@@ -1,0 +1,16 @@
+data/nf-core_rnaseq/*.tsv
+data/nf-core_rnaseq/salmon.merged.transcript.SummarizedExperiment.rds
+.DS_Store
+**/.DS_Store
+.Rhistory
+**/.Rhistory
+Working.Rmd
+
+# ignore nextflow files
+.nextflow
+work
+.nextflow*
+
+# R related
+.Rproj.user
+*.Rproj
