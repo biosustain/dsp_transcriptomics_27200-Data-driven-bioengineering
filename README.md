@@ -1,4 +1,4 @@
-# 🧬 DSP Transcriptomics Training
+# 🧬 27200 Data Driven Bioengineering - Transcriptomics
 
 > **Course materials are live — and we're still polishing a few things for this year!**
 
@@ -8,7 +8,7 @@
 
 All materials, resources, and a **draft agenda** for the day are available in this repository. We are actively updating and revising content ahead of the course.
 
-👉 **[View the full repository →](https://github.com/biosustain/dsp_transcriptomics_training)**
+👉 **[View the full repository →](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)**
 
 ---
 
@@ -16,37 +16,52 @@ All materials, resources, and a **draft agenda** for the day are available in th
 
 | | |
 |---|---|
-| 📍 **Location** | Room 011 / ALC2, Building 208 DTU |
-| 🕘 **Duration** | 9:00 – 16:30 |
-| ☕ **Catering** | Lunch & coffee provided! |
+| 🕘 **Duration** | 10:00 – 14:00 |
 
 ---
 
-## 🗓️ Agenda
+## 🎯 Main Concepts & Learning Objectives
 
-A draft agenda is already available in the repository. Check back closer to the date for the final version.
+> _TODO: fill in — e.g. Illumina sequencing basics, the nf-core/rnaseq pipeline, QC/EDA, differential expression with DESeq2, functional enrichment (ORA/GSEA)._
 
-| Time             | Session                                                                         |
-|------------------|---------------------------------------------------------------------------------|
-| ☕ **9:00 – 9:15**   | Welcome, coffee, and setup                                                   |
-| 🔬 **9:15 – 10:00**  | Theory: Illumina sequencing & RNA-seq                                       |
-| 🔄 **10:00 – 10:30** | Theory: nf-core/rnaseq pipeline overview                                    |
-| ⏸️ **10:30 – 10:45** | Break                                                                       |
-| 💻 **10:45 – 12:15** | Script 01: *nf-core/rnaseq — running the pipeline*                          |
-|                      | Theory: RNAseq data analysis                                                |
-| 🍽️ **12:15 – 13:00** | Lunch                                                                       |
-| 🧬 **13:00 – 14:15** | Script 02: *Quality Control & Exploratory Data Analysis*                    |
-| ⏸️ **14:15 – 14:30** | Break                                                                       |
-| 📊 **14:30 – 15:30** | Script 03: *Differential Expression Analysis with DESeq2*                   |
-| ⏸️ **15:30 – 15:45** | Break                                                                       |
-| 🔍 **15:45 – 16:15** | Script 04: *Functional Enrichment Analysis (ORA & GSEA with mulea)*         |
-| 🏁 **16:15 – 16:30** | Wrap-up, Q&A, and closing                                                   |
+- 
+- 
+- 
 
+---
+
+## 🔑 Key Takeaways
+
+> _TODO: the key messages you want students to leave with._
+
+- 
+- 
+- 
+
+---
+
+## 🧪 Exercises & Interactive Activities
+
+> _TODO: list the planned hands-on scripts/activities (e.g. Script 01–04 below), with a short description of what each one covers._
+
+| Script | Description |
+|---|---|
+|  |  |
+
+---
+
+## 🛠️ Software, Datasets & Resources
+
+> _TODO: list required software, datasets, and other resources beyond the R package installation below._
+
+- 
+- 
+- 
 
 ---
 
 **Material for the workshop is located at:**
-[dsp_transcriptomics_training](https://github.com/biosustain/dsp_transcriptomics_training)
+[dsp_transcriptomics_27200-Data-driven-bioengineering](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
 Below are two setup options for the practical activities:
 
@@ -58,7 +73,7 @@ Below are two setup options for the practical activities:
 
 
 **Launch the app:**
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
 
 >Run the workshop locally on your machine. 
