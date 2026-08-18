@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Transcriptomics"
+title: "27200 Data Driven Bioengineering - Transcriptomics"
 subtitle: "Workshop material"
 site: bookdown::bookdown_site
 documentclass: book
@@ -41,7 +41,7 @@ __Teaching Assistant:__ `r rep_ta_full`
 <br>
 
 
-**Welcome to the Introduction to Transcriptomics Workshop!**
+**Welcome to the 27200 Data Driven Bioengineering - Transcriptomics Workshop!**
 
 This workshop introduces **RNA-seq data analysis**, covering both the theory behind the technology and the full practical workflow — from raw reads to biological interpretation — using real *E. coli* data.
 
@@ -57,7 +57,7 @@ The course is designed for people with **no or little knowledge and practical ex
    * Effective results reporting using the in-house developed software **[vuegen](https://github.com/Multiomics-Analytics-Group/vuegen)**
 
 :::boxy
-You can also explore the [DSP Transcriptomics Training repository](https://github.com/biosustain/dsp_transcriptomics_training)
+You can also explore the [27200 Data Driven Bioengineering - Transcriptomics repository](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 :::
 
 | Time             | Session                                                                         |
@@ -78,7 +78,7 @@ You can also explore the [DSP Transcriptomics Training repository](https://githu
 
 :::boxy
 Material for the workshop is located at:
-[dsp_transcriptomics_training](https://github.com/biosustain/dsp_transcriptomics_training)
+[dsp_transcriptomics_27200-Data-driven-bioengineering](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 :::
 
 Below are two setup options for the practical activities:
@@ -87,7 +87,7 @@ Below are two setup options for the practical activities:
 
 **Launch the app:**
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
 
 >Run the workshop locally on your machine. 
@@ -143,9 +143,9 @@ message("All requested R packages are installed and ready to use!")
 You need to clone the repository.
 
 ```{r, eval=FALSE}
-git clone https://github.com/biosustain/dsp_transcriptomics_training.git
+git clone https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering.git
 
-cd dsp_transcriptomics_training
+cd dsp_transcriptomics_27200-Data-driven-bioengineering
 
 options(error = traceback)
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
@@ -164,11 +164,11 @@ Nextflow pipeline
 
 To avoid installation and configuration issues we are going to deploy an environment for you containing Nextflow and its requirements.
 
-If you want to open directly a GitHub codespace for this specific repository click here: [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_training)
+If you want to open directly a GitHub codespace for this specific repository click here: [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
 Don't change the configuration and accept the default option. It says pay but you're not paying...
 
-If you want to do it manually go to [course website](https://github.com/biosustain/dsp_transcriptomics_training)
+If you want to do it manually go to [course website](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
 Click on button **Code** and click on the Codespaces tab. There click on **Create codespace**. Now your Nextflow environment will be built following the instructions in devcontainer.json file (i.e. installing Ubuntu, Docker, Nextflow, R, Python, VSCode and RStudio server)
 
@@ -235,7 +235,7 @@ The list of contrasts of interest is:
 
 - Type of data: bulk RNASeq
 - Organism: *Escherichia coli* K-12 MG1655
-- Codes location: [GitHub repository](https://github.com/biosustain/dsp_transcriptomics_training)
+- Codes location: [GitHub repository](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 - Reference data used: *E. coli* K-12 MG1655 (NCBI RefSeq: NC_000913.3 / Ensembl)
 
 > **Note:** *E. coli* MG1655 is a prokaryote. Key differences to keep in mind:

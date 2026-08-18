@@ -3,10 +3,10 @@
 # A custom config file is used here to limit the number of CPUs and memory
 nextflow run 'https://github.com/nf-core/rnaseq' \
     -name 'Ecoli_MG1655_saccharin_2_samples' \
-    --outdir '/workspaces/dsp_transcriptomics_training/results/nfcore_rnaseq_processing_subsampled' \
-    --input '/workspaces/dsp_transcriptomics_training/data/seq_files_subsampled/samplesheet_50k_subsampled_2samples.csv' \
-    --fasta '/workspaces/dsp_transcriptomics_training/data/genome_files/GCF_000005845.2_ASM584v2_genomic.fna.gz' \
-    --gtf '/workspaces/dsp_transcriptomics_training/data/genome_files/GCF_000005845.2_ASM584v2_genomic.gtf.gz' \
+    --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/nfcore_rnaseq_processing_subsampled' \
+    --input '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/samplesheet_50k_subsampled_2samples.csv' \
+    --fasta '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/GCF_000005845.2_ASM584v2_genomic.fna.gz' \
+    --gtf '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/GCF_000005845.2_ASM584v2_genomic.gtf.gz' \
     -r 3.23.0 \
     -profile prokaryotic,docker \
-    -c /workspaces/dsp_transcriptomics_training/01_scripts/custom.config 
+    -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config 

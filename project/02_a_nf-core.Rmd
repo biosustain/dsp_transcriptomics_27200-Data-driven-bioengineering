@@ -9,13 +9,13 @@ We will use pipeline release [v3.23.0](https://nf-co.re/rnaseq/3.23.0). From thi
 ```bash
 nextflow run 'https://github.com/nf-core/rnaseq' \
     -name 'Ecoli_MG1655_saccharin_2_samples' \
-    --outdir '/workspaces/dsp_transcriptomics_training/results/nfcore_rnaseq_processing_subsampled' \
-    --input '/workspaces/dsp_transcriptomics_training/data/seq_files_subsampled/samplesheet_50k_subsampled_2samples.csv' \
-    --fasta '/workspaces/dsp_transcriptomics_training/data/genome_files/GCF_000005845.2_ASM584v2_genomic.fna.gz' \
-    --gtf '/workspaces/dsp_transcriptomics_training/data/genome_files/GCF_000005845.2_ASM584v2_genomic.gtf.gz' \
+    --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/nfcore_rnaseq_processing_subsampled' \
+    --input '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/samplesheet_50k_subsampled_2samples.csv' \
+    --fasta '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/GCF_000005845.2_ASM584v2_genomic.fna.gz' \
+    --gtf '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/GCF_000005845.2_ASM584v2_genomic.gtf.gz' \
     -r 3.23.0 \
     -profile prokaryotic,docker \
-    -c /workspaces/dsp_transcriptomics_training/01_scripts/custom.config
+    -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config
 ```
 
 **Parameter descriptions:**
@@ -173,7 +173,7 @@ The detailed structure of the output directory:
 ## Interpretation of RNAseq processing results using the multiQC report
 
 The nf-core/rnaseq pipeline generates a multiQC report which consolidates all quality control (QC) metrics from the pipeline run.  
-We will be analyzing the [multiQC report from processing the entire dataset](https://github.com/biosustain/dsp_transcriptomics_training/tree/main/results/multiqc_nfcore_rnaseq_full_dataset/multiQC_Ecoli_sac_ctrl_deDios_2025_full_dataset.html) - which we have done prior to this course - rather than the one generated in your test run.  
+We will be analyzing the [multiQC report from processing the entire dataset](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/tree/main/results/multiqc_nfcore_rnaseq_full_dataset/multiQC_Ecoli_sac_ctrl_deDios_2025_full_dataset.html) - which we have done prior to this course - rather than the one generated in your test run.  
 
 The multiQC reports summarizes important QC metrics from RNAseq data processing. This includes for example:
 

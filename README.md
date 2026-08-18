@@ -196,7 +196,7 @@ cat("=========================================\n")
 We're looking forward to seeing everyone. If you have questions before the course, feel free to reach out.
 
 **Best wishes,**  
-*The DSP Transcriptomics Training Team*
+*The 27200 Data Driven Bioengineering - Transcriptomics Team*
 
 ---
 

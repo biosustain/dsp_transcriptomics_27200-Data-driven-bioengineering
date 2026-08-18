@@ -3,7 +3,7 @@
 # =============================================================================
 # nf-core/differentialabundance run script
 # Study: MG1655 (E. coli deDios 2025 - PRJNA1158806)
-# Working directory: /workspaces/dsp_transcriptomics_training
+# Working directory: /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering
 # =============================================================================
 
 set -euo pipefail
