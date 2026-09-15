@@ -10,7 +10,10 @@ on:
   push:
     branches: [main]
     paths:
-      - ".devcontainer/**"
+      # Only what actually goes into the image — editing devcontainer.json
+      # does not change the image, so it should not trigger a rebuild.
+      - ".devcontainer/Dockerfile"
+      - ".devcontainer/install_packages.R"
       - ".github/workflows/publish-devcontainer.yml"
 
 env:

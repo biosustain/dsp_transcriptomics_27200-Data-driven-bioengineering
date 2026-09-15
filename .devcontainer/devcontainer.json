@@ -2,9 +2,11 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
   "name": "Ubuntu",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  // Prebuilt image so Codespaces starts in a couple of minutes instead of
+  // building R from source. It is built from ./Dockerfile by
+  // .github/workflows/publish-devcontainer.yml, which republishes on every
+  // change to .devcontainer/ — edit the Dockerfile, not this tag.
+  "image": "ghcr.io/biosustain/dsp_transcriptomics_27200-data-driven-bioengineering:latest",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
