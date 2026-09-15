@@ -8,7 +8,18 @@ install.packages(
     "DT",
     "here",
     "kableExtra",
-    "pheatmap"
+    "pheatmap",
+    # Needed by the S. aureus and human (ASM + dexamethasone) analyses.
+    "tidyverse",
+    "factoextra",
+    "gggenes",
+    "reshape2",
+    "gprofiler2",
+    "msigdbr",
+    # Jupyter R kernel.
+    "heatmaply",
+    "pbdZMQ",
+    "IRkernel"
   ),
   dependencies = TRUE,
   repos = "https://cloud.r-project.org",
@@ -26,7 +37,9 @@ BiocManager::install(
     "apeglm",
     "EnhancedVolcano",
     "KEGGREST",
-    "fgsea"
+    "fgsea",
+    # E. coli KEGG gene-symbol annotation, used by the E. coli scripts.
+    "org.EcK12.eg.db"
   ),
   update = FALSE,
   ask = FALSE

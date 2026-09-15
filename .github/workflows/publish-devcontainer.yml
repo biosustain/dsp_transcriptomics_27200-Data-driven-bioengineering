@@ -1,8 +1,17 @@
 name: Publish dev container image
 
 on:
- release:
-  types: [published]  
+  release:
+    types: [published]
+  # Lets the image be (re)built on demand from the Actions tab, without
+  # having to cut a release.
+  workflow_dispatch:
+  # Keeps the published image in step with the container definition.
+  push:
+    branches: [main]
+    paths:
+      - ".devcontainer/**"
+      - ".github/workflows/publish-devcontainer.yml"
 
 env:
   REGISTRY: ghcr.io
@@ -44,6 +53,8 @@ jobs:
         with:
           context: .devcontainer
           file: .devcontainer/Dockerfile
+          # Codespaces runs on amd64; building only this keeps publishes fast.
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
