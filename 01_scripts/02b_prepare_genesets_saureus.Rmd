@@ -1,0 +1,388 @@
+---
+title: "Prepare KEGG + GO gene sets for *S. aureus* GSEA/ORA"
+author: ""
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: flatly
+    highlight: tango
+    code_folding: show
+    css: assets/report.css
+params:
+  strain: "usa100"
+---
+
+<!-- ----------------------- Do not edit above this ----------------------- -->
+
+# Prepare Gene Sets for Functional Enrichment
+
+This script builds the gene set collections (KEGG pathways and GO Biological Process)
+used by `03_gene_functional_saureus.Rmd`. It is run **once per strain** and caches the
+result to `data/databases/`, so the enrichment script loads instantly and needs no
+internet connection.
+
+Three collections are built, all keyed on the **locus tags produced by the nf-core/rnaseq
+pipeline** (`SA_RS...` for USA-100 / N315, `SAUSA300_RS...` for USA-500 / USA-300):
+
+- **KEGG pathways** — retrieved from the KEGG REST API with `KEGGREST`. KEGG stores
+  *S. aureus* genes under the older locus tags (`SA0001`, `SAUSA300_0001`), so we remap
+  them to the current `_RS` tags using the reference genome annotation.
+- **GO Biological Process (BP)** — the processes a gene takes part in. Read directly from
+  the reference GTF (`go_process`), which already carries GO terms on each gene.
+- **GO Molecular Function (MF)** — the biochemical activities a gene product carries out
+  (e.g. binding, catalytic activities). Also read from the GTF (`go_function`). MF is
+  better annotated than BP for this genome and roughly doubles GO coverage, which is useful
+  given how few *S. aureus* genes carry a curated pathway assignment.
+
+:::boxy
+**Why read GO from the GTF rather than NCBI gene2go?**
+The reference GTF already embeds GO terms on every coding gene, so the collections are built
+entirely offline with no download. The alternative, NCBI `gene2go`, would need each gene's
+numeric NCBI GeneID to join — but this genome's GTF annotates proteins by GenBank accession
+(`WP_...`) and carries no GeneID, so that route is not available from the local files. The
+GTF is the authoritative, self-contained source here.
+:::
+
+:::boxy
+**Why a separate preparation step?**
+Building the gene sets involves live KEGG API calls and parsing the genome annotation.
+Doing this once and caching the result keeps the analysis script fast, reproducible, and
+runnable offline. The two strains use different reference genomes and different KEGG
+organism codes, so each is prepared separately — exactly the same per-strain
+parameterisation used in the differential expression script.
+:::
+
+### Strain parameter
+
+This script is parameterised by `strain`. Render it once per strain (see the render chunk
+at the very bottom), or set the value here when running interactively.
+
+```{r params-setup, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+strain <- params$strain   # "usa100" or "usa500"
+stopifnot(strain %in% c("usa100", "usa500"))
+cat("Preparing gene sets for strain:", strain, "\n")
+```
+
+### Load Libraries
+
+```{r libraries, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(KEGGREST)
+library(SummarizedExperiment)
+```
+
+## Strain configuration
+
+Everything that differs between the two strains is defined in one place. The rest of the
+script is strain-agnostic.
+
+:::boxy
+- **USA-100** was aligned to *S. aureus* N315 (`GCF_000009645.1`); KEGG organism code `sau`.
+- **USA-500** was aligned to *S. aureus* USA300_FPR3757 (`GCF_000013465.1`); KEGG organism
+  code `saa`.
+:::
+
+```{r strain-config, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+git_root <- system("git rev-parse --show-toplevel", intern = TRUE)
+
+strain_cfg <- list(
+  usa100 = list(
+    kegg_org = "sau",
+    gtf      = "data/genome_files/GCF_000009645.1_ASM964v1_genomic.gtf.gz",
+    rds      = "data/data-01-Staphylococcus_aureus/USA-100/salmon.merged.gene.SummarizedExperiment.rds",
+    label    = "USA-100 / N315"
+  ),
+  usa500 = list(
+    kegg_org = "saa",
+    gtf      = "data/genome_files/GCF_000013465.1_ASM1346v1_genomic.gtf.gz",
+    rds      = "data/data-01-Staphylococcus_aureus/USA-500/salmon.merged.gene.SummarizedExperiment.rds",
+    label    = "USA-500 / USA-300"
+  )
+)
+
+cfg <- strain_cfg[[strain]]
+gtf_path <- file.path(git_root, cfg$gtf)
+rds_path <- file.path(git_root, cfg$rds)
+
+cat("Strain      :", cfg$label, "\n")
+cat("KEGG org    :", cfg$kegg_org, "\n")
+cat("GTF         :", cfg$gtf, "\n")
+cat("Count rds   :", cfg$rds, "\n")
+
+stopifnot(file.exists(gtf_path), file.exists(rds_path))
+```
+
+## Build the identifier map from the reference GTF
+
+The reference GTF is the bridge between all three identifier systems. Each `gene` feature
+carries `locus_tag` (the current `_RS` tag, matching the count matrix), `old_locus_tag`
+(the older tag, matching KEGG), and `gene` (a human-readable symbol, where one exists).
+
+:::boxy
+Only about a third of *S. aureus* genes have a human-readable symbol; the rest are named
+only by locus tag. We therefore key every gene set on the **locus tag**, which covers
+100% of genes, and keep the symbol purely as a display label for the results tables.
+:::
+
+```{r id-map, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+con   <- gzfile(gtf_path, "r")
+gtf_l <- readLines(con)
+close(con)
+gtf_l <- gtf_l[!startsWith(gtf_l, "#")]
+
+fields    <- str_split_fixed(gtf_l, "\t", 9)
+gene_attr <- fields[fields[, 3] == "gene", 9]
+
+grab <- function(x, key) str_match(x, paste0(key, ' "([^"]*)"'))[, 2]
+
+id_map <- tibble(
+  locus_tag     = grab(gene_attr, "locus_tag"),      # SA_RS... / SAUSA300_RS... (count matrix)
+  old_locus_tag = grab(gene_attr, "old_locus_tag"),  # SA0001 / SAUSA300_0001    (KEGG)
+  symbol        = grab(gene_attr, "gene")            # dnaA, ...  (display only)
+) %>%
+  filter(!is.na(locus_tag)) %>%
+  distinct(locus_tag, .keep_all = TRUE)
+
+# lookup: old KEGG tag -> current RS locus tag
+old_to_rs <- setNames(id_map$locus_tag, id_map$old_locus_tag)
+
+cat("Gene features in GTF        :", nrow(id_map), "\n")
+cat("  with old_locus_tag (KEGG) :", sum(!is.na(id_map$old_locus_tag)), "\n")
+cat("  with symbol (display)     :", sum(!is.na(id_map$symbol)), "\n")
+```
+
+### Cross-check against the count matrix
+
+Every gene in the count matrix should be present in the map — this confirms the GTF and
+the pipeline output are the same annotation.
+
+```{r id-map-check, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+se  <- readRDS(rds_path)
+ids <- rownames(se)
+
+matched <- sum(ids %in% id_map$locus_tag)
+cat("Count-matrix genes          :", length(ids), "\n")
+cat("Matched in GTF map          :", matched,
+    sprintf("(%.1f%%)\n", 100 * matched / length(ids)))
+
+if (matched < length(ids)) {
+  warning("Some count-matrix genes are not in the GTF map — check the GTF/assembly match.")
+}
+```
+
+## KEGG pathway gene sets
+
+We fetch two pieces from KEGG: the pathway names, and the pathway-to-gene links. KEGG
+returns genes under the **old** locus tags, which we remap to the current `_RS` tags. A
+pathway is kept only if at least 5 of its genes map into this genome.
+
+<div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
+  <strong>Tip:</strong> The first run queries the KEGG API (a few seconds). The result is
+  cached, so later runs of the enrichment script never call KEGG.
+</div>
+
+```{r kegg-fetch, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+org <- cfg$kegg_org
+
+# pathway id -> pathway name
+kegg_pathways <- keggList("pathway", org)
+pathway_names <- str_remove(
+  as.character(kegg_pathways),
+  " - Staphylococcus aureus.*$"
+)
+names(pathway_names) <- str_remove(names(kegg_pathways), "^path:")
+
+# pathway <-> gene links (gene names carry the "org:" prefix and old locus tags)
+kegg_links <- keggLink("pathway", org)
+
+cat("KEGG pathways found         :", length(kegg_pathways), "\n")
+cat("KEGG gene-pathway links     :", length(kegg_links), "\n")
+cat("Example gene id             :", sub(paste0("^", org, ":"), "", names(kegg_links)[1]), "\n")
+```
+
+```{r kegg-build, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+# split into pathway -> vector of old locus tags
+kegg_by_path_old <- split(
+  sub(paste0("^", org, ":"), "", names(kegg_links)),  # bare old locus tags
+  str_remove(unname(kegg_links), "^path:")            # bare pathway ids
+)
+
+# remap old tags -> current RS locus tags, drop unmapped, require >= 5 genes
+kegg_by_path_rs <- map(kegg_by_path_old, function(old_tags) {
+  rs <- unname(old_to_rs[old_tags])
+  rs[!is.na(rs)]
+}) %>%
+  keep(~ length(.x) >= 5)
+
+# assemble the mulea-style GMT data frame (matches the E. coli script's structure)
+kegg_gmt <- tibble(
+  ontology_id    = names(kegg_by_path_rs),
+  ontology_name  = pathway_names[names(kegg_by_path_rs)],
+  list_of_values = kegg_by_path_rs
+)
+# fall back to the id if a name is missing
+kegg_gmt$ontology_name <- ifelse(
+  is.na(kegg_gmt$ontology_name),
+  kegg_gmt$ontology_id,
+  kegg_gmt$ontology_name
+)
+
+n_before <- length(kegg_by_path_old)
+cat("KEGG pathways retained      :", nrow(kegg_gmt), "/", n_before, "\n")
+cat("Genes covered by KEGG       :",
+    length(unique(unlist(kegg_gmt$list_of_values))), "\n")
+cat("Example pathway             :", kegg_gmt$ontology_name[1], "\n")
+```
+
+## GO gene sets (Biological Process and Molecular Function)
+
+The reference GTF annotates each coding gene with GO terms on its `CDS` feature lines.
+The human-readable `go_process` field holds **Biological Process** terms (what a gene is
+*for*) and `go_function` holds **Molecular Function** terms (the biochemical *activity* of
+the gene product). We build one collection from each. Cellular Component is omitted: it is
+uninformative for a bacterium, which lacks the organelles that make location useful in
+eukaryotes. As with KEGG, sets are keyed on RS locus tags and require at least 5 genes.
+
+:::boxy
+**How to read the two namespaces.**
+BP names the process a gene participates in (e.g. cell wall organisation, stress response) —
+the most direct read on a lifestyle contrast. MF names an isolated activity (e.g. ATP
+binding, oxidoreductase activity) — more abstract, but better annotated in this genome and a
+useful complement when a lifestyle switch is largely metabolic. Keeping them separate lets
+you tell process-level from activity-level enrichment.
+:::
+
+```{r go-extract, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+cds_attr  <- fields[fields[, 3] == "CDS", 9]
+cds_locus <- grab(cds_attr, "locus_tag")
+
+# Shared extractor: pull every "<field> "name|GOid|evidence"" entry for a namespace,
+# returning one row per (gene, GO term). Both go_process and go_function share this format.
+extract_go <- function(field_name) {
+  raw <- str_extract_all(cds_attr, paste0(field_name, ' "[^"]*"'))
+  tibble(locus_tag = cds_locus, go = raw) %>%
+    filter(!is.na(locus_tag)) %>%
+    unnest(go) %>%
+    mutate(
+      go      = str_remove_all(go, paste0('^', field_name, ' "|"$')),
+      go_name = str_split_i(go, "\\|", 1),
+      go_id   = str_split_i(go, "\\|", 2)
+    ) %>%
+    filter(!is.na(go_id), go_id != "") %>%
+    mutate(go_id = paste0("GO:", str_remove(go_id, "^GO:"))) %>%
+    distinct(locus_tag, go_id, go_name)
+}
+
+# Turn a long (gene, GO) table into a mulea-style GMT, keeping sets with >= 5 genes
+build_go_gmt <- function(go_long) {
+  sets <- go_long %>%
+    group_by(go_id, go_name) %>%
+    summarise(genes = list(unique(locus_tag)), .groups = "drop") %>%
+    filter(map_int(genes, length) >= 5)
+  tibble(
+    ontology_id    = sets$go_id,
+    ontology_name  = sets$go_name,
+    list_of_values = sets$genes
+  )
+}
+
+go_bp_long <- extract_go("go_process")
+go_mf_long <- extract_go("go_function")
+
+go_bp_gmt <- build_go_gmt(go_bp_long)
+go_mf_gmt <- build_go_gmt(go_mf_long)
+
+cat("GO:BP  annotations :", nrow(go_bp_long),
+    "| genes:", length(unique(go_bp_long$locus_tag)),
+    "| sets (>=5):", nrow(go_bp_gmt), "\n")
+cat("GO:MF  annotations :", nrow(go_mf_long),
+    "| genes:", length(unique(go_mf_long$locus_tag)),
+    "| sets (>=5):", nrow(go_mf_gmt), "\n")
+if (nrow(go_bp_gmt) > 0) cat("Example BP set     :", go_bp_gmt$ontology_name[1], "\n")
+if (nrow(go_mf_gmt) > 0) cat("Example MF set     :", go_mf_gmt$ontology_name[1], "\n")
+```
+
+## Coverage summary
+
+How much of the tested genome each collection annotates. Partial coverage is normal for a
+bacterium — many genes are uncharacterised — and is itself worth discussing when
+interpreting results.
+
+```{r coverage, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+kegg_genes  <- unique(unlist(kegg_gmt$list_of_values))
+bp_genes    <- unique(unlist(go_bp_gmt$list_of_values))
+mf_genes    <- unique(unlist(go_mf_gmt$list_of_values))
+union_genes <- Reduce(union, list(kegg_genes, bp_genes, mf_genes))
+
+coverage <- tibble(
+  Collection = c("KEGG pathways", "GO:BP", "GO:MF", "All three (union)"),
+  Sets       = c(nrow(kegg_gmt), nrow(go_bp_gmt), nrow(go_mf_gmt), NA),
+  Genes      = c(length(kegg_genes), length(bp_genes),
+                 length(mf_genes), length(union_genes)),
+  Pct_of_matrix = round(100 * c(length(kegg_genes), length(bp_genes),
+                                length(mf_genes), length(union_genes)) /
+                          length(ids), 1)
+)
+print(coverage)
+```
+
+## Save cached gene sets
+
+Both collections and the identifier map are cached per strain. The enrichment script reads
+only these files.
+
+```{r save, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+db_dir <- file.path(git_root, "data", "databases")
+dir.create(db_dir, recursive = TRUE, showWarnings = FALSE)
+
+kegg_out <- file.path(db_dir, sprintf("KEGG_Pathways_Saureus_%s.rds", strain))
+bp_out   <- file.path(db_dir, sprintf("GO_BP_Saureus_%s.rds", strain))
+mf_out   <- file.path(db_dir, sprintf("GO_MF_Saureus_%s.rds", strain))
+map_out  <- file.path(db_dir, sprintf("locus_symbol_map_Saureus_%s.rds", strain))
+
+saveRDS(kegg_gmt,  kegg_out)
+saveRDS(go_bp_gmt, bp_out)
+saveRDS(go_mf_gmt, mf_out)
+saveRDS(id_map %>% select(locus_tag, symbol), map_out)
+
+cat("Saved:\n")
+cat("  KEGG GMT   ->", basename(kegg_out), "(", nrow(kegg_gmt),  "sets )\n")
+cat("  GO:BP GMT  ->", basename(bp_out),   "(", nrow(go_bp_gmt), "sets )\n")
+cat("  GO:MF GMT  ->", basename(mf_out),   "(", nrow(go_mf_gmt), "sets )\n")
+cat("  ID map     ->", basename(map_out),  "(", nrow(id_map),    "genes )\n")
+```
+
+## Summary
+
+| Item | Choice | Rationale |
+|---|---|---|
+| Gene set key | RS locus tag | 100% of genes covered; symbols exist for only ~1/3 of genes |
+| KEGG source | `KEGGREST` (`keggLink`) + GTF remap | KEGG uses old locus tags; GTF bridges old -> RS |
+| GO source | Reference GTF `go_process` / `go_function` (inline) | No download needed; GTF carries GO terms. NCBI gene2go unavailable (GTF has no GeneID) |
+| GO namespaces | Biological Process + Molecular Function | BP = process (interpretable); MF nearly doubles coverage. CC uninformative in bacteria |
+| Minimum set size | 5 genes | Avoids tiny, unstable sets prone to spurious enrichment |
+| Symbols | Kept as display labels only | Readable where available, locus tag otherwise |
+| Caching | One `.rds` per collection per strain | Fast, reproducible, offline enrichment script |
+
+Run this once for each strain, then proceed to `03_gene_functional_saureus.Rmd`.
+
+<!-- --------------------- Do not edit this and below ---------------------- -->
+
+</br>
+
+```{r session-info, echo=TRUE, eval=TRUE, include=TRUE}
+sessionInfo()
+```
+
+```{r render, eval=FALSE, echo=FALSE}
+# Render once per strain:
+rmarkdown::render("01_scripts/02b_prepare_genesets_saureus.Rmd",
+                  params = list(strain = "usa100"),
+                  output_file = "02b_prepare_genesets_usa100.html")
+rmarkdown::render("01_scripts/02b_prepare_genesets_saureus.Rmd",
+                  params = list(strain = "usa500"),
+                  output_file = "02b_prepare_genesets_usa500.html")
+```

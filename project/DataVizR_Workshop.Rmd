@@ -277,7 +277,6 @@ library(kableExtra)
 library(DT)
 library(org.EcK12.eg.db)
 library(fgsea)
-library(clusterProfiler)
 ```
 
 ---

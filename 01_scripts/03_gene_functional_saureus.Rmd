@@ -1,0 +1,739 @@
+---
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: flatly
+    highlight: tango
+    code_folding: show
+    css: assets/report.css
+params:
+  strain: "usa100"
+---
+
+<!-- ----------------------- Do not edit above this ----------------------- -->
+
+# Gene Functional Enrichment Analysis
+
+This report covers functional enrichment of the genes that change between the **biofilm**
+and **planktonic** lifestyles in *Staphylococcus aureus* ([Tomlinson *et al.*,
+2021](https://doi.org/10.1128/mBio.03257-20)). The contrast analysed here is the
+*lifestyle (additive)* model from the differential expression step: the overall
+biofilm-versus-planktonic difference, controlling for time point.
+
+We apply two complementary approaches:
+
+- **ORA** (Over-Representation Analysis) using [`mulea`](https://github.com/ELTEbioinformatics/mulea) —
+  tests whether the significant DE genes are enriched in a gene set more than expected by
+  chance, with empirical FDR correction.
+- **GSEA** (Gene Set Enrichment Analysis) using [`fgsea`](https://bioconductor.org/packages/fgsea/) —
+  uses the full ranked gene list to detect coordinated shifts, including changes below the
+  significance threshold.
+
+Both use the gene sets built by `02b_prepare_genesets_saureus.Rmd`: **KEGG pathways**,
+**GO Biological Process**, and **GO Molecular Function**, all keyed on the pipeline's locus
+tags.
+
+### **Why two packages?**
+
+:::boxy
+ `mulea` provides empirical FDR correction for ORA but its GSEA function does not compute
+ NES (Normalised Enrichment Scores). `fgsea` is the standard for preranked GSEA with proper
+ NES and permutation-based p-values. Using the best tool for each task gives the most
+ reliable results.
+:::
+
+### **Why these gene sets?**
+
+:::boxy
+There is no pre-built MSigDB collection for *S. aureus*, and g:Profiler does not support the
+strain-level references used here. We therefore build gene sets directly from KEGG and from
+the reference genome's GO annotation. KEGG gives curated pathways; GO:BP gives biological
+processes; GO:MF gives molecular activities and broadens coverage, which matters because only
+a minority of *S. aureus* genes carry a curated pathway assignment.
+:::
+
+### Strain parameter
+
+This report is parameterised by `strain`. The two strains use different reference genomes,
+so they load different DE tables and different cached gene sets.
+
+```{r saureus-fn-params-setup, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+strain <- "usa100"          # "usa100" or "usa500" (interactive default)
+if (exists("params", inherits = FALSE) && is.list(params) && !is.null(params$strain)) strain <- params$strain
+stopifnot(strain %in% c("usa100", "usa500"))
+cat("Enrichment for strain:", strain, "\n")
+```
+
+### Load Libraries
+
+```{r saureus-fn-libraries, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(mulea)
+library(fgsea)
+library(knitr)
+library(kableExtra)
+library(DT)
+library(ggpubr)   # theme_pubr
+```
+
+## Strain configuration and inputs
+
+Everything strain-specific is set here: the DE table for the lifestyle contrast, the cached
+gene sets, and the output directory. The rest of the script is strain-agnostic.
+
+```{r saureus-fn-config, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+git_root <- system("git rev-parse --show-toplevel", intern = TRUE)
+
+cfg <- list(
+  usa100 = list(
+    de   = "results/usa100/tables/DE_usa100_lifestyle_additive.tsv",
+    out  = "results/usa100",
+    label = "USA-100 / N315"
+  ),
+  usa500 = list(
+    de   = "results/usa500/tables/DE_usa500_lifestyle_additive.tsv",
+    out  = "results/usa500",
+    label = "USA-500 / USA-300"
+  )
+)[[strain]]
+
+db_dir <- file.path(git_root, "data", "databases")
+kegg_gmt <- readRDS(file.path(db_dir, sprintf("KEGG_Pathways_Saureus_%s.rds", strain)))
+go_bp    <- readRDS(file.path(db_dir, sprintf("GO_BP_Saureus_%s.rds", strain)))
+go_mf    <- readRDS(file.path(db_dir, sprintf("GO_MF_Saureus_%s.rds", strain)))
+id_map   <- readRDS(file.path(db_dir, sprintf("locus_symbol_map_Saureus_%s.rds", strain)))
+
+cat("Strain     :", cfg$label, "\n")
+cat("KEGG sets  :", nrow(kegg_gmt), "\n")
+cat("GO:BP sets :", nrow(go_bp), "\n")
+cat("GO:MF sets :", nrow(go_mf), "\n")
+```
+
+<div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
+  <strong>Note:</strong> If any of these files are missing, run
+  <code>02b_prepare_genesets_saureus.Rmd</code> for this strain first — it builds and caches
+  the gene sets. The gene sets are keyed on locus tags (<code>SA_RS...</code> /
+  <code>SAUSA300_RS...</code>), the same identifiers used in the DE table, so no ID
+  conversion is needed.
+</div>
+
+## Load Results from Differential Expression Analysis
+
+We read the lifestyle-additive DE table. It contains every gene tested by DESeq2 for this
+contrast, which is the correct background for enrichment.
+
+```{r saureus-fn-load-de, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+res_df <- read.table(
+  file.path(git_root, cfg$de),
+  header = TRUE, sep = "\t", check.names = TRUE, stringsAsFactors = FALSE
+)
+
+# the DE tables use `gene_id` as the identifier column
+stopifnot("gene_id" %in% colnames(res_df))
+
+cat("Genes tested (background):", nrow(res_df), "\n")
+cat("Columns                  :", paste(colnames(res_df), collapse = ", "), "\n")
+```
+
+### Define significance and check against the DE table
+
+We re-derive significance here (padj < 0.05 and |log2FoldChange| >= log2(3), i.e. a 3-fold
+change) so the threshold is visible in this script, and we check it against the `direction`
+column produced upstream. This is the same threshold used in the differential expression step
+(chosen to match the original paper's 3-fold criterion), so the two should agree exactly; if
+they diverge, the check will flag it.
+
+```{r saureus-fn-significance, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+padj_cut <- 0.05
+lfc_cut  <- log2(3)   # paper's 3-fold threshold on the log2 scale (~1.585); matches script 02
+
+res_df <- res_df %>%
+  mutate(
+    sig_here = !is.na(padj) & padj < padj_cut & abs(log2FoldChange) >= lfc_cut,
+    dir_here = case_when(
+      sig_here & log2FoldChange >=  lfc_cut ~ "Up",
+      sig_here & log2FoldChange <= -lfc_cut ~ "Down",
+      TRUE ~ "Not significant"
+    )
+  )
+
+# Cross-check against the upstream `direction` column, if present
+if ("direction" %in% colnames(res_df)) {
+  agree <- sum(res_df$dir_here == res_df$direction)
+  cat("Agreement with upstream 'direction':", agree, "/", nrow(res_df),
+      sprintf("(%.1f%%)\n", 100 * agree / nrow(res_df)))
+  if (agree < nrow(res_df)) {
+    warning("Re-derived significance disagrees with the upstream 'direction' column.")
+  }
+} else {
+  cat("No upstream 'direction' column to check against.\n")
+}
+
+cat("Significant (padj <", padj_cut, "& |LFC| >= log2(3) ~", round(lfc_cut, 3), "):",
+    sum(res_df$sig_here), "\n")
+cat("  Up  :", sum(res_df$dir_here == "Up"),   "\n")
+cat("  Down:", sum(res_df$dir_here == "Down"), "\n")
+```
+
+## Combine gene set collections
+
+`mulea` and `fgsea` both take one collection at a time. We tag each set with its source so
+results can be read back by collection, then keep them available both combined and separately.
+
+```{r saureus-fn-combine-sets, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+tag_source <- function(gmt, src) gmt %>% mutate(source = src)
+
+all_gmt <- bind_rows(
+  tag_source(kegg_gmt, "KEGG"),
+  tag_source(go_bp,    "GO:BP"),
+  tag_source(go_mf,    "GO:MF")
+)
+
+cat("Total gene sets across collections:", nrow(all_gmt), "\n")
+print(all_gmt %>% dplyr::count(source, name = "sets"))
+```
+
+## Part 1 — Over-Representation Analysis (ORA)
+
+**ORA asks: *"Are my significant DE genes enriched in any gene set more than expected by chance?"***
+
+It uses a hypergeometric test with empirical FDR (eFDR) correction via resampling, which
+accounts for interdependence between gene sets.
+
+- **Query set** — significant DE genes (padj < 0.05, |LFC| >= log2(3), a 3-fold change), split by direction
+- **Background** — all genes tested by DESeq2 for this contrast
+- **Gene sets** — KEGG, GO:BP, GO:MF
+
+:::boxy
+**Key assumption:** ORA treats all significant genes equally — it ignores the magnitude of
+fold change. Running it separately on up- and down-regulated genes partially addresses this,
+which is why we split the query set below. For a fully ranked approach, see Part 2 (GSEA).
+:::
+
+### Prepare Input
+
+```{r saureus-fn-ora-input, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+sig_up   <- res_df %>% filter(dir_here == "Up")   %>% pull(gene_id)
+sig_down <- res_df %>% filter(dir_here == "Down") %>% pull(gene_id)
+background <- res_df$gene_id
+
+cat("Up-regulated genes      :", length(sig_up),     "\n")
+cat("Down-regulated genes    :", length(sig_down),   "\n")
+cat("Background (all tested) :", length(background), "\n")
+```
+
+<div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
+  <strong>Tip:</strong> The background is all genes <em>tested</em> for this contrast, not
+  the whole genome. DESeq2 already filtered to expressed genes, so this table is the correct
+  pool. Using the full genome would inflate the background and produce over-optimistic
+  p-values.
+</div>
+
+### Run ORA
+
+ORA is run for each collection and each direction, with a helper to avoid code duplication.
+Empty query sets (no genes in that direction) are skipped and return `NULL`.
+
+```{r saureus-fn-ora-run, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+set.seed(42)
+
+# mulea's ora() expects the gmt as a data.frame whose `list_of_values` is an
+# AsIs list column (built with I()). A plain tibble list-column is coerced
+# differently by the parallel workers and errors, so we rebuild it here.
+as_mulea_gmt <- function(gmt) {
+  data.frame(
+    ontology_id    = gmt$ontology_id,
+    ontology_name  = gmt$ontology_name,
+    list_of_values = I(gmt$list_of_values),
+    stringsAsFactors = FALSE
+  )
+}
+
+run_ora <- function(query, background, gmt) {
+  if (length(query) == 0 || nrow(gmt) == 0) return(NULL)
+  model <- ora(
+    gmt                       = as_mulea_gmt(gmt),
+    element_names             = query,
+    background_element_names  = background,
+    p_value_adjustment_method = "eFDR",
+    number_of_permutations    = 1000
+  )
+  mulea::run_test(model)
+}
+
+# run per collection so we can label the source in the output
+ora_by_source <- function(query, background) {
+  map_dfr(c("KEGG", "GO:BP", "GO:MF"), function(src) {
+    g <- all_gmt %>% filter(source == src)
+    r <- run_ora(query, background, g)
+    if (is.null(r) || nrow(r) == 0) return(NULL)
+    r %>% mutate(source = src)
+  })
+}
+
+ora_up   <- ora_by_source(sig_up,   background)
+ora_down <- ora_by_source(sig_down, background)
+
+n_sig <- function(x) if (is.null(x) || nrow(x) == 0) 0 else sum(x$eFDR < 0.05, na.rm = TRUE)
+cat("Up   — significant sets (eFDR < 0.05):", n_sig(ora_up),   "\n")
+cat("Down — significant sets (eFDR < 0.05):", n_sig(ora_down), "\n")
+```
+
+<div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
+  <strong>Note:</strong> If a direction returns no significant sets, its table and plot below
+  will be empty. That is a valid outcome, not an error.
+</div>
+
+### Filter and Inspect Significant Sets
+
+```{r saureus-fn-ora-filter, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+get_sig <- function(x) {
+  if (is.null(x) || nrow(x) == 0) return(x[0, , drop = FALSE])
+  x %>% filter(eFDR < 0.05) %>% arrange(eFDR)
+}
+
+ora_up_sig   <- get_sig(ora_up)
+ora_down_sig <- get_sig(ora_down)
+
+cat("Significant up sets  :", nrow(ora_up_sig),   "\n")
+cat("Significant down sets:", nrow(ora_down_sig), "\n")
+```
+
+**Up-regulated genes — enriched sets (biofilm-associated)**
+
+```{r saureus-fn-ora-table-up, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+show_ora_table <- function(sig, caption) {
+  if (nrow(sig) == 0) { cat("No significant enriched sets.\n"); return(invisible()) }
+  DT::datatable(
+    sig %>%
+      select(source, ontology_id, ontology_name,
+             nr_common_with_tested_elements,
+             nr_common_with_background_elements, p_value, eFDR) %>%
+      mutate(across(where(is.numeric), \(x) signif(x, 4))),
+    rownames   = FALSE,
+    colnames   = c("Source", "ID", "Set", "Hits in query",
+                   "Hits in background", "p-value", "eFDR"),
+    extensions = c("Buttons", "Scroller"),
+    options    = list(dom = "Bfrtip", buttons = c("copy", "csv"),
+                      scrollX = TRUE, scrollY = 300, scroller = TRUE),
+    caption = caption
+  )
+}
+show_ora_table(ora_up_sig, "Significant ORA sets — UP-regulated (biofilm) genes")
+```
+
+**Down-regulated genes — enriched sets (planktonic-associated)**
+
+```{r saureus-fn-ora-table-down, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+show_ora_table(ora_down_sig, "Significant ORA sets — DOWN-regulated (planktonic) genes")
+```
+
+### Critical Interpretation — Watch for Spurious Hits
+
+:::boxy
+**Always ask: does this set make biological sense, and is it big enough to trust?**
+
+Very small gene sets are prone to spurious enrichment: if a set has only 3–4 genes in the
+background and they all happen to be DE, it scores as maximally significant regardless of
+biological relevance. When reading the tables above:
+
+1. Check the set size — very small sets (few genes) are fragile.
+2. Check the overlap — 100% overlap in a tiny set is statistically inevitable, not impressive.
+3. Ask whether the set is plausible for *S. aureus* and for a biofilm/planktonic switch.
+4. Cross-reference with GSEA — a set found by both methods is higher confidence.
+
+We built the collections with a minimum of 5 genes per set to reduce this, but scrutiny is
+still part of interpretation.
+:::
+
+### Bar Plot — Top Enriched Sets by Direction
+
+The strongest sets in each direction, ranked by `-log10(eFDR)`. The number of DE genes hitting
+each set is printed at the end of each bar. Up-regulated (biofilm) and down-regulated
+(planktonic) are shown in separate facets.
+
+```{r saureus-fn-ora-barplot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+prep_ora <- function(sig, label, n = 8) {
+  if (nrow(sig) == 0) return(NULL)
+  sig %>%
+    slice_head(n = n) %>%
+    transmute(
+      set_label = paste0(ontology_name, "  [", source, "]"),
+      hits      = nr_common_with_tested_elements,
+      eFDR      = ifelse(eFDR == 0, 1e-4, eFDR),  # floor for plotting log
+      neglog10  = -log10(eFDR),
+      direction = label
+    )
+}
+
+ora_plot_df <- bind_rows(
+  prep_ora(ora_up_sig,   "Up (biofilm)"),
+  prep_ora(ora_down_sig, "Down (planktonic)")
+)
+
+if (!is.null(ora_plot_df) && nrow(ora_plot_df) > 0) {
+  ora_plot_df <- ora_plot_df %>%
+    mutate(
+      direction = factor(direction, levels = c("Up (biofilm)", "Down (planktonic)")),
+      set_label = reorder(paste(set_label, direction, sep = "___"), neglog10)
+    )
+
+  ggplot(ora_plot_df, aes(x = neglog10, y = set_label, fill = direction)) +
+    geom_col(width = 0.7, show.legend = FALSE) +
+    geom_text(aes(label = hits), hjust = -0.2, size = 3.2) +
+    geom_vline(xintercept = -log10(0.05), linetype = "dashed", linewidth = 0.5) +
+    facet_grid(direction ~ ., scales = "free_y", space = "free_y", switch = "y") +
+    scale_y_discrete(labels = function(x) sub("___.*$", "", x)) +
+    scale_fill_manual(values = c("Up (biofilm)"      = "firebrick",
+                                 "Down (planktonic)" = "steelblue")) +
+    scale_x_continuous(expand = expansion(mult = c(0, 0.16))) +
+    theme_pubr() +
+    theme(
+      strip.background   = element_blank(),
+      strip.placement    = "outside",
+      strip.text.y.left  = element_text(angle = 0, size = 10),
+      panel.grid.major.y = element_blank(),
+      axis.text.y        = element_text(size = 8)
+    ) +
+    labs(
+      title    = "ORA — Top Enriched Sets by Direction (eFDR < 0.05)",
+      subtitle = paste0("Biofilm vs planktonic | ", cfg$label),
+      x        = "-log10(eFDR)",
+      y        = NULL
+    )
+} else {
+  cat("No significant sets to plot.\n")
+}
+```
+
+## Part 2 — Gene Set Enrichment Analysis (GSEA)
+
+**GSEA asks: *"Are genes in a set coordinately shifting up or down across the full ranked list?"***
+
+Unlike ORA, GSEA uses **all tested genes**, ranks them by a metric encoding significance and
+direction, and returns a **Normalised Enrichment Score (NES)**: positive = up in biofilm,
+negative = up in planktonic.
+
+:::boxy
+ **Why signed log p-value for ranking?**
+
+ `rank = sign(LFC) x -log10(pvalue)`
+
+ Genes at the top are significantly up in biofilm; genes at the bottom are significantly up
+ in planktonic. This is more robust than ranking on fold change alone, which can place noisy
+ high-fold-change genes from lowly expressed genes at the extremes.
+
+<div style="background:#eef;border-left:4px solid #557;padding:8px;margin:8px 0;">
+<strong>Note:</strong> Genes with <code>pvalue = 0</code> (below machine precision in DESeq2)
+are excluded because <code>-log10(0) = Inf</code> is not a valid ranking score.
+</div>
+:::
+
+### Prepare the Ranked Gene List
+
+```{r saureus-fn-gsea-rank, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ranked_df <- res_df %>%
+  filter(!is.na(pvalue), !is.na(log2FoldChange), pvalue > 0) %>%
+  mutate(rank_metric = sign(log2FoldChange) * -log10(pvalue)) %>%
+  arrange(desc(rank_metric)) %>%
+  distinct(gene_id, .keep_all = TRUE)
+
+rank_vector        <- ranked_df$rank_metric
+names(rank_vector) <- ranked_df$gene_id
+
+cat("Genes in ranked list :", length(rank_vector), "\n")
+cat("Infinite values      :", sum(!is.finite(rank_vector)), "\n")
+cat("Top 5 (biofilm)      :", paste(head(names(rank_vector), 5), collapse = ", "), "\n")
+cat("Bottom 5 (planktonic):", paste(tail(names(rank_vector), 5), collapse = ", "), "\n")
+```
+
+### Convert Gene Sets to fgsea Format
+
+`fgsea` takes a named list of gene vectors. We convert all three collections and keep a lookup
+of each set's source for labelling.
+
+```{r saureus-fn-gsea-sets, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+pathways_list <- setNames(all_gmt$list_of_values, all_gmt$ontology_name)
+set_source    <- setNames(all_gmt$source,         all_gmt$ontology_name)
+
+cat("Sets in fgsea list:", length(pathways_list), "\n")
+```
+
+### Run GSEA
+
+We use `fgseaMultilevel`, which resolves very small p-values more accurately than simple
+permutation, with `minSize = 10` and `maxSize = 500`.
+
+```{r saureus-fn-gsea-run, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+set.seed(42)
+
+gsea_results <- fgseaMultilevel(
+  pathways = pathways_list,
+  stats    = rank_vector,
+  minSize  = 10,
+  maxSize  = 500
+) %>%
+  as.data.frame() %>%
+  mutate(source = set_source[pathway])
+
+cat("Sets tested              :", nrow(gsea_results), "\n")
+cat("Significant (padj < 0.05):", sum(gsea_results$padj < 0.05, na.rm = TRUE), "\n")
+cat("Nominal (pval < 0.05)    :", sum(gsea_results$pval < 0.05, na.rm = TRUE), "\n")
+```
+
+### Inspect Significant Sets
+
+```{r saureus-fn-gsea-table, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+gsea_sig <- gsea_results %>%
+  filter(padj < 0.05) %>%
+  arrange(padj)
+
+cat("Significant GSEA sets:", nrow(gsea_sig), "\n")
+cat("  Activated in biofilm    (NES > 0):", sum(gsea_sig$NES > 0), "\n")
+cat("  Activated in planktonic (NES < 0):", sum(gsea_sig$NES < 0), "\n")
+
+if (nrow(gsea_sig) > 0) {
+  DT::datatable(
+    gsea_sig %>%
+      select(source, pathway, NES, pval, padj, size) %>%
+      mutate(
+        direction = ifelse(NES > 0, "Biofilm", "Planktonic"),
+        across(where(is.numeric), \(x) signif(x, 3))
+      ) %>%
+      arrange(desc(abs(NES))),
+    rownames   = FALSE,
+    colnames   = c("Source", "Set", "NES", "p-value", "padj", "Size", "Higher in"),
+    extensions = c("Buttons", "Scroller"),
+    options    = list(dom = "Bfrtip", buttons = c("copy", "csv"),
+                      scrollX = TRUE, scrollY = 300, scroller = TRUE),
+    caption = "Significant GSEA sets (padj < 0.05)"
+  )
+} else {
+  cat("No sets significant after correction. The nominal top sets below are directional only.\n")
+}
+```
+
+### The biofilm-activated signal
+
+Almost all significant enrichment in this contrast points to processes that are *higher in
+planktonic* (negative NES). The genes induced *in biofilm* rarely fall into a coherent
+annotated set. It is therefore worth naming explicitly any set that is significantly
+**activated in biofilm** (positive NES), because that is the exception, not the rule.
+
+```{r saureus-fn-gsea-biofilm-sets, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+biofilm_sets <- gsea_sig %>% filter(NES > 0) %>% arrange(desc(NES))
+
+if (nrow(biofilm_sets) > 0) {
+  cat("Sets significantly activated in biofilm (padj < 0.05, NES > 0):\n")
+  for (i in seq_len(nrow(biofilm_sets))) {
+    cat(sprintf("  - %s [%s]  NES = %.2f, padj = %.3g, size = %d\n",
+                biofilm_sets$pathway[i], biofilm_sets$source[i],
+                biofilm_sets$NES[i], biofilm_sets$padj[i], biofilm_sets$size[i]))
+  }
+  cat("\nInterpret small sets with care: a high NES on a set of only a few genes",
+      "is fragile. Check the size column above.\n")
+} else {
+  cat("No gene set is significantly activated in biofilm.\n")
+  cat("The biofilm-induced genes do not cluster into any annotated KEGG pathway or GO term.\n")
+}
+```
+
+### NES Bar Plot
+
+If any sets survive correction we plot them; otherwise we fall back to the top sets by nominal
+p-value and label them clearly as directional, not confirmed.
+
+```{r saureus-fn-gsea-nes-barplot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+use_padj <- nrow(gsea_sig) > 0
+
+gsea_bar <- (if (use_padj) gsea_sig
+             else gsea_results %>% filter(pval < 0.05)) %>%
+  slice_max(abs(NES), n = 20) %>%
+  mutate(
+    direction = ifelse(NES > 0, "Biofilm", "Planktonic"),
+    set_label = paste0(pathway, "  [", source, "]"),
+    set_label = fct_reorder(set_label, NES)
+  )
+
+if (nrow(gsea_bar) > 0) {
+  ttl <- if (use_padj) "GSEA — Significant Sets (padj < 0.05)"
+         else "GSEA — Top Sets by Nominal p-value (directional only, not padj-significant)"
+  ggplot(gsea_bar, aes(x = NES, y = set_label, fill = direction)) +
+    geom_col(width = 0.7) +
+    geom_vline(xintercept = 0, linewidth = 0.5) +
+    scale_fill_manual(values = c("Biofilm" = "firebrick", "Planktonic" = "steelblue")) +
+    theme_pubr() +
+    theme(legend.position = "bottom",
+          axis.text.y = element_text(size = 8)) +
+    labs(
+      title    = ttl,
+      subtitle = paste0("Biofilm vs planktonic | ", cfg$label),
+      x        = "Normalised Enrichment Score (NES)",
+      y        = NULL,
+      fill     = "Higher in"
+    )
+} else {
+  cat("No sets to plot at nominal p < 0.05.\n")
+}
+```
+
+### Enrichment Plot — Top Sets in Each Direction
+
+The running enrichment score for the single strongest set in each direction. The peak is the
+enrichment score; the "rug" at the bottom marks where that set's genes fall in the ranked list.
+
+```{r saureus-fn-gsea-enrichment-plots, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+pick_top <- function(res, positive) {
+  d <- res %>% filter(if (positive) NES > 0 else NES < 0)
+  d <- if (nrow(gsea_sig) > 0) d %>% filter(padj < 0.05) else d %>% filter(pval < 0.05)
+  if (nrow(d) == 0) return(NULL)
+  d %>% slice_min(pval, n = 1) %>% pull(pathway)
+}
+
+top_biofilm    <- pick_top(gsea_results, TRUE)
+top_planktonic <- pick_top(gsea_results, FALSE)
+
+if (!is.null(top_biofilm)) {
+  print(plotEnrichment(pathways_list[[top_biofilm]], rank_vector) +
+          labs(title = paste("Top biofilm-activated:", top_biofilm)))
+}
+if (!is.null(top_planktonic)) {
+  print(plotEnrichment(pathways_list[[top_planktonic]], rank_vector) +
+          labs(title = paste("Top planktonic-activated:", top_planktonic)))
+}
+```
+
+## Part 3 — Comparing ORA and GSEA
+
+ORA and GSEA answer different questions and will not always agree. Sets found by both are the
+highest-confidence results.
+
+```{r saureus-fn-compare, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ora_hits <- unique(c(
+  if (nrow(ora_up_sig)   > 0) ora_up_sig$ontology_name   else character(0),
+  if (nrow(ora_down_sig) > 0) ora_down_sig$ontology_name else character(0)
+))
+gsea_hits <- gsea_sig$pathway
+
+both      <- intersect(ora_hits, gsea_hits)
+ora_only  <- setdiff(ora_hits, gsea_hits)
+gsea_only <- setdiff(gsea_hits, ora_hits)
+
+cat("Sets significant in BOTH :", length(both),      "\n")
+cat("Sets in ORA only         :", length(ora_only),  "\n")
+cat("Sets in GSEA only        :", length(gsea_only), "\n")
+if (length(both) > 0) {
+  cat("\nFound by both methods:\n"); cat(paste(" -", both), sep = "\n")
+}
+```
+
+<div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
+  <strong>Interpretation guide:</strong>
+  <ul>
+    <li><strong>Both significant</strong> — high confidence; a strong shift driven by many
+    genes.</li>
+    <li><strong>ORA only</strong> — genes crossing the significance threshold cluster in this
+    set, but the overall coordinated shift may be modest.</li>
+    <li><strong>GSEA only</strong> — a coordinated but subtle shift below the threshold; the
+    genes move together without individually being significant.</li>
+  </ul>
+</div>
+
+### Reading the biology
+
+```{r saureus-fn-biology-summary, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+n_biofilm_sets    <- sum(gsea_sig$NES > 0)
+n_planktonic_sets <- sum(gsea_sig$NES < 0)
+
+cat("GSEA sets higher in planktonic:", n_planktonic_sets, "\n")
+cat("GSEA sets higher in biofilm   :", n_biofilm_sets, "\n")
+cat("ORA sets among biofilm-up genes:", nrow(ora_up_sig), "\n")
+cat("ORA sets among planktonic-up genes:", nrow(ora_down_sig), "\n")
+```
+
+:::boxy
+**Two things this contrast tells us.**
+
+1. **Planktonic cells run the growth machinery.** The enrichment signal is dominated by
+   translation, ribosome, aminoacyl-tRNA and nucleotide-metabolism sets, all higher in the
+   planktonic state. This fits the biology: planktonic cells divide rapidly, while mature
+   biofilm cells slow their growth. GSEA detects this coordinated shift regardless of where the
+   significance threshold is drawn, which makes it a robust result rather than an artefact of
+   the cutoff.
+
+2. **The biofilm-induced programme is largely invisible to enrichment.** Many genes go *up* in
+   biofilm, yet few or none form an enriched annotated set. The biology that switches *on* in
+   biofilm lives disproportionately in genes that KEGG and GO do not annotate. This is a real
+   limitation of enrichment analysis, not a failure of the pipeline: these methods can only
+   see what has been annotated, and the most lifestyle-specific biology is often the least
+   characterised. A "no enrichment" result here is itself a finding worth stating.
+:::
+
+## Saving Results
+
+```{r saureus-fn-save-results, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+tables_dir <- file.path(git_root, cfg$out, "tables")
+dir.create(tables_dir, recursive = TRUE, showWarnings = FALSE)
+
+ora_all <- bind_rows(
+  if (!is.null(ora_up)   && nrow(ora_up)   > 0) ora_up   %>% mutate(direction = "Up-biofilm"),
+  if (!is.null(ora_down) && nrow(ora_down) > 0) ora_down %>% mutate(direction = "Down-planktonic")
+)
+
+if (!is.null(ora_all) && nrow(ora_all) > 0) {
+  write.table(
+    ora_all %>% select(where(~ !is.list(.))),
+    file = file.path(tables_dir,
+                     sprintf("ORA_lifestyle_%s.tsv", strain)),
+    sep = "\t", quote = FALSE, row.names = FALSE
+  )
+}
+
+write.table(
+  gsea_results %>% select(-leadingEdge),
+  file = file.path(tables_dir,
+                   sprintf("GSEA_lifestyle_%s.tsv", strain)),
+  sep = "\t", quote = FALSE, row.names = FALSE
+)
+
+cat("Saved to:", file.path(cfg$out, "tables"), "\n")
+cat("  ORA  -> ", sprintf("ORA_lifestyle_%s.tsv", strain), "\n")
+cat("  GSEA -> ", sprintf("GSEA_lifestyle_%s.tsv", strain), "\n")
+```
+
+## Summary
+
+| Step | Choice made | Rationale |
+|---|---|---|
+| Contrast | Lifestyle (additive): biofilm vs planktonic, time-controlled | Cleanest biofilm/planktonic signal |
+| ORA package | `mulea` | Empirical FDR; accounts for gene set interdependence |
+| GSEA package | `fgseaMultilevel` | Accurate small p-values; proper NES |
+| Gene sets | KEGG + GO:BP + GO:MF (cached) | No MSigDB/g:Profiler for these strains; built from KEGG + genome GO |
+| Gene set key | Locus tag | 100% gene coverage; symbols exist for only ~1/3 of genes |
+| ID conversion | None | DE table and gene sets share the pipeline's locus tags |
+| Background | All genes tested for this contrast | Correct statistical background, not the whole genome |
+| GSEA rank metric | sign(LFC) x -log10(pvalue) | Encodes direction and significance |
+| Significance | padj < 0.05 & |LFC| >= log2(3) (3-fold), checked vs upstream | Matches the paper and script 02; cross-check should reach 100% |
+
+Results are saved and ready for biological interpretation. Read KEGG, GO:BP and GO:MF results
+together: agreement across collections and between ORA and GSEA is the strongest evidence.
+
+<!-- --------------------- Do not edit this and below ---------------------- -->
+
+</br>
+
+```{r saureus-fn-session-info, echo=TRUE, eval=TRUE, include=TRUE}
+sessionInfo()
+```
+
+```{r saureus-fn-render, eval=FALSE, echo=FALSE}
+# Render once per strain:
+rmarkdown::render("01_scripts/03_gene_functional_saureus.Rmd",
+                  params = list(strain = "usa100"),
+                  output_file = "03_gene_functional_usa100.html")
+rmarkdown::render("01_scripts/03_gene_functional_saureus.Rmd",
+                  params = list(strain = "usa500"),
+                  output_file = "03_gene_functional_usa500.html")
+```

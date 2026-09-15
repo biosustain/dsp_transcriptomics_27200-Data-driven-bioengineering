@@ -86,7 +86,7 @@ eco00785	Lipoic acid metabolism	0	11	1	1
 eco00790	Folate biosynthesis	1	25	0.991910036735705	1
 eco00860	Porphyrin metabolism	3	22	0.766479859596371	1
 eco00900	Terpenoid backbone biosynthesis	1	14	0.932332748913054	1
-eco00907	Pinene, camphor and geraniol degradation	6	6	2.78768160338894e-05	0
+eco00907	Pinene, camphor and geraniol degradation	6	6	0.0000278768160338894	0
 eco00910	Nitrogen metabolism	8	23	0.0351041449539296	0.1131
 eco00920	Sulfur metabolism	10	31	0.0328430274379277	0.103052631578947
 eco00930	Caprolactam degradation	3	3	0.00531043111922647	0.0425

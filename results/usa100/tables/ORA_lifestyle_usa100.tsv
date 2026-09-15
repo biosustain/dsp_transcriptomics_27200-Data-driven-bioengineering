@@ -1,0 +1,433 @@
+ontology_id	ontology_name	nr_common_with_tested_elements	nr_common_with_background_elements	p_value	eFDR	source	direction
+sau00010	Glycolysis / Gluconeogenesis	3	38	0.485672396695654	1	KEGG	Up-biofilm
+sau00020	Citrate cycle (TCA cycle)	0	22	1	1	KEGG	Up-biofilm
+sau00030	Pentose phosphate pathway	2	21	0.424886426382101	1	KEGG	Up-biofilm
+sau00040	Pentose and glucuronate interconversions	0	8	1	1	KEGG	Up-biofilm
+sau00051	Fructose and mannose metabolism	2	15	0.272694174314892	1	KEGG	Up-biofilm
+sau00052	Galactose metabolism	0	13	1	1	KEGG	Up-biofilm
+sau00053	Ascorbate and aldarate metabolism	1	5	0.297709451294165	1	KEGG	Up-biofilm
+sau00061	Fatty acid biosynthesis	0	14	1	1	KEGG	Up-biofilm
+sau00071	Fatty acid degradation	1	8	0.432115949369854	1	KEGG	Up-biofilm
+sau00130	Ubiquinone and other terpenoid-quinone biosynthesis	0	9	1	1	KEGG	Up-biofilm
+sau00190	Oxidative phosphorylation	0	21	1	1	KEGG	Up-biofilm
+sau00220	Arginine biosynthesis	0	19	1	1	KEGG	Up-biofilm
+sau00230	Purine metabolism	1	44	0.9566231632469	1	KEGG	Up-biofilm
+sau00240	Pyrimidine metabolism	1	27	0.853098066187475	1	KEGG	Up-biofilm
+sau00250	Alanine, aspartate and glutamate metabolism	0	20	1	1	KEGG	Up-biofilm
+sau00260	Glycine, serine and threonine metabolism	1	28	0.863233714871577	1	KEGG	Up-biofilm
+sau00261	Monobactam biosynthesis	0	5	1	1	KEGG	Up-biofilm
+sau00270	Cysteine and methionine metabolism	0	25	1	1	KEGG	Up-biofilm
+sau00280	Valine, leucine and isoleucine degradation	1	11	0.540932375301772	1	KEGG	Up-biofilm
+sau00290	Valine, leucine and isoleucine biosynthesis	0	7	1	1	KEGG	Up-biofilm
+sau00300	Lysine biosynthesis	0	12	1	1	KEGG	Up-biofilm
+sau00310	Lysine degradation	1	8	0.432115949369854	1	KEGG	Up-biofilm
+sau00330	Arginine and proline metabolism	1	10	0.50718376575751	1	KEGG	Up-biofilm
+sau00340	Histidine metabolism	2	13	0.220671078502312	1	KEGG	Up-biofilm
+sau00362	Benzoate degradation	0	6	1	1	KEGG	Up-biofilm
+sau00380	Tryptophan metabolism	1	8	0.432115949369854	1	KEGG	Up-biofilm
+sau00400	Phenylalanine, tyrosine and tryptophan biosynthesis	0	13	1	1	KEGG	Up-biofilm
+sau00410	beta-Alanine metabolism	1	5	0.297709451294165	1	KEGG	Up-biofilm
+sau00430	Taurine and hypotaurine metabolism	0	6	1	1	KEGG	Up-biofilm
+sau00450	Selenocompound metabolism	0	6	1	1	KEGG	Up-biofilm
+sau00470	D-Amino acid metabolism	1	11	0.540932375301772	1	KEGG	Up-biofilm
+sau00480	Glutathione metabolism	0	8	1	1	KEGG	Up-biofilm
+sau00500	Starch and sucrose metabolism	0	15	1	1	KEGG	Up-biofilm
+sau00520	Amino sugar and nucleotide sugar metabolism	0	25	1	1	KEGG	Up-biofilm
+sau00541	Biosynthesis of various nucleotide sugars	0	10	1	1	KEGG	Up-biofilm
+sau00550	Peptidoglycan biosynthesis	1	27	0.853098066187475	1	KEGG	Up-biofilm
+sau00552	Teichoic acid biosynthesis	1	22	0.790078627221695	1	KEGG	Up-biofilm
+sau00561	Glycerolipid metabolism	1	16	0.678171589571116	1	KEGG	Up-biofilm
+sau00562	Inositol phosphate metabolism	0	5	1	1	KEGG	Up-biofilm
+sau00564	Glycerophospholipid metabolism	0	20	1	1	KEGG	Up-biofilm
+sau00620	Pyruvate metabolism	2	42	0.792933554078675	1	KEGG	Up-biofilm
+sau00630	Glyoxylate and dicarboxylate metabolism	0	22	1	1	KEGG	Up-biofilm
+sau00640	Propanoate metabolism	0	26	1	1	KEGG	Up-biofilm
+sau00650	Butanoate metabolism	0	17	1	1	KEGG	Up-biofilm
+sau00660	C5-Branched dibasic acid metabolism	0	6	1	1	KEGG	Up-biofilm
+sau00670	One carbon pool by folate	1	19	0.740041465628648	1	KEGG	Up-biofilm
+sau00680	Methane metabolism	1	18	0.720858148995757	1	KEGG	Up-biofilm
+sau00710	Carbon fixation by Calvin cycle	3	12	0.0433441804752644	1	KEGG	Up-biofilm
+sau00720	Other carbon fixation pathways	0	25	1	1	KEGG	Up-biofilm
+sau00730	Thiamine metabolism	0	11	1	1	KEGG	Up-biofilm
+sau00740	Riboflavin metabolism	1	10	0.50718376575751	1	KEGG	Up-biofilm
+sau00760	Nicotinate and nicotinamide metabolism	0	7	1	1	KEGG	Up-biofilm
+sau00770	Pantothenate and CoA biosynthesis	1	17	0.700268962822394	1	KEGG	Up-biofilm
+sau00780	Biotin metabolism	0	8	1	1	KEGG	Up-biofilm
+sau00785	Lipoic acid metabolism	0	19	1	1	KEGG	Up-biofilm
+sau00790	Folate biosynthesis	0	21	1	1	KEGG	Up-biofilm
+sau00860	Porphyrin metabolism	0	15	1	1	KEGG	Up-biofilm
+sau00900	Terpenoid backbone biosynthesis	0	13	1	1	KEGG	Up-biofilm
+sau00906	Carotenoid biosynthesis	1	6	0.345697767368677	1	KEGG	Up-biofilm
+sau00910	Nitrogen metabolism	0	12	1	1	KEGG	Up-biofilm
+sau00920	Sulfur metabolism	2	8	0.0986009869291851	1	KEGG	Up-biofilm
+sau00970	Aminoacyl-tRNA biosynthesis	0	50	1	1	KEGG	Up-biofilm
+sau00975	Biosynthesis of various siderophores	1	6	0.345697767368677	1	KEGG	Up-biofilm
+sau01100	Metabolic pathways	15	499	0.999989754972006	1	KEGG	Up-biofilm
+sau01110	Biosynthesis of secondary metabolites	6	257	0.999818611046651	1	KEGG	Up-biofilm
+sau01120	Microbial metabolism in diverse environments	6	136	0.914467070810998	1	KEGG	Up-biofilm
+sau01200	Carbon metabolism	3	79	0.915833396742157	1	KEGG	Up-biofilm
+sau01210	2-Oxocarboxylic acid metabolism	0	29	1	1	KEGG	Up-biofilm
+sau01212	Fatty acid metabolism	0	17	1	1	KEGG	Up-biofilm
+sau01220	Degradation of aromatic compounds	0	5	1	1	KEGG	Up-biofilm
+sau01230	Biosynthesis of amino acids	3	89	0.950098834714831	1	KEGG	Up-biofilm
+sau01232	Nucleotide metabolism	1	31	0.889656142359759	1	KEGG	Up-biofilm
+sau01240	Biosynthesis of cofactors	3	107	0.981517837889559	1	KEGG	Up-biofilm
+sau01250	Biosynthesis of nucleotide sugars	0	21	1	1	KEGG	Up-biofilm
+sau01310	Nitrogen cycle	0	5	1	1	KEGG	Up-biofilm
+sau01501	beta-Lactam resistance	1	15	0.654456317002903	1	KEGG	Up-biofilm
+sau01502	Vancomycin resistance	0	6	1	1	KEGG	Up-biofilm
+sau01503	Cationic antimicrobial peptide (CAMP) resistance	2	13	0.220671078502312	1	KEGG	Up-biofilm
+sau02010	ABC transporters	1	73	0.994705111459605	1	KEGG	Up-biofilm
+sau02020	Two-component system	3	73	0.886185240550601	1	KEGG	Up-biofilm
+sau02024	Quorum sensing	1	36	0.922895884609113	1	KEGG	Up-biofilm
+sau02060	Phosphotransferase system (PTS)	0	21	1	1	KEGG	Up-biofilm
+sau03010	Ribosome	10	67	0.013664392198414	0.675	KEGG	Up-biofilm
+sau03018	RNA degradation	1	14	0.629005507490369	1	KEGG	Up-biofilm
+sau03020	RNA polymerase	0	5	1	1	KEGG	Up-biofilm
+sau03030	DNA replication	0	15	1	1	KEGG	Up-biofilm
+sau03060	Protein export	0	15	1	1	KEGG	Up-biofilm
+sau03070	Bacterial secretion system	0	12	1	1	KEGG	Up-biofilm
+sau03410	Base excision repair	0	10	1	1	KEGG	Up-biofilm
+sau03420	Nucleotide excision repair	0	7	1	1	KEGG	Up-biofilm
+sau03430	Mismatch repair	0	17	1	1	KEGG	Up-biofilm
+sau03440	Homologous recombination	0	20	1	1	KEGG	Up-biofilm
+sau04122	Sulfur relay system	0	10	1	1	KEGG	Up-biofilm
+sau04146	Peroxisome	0	6	1	1	KEGG	Up-biofilm
+sau04156	Integrated stress response (ISR) signaling pathway	1	3	0.190993813444743	1	KEGG	Up-biofilm
+sau05150	Staphylococcus aureus infection	3	33	0.393320464603028	1	KEGG	Up-biofilm
+GO:0000105	L-histidine biosynthetic process	0	5	1	1	GO:BP	Up-biofilm
+GO:0000160	phosphorelay signal transduction system	0	8	1	1	GO:BP	Up-biofilm
+GO:0000162	L-tryptophan biosynthetic process	0	2	1	1	GO:BP	Up-biofilm
+GO:0001522	pseudouridine synthesis	0	7	1	1	GO:BP	Up-biofilm
+GO:0005975	carbohydrate metabolic process	0	14	1	1	GO:BP	Up-biofilm
+GO:0006096	glycolytic process	1	10	0.50718376575751	1	GO:BP	Up-biofilm
+GO:0006099	tricarboxylic acid cycle	0	7	1	1	GO:BP	Up-biofilm
+GO:0006189	'de novo' IMP biosynthetic process	0	7	1	1	GO:BP	Up-biofilm
+GO:0006260	DNA replication	3	20	0.151471271395365	1	GO:BP	Up-biofilm
+GO:0006265	DNA topological change	0	6	1	1	GO:BP	Up-biofilm
+GO:0006281	DNA repair	1	23	0.804530407518877	1	GO:BP	Up-biofilm
+GO:0006310	DNA recombination	1	34	0.911000257930514	1	GO:BP	Up-biofilm
+GO:0006313	DNA transposition	0	11	1	1	GO:BP	Up-biofilm
+GO:0006351	DNA-templated transcription	0	7	1	1	GO:BP	Up-biofilm
+GO:0006355	regulation of DNA-templated transcription	2	47	0.842245493975648	1	GO:BP	Up-biofilm
+GO:0006364	rRNA processing	0	9	1	1	GO:BP	Up-biofilm
+GO:0006400	tRNA modification	0	10	1	1	GO:BP	Up-biofilm
+GO:0006412	translation	0	60	1	1	GO:BP	Up-biofilm
+GO:0006457	protein folding	3	5	0.00280865737309044	0.087	GO:BP	Up-biofilm
+GO:0006508	proteolysis	0	15	1	1	GO:BP	Up-biofilm
+GO:0006520	amino acid metabolic process	0	5	1	1	GO:BP	Up-biofilm
+GO:0006633	fatty acid biosynthetic process	0	10	1	1	GO:BP	Up-biofilm
+GO:0006777	Mo-molybdopterin cofactor biosynthetic process	0	7	1	1	GO:BP	Up-biofilm
+GO:0006810	transport	0	7	1	1	GO:BP	Up-biofilm
+GO:0006812	monoatomic cation transport	0	5	1	1	GO:BP	Up-biofilm
+GO:0006813	potassium ion transport	0	2	1	1	GO:BP	Up-biofilm
+GO:0006865	amino acid transport	1	14	0.629005507490369	1	GO:BP	Up-biofilm
+GO:0007165	signal transduction	0	6	1	1	GO:BP	Up-biofilm
+GO:0008033	tRNA processing	0	10	1	1	GO:BP	Up-biofilm
+GO:0008152	metabolic process	0	9	1	1	GO:BP	Up-biofilm
+GO:0008360	regulation of cell shape	0	5	1	1	GO:BP	Up-biofilm
+GO:0008616	queuosine biosynthetic process	0	5	1	1	GO:BP	Up-biofilm
+GO:0008643	carbohydrate transport	0	5	1	1	GO:BP	Up-biofilm
+GO:0009089	lysine biosynthetic process via diaminopimelate	0	5	1	1	GO:BP	Up-biofilm
+GO:0009228	thiamine biosynthetic process	0	6	1	1	GO:BP	Up-biofilm
+GO:0009234	menaquinone biosynthetic process	0	9	1	1	GO:BP	Up-biofilm
+GO:0009252	peptidoglycan biosynthetic process	0	14	1	1	GO:BP	Up-biofilm
+GO:0009306	protein secretion	0	8	1	1	GO:BP	Up-biofilm
+GO:0009401	phosphoenolpyruvate-dependent sugar phosphotransferase system	0	20	1	1	GO:BP	Up-biofilm
+GO:0015074	DNA integration	1	13	0.6016930295142	1	GO:BP	Up-biofilm
+GO:0015986	proton motive force-driven ATP synthesis	0	6	1	1	GO:BP	Up-biofilm
+GO:0016226	iron-sulfur cluster assembly	0	5	1	1	GO:BP	Up-biofilm
+GO:0016310	phosphorylation	1	10	0.50718376575751	1	GO:BP	Up-biofilm
+GO:0019350	teichoic acid biosynthetic process	0	8	1	1	GO:BP	Up-biofilm
+GO:0019512	lactose catabolic process via tagatose-6-phosphate	0	5	1	1	GO:BP	Up-biofilm
+GO:0030001	metal ion transport	0	5	1	1	GO:BP	Up-biofilm
+GO:0031556	transcriptional attenuation by ribosome	0	0	1	1	GO:BP	Up-biofilm
+GO:0032259	methylation	0	5	1	1	GO:BP	Up-biofilm
+GO:0036211	protein modification process	0	5	1	1	GO:BP	Up-biofilm
+GO:0042254	ribosome biogenesis	0	6	1	1	GO:BP	Up-biofilm
+GO:0045892	negative regulation of DNA-templated transcription	0	8	1	1	GO:BP	Up-biofilm
+GO:0051301	cell division	0	8	1	1	GO:BP	Up-biofilm
+GO:0055085	transmembrane transport	1	54	0.978929167089633	1	GO:BP	Up-biofilm
+GO:0071555	cell wall organization	0	6	1	1	GO:BP	Up-biofilm
+GO:0000155	phosphorelay sensor kinase activity	0	8	1	1	GO:MF	Up-biofilm
+GO:0000166	nucleotide binding	0	21	1	1	GO:MF	Up-biofilm
+GO:0000287	magnesium ion binding	1	10	0.50718376575751	1	GO:MF	Up-biofilm
+GO:0003676	nucleic acid binding	0	13	1	1	GO:MF	Up-biofilm
+GO:0003677	DNA binding	5	110	0.882855420825095	1	GO:MF	Up-biofilm
+GO:0003678	DNA helicase activity	0	7	1	1	GO:MF	Up-biofilm
+GO:0003684	damaged DNA binding	1	5	0.297709451294165	1	GO:MF	Up-biofilm
+GO:0003697	single-stranded DNA binding	0	4	1	1	GO:MF	Up-biofilm
+GO:0003700	DNA-binding transcription factor activity	1	40	0.942152723677691	1	GO:MF	Up-biofilm
+GO:0003723	RNA binding	0	30	1	1	GO:MF	Up-biofilm
+GO:0003735	structural constituent of ribosome	0	56	1	1	GO:MF	Up-biofilm
+GO:0003824	catalytic activity	1	21	0.774565726154231	1	GO:MF	Up-biofilm
+GO:0003887	DNA-directed DNA polymerase activity	1	10	0.50718376575751	1	GO:MF	Up-biofilm
+GO:0003899	DNA-directed 5'-3' RNA polymerase activity	0	7	1	1	GO:MF	Up-biofilm
+GO:0003924	GTPase activity	0	16	1	1	GO:MF	Up-biofilm
+GO:0004040	amidase activity	0	5	1	1	GO:MF	Up-biofilm
+GO:0004252	serine-type endopeptidase activity	0	6	1	1	GO:MF	Up-biofilm
+GO:0004673	protein histidine kinase activity	0	5	1	1	GO:MF	Up-biofilm
+GO:0004803	transposase activity	0	12	1	1	GO:MF	Up-biofilm
+GO:0005198	structural molecule activity	0	3	1	1	GO:MF	Up-biofilm
+GO:0005215	transporter activity	0	5	1	1	GO:MF	Up-biofilm
+GO:0005515	protein binding	1	15	0.654456317002903	1	GO:MF	Up-biofilm
+GO:0005524	ATP binding	2	145	0.999688092924889	1	GO:MF	Up-biofilm
+GO:0005525	GTP binding	0	20	1	1	GO:MF	Up-biofilm
+GO:0008080	N-acetyltransferase activity	2	12	0.194968368282817	1	GO:MF	Up-biofilm
+GO:0008168	methyltransferase activity	0	13	1	1	GO:MF	Up-biofilm
+GO:0008233	peptidase activity	0	4	1	1	GO:MF	Up-biofilm
+GO:0008253	5'-nucleotidase activity	0	5	1	1	GO:MF	Up-biofilm
+GO:0008270	zinc ion binding	0	16	1	1	GO:MF	Up-biofilm
+GO:0008757	S-adenosylmethionine-dependent methyltransferase activity	0	8	1	1	GO:MF	Up-biofilm
+GO:0008982	protein-N(PI)-phosphohistidine-sugar phosphotransferase activity	0	10	1	1	GO:MF	Up-biofilm
+GO:0009009	site-specific recombinase activity	0	4	1	1	GO:MF	Up-biofilm
+GO:0009055	electron transfer activity	0	10	1	1	GO:MF	Up-biofilm
+GO:0009982	pseudouridine synthase activity	0	7	1	1	GO:MF	Up-biofilm
+GO:0010181	FMN binding	2	14	0.246630815824001	1	GO:MF	Up-biofilm
+GO:0015035	protein-disulfide reductase activity	0	6	1	1	GO:MF	Up-biofilm
+GO:0015078	proton transmembrane transporter activity	0	7	1	1	GO:MF	Up-biofilm
+GO:0015171	amino acid transmembrane transporter activity	1	11	0.540932375301772	1	GO:MF	Up-biofilm
+GO:0015293	symporter activity	0	9	1	1	GO:MF	Up-biofilm
+GO:0016301	kinase activity	0	6	1	1	GO:MF	Up-biofilm
+GO:0016491	oxidoreductase activity	6	33	0.0216835158450053	0.547	GO:MF	Up-biofilm
+GO:0016746	acyltransferase activity	0	13	1	1	GO:MF	Up-biofilm
+GO:0016747	acyltransferase activity, transferring groups other than amino-acyl groups	0	5	1	1	GO:MF	Up-biofilm
+GO:0016757	glycosyltransferase activity	0	9	1	1	GO:MF	Up-biofilm
+GO:0016780	phosphotransferase activity, for other substituted phosphate groups	0	5	1	1	GO:MF	Up-biofilm
+GO:0016787	hydrolase activity	1	44	0.9566231632469	1	GO:MF	Up-biofilm
+GO:0016791	phosphatase activity	0	5	1	1	GO:MF	Up-biofilm
+GO:0016887	ATP hydrolysis activity	1	47	0.965058834193374	1	GO:MF	Up-biofilm
+GO:0020037	heme binding	0	7	1	1	GO:MF	Up-biofilm
+GO:0022857	transmembrane transporter activity	1	50	0.971862437900629	1	GO:MF	Up-biofilm
+GO:0030170	pyridoxal phosphate binding	0	19	1	1	GO:MF	Up-biofilm
+GO:0030976	thiamine pyrophosphate binding	1	7	0.390426579064771	1	GO:MF	Up-biofilm
+GO:0042578	phosphoric ester hydrolase activity	0	5	1	1	GO:MF	Up-biofilm
+GO:0042626	ATPase-coupled transmembrane transporter activity	1	58	0.984229569792123	1	GO:MF	Up-biofilm
+GO:0042834	peptidoglycan binding	0	5	1	1	GO:MF	Up-biofilm
+GO:0043022	ribosome binding	0	5	1	1	GO:MF	Up-biofilm
+GO:0046872	metal ion binding	3	63	0.816101139373618	1	GO:MF	Up-biofilm
+GO:0050660	flavin adenine dinucleotide binding	0	14	1	1	GO:MF	Up-biofilm
+GO:0050661	NADP binding	1	11	0.540932375301772	1	GO:MF	Up-biofilm
+GO:0051287	NAD binding	1	12	0.572383648667132	1	GO:MF	Up-biofilm
+GO:0051536	iron-sulfur cluster binding	0	5	1	1	GO:MF	Up-biofilm
+GO:0051539	4 iron, 4 sulfur cluster binding	1	10	0.50718376575751	1	GO:MF	Up-biofilm
+GO:0070403	NAD+ binding	0	5	1	1	GO:MF	Up-biofilm
+GO:0071949	FAD binding	1	5	0.297709451294165	1	GO:MF	Up-biofilm
+GO:0140359	ABC-type transporter activity	1	60	0.986359299817407	1	GO:MF	Up-biofilm
+GO:1904047	S-adenosyl-L-methionine binding	1	20	0.757914330926987	1	GO:MF	Up-biofilm
+sau00010	Glycolysis / Gluconeogenesis	3	38	0.349117884226978	1	KEGG	Down-planktonic
+sau00020	Citrate cycle (TCA cycle)	0	22	1	1	KEGG	Down-planktonic
+sau00030	Pentose phosphate pathway	0	21	1	1	KEGG	Down-planktonic
+sau00040	Pentose and glucuronate interconversions	1	8	0.364834479305255	1	KEGG	Down-planktonic
+sau00051	Fructose and mannose metabolism	3	15	0.0456285912882849	0.222181818181818	KEGG	Down-planktonic
+sau00052	Galactose metabolism	0	13	1	1	KEGG	Down-planktonic
+sau00053	Ascorbate and aldarate metabolism	2	5	0.026964008459218	0.145222222222222	KEGG	Down-planktonic
+sau00061	Fatty acid biosynthesis	0	14	1	1	KEGG	Down-planktonic
+sau00071	Fatty acid degradation	0	8	1	1	KEGG	Down-planktonic
+sau00130	Ubiquinone and other terpenoid-quinone biosynthesis	0	9	1	1	KEGG	Down-planktonic
+sau00190	Oxidative phosphorylation	4	21	0.0252806543367909	0.157714285714286	KEGG	Down-planktonic
+sau00220	Arginine biosynthesis	4	19	0.0178257154793666	0.1225	KEGG	Down-planktonic
+sau00230	Purine metabolism	9	44	0.00048021675022536	0.004	KEGG	Down-planktonic
+sau00240	Pyrimidine metabolism	3	27	0.183239003366892	0.6056	KEGG	Down-planktonic
+sau00250	Alanine, aspartate and glutamate metabolism	1	20	0.679462243858767	1	KEGG	Down-planktonic
+sau00260	Glycine, serine and threonine metabolism	1	28	0.797243673924635	1	KEGG	Down-planktonic
+sau00261	Monobactam biosynthesis	0	5	1	1	KEGG	Down-planktonic
+sau00270	Cysteine and methionine metabolism	2	25	0.404430805702507	0.956461538461538	KEGG	Down-planktonic
+sau00280	Valine, leucine and isoleucine degradation	0	11	1	1	KEGG	Down-planktonic
+sau00290	Valine, leucine and isoleucine biosynthesis	1	7	0.327697191320319	0.9979	KEGG	Down-planktonic
+sau00300	Lysine biosynthesis	1	12	0.494101492147469	0.977375	KEGG	Down-planktonic
+sau00310	Lysine degradation	0	8	1	1	KEGG	Down-planktonic
+sau00330	Arginine and proline metabolism	1	10	0.433111729043178	0.929896551724138	KEGG	Down-planktonic
+sau00340	Histidine metabolism	0	13	1	1	KEGG	Down-planktonic
+sau00362	Benzoate degradation	0	6	1	1	KEGG	Down-planktonic
+sau00380	Tryptophan metabolism	0	8	1	1	KEGG	Down-planktonic
+sau00400	Phenylalanine, tyrosine and tryptophan biosynthesis	0	13	1	1	KEGG	Down-planktonic
+sau00410	beta-Alanine metabolism	0	5	1	1	KEGG	Down-planktonic
+sau00430	Taurine and hypotaurine metabolism	1	6	0.288406767436441	0.884894736842105	KEGG	Down-planktonic
+sau00450	Selenocompound metabolism	2	6	0.0390027415588101	0.1996	KEGG	Down-planktonic
+sau00470	D-Amino acid metabolism	0	11	1	1	KEGG	Down-planktonic
+sau00480	Glutathione metabolism	1	8	0.364834479305255	1	KEGG	Down-planktonic
+sau00500	Starch and sucrose metabolism	1	15	0.573588968291408	1	KEGG	Down-planktonic
+sau00520	Amino sugar and nucleotide sugar metabolism	3	25	0.155641442976306	0.583384615384615	KEGG	Down-planktonic
+sau00541	Biosynthesis of various nucleotide sugars	0	10	1	1	KEGG	Down-planktonic
+sau00550	Peptidoglycan biosynthesis	0	27	1	1	KEGG	Down-planktonic
+sau00552	Teichoic acid biosynthesis	0	22	1	1	KEGG	Down-planktonic
+sau00561	Glycerolipid metabolism	0	16	1	1	KEGG	Down-planktonic
+sau00562	Inositol phosphate metabolism	0	5	1	1	KEGG	Down-planktonic
+sau00564	Glycerophospholipid metabolism	0	20	1	1	KEGG	Down-planktonic
+sau00620	Pyruvate metabolism	0	42	1	1	KEGG	Down-planktonic
+sau00630	Glyoxylate and dicarboxylate metabolism	1	22	0.714095654798989	1	KEGG	Down-planktonic
+sau00640	Propanoate metabolism	0	26	1	1	KEGG	Down-planktonic
+sau00650	Butanoate metabolism	1	17	0.619563277851033	1	KEGG	Down-planktonic
+sau00660	C5-Branched dibasic acid metabolism	1	6	0.288406767436441	0.884894736842105	KEGG	Down-planktonic
+sau00670	One carbon pool by folate	3	19	0.0829039469711055	0.341166666666667	KEGG	Down-planktonic
+sau00680	Methane metabolism	2	18	0.260736567660331	0.818352941176471	KEGG	Down-planktonic
+sau00710	Carbon fixation by Calvin cycle	0	12	1	1	KEGG	Down-planktonic
+sau00720	Other carbon fixation pathways	0	25	1	1	KEGG	Down-planktonic
+sau00730	Thiamine metabolism	4	11	0.00213941837690546	0.018	KEGG	Down-planktonic
+sau00740	Riboflavin metabolism	1	10	0.433111729043178	0.929896551724138	KEGG	Down-planktonic
+sau00760	Nicotinate and nicotinamide metabolism	0	7	1	1	KEGG	Down-planktonic
+sau00770	Pantothenate and CoA biosynthesis	1	17	0.619563277851033	1	KEGG	Down-planktonic
+sau00780	Biotin metabolism	0	8	1	1	KEGG	Down-planktonic
+sau00785	Lipoic acid metabolism	0	19	1	1	KEGG	Down-planktonic
+sau00790	Folate biosynthesis	0	21	1	1	KEGG	Down-planktonic
+sau00860	Porphyrin metabolism	0	15	1	1	KEGG	Down-planktonic
+sau00900	Terpenoid backbone biosynthesis	0	13	1	1	KEGG	Down-planktonic
+sau00906	Carotenoid biosynthesis	0	6	1	1	KEGG	Down-planktonic
+sau00910	Nitrogen metabolism	0	12	1	1	KEGG	Down-planktonic
+sau00920	Sulfur metabolism	0	8	1	1	KEGG	Down-planktonic
+sau00970	Aminoacyl-tRNA biosynthesis	17	50	0.000000000286006107685921	0	KEGG	Down-planktonic
+sau00975	Biosynthesis of various siderophores	0	6	1	1	KEGG	Down-planktonic
+sau01100	Metabolic pathways	37	499	0.025309543394244	0.13975	KEGG	Down-planktonic
+sau01110	Biosynthesis of secondary metabolites	14	257	0.56224095457615	1	KEGG	Down-planktonic
+sau01120	Microbial metabolism in diverse environments	8	136	0.477846847671236	0.982233333333333	KEGG	Down-planktonic
+sau01200	Carbon metabolism	2	79	0.939281143014033	1	KEGG	Down-planktonic
+sau01210	2-Oxocarboxylic acid metabolism	2	29	0.480728488794598	0.959354838709677	KEGG	Down-planktonic
+sau01212	Fatty acid metabolism	0	17	1	1	KEGG	Down-planktonic
+sau01220	Degradation of aromatic compounds	0	5	1	1	KEGG	Down-planktonic
+sau01230	Biosynthesis of amino acids	6	89	0.365590898814062	0.9685	KEGG	Down-planktonic
+sau01232	Nucleotide metabolism	3	31	0.241716036967788	0.753	KEGG	Down-planktonic
+sau01240	Biosynthesis of cofactors	7	107	0.375215081030446	0.94936	KEGG	Down-planktonic
+sau01250	Biosynthesis of nucleotide sugars	0	21	1	1	KEGG	Down-planktonic
+sau01310	Nitrogen cycle	0	5	1	1	KEGG	Down-planktonic
+sau01501	beta-Lactam resistance	0	15	1	1	KEGG	Down-planktonic
+sau01502	Vancomycin resistance	0	6	1	1	KEGG	Down-planktonic
+sau01503	Cationic antimicrobial peptide (CAMP) resistance	0	13	1	1	KEGG	Down-planktonic
+sau02010	ABC transporters	2	73	0.919290042931362	1	KEGG	Down-planktonic
+sau02020	Two-component system	1	73	0.985056359826944	1	KEGG	Down-planktonic
+sau02024	Quorum sensing	1	36	0.871960549816253	1	KEGG	Down-planktonic
+sau02060	Phosphotransferase system (PTS)	6	21	0.000678148325944927	0.00625	KEGG	Down-planktonic
+sau03010	Ribosome	22	67	0.00000000000111621822895813	0	KEGG	Down-planktonic
+sau03018	RNA degradation	1	14	0.548576030677216	1	KEGG	Down-planktonic
+sau03020	RNA polymerase	0	5	1	1	KEGG	Down-planktonic
+sau03030	DNA replication	0	15	1	1	KEGG	Down-planktonic
+sau03060	Protein export	0	15	1	1	KEGG	Down-planktonic
+sau03070	Bacterial secretion system	0	12	1	1	KEGG	Down-planktonic
+sau03410	Base excision repair	0	10	1	1	KEGG	Down-planktonic
+sau03420	Nucleotide excision repair	0	7	1	1	KEGG	Down-planktonic
+sau03430	Mismatch repair	0	17	1	1	KEGG	Down-planktonic
+sau03440	Homologous recombination	0	20	1	1	KEGG	Down-planktonic
+sau04122	Sulfur relay system	1	10	0.433111729043178	0.929896551724138	KEGG	Down-planktonic
+sau04146	Peroxisome	0	6	1	1	KEGG	Down-planktonic
+sau04156	Integrated stress response (ISR) signaling pathway	1	3	0.156343228125193	0.552571428571429	KEGG	Down-planktonic
+sau05150	Staphylococcus aureus infection	2	33	0.550816696476313	1	KEGG	Down-planktonic
+GO:0000105	L-histidine biosynthetic process	0	5	1	1	GO:BP	Down-planktonic
+GO:0000160	phosphorelay signal transduction system	0	8	1	1	GO:BP	Down-planktonic
+GO:0000162	L-tryptophan biosynthetic process	0	2	1	1	GO:BP	Down-planktonic
+GO:0001522	pseudouridine synthesis	0	7	1	1	GO:BP	Down-planktonic
+GO:0005975	carbohydrate metabolic process	1	14	0.548576030677216	1	GO:BP	Down-planktonic
+GO:0006096	glycolytic process	1	10	0.433111729043178	1	GO:BP	Down-planktonic
+GO:0006099	tricarboxylic acid cycle	0	7	1	1	GO:BP	Down-planktonic
+GO:0006189	'de novo' IMP biosynthetic process	3	7	0.00484903512289447	0.0275	GO:BP	Down-planktonic
+GO:0006260	DNA replication	0	20	1	1	GO:BP	Down-planktonic
+GO:0006265	DNA topological change	0	6	1	1	GO:BP	Down-planktonic
+GO:0006281	DNA repair	0	23	1	1	GO:BP	Down-planktonic
+GO:0006310	DNA recombination	0	34	1	1	GO:BP	Down-planktonic
+GO:0006313	DNA transposition	0	11	1	1	GO:BP	Down-planktonic
+GO:0006351	DNA-templated transcription	0	7	1	1	GO:BP	Down-planktonic
+GO:0006355	regulation of DNA-templated transcription	0	47	1	1	GO:BP	Down-planktonic
+GO:0006364	rRNA processing	0	9	1	1	GO:BP	Down-planktonic
+GO:0006400	tRNA modification	1	10	0.433111729043178	1	GO:BP	Down-planktonic
+GO:0006412	translation	22	60	0.0000000000000801581023779363	0	GO:BP	Down-planktonic
+GO:0006457	protein folding	0	5	1	1	GO:BP	Down-planktonic
+GO:0006508	proteolysis	0	15	1	1	GO:BP	Down-planktonic
+GO:0006520	amino acid metabolic process	0	5	1	1	GO:BP	Down-planktonic
+GO:0006633	fatty acid biosynthetic process	0	10	1	1	GO:BP	Down-planktonic
+GO:0006777	Mo-molybdopterin cofactor biosynthetic process	0	7	1	1	GO:BP	Down-planktonic
+GO:0006810	transport	0	7	1	1	GO:BP	Down-planktonic
+GO:0006812	monoatomic cation transport	0	5	1	1	GO:BP	Down-planktonic
+GO:0006813	potassium ion transport	0	2	1	1	GO:BP	Down-planktonic
+GO:0006865	amino acid transport	1	14	0.548576030677216	1	GO:BP	Down-planktonic
+GO:0007165	signal transduction	0	6	1	1	GO:BP	Down-planktonic
+GO:0008033	tRNA processing	0	10	1	1	GO:BP	Down-planktonic
+GO:0008152	metabolic process	1	9	0.399935731764701	1	GO:BP	Down-planktonic
+GO:0008360	regulation of cell shape	0	5	1	1	GO:BP	Down-planktonic
+GO:0008616	queuosine biosynthetic process	0	5	1	1	GO:BP	Down-planktonic
+GO:0008643	carbohydrate transport	1	5	0.246839429790169	0.999428571428571	GO:BP	Down-planktonic
+GO:0009089	lysine biosynthetic process via diaminopimelate	1	5	0.246839429790169	0.999428571428571	GO:BP	Down-planktonic
+GO:0009228	thiamine biosynthetic process	4	6	0.000120812006491278	0.000666666666666667	GO:BP	Down-planktonic
+GO:0009234	menaquinone biosynthetic process	0	9	1	1	GO:BP	Down-planktonic
+GO:0009252	peptidoglycan biosynthetic process	0	14	1	1	GO:BP	Down-planktonic
+GO:0009306	protein secretion	1	8	0.364834479305255	1	GO:BP	Down-planktonic
+GO:0009401	phosphoenolpyruvate-dependent sugar phosphotransferase system	3	20	0.0937657843792359	0.4402	GO:BP	Down-planktonic
+GO:0015074	DNA integration	0	13	1	1	GO:BP	Down-planktonic
+GO:0015986	proton motive force-driven ATP synthesis	4	6	0.000120812006491278	0.000666666666666667	GO:BP	Down-planktonic
+GO:0016226	iron-sulfur cluster assembly	0	5	1	1	GO:BP	Down-planktonic
+GO:0016310	phosphorylation	0	10	1	1	GO:BP	Down-planktonic
+GO:0019350	teichoic acid biosynthetic process	0	8	1	1	GO:BP	Down-planktonic
+GO:0019512	lactose catabolic process via tagatose-6-phosphate	0	5	1	1	GO:BP	Down-planktonic
+GO:0030001	metal ion transport	0	5	1	1	GO:BP	Down-planktonic
+GO:0031556	transcriptional attenuation by ribosome	0	0	1	1	GO:BP	Down-planktonic
+GO:0032259	methylation	0	5	1	1	GO:BP	Down-planktonic
+GO:0036211	protein modification process	0	5	1	1	GO:BP	Down-planktonic
+GO:0042254	ribosome biogenesis	0	6	1	1	GO:BP	Down-planktonic
+GO:0045892	negative regulation of DNA-templated transcription	0	8	1	1	GO:BP	Down-planktonic
+GO:0051301	cell division	0	8	1	1	GO:BP	Down-planktonic
+GO:0055085	transmembrane transport	3	54	0.579705166678627	1	GO:BP	Down-planktonic
+GO:0071555	cell wall organization	0	6	1	1	GO:BP	Down-planktonic
+GO:0000155	phosphorelay sensor kinase activity	0	8	1	1	GO:MF	Down-planktonic
+GO:0000166	nucleotide binding	5	21	0.00466327777506192	0.059	GO:MF	Down-planktonic
+GO:0000287	magnesium ion binding	1	10	0.433111729043178	1	GO:MF	Down-planktonic
+GO:0003676	nucleic acid binding	0	13	1	1	GO:MF	Down-planktonic
+GO:0003677	DNA binding	0	110	1	1	GO:MF	Down-planktonic
+GO:0003678	DNA helicase activity	0	7	1	1	GO:MF	Down-planktonic
+GO:0003684	damaged DNA binding	0	5	1	1	GO:MF	Down-planktonic
+GO:0003697	single-stranded DNA binding	0	4	1	1	GO:MF	Down-planktonic
+GO:0003700	DNA-binding transcription factor activity	0	40	1	1	GO:MF	Down-planktonic
+GO:0003723	RNA binding	2	30	0.49886811356688	1	GO:MF	Down-planktonic
+GO:0003735	structural constituent of ribosome	22	56	0.0000000000000145439216225896	0	GO:MF	Down-planktonic
+GO:0003824	catalytic activity	3	21	0.105179972719643	1	GO:MF	Down-planktonic
+GO:0003887	DNA-directed DNA polymerase activity	0	10	1	1	GO:MF	Down-planktonic
+GO:0003899	DNA-directed 5'-3' RNA polymerase activity	0	7	1	1	GO:MF	Down-planktonic
+GO:0003924	GTPase activity	0	16	1	1	GO:MF	Down-planktonic
+GO:0004040	amidase activity	1	5	0.246839429790169	1	GO:MF	Down-planktonic
+GO:0004252	serine-type endopeptidase activity	0	6	1	1	GO:MF	Down-planktonic
+GO:0004673	protein histidine kinase activity	0	5	1	1	GO:MF	Down-planktonic
+GO:0004803	transposase activity	0	12	1	1	GO:MF	Down-planktonic
+GO:0005198	structural molecule activity	0	3	1	1	GO:MF	Down-planktonic
+GO:0005215	transporter activity	0	5	1	1	GO:MF	Down-planktonic
+GO:0005515	protein binding	0	15	1	1	GO:MF	Down-planktonic
+GO:0005524	ATP binding	6	145	0.823979875733795	1	GO:MF	Down-planktonic
+GO:0005525	GTP binding	1	20	0.679462243858767	1	GO:MF	Down-planktonic
+GO:0008080	N-acetyltransferase activity	0	12	1	1	GO:MF	Down-planktonic
+GO:0008168	methyltransferase activity	0	13	1	1	GO:MF	Down-planktonic
+GO:0008233	peptidase activity	0	4	1	1	GO:MF	Down-planktonic
+GO:0008253	5'-nucleotidase activity	0	5	1	1	GO:MF	Down-planktonic
+GO:0008270	zinc ion binding	0	16	1	1	GO:MF	Down-planktonic
+GO:0008757	S-adenosylmethionine-dependent methyltransferase activity	0	8	1	1	GO:MF	Down-planktonic
+GO:0008982	protein-N(PI)-phosphohistidine-sugar phosphotransferase activity	1	10	0.433111729043178	1	GO:MF	Down-planktonic
+GO:0009009	site-specific recombinase activity	0	4	1	1	GO:MF	Down-planktonic
+GO:0009055	electron transfer activity	0	10	1	1	GO:MF	Down-planktonic
+GO:0009982	pseudouridine synthase activity	0	7	1	1	GO:MF	Down-planktonic
+GO:0010181	FMN binding	0	14	1	1	GO:MF	Down-planktonic
+GO:0015035	protein-disulfide reductase activity	0	6	1	1	GO:MF	Down-planktonic
+GO:0015078	proton transmembrane transporter activity	1	7	0.327697191320319	1	GO:MF	Down-planktonic
+GO:0015171	amino acid transmembrane transporter activity	1	11	0.464467269930166	1	GO:MF	Down-planktonic
+GO:0015293	symporter activity	0	9	1	1	GO:MF	Down-planktonic
+GO:0016301	kinase activity	0	6	1	1	GO:MF	Down-planktonic
+GO:0016491	oxidoreductase activity	0	33	1	1	GO:MF	Down-planktonic
+GO:0016746	acyltransferase activity	0	13	1	1	GO:MF	Down-planktonic
+GO:0016747	acyltransferase activity, transferring groups other than amino-acyl groups	1	5	0.246839429790169	1	GO:MF	Down-planktonic
+GO:0016757	glycosyltransferase activity	0	9	1	1	GO:MF	Down-planktonic
+GO:0016780	phosphotransferase activity, for other substituted phosphate groups	1	5	0.246839429790169	1	GO:MF	Down-planktonic
+GO:0016787	hydrolase activity	2	44	0.708089373526377	1	GO:MF	Down-planktonic
+GO:0016791	phosphatase activity	0	5	1	1	GO:MF	Down-planktonic
+GO:0016887	ATP hydrolysis activity	2	47	0.742196317042645	1	GO:MF	Down-planktonic
+GO:0020037	heme binding	0	7	1	1	GO:MF	Down-planktonic
+GO:0022857	transmembrane transporter activity	4	50	0.295330235252228	1	GO:MF	Down-planktonic
+GO:0030170	pyridoxal phosphate binding	1	19	0.660615880221905	1	GO:MF	Down-planktonic
+GO:0030976	thiamine pyrophosphate binding	1	7	0.327697191320319	1	GO:MF	Down-planktonic
+GO:0042578	phosphoric ester hydrolase activity	0	5	1	1	GO:MF	Down-planktonic
+GO:0042626	ATPase-coupled transmembrane transporter activity	2	58	0.83965723565358	1	GO:MF	Down-planktonic
+GO:0042834	peptidoglycan binding	1	5	0.246839429790169	1	GO:MF	Down-planktonic
+GO:0043022	ribosome binding	0	5	1	1	GO:MF	Down-planktonic
+GO:0046872	metal ion binding	3	63	0.685035981539483	1	GO:MF	Down-planktonic
+GO:0050660	flavin adenine dinucleotide binding	1	14	0.548576030677216	1	GO:MF	Down-planktonic
+GO:0050661	NADP binding	0	11	1	1	GO:MF	Down-planktonic
+GO:0051287	NAD binding	2	12	0.138490825539833	1	GO:MF	Down-planktonic
+GO:0051536	iron-sulfur cluster binding	0	5	1	1	GO:MF	Down-planktonic
+GO:0051539	4 iron, 4 sulfur cluster binding	0	10	1	1	GO:MF	Down-planktonic
+GO:0070403	NAD+ binding	0	5	1	1	GO:MF	Down-planktonic
+GO:0071949	FAD binding	0	5	1	1	GO:MF	Down-planktonic
+GO:0140359	ABC-type transporter activity	2	60	0.853338476647036	1	GO:MF	Down-planktonic
+GO:1904047	S-adenosyl-L-methionine binding	0	20	1	1	GO:MF	Down-planktonic

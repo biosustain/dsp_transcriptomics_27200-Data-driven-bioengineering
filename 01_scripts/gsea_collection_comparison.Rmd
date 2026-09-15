@@ -1,0 +1,223 @@
+---
+title: "GSEA: filtered vs unfiltered gene list — Human ASM"
+author: ""
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    highlight: tango
+    code_folding: show
+    css: assets/report.css
+---
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- PURPOSE: test whether running GSEA on the FULLY UNFILTERED gene list      -->
+<!-- (before low-count pre-filtering) recovers pathway signal that the        -->
+<!-- filtered list did not. Self-contained: rebuilds the DDS from the count    -->
+<!-- matrix so no re-run of the main pipeline is needed.                       -->
+<!-- ----------------------------------------------------------------------- -->
+
+# GSEA: filtered vs unfiltered gene list
+
+The main analysis pre-filters low-count genes before DESeq2. GSEA was then run on
+that filtered list (~14,080 genes) and found almost no coordinated pathway signal.
+Here we test the alternative: run DESeq2 and GSEA on the **fully unfiltered** gene
+list, and compare.
+
+```{r libs, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(DESeq2)
+library(fgsea)
+library(msigdbr)
+library(knitr)
+library(kableExtra)
+```
+
+## Rebuild the count matrix and metadata (mirrors script 01)
+
+```{r load, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+git_root <- system("git rev-parse --show-toplevel", intern = TRUE)
+
+samples_info <- read.table(
+  file.path(git_root, "data", "data-02-Homo_sapiens", "metadata", "metadata.tsv"),
+  header = TRUE, sep = "\t", check.names = TRUE
+)
+samples_info$group <- factor(samples_info$group, levels = c("control", "treatment"))
+samples_info$donor <- factor(samples_info$donor)
+
+count_x <- readRDS(
+  file.path(git_root, "data", "data-02-Homo_sapiens", "hasapiens", "star_salmon",
+            "salmon.merged.gene.SummarizedExperiment.rds")
+)
+
+count_genes <- assay(count_x, assayNames(count_x)[1])
+gene_symbols <- rowData(count_x)$gene_name
+gene_ids     <- rowData(count_x)$gene_id
+gene_symbols_saved <- ifelse(
+  !is.na(gene_symbols) & nchar(gene_symbols) > 0,
+  make.unique(as.character(gene_symbols)),
+  make.unique(as.character(gene_ids))
+)
+
+count_genes <- as.matrix(count_genes)
+mode(count_genes) <- "numeric"
+count_genes <- round(count_genes)
+storage.mode(count_genes) <- "integer"
+rownames(count_genes) <- gene_symbols_saved
+
+# subset to the 8 dex/untreated samples
+keep_samples <- intersect(samples_info$sample, colnames(count_genes))
+count_genes  <- count_genes[, keep_samples, drop = FALSE]
+samples_info <- samples_info[match(colnames(count_genes), samples_info$sample), ]
+samples_info$condition <- relevel(factor(samples_info$group), ref = "control")
+
+cat("Genes in matrix (unfiltered):", nrow(count_genes), "\n")
+```
+
+## Build DDS and run DESeq2 — WITHOUT pre-filtering
+
+We keep every gene that has a nonzero total count (DESeq2 drops all-zero rows
+internally anyway). No `rowSums(counts >= 10)` pre-filter.
+
+```{r deseq-unfiltered, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+dds_unf <- DESeqDataSetFromMatrix(
+  countData = count_genes,
+  colData   = samples_info,
+  design    = ~ donor + condition
+)
+
+# Only remove genes that are all-zero (unavoidable), NOTHING else
+dds_unf <- dds_unf[rowSums(counts(dds_unf)) > 0, ]
+cat("Genes kept (nonzero only):", nrow(dds_unf), "\n")
+
+dds_unf <- DESeq(dds_unf)
+
+res_unf <- results(dds_unf,
+                   contrast = c("condition", "treatment", "control"),
+                   alpha = 0.05) %>%
+  as.data.frame() %>%
+  rownames_to_column("gene")
+```
+
+## Build the ranked list from the unfiltered results
+
+```{r rank-unfiltered, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ranked_unf <- res_unf %>%
+  filter(!is.na(pvalue), !is.na(log2FoldChange), pvalue > 0) %>%
+  mutate(rank_metric = sign(log2FoldChange) * -log10(pvalue)) %>%
+  arrange(desc(rank_metric)) %>%
+  distinct(gene, .keep_all = TRUE)
+
+rank_unf <- ranked_unf$rank_metric
+names(rank_unf) <- ranked_unf$gene
+
+cat("Genes in UNFILTERED ranked list:", length(rank_unf), "\n")
+```
+
+## Also load the FILTERED ranked list (from the main pipeline) for comparison
+
+```{r rank-filtered, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+res_filt <- read.table(
+  file.path(git_root, "results", "human", "DE_treatment_vs_control_all.tsv"),
+  header = TRUE, sep = "\t", check.names = TRUE
+)
+ranked_filt <- res_filt %>%
+  filter(!is.na(pvalue), !is.na(log2FoldChange), pvalue > 0) %>%
+  mutate(rank_metric = sign(log2FoldChange) * -log10(pvalue)) %>%
+  arrange(desc(rank_metric)) %>%
+  distinct(gene, .keep_all = TRUE)
+rank_filt <- ranked_filt$rank_metric
+names(rank_filt) <- ranked_filt$gene
+
+cat("Genes in FILTERED ranked list:", length(rank_filt), "\n")
+```
+
+## Fetch gene sets (Hallmark + KEGG + Reactome)
+
+```{r sets, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+get_sets <- function(collection, subcollection = NULL) {
+  df <- tryCatch(
+    if (is.null(subcollection)) msigdbr(species = "Homo sapiens", collection = collection)
+    else msigdbr(species = "Homo sapiens", collection = collection, subcollection = subcollection),
+    error = function(e)
+      if (is.null(subcollection)) msigdbr(species = "Homo sapiens", category = collection)
+      else msigdbr(species = "Homo sapiens", category = collection, subcategory = subcollection)
+  )
+  split(x = df$gene_symbol, f = df$gs_name)
+}
+
+avail <- msigdbr_collections()
+subcol_names <- if ("gs_subcollection" %in% names(avail)) avail$gs_subcollection else avail$gs_subcat
+kegg_subcol <- if ("CP:KEGG_LEGACY" %in% subcol_names) "CP:KEGG_LEGACY" else "CP:KEGG"
+
+sets <- c(
+  get_sets("H"),
+  get_sets("C2", kegg_subcol),
+  get_sets("C2", "CP:REACTOME")
+)
+cat("Total gene sets:", length(sets), "\n")
+```
+
+## Run GSEA on both ranked lists
+
+```{r gsea, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+set.seed(42)
+
+run_gsea <- function(rv) {
+  fgseaMultilevel(pathways = sets, stats = rv, minSize = 15, maxSize = 1000) %>%
+    as.data.frame()
+}
+
+g_filt <- run_gsea(rank_filt)
+g_unf  <- run_gsea(rank_unf)
+```
+
+## Head-to-head comparison
+
+```{r compare, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+relevant_kw <- "cytokine|inflamm|immune|interleukin|IL[0-9]|TNF|NFKB|chemokine|glucocortic|steroid|hormone|JAK|STAT|MAPK"
+
+summ <- function(name, res) {
+  sig <- res %>% filter(padj < 0.05)
+  data.frame(
+    List            = name,
+    Genes_ranked    = NA_integer_,
+    Sig_padj_0.05   = nrow(sig),
+    Relevant_sig    = sum(grepl(relevant_kw, sig$pathway, ignore.case = TRUE)),
+    Top_by_padj     = if (nrow(sig) > 0) sig %>% arrange(padj) %>% slice(1) %>% pull(pathway) else NA_character_
+  )
+}
+
+comp <- bind_rows(
+  summ("Filtered (~14k genes)",  g_filt),
+  summ("Unfiltered (all genes)", g_unf)
+)
+comp$Genes_ranked <- c(length(rank_filt), length(rank_unf))
+
+comp %>%
+  kable(caption = "GSEA on filtered vs unfiltered ranked list") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+```
+
+## Top hits — unfiltered list (nominal pval < 0.05, for inspection)
+
+Even if nothing survives padj, the top NES by nominal p-value shows whether the
+biology is *directionally* sensible.
+
+```{r top-unf, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+g_unf %>%
+  filter(pval < 0.05) %>%
+  arrange(pval) %>%
+  mutate(NES = round(NES, 2), pval = signif(pval, 3), padj = signif(padj, 3)) %>%
+  select(pathway, NES, pval, padj, size) %>%
+  head(20) %>%
+  kable(caption = "Unfiltered GSEA — top sets by nominal p-value") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+```
+
+<!-- --------------------------------------------------------------------- -->
+<!-- After running: paste the two tables back. If unfiltered is no better   -->
+<!-- (expected), we keep the filtered list and make ORA the main result.    -->
+<!-- --------------------------------------------------------------------- -->

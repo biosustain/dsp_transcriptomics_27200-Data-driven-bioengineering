@@ -1,7 +1,4 @@
 ---
-title: "RNA-seq Quality Control — *E. coli* MG1655"
-author: ""
-date: "`r Sys.Date()`"
 output:
   html_document:
     toc: true
@@ -17,43 +14,45 @@ output:
 
 # Quality Control
 
-This report covers the quality control and exploratory analysis of bulk RNA-seq data from _Escherichia coli* K-12 MG1655_.
+This report covers the quality control and exploratory analysis of bulk RNA-seq data from primary human airway smooth muscle (ASM) cells treated with dexamethasone, from [Himes *et al.*, 2014](https://doi.org/10.1371/journal.pone.0099625) (GEO: GSE52778, PRJNA229998).
 
 The list of contrasts of interest is:
 
 :::boxy
-- DE between [condition A] vs [condition B]
-- Control vs Treatment
+- Dexamethasone (treatment) vs untreated (control)
 :::
 
 **Topics covered**
 
 -   Exploratory data analyses
--   Sanity Checks 
+-   Sanity Checks
 
 **Data**
 
--   Reference data used: [E. coli\* K-12 MG1655](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/) NCBI RefSeq: NC_000913.3
+-   Reference genome: human GRCh37 (hg19), as used in the original paper.
 
--   Input data is the output from the [nf-core rnaseq pipeline](https://nf-co.re/rnaseq/3.26.0/docs/usage/) `salmon.merged.gene.SummarizedExperiment.rds`
-
-
+-   Input data is the output from the [nf-core/rnaseq pipeline](https://nf-co.re/rnaseq/) `salmon.merged.gene.SummarizedExperiment.rds` (STAR + Salmon).
 
 <div class="note">
-<strong>📘 Note:</strong> <em>E. coli</em> MG1655 is a prokaryote. 
-Key differences to keep in mind:
+<strong>📘 Note:</strong> Key points about this dataset:
 <ul>
-<li>No introns → transcript = gene (tx2gene mapping is 1:1)</li>
-<li>Genome size ~4.6 Mb with ~4,300 genes</li>
-<li>Enrichment analysis via KEGG or custom gene sets with <strong>fgsea</strong></li>
+<li>Reads are aligned with a splice-aware aligner (STAR), appropriate for spliced human transcripts</li>
+<li>The reference GTF carries gene symbols, so genes are labelled directly (no ID conversion needed)</li>
+<li>Enrichment analysis uses g:Profiler with human gene sets (GO, KEGG, Reactome)</li>
+<li>Cells come from four donors → donor is a candidate confounder in the design (addressed below)</li>
 </ul>
 </div>
 
-
+<div class="note">
+<strong>📘 Note on this experiment:</strong> The full dataset contains four treatment arms per donor
+(untreated, albuterol, dexamethasone, albuterol+dexamethasone). Following the study's primary
+comparison, this workshop uses only <strong>dexamethasone vs untreated</strong> (n = 4 per group).
+Because each donor contributes one treated and one untreated sample, the design is <strong>paired</strong>.
+</div>
 
 **Explanation of the QC analysis 🧾**
 
-This document guides you through the standard QC pipeline for prokaryotic bulk RNA-seq data processed with [nf-core/rnaseq](https://nf-co.re/rnaseq/3.26.0/docs/usage/) `Bowtie2` + `Salmon`. It is structured to be both educational and reproducible.
+This document guides you through the standard QC pipeline for bulk RNA-seq data processed with [nf-core/rnaseq](https://nf-co.re/rnaseq/) `STAR` + `Salmon`. It is structured to be both educational and reproducible.
 
 
 ## Setup the Environment
@@ -66,7 +65,7 @@ This document guides you through the standard QC pipeline for prokaryotic bulk R
 <strong>📌 Remember:</strong> Load all libraries at the start of every session before running any analysis.
 :::
 
-```{r libraries-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-libraries-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(reshape2)
 library(DESeq2)
@@ -77,19 +76,18 @@ library(factoextra)
 library(knitr)
 library(kableExtra)
 library(DT)
-library(plotly)
 ```
 
 ## Getting the Metadata
 
-The metadata file describes the experimental design: which sample belongs to which condition and replicate. This information is essential for `DESeq2` to model expression differences correctly.
+The metadata file describes the experimental design: which sample belongs to which donor and treatment group. This information is essential for `DESeq2` to model expression differences correctly.
 
-```{r load-metadata-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-load-metadata-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 
 git_root <- system("git rev-parse --show-toplevel", intern = TRUE)
 
 samples_info <- read.table(
-  file.path(git_root, "data", "metadata", "metadata.tsv"),
+  file.path(git_root, "data", "data-02-Homo_sapiens", "metadata", "metadata.tsv"),
   header      = TRUE,
   sep         = "\t",
   check.names = TRUE
@@ -100,7 +98,7 @@ samples_info <- read.table(
 <strong>💡 Tip:</strong> Use the interactive table below to verify your sample metadata before proceeding.
 :::
 
-```{r view-metadata-0, echo=TRUE, include=TRUE, eval=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-view-metadata-0, echo=TRUE, include=TRUE, eval=TRUE, message=FALSE, warning=FALSE}
 
 DT::datatable(
   data       = samples_info,
@@ -114,7 +112,7 @@ DT::datatable(
     scrollY     = 200,
     scroller    = TRUE
   ),
-  caption = 'Sample metadata — E. coli MG1655'
+  caption = 'Sample metadata — Human ASM (dexamethasone vs untreated)'
 )
 ```
 
@@ -122,15 +120,10 @@ DT::datatable(
 
 ## Loading Count Data
 
-The nf-core/rnaseq pipeline was run with `-profile prokaryotic`, which uses `Bowtie2` for alignment and `Salmon` for quantification. Since _E. coli_ has no introns*, splice-aware aligners like STAR are unnecessary. We load the `SummarizedExperiment` object produced by the pipeline, extract the raw count matrix, and assign gene symbols as row names
-
-::: {style="font-size: 0.75em; color: grey;"}
-*The dispersal of five group II introns among natural populations of Escherichia coli [Dai & Zimmerly -2002](https://pmc.ncbi.nlm.nih.gov/articles/PMC1370338/). Despite their apparent intractability, at least five distinct group II introns exist naturally in _E. coli_ strains. These are self-splicing group II introns (retroelements), not spliceosomal introns like in eukaryotes — so they don't affect RNA-seq quantification in the way eukaryotic introns do, which is why `Bowtie2` (non-splice-aware) works fine for _E. coli_.*
-:::
-
+The nf-core/rnaseq pipeline was run with `STAR` for alignment and `Salmon` for quantification. We load the `SummarizedExperiment` object produced by the pipeline, extract the raw count matrix, and assign gene symbols as row names.
 
 <div class="important">
-  <strong>⭐ Important:</strong> Raw counts must remain as integers — DESeq2's statistical model requires this.
+  <strong>⭐ Important:</strong> Salmon returns estimated counts, which are not integers. DESeq2 requires integer counts, so we round (not truncate) before building the object. This matches the tximport convention used by nf-core/differentialabundance.
 </div>
 
 
@@ -138,12 +131,15 @@ The nf-core/rnaseq pipeline was run with `-profile prokaryotic`, which uses `Bow
 <strong>💡 Tip:</strong> If you are unsure which assay name or rowData columns are available in your RDS, inspect them first with <code>assayNames(count_x)</code> and <code>names(rowData(count_x))</code>.
 :::
 
-```{r load-counts-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-load-counts-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 
 count_x <- readRDS(
-  file.path(git_root, "data", "nf-core_rnaseq",
+  file.path(git_root, "data", "data-02-Homo_sapiens", "hasapiens", "star_salmon",
             "salmon.merged.gene.SummarizedExperiment.rds")
 )
+
+# Inspect what is available (uncomment to explore):
+# assayNames(count_x); names(rowData(count_x))
 
 count_genes <- assay(count_x, assayNames(count_x)[1])
 
@@ -156,76 +152,115 @@ gene_symbols_saved <- ifelse(
   make.unique(as.character(gene_ids))
 )
 
-count_genes           <- apply(count_genes, 2, as.integer)
+# Salmon estimates are fractional -> round to nearest integer for DESeq2
+count_genes <- as.matrix(count_genes)
+mode(count_genes) <- "numeric"        # ensure numeric, not character
+count_genes <- round(count_genes)
+storage.mode(count_genes) <- "integer"
 rownames(count_genes) <- gene_symbols_saved
 
 cat("Dimensions (genes × samples):", dim(count_genes), "\n")
 print(head(rownames(count_genes)))
+print(colnames(count_genes))
+
+# Report what the gene_id / gene_name columns actually contain.
+# This pipeline used a RefSeq GTF with gtf_extra_attributes = gene_name,
+# so both are expected to be symbols (not ENSEMBL). Confirm here:
+cat("\nExample gene_id  :", paste(head(gene_ids, 3), collapse = ", "), "\n")
+cat("Example gene_name:", paste(head(gene_symbols, 3), collapse = ", "), "\n")
+cat("gene_id look like ENSEMBL? :",
+    any(grepl("^ENSG", head(gene_ids, 50))), "\n")
 ```
 
+<div class="note">
+  <strong>📘 Note:</strong> This dataset was processed against a <strong>RefSeq</strong> GRCh37 GTF with
+  <code>gtf_extra_attributes = gene_name</code>, so both <code>gene_id</code> and <code>gene_name</code>
+  hold gene <strong>symbols</strong> (e.g. <code>A1BG</code>), not ENSEMBL IDs. Symbols are exactly what
+  g:Profiler and MSigDB accept, so no ID conversion is needed downstream. The check above prints the
+  actual values so you can confirm this on your own RDS.
+</div>
+
+```{r human-qc-save-idmap-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+# Persist gene_id <-> gene_name map for downstream scripts
+id_map <- data.frame(
+  gene_id     = as.character(gene_ids),
+  gene_symbol = gene_symbols_saved,
+  stringsAsFactors = FALSE
+)
+dir.create(file.path(git_root, "results", "human"), recursive = TRUE, showWarnings = FALSE)
+saveRDS(id_map, file.path(git_root, "results", "human", "gene_id_symbol_map.rds"))
+```
 
 ## Preparing the Data
 
-Before building the `DESeq2` object we need to:
+Before building the `DESeq2` object we:
 
-1.  Set factor levels so that `control` is the **reference level** (the denominator in fold-change calculations).
-2.  Clean column names in the count matrix to remove whitespace or special characters.
-3.  Align the sample order between the count matrix and the metadata — `DESeq2` requires these to match exactly.
+1.  Subset the count matrix to the samples in the metadata (dexamethasone + untreated only — the albuterol arms are excluded).
+2.  Set factor levels so that `control` is the **reference level** (the denominator in fold-change calculations).
+3.  Set `donor` as a factor (needed for the paired design).
+4.  Align the sample order between the count matrix and the metadata — `DESeq2` requires these to match exactly.
 
-```{r prepare-data-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-prepare-data-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 condition_levels   <- c("control", "treatment")
 samples_info$group <- factor(samples_info$group, levels = condition_levels)
+samples_info$donor <- factor(samples_info$donor)
 
-colnames(count_genes) <- gsub(
-  "[^[:alnum:]_]", "",
-  gsub("\\s+", "_", trimws(colnames(count_genes)))
-)
-
-if (!all(colnames(count_genes) %in% samples_info$sample)) {
-  stop("⛔ Some samples in count matrix are NOT in metadata! Check sample names.")
+# Subset count matrix to the 8 samples of interest (drop albuterol arms)
+keep_samples <- intersect(samples_info$sample, colnames(count_genes))
+missing      <- setdiff(samples_info$sample, colnames(count_genes))
+if (length(missing) > 0) {
+  stop("⛔ Metadata samples not found in count matrix: ", paste(missing, collapse = ", "))
 }
+count_genes <- count_genes[, keep_samples, drop = FALSE]
+
+# Order metadata to match the count matrix columns exactly
 samples_info <- samples_info[match(colnames(count_genes), samples_info$sample), ]
 
 print(data.frame(count_col    = colnames(count_genes),
-                 metadata_row = samples_info$sample))
+                 metadata_row = samples_info$sample,
+                 donor        = samples_info$donor,
+                 group        = samples_info$group))
 ```
 
 
 ## Creating the DESeqDataSet
 
-The `DESeqDataSet` (DDS) is DESeq2's core data container. It holds the raw count matrix, sample metadata, and the experimental design formula. The design formula tells DESeq2 which variable to test — here `~ condition` compares treatment vs control.
+The `DESeqDataSet` (DDS) holds the raw count matrix, sample metadata, and the design formula.
 
 ::: note
-<strong>📘 Note:</strong> **Prokaryote:** DESeq2's negative binomial model is organism-agnostic. It works identically for *E. coli* as for mouse or human data. ✅
+<strong>📘 Note:</strong> **Design choice.** Because each donor provides both a treated and an untreated
+sample, donor is a paired/blocking factor. The recommended design is `~ donor + condition`, which
+removes between-donor baseline differences before testing the treatment effect. We build the DDS with
+this design, and also keep a simple `~ condition` version so the two can be compared for teaching (script 02).
 :::
 
-```{r make-dds-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-make-dds-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 samples_info$condition <- factor(samples_info$group,
                                  levels = c("control", "treatment"))
 
+# Primary (recommended) design: paired on donor
 dds <- DESeqDataSetFromMatrix(
   countData = count_genes,
   colData   = samples_info,
-  design    = ~ condition
+  design    = ~ donor + condition
 )
 ```
 
 
 <div class="note">
   <strong>📘 Note:</strong> The design formula uses R's formula syntax, where the tilde (`~`, pronounced **"TIL-duh"**)
-means **"is modelled by"**. So `~ condition` reads as: *"gene expression is modelled by
-condition"*.
+means **"is modelled by"**. So `~ donor + condition` reads as: *"gene expression is modelled by
+donor and condition"*.
 
 In a general linear model, the tilde separates the **response variable** (left side) from
 the **predictors** (right side). For example:
 
-- `gene_expression ~ condition` — model expression as a function of condition
-- `y ~ x1 + x2` — model y as a function of two predictors
+- `gene_expression ~ condition` — model expression as a function of condition only
+- `gene_expression ~ donor + condition` — adjust for donor, then test condition
 
 In DESeq2, the left side is omitted because the count matrix is already the response —
-you only need to specify which variable explains the differences between samples.
-`~ condition` therefore tells DESeq2 to test whether gene counts differ between your
-experimental groups.
+you only need to specify which variables explain the differences between samples.
+The variable of interest (`condition`) goes **last**; the terms before it are adjusted for.
 </div>
 
 ## Sanity Checks
@@ -237,14 +272,14 @@ experimental groups.
 
 ### Are We Working with Raw Counts?
 
-`DESeq2` requires **raw, un-normalised integer counts**. Feeding it normalised values (TPM, FPKM) will produce incorrect results. 
+`DESeq2` requires **raw, un-normalised integer counts**. Feeding it normalised values (TPM, FPKM) will produce incorrect results.
 
 <div class="remember">
   <strong>📌 Remember:</strong> Always verify your input before proceeding.
 </div>
 
 
-```{r check-raw-0, echo=TRUE, eval=TRUE, include=TRUE, warning=FALSE, message=FALSE}
+```{r human-qc-check-raw-0, echo=TRUE, eval=TRUE, include=TRUE, warning=FALSE, message=FALSE}
 options(scipen = 999)
 
 
@@ -271,19 +306,17 @@ barplot(colSums(count_genes),
 
 
 :::boxy
- Raw *E. coli* RNA-seq counts are typically in the thousands to millions range (library sizes \~5–50 M reads for bacterial experiments). 
- 
- A highly right-skewed distribution is expected and correct at this stage.
+Raw human RNA-seq counts span a very wide range (many genes near zero, a few in the hundreds of thousands). A highly right-skewed distribution is expected and correct at this stage.
 :::
 
 
 ### Pre-filtering Low-count Genes
 
-Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples (equal to the size of the smallest group, i.e., 3 replicates here).
+Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples (equal to the size of the smallest group).
 
-*E. coli* has \~4,300 genes — after filtering you should retain the majority of them.
+The human genome has roughly 20,000 protein-coding genes plus many non-coding ones, and a large fraction are not expressed in ASM cells — expect a substantial number to be filtered out.
 
-```{r prefilter-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-prefilter-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 
 smallestGroupSize <- min(table(samples_info$condition))
 
@@ -291,9 +324,10 @@ cat("Smallest group size   :", smallestGroupSize, "\n")
 cat("Filtering threshold   : at least 10 counts in", smallestGroupSize, "or more samples\n")
 
 keep <- rowSums(counts(dds) >= 10) >= smallestGroupSize
+n_before <- nrow(dds)
 dds  <- dds[keep, ]
 
-cat("Genes before filtering:", nrow(counts(dds)) + sum(!keep), "\n")
+cat("Genes before filtering:", n_before, "\n")
 cat("Genes after  filtering:", nrow(dds), "\n")
 cat("Genes removed         :", sum(!keep), "\n")
 ```
@@ -302,9 +336,9 @@ cat("Genes removed         :", sum(!keep), "\n")
 
 ### Factor Order and Reference Level
 
-The first factor level is always the reference (denominator) in `DESeq2` comparisons. Setting it explicitly ensures that fold changes are computed in the intended direction: **treatment vs control**, not the reverse.
+The first factor level is always the reference (denominator) in `DESeq2` comparisons. Setting it explicitly ensures fold changes are computed in the intended direction: **treatment (dexamethasone) vs control (untreated)**, not the reverse.
 
-```{r factor-order-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-factor-order-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 
 dds$condition <- relevel(dds$condition, ref = "control")
 
@@ -312,19 +346,19 @@ levels(dds$condition)
 ```
 
 ::: {style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;"}
-<strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC means higher expression in the treatment relative to control.
+<strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC means higher expression in dexamethasone-treated cells relative to untreated.
 :::
 
 
 ## Exploratory Data Analysis
 
-In this section we do **not** perform statistical tests. The goal is **quality control:** check count distributions, detect technical outliers, and confirm that samples cluster as expected by condition before committing to differential expression analysis.
+In this section we do **not** perform statistical tests. The goal is **quality control:** check count distributions, detect technical outliers, and confirm that samples cluster as expected before committing to differential expression analysis.
 
 ### Estimate Size Factors
 
 Library sizes (total mapped reads) differ between samples due to technical variation in sequencing depth. `DESeq2's` median-of-ratios normalisation corrects for this by computing a size factor per sample. Size factors close to 1.0 indicate balanced libraries; values far from 1.0 suggest uneven sequencing depth and warrant investigation.
 
-```{r size-factors-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-size-factors-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 
 dds <- estimateSizeFactors(dds)
 
@@ -338,16 +372,13 @@ sizeFactors(dds) %>%
 
 ### Distribution of Normalised Counts
 
-Boxplots of log2-normalised counts per sample provide a quick visual check that all samples have comparable expression distributions. After normalisation, boxes should overlap substantially. A sample that is a clear outlier in median or spread may indicate a failed library or mislabelled condition.
+Boxplots of log2-normalised counts per sample provide a quick visual check that all samples have comparable expression distributions. After normalisation, boxes should overlap substantially. A sample that is a clear outlier in median or spread may indicate a failed library or mislabelled sample.
 
 ::: {style="background:#f8d7da;border-left:4px solid #721c24;padding:10px;margin:10px 0;"}
 <strong>📌 Remember:</strong> These normalised counts are for visualisation only. Always feed DESeq2 <strong>raw integer counts</strong>.
 :::
 
-```{r distribution-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-cols_condition <- c("control"   = "#2c7bb6",
-                    "treatment" = "#d7191c")
-
+```{r human-qc-distribution-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 normalized_counts <- counts(dds, normalized = TRUE)
 
 counts_norm <- reshape2::melt(
@@ -362,7 +393,7 @@ counts_norm <- inner_join(
   by = "sample"
 )
 
-dir.create(file.path(git_root, "results", "plots"), recursive = TRUE, showWarnings = FALSE)
+dir.create(file.path(git_root, "results", "human", "plots"), recursive = TRUE, showWarnings = FALSE)
 
 distribution <- ggplot(counts_norm,
                        aes(x    = sample,
@@ -373,13 +404,12 @@ distribution <- ggplot(counts_norm,
   theme_pubr(border = TRUE) +
   xlab("Sample") +
   ylab("log2(normalised counts + 1)") +
-  ggtitle("Normalised count distribution — E. coli MG1655") +
-  scale_fill_manual(values = cols_condition)
+  ggtitle("Normalised count distribution — Human ASM")
 
 distribution
 
 ggsave(
-  filename = file.path(git_root, "results", "plots", "normalised_count_distribution.png"),
+  filename = file.path(git_root, "results", "human", "plots", "normalised_count_distribution.png"),
   plot     = distribution,
   width    = 8,
   height   = 6,
@@ -387,41 +417,29 @@ ggsave(
 )
 ```
 
-<div class="extra">
-  <strong>💡 Extra:</strong> You can always use plotly!
-</div>
-
-```{r distribution-01}
-ggplotly(distribution)
-```
-
-:::boxy
-C3 had a size factor of 2.324 — nearly 4x higher than C2 (0.584). Before normalization, C3 raw counts were inflated. After DESeq2's median-of-ratios normalization, all samples align. This is why you never skip the normalization check, and why raw counts must go into DESeq2 rather than pre-normalized values.
-:::
-
 ## Sample Correlation Heatmap
 
-Euclidean distances between `VST-transformed` samples reveal how similar samples are to each other globally. Replicates from the same condition should cluster together and show small (dark) distances. A sample that is more similar to the opposite condition than to its own replicates is a red flag for a labelling error or a failed experiment.
+Euclidean distances between `VST-transformed` samples reveal how similar samples are to each other globally. Samples from the same treatment group (or the same donor) may cluster together. With a paired design, donor structure is often visible here — this is expected and is exactly what the `~ donor + condition` model accounts for.
 
-`Variance-stabilising transformation (VST)` is applied here because raw or normalised counts have heteroscedastic variance (high-count genes have much larger absolute variance). 
+`Variance-stabilising transformation (VST)` is applied here because raw or normalised counts have heteroscedastic variance (high-count genes have much larger absolute variance).
 
 :::boxy
 VST removes this mean–variance dependence, making distances meaningful across the full expression range ([Anders & Huber, 2010](https://doi.org/10.1186/gb-2010-11-10-r106)).
 :::
 
-```{r vst-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-vst-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 
 vsd <- varianceStabilizingTransformation(dds, blind = TRUE)
 ```
 
 
 :::boxy
-**`blind = TRUE`**,the VST is computed ignoring the experimental design. This is recommended for QC and exploratory analysis, where you want an unbiased view of sample similarity. 
+**`blind = TRUE`**, the VST is computed ignoring the experimental design. This is recommended for QC and exploratory analysis, where you want an unbiased view of sample similarity.
 
 Use `blind = FALSE` only when the transformation is feeding into a model that already accounts for the design.
 :::
 
-```{r correlation-heatmap-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-correlation-heatmap-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 
 sampleDists      <- dist(t(assay(vsd)))
 sampleDistMatrix <- as.matrix(sampleDists)
@@ -429,20 +447,16 @@ sampleDistMatrix <- as.matrix(sampleDists)
 rownames(sampleDistMatrix) <- paste(vsd$sample, vsd$condition, sep = " | ")
 colnames(sampleDistMatrix) <- rownames(sampleDistMatrix)
 
-colours <- colorRampPalette(rev(brewer.pal(9, "Blues")))(255)
-
 heat <- pheatmap(
   sampleDistMatrix,
-  col          = colours,
-  border_color = NA,
-  main         = "Sample-to-sample distances (VST) — E. coli MG1655",
+  main         = "Sample-to-sample distances (VST) — Human ASM",
   fontsize     = 10
 )
 
 heat
 
 ggsave(
-  filename = file.path(git_root, "results", "plots", "heat.png"),
+  filename = file.path(git_root, "results", "human", "plots", "heat.png"),
   plot     = heat,
   width    = 8,
   height   = 12,
@@ -451,18 +465,18 @@ ggsave(
 ```
 
 :::boxy
-The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. You want dark blocks on the diagonal within conditions and light blocks between conditions. If a replicate appeared in the wrong block, you would stop and investigate before running DESeq2.
+The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by treatment, by donor, or both. If donor is a strong driver of the distances, that is a signal the paired design is worthwhile.
 :::
 
 ## Principal Component Analysis (PCA)
 
-PCA reduces the high-dimensional expression space (one dimension per gene) to a small number of principal components that capture the largest sources of variance in the data. In a well-controlled experiment, PC1 should separate the two conditions — this confirms that the biological effect of interest is the dominant driver of transcriptional variation.
+PCA reduces the high-dimensional expression space (one dimension per gene) to a small number of principal components that capture the largest sources of variance in the data. Inspect whether the treatment separates samples, and whether donor identity contributes to the remaining structure.
 
-If PC1 is instead explained by a technical variable (batch, sequencing run, RNA quality), batch correction will be needed before differential expression analysis ([Leek *et al.*, 2010](https://doi.org/10.1038/nrg2825)).
+If a technical variable (batch, sequencing run, RNA quality) — or, here, donor — dominates PC1, that variance should be accounted for in the design before differential expression analysis ([Leek *et al.*, 2010](https://doi.org/10.1038/nrg2825)).
 
-```{r pca-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-pca-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 pca_data <- plotPCA(vsd,
-                    intgroup  = c("sample", "condition"),
+                    intgroup  = c("sample", "condition", "donor"),
                     returnData = TRUE)
 
 pct_var <- round(100 * attr(pca_data, "percentVar"), 1)
@@ -470,6 +484,7 @@ pct_var <- round(100 * attr(pca_data, "percentVar"), 1)
 PCAPlot <- ggplot(pca_data, aes(x     = PC1,
                                 y     = PC2,
                                 color = condition,
+                                shape = donor,
                                 label = sample)) +
   geom_point(size = 4) +
   geom_text(vjust = -0.8, size = 3, show.legend = FALSE) +
@@ -485,15 +500,15 @@ PCAPlot <- ggplot(pca_data, aes(x     = PC1,
   labs(
     x     = paste0("PC1: ", pct_var[1], "% variance"),
     y     = paste0("PC2: ", pct_var[2], "% variance"),
-    title = "PCA — E. coli MG1655 (VST-transformed counts)",
-    color = "Condition"
-  ) +
-  scale_color_manual(values = cols_condition)
+    title = "PCA — Human ASM (VST-transformed counts)",
+    color = "Condition",
+    shape = "Donor"
+  )
 
 PCAPlot
 
 ggsave(
-  filename = file.path(git_root, "results", "plots", "PCA_Plot.png"),
+  filename = file.path(git_root, "results", "human", "plots", "PCA_Plot.png"),
   plot     = PCAPlot,
   width    = 8,
   height   = 6,
@@ -501,23 +516,15 @@ ggsave(
 )
 ```
 
-<div class="extra">
-  <strong>💡 Extra:</strong> You can always use plotly!
-</div>
-
-```{r pca-01}
-ggplotly(PCAPlot)
-```
-
 :::boxy
-PC1 capturing 85.4% and separating conditions cleanly is a strong positive signal — the saccharin treatment has a large, consistent transcriptional effect. C3 separating on PC2 is worth noting: it passed normalization QC but shows some residual transcriptional difference from C1/C2. This is within acceptable range for biological replicates, but we need to document it and check if C3 was grown or processed differently.
+Colour encodes treatment, shape encodes donor. If treatment separates cleanly on one axis while donors are spread along another, that is the classic signature of a paired design: a consistent treatment effect on top of donor-to-donor baseline differences.
 :::
 
 ## Detecting Outliers
 
 The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.
 
-```{r outlier-detection-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-outlier-detection-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 
 pca_full <- prcomp(t(assay(vsd)))
 
@@ -529,15 +536,13 @@ pca_ind <- fviz_pca_ind(pca_full, geom = c("point", "text"), repel = TRUE,
 pca_ind
 pca_biplot <- fviz_pca_biplot(pca_full,
                 repel        = TRUE,
-                select.var   = list(contrib = 50),  # top  genes only
-                title        = "Biplot — top 50 contributing genes and samples",
-                col.var      = "#92C5DE",
-                col.ind      = "black")
+                select.var   = list(contrib = 50),  # top genes only
+                title        = "Biplot — top 50 contributing genes and samples")
 
 pca_biplot
 
 ggsave(
-  filename = file.path(git_root, "results", "plots", "pca_screeplot.png"),
+  filename = file.path(git_root, "results", "human", "plots", "pca_screeplot.png"),
   plot     = screeplot,
   width    = 8,
   height   = 6,
@@ -545,7 +550,7 @@ ggsave(
 )
 
 ggsave(
-  filename = file.path(git_root, "results", "plots", "pca_individuals.png"),
+  filename = file.path(git_root, "results", "human", "plots", "pca_individuals.png"),
   plot     = pca_ind,
   width    = 8,
   height   = 6,
@@ -553,7 +558,7 @@ ggsave(
 )
 
 ggsave(
-  filename = file.path(git_root, "results", "plots", "pca_biplot.png"),
+  filename = file.path(git_root, "results", "human", "plots", "pca_biplot.png"),
   plot     = pca_biplot,
   width    = 8,
   height   = 6,
@@ -564,37 +569,32 @@ ggsave(
 :::boxy
 **How to read a biplot:**
 
-**Dots** = samples (C1, C2, C3, sac1, sac2, sac3)
+**Dots** = samples
 
 **Arrows/lines** = genes — the direction shows which samples that gene is highly expressed in, and the length shows how strongly it contributes to the PC:
 
-- Genes pointing **right** → higher expression in treatment
-- Genes pointing **left** → higher expression in control  
-- Genes pointing **up/down** → contribute more to PC2 (within-condition variation)
+- Genes pointing **right** → higher expression in samples on the right
+- Genes pointing **left** → higher expression in samples on the left
 - Genes near the **centre** → contribute little to either PC
 
 **What to look for:**
 
-- Genes with long arrows along PC1 are your strongest candidates for driving the treatment response — these are likely to appear as significant DE genes
+- Genes with long arrows are the strongest candidates for driving the dominant axis of variation
 - If many arrows point in the same direction, it suggests coordinated regulation (a pathway-level response)
-- A gene pointing toward C3 specifically (along PC2) would explain the C3 separation flagged in the PCA and heatmap
+- Check whether the dominant axis aligns with treatment or with donor
 :::
 
 ## Top Variable Genes Heatmap
 
-Clustering the 50 most variable genes across samples provides a gene-level view of the separation between conditions. Genes that are truly differentially expressed should show clear block structure, high expression in one condition, low in the other. This heatmap also helps identify whether replicates within a condition are consistent with each other.
+Clustering the 50 most variable genes across samples provides a gene-level view of the structure in the data. Truly treatment-responsive genes should show block structure by condition. This heatmap also helps reveal whether donor identity contributes strongly to the top variable genes.
 
 Row-scaling (z-score per gene) is applied so that highly expressed genes do not visually dominate over lowly expressed ones.
 
-```{r topvar-heatmap-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=12}
+```{r human-qc-topvar-heatmap-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=12}
 
 topVarGenes <- head(order(rowVars(assay(vsd)), decreasing = TRUE), 50)
 
-df_anno <- as.data.frame(colData(vsd)[, "condition", drop = FALSE])
-
-anno_colors <- list(condition = cols_condition)
-
-colsHeat <- c("#F7F7F7", "#92C5DE", "#0571B0", "#F4A582", "#CA0020")
+df_anno <- as.data.frame(colData(vsd)[, c("condition", "donor"), drop = FALSE])
 
 heat_plot <- pheatmap(
   assay(vsd)[topVarGenes, ],
@@ -604,19 +604,16 @@ heat_plot <- pheatmap(
   clustering_distance_rows = "euclidean",
   clustering_distance_cols = "euclidean",
   annotation_col           = df_anno,
-  annotation_colors        = anno_colors,
   show_colnames            = TRUE,
   show_rownames            = TRUE,
-  color                    = colorRampPalette(colsHeat)(255),
-  border_color             = "#f8edeb",
   fontsize_row             = 7,
-  main                     = "Top 50 variable genes — E. coli MG1655 (VST, row-scaled)"
+  main                     = "Top 50 variable genes — Human ASM (VST, row-scaled)"
 )
 
 heat_plot
-#install.packages("heatmaply")
+
 png(
-  filename = file.path(git_root, "results", "plots", "heatmap_top50_variable.png"),
+  filename = file.path(git_root, "results", "human", "plots", "heatmap_top50_variable.png"),
   width    = 8,
   height   = 12,
   units    = "in",
@@ -626,84 +623,10 @@ heat_plot
 dev.off()
 ```
 
-```{r heat0-0, echo=FALSE, eval=FALSE, include=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=12}
-
-library(heatmaply)
-
-heatmaply(
-  assay(vsd)[topVarGenes, ],
-  scale                    = "row",
-  dist_method              = "euclidean",
-  hclust_method            = "complete",
-  col_side_colors          = df_anno,
-  colors                   = colorRampPalette(colsHeat)(255),
-  show_dendrogram          = c(TRUE, TRUE),
-  showticklabels           = c(TRUE, TRUE),
-  fontsize_row             = 7,
-  main                     = "Top 50 variable genes — E. coli MG1655 (VST, row-scaled)"
-)
-```
-
-### Add gene names
-```{r gene-name-map, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-gtf_path <- file.path(git_root, "data/genome_files/gtf/GCF_000005845.2_ASM584v2_genomic_full.gtf")
-
-# Extract locus_tag and gene name from GTF attributes
-gtf_map <- read.table(gtf_path, sep = "\t", quote = "", comment.char = "#") %>%
-  filter(V3 == "gene") %>%
-  mutate(
-    locus_tag  = str_extract(V9, 'locus_tag "([^"]+)"', group = 1),
-    gene_name  = str_extract(V9, '(?<=gene ")([^"]+)',  group = 1)
-  ) %>%
-  filter(!is.na(locus_tag)) %>%
-  mutate(label = ifelse(!is.na(gene_name), gene_name, locus_tag)) %>%
-  select(locus_tag, label) %>%
-  distinct()
-
-cat("Mapping built:", nrow(gtf_map), "genes\n")
-saveRDS(gtf_map, file.path(git_root, "results", "gtf_map.rds"))
-```
-
-```{r heat-plot-name, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=12}
-topVarGenes <- head(order(rowVars(assay(vsd)), decreasing = TRUE), 50)
-
-# Swap locus tags to gene names for display
-heat_mat    <- assay(vsd)[topVarGenes, ]
-row_labels  <- gtf_map$label[match(rownames(heat_mat), gtf_map$locus_tag)]
-rownames(heat_mat) <- ifelse(is.na(row_labels), rownames(heat_mat), row_labels)
-
-df_anno     <- as.data.frame(colData(vsd)[, "condition", drop = FALSE])
-anno_colors <- list(condition = cols_condition)
-colsHeat    <- c("#F7F7F7", "#92C5DE", "#0571B0", "#F4A582", "#CA0020")
-
-heat_plot <- pheatmap(
-  heat_mat,
-  cluster_cols             = TRUE,
-  cluster_rows             = TRUE,
-  scale                    = "row",
-  clustering_distance_rows = "euclidean",
-  clustering_distance_cols = "euclidean",
-  annotation_col           = df_anno,
-  annotation_colors        = anno_colors,
-  show_colnames            = TRUE,
-  show_rownames            = TRUE,
-  color                    = colorRampPalette(colsHeat)(255),
-  border_color             = "#f8edeb",
-  fontsize_row             = 7,
-  main                     = "Top 50 variable genes — E. coli MG1655 (VST, row-scaled)"
-)
-heat_plot
-
-png(
-  filename = file.path(git_root, "results", "plots", "heatmap_top50_DE_genes.png"),
-  width    = 8,
-  height   = 12,
-  units    = "in",
-  res      = 300
-)
-heat_plot
-dev.off()
-```
+<div class="note">
+  <strong>📘 Note:</strong> Rows are already gene symbols (from the human reference), so they are ready
+  to use directly in the enrichment analysis (script 03) with no ID conversion step.
+</div>
 
 :::boxy
 **How to read this heatmap:**
@@ -715,45 +638,42 @@ dev.off()
 **What to look for:**
 
 - Clear colour blocks by condition → the treatment has a strong, consistent transcriptional effect
-- Consistent colours within replicates → biological replicates are reproducible
-- Genes in the **upper cluster** are upregulated in treatment (red in sac, blue in control)
-- Genes in the **lower cluster** are downregulated in treatment (blue in sac, red in control)
-- Note that C3 sits slightly apart from C1/C2 in the dendrogram — consistent with what we observed in the PCA and sample distance heatmap
+- Whether samples cluster by donor instead of (or in addition to) treatment — a visual argument for the paired design
 :::
 
 ## Summary
 
-Before proceeding to differential expression analysis, confirm all QC checks pass:
+Before proceeding to differential expression analysis, confirm the QC checks and note the design implication:
 
 :::boxy
-| Check | Expected outcome | This dataset |
-|------------------------------------|------------------------------------|--------------------|
-| Size factors ≈ 1.0 across samples | Library sizes are balanced | ⚠️ C3 = 2.324 — corrected by normalisation |
-| Boxplots of normalised counts overlap | No extreme outlier samples | ✅ All samples overlap after normalisation |
-| Correlation heatmap: within-group distances < between-group | Replicates are reproducible | ✅ Clean block structure |
-| PCA PC1 separates conditions | Condition is the dominant source of variance | ✅ PC1 = 85.4%, perfect separation |
-| No isolated samples in PCA or heatmap | No technical outliers | ⚠️ C3 offset on PC2 — consistent, not alarming |
+| Check | What to confirm |
+|---|---|
+| Size factors ≈ 1.0 across samples | Library sizes are balanced |
+| Boxplots of normalised counts overlap | No extreme outlier samples |
+| Correlation heatmap | Note whether structure is by treatment, by donor, or both |
+| PCA | Note whether treatment or donor drives the main axes |
+| No isolated samples | No technical outliers |
 :::
 
 ::: {style="font-size: 0.9em; color: grey;"}
-*Overall the dataset passes QC. C3 shows a higher sequencing depth and mild 
-transcriptional offset from C1/C2, visible consistently across all QC plots. 
-This is within acceptable range for biological replicates and does not 
-compromise the downstream analysis. We proceed to differential expression.*
+*Because the four donors each contribute a treated and an untreated sample, donor is a paired factor.
+The recommended design `~ donor + condition` removes donor baseline differences before testing the
+treatment effect. Script 02 runs this model and, for teaching, compares it against the simpler
+`~ condition` model.*
 :::
 
 
 <div class="important">
-  <strong>⭐ Important:</strong> If any check fails, investigate the cause before running DESeq2. Proceeding with outlier samples or confounded designs will compromise all downstream results
+  <strong>⭐ Important:</strong> If any check fails, investigate the cause before running DESeq2. Proceeding with outlier samples or a mis-specified design will compromise all downstream results.
 </div>
 
 
-```{r export-dds-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-export-dds-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 # ── Export DDS for downstream analysis ────────────────────────────────────────
-results_dir <- file.path(git_root, "results", "rds")
+results_dir <- file.path(git_root, "results", "human", "rds")
 dir.create(results_dir, recursive = TRUE, showWarnings = FALSE)
 
-dds_path <- file.path(results_dir, "dds_ecoli_MG1655.rds")
+dds_path <- file.path(results_dir, "dds_human_asm.rds")
 saveRDS(dds, file = dds_path)
 ```
 
@@ -761,6 +681,7 @@ saveRDS(dds, file = dds_path)
 ```{r, echo=TRUE, eval=FALSE, include=TRUE, message=FALSE, warning=FALSE}
 cat("✅ DDS saved to:", dds_path, "\n")
 cat("   Dimensions  :", nrow(dds), "genes ×", ncol(dds), "samples\n")
+cat("   Design      : ~ donor + condition\n")
 cat("   Conditions  :", paste(levels(dds$condition), collapse = " vs "), "\n")
 ```
 
@@ -768,10 +689,10 @@ cat("   Conditions  :", paste(levels(dds$condition), collapse = " vs "), "\n")
 
 </br>
 
-```{r session-info-0, echo=TRUE, eval=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-qc-session-info-0, echo=TRUE, eval=FALSE, include=TRUE, message=FALSE, warning=FALSE}
 sessionInfo()
 ```
 
-```{r render-0, eval=FALSE, echo=FALSE}
+```{r human-qc-render-0, eval=FALSE, echo=FALSE}
 rmarkdown::render("01_scripts/01_quality_control.Rmd")
 ```

@@ -1,20 +1,20 @@
 {
-    "study_name": "MG1655",
+    "study_name": "Human_ASM_dexamethasone",
     "study_type": "rnaseq",
     "study_abundance_type": "counts",
-    "report_title": "MG1655",
-    "report_contributors": "E.coli",
+    "report_title": "Human ASM — dexamethasone vs untreated",
+    "report_contributors": "Himes 2014 (PRJNA229998)",
 
-    "input": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/nf-core_rnaseq/metadata/samplesheet_deDios_2025_PRJNA1158806-seq_DEG.csv",
-    "contrasts": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/nf-core_rnaseq/metadata/contrast.csv",
-    "matrix": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/nf-core_rnaseq/salmon.merged.gene_counts.tsv",
-    "transcript_length_matrix": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/nf-core_rnaseq/salmon.merged.gene_lengths.tsv",
-    "gtf": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/GCF_000005845.2_ASM584v2_genomic.gtf.gz",
+    "input": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/data-02-Homo_sapiens/metadata/samplesheet_PRJNA229998-seq_DEG.csv",
+    "contrasts": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/data-02-Homo_sapiens/metadata/contrast.csv",
+    "matrix": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/data-02-Homo_sapiens/hasapiens/star_salmon/salmon.merged.gene_counts.tsv",
+    "transcript_length_matrix": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/data-02-Homo_sapiens/hasapiens/star_salmon/salmon.merged.gene_lengths.tsv",
+    "gtf": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/data-02-Homo_sapiens/genome_files/GCF_000001405.13_GRCh37_genomic.gtf.gz",
 
     "features_id_col": "gene_id",
     "features_name_col": "gene_name",
     "features_type": "gene",
-    "features_metadata_cols": "gene_id,gene_name,gene_biotype,gene_symbol",
+    "features_metadata_cols": "gene_id,gene_name",
     "features_gtf_feature_type": "transcript",
     "features_gtf_table_first_field": "gene_id",
 
@@ -22,17 +22,18 @@
     "observations_type": "sample",
 
     "filtering_min_abundance": 10,
-    "filtering_min_samples": 2,
+    "filtering_min_samples": 4,
     "filtering_min_proportion": 0,
     "filtering_min_samples_not_na": 0.1,
     "filtering_min_proportion_not_na": 0.5,
-    "filtering_grouping_var": "group",
+    "filtering_grouping_var": "condition",
 
-    "deseq2_fit_type": "local",
+    "deseq2_fit_type": "parametric",
 
     "differential_min_fold_change": 1.0,
 
-    "gprofiler2_run": false,
+    "gprofiler2_run": true,
+    "gprofiler2_organism": "hsapiens",
     "gsea_run": false,
 
     "max_memory": "8.GB",

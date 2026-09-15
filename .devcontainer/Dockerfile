@@ -1,33 +1,18 @@
-FROM mcr.microsoft.com/devcontainers/base:noble
-WORKDIR /home
+FROM ghcr.io/biosustain/dsp_transcriptomics_training:latest
 
-RUN apt-get update \
-    && apt-get install -y \
-        openjdk-21-jre \
-        python3-venv \
-        r-base \
-        r-base-dev \
-        r-cran-dplyr \
-        r-cran-ggplot2 \
-        r-cran-ggrepel \
-        r-cran-rcolorbrewer \
-        r-cran-rmarkdown \
-        r-cran-tidyr \
-        libcurl4-openssl-dev \
-        libssl-dev \
-        libxml2-dev \
-        libfontconfig1-dev \
-        libharfbuzz-dev \
-        libfribidi-dev \
-        libfreetype6-dev \
-        libpng-dev \
-        libtiff5-dev \
-        libjpeg-dev \
-    && curl -L -s -o /usr/local/bin/nextflow \
-        https://github.com/nextflow-io/nextflow/releases/download/v25.10.4/nextflow-25.10.4-dist \
-    && chmod +x /usr/local/bin/nextflow \
-    && ln -s /usr/bin/python3 /usr/bin/python \
-    && chmod -R 777 /usr/local/lib/R/site-library
+# System library needed to build the pbdZMQ R package (IRkernel dependency),
+# plus Python/pip to install Jupyter itself.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libzmq3-dev \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY install_packages.R /tmp/install_packages.R
-RUN Rscript /tmp/install_packages.R && rm /tmp/install_packages.R
+RUN pip3 install --no-cache-dir --break-system-packages jupyterlab
+
+# R packages referenced by the workshop scripts that aren't in the base image yet,
+# plus the R Jupyter kernel (IRkernel).
+RUN Rscript -e "install.packages(c('heatmaply', 'pbdZMQ', 'IRkernel'), repos = 'https://cloud.r-project.org')"
+
+RUN Rscript -e "BiocManager::install('org.EcK12.eg.db', update = FALSE, ask = FALSE)"
+
+RUN Rscript -e "IRkernel::installspec(name = 'ir', displayname = 'R', user = FALSE)"

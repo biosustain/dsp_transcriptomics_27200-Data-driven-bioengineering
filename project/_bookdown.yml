@@ -1,11 +1,20 @@
 book_filename: "27200 Data Driven Bioengineering - Transcriptomics"
-output_dir: "docs"
+output_dir: "../docs"
 delete_merged_file: true
 
 rmd_files:
   - "index.Rmd"
   - "02_introduction.Rmd"
   - "02_a_nf-core.Rmd"
+  - "part_staphylococcus.Rmd"
+  - "../01_scripts/01_quality_control_saureus.Rmd"
+  - "../01_scripts/02_differential_expression_analysis_saureus.Rmd"
+  - "../01_scripts/03_gene_functional_saureus.Rmd"
+  - "part_homo_sapiens.Rmd"
+  - "../01_scripts/01_quality_control.Rmd"
+  - "../01_scripts/02_differential_expression_analysis.Rmd"
+  - "../01_scripts/03_gene_functional.Rmd"
+  - "part_ecoli.Rmd"
   - "03_analysis_basics.Rmd"
   - "04_viz_practice.Rmd"
   - "05_wrapup.Rmd"

@@ -1,0 +1,9 @@
+sample,donor,condition
+N052611_dexamethasone,N052611,treatment
+N052611_untreated,N052611,control
+N061011_dexamethasone,N061011,treatment
+N061011_untreated,N061011,control
+N080611_dexamethasone,N080611,treatment
+N080611_untreated,N080611,control
+N61311_dexamethasone,N61311,treatment
+N61311_untreated,N61311,control

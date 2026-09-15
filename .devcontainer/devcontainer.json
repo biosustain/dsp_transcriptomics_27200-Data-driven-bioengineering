@@ -2,13 +2,15 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
   "name": "Ubuntu",
-  "image": "ghcr.io/biosustain/dsp_transcriptomics_training:latest",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "customizations": {
     "vscode": {
-      "extensions": ["REditorSupport.r"]
+      "extensions": ["REditorSupport.r", "ms-toolsai.jupyter"]
     }
   }
 }
