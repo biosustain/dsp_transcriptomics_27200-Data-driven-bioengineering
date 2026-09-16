@@ -14,29 +14,42 @@ All materials, resources, and a **draft agenda** for the day are available in th
 
 ## 📋 Course Details
 
+This session is the **Transcriptomics week (Week 6)** of **27200 Data-driven Bioengineering** (DTU Bioengineering, Fall 2026) — a 13-week course building systems-level, data-driven reasoning across omics technologies, modeling, and AI.
+
 | | |
 |---|---|
-| 🕘 **Duration** | 10:00 – 14:00 |
+| 📅 **Lecture date** | Thursday, 08 October 2026 |
+| 🕘 **Duration** | 10:00 – 14:00 (≈2 h lecture + ≈2 h guided exercises) |
+| 🧭 **Theme** | Transcript abundance as a dynamic — but incomplete — regulatory readout |
+| 👥 **Format** | Active learning in fixed groups of 4; 2–3 short in-class quizzes; end-of-session "key insight + muddy point" reflection |
+| 📝 **Deliverable** | No formal written deliverable this week — in-class outputs and quizzes; optional project-relevant notes |
 
 ---
 
 ## 🎯 Main Concepts & Learning Objectives
 
-> _TODO: fill in — e.g. Illumina sequencing basics, the nf-core/rnaseq pipeline, QC/EDA, differential expression with DESeq2, functional enrichment (ORA/GSEA)._
+By the end of this session, students will be able to:
 
-- 
-- 
-- 
+- Describe the **RNA-seq workflow** from raw reads to a count matrix, including processing with the **nf-core/rnaseq** pipeline
+- Interpret **count matrices** and related data structures — what they contain and what they omit (LO4)
+- Apply and compare **normalization** strategies, and revisit **batch effects** and experimental design from the statistics week
+- Perform **quality control and exploratory analysis**: PCA, sample correlation, outlier detection
+- Run and interpret **differential expression analysis** with DESeq2, including design formulas, shrinkage, and multiple testing (LO5)
+- Gain biological insight through **functional enrichment** — ORA and GSEA with KEGG, GO, and MSigDB gene sets
+- Explain **what transcriptomics reflects and what it misses** — how the technology constrains biological interpretation (LO8)
+
+**In-class quiz themes:** count matrices & normalization · PCA interpretation · transcript abundance versus activity
 
 ---
 
 ## 🔑 Key Takeaways
 
-> _TODO: the key messages you want students to leave with._
+Tied to the course's recurring backbone principles:
 
-- 
-- 
-- 
+- **Measurement defines reality** — a count matrix is a filtered snapshot: transcript abundance is not protein abundance, and not activity
+- **Representation shapes understanding** — expression becomes a matrix; normalization and transformation choices shape every downstream conclusion
+- **Models are controlled simplifications** — the DESeq2 design formula *is* your hypothesis; assumptions and shrinkage determine what you can claim
+- Inference is bounded by **experimental design**: replication, confounders, and multiple testing (ties back to Week 4)
 
 ---
 
@@ -59,11 +72,24 @@ The hands-on work happens in **[`02_notebooks/`](02_notebooks/)** — Jupyter no
 
 ## 🛠️ Software, Datasets & Resources
 
-> _TODO: list required software, datasets, and other resources beyond the R package installation below._
+**Software**
 
-- 
-- 
-- 
+- **R (≥ 4.3)** with DESeq2, fgsea, mulea, tidyverse and friends — full list in the installation script below
+- **Jupyter notebooks (R kernel)** in [`02_notebooks/`](02_notebooks/), or the source R Markdown scripts in [`01_scripts/`](01_scripts/)
+- **GitHub Codespaces / dev container** — preconfigured cloud environment, no local install needed (see setup options below)
+- **nf-core/rnaseq** (Nextflow) — used upstream to process raw reads; outputs are provided precomputed
+
+**Datasets** (small, preprocessed for in-class scalability)
+
+- 🦠 *Staphylococcus aureus* **biofilm vs planktonic** time course, strains USA-100 and USA-500 — [`data/data-01-Staphylococcus_aureus/`](data/data-01-Staphylococcus_aureus/)
+- 🧑‍🔬 *Homo sapiens* **airway smooth muscle ± dexamethasone** (paired donor design) — [`data/data-02-Homo_sapiens/`](data/data-02-Homo_sapiens/)
+- 📚 Prebuilt gene-set databases (KEGG, GO) in [`data/databases/`](data/databases/)
+
+**Resources**
+
+- 📖 **[Rendered course book](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/)** — the `docs/` site built from this repository (bookdown)
+- 🎞️ Slides in [`slides/`](slides/)
+- 🔬 Example nf-core/rnaseq outputs and MultiQC report in [`data/nf-core_rnaseq/`](data/nf-core_rnaseq/) and [`results/`](results/)
 
 ---
 
@@ -121,12 +147,16 @@ cran_pkgs <- c(
   "reshape2",
   "RColorBrewer",
   "pheatmap",
+  "heatmaply",
   "factoextra",
   "knitr",
   "kableExtra",
   "DT",
   "plotly",
   "ggpubr",
+  "gggenes",     # operon plots (S. aureus)
+  "gprofiler2",  # ORA via g:Profiler (human)
+  "msigdbr",     # MSigDB gene sets for GSEA (human)
   "remotes"      # needed for GitHub installs below
 )
 
@@ -148,7 +178,8 @@ bioc_pkgs <- c(
   "apeglm",       # recommended shrinkage estimator used with DESeq2
   "fgsea",
   "KEGGREST",
-  "EnhancedVolcano"
+  "EnhancedVolcano",
+  "org.EcK12.eg.db"  # E. coli gene annotation (E. coli chapters)
 )
 
 for (pkg in bioc_pkgs) {

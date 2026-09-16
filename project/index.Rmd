@@ -41,39 +41,44 @@ __Teaching Assistant:__ `r rep_ta_full`
 <br>
 
 
-**Welcome to the 27200 Data Driven Bioengineering - Transcriptomics Workshop!**
+**Welcome to the Transcriptomics week of 27200 Data-driven Bioengineering!**
 
-This workshop introduces **RNA-seq data analysis**, covering both the theory behind the technology and the full practical workflow — from raw reads to biological interpretation — using real *E. coli* data.
+This session is **Week 6** of the course (lecture: **Thursday, 08 October 2026**), part of the omics block. The theme of the week: **transcript abundance as a dynamic — but incomplete — regulatory readout**.
 
-The course is designed for people with **no or little knowledge and practical experience** in transcriptomic analysis using RNA sequencing (RNAseq).
+We cover the theory behind RNA sequencing and the full practical workflow — from raw reads to biological interpretation: the RNA-seq workflow and count matrices, normalization, batch effects revisited, PCA, differential expression, and what transcriptomics reflects and misses.
+
+The material is designed for people with **no or little practical experience** in transcriptomic analysis using RNA sequencing (RNA-seq).
 
 **Objectives**
 
 * Theory on Illumina short-read sequencing technology for transcriptome analysis
 * Theory and practical sessions for
-   * RNAseq data processing using the nf-core/rnaseq pipeline
-   * Statistical data analysis and visualization of RNAseq results
-   * Enrichment analysis — gaining biological insights from transcriptomic data
-   * Effective results reporting using the in-house developed software **[vuegen](https://github.com/Multiomics-Analytics-Group/vuegen)**
+   * RNA-seq data processing using the nf-core/rnaseq pipeline
+   * Quality control and exploratory analysis (normalization, PCA, sample correlation)
+   * Differential expression analysis with DESeq2 — design formulas, shrinkage, multiple testing
+   * Enrichment analysis (ORA & GSEA) — gaining biological insights from transcriptomic data
+   * Critically assessing what transcript abundance can and cannot tell you about biology
+
+**Datasets**
+
+* 🦠 *Staphylococcus aureus* — biofilm vs planktonic lifestyle over time (strains USA-100 and USA-500)
+* 🧑‍🔬 *Homo sapiens* — airway smooth muscle cells treated with dexamethasone (paired donor design)
 
 :::boxy
 You can also explore the [27200 Data Driven Bioengineering - Transcriptomics repository](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 :::
 
+**Draft agenda** (4-hour block: ~2 h lecture + ~2 h guided exercises, in groups of 4)
+
 | Time | Session |
 |---|---|
-| ☕ **9:00–9:15** | Welcome, coffee, and setup |
-| 🔬 **9:15–10:00** | Theory: Illumina sequencing & RNA-seq experimental design |
-| 🔄 **10:00–10:45** | Theory: nf-core/rnaseq pipeline overview |
-| ⏸️ **10:45–11:00** | Break |
-| 💻 **11:00–12:00** | Script 01: *nf-core/rnaseq — running the pipeline* |
-| 🍽️ **12:00–13:00** | Lunch |
-| 🧬 **13:00–14:15** | Script 02: *Quality Control & Exploratory Data Analysis* |
-| ⏸️ **14:15–14:30** | Break |
-| 📊 **14:30–15:30** | Script 03: *Differential Expression Analysis with DESeq2* |
-| ⏸️ **15:30–15:45** | Break |
-| 🔍 **15:45–16:15** | Script 04: *Functional Enrichment Analysis (ORA & GSEA with mulea)* |
-| 🏁 **16:15–16:30** | Wrap-up, Q&A, and closing |
+| ☕ **10:00–10:15** | Welcome and setup |
+| 🔬 **10:15–11:00** | Theory: Illumina sequencing, RNA-seq workflow & the nf-core/rnaseq pipeline |
+| 📊 **11:00–11:45** | Theory: count matrices, normalization, PCA & differential expression (+ quizzes) |
+| ⏸️ **11:45–12:00** | Break |
+| 💻 **12:00–12:55** | Exercises: *Quality Control & Exploratory Data Analysis* |
+| 🧬 **12:55–13:50** | Exercises: *Differential Expression & Functional Enrichment (ORA/GSEA)* |
+| 🏁 **13:50–14:00** | Wrap-up: key insight + muddy point |
 
 
 :::boxy
