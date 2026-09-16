@@ -3,10 +3,14 @@
 {
   "name": "Ubuntu",
   // Prebuilt image so Codespaces starts in a couple of minutes instead of
-  // building R from source. It is built from ./Dockerfile by
-  // .github/workflows/publish-devcontainer.yml, which republishes on every
-  // change to .devcontainer/ — edit the Dockerfile, not this tag.
-  "image": "ghcr.io/biosustain/dsp_transcriptomics_27200-data-driven-bioengineering:latest",
+  // building R from source. Built from ./Dockerfile by
+  // .github/workflows/publish-devcontainer.yml.
+  //
+  // Pinned to a release so the environment cannot change under students
+  // mid-course. To roll out a new image: edit the Dockerfile, cut a new
+  // GitHub release (which builds, verifies and publishes it), then bump
+  // this tag.
+  "image": "ghcr.io/biosustain/dsp_transcriptomics_27200-data-driven-bioengineering:1.0.0",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
