@@ -52,6 +52,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and push image
+        id: build
         uses: docker/build-push-action@v6
         with:
           context: .devcontainer
@@ -63,3 +64,25 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      # install.packages() only warns when a package fails to build, so the
+      # image can publish "successfully" with a broken package inside. Check
+      # the real thing before anyone opens a Codespace on it.
+      - name: Verify the published image
+        run: |
+          set -euo pipefail
+          IMAGE="$(echo "${REGISTRY}/${IMAGE_NAME}" | tr '[:upper:]' '[:lower:]')@${{ steps.build.outputs.digest }}"
+          echo "Verifying $IMAGE"
+
+          docker run --rm -v "$PWD/.devcontainer:/verify:ro" "$IMAGE" \
+            Rscript /verify/verify_image.R
+
+          docker run --rm "$IMAGE" bash -lc '
+            set -e
+            command -v nextflow >/dev/null || { echo "MISSING: nextflow"; exit 1; }
+            nextflow -version >/dev/null 2>&1 || { echo "BROKEN: nextflow"; exit 1; }
+            python3 -c "import pandas, numpy, matplotlib, seaborn, scipy, statsmodels, sklearn"
+            jupyter kernelspec list | grep -qw ir || { echo "MISSING: R kernel"; exit 1; }
+            jupyter kernelspec list | grep -qw python3 || { echo "MISSING: Python kernel"; exit 1; }
+            echo "nextflow, Python stack and both Jupyter kernels OK"
+          '

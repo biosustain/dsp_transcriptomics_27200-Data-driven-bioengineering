@@ -64,7 +64,7 @@ below is derived from that one setting, so the same script produces the QC for e
 further edits.
 :::
 
-## Setup the Environment
+**Setup the Environment**
 
 ::: {style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;"}
 <strong>💡 Tip:</strong> Install packages only once!
@@ -93,7 +93,7 @@ Everything downstream keys off this single setting. Change it to `"USA-500"` to 
 
 ```{r saureus-qc-choose-strain-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 # --- The only line you need to change to switch strains ---
-strain <- "USA-500"          # "USA-100" or "USA-500"
+strain <- "USA-100"          # "USA-100" or "USA-500"
 # ----------------------------------------------------------
 
 stopifnot(strain %in% c("USA-100", "USA-500"))
@@ -110,7 +110,7 @@ cat("Data folder   :", data_dir, "\n")
 cat("Results folder:", results_dir, "\n")
 ```
 
-## Loading Count Data
+### Loading Count Data
 
 The nf-core/rnaseq pipeline (prokaryotic profile: `Bowtie2` + `Salmon`) produces a `SummarizedExperiment` object. We load it, extract the raw count matrix, and use the locus tags as row names.
 
@@ -240,7 +240,7 @@ print(data.frame(count_col = colnames(count_genes),
                  timepoint = samples_info$timepoint))
 ```
 
-## Creating the DESeqDataSet
+### Creating the DESeqDataSet
 
 The `DESeqDataSet` (DDS) holds the raw count matrix, sample metadata, and a design formula.
 
@@ -260,13 +260,13 @@ dds <- DESeqDataSetFromMatrix(
 )
 ```
 
-## Sanity Checks
+### Sanity Checks
 
 <div class="remember">
   <strong>📌 Remember:</strong> Always do a sanity check!
 </div>
 
-### Are We Working with Raw Counts?
+**Are We Working with Raw Counts?**
 
 `DESeq2` requires **raw, un-normalised integer counts**. Feeding it normalised values (TPM, FPKM) will produce incorrect results.
 
@@ -395,7 +395,7 @@ ggsave(
 )
 ```
 
-## Sample Correlation Heatmap
+### Sample Correlation Heatmap
 
 Euclidean distances between `VST-transformed` samples reveal how similar samples are to each other globally. Samples from the same lifestyle, or the same time point, may cluster together.
 
@@ -445,7 +445,7 @@ dev.off()
 The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by lifestyle, by time point, or both. If time point is a strong driver of the distances, that is a signal that the time points should be analysed separately rather than pooled — which is exactly why we pick a single time point for differential expression.
 :::
 
-## Principal Component Analysis (PCA)
+### Principal Component Analysis (PCA)
 
 PCA reduces the high-dimensional expression space (one dimension per gene) to a few principal components capturing the largest sources of variance. Here it answers two questions at once: does lifestyle (biofilm vs planktonic) separate the samples, and how much of the structure is driven by time point?
 
@@ -498,7 +498,7 @@ biofilm and planktonic separate cleanly <em>and</em> where you have adequate rep
 separation off this plot rather than assuming it — then set that time point in script 02.
 :::
 
-## Detecting Outliers
+### Detecting Outliers
 
 The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.
 
@@ -528,7 +528,7 @@ ggsave(
 **What to look for:** an isolated sample sitting far from every other point on the individuals plot, or a single sample dominating PC1 on the scree plot, is a candidate technical outlier. Investigate its library size and its MultiQC metrics before deciding whether to exclude it.
 :::
 
-## Top Variable Genes Heatmap
+### Top Variable Genes Heatmap
 
 Clustering the 50 most variable genes across samples gives a gene-level view of the structure in the data. Row-scaling (z-score per gene) is applied so that highly expressed genes do not visually dominate.
 
