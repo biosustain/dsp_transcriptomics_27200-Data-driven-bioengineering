@@ -42,11 +42,18 @@ All materials, resources, and a **draft agenda** for the day are available in th
 
 ## 🧪 Exercises & Interactive Activities
 
-> _TODO: list the planned hands-on scripts/activities (e.g. Script 01–04 below), with a short description of what each one covers._
+The hands-on work happens in **[`02_notebooks/`](02_notebooks/)** — Jupyter notebooks (R kernel) generated from the scripts in `01_scripts/`. Run each dataset's notebooks in order, **01 → 02 → 03**; every step saves results that the next one loads.
 
-| Script | Description |
+| Notebook | Description |
 |---|---|
-|  |  |
+| **_Staphylococcus aureus_ — biofilm vs planktonic** | |
+| [`01_quality_control`](02_notebooks/staphylococcus_aureus/01_quality_control.ipynb) | QC and exploratory analysis across lifestyles and time points, one strain at a time |
+| [`02_differential_expression_analysis`](02_notebooks/staphylococcus_aureus/02_differential_expression_analysis.ipynb) | DESeq2: maturation over time, and biofilm vs planktonic adjusted for time |
+| [`03_gene_functional`](02_notebooks/staphylococcus_aureus/03_gene_functional.ipynb) | ORA and GSEA with KEGG and GO gene sets |
+| **_Homo sapiens_ — airway smooth muscle ± dexamethasone** | |
+| [`01_quality_control`](02_notebooks/homo_sapiens/01_quality_control.ipynb) | QC and exploratory analysis, accounting for donor |
+| [`02_differential_expression_analysis`](02_notebooks/homo_sapiens/02_differential_expression_analysis.ipynb) | DESeq2 with a paired design (`~ donor + condition`) |
+| [`03_gene_functional`](02_notebooks/homo_sapiens/03_gene_functional.ipynb) | ORA with g:Profiler and GSEA with MSigDB gene sets |
 
 ---
 
@@ -74,6 +81,8 @@ Below are two setup options for the practical activities:
 
 **Launch the app:**
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
+
+Once the Codespace is running, open `02_notebooks/` and start with `staphylococcus_aureus/01_quality_control.ipynb` (choose the **R** kernel if prompted).
 
 
 >Run the workshop locally on your machine. 
