@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -455,14 +459,14 @@ is a paired factor. We run two models:
 The paired model is used for all downstream analysis.</p>
 </div>
 <p><strong>Setup the Environment</strong></p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="background.html#cb304-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb304-2"><a href="background.html#cb304-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
-<span id="cb304-3"><a href="background.html#cb304-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb304-4"><a href="background.html#cb304-4" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb304-5"><a href="background.html#cb304-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb304-6"><a href="background.html#cb304-6" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb304-7"><a href="background.html#cb304-7" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb304-8"><a href="background.html#cb304-8" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="background.html#cb303-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb303-2"><a href="background.html#cb303-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb303-3"><a href="background.html#cb303-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb303-4"><a href="background.html#cb303-4" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb303-5"><a href="background.html#cb303-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb303-6"><a href="background.html#cb303-6" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb303-7"><a href="background.html#cb303-7" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb303-8"><a href="background.html#cb303-8" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
 </div>
             </section>
 

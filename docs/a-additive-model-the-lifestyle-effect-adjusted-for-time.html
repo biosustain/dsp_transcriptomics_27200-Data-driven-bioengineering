@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -439,23 +443,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>A hit tells you:</strong> this gene differs by lifestyle in a way that is consistent across time — a candidate core biofilm-vs-planktonic gene, not just a growth-phase artefact.</li>
 </ul>
 </div>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb128-1" tabindex="-1"></a><span class="fu">design</span>(dds_ls) <span class="ot">&lt;-</span> <span class="er">~</span> timepoint <span class="sc">+</span> lifestyle</span>
-<span id="cb128-2"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb128-2" tabindex="-1"></a>dds_add <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_ls)</span>
-<span id="cb128-3"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb128-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;resultsNames:</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">resultsNames</span>(dds_add))</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb127-1" tabindex="-1"></a><span class="fu">design</span>(dds_ls) <span class="ot">&lt;-</span> <span class="er">~</span> timepoint <span class="sc">+</span> lifestyle</span>
+<span id="cb127-2"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb127-2" tabindex="-1"></a>dds_add <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_ls)</span>
+<span id="cb127-3"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb127-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;resultsNames:</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">resultsNames</span>(dds_add))</span></code></pre></div>
 <pre><code>## resultsNames:</code></pre>
 <pre><code>## [1] &quot;Intercept&quot;                       &quot;timepoint_10h_vs_5h&quot;            
 ## [3] &quot;timepoint_24h_vs_5h&quot;             &quot;lifestyle_Biofilm_vs_Planktonic&quot;</code></pre>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb131-1" tabindex="-1"></a>res_add <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_add, <span class="st">&quot;lifestyle_Biofilm_vs_Planktonic&quot;</span>)</span>
-<span id="cb131-2"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb131-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb130-1" tabindex="-1"></a>res_add <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_add, <span class="st">&quot;lifestyle_Biofilm_vs_Planktonic&quot;</span>)</span>
+<span id="cb130-2"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb130-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## DEG counts (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ):</code></pre>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb133-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_add<span class="sc">$</span>direction))</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb132-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_add<span class="sc">$</span>direction))</span></code></pre></div>
 <pre><code>## 
 ##              Up            Down Not significant 
 ##             156             126            2006</code></pre>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb135-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_add,</span>
-<span id="cb135-2"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb135-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — lifestyle (additive, time-adjusted)&quot;</span>),</span>
-<span id="cb135-3"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb135-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher in biofilm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb134-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_add,</span>
+<span id="cb134-2"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb134-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — lifestyle (additive, time-adjusted)&quot;</span>),</span>
+<span id="cb134-3"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html#cb134-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher in biofilm&quot;</span>)</span></code></pre></div>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-lifestyle-additive-volcano-0-1.png" alt="" width="864" /></p>
 <p><em>Interpretation:</em> once the shared ageing trend is removed by the <code>timepoint</code> term, the number of lifestyle genes is much smaller than a naive single-time-point comparison would give. That drop is the growth-phase confound being taken out: many genes that look “biofilm-specific” at 24 h are really just ageing effects common to both cultures. What remains is a cleaner candidate set of genes that differ by lifestyle regardless of time.</p>
 <div class="important">

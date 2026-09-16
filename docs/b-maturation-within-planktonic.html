@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -439,33 +443,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>A hit tells you:</strong> this gene responds to culture ageing in planktonic cells (largely the entry into stationary phase).</li>
 </ul>
 </div>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="b-maturation-within-planktonic.html#cb99-1" tabindex="-1"></a>dds_pk <span class="ot">&lt;-</span> dds_all[, dds_all<span class="sc">$</span>lifestyle <span class="sc">==</span> <span class="st">&quot;Planktonic&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb99-2"><a href="b-maturation-within-planktonic.html#cb99-2" tabindex="-1"></a>                    dds_all<span class="sc">$</span>timepoint <span class="sc">%in%</span> <span class="fu">c</span>(first_tp, last_tp)]</span>
-<span id="cb99-3"><a href="b-maturation-within-planktonic.html#cb99-3" tabindex="-1"></a>dds_pk<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_pk<span class="sc">$</span>timepoint), <span class="at">ref =</span> first_tp)</span>
-<span id="cb99-4"><a href="b-maturation-within-planktonic.html#cb99-4" tabindex="-1"></a><span class="fu">design</span>(dds_pk)   <span class="ot">&lt;-</span> <span class="er">~</span> timepoint</span>
-<span id="cb99-5"><a href="b-maturation-within-planktonic.html#cb99-5" tabindex="-1"></a></span>
-<span id="cb99-6"><a href="b-maturation-within-planktonic.html#cb99-6" tabindex="-1"></a>dds_pk <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_pk)</span>
-<span id="cb99-7"><a href="b-maturation-within-planktonic.html#cb99-7" tabindex="-1"></a>coef_pk <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;timepoint_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp)</span>
-<span id="cb99-8"><a href="b-maturation-within-planktonic.html#cb99-8" tabindex="-1"></a>res_pk  <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_pk, coef_pk)</span>
-<span id="cb99-9"><a href="b-maturation-within-planktonic.html#cb99-9" tabindex="-1"></a></span>
-<span id="cb99-10"><a href="b-maturation-within-planktonic.html#cb99-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples (planktonic):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">table</span>(dds_pk<span class="sc">$</span>timepoint))</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="b-maturation-within-planktonic.html#cb98-1" tabindex="-1"></a>dds_pk <span class="ot">&lt;-</span> dds_all[, dds_all<span class="sc">$</span>lifestyle <span class="sc">==</span> <span class="st">&quot;Planktonic&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-2"><a href="b-maturation-within-planktonic.html#cb98-2" tabindex="-1"></a>                    dds_all<span class="sc">$</span>timepoint <span class="sc">%in%</span> <span class="fu">c</span>(first_tp, last_tp)]</span>
+<span id="cb98-3"><a href="b-maturation-within-planktonic.html#cb98-3" tabindex="-1"></a>dds_pk<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_pk<span class="sc">$</span>timepoint), <span class="at">ref =</span> first_tp)</span>
+<span id="cb98-4"><a href="b-maturation-within-planktonic.html#cb98-4" tabindex="-1"></a><span class="fu">design</span>(dds_pk)   <span class="ot">&lt;-</span> <span class="er">~</span> timepoint</span>
+<span id="cb98-5"><a href="b-maturation-within-planktonic.html#cb98-5" tabindex="-1"></a></span>
+<span id="cb98-6"><a href="b-maturation-within-planktonic.html#cb98-6" tabindex="-1"></a>dds_pk <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_pk)</span>
+<span id="cb98-7"><a href="b-maturation-within-planktonic.html#cb98-7" tabindex="-1"></a>coef_pk <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;timepoint_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp)</span>
+<span id="cb98-8"><a href="b-maturation-within-planktonic.html#cb98-8" tabindex="-1"></a>res_pk  <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_pk, coef_pk)</span>
+<span id="cb98-9"><a href="b-maturation-within-planktonic.html#cb98-9" tabindex="-1"></a></span>
+<span id="cb98-10"><a href="b-maturation-within-planktonic.html#cb98-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples (planktonic):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">table</span>(dds_pk<span class="sc">$</span>timepoint))</span></code></pre></div>
 <pre><code>## Samples (planktonic):</code></pre>
 <pre><code>## 
 ##  5h 24h 
 ##   4   8</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="b-maturation-within-planktonic.html#cb102-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_pk, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="b-maturation-within-planktonic.html#cb101-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_pk, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Coefficient: timepoint_24h_vs_5h</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="b-maturation-within-planktonic.html#cb104-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="b-maturation-within-planktonic.html#cb103-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## DEG counts (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ):</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="b-maturation-within-planktonic.html#cb106-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_pk<span class="sc">$</span>direction))</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="b-maturation-within-planktonic.html#cb105-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_pk<span class="sc">$</span>direction))</span></code></pre></div>
 <pre><code>## 
 ##              Up            Down Not significant 
 ##             277             146            1865</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="b-maturation-within-planktonic.html#cb108-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="b-maturation-within-planktonic.html#cb107-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## 
-## Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="b-maturation-within-planktonic.html#cb110-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">check_extreme_fc</span>(res_pk))</span></code></pre></div>
+## Most extreme fold changes (check baseMean &lt;U+2014&gt; high = real, single digits = low-count noise):</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="b-maturation-within-planktonic.html#cb109-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">check_extreme_fc</span>(res_pk))</span></code></pre></div>
 <pre><code>##       gene_id baseMean log2FoldChange         padj direction
 ## 1  SA_RS13915   2187.0          -8.71 0.0000000000      Down
 ## 2  SA_RS13920   3446.2          -8.51 0.0000000000      Down
@@ -477,9 +481,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8  SA_RS07200    858.5          -5.63 0.0000000000      Down
 ## 9  SA_RS13900    772.4          -5.63 0.0000000000      Down
 ## 10 SA_RS00035     13.3           5.61 0.0000000212        Up</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="b-maturation-within-planktonic.html#cb112-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_pk,</span>
-<span id="cb112-2"><a href="b-maturation-within-planktonic.html#cb112-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — planktonic maturation (&quot;</span>, last_tp, <span class="st">&quot; vs &quot;</span>, first_tp, <span class="st">&quot;)&quot;</span>),</span>
-<span id="cb112-3"><a href="b-maturation-within-planktonic.html#cb112-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher at 24 h&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="b-maturation-within-planktonic.html#cb111-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_pk,</span>
+<span id="cb111-2"><a href="b-maturation-within-planktonic.html#cb111-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — planktonic maturation (&quot;</span>, last_tp, <span class="st">&quot; vs &quot;</span>, first_tp, <span class="st">&quot;)&quot;</span>),</span>
+<span id="cb111-3"><a href="b-maturation-within-planktonic.html#cb111-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher at 24 h&quot;</span>)</span></code></pre></div>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-maturation-planktonic-volcano-0-1.png" alt="" width="864" /></p>
 <p><em>Interpretation:</em> planktonic cultures typically show an even larger maturation response than biofilm over the same window. This is expected: planktonic cells exhaust their medium and enter stationary phase between 5 h and 24 h, a dramatic physiological transition that remodels a large part of the transcriptome.</p>
 <div class="note">

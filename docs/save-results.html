@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -430,19 +434,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="save-results" class="section level1 hasAnchor">
 <h1>Save Results<a href="save-results.html#save-results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="save-results.html#cb153-1" tabindex="-1"></a><span class="fu">write_tsv</span>(res_bf,  <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
-<span id="cb153-2"><a href="save-results.html#cb153-2" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_maturation_biofilm_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp, <span class="st">&quot;.tsv&quot;</span>)))</span>
-<span id="cb153-3"><a href="save-results.html#cb153-3" tabindex="-1"></a><span class="fu">write_tsv</span>(res_pk,  <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
-<span id="cb153-4"><a href="save-results.html#cb153-4" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_maturation_planktonic_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp, <span class="st">&quot;.tsv&quot;</span>)))</span>
-<span id="cb153-5"><a href="save-results.html#cb153-5" tabindex="-1"></a><span class="fu">write_tsv</span>(res_add, <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
-<span id="cb153-6"><a href="save-results.html#cb153-6" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_lifestyle_additive.tsv&quot;</span>)))</span>
-<span id="cb153-7"><a href="save-results.html#cb153-7" tabindex="-1"></a><span class="fu">write_tsv</span>(res_lrt, <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
-<span id="cb153-8"><a href="save-results.html#cb153-8" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_lifestyle_interaction_LRT.tsv&quot;</span>)))</span>
-<span id="cb153-9"><a href="save-results.html#cb153-9" tabindex="-1"></a><span class="fu">write_tsv</span>(res_24, <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
-<span id="cb153-10"><a href="save-results.html#cb153-10" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_biofilm_vs_planktonic_24h.tsv&quot;</span>)))</span>
-<span id="cb153-11"><a href="save-results.html#cb153-11" tabindex="-1"></a></span>
-<span id="cb153-12"><a href="save-results.html#cb153-12" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ Saved all result tables for&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## ✅ Saved all result tables for USA-100</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="save-results.html#cb152-1" tabindex="-1"></a><span class="fu">write_tsv</span>(res_bf,  <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
+<span id="cb152-2"><a href="save-results.html#cb152-2" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_maturation_biofilm_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp, <span class="st">&quot;.tsv&quot;</span>)))</span>
+<span id="cb152-3"><a href="save-results.html#cb152-3" tabindex="-1"></a><span class="fu">write_tsv</span>(res_pk,  <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
+<span id="cb152-4"><a href="save-results.html#cb152-4" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_maturation_planktonic_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp, <span class="st">&quot;.tsv&quot;</span>)))</span>
+<span id="cb152-5"><a href="save-results.html#cb152-5" tabindex="-1"></a><span class="fu">write_tsv</span>(res_add, <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
+<span id="cb152-6"><a href="save-results.html#cb152-6" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_lifestyle_additive.tsv&quot;</span>)))</span>
+<span id="cb152-7"><a href="save-results.html#cb152-7" tabindex="-1"></a><span class="fu">write_tsv</span>(res_lrt, <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
+<span id="cb152-8"><a href="save-results.html#cb152-8" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_lifestyle_interaction_LRT.tsv&quot;</span>)))</span>
+<span id="cb152-9"><a href="save-results.html#cb152-9" tabindex="-1"></a><span class="fu">write_tsv</span>(res_24, <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
+<span id="cb152-10"><a href="save-results.html#cb152-10" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_biofilm_vs_planktonic_24h.tsv&quot;</span>)))</span>
+<span id="cb152-11"><a href="save-results.html#cb152-11" tabindex="-1"></a></span>
+<span id="cb152-12"><a href="save-results.html#cb152-12" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ Saved all result tables for&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## &lt;U+2705&gt; Saved all result tables for USA-100</code></pre>
 </div>
             </section>
 

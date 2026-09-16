@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -431,16 +435,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="detecting-outliers-2" class="section level2 hasAnchor">
 <h2>Detecting Outliers<a href="detecting-outliers-2.html#detecting-outliers-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="detecting-outliers-2.html#cb432-1" tabindex="-1"></a>pca_full <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(vsd)))</span>
-<span id="cb432-2"><a href="detecting-outliers-2.html#cb432-2" tabindex="-1"></a></span>
-<span id="cb432-3"><a href="detecting-outliers-2.html#cb432-3" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_full, <span class="at">addlabels =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb432-4"><a href="detecting-outliers-2.html#cb432-4" tabindex="-1"></a>               <span class="at">main =</span> <span class="st">&quot;Scree plot — variance per PC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="detecting-outliers-2.html#cb433-1" tabindex="-1"></a>pca_full <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(vsd)))</span>
+<span id="cb433-2"><a href="detecting-outliers-2.html#cb433-2" tabindex="-1"></a></span>
+<span id="cb433-3"><a href="detecting-outliers-2.html#cb433-3" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_full, <span class="at">addlabels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb433-4"><a href="detecting-outliers-2.html#cb433-4" tabindex="-1"></a>               <span class="at">main =</span> <span class="st">&quot;Scree plot — variance per PC&quot;</span>)</span></code></pre></div>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/outlier-detection-0-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="detecting-outliers-2.html#cb433-1" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_full, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;text&quot;</span>), <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb433-2"><a href="detecting-outliers-2.html#cb433-2" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;PCA — sample positions (full gene matrix)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="detecting-outliers-2.html#cb434-1" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_full, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;text&quot;</span>), <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb434-2"><a href="detecting-outliers-2.html#cb434-2" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;PCA — sample positions (full gene matrix)&quot;</span>)</span></code></pre></div>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/outlier-detection-0-2.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="detecting-outliers-2.html#cb434-1" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(pca_full, <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb434-2"><a href="detecting-outliers-2.html#cb434-2" tabindex="-1"></a>                <span class="at">title =</span> <span class="st">&quot;Biplot — genes and samples&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="detecting-outliers-2.html#cb435-1" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(pca_full, <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb435-2"><a href="detecting-outliers-2.html#cb435-2" tabindex="-1"></a>                <span class="at">title =</span> <span class="st">&quot;Biplot — genes and samples&quot;</span>)</span></code></pre></div>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/outlier-detection-0-3.png" alt="" width="672" /></p>
 </div>
             </section>

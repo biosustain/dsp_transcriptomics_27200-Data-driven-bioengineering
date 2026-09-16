@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -437,15 +441,15 @@ sample, donor is a paired/blocking factor. The recommended design is <code>~ don
 removes between-donor baseline differences before testing the treatment effect. We build the DDS with
 this design, and also keep a simple <code>~ condition</code> version so the two can be compared for teaching (script 02).</p>
 </div>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="creating-the-deseqdataset-1.html#cb271-1" tabindex="-1"></a>samples_info<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group,</span>
-<span id="cb271-2"><a href="creating-the-deseqdataset-1.html#cb271-2" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>))</span>
-<span id="cb271-3"><a href="creating-the-deseqdataset-1.html#cb271-3" tabindex="-1"></a></span>
-<span id="cb271-4"><a href="creating-the-deseqdataset-1.html#cb271-4" tabindex="-1"></a><span class="co"># Primary (recommended) design: paired on donor</span></span>
-<span id="cb271-5"><a href="creating-the-deseqdataset-1.html#cb271-5" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(</span>
-<span id="cb271-6"><a href="creating-the-deseqdataset-1.html#cb271-6" tabindex="-1"></a>  <span class="at">countData =</span> count_genes,</span>
-<span id="cb271-7"><a href="creating-the-deseqdataset-1.html#cb271-7" tabindex="-1"></a>  <span class="at">colData   =</span> samples_info,</span>
-<span id="cb271-8"><a href="creating-the-deseqdataset-1.html#cb271-8" tabindex="-1"></a>  <span class="at">design    =</span> <span class="sc">~</span> donor <span class="sc">+</span> condition</span>
-<span id="cb271-9"><a href="creating-the-deseqdataset-1.html#cb271-9" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="creating-the-deseqdataset-1.html#cb270-1" tabindex="-1"></a>samples_info<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group,</span>
+<span id="cb270-2"><a href="creating-the-deseqdataset-1.html#cb270-2" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>))</span>
+<span id="cb270-3"><a href="creating-the-deseqdataset-1.html#cb270-3" tabindex="-1"></a></span>
+<span id="cb270-4"><a href="creating-the-deseqdataset-1.html#cb270-4" tabindex="-1"></a><span class="co"># Primary (recommended) design: paired on donor</span></span>
+<span id="cb270-5"><a href="creating-the-deseqdataset-1.html#cb270-5" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(</span>
+<span id="cb270-6"><a href="creating-the-deseqdataset-1.html#cb270-6" tabindex="-1"></a>  <span class="at">countData =</span> count_genes,</span>
+<span id="cb270-7"><a href="creating-the-deseqdataset-1.html#cb270-7" tabindex="-1"></a>  <span class="at">colData   =</span> samples_info,</span>
+<span id="cb270-8"><a href="creating-the-deseqdataset-1.html#cb270-8" tabindex="-1"></a>  <span class="at">design    =</span> <span class="sc">~</span> donor <span class="sc">+</span> condition</span>
+<span id="cb270-9"><a href="creating-the-deseqdataset-1.html#cb270-9" tabindex="-1"></a>)</span></code></pre></div>
 <div class="note">
 <p><strong>📘 Note:</strong> The design formula uses R’s formula syntax, where the tilde (<code>~</code>, pronounced <strong>“TIL-duh”</strong>)
 means <strong>“is modelled by”</strong>. So <code>~ donor + condition</code> reads as: <em>“gene expression is modelled by

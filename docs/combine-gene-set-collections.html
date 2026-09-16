@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -432,18 +436,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Combine gene set collections<a href="combine-gene-set-collections.html#combine-gene-set-collections" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>mulea</code> and <code>fgsea</code> both take one collection at a time. We tag each set with its source so
 results can be read back by collection, then keep them available both combined and separately.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="combine-gene-set-collections.html#cb179-1" tabindex="-1"></a>tag_source <span class="ot">&lt;-</span> <span class="cf">function</span>(gmt, src) gmt <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">source =</span> src)</span>
-<span id="cb179-2"><a href="combine-gene-set-collections.html#cb179-2" tabindex="-1"></a></span>
-<span id="cb179-3"><a href="combine-gene-set-collections.html#cb179-3" tabindex="-1"></a>all_gmt <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb179-4"><a href="combine-gene-set-collections.html#cb179-4" tabindex="-1"></a>  <span class="fu">tag_source</span>(kegg_gmt, <span class="st">&quot;KEGG&quot;</span>),</span>
-<span id="cb179-5"><a href="combine-gene-set-collections.html#cb179-5" tabindex="-1"></a>  <span class="fu">tag_source</span>(go_bp,    <span class="st">&quot;GO:BP&quot;</span>),</span>
-<span id="cb179-6"><a href="combine-gene-set-collections.html#cb179-6" tabindex="-1"></a>  <span class="fu">tag_source</span>(go_mf,    <span class="st">&quot;GO:MF&quot;</span>)</span>
-<span id="cb179-7"><a href="combine-gene-set-collections.html#cb179-7" tabindex="-1"></a>)</span>
-<span id="cb179-8"><a href="combine-gene-set-collections.html#cb179-8" tabindex="-1"></a></span>
-<span id="cb179-9"><a href="combine-gene-set-collections.html#cb179-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total gene sets across collections:&quot;</span>, <span class="fu">nrow</span>(all_gmt), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="combine-gene-set-collections.html#cb178-1" tabindex="-1"></a>tag_source <span class="ot">&lt;-</span> <span class="cf">function</span>(gmt, src) gmt <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">source =</span> src)</span>
+<span id="cb178-2"><a href="combine-gene-set-collections.html#cb178-2" tabindex="-1"></a></span>
+<span id="cb178-3"><a href="combine-gene-set-collections.html#cb178-3" tabindex="-1"></a>all_gmt <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb178-4"><a href="combine-gene-set-collections.html#cb178-4" tabindex="-1"></a>  <span class="fu">tag_source</span>(kegg_gmt, <span class="st">&quot;KEGG&quot;</span>),</span>
+<span id="cb178-5"><a href="combine-gene-set-collections.html#cb178-5" tabindex="-1"></a>  <span class="fu">tag_source</span>(go_bp,    <span class="st">&quot;GO:BP&quot;</span>),</span>
+<span id="cb178-6"><a href="combine-gene-set-collections.html#cb178-6" tabindex="-1"></a>  <span class="fu">tag_source</span>(go_mf,    <span class="st">&quot;GO:MF&quot;</span>)</span>
+<span id="cb178-7"><a href="combine-gene-set-collections.html#cb178-7" tabindex="-1"></a>)</span>
+<span id="cb178-8"><a href="combine-gene-set-collections.html#cb178-8" tabindex="-1"></a></span>
+<span id="cb178-9"><a href="combine-gene-set-collections.html#cb178-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total gene sets across collections:&quot;</span>, <span class="fu">nrow</span>(all_gmt), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Total gene sets across collections: 216</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="combine-gene-set-collections.html#cb181-1" tabindex="-1"></a><span class="fu">print</span>(all_gmt <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>(source, <span class="at">name =</span> <span class="st">&quot;sets&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 2
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="combine-gene-set-collections.html#cb180-1" tabindex="-1"></a><span class="fu">print</span>(all_gmt <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>(source, <span class="at">name =</span> <span class="st">&quot;sets&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 2
 ##   source  sets
 ##   &lt;chr&gt;  &lt;int&gt;
 ## 1 GO:BP     54

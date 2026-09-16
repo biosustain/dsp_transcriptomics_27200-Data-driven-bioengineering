@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -438,29 +442,29 @@ Make sure you have run that script first — it saves two files to <code>results
 <li><code>results/DE_treatment_vs_control_significant.tsv</code> — significant DE genes (padj &lt; 0.05, |LFC| &gt;= 1)</li>
 </ul>
 </div>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="load-results-from-differential-expression-analysis-1.html#cb339-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb339-2"><a href="load-results-from-differential-expression-analysis-1.html#cb339-2" tabindex="-1"></a></span>
-<span id="cb339-3"><a href="load-results-from-differential-expression-analysis-1.html#cb339-3" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
-<span id="cb339-4"><a href="load-results-from-differential-expression-analysis-1.html#cb339-4" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;DE_treatment_vs_control_all.tsv&quot;</span>),</span>
-<span id="cb339-5"><a href="load-results-from-differential-expression-analysis-1.html#cb339-5" tabindex="-1"></a>  <span class="at">header      =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb339-6"><a href="load-results-from-differential-expression-analysis-1.html#cb339-6" tabindex="-1"></a>  <span class="at">sep         =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb339-7"><a href="load-results-from-differential-expression-analysis-1.html#cb339-7" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">TRUE</span></span>
-<span id="cb339-8"><a href="load-results-from-differential-expression-analysis-1.html#cb339-8" tabindex="-1"></a>)</span>
-<span id="cb339-9"><a href="load-results-from-differential-expression-analysis-1.html#cb339-9" tabindex="-1"></a></span>
-<span id="cb339-10"><a href="load-results-from-differential-expression-analysis-1.html#cb339-10" tabindex="-1"></a>res_sig <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
-<span id="cb339-11"><a href="load-results-from-differential-expression-analysis-1.html#cb339-11" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;DE_treatment_vs_control_significant.tsv&quot;</span>),</span>
-<span id="cb339-12"><a href="load-results-from-differential-expression-analysis-1.html#cb339-12" tabindex="-1"></a>  <span class="at">header      =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb339-13"><a href="load-results-from-differential-expression-analysis-1.html#cb339-13" tabindex="-1"></a>  <span class="at">sep         =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb339-14"><a href="load-results-from-differential-expression-analysis-1.html#cb339-14" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">TRUE</span></span>
-<span id="cb339-15"><a href="load-results-from-differential-expression-analysis-1.html#cb339-15" tabindex="-1"></a>)</span>
-<span id="cb339-16"><a href="load-results-from-differential-expression-analysis-1.html#cb339-16" tabindex="-1"></a></span>
-<span id="cb339-17"><a href="load-results-from-differential-expression-analysis-1.html#cb339-17" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;All tested genes     :&quot;</span>, <span class="fu">nrow</span>(res_df), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="load-results-from-differential-expression-analysis-1.html#cb338-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb338-2"><a href="load-results-from-differential-expression-analysis-1.html#cb338-2" tabindex="-1"></a></span>
+<span id="cb338-3"><a href="load-results-from-differential-expression-analysis-1.html#cb338-3" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb338-4"><a href="load-results-from-differential-expression-analysis-1.html#cb338-4" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;DE_treatment_vs_control_all.tsv&quot;</span>),</span>
+<span id="cb338-5"><a href="load-results-from-differential-expression-analysis-1.html#cb338-5" tabindex="-1"></a>  <span class="at">header      =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb338-6"><a href="load-results-from-differential-expression-analysis-1.html#cb338-6" tabindex="-1"></a>  <span class="at">sep         =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb338-7"><a href="load-results-from-differential-expression-analysis-1.html#cb338-7" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">TRUE</span></span>
+<span id="cb338-8"><a href="load-results-from-differential-expression-analysis-1.html#cb338-8" tabindex="-1"></a>)</span>
+<span id="cb338-9"><a href="load-results-from-differential-expression-analysis-1.html#cb338-9" tabindex="-1"></a></span>
+<span id="cb338-10"><a href="load-results-from-differential-expression-analysis-1.html#cb338-10" tabindex="-1"></a>res_sig <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb338-11"><a href="load-results-from-differential-expression-analysis-1.html#cb338-11" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;DE_treatment_vs_control_significant.tsv&quot;</span>),</span>
+<span id="cb338-12"><a href="load-results-from-differential-expression-analysis-1.html#cb338-12" tabindex="-1"></a>  <span class="at">header      =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb338-13"><a href="load-results-from-differential-expression-analysis-1.html#cb338-13" tabindex="-1"></a>  <span class="at">sep         =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb338-14"><a href="load-results-from-differential-expression-analysis-1.html#cb338-14" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">TRUE</span></span>
+<span id="cb338-15"><a href="load-results-from-differential-expression-analysis-1.html#cb338-15" tabindex="-1"></a>)</span>
+<span id="cb338-16"><a href="load-results-from-differential-expression-analysis-1.html#cb338-16" tabindex="-1"></a></span>
+<span id="cb338-17"><a href="load-results-from-differential-expression-analysis-1.html#cb338-17" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;All tested genes     :&quot;</span>, <span class="fu">nrow</span>(res_df), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## All tested genes     : 14080</code></pre>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="load-results-from-differential-expression-analysis-1.html#cb341-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant DE genes :&quot;</span>, <span class="fu">nrow</span>(res_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="load-results-from-differential-expression-analysis-1.html#cb340-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant DE genes :&quot;</span>, <span class="fu">nrow</span>(res_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Significant DE genes : 701</code></pre>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="load-results-from-differential-expression-analysis-1.html#cb343-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Upregulated        :&quot;</span>, <span class="fu">sum</span>(res_sig<span class="sc">$</span>log2FoldChange <span class="sc">&gt;=</span> <span class="dv">1</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="load-results-from-differential-expression-analysis-1.html#cb342-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Upregulated        :&quot;</span>, <span class="fu">sum</span>(res_sig<span class="sc">$</span>log2FoldChange <span class="sc">&gt;=</span> <span class="dv">1</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>##   Upregulated        : 379</code></pre>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="load-results-from-differential-expression-analysis-1.html#cb345-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Downregulated      :&quot;</span>, <span class="fu">sum</span>(res_sig<span class="sc">$</span>log2FoldChange <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">1</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="load-results-from-differential-expression-analysis-1.html#cb344-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Downregulated      :&quot;</span>, <span class="fu">sum</span>(res_sig<span class="sc">$</span>log2FoldChange <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">1</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>##   Downregulated      : 322</code></pre>
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
 <p><strong>Note:</strong> The <code>gene</code> column holds human gene symbols (from the reference GTF).

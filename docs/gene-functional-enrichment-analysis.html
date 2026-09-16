@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -470,21 +474,21 @@ a minority of <em>S. aureus</em> genes carry a curated pathway assignment.</p>
 <h3>Strain parameter<a href="gene-functional-enrichment-analysis.html#strain-parameter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This report is parameterised by <code>strain</code>. The two strains use different reference genomes,
 so they load different DE tables and different cached gene sets.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="gene-functional-enrichment-analysis.html#cb156-1" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;usa100&quot;</span>          <span class="co"># &quot;usa100&quot; or &quot;usa500&quot; (interactive default)</span></span>
-<span id="cb156-2"><a href="gene-functional-enrichment-analysis.html#cb156-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;params&quot;</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">is.list</span>(params) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(params<span class="sc">$</span>strain)) strain <span class="ot">&lt;-</span> params<span class="sc">$</span>strain</span>
-<span id="cb156-3"><a href="gene-functional-enrichment-analysis.html#cb156-3" tabindex="-1"></a><span class="fu">stopifnot</span>(strain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;usa100&quot;</span>, <span class="st">&quot;usa500&quot;</span>))</span>
-<span id="cb156-4"><a href="gene-functional-enrichment-analysis.html#cb156-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Enrichment for strain:&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="gene-functional-enrichment-analysis.html#cb155-1" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;usa100&quot;</span>          <span class="co"># &quot;usa100&quot; or &quot;usa500&quot; (interactive default)</span></span>
+<span id="cb155-2"><a href="gene-functional-enrichment-analysis.html#cb155-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;params&quot;</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">is.list</span>(params) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(params<span class="sc">$</span>strain)) strain <span class="ot">&lt;-</span> params<span class="sc">$</span>strain</span>
+<span id="cb155-3"><a href="gene-functional-enrichment-analysis.html#cb155-3" tabindex="-1"></a><span class="fu">stopifnot</span>(strain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;usa100&quot;</span>, <span class="st">&quot;usa500&quot;</span>))</span>
+<span id="cb155-4"><a href="gene-functional-enrichment-analysis.html#cb155-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Enrichment for strain:&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Enrichment for strain: usa100</code></pre>
 </div>
 <div id="load-libraries" class="section level3 hasAnchor">
 <h3>Load Libraries<a href="gene-functional-enrichment-analysis.html#load-libraries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="gene-functional-enrichment-analysis.html#cb158-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb158-2"><a href="gene-functional-enrichment-analysis.html#cb158-2" tabindex="-1"></a><span class="fu">library</span>(mulea)</span>
-<span id="cb158-3"><a href="gene-functional-enrichment-analysis.html#cb158-3" tabindex="-1"></a><span class="fu">library</span>(fgsea)</span>
-<span id="cb158-4"><a href="gene-functional-enrichment-analysis.html#cb158-4" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb158-5"><a href="gene-functional-enrichment-analysis.html#cb158-5" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb158-6"><a href="gene-functional-enrichment-analysis.html#cb158-6" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
-<span id="cb158-7"><a href="gene-functional-enrichment-analysis.html#cb158-7" tabindex="-1"></a><span class="fu">library</span>(ggpubr)   <span class="co"># theme_pubr</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="gene-functional-enrichment-analysis.html#cb157-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb157-2"><a href="gene-functional-enrichment-analysis.html#cb157-2" tabindex="-1"></a><span class="fu">library</span>(mulea)</span>
+<span id="cb157-3"><a href="gene-functional-enrichment-analysis.html#cb157-3" tabindex="-1"></a><span class="fu">library</span>(fgsea)</span>
+<span id="cb157-4"><a href="gene-functional-enrichment-analysis.html#cb157-4" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb157-5"><a href="gene-functional-enrichment-analysis.html#cb157-5" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb157-6"><a href="gene-functional-enrichment-analysis.html#cb157-6" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb157-7"><a href="gene-functional-enrichment-analysis.html#cb157-7" tabindex="-1"></a><span class="fu">library</span>(ggpubr)   <span class="co"># theme_pubr</span></span></code></pre></div>
 </div>
 </div>
             </section>

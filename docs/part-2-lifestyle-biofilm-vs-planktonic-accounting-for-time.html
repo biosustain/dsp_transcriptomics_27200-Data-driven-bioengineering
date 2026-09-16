@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -432,13 +436,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Part 2 — Lifestyle: Biofilm vs Planktonic, Accounting for Time<a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Now we ask how biofilm differs from planktonic. Because the two lifestyles are sampled at the same set of time points, we can model lifestyle <strong>while adjusting for time</strong>, instead of comparing at a single confounded snapshot. We show two models that ask subtly different questions.</p>
 <p>We use all three time points so the time term is meaningful.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-1" tabindex="-1"></a>dds_ls <span class="ot">&lt;-</span> dds_all</span>
-<span id="cb124-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-2" tabindex="-1"></a>dds_ls<span class="sc">$</span>lifestyle <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>lifestyle), <span class="at">ref =</span> <span class="st">&quot;Planktonic&quot;</span>)</span>
-<span id="cb124-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-3" tabindex="-1"></a>dds_ls<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>timepoint), <span class="at">ref =</span> <span class="st">&quot;5h&quot;</span>)</span>
-<span id="cb124-4"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-4" tabindex="-1"></a></span>
-<span id="cb124-5"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Design table:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-1" tabindex="-1"></a>dds_ls <span class="ot">&lt;-</span> dds_all</span>
+<span id="cb123-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-2" tabindex="-1"></a>dds_ls<span class="sc">$</span>lifestyle <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>lifestyle), <span class="at">ref =</span> <span class="st">&quot;Planktonic&quot;</span>)</span>
+<span id="cb123-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-3" tabindex="-1"></a>dds_ls<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>timepoint), <span class="at">ref =</span> <span class="st">&quot;5h&quot;</span>)</span>
+<span id="cb123-4"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-4" tabindex="-1"></a></span>
+<span id="cb123-5"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Design table:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Design table:</code></pre>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb126-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(dds_ls<span class="sc">$</span>lifestyle, dds_ls<span class="sc">$</span>timepoint))</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb125-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(dds_ls<span class="sc">$</span>lifestyle, dds_ls<span class="sc">$</span>timepoint))</span></code></pre></div>
 <pre><code>##             
 ##              5h 10h 24h
 ##   Planktonic  4   4   8

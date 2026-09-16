@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -436,16 +440,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
 <p><strong>📌 Remember:</strong> Load all libraries at the start of every session before running any analysis.</p>
 </div>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="setup-the-environment-1.html#cb253-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb253-2"><a href="setup-the-environment-1.html#cb253-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb253-3"><a href="setup-the-environment-1.html#cb253-3" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
-<span id="cb253-4"><a href="setup-the-environment-1.html#cb253-4" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb253-5"><a href="setup-the-environment-1.html#cb253-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb253-6"><a href="setup-the-environment-1.html#cb253-6" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb253-7"><a href="setup-the-environment-1.html#cb253-7" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
-<span id="cb253-8"><a href="setup-the-environment-1.html#cb253-8" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb253-9"><a href="setup-the-environment-1.html#cb253-9" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb253-10"><a href="setup-the-environment-1.html#cb253-10" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="setup-the-environment-1.html#cb252-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb252-2"><a href="setup-the-environment-1.html#cb252-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb252-3"><a href="setup-the-environment-1.html#cb252-3" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb252-4"><a href="setup-the-environment-1.html#cb252-4" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb252-5"><a href="setup-the-environment-1.html#cb252-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb252-6"><a href="setup-the-environment-1.html#cb252-6" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb252-7"><a href="setup-the-environment-1.html#cb252-7" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb252-8"><a href="setup-the-environment-1.html#cb252-8" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb252-9"><a href="setup-the-environment-1.html#cb252-9" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb252-10"><a href="setup-the-environment-1.html#cb252-10" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
 </div>
             </section>
 

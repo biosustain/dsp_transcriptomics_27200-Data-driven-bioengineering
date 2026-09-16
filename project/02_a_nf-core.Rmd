@@ -29,13 +29,9 @@ nextflow run 'https://github.com/nf-core/rnaseq' \
 -   `-profile`: profile(s) to run; here "prokaryotic" mode using "docker"
 -   `-c`: (absolute) path to the custom configuration file; used here to limit the number of CPUs and memory
 
-The Nextflow command is stored in a bash script and can be executed by running:
-
-```bash
-bash 01_scripts/00_nfcore_rnaseq_processing.sh
-```
-
 The processing time is about 7 minutes.
+
+The *S. aureus* and human datasets analysed in the next parts of this book were processed with this same pipeline; the human run is documented in `01_scripts/00_nfcore_rnaseq_processing.sh` (kept as provenance — its outputs are already committed, you do not need to run it).
 
 <div class="remember">
   <strong>📌 Remember:</strong> Rather than configuring parameters manually, nf-core offers automatic parameter configuration. Go to the [pipeline page](https://nf-co.re/rnaseq/3.23.0) and press **Launch version 3.23.0** to see all pipeline parameters and change them as needed. A configuration file can be generated automatically for use with your Nextflow command.
@@ -173,7 +169,7 @@ The detailed structure of the output directory:
 ## Interpretation of RNAseq processing results using the multiQC report
 
 The nf-core/rnaseq pipeline generates a multiQC report which consolidates all quality control (QC) metrics from the pipeline run.  
-We will be analyzing the [multiQC report from processing the entire dataset](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/tree/main/results/multiqc_nfcore_rnaseq_full_dataset/multiQC_Ecoli_sac_ctrl_deDios_2025_full_dataset.html) - which we have done prior to this course - rather than the one generated in your test run.  
+We will be analyzing the [multiQC report from processing the entire dataset](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/results/multiqc_nfcore_rnaseq_full_dataset/multiQC_Ecoli_sac_ctrl_deDios_2025_full_dataset.html) - which we have done prior to this course - rather than the one generated in your test run. (On GitHub, click **Download raw file** and open the downloaded HTML in your browser; in a Codespace, right-click the file under `results/multiqc_nfcore_rnaseq_full_dataset/` and choose **Open Preview** or download it.)
 
 The multiQC reports summarizes important QC metrics from RNAseq data processing. This includes for example:
 

@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -453,9 +457,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>-profile</code>: profile(s) to run; here “prokaryotic” mode using “docker”</li>
 <li><code>-c</code>: (absolute) path to the custom configuration file; used here to limit the number of CPUs and memory</li>
 </ul>
-<p>The Nextflow command is stored in a bash script and can be executed by running:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-1" tabindex="-1"></a><span class="fu">bash</span> 01_scripts/00_nfcore_rnaseq_processing.sh</span></code></pre></div>
 <p>The processing time is about 7 minutes.</p>
+<p>The <em>S. aureus</em> and human datasets analysed in the next parts of this book were processed with this same pipeline; the human run is documented in <code>01_scripts/00_nfcore_rnaseq_processing.sh</code> (kept as provenance — its outputs are already committed, you do not need to run it).</p>
 <div class="remember">
 <p><strong>📌 Remember:</strong> Rather than configuring parameters manually, nf-core offers automatic parameter configuration. Go to the <a href="https://nf-co.re/rnaseq/3.23.0">pipeline page</a> and press <strong>Launch version 3.23.0</strong> to see all pipeline parameters and change them as needed. A configuration file can be generated automatically for use with your Nextflow command.</p>
 </div>

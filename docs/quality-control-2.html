@@ -28,7 +28,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="summary-5.html"/>
+<link rel="prev" href="key-parameters.html"/>
 <link rel="next" href="setup-the-environment-2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -430,12 +434,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="quality-control-2" class="section level1 hasAnchor">
 <h1>Quality Control<a href="quality-control-2.html#quality-control-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This report covers the quality control and exploratory analysis of bulk RNA-seq data from <em>Escherichia coli* K-12 MG1655</em>.</p>
+<p>This report covers the quality control and exploratory analysis of bulk RNA-seq data from <em>Escherichia coli</em> K-12 MG1655.</p>
 <p>The list of contrasts of interest is:</p>
 <div class="boxy">
 <ul>
-<li>DE between [condition A] vs [condition B]</li>
-<li>DE between [condition C] vs [condition D]</li>
+<li>DE between saccharin treatment vs control</li>
 </ul>
 </div>
 <p><strong>Topics covered</strong></p>
@@ -445,8 +448,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><strong>Data</strong></p>
 <ul>
-<li><p>Reference data used: <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/">E. coli* K-12 MG1655</a> NCBI RefSeq: NC_000913.3</p></li>
-<li><p>Input data is the output from the <a href="https://nf-co.re/rnaseq/3.26.0/docs/usage/">nf-core rnaseq pipeline</a> <code>salmon.merged.gene.SummarizedExperiment.rds</code></p></li>
+<li><p>Reference data used: <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/"><em>E. coli</em> K-12 MG1655</a> NCBI RefSeq: NC_000913.3</p></li>
+<li><p>Input data is the output from the <a href="https://nf-co.re/rnaseq/3.23.0/docs/usage/">nf-core rnaseq pipeline</a> <code>salmon.merged.gene.SummarizedExperiment.rds</code></p></li>
 </ul>
 <div class="note">
 <strong>📘 Note:</strong> <em>E. coli</em> MG1655 is a prokaryote.
@@ -464,14 +467,14 @@ Enrichment analysis via KEGG or custom gene sets with <strong>fgsea</strong>
 </ul>
 </div>
 <p><strong>Explanation of the QC analysis 🧾</strong></p>
-<p>This document guides you through the standard QC pipeline for prokaryotic bulk RNA-seq data processed with <a href="https://nf-co.re/rnaseq/3.26.0/docs/usage/">nf-core/rnaseq</a> <code>Bowtie2</code> + <code>Salmon</code>. It is structured to be both educational and reproducible.</p>
+<p>This document guides you through the standard QC pipeline for prokaryotic bulk RNA-seq data processed with <a href="https://nf-co.re/rnaseq/3.23.0/docs/usage/">nf-core/rnaseq</a> <code>Bowtie2</code> + <code>Salmon</code>. It is structured to be both educational and reproducible.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="summary-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="key-parameters.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="setup-the-environment-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

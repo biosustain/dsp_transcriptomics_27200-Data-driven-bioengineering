@@ -41,7 +41,7 @@ library(plotly)
 
 ## Load Results from Differential Expression Analysis
 
-This script reads the DE results produced by `02_differential_expression_ecoli.Rmd`.
+This script reads the DE results produced by the E. coli Differential Expression chapter (`04_viz_practice.Rmd`).
 Make sure you have run that script first — it saves two files to `results/`:
 
 :::boxy
@@ -696,6 +696,3 @@ Enrichment results are saved and ready for biological interpretation and reporti
 sessionInfo()
 ```
 
-```{r , eval=FALSE, echo=FALSE}
-rmarkdown::render("03_gene_functional_ecoli.Rmd")
-```

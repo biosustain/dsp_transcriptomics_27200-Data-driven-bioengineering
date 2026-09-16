@@ -1,78 +1,63 @@
-# DSP Transcriptomics — Human ASM (dexamethasone) workshop
+# Analysis scripts — 27200 Transcriptomics week
 
-Second dataset for the existing repo
-`dsp_transcriptomics_27200-Data-driven-bioengineering`
-(**Dataset 2: Homo sapiens** — Himes *et al.*, 2014, airway smooth muscle + dexamethasone;
-GEO GSE52778 / PRJNA229998).
+R Markdown source scripts for the two main datasets of the transcriptomics session.
+They are rendered into the course book (see `project/_bookdown.yml`) and converted to
+Jupyter notebooks in `02_notebooks/` (regenerate with `python util/rmd_to_ipynb.py`).
 
-Adapted from the *E. coli* MG1655 saccharin scripts. The *E. coli* scripts and outputs are
-untouched; everything human is namespaced so it lives alongside them in the same repo.
+All scripts resolve paths from the repo root via `git rev-parse --show-toplevel`, so they
+run unchanged on a local machine or in a Codespace.
 
-## Where things live in the repo
+## Datasets
 
-| What | Path (relative to repo root) |
+| Dataset | Source | Scripts |
+|---|---|---|
+| *Staphylococcus aureus* — biofilm vs planktonic over time, strains USA-100/USA-500 | Tomlinson *et al.* 2021, GEO GSE163153 / PRJNA685119 | `*_saureus.Rmd` |
+| *Homo sapiens* — airway smooth muscle ± dexamethasone, paired donor design | Himes *et al.* 2014, GEO GSE52778 / PRJNA229998 | unsuffixed `.Rmd` |
+
+Each dataset has three scripts, run in order — every step saves results the next one loads:
+
+1. `01_quality_control[_saureus].Rmd` — QC and exploratory analysis (PCA, correlation, outliers)
+2. `02_differential_expression_analysis[_saureus].Rmd` — DESeq2
+3. `03_gene_functional[_saureus].Rmd` — functional enrichment (ORA & GSEA)
+
+## Helper and provenance files
+
+| File | Purpose |
 |---|---|
-| nf-core star_salmon output (already produced) | `data/data-02-Homo_sapiens/hasapiens/star_salmon/` |
-| Human sample metadata (QC reads this) | `data/data-02-Homo_sapiens/metadata/metadata.tsv` |
-| differentialabundance samplesheet + contrast | `data/data-02-Homo_sapiens/metadata/` |
-| RefSeq GRCh37 GTF | `data/data-02-Homo_sapiens/genome_files/GCF_000001405.13_GRCh37_genomic.gtf.gz` |
-| All human outputs | `results/human/` (rds, plots, DE + enrichment TSVs) |
+| `00_nfcore_rnaseq_processing.sh` | Provenance: the nf-core/rnaseq command used to process the **human** dataset (outputs already committed — no need to run) |
+| `02b_prepare_genesets_saureus.Rmd` | Builds the KEGG/GO gene-set `.rds` caches in `data/databases/` used by the S. aureus functional script (cached outputs committed) |
+| `render_all_strains.R` | Renders the parameterized S. aureus scripts for **both** strains (USA-100 and USA-500); HTML lands next to the scripts |
+| `gsea_collection_comparison.Rmd` | One-off sensitivity check: human GSEA with filtered vs unfiltered gene-set collections |
+| `params_degs.json` | Parameters for the optional nf-core/differentialabundance run (human dataset) |
+| `run_differentialabundance.sh` | Optional comparison track: nf-core/differentialabundance with the simple `~ condition` model (the paired `~ donor + condition` DESeq2 analysis in script 02 is the primary analysis) |
+| `custom.config` | Nextflow resource limits (CPUs/memory) for the in-class pipeline run — **to be added** |
 
-The three `.Rmd` scripts use `git_root` so they resolve these paths on any machine
-(local Mac or Codespace).
+## Scientific decisions baked into the scripts
 
-## Scientific decisions baked into these scripts
+**S. aureus**
 
-- **Contrast:** dexamethasone (treatment) vs untreated (control), n = 4 per group. The
-  albuterol and albuterol+dexamethasone arms are **excluded** (per the workshop plan / Lasse).
-- **Design:** `~ donor + condition` (paired) is the primary model — each donor contributes
-  one treated and one untreated sample. Script 02 also runs the simple `~ condition` model
-  side by side so the effect of accounting for donor is visible for teaching.
-- **Enrichment:** g:Profiler (`gprofiler2::gost`) for ORA (native human support), `fgsea` +
-  MSigDB Hallmark (`msigdbr`) for GSEA. This replaces the *E. coli* KEGGREST/mulea/locus-tag
-  machinery, which existed only because g:Profiler does not support *E. coli*.
-- **Gene IDs:** the pipeline used a **RefSeq** GTF (`GCF_000001405.13_GRCh37`) with
-  `gtf_extra_attributes = gene_name`, so both `gene_id` and `gene_name` in the RDS are
-  gene **symbols** (e.g. `A1BG`, `A2M`), not ENSEMBL IDs. Symbols are what g:Profiler and
-  MSigDB expect, so **no ID conversion is needed**. Script 01 prints the actual ID types at
-  runtime so you can confirm this on your data.
-- **Counts:** Salmon estimates are fractional; script 01 **rounds** to integers before DESeq2
-  (not `as.integer` truncation).
+- Strain-specific reference genomes: **USA-100** → N315 (`GCF_000009645.1`); **USA-500** →
+  USA300_FPR3757 (`GCF_000013465.1`), its closest finished relative, as in the paper.
+- Scripts 02/03 are parameterized by strain (`params$strain`) with USA-100 as the
+  interactive/book default; use `render_all_strains.R` for both strains.
+- Enrichment via KEGGREST/mulea with locus-tag → symbol maps cached in `data/databases/`.
 
-## What you MUST verify before running
+**Human**
 
-1. **RDS location.** Script 01 reads
-   `data/data-02-Homo_sapiens/hasapiens/star_salmon/salmon.merged.gene.SummarizedExperiment.rds`.
-   Confirm that file is committed / present at that path.
+- Contrast: dexamethasone vs untreated, n = 4 donors per group; albuterol arms excluded.
+- Design: `~ donor + condition` (paired) is the primary model; script 02 also runs plain
+  `~ condition` side by side for teaching.
+- Enrichment: g:Profiler (`gprofiler2::gost`, live API — needs internet) for ORA;
+  `fgsea` + MSigDB Hallmark (`msigdbr`) for GSEA.
+- Gene IDs: the RefSeq GRCh37 GTF yields gene **symbols** in both `gene_id` and
+  `gene_name`, so no ID conversion is needed.
+- Counts: Salmon estimates are fractional; script 01 rounds to integers before DESeq2.
 
-2. **RDS assay + rowData columns.** Script 01 uses `assayNames()[1]` and
-   `rowData()$gene_name` / `$gene_id`, and prints them at runtime. If your RDS names differ,
-   adjust there.
+## Outputs
 
-## Sample metadata
+- S. aureus → `results/usa100/`, `results/usa500/`, `results/cross_strain/`
+- Human → `results/human/`
+- E. coli (practice chapters in `project/`) → `results/` root and `results/rds/`
 
-`data/data-02-Homo_sapiens/metadata/metadata.tsv` was generated directly from your count-matrix
-column names and cross-checked against your nf-core samplesheet (8 dex/untreated samples,
-4 donors). No values were invented.
-
-## Files
-
-| File | Change from E. coli version |
-|---|---|
-| `01_scripts/00_nfcore_rnaseq_processing.sh` | Provenance only (run already done); real repo + Azure paths recorded |
-| `01_scripts/01_quality_control.Rmd` | star_salmon RDS path, donor factor, round-to-int, paired design, symbols (no locus-tag map), runtime ID check, `results/human/` outputs |
-| `01_scripts/02_differential_expression_analysis.Rmd` | `~ donor + condition` primary + `~ condition` teaching comparison; `results/human/` |
-| `01_scripts/03_gene_functional.Rmd` | g:Profiler ORA + fgsea/MSigDB GSEA (KEGGREST/mulea removed); `results/human/` |
-| `01_scripts/params_degs.json` | Real repo paths, RefSeq GTF, group size 4, parametric fit, gprofiler2 on |
-| `01_scripts/run_differentialabundance.sh` | outdir -> `results/human/differentialabundance` |
-| `01_scripts/custom.config` | Unchanged (environment resource limits, not organism-specific) |
-| `data/data-02-Homo_sapiens/metadata/metadata.tsv` | New — derived from your sample names |
-
-## Not touched / not invented
-
-- No PC1 percentages, gene counts, or specific pathway hits were written into the prose —
-  the *E. coli* scripts had hardcoded numbers (e.g. "PC1 = 85.4%", C3 outlier narrative);
-  those are removed rather than replaced with guesses. The rendered output will fill them in.
-- The Python notebook was left out, as requested.
-- `assets/`, bookdown/publishing config, and the `docs/` site were not migrated — say the
-  word and I'll set those up too.
+All outputs are committed so the book builds from a fresh clone without re-running
+anything upstream.

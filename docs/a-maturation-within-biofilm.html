@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -439,33 +443,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>A hit tells you:</strong> this gene is part of the biofilm maturation programme.</li>
 </ul>
 </div>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="a-maturation-within-biofilm.html#cb85-1" tabindex="-1"></a>dds_bf <span class="ot">&lt;-</span> dds_all[, dds_all<span class="sc">$</span>lifestyle <span class="sc">==</span> <span class="st">&quot;Biofilm&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb85-2"><a href="a-maturation-within-biofilm.html#cb85-2" tabindex="-1"></a>                    dds_all<span class="sc">$</span>timepoint <span class="sc">%in%</span> <span class="fu">c</span>(first_tp, last_tp)]</span>
-<span id="cb85-3"><a href="a-maturation-within-biofilm.html#cb85-3" tabindex="-1"></a>dds_bf<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_bf<span class="sc">$</span>timepoint), <span class="at">ref =</span> first_tp)</span>
-<span id="cb85-4"><a href="a-maturation-within-biofilm.html#cb85-4" tabindex="-1"></a><span class="fu">design</span>(dds_bf)   <span class="ot">&lt;-</span> <span class="er">~</span> timepoint</span>
-<span id="cb85-5"><a href="a-maturation-within-biofilm.html#cb85-5" tabindex="-1"></a></span>
-<span id="cb85-6"><a href="a-maturation-within-biofilm.html#cb85-6" tabindex="-1"></a>dds_bf <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_bf)</span>
-<span id="cb85-7"><a href="a-maturation-within-biofilm.html#cb85-7" tabindex="-1"></a>coef_bf <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;timepoint_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp)</span>
-<span id="cb85-8"><a href="a-maturation-within-biofilm.html#cb85-8" tabindex="-1"></a>res_bf  <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_bf, coef_bf)</span>
-<span id="cb85-9"><a href="a-maturation-within-biofilm.html#cb85-9" tabindex="-1"></a></span>
-<span id="cb85-10"><a href="a-maturation-within-biofilm.html#cb85-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples (biofilm):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">table</span>(dds_bf<span class="sc">$</span>timepoint))</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="a-maturation-within-biofilm.html#cb84-1" tabindex="-1"></a>dds_bf <span class="ot">&lt;-</span> dds_all[, dds_all<span class="sc">$</span>lifestyle <span class="sc">==</span> <span class="st">&quot;Biofilm&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb84-2"><a href="a-maturation-within-biofilm.html#cb84-2" tabindex="-1"></a>                    dds_all<span class="sc">$</span>timepoint <span class="sc">%in%</span> <span class="fu">c</span>(first_tp, last_tp)]</span>
+<span id="cb84-3"><a href="a-maturation-within-biofilm.html#cb84-3" tabindex="-1"></a>dds_bf<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_bf<span class="sc">$</span>timepoint), <span class="at">ref =</span> first_tp)</span>
+<span id="cb84-4"><a href="a-maturation-within-biofilm.html#cb84-4" tabindex="-1"></a><span class="fu">design</span>(dds_bf)   <span class="ot">&lt;-</span> <span class="er">~</span> timepoint</span>
+<span id="cb84-5"><a href="a-maturation-within-biofilm.html#cb84-5" tabindex="-1"></a></span>
+<span id="cb84-6"><a href="a-maturation-within-biofilm.html#cb84-6" tabindex="-1"></a>dds_bf <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_bf)</span>
+<span id="cb84-7"><a href="a-maturation-within-biofilm.html#cb84-7" tabindex="-1"></a>coef_bf <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;timepoint_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp)</span>
+<span id="cb84-8"><a href="a-maturation-within-biofilm.html#cb84-8" tabindex="-1"></a>res_bf  <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_bf, coef_bf)</span>
+<span id="cb84-9"><a href="a-maturation-within-biofilm.html#cb84-9" tabindex="-1"></a></span>
+<span id="cb84-10"><a href="a-maturation-within-biofilm.html#cb84-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples (biofilm):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">table</span>(dds_bf<span class="sc">$</span>timepoint))</span></code></pre></div>
 <pre><code>## Samples (biofilm):</code></pre>
 <pre><code>## 
 ##  5h 24h 
 ##   4   8</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="a-maturation-within-biofilm.html#cb88-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_bf, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="a-maturation-within-biofilm.html#cb87-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_bf, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Coefficient: timepoint_24h_vs_5h</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="a-maturation-within-biofilm.html#cb90-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="a-maturation-within-biofilm.html#cb89-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## DEG counts (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ):</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="a-maturation-within-biofilm.html#cb92-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_bf<span class="sc">$</span>direction))</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="a-maturation-within-biofilm.html#cb91-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_bf<span class="sc">$</span>direction))</span></code></pre></div>
 <pre><code>## 
 ##              Up            Down Not significant 
 ##             154              70            2064</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="a-maturation-within-biofilm.html#cb94-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="a-maturation-within-biofilm.html#cb93-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## 
-## Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="a-maturation-within-biofilm.html#cb96-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">check_extreme_fc</span>(res_bf))</span></code></pre></div>
+## Most extreme fold changes (check baseMean &lt;U+2014&gt; high = real, single digits = low-count noise):</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="a-maturation-within-biofilm.html#cb95-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">check_extreme_fc</span>(res_bf))</span></code></pre></div>
 <pre><code>##       gene_id baseMean log2FoldChange
 ## 1  SA_RS09290     30.2           6.62
 ## 2  SA_RS13430   1315.3           6.39
@@ -499,9 +503,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8         Up
 ## 9         Up
 ## 10        Up</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="a-maturation-within-biofilm.html#cb98-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_bf,</span>
-<span id="cb98-2"><a href="a-maturation-within-biofilm.html#cb98-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — biofilm maturation (&quot;</span>, last_tp, <span class="st">&quot; vs &quot;</span>, first_tp, <span class="st">&quot;)&quot;</span>),</span>
-<span id="cb98-3"><a href="a-maturation-within-biofilm.html#cb98-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher at 24 h&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="a-maturation-within-biofilm.html#cb97-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_bf,</span>
+<span id="cb97-2"><a href="a-maturation-within-biofilm.html#cb97-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — biofilm maturation (&quot;</span>, last_tp, <span class="st">&quot; vs &quot;</span>, first_tp, <span class="st">&quot;)&quot;</span>),</span>
+<span id="cb97-3"><a href="a-maturation-within-biofilm.html#cb97-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher at 24 h&quot;</span>)</span></code></pre></div>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-maturation-biofilm-volcano-0-1.png" alt="" width="864" /></p>
 <p><em>Interpretation:</em> a substantial set of genes changes as the biofilm matures from 5 h to 24 h, split between genes induced and repressed with age. This is the biofilm’s own developmental programme, measured without any reference to the planktonic state.</p>
 </div>

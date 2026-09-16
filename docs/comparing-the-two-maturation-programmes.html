@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -431,19 +435,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="comparing-the-two-maturation-programmes" class="section level2 hasAnchor">
 <h2>Comparing the Two Maturation Programmes<a href="comparing-the-two-maturation-programmes.html#comparing-the-two-maturation-programmes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The two lists answer “what changes with time” in each lifestyle. Overlapping genes change with age regardless of lifestyle (general ageing / stationary-phase response); genes unique to one list are the lifestyle-specific part of maturation.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="comparing-the-two-maturation-programmes.html#cb123-1" tabindex="-1"></a>sig_bf <span class="ot">&lt;-</span> res_bf <span class="sc">%&gt;%</span> <span class="fu">filter</span>(direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
-<span id="cb123-2"><a href="comparing-the-two-maturation-programmes.html#cb123-2" tabindex="-1"></a>sig_pk <span class="ot">&lt;-</span> res_pk <span class="sc">%&gt;%</span> <span class="fu">filter</span>(direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
-<span id="cb123-3"><a href="comparing-the-two-maturation-programmes.html#cb123-3" tabindex="-1"></a></span>
-<span id="cb123-4"><a href="comparing-the-two-maturation-programmes.html#cb123-4" tabindex="-1"></a>overlap_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb123-5"><a href="comparing-the-two-maturation-programmes.html#cb123-5" tabindex="-1"></a>  <span class="at">set   =</span> <span class="fu">c</span>(<span class="st">&quot;Biofilm only&quot;</span>, <span class="st">&quot;Planktonic only&quot;</span>, <span class="st">&quot;Shared&quot;</span>, <span class="st">&quot;Biofilm total&quot;</span>, <span class="st">&quot;Planktonic total&quot;</span>),</span>
-<span id="cb123-6"><a href="comparing-the-two-maturation-programmes.html#cb123-6" tabindex="-1"></a>  <span class="at">n     =</span> <span class="fu">c</span>(<span class="fu">length</span>(<span class="fu">setdiff</span>(sig_bf, sig_pk)),</span>
-<span id="cb123-7"><a href="comparing-the-two-maturation-programmes.html#cb123-7" tabindex="-1"></a>            <span class="fu">length</span>(<span class="fu">setdiff</span>(sig_pk, sig_bf)),</span>
-<span id="cb123-8"><a href="comparing-the-two-maturation-programmes.html#cb123-8" tabindex="-1"></a>            <span class="fu">length</span>(<span class="fu">intersect</span>(sig_bf, sig_pk)),</span>
-<span id="cb123-9"><a href="comparing-the-two-maturation-programmes.html#cb123-9" tabindex="-1"></a>            <span class="fu">length</span>(sig_bf),</span>
-<span id="cb123-10"><a href="comparing-the-two-maturation-programmes.html#cb123-10" tabindex="-1"></a>            <span class="fu">length</span>(sig_pk))</span>
-<span id="cb123-11"><a href="comparing-the-two-maturation-programmes.html#cb123-11" tabindex="-1"></a>)</span>
-<span id="cb123-12"><a href="comparing-the-two-maturation-programmes.html#cb123-12" tabindex="-1"></a><span class="fu">kable</span>(overlap_tbl, <span class="at">caption =</span> <span class="st">&quot;Maturation DEGs: overlap between lifestyles&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb123-13"><a href="comparing-the-two-maturation-programmes.html#cb123-13" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="comparing-the-two-maturation-programmes.html#cb122-1" tabindex="-1"></a>sig_bf <span class="ot">&lt;-</span> res_bf <span class="sc">%&gt;%</span> <span class="fu">filter</span>(direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
+<span id="cb122-2"><a href="comparing-the-two-maturation-programmes.html#cb122-2" tabindex="-1"></a>sig_pk <span class="ot">&lt;-</span> res_pk <span class="sc">%&gt;%</span> <span class="fu">filter</span>(direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
+<span id="cb122-3"><a href="comparing-the-two-maturation-programmes.html#cb122-3" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="comparing-the-two-maturation-programmes.html#cb122-4" tabindex="-1"></a>overlap_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb122-5"><a href="comparing-the-two-maturation-programmes.html#cb122-5" tabindex="-1"></a>  <span class="at">set   =</span> <span class="fu">c</span>(<span class="st">&quot;Biofilm only&quot;</span>, <span class="st">&quot;Planktonic only&quot;</span>, <span class="st">&quot;Shared&quot;</span>, <span class="st">&quot;Biofilm total&quot;</span>, <span class="st">&quot;Planktonic total&quot;</span>),</span>
+<span id="cb122-6"><a href="comparing-the-two-maturation-programmes.html#cb122-6" tabindex="-1"></a>  <span class="at">n     =</span> <span class="fu">c</span>(<span class="fu">length</span>(<span class="fu">setdiff</span>(sig_bf, sig_pk)),</span>
+<span id="cb122-7"><a href="comparing-the-two-maturation-programmes.html#cb122-7" tabindex="-1"></a>            <span class="fu">length</span>(<span class="fu">setdiff</span>(sig_pk, sig_bf)),</span>
+<span id="cb122-8"><a href="comparing-the-two-maturation-programmes.html#cb122-8" tabindex="-1"></a>            <span class="fu">length</span>(<span class="fu">intersect</span>(sig_bf, sig_pk)),</span>
+<span id="cb122-9"><a href="comparing-the-two-maturation-programmes.html#cb122-9" tabindex="-1"></a>            <span class="fu">length</span>(sig_bf),</span>
+<span id="cb122-10"><a href="comparing-the-two-maturation-programmes.html#cb122-10" tabindex="-1"></a>            <span class="fu">length</span>(sig_pk))</span>
+<span id="cb122-11"><a href="comparing-the-two-maturation-programmes.html#cb122-11" tabindex="-1"></a>)</span>
+<span id="cb122-12"><a href="comparing-the-two-maturation-programmes.html#cb122-12" tabindex="-1"></a><span class="fu">kable</span>(overlap_tbl, <span class="at">caption =</span> <span class="st">&quot;Maturation DEGs: overlap between lifestyles&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb122-13"><a href="comparing-the-two-maturation-programmes.html#cb122-13" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:saureus-de-maturation-overlap-0">Table 5: </span><span id="tab:saureus-de-maturation-overlap-0">Table 6: </span>Maturation DEGs: overlap between lifestyles

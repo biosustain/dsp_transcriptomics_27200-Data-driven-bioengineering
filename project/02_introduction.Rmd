@@ -1,7 +1,7 @@
 # Instructions
 
 :::boxy
-[nf-core rnaseq pipeline](https://nf-co.re/rnaseq/3.26.0/docs/usage/) 
+[nf-core rnaseq pipeline](https://nf-co.re/rnaseq/3.23.0/docs/usage/)
 :::
 
 **Topics covered**
@@ -20,7 +20,7 @@ All datasets are bulk RNA-seq. The codes are in the [GitHub repository](https://
     Reference genomes are strain-specific: **USA-100** → N315 ([GCF_000009645.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009645.1/)); **USA-500** → USA300_FPR3757 ([GCF_000013465.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000013465.1/)), its closest finished relative, as in the paper.
 -   🧑‍🔬 ***Homo sapiens*** — primary airway smooth muscle (ASM) cells treated with dexamethasone, paired donor design, from [Himes *et al.*, 2014](https://doi.org/10.1371/journal.pone.0099625) (GEO: [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778), PRJNA229998).
     Reference genome: GRCh37 ([GCF_000001405.13](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.13/)), RefSeq annotation.
--   🧫 ***Escherichia coli*** K-12 MG1655 — a small subsampled dataset ([PRJNA1158806](https://www.ebi.ac.uk/ena/browser/view/PRJNA1158806)) used only for the hands-on **nf-core/rnaseq pipeline run** below, so it finishes within class time.
+-   🧫 ***Escherichia coli*** K-12 MG1655 — saccharin treatment vs control ([PRJNA1158806](https://www.ebi.ac.uk/ena/browser/view/PRJNA1158806)). A small subsampled version is used for the hands-on **nf-core/rnaseq pipeline run** below (so it finishes within class time), and the full dataset is analysed in the extra practice chapters at the end of the book.
     Reference genome: [GCF_000005845.2](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/) (NCBI RefSeq: NC_000913.3).
 
 The *S. aureus* and human count matrices were produced with the same nf-core/rnaseq pipeline and are provided **precomputed** in the repository — the analysis notebooks start from those.
@@ -31,7 +31,7 @@ To avoid installation and configuration issues we are going to deploy an environ
 
 If you want to open directly a GitHub codespace for this specific repository click here: [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
-Don't change the configuration and accept the default option. It says pay but you're not paying...
+Before creating the Codespace, change the **Machine type** to **4-core** (click the options arrow next to the button instead of accepting the default). It says pay but you're not paying...
 
 If you want to do it manually go to [course website](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
@@ -68,7 +68,7 @@ nextflow info
 docker --version
 ```
 
-If everything went well you have a fully functional Nextflow environment for today. Rememeber that we are going to use VS code as our editor to write code and handle our files.
+If everything went well you have a fully functional Nextflow environment for today. Remember that we are going to use VS code as our editor to write code and handle our files.
 
 
 
@@ -76,7 +76,7 @@ If everything went well you have a fully functional Nextflow environment for tod
 
 **Sources of data and genome files**
 
-For the hands-on pipeline run we use a **size-reduced *E. coli* K-12 MG1655 dataset** (accession: GCF_000005845.2) so the pipeline completes within class time. Nothing has to be downloaded — the subsampled reads and genome files are already deposited in the repository.
+For the hands-on pipeline run we use a **size-reduced *E. coli* K-12 MG1655 dataset** (reads: PRJNA1158806; genome: GCF_000005845.2) so the pipeline completes within class time. Nothing has to be downloaded — the subsampled reads and genome files are already deposited in the repository.
 
 -   [RNAseq files (.fastq.gz) - PRJNA1158806](https://www.ebi.ac.uk/ena/browser/view/PRJNA1158806)
 -   [*E. coli* genome sequence (.fna.gz)](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz)

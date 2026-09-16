@@ -1,12 +1,11 @@
 # Quality Control
 
-This report covers the quality control and exploratory analysis of bulk RNA-seq data from _Escherichia coli* K-12 MG1655_.
+This report covers the quality control and exploratory analysis of bulk RNA-seq data from *Escherichia coli* K-12 MG1655.
 
 The list of contrasts of interest is:
 
 :::boxy
-- DE between [condition A] vs [condition B]
-- DE between [condition C] vs [condition D]
+- DE between saccharin treatment vs control
 :::
 
 **Topics covered**
@@ -16,9 +15,9 @@ The list of contrasts of interest is:
 
 **Data**
 
--   Reference data used: [E. coli\* K-12 MG1655](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/) NCBI RefSeq: NC_000913.3
+-   Reference data used: [*E. coli* K-12 MG1655](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/) NCBI RefSeq: NC_000913.3
 
--   Input data is the output from the [nf-core rnaseq pipeline](https://nf-co.re/rnaseq/3.26.0/docs/usage/) `salmon.merged.gene.SummarizedExperiment.rds`
+-   Input data is the output from the [nf-core rnaseq pipeline](https://nf-co.re/rnaseq/3.23.0/docs/usage/) `salmon.merged.gene.SummarizedExperiment.rds`
 
 
 
@@ -36,7 +35,7 @@ Key differences to keep in mind:
 
 **Explanation of the QC analysis 🧾**
 
-This document guides you through the standard QC pipeline for prokaryotic bulk RNA-seq data processed with [nf-core/rnaseq](https://nf-co.re/rnaseq/3.26.0/docs/usage/) `Bowtie2` + `Salmon`. It is structured to be both educational and reproducible.
+This document guides you through the standard QC pipeline for prokaryotic bulk RNA-seq data processed with [nf-core/rnaseq](https://nf-co.re/rnaseq/3.23.0/docs/usage/) `Bowtie2` + `Salmon`. It is structured to be both educational and reproducible.
 
 
 ## Setup the Environment
@@ -546,6 +545,3 @@ cat("   Conditions  :", paste(levels(dds$condition), collapse = " vs "), "\n")
 sessionInfo()
 ```
 
-```{r render2, eval=FALSE, echo=FALSE}
-rmarkdown::render("01_quality_control_ecoli.Rmd")
-```

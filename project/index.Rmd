@@ -76,7 +76,11 @@ Material for the workshop is located at:
 
 Below are two setup options for the practical activities:
 
->Run the workshop in the cloud (no need to install anything). 
+>Run the workshop in the cloud (no need to install anything).
+
+<div class="warning">
+  <strong>⚠️ Warning:</strong> Change the configuration at the Machine type: increase it to 4-core.
+</div>
 
 **Launch the app:**
 

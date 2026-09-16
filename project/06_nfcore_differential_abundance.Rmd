@@ -4,6 +4,11 @@ We will use pipeline release [v1.5](https://nf-co.re/differentialabundance/1.5.0
 takes the count matrix and sample metadata produced by nf-core/rnaseq and performs
 differential expression analysis using DESeq2.
 
+This is an **optional comparison track** for the **human dataset** (ASM ± dexamethasone).
+It runs the pipeline's standard `~ condition` model; the paired `~ donor + condition`
+analysis in the Differential Expression chapter remains the primary analysis — comparing
+the two is a nice exercise in how much the design formula matters.
+
 **To process the data, run the following command:**
 
 ```bash
@@ -11,13 +16,13 @@ nextflow run nf-core/differentialabundance \
     -r 1.5.0 \
     -profile docker \
     -params-file params_degs.json \
-    --outdir results/differentialabundance
+    --outdir results/human/differentialabundance
 ```
 
 The Nextflow command is stored in a bash script and can be executed by running:
 
 ```bash
-bash 01_scripts/nfcore_differential_abundance.sh
+bash 01_scripts/run_differentialabundance.sh
 ```
 
 The processing time is about 5 minutes.
@@ -29,34 +34,36 @@ are described below.
 
 **Inputs**
 
-- `input` — sample sheet linking each sample to its condition
+- `input` — sample sheet linking each sample to its condition (dexamethasone vs untreated)
 - `matrix` — raw gene count matrix from Salmon (`salmon.merged.gene_counts.tsv`)
 - `transcript_length_matrix` — gene length matrix for TPM normalisation
-- `contrasts` — CSV file defining which groups to compare (treatment vs control)
-- `gtf` — genome annotation file for *E. coli* K-12 MG1655
+- `contrasts` — CSV file defining which groups to compare (dexamethasone vs untreated)
+- `gtf` — genome annotation file for *Homo sapiens* (GRCh37, RefSeq)
 
 **Feature annotation**
 
-- `features_id_col: "gene_id"` — locus tags (e.g. `b0001`) are used as the primary identifier
-- `features_name_col: "gene_name"` — gene symbols (e.g. `thrL`) are used as display names
+- `features_id_col: "gene_id"` and `features_name_col: "gene_name"` — with this RefSeq
+  GTF both hold gene **symbols** (e.g. `A1BG`), so no ID conversion is needed downstream
 - `features_gtf_feature_type: "transcript"` — annotations are extracted at transcript level
 
-**Filtering** — genes must pass all three criteria to be retained:
+**Filtering** — genes must pass all criteria to be retained:
 
 - `filtering_min_abundance: 10` — minimum count of 10
-- `filtering_min_samples: 2` — present in at least 2 samples
-- `filtering_grouping_var: "group"` — filtering applied per experimental group
+- `filtering_min_samples: 4` — present in at least 4 samples (one full group)
+- `filtering_grouping_var: "condition"` — filtering applied per experimental group
 
 **DESeq2**
 
-- `deseq2_fit_type: "local"` — uses a local dispersion fit, more appropriate for
-  smaller sample sizes than the default parametric fit
+- `deseq2_fit_type: "parametric"` — the default parametric dispersion fit, appropriate
+  for this sample size
 
 **Differential expression threshold**
 
-- `differential_min_fold_change: 1.0` — only genes with |FC| ≥ 1.5 are reported as DE
+- `differential_min_fold_change: 1.0` — no fold-change filter; genes are called DE by
+  adjusted p-value alone
 
-**Disabled modules**
+**Functional enrichment**
 
-- `gprofiler2_run: false` and `gsea_run: false` — the pipeline's built-in functional
-  enrichment steps are turned off because to save time here.
+- `gprofiler2_run: true` with `gprofiler2_organism: "hsapiens"` — the pipeline's built-in
+  g:Profiler ORA runs automatically; `gsea_run: false` (we do GSEA ourselves in the
+  functional enrichment chapter)

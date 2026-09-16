@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -432,34 +436,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Strain configuration and inputs<a href="strain-configuration-and-inputs.html#strain-configuration-and-inputs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Everything strain-specific is set here: the DE table for the lifestyle contrast, the cached
 gene sets, and the output directory. The rest of the script is strain-agnostic.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="strain-configuration-and-inputs.html#cb159-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb159-2"><a href="strain-configuration-and-inputs.html#cb159-2" tabindex="-1"></a></span>
-<span id="cb159-3"><a href="strain-configuration-and-inputs.html#cb159-3" tabindex="-1"></a>cfg <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb159-4"><a href="strain-configuration-and-inputs.html#cb159-4" tabindex="-1"></a>  <span class="at">usa100 =</span> <span class="fu">list</span>(</span>
-<span id="cb159-5"><a href="strain-configuration-and-inputs.html#cb159-5" tabindex="-1"></a>    <span class="at">de   =</span> <span class="st">&quot;results/usa100/tables/DE_usa100_lifestyle_additive.tsv&quot;</span>,</span>
-<span id="cb159-6"><a href="strain-configuration-and-inputs.html#cb159-6" tabindex="-1"></a>    <span class="at">out  =</span> <span class="st">&quot;results/usa100&quot;</span>,</span>
-<span id="cb159-7"><a href="strain-configuration-and-inputs.html#cb159-7" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;USA-100 / N315&quot;</span></span>
-<span id="cb159-8"><a href="strain-configuration-and-inputs.html#cb159-8" tabindex="-1"></a>  ),</span>
-<span id="cb159-9"><a href="strain-configuration-and-inputs.html#cb159-9" tabindex="-1"></a>  <span class="at">usa500 =</span> <span class="fu">list</span>(</span>
-<span id="cb159-10"><a href="strain-configuration-and-inputs.html#cb159-10" tabindex="-1"></a>    <span class="at">de   =</span> <span class="st">&quot;results/usa500/tables/DE_usa500_lifestyle_additive.tsv&quot;</span>,</span>
-<span id="cb159-11"><a href="strain-configuration-and-inputs.html#cb159-11" tabindex="-1"></a>    <span class="at">out  =</span> <span class="st">&quot;results/usa500&quot;</span>,</span>
-<span id="cb159-12"><a href="strain-configuration-and-inputs.html#cb159-12" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;USA-500 / USA-300&quot;</span></span>
-<span id="cb159-13"><a href="strain-configuration-and-inputs.html#cb159-13" tabindex="-1"></a>  )</span>
-<span id="cb159-14"><a href="strain-configuration-and-inputs.html#cb159-14" tabindex="-1"></a>)[[strain]]</span>
-<span id="cb159-15"><a href="strain-configuration-and-inputs.html#cb159-15" tabindex="-1"></a></span>
-<span id="cb159-16"><a href="strain-configuration-and-inputs.html#cb159-16" tabindex="-1"></a>db_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;databases&quot;</span>)</span>
-<span id="cb159-17"><a href="strain-configuration-and-inputs.html#cb159-17" tabindex="-1"></a>kegg_gmt <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(db_dir, <span class="fu">sprintf</span>(<span class="st">&quot;KEGG_Pathways_Saureus_%s.rds&quot;</span>, strain)))</span>
-<span id="cb159-18"><a href="strain-configuration-and-inputs.html#cb159-18" tabindex="-1"></a>go_bp    <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(db_dir, <span class="fu">sprintf</span>(<span class="st">&quot;GO_BP_Saureus_%s.rds&quot;</span>, strain)))</span>
-<span id="cb159-19"><a href="strain-configuration-and-inputs.html#cb159-19" tabindex="-1"></a>go_mf    <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(db_dir, <span class="fu">sprintf</span>(<span class="st">&quot;GO_MF_Saureus_%s.rds&quot;</span>, strain)))</span>
-<span id="cb159-20"><a href="strain-configuration-and-inputs.html#cb159-20" tabindex="-1"></a>id_map   <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(db_dir, <span class="fu">sprintf</span>(<span class="st">&quot;locus_symbol_map_Saureus_%s.rds&quot;</span>, strain)))</span>
-<span id="cb159-21"><a href="strain-configuration-and-inputs.html#cb159-21" tabindex="-1"></a></span>
-<span id="cb159-22"><a href="strain-configuration-and-inputs.html#cb159-22" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain     :&quot;</span>, cfg<span class="sc">$</span>label, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="strain-configuration-and-inputs.html#cb158-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb158-2"><a href="strain-configuration-and-inputs.html#cb158-2" tabindex="-1"></a></span>
+<span id="cb158-3"><a href="strain-configuration-and-inputs.html#cb158-3" tabindex="-1"></a>cfg <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb158-4"><a href="strain-configuration-and-inputs.html#cb158-4" tabindex="-1"></a>  <span class="at">usa100 =</span> <span class="fu">list</span>(</span>
+<span id="cb158-5"><a href="strain-configuration-and-inputs.html#cb158-5" tabindex="-1"></a>    <span class="at">de   =</span> <span class="st">&quot;results/usa100/tables/DE_usa100_lifestyle_additive.tsv&quot;</span>,</span>
+<span id="cb158-6"><a href="strain-configuration-and-inputs.html#cb158-6" tabindex="-1"></a>    <span class="at">out  =</span> <span class="st">&quot;results/usa100&quot;</span>,</span>
+<span id="cb158-7"><a href="strain-configuration-and-inputs.html#cb158-7" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;USA-100 / N315&quot;</span></span>
+<span id="cb158-8"><a href="strain-configuration-and-inputs.html#cb158-8" tabindex="-1"></a>  ),</span>
+<span id="cb158-9"><a href="strain-configuration-and-inputs.html#cb158-9" tabindex="-1"></a>  <span class="at">usa500 =</span> <span class="fu">list</span>(</span>
+<span id="cb158-10"><a href="strain-configuration-and-inputs.html#cb158-10" tabindex="-1"></a>    <span class="at">de   =</span> <span class="st">&quot;results/usa500/tables/DE_usa500_lifestyle_additive.tsv&quot;</span>,</span>
+<span id="cb158-11"><a href="strain-configuration-and-inputs.html#cb158-11" tabindex="-1"></a>    <span class="at">out  =</span> <span class="st">&quot;results/usa500&quot;</span>,</span>
+<span id="cb158-12"><a href="strain-configuration-and-inputs.html#cb158-12" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;USA-500 / USA-300&quot;</span></span>
+<span id="cb158-13"><a href="strain-configuration-and-inputs.html#cb158-13" tabindex="-1"></a>  )</span>
+<span id="cb158-14"><a href="strain-configuration-and-inputs.html#cb158-14" tabindex="-1"></a>)[[strain]]</span>
+<span id="cb158-15"><a href="strain-configuration-and-inputs.html#cb158-15" tabindex="-1"></a></span>
+<span id="cb158-16"><a href="strain-configuration-and-inputs.html#cb158-16" tabindex="-1"></a>db_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;databases&quot;</span>)</span>
+<span id="cb158-17"><a href="strain-configuration-and-inputs.html#cb158-17" tabindex="-1"></a>kegg_gmt <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(db_dir, <span class="fu">sprintf</span>(<span class="st">&quot;KEGG_Pathways_Saureus_%s.rds&quot;</span>, strain)))</span>
+<span id="cb158-18"><a href="strain-configuration-and-inputs.html#cb158-18" tabindex="-1"></a>go_bp    <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(db_dir, <span class="fu">sprintf</span>(<span class="st">&quot;GO_BP_Saureus_%s.rds&quot;</span>, strain)))</span>
+<span id="cb158-19"><a href="strain-configuration-and-inputs.html#cb158-19" tabindex="-1"></a>go_mf    <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(db_dir, <span class="fu">sprintf</span>(<span class="st">&quot;GO_MF_Saureus_%s.rds&quot;</span>, strain)))</span>
+<span id="cb158-20"><a href="strain-configuration-and-inputs.html#cb158-20" tabindex="-1"></a>id_map   <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(db_dir, <span class="fu">sprintf</span>(<span class="st">&quot;locus_symbol_map_Saureus_%s.rds&quot;</span>, strain)))</span>
+<span id="cb158-21"><a href="strain-configuration-and-inputs.html#cb158-21" tabindex="-1"></a></span>
+<span id="cb158-22"><a href="strain-configuration-and-inputs.html#cb158-22" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain     :&quot;</span>, cfg<span class="sc">$</span>label, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Strain     : USA-100 / N315</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="strain-configuration-and-inputs.html#cb161-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;KEGG sets  :&quot;</span>, <span class="fu">nrow</span>(kegg_gmt), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="strain-configuration-and-inputs.html#cb160-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;KEGG sets  :&quot;</span>, <span class="fu">nrow</span>(kegg_gmt), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## KEGG sets  : 96</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="strain-configuration-and-inputs.html#cb163-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GO:BP sets :&quot;</span>, <span class="fu">nrow</span>(go_bp), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="strain-configuration-and-inputs.html#cb162-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GO:BP sets :&quot;</span>, <span class="fu">nrow</span>(go_bp), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## GO:BP sets : 54</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="strain-configuration-and-inputs.html#cb165-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GO:MF sets :&quot;</span>, <span class="fu">nrow</span>(go_mf), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="strain-configuration-and-inputs.html#cb164-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GO:MF sets :&quot;</span>, <span class="fu">nrow</span>(go_mf), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## GO:MF sets : 66</code></pre>
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
 <p><strong>Note:</strong> If any of these files are missing, run

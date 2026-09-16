@@ -335,6 +335,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
+<ul>
+<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
+</ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
@@ -431,7 +435,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="instructions" class="section level1 hasAnchor">
 <h1>Instructions<a href="instructions.html#instructions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div class="boxy">
-<p><a href="https://nf-co.re/rnaseq/3.26.0/docs/usage/">nf-core rnaseq pipeline</a></p>
+<p><a href="https://nf-co.re/rnaseq/3.23.0/docs/usage/">nf-core rnaseq pipeline</a></p>
 </div>
 <p><strong>Topics covered</strong></p>
 <ul>
@@ -448,7 +452,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Reference genomes are strain-specific: <strong>USA-100</strong> → N315 (<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009645.1/">GCF_000009645.1</a>); <strong>USA-500</strong> → USA300_FPR3757 (<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000013465.1/">GCF_000013465.1</a>), its closest finished relative, as in the paper.</li>
 <li>🧑‍🔬 <strong><em>Homo sapiens</em></strong> — primary airway smooth muscle (ASM) cells treated with dexamethasone, paired donor design, from <a href="https://doi.org/10.1371/journal.pone.0099625">Himes <em>et al.</em>, 2014</a> (GEO: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778">GSE52778</a>, PRJNA229998).
 Reference genome: GRCh37 (<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.13/">GCF_000001405.13</a>), RefSeq annotation.</li>
-<li>🧫 <strong><em>Escherichia coli</em></strong> K-12 MG1655 — a small subsampled dataset (<a href="https://www.ebi.ac.uk/ena/browser/view/PRJNA1158806">PRJNA1158806</a>) used only for the hands-on <strong>nf-core/rnaseq pipeline run</strong> below, so it finishes within class time.
+<li>🧫 <strong><em>Escherichia coli</em></strong> K-12 MG1655 — saccharin treatment vs control (<a href="https://www.ebi.ac.uk/ena/browser/view/PRJNA1158806">PRJNA1158806</a>). A small subsampled version is used for the hands-on <strong>nf-core/rnaseq pipeline run</strong> below (so it finishes within class time), and the full dataset is analysed in the extra practice chapters at the end of the book.
 Reference genome: <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/">GCF_000005845.2</a> (NCBI RefSeq: NC_000913.3).</li>
 </ul>
 <p>The <em>S. aureus</em> and human count matrices were produced with the same nf-core/rnaseq pipeline and are provided <strong>precomputed</strong> in the repository — the analysis notebooks start from those.</p>

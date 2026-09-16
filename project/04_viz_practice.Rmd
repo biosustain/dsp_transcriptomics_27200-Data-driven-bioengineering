@@ -5,11 +5,11 @@ This report covers differential expression (DE) analysis of bulk RNA-seq data fr
 We test one contrast:
 
 ::: boxy
-- **Control vs Treatment** — which genes change expression in response to treatment?
+- **Treatment vs Control** — which genes change expression in response to treatment?
 :::
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
-<strong>⭐ Important:</strong> This script assumes you have already run `01_quality_control_ecoli.Rmd` and that the `dds` object is available in your environment. If not, re-run the QC script first.
+<strong>⭐ Important:</strong> This script assumes you have already run the E. coli Quality Control chapter (`03_analysis_basics.Rmd`), which saves the `dds` object to `results/rds/`. If not, run that script first.
 :::
 
 **Setup the Environment**
@@ -325,6 +325,3 @@ Significant genes are saved and ready for gene set enrichment analysis in the ne
 sessionInfo()
 ```
 
-```{r rendera, eval=FALSE, echo=FALSE}
-rmarkdown::render("02_differential_expression_ecoli.Rmd")
-```
