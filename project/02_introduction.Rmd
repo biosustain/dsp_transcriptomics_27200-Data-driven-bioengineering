@@ -6,17 +6,24 @@
 
 **Topics covered**
 
--   RNAseq Quality control analysis
--   Mapping of short reads (Bowtie2)
--   Quantification of gene expression (Salmon)
--   Exploratory data analyses
+-   RNA-seq data processing with the nf-core/rnaseq pipeline
+-   Mapping of short reads (STAR) and quantification of gene expression (Salmon)
+-   Quality control and exploratory data analysis
+-   Differential expression analysis (DESeq2)
+-   Functional enrichment analysis (ORA & GSEA)
 
 **Data**
 
--   Type of data: bulk RNASeq
--   Organism: *Escherichia coli* K-12 MG1655
--   Codes location: [GitHub repository](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
--   Reference data used: [E. coli\* K-12 MG1655](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/) NCBI RefSeq: NC_000913.3
+All datasets are bulk RNA-seq. The codes are in the [GitHub repository](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering).
+
+-   🦠 ***Staphylococcus aureus*** — biofilm vs planktonic lifestyle over time, strains USA-100 and USA-500, from [Tomlinson *et al.*, 2021](https://doi.org/10.1099/mgen.0.000598) (GEO: [GSE163153](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE163153), PRJNA685119).
+    Reference genomes are strain-specific: **USA-100** → N315 ([GCF_000009645.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009645.1/)); **USA-500** → USA300_FPR3757 ([GCF_000013465.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000013465.1/)), its closest finished relative, as in the paper.
+-   🧑‍🔬 ***Homo sapiens*** — primary airway smooth muscle (ASM) cells treated with dexamethasone, paired donor design, from [Himes *et al.*, 2014](https://doi.org/10.1371/journal.pone.0099625) (GEO: [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778), PRJNA229998).
+    Reference genome: GRCh37 ([GCF_000001405.13](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.13/)), RefSeq annotation.
+-   🧫 ***Escherichia coli*** K-12 MG1655 — a small subsampled dataset ([PRJNA1158806](https://www.ebi.ac.uk/ena/browser/view/PRJNA1158806)) used only for the hands-on **nf-core/rnaseq pipeline run** below, so it finishes within class time.
+    Reference genome: [GCF_000005845.2](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/) (NCBI RefSeq: NC_000913.3).
+
+The *S. aureus* and human count matrices were produced with the same nf-core/rnaseq pipeline and are provided **precomputed** in the repository — the analysis notebooks start from those.
 
 ## Opening the Nextflow environment
 
@@ -40,8 +47,6 @@ To learn more about Github codespaces go [here](https://github.com/features/code
 
 ## Initial checks
 Now, Nextflow should be ready to run in your GitHub Codespace environment! Let's check that you have a fully functional environment with Nextflow, java and Docker properly installed
-
-**Verify java installation:**
 
 **Verify java installation:**
 ```bash
@@ -71,8 +76,10 @@ If everything went well you have a fully functional Nextflow environment for tod
 
 **Sources of data and genome files**
 
-RNAseq analysis of *Escherichia coli* str. K-12 substr. MG1655 (accession: GCF_000005845.2) will be performed. RNA sequencing read files and genome files were obtained from the following links. The data do not have to be downloaded — a size-reduced dataset and the genome files are already deposited in the repository.
+For the hands-on pipeline run we use a **size-reduced *E. coli* K-12 MG1655 dataset** (accession: GCF_000005845.2) so the pipeline completes within class time. Nothing has to be downloaded — the subsampled reads and genome files are already deposited in the repository.
 
 -   [RNAseq files (.fastq.gz) - PRJNA1158806](https://www.ebi.ac.uk/ena/browser/view/PRJNA1158806)
 -   [*E. coli* genome sequence (.fna.gz)](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz)
 -   [*E. coli* genome annotation file (.gtf.gz)](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gtf.gz)
+
+The ***S. aureus*** and **human** datasets analysed in the following chapters were processed with this same pipeline (aligner: `star_salmon`; for *S. aureus*, prokaryotic settings and strain-specific references). Their outputs — count matrices, gene lengths, and MultiQC reports — are provided precomputed under `data/`, so the analysis notebooks can start directly from the counts.
