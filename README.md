@@ -115,6 +115,7 @@ Once the Codespace is running, open `02_notebooks/` and start with `staphylococc
 - 🌐 **Browser:** use **Chrome, Firefox or Edge**. Codespaces does not work reliably in Safari.
 - 🧮 **Kernel:** when VS Code asks you to *Select Kernel*, choose **R** (under *Jupyter Kernel*). The notebooks run R, not Python.
 - ⚠️ **"No text editor active" pop-up:** a warning from the R extension that appears when running cells. It is harmless — your code still runs. Just close it.
+- ▶️ **Running cells:** use **Shift+Enter** or the ▶ button next to the cell — **not Ctrl+Enter**, which the R extension intercepts and sends to a terminal instead of the notebook. The first cell can take a moment while the R kernel starts.
 
 
 >Run the workshop locally on your machine. 

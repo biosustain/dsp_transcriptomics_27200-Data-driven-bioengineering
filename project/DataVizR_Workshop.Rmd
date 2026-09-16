@@ -54,7 +54,6 @@ The course is designed for people with **no or little knowledge and practical ex
    * RNAseq data processing using the nf-core/rnaseq pipeline
    * Statistical data analysis and visualization of RNAseq results
    * Enrichment analysis — gaining biological insights from transcriptomic data
-   * Effective results reporting using the in-house developed software **[vuegen](https://github.com/Multiomics-Analytics-Group/vuegen)**
 
 :::boxy
 You can also explore the [27200 Data Driven Bioengineering - Transcriptomics repository](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)

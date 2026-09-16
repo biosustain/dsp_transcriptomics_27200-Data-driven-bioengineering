@@ -12,7 +12,12 @@
   },
   "customizations": {
     "vscode": {
-      "extensions": ["REditorSupport.r", "ms-toolsai.jupyter"]
+      "extensions": ["REditorSupport.r", "ms-toolsai.jupyter"],
+      "settings": {
+        // The R extension lints notebook cells like script files and floods the
+        // Problems panel with style warnings students cannot act on.
+        "r.lsp.diagnostics": false
+      }
     }
   }
 }
