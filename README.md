@@ -108,7 +108,13 @@ Below are two setup options for the practical activities:
 **Launch the app:**
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
-Once the Codespace is running, open `02_notebooks/` and start with `staphylococcus_aureus/01_quality_control.ipynb` (choose the **R** kernel if prompted).
+Once the Codespace is running, open `02_notebooks/` and start with `staphylococcus_aureus/01_quality_control.ipynb`.
+
+**First time in the notebooks — three things to expect:**
+
+- 🌐 **Browser:** use **Chrome, Firefox or Edge**. Codespaces does not work reliably in Safari.
+- 🧮 **Kernel:** when VS Code asks you to *Select Kernel*, choose **R** (under *Jupyter Kernel*). The notebooks run R, not Python.
+- ⚠️ **"No text editor active" pop-up:** a warning from the R extension that appears when running cells. It is harmless — your code still runs. Just close it.
 
 
 >Run the workshop locally on your machine. 
