@@ -12,7 +12,9 @@
   },
   "customizations": {
     "vscode": {
-      "extensions": ["REditorSupport.r", "ms-toolsai.jupyter"],
+      // jupyter-renderers adds the plotly renderer VS Code needs for the
+      // g:Profiler Manhattan plot (gostplot) in the enrichment notebook.
+      "extensions": ["REditorSupport.r", "ms-toolsai.jupyter", "ms-toolsai.jupyter-renderers"],
       "settings": {
         // The R extension lints notebook cells like script files and floods the
         // Problems panel with style warnings students cannot act on.

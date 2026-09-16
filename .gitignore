@@ -15,8 +15,9 @@ work
 .Rproj.user
 *.Rproj
 
-# Jupyter
+# Jupyter / Python
 .ipynb_checkpoints/
+__pycache__/
 
 # Internal planning material (presentations, master plan) — not course content
 material/
