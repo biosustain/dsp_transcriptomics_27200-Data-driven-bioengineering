@@ -17,8 +17,9 @@ rep_core2 <- "Sebastian Schulz"
 rep_core_email2 <- "sebschu@dtu.dk"
 rep_core3 <- "Alberto Pallejà Caro"
 rep_core_email3 <- "apca@dtu.dk"
-rep_ta    <- "Edir Sebastian Vidal Castro"
-rep_ta_email <- "s243564@student.dtu.dk"
+rep_lecturer       <- "Lasse Ebdrup Pedersen"
+rep_lecturer_email <- "laeb@dtu.dk"
+rep_lecturer_title <- "Senior Researcher, DTU Bioengineering"
 
 # Combine all responsibles into a single string
 rep_all <- paste0(
@@ -27,15 +28,15 @@ rep_all <- paste0(
   rep_core3, " (", rep_core_email3, ")"
 )
 
-rep_ta_full <- paste0(rep_ta, " (", rep_ta_email, ")")
+rep_lecturer_full <- paste0(rep_lecturer, " (", rep_lecturer_email, ") — ", rep_lecturer_title)
 ```
 
 <br>
 
 ::: boxy
-__Organisation:__ `r rep_org`  
-__Responsibles:__ `r paste0(rep_all," ")`  
-__Teaching Assistant:__ `r rep_ta_full`  
+__Organisation:__ `r rep_org`
+__Lecturer (theory):__ `r rep_lecturer_full`
+__Responsibles:__ `r paste0(rep_all," ")`
 :::
 
 <br>

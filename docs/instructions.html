@@ -435,18 +435,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p><strong>Topics covered</strong></p>
 <ul>
-<li>RNAseq Quality control analysis</li>
-<li>Mapping of short reads (Bowtie2)</li>
-<li>Quantification of gene expression (Salmon)</li>
-<li>Exploratory data analyses</li>
+<li>RNA-seq data processing with the nf-core/rnaseq pipeline</li>
+<li>Mapping of short reads (STAR) and quantification of gene expression (Salmon)</li>
+<li>Quality control and exploratory data analysis</li>
+<li>Differential expression analysis (DESeq2)</li>
+<li>Functional enrichment analysis (ORA &amp; GSEA)</li>
 </ul>
 <p><strong>Data</strong></p>
+<p>All datasets are bulk RNA-seq. The codes are in the <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering">GitHub repository</a>.</p>
 <ul>
-<li>Type of data: bulk RNASeq</li>
-<li>Organism: <em>Escherichia coli</em> K-12 MG1655</li>
-<li>Codes location: <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering">GitHub repository</a></li>
-<li>Reference data used: <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/">E. coli* K-12 MG1655</a> NCBI RefSeq: NC_000913.3</li>
+<li>🦠 <strong><em>Staphylococcus aureus</em></strong> — biofilm vs planktonic lifestyle over time, strains USA-100 and USA-500, from <a href="https://doi.org/10.1099/mgen.0.000598">Tomlinson <em>et al.</em>, 2021</a> (GEO: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE163153">GSE163153</a>, PRJNA685119).
+Reference genomes are strain-specific: <strong>USA-100</strong> → N315 (<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009645.1/">GCF_000009645.1</a>); <strong>USA-500</strong> → USA300_FPR3757 (<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000013465.1/">GCF_000013465.1</a>), its closest finished relative, as in the paper.</li>
+<li>🧑‍🔬 <strong><em>Homo sapiens</em></strong> — primary airway smooth muscle (ASM) cells treated with dexamethasone, paired donor design, from <a href="https://doi.org/10.1371/journal.pone.0099625">Himes <em>et al.</em>, 2014</a> (GEO: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778">GSE52778</a>, PRJNA229998).
+Reference genome: GRCh37 (<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.13/">GCF_000001405.13</a>), RefSeq annotation.</li>
+<li>🧫 <strong><em>Escherichia coli</em></strong> K-12 MG1655 — a small subsampled dataset (<a href="https://www.ebi.ac.uk/ena/browser/view/PRJNA1158806">PRJNA1158806</a>) used only for the hands-on <strong>nf-core/rnaseq pipeline run</strong> below, so it finishes within class time.
+Reference genome: <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000005845.2/">GCF_000005845.2</a> (NCBI RefSeq: NC_000913.3).</li>
 </ul>
+<p>The <em>S. aureus</em> and human count matrices were produced with the same nf-core/rnaseq pipeline and are provided <strong>precomputed</strong> in the repository — the analysis notebooks start from those.</p>
 </div>
             </section>
 
