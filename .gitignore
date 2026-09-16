@@ -17,3 +17,6 @@ work
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Internal planning material (presentations, master plan) — not course content
+material/
