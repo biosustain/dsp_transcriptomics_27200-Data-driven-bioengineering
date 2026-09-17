@@ -343,17 +343,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#run-gsea-1"><i class="fa fa-check"></i>Run GSEA</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#inspect-gene-sets"><i class="fa fa-check"></i>Inspect Gene Sets</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#dot-plot-nes-p-value-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, p-value and Gene Set Size</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
-<ul>
-<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
 </ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -490,18 +485,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="important">
 <p><strong>⭐ Important:</strong> If any check fails, investigate the cause before running DESeq2. Proceeding with outlier samples or confounded designs will compromise all downstream results</p>
 </div>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="summary-6.html#cb440-1" tabindex="-1"></a><span class="co"># ── Export DDS for downstream analysis ────────────────────────────────────────</span></span>
-<span id="cb440-2"><a href="summary-6.html#cb440-2" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;rds&quot;</span>)</span>
-<span id="cb440-3"><a href="summary-6.html#cb440-3" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb440-4"><a href="summary-6.html#cb440-4" tabindex="-1"></a></span>
-<span id="cb440-5"><a href="summary-6.html#cb440-5" tabindex="-1"></a>dds_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;dds_ecoli_MG1655.rds&quot;</span>)</span>
-<span id="cb440-6"><a href="summary-6.html#cb440-6" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> dds_path)</span></code></pre></div>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="summary-6.html#cb441-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ DDS saved to:&quot;</span>, dds_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb441-2"><a href="summary-6.html#cb441-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb441-3"><a href="summary-6.html#cb441-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Conditions  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">levels</span>(dds<span class="sc">$</span>condition), <span class="at">collapse =</span> <span class="st">&quot; vs &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="summary-6.html#cb437-1" tabindex="-1"></a><span class="co"># ── Export DDS for downstream analysis ────────────────────────────────────────</span></span>
+<span id="cb437-2"><a href="summary-6.html#cb437-2" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;rds&quot;</span>)</span>
+<span id="cb437-3"><a href="summary-6.html#cb437-3" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb437-4"><a href="summary-6.html#cb437-4" tabindex="-1"></a></span>
+<span id="cb437-5"><a href="summary-6.html#cb437-5" tabindex="-1"></a>dds_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;dds_ecoli_MG1655.rds&quot;</span>)</span>
+<span id="cb437-6"><a href="summary-6.html#cb437-6" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> dds_path)</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="summary-6.html#cb438-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ DDS saved to:&quot;</span>, dds_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb438-2"><a href="summary-6.html#cb438-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb438-3"><a href="summary-6.html#cb438-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Conditions  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">levels</span>(dds<span class="sc">$</span>condition), <span class="at">collapse =</span> <span class="st">&quot; vs &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <!-- --------------------- Do not edit this and below ---------------------- -->
 <p></br></p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="summary-6.html#cb442-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="summary-6.html#cb439-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.4.1 (2024-06-14)
 ## Platform: aarch64-apple-darwin20
 ## Running under: macOS Sonoma 14.3

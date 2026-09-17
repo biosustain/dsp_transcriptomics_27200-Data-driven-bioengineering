@@ -343,17 +343,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#run-gsea-1"><i class="fa fa-check"></i>Run GSEA</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#inspect-gene-sets"><i class="fa fa-check"></i>Inspect Gene Sets</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#dot-plot-nes-p-value-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, p-value and Gene Set Size</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
-<ul>
-<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
 </ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -459,28 +454,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
 <p><strong>💡 Tip:</strong> If you are unsure which assay name or rowData columns are available in your RDS, inspect them first with <code>assayNames(count_x)</code> and <code>names(rowData(count_x))</code>.</p>
 </div>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="loading-count-data-2.html#cb410-1" tabindex="-1"></a>count_x <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
-<span id="cb410-2"><a href="loading-count-data-2.html#cb410-2" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;nf-core_rnaseq&quot;</span>,</span>
-<span id="cb410-3"><a href="loading-count-data-2.html#cb410-3" tabindex="-1"></a>            <span class="st">&quot;salmon.merged.gene.SummarizedExperiment.rds&quot;</span>)</span>
-<span id="cb410-4"><a href="loading-count-data-2.html#cb410-4" tabindex="-1"></a>)</span>
-<span id="cb410-5"><a href="loading-count-data-2.html#cb410-5" tabindex="-1"></a></span>
-<span id="cb410-6"><a href="loading-count-data-2.html#cb410-6" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> <span class="fu">assay</span>(count_x, <span class="fu">assayNames</span>(count_x)[<span class="dv">1</span>])</span>
-<span id="cb410-7"><a href="loading-count-data-2.html#cb410-7" tabindex="-1"></a></span>
-<span id="cb410-8"><a href="loading-count-data-2.html#cb410-8" tabindex="-1"></a>gene_symbols <span class="ot">&lt;-</span> <span class="fu">rowData</span>(count_x)<span class="sc">$</span>gene_name</span>
-<span id="cb410-9"><a href="loading-count-data-2.html#cb410-9" tabindex="-1"></a>gene_ids     <span class="ot">&lt;-</span> <span class="fu">rowData</span>(count_x)<span class="sc">$</span>gene_id</span>
-<span id="cb410-10"><a href="loading-count-data-2.html#cb410-10" tabindex="-1"></a></span>
-<span id="cb410-11"><a href="loading-count-data-2.html#cb410-11" tabindex="-1"></a>gene_symbols_saved <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
-<span id="cb410-12"><a href="loading-count-data-2.html#cb410-12" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">is.na</span>(gene_symbols) <span class="sc">&amp;</span> <span class="fu">nchar</span>(gene_symbols) <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb410-13"><a href="loading-count-data-2.html#cb410-13" tabindex="-1"></a>  <span class="fu">make.unique</span>(<span class="fu">as.character</span>(gene_symbols)),</span>
-<span id="cb410-14"><a href="loading-count-data-2.html#cb410-14" tabindex="-1"></a>  <span class="fu">make.unique</span>(<span class="fu">as.character</span>(gene_ids))</span>
-<span id="cb410-15"><a href="loading-count-data-2.html#cb410-15" tabindex="-1"></a>)</span>
-<span id="cb410-16"><a href="loading-count-data-2.html#cb410-16" tabindex="-1"></a></span>
-<span id="cb410-17"><a href="loading-count-data-2.html#cb410-17" tabindex="-1"></a>count_genes           <span class="ot">&lt;-</span> <span class="fu">apply</span>(count_genes, <span class="dv">2</span>, as.integer)</span>
-<span id="cb410-18"><a href="loading-count-data-2.html#cb410-18" tabindex="-1"></a><span class="fu">rownames</span>(count_genes) <span class="ot">&lt;-</span> gene_symbols_saved</span>
-<span id="cb410-19"><a href="loading-count-data-2.html#cb410-19" tabindex="-1"></a></span>
-<span id="cb410-20"><a href="loading-count-data-2.html#cb410-20" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions (genes × samples):&quot;</span>, <span class="fu">dim</span>(count_genes), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="loading-count-data-2.html#cb407-1" tabindex="-1"></a>count_x <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb407-2"><a href="loading-count-data-2.html#cb407-2" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;nf-core_rnaseq&quot;</span>,</span>
+<span id="cb407-3"><a href="loading-count-data-2.html#cb407-3" tabindex="-1"></a>            <span class="st">&quot;salmon.merged.gene.SummarizedExperiment.rds&quot;</span>)</span>
+<span id="cb407-4"><a href="loading-count-data-2.html#cb407-4" tabindex="-1"></a>)</span>
+<span id="cb407-5"><a href="loading-count-data-2.html#cb407-5" tabindex="-1"></a></span>
+<span id="cb407-6"><a href="loading-count-data-2.html#cb407-6" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> <span class="fu">assay</span>(count_x, <span class="fu">assayNames</span>(count_x)[<span class="dv">1</span>])</span>
+<span id="cb407-7"><a href="loading-count-data-2.html#cb407-7" tabindex="-1"></a></span>
+<span id="cb407-8"><a href="loading-count-data-2.html#cb407-8" tabindex="-1"></a>gene_symbols <span class="ot">&lt;-</span> <span class="fu">rowData</span>(count_x)<span class="sc">$</span>gene_name</span>
+<span id="cb407-9"><a href="loading-count-data-2.html#cb407-9" tabindex="-1"></a>gene_ids     <span class="ot">&lt;-</span> <span class="fu">rowData</span>(count_x)<span class="sc">$</span>gene_id</span>
+<span id="cb407-10"><a href="loading-count-data-2.html#cb407-10" tabindex="-1"></a></span>
+<span id="cb407-11"><a href="loading-count-data-2.html#cb407-11" tabindex="-1"></a>gene_symbols_saved <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb407-12"><a href="loading-count-data-2.html#cb407-12" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">is.na</span>(gene_symbols) <span class="sc">&amp;</span> <span class="fu">nchar</span>(gene_symbols) <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb407-13"><a href="loading-count-data-2.html#cb407-13" tabindex="-1"></a>  <span class="fu">make.unique</span>(<span class="fu">as.character</span>(gene_symbols)),</span>
+<span id="cb407-14"><a href="loading-count-data-2.html#cb407-14" tabindex="-1"></a>  <span class="fu">make.unique</span>(<span class="fu">as.character</span>(gene_ids))</span>
+<span id="cb407-15"><a href="loading-count-data-2.html#cb407-15" tabindex="-1"></a>)</span>
+<span id="cb407-16"><a href="loading-count-data-2.html#cb407-16" tabindex="-1"></a></span>
+<span id="cb407-17"><a href="loading-count-data-2.html#cb407-17" tabindex="-1"></a>count_genes           <span class="ot">&lt;-</span> <span class="fu">apply</span>(count_genes, <span class="dv">2</span>, as.integer)</span>
+<span id="cb407-18"><a href="loading-count-data-2.html#cb407-18" tabindex="-1"></a><span class="fu">rownames</span>(count_genes) <span class="ot">&lt;-</span> gene_symbols_saved</span>
+<span id="cb407-19"><a href="loading-count-data-2.html#cb407-19" tabindex="-1"></a></span>
+<span id="cb407-20"><a href="loading-count-data-2.html#cb407-20" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions (genes × samples):&quot;</span>, <span class="fu">dim</span>(count_genes), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Dimensions (genes &lt;U+00D7&gt; samples): 4523 6</code></pre>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="loading-count-data-2.html#cb412-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(<span class="fu">rownames</span>(count_genes)))</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="loading-count-data-2.html#cb409-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(<span class="fu">rownames</span>(count_genes)))</span></code></pre></div>
 <pre><code>## [1] &quot;b0001&quot; &quot;b0002&quot; &quot;b0003&quot; &quot;b0004&quot; &quot;b0005&quot; &quot;b0006&quot;</code></pre>
 </div>
             </section>

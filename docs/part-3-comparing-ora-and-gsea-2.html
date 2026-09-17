@@ -343,17 +343,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#run-gsea-1"><i class="fa fa-check"></i>Run GSEA</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#inspect-gene-sets"><i class="fa fa-check"></i>Inspect Gene Sets</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#dot-plot-nes-p-value-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, p-value and Gene Set Size</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
-<ul>
-<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
 </ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -451,23 +446,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="part-3-comparing-ora-and-gsea-2" class="section level2 hasAnchor">
 <h2>Part 3 — Comparing ORA and GSEA<a href="part-3-comparing-ora-and-gsea-2.html#part-3-comparing-ora-and-gsea-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>ORA and GSEA are complementary — they answer different questions and will not always agree.</p>
-<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="part-3-comparing-ora-and-gsea-2.html#cb550-1" tabindex="-1"></a>ora_hits  <span class="ot">&lt;-</span> ora_sig<span class="sc">$</span>ontology_name</span>
-<span id="cb550-2"><a href="part-3-comparing-ora-and-gsea-2.html#cb550-2" tabindex="-1"></a>gsea_hits <span class="ot">&lt;-</span> gsea_sig<span class="sc">$</span>pathway</span>
-<span id="cb550-3"><a href="part-3-comparing-ora-and-gsea-2.html#cb550-3" tabindex="-1"></a></span>
-<span id="cb550-4"><a href="part-3-comparing-ora-and-gsea-2.html#cb550-4" tabindex="-1"></a>both      <span class="ot">&lt;-</span> <span class="fu">intersect</span>(ora_hits, gsea_hits)</span>
-<span id="cb550-5"><a href="part-3-comparing-ora-and-gsea-2.html#cb550-5" tabindex="-1"></a>ora_only  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(ora_hits, gsea_hits)</span>
-<span id="cb550-6"><a href="part-3-comparing-ora-and-gsea-2.html#cb550-6" tabindex="-1"></a>gsea_only <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(gsea_hits, ora_hits)</span>
-<span id="cb550-7"><a href="part-3-comparing-ora-and-gsea-2.html#cb550-7" tabindex="-1"></a></span>
-<span id="cb550-8"><a href="part-3-comparing-ora-and-gsea-2.html#cb550-8" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Pathways significant in BOTH :&quot;</span>, <span class="fu">length</span>(both), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="part-3-comparing-ora-and-gsea-2.html#cb547-1" tabindex="-1"></a>ora_hits  <span class="ot">&lt;-</span> ora_sig<span class="sc">$</span>ontology_name</span>
+<span id="cb547-2"><a href="part-3-comparing-ora-and-gsea-2.html#cb547-2" tabindex="-1"></a>gsea_hits <span class="ot">&lt;-</span> gsea_sig<span class="sc">$</span>pathway</span>
+<span id="cb547-3"><a href="part-3-comparing-ora-and-gsea-2.html#cb547-3" tabindex="-1"></a></span>
+<span id="cb547-4"><a href="part-3-comparing-ora-and-gsea-2.html#cb547-4" tabindex="-1"></a>both      <span class="ot">&lt;-</span> <span class="fu">intersect</span>(ora_hits, gsea_hits)</span>
+<span id="cb547-5"><a href="part-3-comparing-ora-and-gsea-2.html#cb547-5" tabindex="-1"></a>ora_only  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(ora_hits, gsea_hits)</span>
+<span id="cb547-6"><a href="part-3-comparing-ora-and-gsea-2.html#cb547-6" tabindex="-1"></a>gsea_only <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(gsea_hits, ora_hits)</span>
+<span id="cb547-7"><a href="part-3-comparing-ora-and-gsea-2.html#cb547-7" tabindex="-1"></a></span>
+<span id="cb547-8"><a href="part-3-comparing-ora-and-gsea-2.html#cb547-8" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Pathways significant in BOTH :&quot;</span>, <span class="fu">length</span>(both), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Pathways significant in BOTH : 0</code></pre>
-<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="part-3-comparing-ora-and-gsea-2.html#cb552-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Pathways in ORA only         :&quot;</span>, <span class="fu">length</span>(ora_only), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="part-3-comparing-ora-and-gsea-2.html#cb549-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Pathways in ORA only         :&quot;</span>, <span class="fu">length</span>(ora_only), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Pathways in ORA only         : 12</code></pre>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="part-3-comparing-ora-and-gsea-2.html#cb554-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Pathways in GSEA only        :&quot;</span>, <span class="fu">length</span>(gsea_only), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="part-3-comparing-ora-and-gsea-2.html#cb551-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Pathways in GSEA only        :&quot;</span>, <span class="fu">length</span>(gsea_only), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Pathways in GSEA only        : 2</code></pre>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="part-3-comparing-ora-and-gsea-2.html#cb556-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(both) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb556-2"><a href="part-3-comparing-ora-and-gsea-2.html#cb556-2" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Pathways found by both methods:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb556-3"><a href="part-3-comparing-ora-and-gsea-2.html#cb556-3" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">&quot; -&quot;</span>, both), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb556-4"><a href="part-3-comparing-ora-and-gsea-2.html#cb556-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="part-3-comparing-ora-and-gsea-2.html#cb553-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(both) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb553-2"><a href="part-3-comparing-ora-and-gsea-2.html#cb553-2" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Pathways found by both methods:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb553-3"><a href="part-3-comparing-ora-and-gsea-2.html#cb553-3" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">&quot; -&quot;</span>, both), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb553-4"><a href="part-3-comparing-ora-and-gsea-2.html#cb553-4" tabindex="-1"></a>}</span></code></pre></div>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
 <strong>Interpretation guide:</strong>
 <ul>

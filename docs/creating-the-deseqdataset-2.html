@@ -343,17 +343,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#run-gsea-1"><i class="fa fa-check"></i>Run GSEA</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#inspect-gene-sets"><i class="fa fa-check"></i>Inspect Gene Sets</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#dot-plot-nes-p-value-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, p-value and Gene Set Size</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
-<ul>
-<li class="chapter" data-level="" data-path="key-parameters.html"><a href="key-parameters.html"><i class="fa fa-check"></i>Key parameters</a></li>
 </ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -454,14 +449,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="note">
 <p><strong>📘 Note:</strong> <strong>Prokaryote:</strong> DESeq2’s negative binomial model is organism-agnostic. It works identically for <em>E. coli</em> as for mouse or human data. ✅</p>
 </div>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="creating-the-deseqdataset-2.html#cb416-1" tabindex="-1"></a>samples_info<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group,</span>
-<span id="cb416-2"><a href="creating-the-deseqdataset-2.html#cb416-2" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>))</span>
-<span id="cb416-3"><a href="creating-the-deseqdataset-2.html#cb416-3" tabindex="-1"></a></span>
-<span id="cb416-4"><a href="creating-the-deseqdataset-2.html#cb416-4" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(</span>
-<span id="cb416-5"><a href="creating-the-deseqdataset-2.html#cb416-5" tabindex="-1"></a>  <span class="at">countData =</span> count_genes,</span>
-<span id="cb416-6"><a href="creating-the-deseqdataset-2.html#cb416-6" tabindex="-1"></a>  <span class="at">colData   =</span> samples_info,</span>
-<span id="cb416-7"><a href="creating-the-deseqdataset-2.html#cb416-7" tabindex="-1"></a>  <span class="at">design    =</span> <span class="sc">~</span> condition</span>
-<span id="cb416-8"><a href="creating-the-deseqdataset-2.html#cb416-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="creating-the-deseqdataset-2.html#cb413-1" tabindex="-1"></a>samples_info<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group,</span>
+<span id="cb413-2"><a href="creating-the-deseqdataset-2.html#cb413-2" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>))</span>
+<span id="cb413-3"><a href="creating-the-deseqdataset-2.html#cb413-3" tabindex="-1"></a></span>
+<span id="cb413-4"><a href="creating-the-deseqdataset-2.html#cb413-4" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(</span>
+<span id="cb413-5"><a href="creating-the-deseqdataset-2.html#cb413-5" tabindex="-1"></a>  <span class="at">countData =</span> count_genes,</span>
+<span id="cb413-6"><a href="creating-the-deseqdataset-2.html#cb413-6" tabindex="-1"></a>  <span class="at">colData   =</span> samples_info,</span>
+<span id="cb413-7"><a href="creating-the-deseqdataset-2.html#cb413-7" tabindex="-1"></a>  <span class="at">design    =</span> <span class="sc">~</span> condition</span>
+<span id="cb413-8"><a href="creating-the-deseqdataset-2.html#cb413-8" tabindex="-1"></a>)</span></code></pre></div>
 </div>
             </section>
 
