@@ -10,16 +10,12 @@
   // mid-course. To roll out a new image: edit the Dockerfile, cut a new
   // GitHub release (which builds, verifies and publishes it), then bump
   // this tag.
-  "image": "ghcr.io/biosustain/dsp_transcriptomics_27200-data-driven-bioengineering:1.0.0",
+  // 1.1.0 bakes in the AI agent CLIs (Claude Code, Codex) — see the
+  // "AI assistants in your Codespace" section of the course book.
+  "image": "ghcr.io/biosustain/dsp_transcriptomics_27200-data-driven-bioengineering:1.1.0",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    // Node is only needed for the AI agent CLIs installed below.
-    "ghcr.io/devcontainers/features/node:1": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
-  // AI coding agents for the students to experiment with (see the
-  // "AI assistants in your Codespace" section of the course book).
-  // Installed at create time rather than baked into the pinned image.
-  "postCreateCommand": "npm install -g @anthropic-ai/claude-code @openai/codex",
   "customizations": {
     "vscode": {
       // jupyter-renderers adds the plotly renderer VS Code needs for the
