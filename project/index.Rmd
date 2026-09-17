@@ -15,7 +15,7 @@ rep_lecturer <- "Lasse Ebdrup Pedersen (laeb@dtu.dk), Senior Researcher - DTU Bi
 rep_all <- paste0(
   "Juliana Assis, Senior Data Scientist - Biotechnology Research Institute for the Green Transition BRIGHT (jasge@dtu.dk)<br>",
   "Sebastian Schulz, Senior Data Scientist - BRIGHT (sebschu@dtu.dk)<br>",
-  "Alberto Pallejà Caro, Team Lead Data Science Platform - BRIGHT (apca@dtu.dk)"
+  "Alberto Palleja Caro, Team Lead Data Science Platform - BRIGHT (apca@dtu.dk)"
 )
 ```
 

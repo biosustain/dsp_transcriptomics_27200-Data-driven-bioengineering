@@ -516,9 +516,9 @@ ggsave(
 Colour encodes treatment, shape encodes donor. If treatment separates cleanly on one axis while donors are spread along another, that is the classic signature of a paired design: a consistent treatment effect on top of donor-to-donor baseline differences.
 :::
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 1. Find each donor's treated and untreated points in your PCA. Which is bigger: the difference between donors, or the shift caused by treatment? Based on that, predict which model will find more differentially expressed genes in the next notebook — `~ condition` or `~ donor + condition` — and why. Write the prediction down: you will check it.
 :::
 
@@ -644,9 +644,9 @@ dev.off()
 - Whether samples cluster by donor instead of (or in addition to) treatment — a visual argument for the paired design
 :::
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 2. Pick the gene with the cleanest treated/untreated split in your heatmap. Which of these can you claim from it: more transcript? more protein? more activity? Then look for *NR3C1* — the receptor dexamethasone binds to. It is a pre-existing protein: did its transcript need to change for the response you see? What does that say about what RNA-seq can and cannot show?
 :::
 

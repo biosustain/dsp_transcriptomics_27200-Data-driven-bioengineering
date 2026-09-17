@@ -634,9 +634,9 @@ about whether a single "biofilm vs planktonic" number is meaningful for this str
 between USA100 and USA500?
 </div>
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 1. Pick one gene from your nine-panel profile plot. Looking at its two lines: is the interaction driven by the biofilm cells changing, the planktonic cells changing, or a real crossover? Now imagine sampling had stopped at 10 h — what would you have concluded about this gene? What decides the answer: the biology, or the time window you measured?
 :::
 
@@ -731,9 +731,9 @@ plot_volcano(res_24,
              "Positive log2FC = higher in biofilm | note: growth-phase confounded")
 ```
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 2. The hypothesis: USA500, the strongest biofilm producer in the paper's assay, should show the biggest biofilm-vs-planktonic difference at 24 h. Compare your cross-strain table with a group that analysed the other strain. Did the hypothesis hold? Suggest two possible explanations for what you see — one biological, one technical. (Hint: which reference genome were the USA500 reads mapped to?)
 :::
 

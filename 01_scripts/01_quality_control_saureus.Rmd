@@ -318,9 +318,9 @@ cat("Genes after  filtering:", nrow(dds), "\n")
 cat("Genes removed         :", sum(!keep), "\n")
 ```
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 1. Your output prints how many genes the filter removed. Pick one of them — a gene with almost no counts in any of your 32 samples — and suggest two possible reasons it is so quiet: one biological, one technical. (USA-500 groups: remember your reads were mapped to the USA300 genome.) How could you start telling the two apart with the data you already have?
 :::
 
@@ -338,9 +338,9 @@ levels(dds$lifestyle)
 <strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC will mean higher expression in biofilm relative to planktonic.
 :::
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 2. The script sets planktonic as the reference, so a positive fold change means "up in biofilm". If you swapped the reference, what would change in the numbers — and what would change only in how you tell the story? For *S. aureus* living on a catheter in a patient, which lifestyle is really the "normal" one?
 :::
 
@@ -597,9 +597,9 @@ dev.off()
 - Whether samples split by time point first (a sign the time points are very different states)
 :::
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 3. These 50 genes are the most *variable* — not necessarily the most *important*. Could a gene that is essential for biofilm formation be missing from this heatmap? Give one reason how. (Hint: what does a count measure — and what does it miss?)
 :::
 

@@ -312,9 +312,9 @@ if (!is.null(ora_combined) && nrow(ora_combined) > 0) {
 }
 ```
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 1. Dexamethasone is prescribed to switch inflammation **off** — yet immune and cytokine terms show up in your ORA results. Check which direction they come from. Does an immune term among UP-regulated genes mean the drug switched inflammation on? Look at a few of the genes behind one such term: are they activators of inflammation, or brakes?
 :::
 
@@ -649,9 +649,9 @@ sessionInfo()
 rmarkdown::render("01_scripts/03_gene_functional.Rmd")
 ```
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 2. Everything in this chapter came from transcript abundance. Yet the molecule whose *activity* changed most — the glucocorticoid receptor (*NR3C1*) — was switched on by drug binding, not by transcription. Name one claim your enrichment tables can honestly make, one they cannot, and one experiment that would measure activity instead of abundance.
 :::
 

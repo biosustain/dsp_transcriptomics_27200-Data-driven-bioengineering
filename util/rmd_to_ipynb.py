@@ -60,6 +60,7 @@ CLASS_STYLE = {
     "important": "background:#fdf2e9;border-left:5px solid #e67e22;border-radius:4px;padding:10px 16px;margin:10px 0;",
     "tip":       "background:#fff3cd;border-left:4px solid #ffc107;border-radius:4px;padding:10px 16px;margin:10px 0;",
     "remember":  "background:#d1ecf1;border-left:4px solid #0c5460;border-radius:4px;padding:10px 16px;margin:10px 0;",
+    "question":  "background:#f2efff;border-left:5px solid #6c5ce7;border-radius:6px;padding:10px 16px;margin:10px 0;",
 }
 
 CHUNK_OPEN = re.compile(r"^```\{r(?:[ ,]+([A-Za-z0-9._-]+))?\s*,?\s*(.*?)\}\s*$")

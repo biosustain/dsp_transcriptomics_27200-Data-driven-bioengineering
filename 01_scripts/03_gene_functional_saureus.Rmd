@@ -408,9 +408,9 @@ if (!is.null(ora_plot_df) && nrow(ora_plot_df) > 0) {
 }
 ```
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 1. From your ORA results, pick the enriched set you trust **most** and the one you trust **least**. Defend both using the numbers in your table (how many hits, how big the set, the eFDR) and whether the biology makes sense for a biofilm-planktonic switch.
 :::
 
@@ -678,9 +678,9 @@ cat("ORA sets among planktonic-up genes:", nrow(ora_down_sig), "\n")
    characterised. A "no enrichment" result here is itself a finding worth stating.
 :::
 
-### 🧠 Interpretation questions
+## 🧠 Interpretation questions
 
-::: boxy
+::: question
 2. Ribosome and translation gene sets score higher in planktonic cells — at the transcript level. A colleague concludes: "biofilm cells have shut down protein synthesis." Is that claim justified by your data? What else could explain fewer ribosomal transcripts in biofilm, and what measurement would settle it?
 :::
 
