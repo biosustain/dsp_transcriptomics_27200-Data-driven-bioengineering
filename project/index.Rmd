@@ -53,6 +53,10 @@ The material is designed for people with **no or little practical experience** i
 * 🧑‍🔬 *Homo sapiens* — airway smooth muscle cells treated with dexamethasone (paired donor design)
 
 :::boxy
+**Pick ONE dataset** — whichever interests you more, microbial or biomedical — and work through its three notebooks in order (**01 quality control → 02 differential expression → 03 functional enrichment**). Depth beats coverage: it is better to interpret one dataset well than to rush through both. If your group finishes early, start on the other dataset.
+:::
+
+:::boxy
 You can also explore the [27200 Data Driven Bioengineering - Transcriptomics repository](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 :::
 

@@ -466,6 +466,12 @@ the whole genome. DESeq2 already filtered to expressed genes, so this table is t
 pool. Using the full genome would inflate the background and produce over-optimistic
 p-values.</p>
 </div>
+<div class="boxy">
+<p><strong>🧠 Interpretation — discuss in your group</strong></p>
+<ol style="list-style-type: decimal">
+<li>Read ‘Background (all tested)’ off your own output and compare it to the size of your strain’s reference genome (roughly 2,800-2,900 protein-coding genes for either strain). Where did the missing genes go, and if you put them back into the background, would your eFDR values become more or less significant? Name one kind of gene set whose verdict could flip, and explain why the smaller background is the honest one for THIS experiment.</li>
+</ol>
+</div>
 </div>
 <div id="run-ora" class="section level3 hasAnchor">
 <h3>Run ORA<a href="part-1-over-representation-analysis-ora.html#run-ora" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -556,8 +562,8 @@ will be empty. That is a valid outcome, not an error.</p>
 <pre><code>## No significant enriched sets.</code></pre>
 <p><strong>Down-regulated genes — enriched sets (planktonic-associated)</strong></p>
 <div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="part-1-over-representation-analysis-ora.html#cb198-1" tabindex="-1"></a><span class="fu">show_ora_table</span>(ora_down_sig, <span class="st">&quot;Significant ORA sets — DOWN-regulated (planktonic) genes&quot;</span>)</span></code></pre></div>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-b49efb3b2b1968addfc1" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b49efb3b2b1968addfc1">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Significant ORA sets &lt;U+2014&gt; DOWN-regulated (planktonic) genes<\/caption>","data":[["KEGG","KEGG","GO:BP","GO:MF","GO:BP","GO:BP","KEGG","KEGG","KEGG","GO:BP"],["sau00970","sau03010","GO:0006412","GO:0003735","GO:0009228","GO:0015986","sau00230","sau02060","sau00730","GO:0006189"],["Aminoacyl-tRNA biosynthesis","Ribosome","translation","structural constituent of ribosome","thiamine biosynthetic process","proton motive force-driven ATP synthesis","Purine metabolism","Phosphotransferase system (PTS)","Thiamine metabolism","'de novo' IMP biosynthetic process"],[17,22,22,22,4,4,9,6,4,3],[50,67,60,56,6,6,44,21,11,7],[2.86e-10,1.116e-12,8.016e-14,1.454e-14,0.0001208,0.0001208,0.0004802,0.0006780999999999999,0.002139,0.004849],[0,0,0,0,0.0006667,0.0006667,0.004,0.00625,0.018,0.0275]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source<\/th>\n      <th>ID<\/th>\n      <th>Set<\/th>\n      <th>Hits in query<\/th>\n      <th>Hits in background<\/th>\n      <th>p-value<\/th>\n      <th>eFDR<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"scrollX":true,"scrollY":300,"scroller":true,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]},{"name":"source","targets":0},{"name":"ontology_id","targets":1},{"name":"ontology_name","targets":2},{"name":"nr_common_with_tested_elements","targets":3},{"name":"nr_common_with_background_elements","targets":4},{"name":"p_value","targets":5},{"name":"eFDR","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-7c00bb89e3b073a7d3a0" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7c00bb89e3b073a7d3a0">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Significant ORA sets &lt;U+2014&gt; DOWN-regulated (planktonic) genes<\/caption>","data":[["KEGG","KEGG","GO:BP","GO:MF","GO:BP","GO:BP","KEGG","KEGG","KEGG","GO:BP"],["sau00970","sau03010","GO:0006412","GO:0003735","GO:0009228","GO:0015986","sau00230","sau02060","sau00730","GO:0006189"],["Aminoacyl-tRNA biosynthesis","Ribosome","translation","structural constituent of ribosome","thiamine biosynthetic process","proton motive force-driven ATP synthesis","Purine metabolism","Phosphotransferase system (PTS)","Thiamine metabolism","'de novo' IMP biosynthetic process"],[17,22,22,22,4,4,9,6,4,3],[50,67,60,56,6,6,44,21,11,7],[2.86e-10,1.116e-12,8.016e-14,1.454e-14,0.0001208,0.0001208,0.0004802,0.0006780999999999999,0.002139,0.004849],[0,0,0,0,0.0006667,0.0006667,0.004,0.00625,0.018,0.0275]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source<\/th>\n      <th>ID<\/th>\n      <th>Set<\/th>\n      <th>Hits in query<\/th>\n      <th>Hits in background<\/th>\n      <th>p-value<\/th>\n      <th>eFDR<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"scrollX":true,"scrollY":300,"scroller":true,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]},{"name":"source","targets":0},{"name":"ontology_id","targets":1},{"name":"ontology_name","targets":2},{"name":"nr_common_with_tested_elements","targets":3},{"name":"nr_common_with_background_elements","targets":4},{"name":"p_value","targets":5},{"name":"eFDR","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="critical-interpretation-watch-for-spurious-hits" class="section level3 hasAnchor">
 <h3>Critical Interpretation — Watch for Spurious Hits<a href="part-1-over-representation-analysis-ora.html#critical-interpretation-watch-for-spurious-hits" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -633,6 +639,12 @@ each set is printed at the end of each bar. Up-regulated (biofilm) and down-regu
 <span id="cb199-50"><a href="part-1-over-representation-analysis-ora.html#cb199-50" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No significant sets to plot.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb199-51"><a href="part-1-over-representation-analysis-ora.html#cb199-51" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-fn-ora-barplot-1.png" alt="" width="672" /></p>
+<div class="boxy">
+<p><strong>🧠 Interpretation — discuss in your group</strong></p>
+<ol start="2" style="list-style-type: decimal">
+<li>From your ORA bar plot and tables, pick the one enriched set you trust MOST and the one you trust LEAST, and defend both choices using at least three pieces of evidence from your own table (hits in query, hits in background, eFDR) plus biological plausibility for a biofilm-planktonic switch. Would 5 hits out of a 5-gene set impress you more or less than 30 hits out of a 120-gene set, and why?</li>
+</ol>
+</div>
 </div>
 </div>
             </section>

@@ -485,6 +485,13 @@ to use directly in the enrichment analysis (script 03) with no ID conversion ste
 <li>Whether samples cluster by donor instead of (or in addition to) treatment — a visual argument for the paired design</li>
 </ul>
 </div>
+<div class="boxy">
+<p><strong>🧠 Interpretation — discuss in your group</strong></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Pick the gene with the cleanest red/blue split by condition in your top-50 heatmap. Which of these claims does that pattern license: more transcript, more protein, more activity, ‘the pathway is switched on’ — and for each claim it does not license, what measurement would? Then scan the row names of your heatmap for NR3C1, the glucocorticoid receptor that dexamethasone acts through. It is a pre-existing protein — did its transcript need to change at all for the whole response you see to happen, and what does its presence or absence from your top 50 tell you?</li>
+<li>Every row in this heatmap is z-scored, so every gene gets equal visual weight. Find a gene that looks dramatic here and ask what the z-score hides: could its strong red/blue pattern sit on top of trivially low absolute expression, and how would you check using outputs you already have (hint: the normalised counts are a few sections back)? Which representation — row-scaled or absolute — is honest for judging consistency of response, and which for judging biological magnitude?</li>
+</ol>
+</div>
 </div>
             </section>
 

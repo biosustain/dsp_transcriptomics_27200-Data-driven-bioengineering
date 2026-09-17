@@ -297,6 +297,13 @@ barplot(colSums(count_genes),
 A bacterial genome has far fewer genes than a human one (roughly 2,500–2,900 for *S. aureus*), so this count matrix is much smaller than a eukaryotic one. A right-skewed count distribution (many low-count genes, a few very high) is still expected and correct.
 :::
 
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+1. Look at your library-size barplot and pick the tallest and the shortest bar. Predict, before you scroll any further: will each of those samples get a size factor above or below 1.0 in the Estimate Size Factors table further down? Check your prediction when you get there, and note any sample where it fails. Then the biological question: if a biofilm sample had twice the total counts of a planktonic sample, would that mean biofilm cells were making twice as much RNA — why or why not?
+:::
+
+
 ### Pre-filtering Low-count Genes
 
 Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples (equal to the size of the smallest lifestyle group).
@@ -318,6 +325,13 @@ cat("Genes after  filtering:", nrow(dds), "\n")
 cat("Genes removed         :", sum(!keep), "\n")
 ```
 
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+2. Read the number of removed genes off your own output — as the chapter notes, the fraction is small compared with a human dataset. Now consider one gene the filter removed (consistently low counts across nearly all of your 32 samples) and list three different reasons it could be that quiet, labelling each reason 'biology' or 'measurement'. (Hint for USA-500 groups: whose genome were your reads aligned to?) How would you tell the reasons apart using only data you already have?
+:::
+
+
 ### Factor Order and Reference Level
 
 The first factor level is always the reference (denominator) in `DESeq2` comparisons. Setting `Planktonic` as the reference ensures fold changes are computed in the intended direction: **biofilm vs planktonic**, not the reverse.
@@ -330,6 +344,13 @@ levels(dds$lifestyle)
 ::: {style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;"}
 <strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC will mean higher expression in biofilm relative to planktonic.
 :::
+
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+3. The script sets Planktonic as the reference, so in script 02 a positive log2 fold-change will read 'up in biofilm'. If you swapped the reference, what would change in the results, and what would change only in the story you tell about them? When you reach the Top Variable Genes Heatmap, pick one locus tag from your own plot and write its behaviour both ways ('induced in biofilm' vs 'repressed in planktonic'). Then attack the convention itself: for S. aureus on an implanted catheter, which lifestyle is the organism's 'normal' state — and what does calling shaken rich-medium culture the control quietly assume?
+:::
+
 
 ## Exploratory Data Analysis
 
@@ -498,6 +519,13 @@ biofilm and planktonic separate cleanly <em>and</em> where you have adequate rep
 separation off this plot rather than assuming it — then set that time point in script 02.
 :::
 
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+4. You have now seen two views of the same samples: the distance heatmap and this PCA. Commit as a group to one claim — 'these samples are organised first by time point' or 'first by lifestyle' — and point to the specific block in your heatmap and the specific axis in your PCA that support it. Where the two plots seem to disagree, reconcile them (the chapter tells you, under Detecting Outliers, that they are not computed from the same set of genes). Biologically: are a 5 h biofilm and a 24 h biofilm the same state, and what in your plots says so?
+:::
+
+
 ### Detecting Outliers
 
 The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.
@@ -583,6 +611,13 @@ dev.off()
 - Whether samples split by time point first (a sign the time points are very different states)
 :::
 
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+5. These 50 genes are the most variable, not the most important. Read your annotation bars: do the columns split first by lifestyle or by time point — and does that make this a list of biofilm genes or of growth-phase genes? Then name one way a gene absolutely central to biofilm formation could be missing from this heatmap entirely. (Hint: what does a count measure, and what does it not?)
+:::
+
+
 ## Summary
 
 Before proceeding to differential expression, confirm the QC checks and record the time-point decision:
@@ -633,4 +668,11 @@ sessionInfo()
 ```{r saureus-qc-render-0, eval=FALSE, echo=FALSE}
 rmarkdown::render("01_scripts/01_quality_control.Rmd")
 ```
+
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+6. The last row of the summary table asks you to record a time-point decision. Decide now, as a group, which time point you will carry into script 02, and defend the choice in one sentence that cites at least two numbers from your own outputs (the % variance on a PCA axis, the visible separation, the replicate counts in your design table). Then state the price: by keeping only that time point and comparing biofilm to planktonic as two groups, what biofilm biology do you become blind to?
+:::
+
 

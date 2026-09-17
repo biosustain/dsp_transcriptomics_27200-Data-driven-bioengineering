@@ -170,6 +170,13 @@ inter-patient variability the study design anticipated, and it is why we use the
 downstream steps.
 :::
 
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+1. Your comparison table shows the paired model (~ donor + condition) calls roughly 3,800 genes significant, against about 2,600 for the simple model — around 1,200 genes appeared the moment donor entered the design. The data did not change and neither did the treatment effect, so what did? Commit to a mechanism, then point to one piece of evidence in your own outputs (the heatmap's donor annotation later in this notebook, or the sample clustering/PCA from notebook 01) that donors really do differ at baseline — and say what the simple model was treating that donor variation as.
+:::
+
+
 ## Extracting Results
 
 `results()` extracts the Wald test output for a given contrast. By default DESeq2 applies **independent filtering** — it removes genes with very low mean counts before multiple testing correction, which increases power to detect DE genes at a given FDR threshold.
@@ -329,6 +336,14 @@ DT::datatable(
 )
 ```
 
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+2. At padj < 0.05 alone you had ~3,800 genes; adding |log2FC| ≥ 1 leaves about 700. The ~3,100 genes you just discarded are statistically real — dexamethasone did change them, just by less than 2-fold. Find one concrete casualty in your own res_df: a gene with padj far below 0.05 but |log2FC| under 1, and note its name and values. Then name one class of gene whose biology could hinge on a 1.3-fold change, and defend or attack sending only the 700-gene list into the next notebook's enrichment analysis: what could that choice make invisible?
+3. Dexamethasone acts by binding the glucocorticoid receptor, encoded by NR3C1. Before you look: predict where NR3C1 sits in your results — among the top hits, significant but modest, or absent — and justify the prediction. Now go looking: check your interactive table of significant genes first, then res_df. Careful — the interactive table only contains genes passing BOTH padj < 0.05 and |log2FC| ≥ 1, so absence there does not mean the gene wasn't tested. If the one protein that drives this entire response is nowhere near your strongest hits, and possibly not in your significant table at all, what does that tell you about what an mRNA count can and cannot measure?
+:::
+
+
 
 ## Visualisation
 
@@ -387,6 +402,13 @@ plotMA(res_shrunk,
 abline(h = c(-1, 1), lty = 2, col = "black")
 ```
 
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+4. On your MA plot the left-hand side — genes with low mean counts — now hugs zero, because apeglm pulled those fold changes toward it. A groupmate objects: 'shrinkage just deleted real 3-fold changes in lowly expressed genes.' Take the chapter's example of a gene with 1 count in control and 3 in treatment: which number is the measurement and which is the noise? If you had budget to qPCR-validate ten genes, would you rank candidates by raw or shrunken log2FC — and what goes wrong with the other choice?
+:::
+
+
 
 ## Top Gene Count Plot
 
@@ -429,6 +451,13 @@ pheatmap(
   main                     = "Top DE genes — Dexamethasone vs Untreated (VST, row-scaled)"
 )
 ```
+
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+5. Your heatmap shows the top 50 genes, row-scaled, annotated by condition and donor. First, audit a claim you accepted earlier: the paired design won because 'donors differ substantially at baseline' — can you actually see those donor differences in this heatmap, or has a plotting choice hidden them? Then judge consistency: is the treatment effect visible in all four donors for essentially every gene, and what would a gene that breaks the pattern in one donor make you suspect — plus how would you check it with what you already have?
+:::
+
 
 ## Saving Results
 

@@ -479,6 +479,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="boxy">
 <p>Colour encodes treatment, shape encodes donor. If treatment separates cleanly on one axis while donors are spread along another, that is the classic signature of a paired design: a consistent treatment effect on top of donor-to-donor baseline differences.</p>
 </div>
+<div class="boxy">
+<p><strong>🧠 Interpretation — discuss in your group</strong></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Colour is treatment, shape is donor. Commit to one sentence each — ‘PC1 is <strong><em>’ and ’PC2 is </em></strong>’ — and defend each with two specific observations from your plot (which points sit where, and the % variance printed on each axis). Now cross-check against the sample-distance heatmap from the previous section: do the two representations of the same VST matrix tell the same story, and if not, which do you trust and why?</li>
+<li>For each donor, find its treated and untreated points and judge: is the donor-to-donor spread larger or smaller than the treatment shift? The simple ~ condition model has nowhere to put that donor spread except into noise — so predict which design, ~ condition or ~ donor + condition, will call more differentially expressed genes at the same FDR in script 02, and why. Write the prediction down: you will check it in the next notebook.</li>
+</ol>
+</div>
 </div>
             </section>
 

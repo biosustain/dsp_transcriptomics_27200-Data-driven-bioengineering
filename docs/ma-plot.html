@@ -442,6 +442,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb330-4"><a href="ma-plot.html#cb330-4" tabindex="-1"></a>       <span class="at">ylab  =</span> <span class="st">&quot;log2 Fold Change&quot;</span>)</span>
 <span id="cb330-5"><a href="ma-plot.html#cb330-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-ma-plot-1.png" alt="" width="672" /></p>
+<div class="boxy">
+<p><strong>🧠 Interpretation — discuss in your group</strong></p>
+<ol start="4" style="list-style-type: decimal">
+<li>On your MA plot the left-hand side — genes with low mean counts — now hugs zero, because apeglm pulled those fold changes toward it. A groupmate objects: ‘shrinkage just deleted real 3-fold changes in lowly expressed genes.’ Take the chapter’s example of a gene with 1 count in control and 3 in treatment: which number is the measurement and which is the noise? If you had budget to qPCR-validate ten genes, would you rank candidates by raw or shrunken log2FC — and what goes wrong with the other choice?</li>
+</ol>
+</div>
 </div>
             </section>
 

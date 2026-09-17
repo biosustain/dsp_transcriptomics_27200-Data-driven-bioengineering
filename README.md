@@ -55,7 +55,7 @@ Tied to the course's recurring backbone principles:
 
 ## 🧪 Exercises & Interactive Activities
 
-The hands-on work happens in **[`02_notebooks/`](02_notebooks/)** — Jupyter notebooks (R kernel) generated from the scripts in `01_scripts/`. Run each dataset's notebooks in order, **01 → 02 → 03**; every step saves results that the next one loads.
+The hands-on work happens in **[`02_notebooks/`](02_notebooks/)** — Jupyter notebooks (R kernel) generated from the scripts in `01_scripts/`. **Pick ONE dataset** and run its notebooks in order, **01 → 02 → 03**; every step saves results that the next one loads. If your group finishes early, start on the other dataset.
 
 | Notebook | Description |
 |---|---|

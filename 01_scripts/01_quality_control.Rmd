@@ -332,6 +332,13 @@ cat("Genes after  filtering:", nrow(dds), "\n")
 cat("Genes removed         :", sum(!keep), "\n")
 ```
 
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+1. Your output prints a 'Genes removed' number. Are those genes silent in airway smooth muscle, or just below what an experiment with four samples per group can see — and how would you tell the difference for one specific gene? Name one class of gene that could be invisible here yet biologically decisive (hint: many transcription factors work at low copy number), and say what that means your script-02 DE list actually represents.
+:::
+
+
 
 
 ### Factor Order and Reference Level
@@ -367,6 +374,13 @@ sizeFactors(dds) %>%
   kable(digits = 3, caption = "DESeq2 size factors per sample") %>%
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 ```
+
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+2. Before running the cell below: look back at your library-size barplot and, as a group, write down which sample you expect to get the largest size factor and which will sit closest to 1.0. Run it and check your prediction against the table. Where the ranking deviates from raw library size, what is median-of-ratios actually measuring that total counts are not?
+:::
+
 
 
 
@@ -520,6 +534,14 @@ ggsave(
 Colour encodes treatment, shape encodes donor. If treatment separates cleanly on one axis while donors are spread along another, that is the classic signature of a paired design: a consistent treatment effect on top of donor-to-donor baseline differences.
 :::
 
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+3. Colour is treatment, shape is donor. Commit to one sentence each — 'PC1 is ___' and 'PC2 is ___' — and defend each with two specific observations from your plot (which points sit where, and the % variance printed on each axis). Now cross-check against the sample-distance heatmap from the previous section: do the two representations of the same VST matrix tell the same story, and if not, which do you trust and why?
+4. For each donor, find its treated and untreated points and judge: is the donor-to-donor spread larger or smaller than the treatment shift? The simple ~ condition model has nowhere to put that donor spread except into noise — so predict which design, ~ condition or ~ donor + condition, will call more differentially expressed genes at the same FDR in script 02, and why. Write the prediction down: you will check it in the next notebook.
+:::
+
+
 ## Detecting Outliers
 
 The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.
@@ -640,6 +662,14 @@ dev.off()
 - Clear colour blocks by condition → the treatment has a strong, consistent transcriptional effect
 - Whether samples cluster by donor instead of (or in addition to) treatment — a visual argument for the paired design
 :::
+
+::: boxy
+**🧠 Interpretation — discuss in your group**
+
+5. Pick the gene with the cleanest red/blue split by condition in your top-50 heatmap. Which of these claims does that pattern license: more transcript, more protein, more activity, 'the pathway is switched on' — and for each claim it does not license, what measurement would? Then scan the row names of your heatmap for NR3C1, the glucocorticoid receptor that dexamethasone acts through. It is a pre-existing protein — did its transcript need to change at all for the whole response you see to happen, and what does its presence or absence from your top 50 tell you?
+6. Every row in this heatmap is z-scored, so every gene gets equal visual weight. Find a gene that looks dramatic here and ask what the z-score hides: could its strong red/blue pattern sit on top of trivially low absolute expression, and how would you check using outputs you already have (hint: the normalised counts are a few sections back)? Which representation — row-scaled or absolute — is honest for judging consistency of response, and which for judging biological magnitude?
+:::
+
 
 ## Summary
 

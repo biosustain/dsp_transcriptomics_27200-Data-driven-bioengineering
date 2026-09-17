@@ -739,6 +739,12 @@ SA_RS00030
 <div class="boxy">
 <p>A bacterial genome has far fewer genes than a human one (roughly 2,500–2,900 for <em>S. aureus</em>), so this count matrix is much smaller than a eukaryotic one. A right-skewed count distribution (many low-count genes, a few very high) is still expected and correct.</p>
 </div>
+<div class="boxy">
+<p><strong>🧠 Interpretation — discuss in your group</strong></p>
+<ol style="list-style-type: decimal">
+<li>Look at your library-size barplot and pick the tallest and the shortest bar. Predict, before you scroll any further: will each of those samples get a size factor above or below 1.0 in the Estimate Size Factors table further down? Check your prediction when you get there, and note any sample where it fails. Then the biological question: if a biofilm sample had twice the total counts of a planktonic sample, would that mean biofilm cells were making twice as much RNA — why or why not?</li>
+</ol>
+</div>
 </div>
 <div id="pre-filtering-low-count-genes" class="section level3 hasAnchor">
 <h3>Pre-filtering Low-count Genes<a href="preparing-the-data.html#pre-filtering-low-count-genes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -760,6 +766,12 @@ SA_RS00030
 <pre><code>## Genes after  filtering: 2288</code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="preparing-the-data.html#cb42-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes removed         :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Genes removed         : 528</code></pre>
+<div class="boxy">
+<p><strong>🧠 Interpretation — discuss in your group</strong></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Read the number of removed genes off your own output — as the chapter notes, the fraction is small compared with a human dataset. Now consider one gene the filter removed (consistently low counts across nearly all of your 32 samples) and list three different reasons it could be that quiet, labelling each reason ‘biology’ or ‘measurement’. (Hint for USA-500 groups: whose genome were your reads aligned to?) How would you tell the reasons apart using only data you already have?</li>
+</ol>
+</div>
 </div>
 <div id="factor-order-and-reference-level" class="section level3 hasAnchor">
 <h3>Factor Order and Reference Level<a href="preparing-the-data.html#factor-order-and-reference-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -769,6 +781,12 @@ SA_RS00030
 <pre><code>## [1] &quot;Planktonic&quot; &quot;Biofilm&quot;</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
 <p><strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC will mean higher expression in biofilm relative to planktonic.</p>
+</div>
+<div class="boxy">
+<p><strong>🧠 Interpretation — discuss in your group</strong></p>
+<ol start="3" style="list-style-type: decimal">
+<li>The script sets Planktonic as the reference, so in script 02 a positive log2 fold-change will read ‘up in biofilm’. If you swapped the reference, what would change in the results, and what would change only in the story you tell about them? When you reach the Top Variable Genes Heatmap, pick one locus tag from your own plot and write its behaviour both ways (‘induced in biofilm’ vs ‘repressed in planktonic’). Then attack the convention itself: for S. aureus on an implanted catheter, which lifestyle is the organism’s ‘normal’ state — and what does calling shaken rich-medium culture the control quietly assume?</li>
+</ol>
 </div>
 </div>
 </div>
