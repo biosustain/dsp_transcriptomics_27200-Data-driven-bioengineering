@@ -10,7 +10,7 @@ output:
     css: assets/report.css
 ---
 
-# Background
+# Differential Expression Analysis
 
 This report covers differential expression (DE) analysis of bulk RNA-seq data from primary human airway smooth muscle (ASM) cells treated with dexamethasone ([Himes *et al.*, 2014](https://doi.org/10.1371/journal.pone.0099625)) using `DESeq2`.
 
@@ -50,7 +50,7 @@ library(DT)
 ```
 
 
-## Differential Expression Analysis
+## Running DESeq2
 
 <div style="background:#f8d7da;border-left:4px solid #721c24;padding:10px;margin:10px 0;">
   <strong>⚠️ Warning:</strong> Always use raw integer counts as input. Do not use TPM, FPKM, or any normalised values — DESeq2 handles normalisation internally.
@@ -170,13 +170,6 @@ inter-patient variability the study design anticipated, and it is why we use the
 downstream steps.
 :::
 
-## 🧠 Interpretation questions
-
-::: question
-1. Your table shows the paired model (`~ donor + condition`) finds over a thousand more significant genes than the simple model — same data, same treatment. What changed? Where did the donor-to-donor differences "go" in the simple model, and why does giving them a name in the paired model make the treatment effect easier to see? Was your prediction from the QC notebook right?
-:::
-
-
 ## Extracting Results
 
 `results()` extracts the Wald test output for a given contrast. By default DESeq2 applies **independent filtering** — it removes genes with very low mean counts before multiple testing correction, which increases power to detect DE genes at a given FDR threshold.
@@ -214,7 +207,7 @@ The results table contains one row per gene with the following columns:
 
 ---
 
-## Log2 Fold Change Shrinkage
+### Log2 Fold Change Shrinkage
 
 :::boxy
 **What is this step and why do we need it?**
@@ -258,7 +251,7 @@ summary(res_shrunk, alpha = 0.05)
 
 ---
 
-## Sorting and Filtering Significant Genes
+### Sorting and Filtering Significant Genes
 
 We order genes by adjusted p-value and filter to retain only those passing our significance thresholds: **padj < 0.05** and **|log2FC| ≥ 1** (i.e., at least a 2-fold change).
 
@@ -342,13 +335,6 @@ DT::datatable(
 )
 ```
 
-## 🧠 Interpretation questions
-
-::: question
-2. Dexamethasone works by binding the glucocorticoid receptor, made by the gene *NR3C1*. Before looking: predict where *NR3C1* sits in your results — top hit, modest, or absent? Now find it in `res_df` (not the interactive table — that only holds genes passing *both* cutoffs). Two surprises are waiting: which **direction** did it move, and does it appear in your significant table at all? The drug did not switch this gene on — it bound the protein that was already there. So what did your RNA-seq actually measure about the receptor, and what did it miss?
-:::
-
-
 ## Visualisation
 
 **Volcano Plot**
@@ -394,7 +380,7 @@ volcano
 
 
 
-## MA Plot
+### MA Plot
 
 An MA plot shows log2 fold change (y-axis) against mean expression (x-axis). It helps assess whether the fold change estimates are stable across the expression range. After shrinkage, estimates for lowly expressed genes (left side) should be pulled toward zero.
 
@@ -406,7 +392,7 @@ plotMA(res_shrunk,
 abline(h = c(-1, 1), lty = 2, col = "black")
 ```
 
-## Top Gene Count Plot
+### Top Gene Count Plot
 
 Plotting raw normalised counts for the most significant gene provides a sanity check: the direction and magnitude of the fold change should be visually obvious. If it isn't, investigate further.
 
@@ -420,7 +406,7 @@ plotCounts(dds,
 ```
 
 
-## Heatmap of Significant Genes
+### Heatmap of Significant Genes
 
 Clustering significant DE genes across samples provides a gene-level view of the expression differences. Genes should show clear block structure: high expression in treatment and low in control (or vice versa). With the paired design, you can also annotate donor to see whether the treatment effect is consistent across donors.
 
@@ -487,6 +473,13 @@ cat("Results saved to:", results_dir, "\n")
 | Enrichment (next script) | g:Profiler via `gprofiler2` (human) |
 
 Significant genes are saved and ready for gene set enrichment analysis in the next script.
+
+## 🧠 Interpretation questions
+
+::: question
+1. Your table shows the paired model (`~ donor + condition`) finds over a thousand more significant genes than the simple model — same data, same treatment. What changed? Where did the donor-to-donor differences "go" in the simple model, and why does giving them a name in the paired model make the treatment effect easier to see? Was your prediction from the QC notebook right?
+2. Dexamethasone works by binding the glucocorticoid receptor, made by the gene *NR3C1*. Before looking: predict where *NR3C1* sits in your results — top hit, modest, or absent? Now find it in `res_df` (not the interactive table — that only holds genes passing *both* cutoffs). Two surprises are waiting: which **direction** did it move, and does it appear in your significant table at all? The drug did not switch this gene on — it bound the protein that was already there. So what did your RNA-seq actually measure about the receptor, and what did it miss?
+:::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->
 

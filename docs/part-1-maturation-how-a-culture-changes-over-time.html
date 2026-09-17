@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="a-small-helper-for-extracting-and-classifying-results.html"/>
-<link rel="next" href="a-maturation-within-biofilm.html"/>
+<link rel="prev" href="setup-the-environment.html"/>
+<link rel="next" href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -186,19 +186,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html"><i class="fa fa-check"></i>Choose the Strain</a>
 <ul>
 <li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#loading-count-data"><i class="fa fa-check"></i>Loading Count Data</a></li>
+<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#building-the-metadata-from-sample-names"><i class="fa fa-check"></i>Building the Metadata from Sample Names</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="building-the-metadata-from-sample-names.html"><a href="building-the-metadata-from-sample-names.html"><i class="fa fa-check"></i>Building the Metadata from Sample Names</a></li>
 <li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html"><i class="fa fa-check"></i>Preparing the Data</a>
 <ul>
 <li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html#creating-the-deseqdataset"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
 <li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html#sanity-checks"><i class="fa fa-check"></i>Sanity Checks</a></li>
 <li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html#pre-filtering-low-count-genes"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
+<li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html#factor-order-and-reference-level"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions.html"><a href="interpretation-questions.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a>
-<ul>
-<li class="chapter" data-level="" data-path="interpretation-questions.html"><a href="interpretation-questions.html#factor-order-and-reference-level"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-1.html"><a href="interpretation-questions-1.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
 <ul>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#estimate-size-factors"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
@@ -208,49 +204,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#detecting-outliers"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-variable-genes-heatmap"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions.html"><a href="interpretation-questions.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="differential-expression-analysis.html"><a href="differential-expression-analysis.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="choose-the-strain-1.html"><a href="choose-the-strain-1.html"><i class="fa fa-check"></i>Choose the Strain</a></li>
-<li class="chapter" data-level="" data-path="load-the-deseqdataset-from-qc.html"><a href="load-the-deseqdataset-from-qc.html"><i class="fa fa-check"></i>Load the DESeqDataSet from QC</a></li>
-<li class="chapter" data-level="" data-path="a-small-helper-for-extracting-and-classifying-results.html"><a href="a-small-helper-for-extracting-and-classifying-results.html"><i class="fa fa-check"></i>A Small Helper for Extracting and Classifying Results</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html"><i class="fa fa-check"></i>Setup the Environment</a>
+<ul>
+<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html#choose-the-strain-1"><i class="fa fa-check"></i>Choose the Strain</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html#load-the-deseqdataset-from-qc"><i class="fa fa-check"></i>Load the DESeqDataSet from QC</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html#a-small-helper-for-extracting-and-classifying-results"><i class="fa fa-check"></i>A Small Helper for Extracting and Classifying Results</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html"><i class="fa fa-check"></i>Part 1 — Maturation: How a Culture Changes Over Time</a>
 <ul>
-<li class="chapter" data-level="" data-path="a-maturation-within-biofilm.html"><a href="a-maturation-within-biofilm.html"><i class="fa fa-check"></i>1a — Maturation within Biofilm</a></li>
-<li class="chapter" data-level="" data-path="b-maturation-within-planktonic.html"><a href="b-maturation-within-planktonic.html"><i class="fa fa-check"></i>1b — Maturation within Planktonic</a></li>
-<li class="chapter" data-level="" data-path="visualising-the-operon-genes-as-arrows-along-the-chromosome.html"><a href="visualising-the-operon-genes-as-arrows-along-the-chromosome.html"><i class="fa fa-check"></i>Visualising the Operon: Genes as Arrows Along the Chromosome</a></li>
-<li class="chapter" data-level="" data-path="comparing-the-two-maturation-programmes.html"><a href="comparing-the-two-maturation-programmes.html"><i class="fa fa-check"></i>Comparing the Two Maturation Programmes</a></li>
+<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#a-maturation-within-biofilm"><i class="fa fa-check"></i>1a — Maturation within Biofilm</a></li>
+<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#b-maturation-within-planktonic"><i class="fa fa-check"></i>1b — Maturation within Planktonic</a></li>
+<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#visualising-the-operon-genes-as-arrows-along-the-chromosome"><i class="fa fa-check"></i>Visualising the Operon: Genes as Arrows Along the Chromosome</a></li>
+<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#comparing-the-two-maturation-programmes"><i class="fa fa-check"></i>Comparing the Two Maturation Programmes</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><i class="fa fa-check"></i>Part 2 — Lifestyle: Biofilm vs Planktonic, Accounting for Time</a>
 <ul>
-<li class="chapter" data-level="" data-path="a-additive-model-the-lifestyle-effect-adjusted-for-time.html"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html"><i class="fa fa-check"></i>2a — Additive Model: the Lifestyle Effect, Adjusted for Time</a></li>
-<li class="chapter" data-level="" data-path="b-interaction-model-does-the-lifestyle-difference-change-with-time.html"><a href="b-interaction-model-does-the-lifestyle-difference-change-with-time.html"><i class="fa fa-check"></i>2b — Interaction Model: Does the Lifestyle Difference Change with Time?</a></li>
-<li class="chapter" data-level="" data-path="additive-vs-interaction-which-should-you-use.html"><a href="additive-vs-interaction-which-should-you-use.html"><i class="fa fa-check"></i>Additive vs Interaction: Which Should You Use?</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-3.html"><a href="interpretation-questions-3.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
+<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#a-additive-model-the-lifestyle-effect-adjusted-for-time"><i class="fa fa-check"></i>2a — Additive Model: the Lifestyle Effect, Adjusted for Time</a></li>
+<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#b-interaction-model-does-the-lifestyle-difference-change-with-time"><i class="fa fa-check"></i>2b — Interaction Model: Does the Lifestyle Difference Change with Time?</a></li>
+<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#additive-vs-interaction-which-should-you-use"><i class="fa fa-check"></i>Additive vs Interaction: Which Should You Use?</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><i class="fa fa-check"></i>Part 3 — Hypothesis Test: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?</a>
 <ul>
-<li class="chapter" data-level="" data-path="cross-strain-comparison-of-the-hypothesis.html"><a href="cross-strain-comparison-of-the-hypothesis.html"><i class="fa fa-check"></i>Cross-Strain Comparison of the Hypothesis</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-4.html"><a href="interpretation-questions-4.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
+<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cross-strain-comparison-of-the-hypothesis"><i class="fa fa-check"></i>Cross-Strain Comparison of the Hypothesis</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="save-results.html"><a href="save-results.html"><i class="fa fa-check"></i>Save Results</a></li>
 <li class="chapter" data-level="" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-1.html"><a href="interpretation-questions-1.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
 <ul>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-two-packages"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#strain-parameter"><i class="fa fa-check"></i>Strain parameter</a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#load-libraries"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html"><i class="fa fa-check"></i>Strain configuration and inputs</a></li>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis.html"><a href="load-results-from-differential-expression-analysis.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a>
+<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html"><i class="fa fa-check"></i>Strain configuration and inputs</a>
 <ul>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis.html"><a href="load-results-from-differential-expression-analysis.html#define-significance-and-check-against-the-de-table"><i class="fa fa-check"></i>Define significance and check against the DE table</a></li>
+<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#load-results-from-differential-expression-analysis"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
+<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#define-significance-and-check-against-the-de-table"><i class="fa fa-check"></i>Define significance and check against the DE table</a></li>
+<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#combine-gene-set-collections"><i class="fa fa-check"></i>Combine gene set collections</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="combine-gene-set-collections.html"><a href="combine-gene-set-collections.html"><i class="fa fa-check"></i>Combine gene set collections</a></li>
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
 <ul>
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#prepare-input"><i class="fa fa-check"></i>Prepare Input</a></li>
@@ -259,7 +256,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#critical-interpretation-watch-for-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Watch for Spurious Hits</a></li>
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#bar-plot-top-enriched-sets-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Enriched Sets by Direction</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
 <ul>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
@@ -274,18 +270,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea.html"><a href="part-3-comparing-ora-and-gsea.html#reading-the-biology"><i class="fa fa-check"></i>Reading the biology</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-6.html"><a href="interpretation-questions-6.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results.html"><a href="saving-results.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="part"><span><b>II Homo sapiens (dexamethasone)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-1.html"><a href="quality-control-1.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="getting-the-metadata.html"><a href="getting-the-metadata.html"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-<li class="chapter" data-level="" data-path="loading-count-data-1.html"><a href="loading-count-data-1.html"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html"><i class="fa fa-check"></i>Preparing the Data</a></li>
-<li class="chapter" data-level="" data-path="creating-the-deseqdataset-1.html"><a href="creating-the-deseqdataset-1.html"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html"><i class="fa fa-check"></i>Setup the Environment</a>
+<ul>
+<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#getting-the-metadata"><i class="fa fa-check"></i>Getting the Metadata</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#loading-count-data-1"><i class="fa fa-check"></i>Loading Count Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html"><i class="fa fa-check"></i>Preparing the Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#creating-the-deseqdataset-1"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="sanity-checks-1.html"><a href="sanity-checks-1.html"><i class="fa fa-check"></i>Sanity Checks</a>
 <ul>
 <li class="chapter" data-level="" data-path="sanity-checks-1.html"><a href="sanity-checks-1.html#are-we-working-with-raw-counts"><i class="fa fa-check"></i>Are We Working with Raw Counts?</a></li>
@@ -296,30 +296,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#estimate-size-factors-1"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#sample-correlation-heatmap-1"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#detecting-outliers-1"><i class="fa fa-check"></i>Detecting Outliers</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sample-correlation-heatmap-1.html"><a href="sample-correlation-heatmap-1.html"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-pca-1.html"><a href="principal-component-analysis-pca-1.html"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-7.html"><a href="interpretation-questions-7.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
-<li class="chapter" data-level="" data-path="detecting-outliers-1.html"><a href="detecting-outliers-1.html"><i class="fa fa-check"></i>Detecting Outliers</a></li>
-<li class="chapter" data-level="" data-path="top-variable-genes-heatmap-1.html"><a href="top-variable-genes-heatmap-1.html"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-8.html"><a href="interpretation-questions-8.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-3.html"><a href="interpretation-questions-3.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i>Background</a>
+<li class="chapter" data-level="" data-path="differential-expression-analysis-1.html"><a href="differential-expression-analysis-1.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-1.html"><a href="differential-expression-analysis-1.html"><i class="fa fa-check"></i>Differential Expression Analysis</a></li>
+<li class="chapter" data-level="" data-path="running-deseq2.html"><a href="running-deseq2.html"><i class="fa fa-check"></i>Running DESeq2</a></li>
 <li class="chapter" data-level="" data-path="teaching-comparison-paired-vs-simple-design.html"><a href="teaching-comparison-paired-vs-simple-design.html"><i class="fa fa-check"></i>Teaching Comparison — Paired vs Simple Design</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-9.html"><a href="interpretation-questions-9.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
-<li class="chapter" data-level="" data-path="extracting-results.html"><a href="extracting-results.html"><i class="fa fa-check"></i>Extracting Results</a></li>
-<li class="chapter" data-level="" data-path="log2-fold-change-shrinkage.html"><a href="log2-fold-change-shrinkage.html"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
-<li class="chapter" data-level="" data-path="sorting-and-filtering-significant-genes.html"><a href="sorting-and-filtering-significant-genes.html"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-10.html"><a href="interpretation-questions-10.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
-<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html"><i class="fa fa-check"></i>Visualisation</a></li>
-<li class="chapter" data-level="" data-path="ma-plot.html"><a href="ma-plot.html"><i class="fa fa-check"></i>MA Plot</a></li>
-<li class="chapter" data-level="" data-path="top-gene-count-plot.html"><a href="top-gene-count-plot.html"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
-<li class="chapter" data-level="" data-path="heatmap-of-significant-genes.html"><a href="heatmap-of-significant-genes.html"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
+<li class="chapter" data-level="" data-path="extracting-results.html"><a href="extracting-results.html"><i class="fa fa-check"></i>Extracting Results</a>
+<ul>
+<li class="chapter" data-level="" data-path="extracting-results.html"><a href="extracting-results.html#log2-fold-change-shrinkage"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
+<li class="chapter" data-level="" data-path="extracting-results.html"><a href="extracting-results.html#sorting-and-filtering-significant-genes"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html"><i class="fa fa-check"></i>Visualisation</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html#ma-plot"><i class="fa fa-check"></i>MA Plot</a></li>
+<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html#top-gene-count-plot"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
+<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html#heatmap-of-significant-genes"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-4.html"><a href="interpretation-questions-4.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
 <ul>
@@ -335,7 +337,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#interactive-manhattan-plot"><i class="fa fa-check"></i>Interactive Manhattan Plot</a></li>
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#bar-plot-top-terms-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Terms by Direction</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-11.html"><a href="interpretation-questions-11.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
 <ul>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#prepare-the-ranked-gene-list-1"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
@@ -346,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -443,8 +444,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="part-1-maturation-how-a-culture-changes-over-time" class="section level1 hasAnchor">
-<h1>Part 1 — Maturation: How a Culture Changes Over Time<a href="part-1-maturation-how-a-culture-changes-over-time.html#part-1-maturation-how-a-culture-changes-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="part-1-maturation-how-a-culture-changes-over-time" class="section level2 hasAnchor">
+<h2>Part 1 — Maturation: How a Culture Changes Over Time<a href="part-1-maturation-how-a-culture-changes-over-time.html#part-1-maturation-how-a-culture-changes-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Here we compare the <strong>last</strong> time point to the <strong>first</strong> <em>within a single lifestyle</em>. This isolates the effect of time (culture ageing / maturation) with lifestyle held constant, so nothing here is confounded by the biofilm-vs-planktonic difference.</p>
 <div class="note">
 <p><strong>📘 Note — first vs last, and an invitation to explore.</strong> We compare <strong>24 h vs 5 h</strong>
@@ -455,14 +456,393 @@ builds up over time. Nothing else in the code needs to change.</p>
 </div>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb83-1" tabindex="-1"></a>first_tp <span class="ot">&lt;-</span> <span class="st">&quot;5h&quot;</span>    <span class="co"># baseline (reference)</span></span>
 <span id="cb83-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb83-2" tabindex="-1"></a>last_tp  <span class="ot">&lt;-</span> <span class="st">&quot;24h&quot;</span>   <span class="co"># compared against baseline</span></span></code></pre></div>
+<div id="a-maturation-within-biofilm" class="section level3 hasAnchor">
+<h3>1a — Maturation within Biofilm<a href="part-1-maturation-how-a-culture-changes-over-time.html#a-maturation-within-biofilm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div style="background:#eef7ee;border-left:5px solid #2e7d32;padding:0.6em 1em;margin:1em 0;border-radius:6px;">
+<p><strong>❓ The question we are answering</strong></p>
+<ul>
+<li><strong>Question:</strong> Within biofilm cultures, which genes change between 5 h and 24 h of growth?</li>
+<li><strong>Contrast:</strong> Biofilm 24 h vs Biofilm 5 h. Reference = 5 h.</li>
+<li><strong>A positive log2FC means:</strong> higher at 24 h (induced as the biofilm matures).</li>
+<li><strong>A hit tells you:</strong> this gene is part of the biofilm maturation programme.</li>
+</ul>
+</div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-1" tabindex="-1"></a>dds_bf <span class="ot">&lt;-</span> dds_all[, dds_all<span class="sc">$</span>lifestyle <span class="sc">==</span> <span class="st">&quot;Biofilm&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb84-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-2" tabindex="-1"></a>                    dds_all<span class="sc">$</span>timepoint <span class="sc">%in%</span> <span class="fu">c</span>(first_tp, last_tp)]</span>
+<span id="cb84-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-3" tabindex="-1"></a>dds_bf<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_bf<span class="sc">$</span>timepoint), <span class="at">ref =</span> first_tp)</span>
+<span id="cb84-4"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-4" tabindex="-1"></a><span class="fu">design</span>(dds_bf)   <span class="ot">&lt;-</span> <span class="er">~</span> timepoint</span>
+<span id="cb84-5"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-5" tabindex="-1"></a></span>
+<span id="cb84-6"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-6" tabindex="-1"></a>dds_bf <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_bf)</span>
+<span id="cb84-7"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-7" tabindex="-1"></a>coef_bf <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;timepoint_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp)</span>
+<span id="cb84-8"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-8" tabindex="-1"></a>res_bf  <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_bf, coef_bf)</span>
+<span id="cb84-9"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-9" tabindex="-1"></a></span>
+<span id="cb84-10"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples (biofilm):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">table</span>(dds_bf<span class="sc">$</span>timepoint))</span></code></pre></div>
+<pre><code>## Samples (biofilm):</code></pre>
+<pre><code>## 
+##  5h 24h 
+##   4   8</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb87-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_bf, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## Coefficient: timepoint_24h_vs_5h</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb89-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## DEG counts (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ):</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb91-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_bf<span class="sc">$</span>direction))</span></code></pre></div>
+<pre><code>## 
+##              Up            Down Not significant 
+##             154              70            2064</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb93-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## Most extreme fold changes (check baseMean &lt;U+2014&gt; high = real, single digits = low-count noise):</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb95-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">check_extreme_fc</span>(res_bf))</span></code></pre></div>
+<pre><code>##       gene_id baseMean log2FoldChange
+## 1  SA_RS09290     30.2           6.62
+## 2  SA_RS13430   1315.3           6.39
+## 3  SA_RS00235     15.2           6.11
+## 4  SA_RS08310   1021.1           5.76
+## 5  SA_RS11475     91.0          -5.44
+## 6  SA_RS04675   1234.2           5.42
+## 7  SA_RS11470    414.7          -5.38
+## 8  SA_RS10730     27.1           5.32
+## 9  SA_RS08315   1211.2           5.15
+## 10 SA_RS04670   1376.7           5.03
+##                                                                                                                  padj
+## 1  0.0000000000000016200000000000000943283115913504761495884980626244753487696925731142982840538024902343750000000000
+## 2  0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+## 3  0.0000000010500000000000000964149440014073870475197480800488847307860851287841796875000000000000000000000000000000
+## 4  0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+## 5  0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000452
+## 6  0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+## 7  0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+## 8  0.0000000000000000000010500000000000000627815565511222910503146002994847194780944545783318844200948660727590322495
+## 9  0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+## 10 0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+##    direction
+## 1         Up
+## 2         Up
+## 3         Up
+## 4         Up
+## 5       Down
+## 6         Up
+## 7       Down
+## 8         Up
+## 9         Up
+## 10        Up</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb97-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_bf,</span>
+<span id="cb97-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb97-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — biofilm maturation (&quot;</span>, last_tp, <span class="st">&quot; vs &quot;</span>, first_tp, <span class="st">&quot;)&quot;</span>),</span>
+<span id="cb97-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb97-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher at 24 h&quot;</span>)</span></code></pre></div>
+<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-maturation-biofilm-volcano-0-1.png" alt="" width="864" /></p>
+<p><em>Interpretation:</em> a substantial set of genes changes as the biofilm matures from 5 h to 24 h, split between genes induced and repressed with age. This is the biofilm’s own developmental programme, measured without any reference to the planktonic state.</p>
+</div>
+<div id="b-maturation-within-planktonic" class="section level3 hasAnchor">
+<h3>1b — Maturation within Planktonic<a href="part-1-maturation-how-a-culture-changes-over-time.html#b-maturation-within-planktonic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div style="background:#eef7ee;border-left:5px solid #2e7d32;padding:0.6em 1em;margin:1em 0;border-radius:6px;">
+<p><strong>❓ The question we are answering</strong></p>
+<ul>
+<li><strong>Question:</strong> Within planktonic cultures, which genes change between 5 h and 24 h of growth?</li>
+<li><strong>Contrast:</strong> Planktonic 24 h vs Planktonic 5 h. Reference = 5 h.</li>
+<li><strong>A positive log2FC means:</strong> higher at 24 h.</li>
+<li><strong>A hit tells you:</strong> this gene responds to culture ageing in planktonic cells (largely the entry into stationary phase).</li>
+</ul>
+</div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-1" tabindex="-1"></a>dds_pk <span class="ot">&lt;-</span> dds_all[, dds_all<span class="sc">$</span>lifestyle <span class="sc">==</span> <span class="st">&quot;Planktonic&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-2" tabindex="-1"></a>                    dds_all<span class="sc">$</span>timepoint <span class="sc">%in%</span> <span class="fu">c</span>(first_tp, last_tp)]</span>
+<span id="cb98-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-3" tabindex="-1"></a>dds_pk<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_pk<span class="sc">$</span>timepoint), <span class="at">ref =</span> first_tp)</span>
+<span id="cb98-4"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-4" tabindex="-1"></a><span class="fu">design</span>(dds_pk)   <span class="ot">&lt;-</span> <span class="er">~</span> timepoint</span>
+<span id="cb98-5"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-5" tabindex="-1"></a></span>
+<span id="cb98-6"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-6" tabindex="-1"></a>dds_pk <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_pk)</span>
+<span id="cb98-7"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-7" tabindex="-1"></a>coef_pk <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;timepoint_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp)</span>
+<span id="cb98-8"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-8" tabindex="-1"></a>res_pk  <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_pk, coef_pk)</span>
+<span id="cb98-9"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-9" tabindex="-1"></a></span>
+<span id="cb98-10"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples (planktonic):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">table</span>(dds_pk<span class="sc">$</span>timepoint))</span></code></pre></div>
+<pre><code>## Samples (planktonic):</code></pre>
+<pre><code>## 
+##  5h 24h 
+##   4   8</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb101-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_pk, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## Coefficient: timepoint_24h_vs_5h</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb103-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## DEG counts (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ):</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb105-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_pk<span class="sc">$</span>direction))</span></code></pre></div>
+<pre><code>## 
+##              Up            Down Not significant 
+##             277             146            1865</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb107-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## Most extreme fold changes (check baseMean &lt;U+2014&gt; high = real, single digits = low-count noise):</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb109-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">check_extreme_fc</span>(res_pk))</span></code></pre></div>
+<pre><code>##       gene_id baseMean log2FoldChange         padj direction
+## 1  SA_RS13915   2187.0          -8.71 0.0000000000      Down
+## 2  SA_RS13920   3446.2          -8.51 0.0000000000      Down
+## 3  SA_RS13910   4402.2          -7.64 0.0000000000      Down
+## 4  SA_RS13960   4151.5          -7.07 0.0000000000      Down
+## 5  SA_RS13905   9346.5          -6.91 0.0000000000      Down
+## 6  SA_RS07205    977.4          -6.00 0.0000000000      Down
+## 7  SA_RS13955   5645.7          -5.72 0.0000000000      Down
+## 8  SA_RS07200    858.5          -5.63 0.0000000000      Down
+## 9  SA_RS13900    772.4          -5.63 0.0000000000      Down
+## 10 SA_RS00035     13.3           5.61 0.0000000212        Up</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb111-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_pk,</span>
+<span id="cb111-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb111-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — planktonic maturation (&quot;</span>, last_tp, <span class="st">&quot; vs &quot;</span>, first_tp, <span class="st">&quot;)&quot;</span>),</span>
+<span id="cb111-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb111-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher at 24 h&quot;</span>)</span></code></pre></div>
+<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-maturation-planktonic-volcano-0-1.png" alt="" width="864" /></p>
+<p><em>Interpretation:</em> planktonic cultures typically show an even larger maturation response than biofilm over the same window. This is expected: planktonic cells exhaust their medium and enter stationary phase between 5 h and 24 h, a dramatic physiological transition that remodels a large part of the transcriptome.</p>
+<div class="note">
+<p><strong>📘 Look closely at the most extreme genes — a biology lesson hiding in a sanity check.</strong> The
+diagnostic table above was meant only to confirm that big fold changes come from well-expressed genes (they
+do — base means in the hundreds to thousands). But look at the <em>gene IDs</em> of the strongest planktonic
+hits: several are <strong>consecutive locus tags</strong> (e.g. a run of neighbouring <code>SA_RS139xx</code>
+genes), all changing strongly in the <strong>same direction</strong>, all highly expressed. In bacteria,
+consecutive genes transcribed together usually form an <strong>operon</strong> — a group of genes controlled
+as a single unit. Seeing a whole run of adjacent genes coordinately switched off is the transcriptional
+signature of an operon being shut down as the culture ages.</p>
+<p><strong>Challenge:</strong> look up a few of these <code>SA_RS139xx</code> locus tags (e.g. on NCBI Gene or
+in the reference annotation). What do they encode? A coordinated shutdown of highly-expressed adjacent genes
+at 24 h is a classic sign of the cell reducing a major energy-expensive process as it enters stationary
+phase — which functional category would you expect, and does it match the “dormancy” biology described in
+the paper?</p>
+</div>
+<div class="tip">
+<p><strong>💡 Tip — visualising operons in R.</strong> Genes along a chromosome can be drawn as arrows with the
+<code>gggenes</code> package (a ggplot extension), coloured by fold change to show a coordinated operon
+response at a glance. This needs each gene’s genomic start/end/strand, which come from the reference
+annotation (GTF/GFF) rather than the count matrix. If those coordinates are available in the analysis object,
+the section below draws the neighbourhood of the top hit automatically.</p>
+</div>
+</div>
+<div id="visualising-the-operon-genes-as-arrows-along-the-chromosome" class="section level3 hasAnchor">
+<h3>Visualising the Operon: Genes as Arrows Along the Chromosome<a href="part-1-maturation-how-a-culture-changes-over-time.html#visualising-the-operon-genes-as-arrows-along-the-chromosome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To see the coordinated shutdown directly, we read the gene coordinates from the reference GTF, take a window of genes centred on the strongest planktonic maturation hit, and draw them as arrows coloured by their fold change. A block of adjacent arrows all the same colour is the visual signature of an operon responding as a unit.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-1" tabindex="-1"></a><span class="co"># A GTF is a tab-delimited text file, so we read it directly with readr — no</span></span>
+<span id="cb112-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-2" tabindex="-1"></a><span class="co"># specialised genomics package is needed. We keep only the &quot;gene&quot; feature rows,</span></span>
+<span id="cb112-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-3" tabindex="-1"></a><span class="co"># then pull the fields we want out of the free-text attributes column with regex.</span></span>
+<span id="cb112-4"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-4" tabindex="-1"></a>gtf_raw <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb112-5"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-5" tabindex="-1"></a>  gtf_path,</span>
+<span id="cb112-6"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-6" tabindex="-1"></a>  <span class="at">comment   =</span> <span class="st">&quot;#&quot;</span>,</span>
+<span id="cb112-7"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-7" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&quot;seqname&quot;</span>, <span class="st">&quot;source&quot;</span>, <span class="st">&quot;feature&quot;</span>, <span class="st">&quot;start&quot;</span>, <span class="st">&quot;end&quot;</span>,</span>
+<span id="cb112-8"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-8" tabindex="-1"></a>                <span class="st">&quot;score&quot;</span>, <span class="st">&quot;strand&quot;</span>, <span class="st">&quot;frame&quot;</span>, <span class="st">&quot;attribute&quot;</span>),</span>
+<span id="cb112-9"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-9" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="st">&quot;ccciicccc&quot;</span>,</span>
+<span id="cb112-10"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-10" tabindex="-1"></a>  <span class="at">progress  =</span> <span class="cn">FALSE</span></span>
+<span id="cb112-11"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-11" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb112-12"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-12" tabindex="-1"></a>  <span class="fu">filter</span>(feature <span class="sc">==</span> <span class="st">&quot;gene&quot;</span>)</span>
+<span id="cb112-13"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-13" tabindex="-1"></a></span>
+<span id="cb112-14"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-14" tabindex="-1"></a><span class="co"># Helper: pull the value of a named attribute (e.g. gene_id &quot;SA_RS00145&quot;;)</span></span>
+<span id="cb112-15"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-15" tabindex="-1"></a>extract_attr <span class="ot">&lt;-</span> <span class="cf">function</span>(x, key) {</span>
+<span id="cb112-16"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-16" tabindex="-1"></a>  m <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_match</span>(x, <span class="fu">paste0</span>(key, <span class="st">&#39; &quot;([^&quot;]*)&quot;&#39;</span>))</span>
+<span id="cb112-17"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-17" tabindex="-1"></a>  m[, <span class="dv">2</span>]</span>
+<span id="cb112-18"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-18" tabindex="-1"></a>}</span>
+<span id="cb112-19"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-19" tabindex="-1"></a></span>
+<span id="cb112-20"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-20" tabindex="-1"></a>coords <span class="ot">&lt;-</span> gtf_raw <span class="sc">%&gt;%</span></span>
+<span id="cb112-21"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-21" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb112-22"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-22" tabindex="-1"></a>    <span class="at">gene_id   =</span> <span class="fu">extract_attr</span>(attribute, <span class="st">&quot;gene_id&quot;</span>),</span>
+<span id="cb112-23"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-23" tabindex="-1"></a>    <span class="at">gene_name =</span> <span class="fu">extract_attr</span>(attribute, <span class="st">&quot;gene&quot;</span>),          <span class="co"># real symbol if present</span></span>
+<span id="cb112-24"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-24" tabindex="-1"></a>    <span class="at">locus_tag =</span> <span class="fu">extract_attr</span>(attribute, <span class="st">&quot;locus_tag&quot;</span>)</span>
+<span id="cb112-25"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-25" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb112-26"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-26" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gene_name =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(gene_name) <span class="sc">|</span> gene_name <span class="sc">==</span> <span class="st">&quot;&quot;</span>, gene_id, gene_name)) <span class="sc">%&gt;%</span></span>
+<span id="cb112-27"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-27" tabindex="-1"></a>  <span class="fu">select</span>(gene_id, gene_name, locus_tag, seqname, start, end, strand) <span class="sc">%&gt;%</span></span>
+<span id="cb112-28"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-28" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gene_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb112-29"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-29" tabindex="-1"></a>  <span class="fu">distinct</span>(gene_id, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb112-30"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-30" tabindex="-1"></a></span>
+<span id="cb112-31"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-31" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes with coordinates parsed from GTF:&quot;</span>, <span class="fu">nrow</span>(coords), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Genes with coordinates parsed from GTF: 2816</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb114-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes in results also found in GTF     :&quot;</span>,</span>
+<span id="cb114-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb114-2" tabindex="-1"></a>    <span class="fu">sum</span>(res_pk<span class="sc">$</span>gene_id <span class="sc">%in%</span> coords<span class="sc">$</span>gene_id), <span class="st">&quot;of&quot;</span>, <span class="fu">nrow</span>(res_pk), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Genes in results also found in GTF     : 2288 of 2288</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb116-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(coords, <span class="dv">3</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 7
+##   gene_id    gene_name locus_tag  seqname     start   end strand
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;       &lt;int&gt; &lt;int&gt; &lt;chr&gt; 
+## 1 SA_RS00145 dnaA      SA_RS00145 NC_002745.2   517  1878 +     
+## 2 SA_RS00150 dnaN      SA_RS00150 NC_002745.2  2156  3289 +     
+## 3 SA_RS00155 yaaA      SA_RS00155 NC_002745.2  3670  3915 +</code></pre>
+<div class="note">
+<p><strong>📘 Note:</strong> We match the DE results to the GTF by <code>gene_id</code> (the locus tag). This GTF
+also carries a <code>gene</code> attribute with the real gene symbol (e.g. <em>dnaA</em>), which we use for
+nicer labels when available and fall back to the locus tag otherwise. If the number matched were much lower
+than the number of genes, the identifier styles would differ between the count matrix and the GTF — here they
+are the same locus tags, so the match should be nearly complete.</p>
+</div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-1" tabindex="-1"></a><span class="co"># --- Settings you can change --------------------------------------------------</span></span>
+<span id="cb118-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-2" tabindex="-1"></a>window_genes <span class="ot">&lt;-</span> <span class="dv">8</span>   <span class="co"># how many genes to show on each side of the central hit</span></span>
+<span id="cb118-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-3" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
+<span id="cb118-4"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-4" tabindex="-1"></a></span>
+<span id="cb118-5"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-5" tabindex="-1"></a><span class="co"># 1. Pick the central gene: the strongest planktonic maturation hit that has coordinates</span></span>
+<span id="cb118-6"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-6" tabindex="-1"></a>central_gene <span class="ot">&lt;-</span> res_pk <span class="sc">%&gt;%</span></span>
+<span id="cb118-7"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-7" tabindex="-1"></a>  <span class="fu">filter</span>(direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>, gene_id <span class="sc">%in%</span> coords<span class="sc">$</span>gene_id) <span class="sc">%&gt;%</span></span>
+<span id="cb118-8"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-8" tabindex="-1"></a>  <span class="fu">arrange</span>(padj, <span class="fu">desc</span>(<span class="fu">abs</span>(log2FoldChange))) <span class="sc">%&gt;%</span></span>
+<span id="cb118-9"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-9" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb118-10"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-10" tabindex="-1"></a>  <span class="fu">pull</span>(gene_id)</span>
+<span id="cb118-11"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-11" tabindex="-1"></a></span>
+<span id="cb118-12"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-12" tabindex="-1"></a><span class="co"># 2. Order genes by genomic position on that contig and take a window around it</span></span>
+<span id="cb118-13"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-13" tabindex="-1"></a>central_row <span class="ot">&lt;-</span> coords <span class="sc">%&gt;%</span> <span class="fu">filter</span>(gene_id <span class="sc">==</span> central_gene)</span>
+<span id="cb118-14"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-14" tabindex="-1"></a></span>
+<span id="cb118-15"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-15" tabindex="-1"></a>region <span class="ot">&lt;-</span> coords <span class="sc">%&gt;%</span></span>
+<span id="cb118-16"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-16" tabindex="-1"></a>  <span class="fu">filter</span>(seqname <span class="sc">==</span> central_row<span class="sc">$</span>seqname) <span class="sc">%&gt;%</span></span>
+<span id="cb118-17"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-17" tabindex="-1"></a>  <span class="fu">arrange</span>(start) <span class="sc">%&gt;%</span></span>
+<span id="cb118-18"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-18" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">idx =</span> <span class="fu">row_number</span>())</span>
+<span id="cb118-19"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-19" tabindex="-1"></a></span>
+<span id="cb118-20"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-20" tabindex="-1"></a>central_idx <span class="ot">&lt;-</span> region<span class="sc">$</span>idx[region<span class="sc">$</span>gene_id <span class="sc">==</span> central_gene]</span>
+<span id="cb118-21"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-21" tabindex="-1"></a>lo <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="dv">1</span>, central_idx <span class="sc">-</span> window_genes)</span>
+<span id="cb118-22"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-22" tabindex="-1"></a>hi <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">nrow</span>(region), central_idx <span class="sc">+</span> window_genes)</span>
+<span id="cb118-23"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-23" tabindex="-1"></a></span>
+<span id="cb118-24"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-24" tabindex="-1"></a>region_window <span class="ot">&lt;-</span> region <span class="sc">%&gt;%</span></span>
+<span id="cb118-25"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-25" tabindex="-1"></a>  <span class="fu">filter</span>(idx <span class="sc">&gt;=</span> lo, idx <span class="sc">&lt;=</span> hi) <span class="sc">%&gt;%</span></span>
+<span id="cb118-26"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-26" tabindex="-1"></a>  <span class="fu">left_join</span>(res_pk <span class="sc">%&gt;%</span> <span class="fu">select</span>(gene_id, log2FoldChange, padj), <span class="at">by =</span> <span class="st">&quot;gene_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb118-27"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-27" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_center =</span> gene_id <span class="sc">==</span> central_gene)</span>
+<span id="cb118-28"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-28" tabindex="-1"></a></span>
+<span id="cb118-29"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-29" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Central gene:&quot;</span>, central_gene,</span>
+<span id="cb118-30"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-30" tabindex="-1"></a>    <span class="st">&quot;| contig:&quot;</span>, central_row<span class="sc">$</span>seqname,</span>
+<span id="cb118-31"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-31" tabindex="-1"></a>    <span class="st">&quot;| window:&quot;</span>, <span class="fu">nrow</span>(region_window), <span class="st">&quot;genes</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Central gene: SA_RS13915 | contig: NC_002745.2 | window: 17 genes</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-1" tabindex="-1"></a><span class="co"># 3. Draw. We give gggenes the true start/end plus a &#39;forward&#39; flag for strand,</span></span>
+<span id="cb120-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-2" tabindex="-1"></a><span class="co">#    and let it draw the arrowhead direction. Assign then print() so the plot</span></span>
+<span id="cb120-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-3" tabindex="-1"></a><span class="co">#    always renders inside the chunk.</span></span>
+<span id="cb120-4"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-4" tabindex="-1"></a>operon_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb120-5"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-5" tabindex="-1"></a>  region_window,</span>
+<span id="cb120-6"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-6" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">xmin =</span> start, <span class="at">xmax =</span> end, <span class="at">y =</span> <span class="st">&quot;Chromosome&quot;</span>,</span>
+<span id="cb120-7"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-7" tabindex="-1"></a>      <span class="at">fill =</span> log2FoldChange, <span class="at">forward =</span> (strand <span class="sc">==</span> <span class="st">&quot;+&quot;</span>))</span>
+<span id="cb120-8"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-8" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb120-9"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-9" tabindex="-1"></a>  <span class="fu">geom_gene_arrow</span>(<span class="at">arrowhead_height =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="dv">6</span>, <span class="st">&quot;mm&quot;</span>),</span>
+<span id="cb120-10"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-10" tabindex="-1"></a>                  <span class="at">arrow_body_height =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">&quot;mm&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb120-11"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-11" tabindex="-1"></a>  <span class="fu">geom_gene_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> gene_name), <span class="at">align =</span> <span class="st">&quot;left&quot;</span>, <span class="at">min.size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb120-12"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-12" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;grey90&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb120-13"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-13" tabindex="-1"></a>                       <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">name =</span> <span class="st">&quot;log2FC</span><span class="sc">\n</span><span class="st">(24h vs 5h)&quot;</span>,</span>
+<span id="cb120-14"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-14" tabindex="-1"></a>                       <span class="at">na.value =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb120-15"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-15" tabindex="-1"></a>  <span class="fu">theme_genes</span>() <span class="sc">+</span></span>
+<span id="cb120-16"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>) <span class="sc">+</span></span>
+<span id="cb120-17"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-17" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb120-18"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-18" tabindex="-1"></a>    <span class="at">x     =</span> <span class="fu">paste0</span>(<span class="st">&quot;Genomic position on &quot;</span>, central_row<span class="sc">$</span>seqname, <span class="st">&quot; (bp)&quot;</span>),</span>
+<span id="cb120-19"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-19" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste0</span>(strain, <span class="st">&quot; — genomic neighbourhood of &quot;</span>, central_gene,</span>
+<span id="cb120-20"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-20" tabindex="-1"></a>                   <span class="st">&quot; (planktonic maturation)&quot;</span>),</span>
+<span id="cb120-21"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-21" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Adjacent arrows sharing a colour indicate a coordinated (operon-level) response&quot;</span></span>
+<span id="cb120-22"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-22" tabindex="-1"></a>  )</span>
+<span id="cb120-23"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-23" tabindex="-1"></a></span>
+<span id="cb120-24"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-24" tabindex="-1"></a><span class="fu">print</span>(operon_plot)</span></code></pre></div>
+<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-operon-plot-0-1.png" alt="" width="1056" /></p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb121-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;operon_&quot;</span>, strain_tag, <span class="st">&quot;.png&quot;</span>)),</span>
+<span id="cb121-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb121-2" tabindex="-1"></a>       operon_plot, <span class="at">width =</span> <span class="dv">11</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div>
+<div class="tip">
+<p><strong>💡 Tip:</strong> Increase or decrease <code>window_genes</code> to widen or narrow the region shown.
+Genes coloured white have no fold-change value (they were filtered out in QC for low counts, or are not in the
+results). A run of same-coloured arrows flanked by grey/white neighbours is a strong hint that you are looking
+at a single transcriptional unit.</p>
+</div>
+<div class="note">
+<strong>📘 Interpreting the plot — is this really an operon?</strong> Three features together justify calling
+a block of genes an operon, and you can read all three straight off this figure:
+<ul>
+<li>
+<strong>Co-location</strong> — the strongly-coloured genes are immediate neighbours on the chromosome,
+with no unrelated genes breaking up the block.
+</li>
+<li>
+<strong>Co-orientation</strong> — the arrows all point the same way (same strand), which is required for
+genes to be transcribed together into one mRNA.
+</li>
+<li>
+<strong>Co-regulation</strong> — they all change by a similar, large amount in the same direction (here a
+coordinated shutdown of roughly 7–8 log2 units in planktonic cells by 24 h).
+</li>
+</ul>
+<p><strong>Challenge:</strong> read the gene symbols on the coloured arrows and look a few of them up (NCBI Gene,
+or the reference annotation). You should find they belong to a single, named metabolic pathway. Which
+pathway is it, what does it let the cell do, and why would that pathway be switched off as a planktonic
+culture ages into stationary phase? Relate your answer to the “dormancy / metabolic slow-down” biology the
+paper describes.</p>
+<p><strong>A note on rigour:</strong> co-location + co-orientation + co-regulation make a very strong
+<em>inference</em> that these genes form an operon, but strictly, “operon” means transcription from a single
+promoter into one mRNA — proving that needs operon-mapping evidence (e.g. transcript read-through across gene
+boundaries) or prior literature. For well-studied organisms like <em>S. aureus</em>, the identity of the
+block can be confirmed directly against the published literature.</p>
+</div>
+</div>
+<div id="comparing-the-two-maturation-programmes" class="section level3 hasAnchor">
+<h3>Comparing the Two Maturation Programmes<a href="part-1-maturation-how-a-culture-changes-over-time.html#comparing-the-two-maturation-programmes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The two lists answer “what changes with time” in each lifestyle. Overlapping genes change with age regardless of lifestyle (general ageing / stationary-phase response); genes unique to one list are the lifestyle-specific part of maturation.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-1" tabindex="-1"></a>sig_bf <span class="ot">&lt;-</span> res_bf <span class="sc">%&gt;%</span> <span class="fu">filter</span>(direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
+<span id="cb122-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-2" tabindex="-1"></a>sig_pk <span class="ot">&lt;-</span> res_pk <span class="sc">%&gt;%</span> <span class="fu">filter</span>(direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
+<span id="cb122-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-3" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-4" tabindex="-1"></a>overlap_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb122-5"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-5" tabindex="-1"></a>  <span class="at">set   =</span> <span class="fu">c</span>(<span class="st">&quot;Biofilm only&quot;</span>, <span class="st">&quot;Planktonic only&quot;</span>, <span class="st">&quot;Shared&quot;</span>, <span class="st">&quot;Biofilm total&quot;</span>, <span class="st">&quot;Planktonic total&quot;</span>),</span>
+<span id="cb122-6"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-6" tabindex="-1"></a>  <span class="at">n     =</span> <span class="fu">c</span>(<span class="fu">length</span>(<span class="fu">setdiff</span>(sig_bf, sig_pk)),</span>
+<span id="cb122-7"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-7" tabindex="-1"></a>            <span class="fu">length</span>(<span class="fu">setdiff</span>(sig_pk, sig_bf)),</span>
+<span id="cb122-8"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-8" tabindex="-1"></a>            <span class="fu">length</span>(<span class="fu">intersect</span>(sig_bf, sig_pk)),</span>
+<span id="cb122-9"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-9" tabindex="-1"></a>            <span class="fu">length</span>(sig_bf),</span>
+<span id="cb122-10"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-10" tabindex="-1"></a>            <span class="fu">length</span>(sig_pk))</span>
+<span id="cb122-11"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-11" tabindex="-1"></a>)</span>
+<span id="cb122-12"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-12" tabindex="-1"></a><span class="fu">kable</span>(overlap_tbl, <span class="at">caption =</span> <span class="st">&quot;Maturation DEGs: overlap between lifestyles&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb122-13"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-13" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:saureus-de-maturation-overlap-0">Table 5: </span><span id="tab:saureus-de-maturation-overlap-0">Table 6: </span>Maturation DEGs: overlap between lifestyles
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+set
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Biofilm only
+</td>
+<td style="text-align:right;">
+117
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Planktonic only
+</td>
+<td style="text-align:right;">
+316
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Shared
+</td>
+<td style="text-align:right;">
+107
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Biofilm total
+</td>
+<td style="text-align:right;">
+224
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Planktonic total
+</td>
+<td style="text-align:right;">
+423
+</td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p><strong>📘 Note:</strong> A large “Shared” set is expected — both cultures age over the same 5 h → 24 h window
+and share the general stationary-phase / growth-slowdown response. The lifestyle-specific genes (in only one
+column) are often the more biologically interesting part of maturation.</p>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="a-small-helper-for-extracting-and-classifying-results.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-maturation-within-biofilm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="setup-the-environment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

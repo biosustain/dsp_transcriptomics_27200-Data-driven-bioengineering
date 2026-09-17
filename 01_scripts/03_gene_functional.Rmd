@@ -323,13 +323,6 @@ if (!is.null(ora_combined) && nrow(ora_combined) > 0) {
 }
 ```
 
-## 🧠 Interpretation questions
-
-::: question
-1. Dexamethasone is prescribed to switch inflammation **off**. Find the immune and cytokine terms in your ORA results: which direction are they in — among the up-regulated or the down-regulated genes? Does that match the drug's job? Now look at the *other* direction's terms (adhesion, cytoskeleton, metal/mineral handling): those are not inflammation at all. What does that tell you about a drug that is described in one word ("anti-inflammatory") but acts through a receptor present in every cell?
-:::
-
-
 ## Part 2 — Gene Set Enrichment Analysis (GSEA)
 
 **What is GSEA?**
@@ -582,12 +575,6 @@ more appropriate tool — which is exactly why we report ORA as the primary enri
 secondary, directional check.
 :::
 
-## 🧠 Interpretation questions
-
-::: question
-2. Everything in this chapter came from transcript abundance. Yet the molecule whose *activity* changed most — the glucocorticoid receptor (*NR3C1*) — was switched on by drug binding, not by transcription. Name one claim your enrichment tables can honestly make, one they cannot, and one experiment that would measure activity instead of abundance.
-:::
-
 ## Saving Results
 
 ```{r human-fn-save-results-5, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -639,6 +626,13 @@ cytokine and immune signalling **down** in the treated cells, consistent with th
 glucocorticoid biology described by Himes *et al.* GSEA is reported as a secondary check that, here, cannot
 settle anything on its own.
 
+
+## 🧠 Interpretation questions
+
+::: question
+1. Dexamethasone is prescribed to switch inflammation **off**. Find the immune and cytokine terms in your ORA results: which direction are they in — among the up-regulated or the down-regulated genes? Does that match the drug's job? Now look at the *other* direction's terms (adhesion, cytoskeleton, metal/mineral handling): those are not inflammation at all. What does that tell you about a drug that is described in one word ("anti-inflammatory") but acts through a receptor present in every cell?
+2. Everything in this chapter came from transcript abundance. Yet the molecule whose *activity* changed most — the glucocorticoid receptor (*NR3C1*) — was switched on by drug binding, not by transcription. Name one claim your enrichment tables can honestly make, one they cannot, and one experiment that would measure activity instead of abundance.
+:::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->
 

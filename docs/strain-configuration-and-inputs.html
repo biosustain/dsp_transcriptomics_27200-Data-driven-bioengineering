@@ -29,7 +29,7 @@
   
   
 <link rel="prev" href="gene-functional-enrichment-analysis.html"/>
-<link rel="next" href="load-results-from-differential-expression-analysis.html"/>
+<link rel="next" href="part-1-over-representation-analysis-ora.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -186,19 +186,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html"><i class="fa fa-check"></i>Choose the Strain</a>
 <ul>
 <li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#loading-count-data"><i class="fa fa-check"></i>Loading Count Data</a></li>
+<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#building-the-metadata-from-sample-names"><i class="fa fa-check"></i>Building the Metadata from Sample Names</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="building-the-metadata-from-sample-names.html"><a href="building-the-metadata-from-sample-names.html"><i class="fa fa-check"></i>Building the Metadata from Sample Names</a></li>
 <li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html"><i class="fa fa-check"></i>Preparing the Data</a>
 <ul>
 <li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html#creating-the-deseqdataset"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
 <li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html#sanity-checks"><i class="fa fa-check"></i>Sanity Checks</a></li>
 <li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html#pre-filtering-low-count-genes"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
+<li class="chapter" data-level="" data-path="preparing-the-data.html"><a href="preparing-the-data.html#factor-order-and-reference-level"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions.html"><a href="interpretation-questions.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a>
-<ul>
-<li class="chapter" data-level="" data-path="interpretation-questions.html"><a href="interpretation-questions.html#factor-order-and-reference-level"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-1.html"><a href="interpretation-questions-1.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
 <ul>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#estimate-size-factors"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
@@ -208,49 +204,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#detecting-outliers"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-variable-genes-heatmap"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions.html"><a href="interpretation-questions.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="differential-expression-analysis.html"><a href="differential-expression-analysis.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="choose-the-strain-1.html"><a href="choose-the-strain-1.html"><i class="fa fa-check"></i>Choose the Strain</a></li>
-<li class="chapter" data-level="" data-path="load-the-deseqdataset-from-qc.html"><a href="load-the-deseqdataset-from-qc.html"><i class="fa fa-check"></i>Load the DESeqDataSet from QC</a></li>
-<li class="chapter" data-level="" data-path="a-small-helper-for-extracting-and-classifying-results.html"><a href="a-small-helper-for-extracting-and-classifying-results.html"><i class="fa fa-check"></i>A Small Helper for Extracting and Classifying Results</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html"><i class="fa fa-check"></i>Setup the Environment</a>
+<ul>
+<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html#choose-the-strain-1"><i class="fa fa-check"></i>Choose the Strain</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html#load-the-deseqdataset-from-qc"><i class="fa fa-check"></i>Load the DESeqDataSet from QC</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment.html"><a href="setup-the-environment.html#a-small-helper-for-extracting-and-classifying-results"><i class="fa fa-check"></i>A Small Helper for Extracting and Classifying Results</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html"><i class="fa fa-check"></i>Part 1 — Maturation: How a Culture Changes Over Time</a>
 <ul>
-<li class="chapter" data-level="" data-path="a-maturation-within-biofilm.html"><a href="a-maturation-within-biofilm.html"><i class="fa fa-check"></i>1a — Maturation within Biofilm</a></li>
-<li class="chapter" data-level="" data-path="b-maturation-within-planktonic.html"><a href="b-maturation-within-planktonic.html"><i class="fa fa-check"></i>1b — Maturation within Planktonic</a></li>
-<li class="chapter" data-level="" data-path="visualising-the-operon-genes-as-arrows-along-the-chromosome.html"><a href="visualising-the-operon-genes-as-arrows-along-the-chromosome.html"><i class="fa fa-check"></i>Visualising the Operon: Genes as Arrows Along the Chromosome</a></li>
-<li class="chapter" data-level="" data-path="comparing-the-two-maturation-programmes.html"><a href="comparing-the-two-maturation-programmes.html"><i class="fa fa-check"></i>Comparing the Two Maturation Programmes</a></li>
+<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#a-maturation-within-biofilm"><i class="fa fa-check"></i>1a — Maturation within Biofilm</a></li>
+<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#b-maturation-within-planktonic"><i class="fa fa-check"></i>1b — Maturation within Planktonic</a></li>
+<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#visualising-the-operon-genes-as-arrows-along-the-chromosome"><i class="fa fa-check"></i>Visualising the Operon: Genes as Arrows Along the Chromosome</a></li>
+<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#comparing-the-two-maturation-programmes"><i class="fa fa-check"></i>Comparing the Two Maturation Programmes</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><i class="fa fa-check"></i>Part 2 — Lifestyle: Biofilm vs Planktonic, Accounting for Time</a>
 <ul>
-<li class="chapter" data-level="" data-path="a-additive-model-the-lifestyle-effect-adjusted-for-time.html"><a href="a-additive-model-the-lifestyle-effect-adjusted-for-time.html"><i class="fa fa-check"></i>2a — Additive Model: the Lifestyle Effect, Adjusted for Time</a></li>
-<li class="chapter" data-level="" data-path="b-interaction-model-does-the-lifestyle-difference-change-with-time.html"><a href="b-interaction-model-does-the-lifestyle-difference-change-with-time.html"><i class="fa fa-check"></i>2b — Interaction Model: Does the Lifestyle Difference Change with Time?</a></li>
-<li class="chapter" data-level="" data-path="additive-vs-interaction-which-should-you-use.html"><a href="additive-vs-interaction-which-should-you-use.html"><i class="fa fa-check"></i>Additive vs Interaction: Which Should You Use?</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-3.html"><a href="interpretation-questions-3.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
+<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#a-additive-model-the-lifestyle-effect-adjusted-for-time"><i class="fa fa-check"></i>2a — Additive Model: the Lifestyle Effect, Adjusted for Time</a></li>
+<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#b-interaction-model-does-the-lifestyle-difference-change-with-time"><i class="fa fa-check"></i>2b — Interaction Model: Does the Lifestyle Difference Change with Time?</a></li>
+<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#additive-vs-interaction-which-should-you-use"><i class="fa fa-check"></i>Additive vs Interaction: Which Should You Use?</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><i class="fa fa-check"></i>Part 3 — Hypothesis Test: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?</a>
 <ul>
-<li class="chapter" data-level="" data-path="cross-strain-comparison-of-the-hypothesis.html"><a href="cross-strain-comparison-of-the-hypothesis.html"><i class="fa fa-check"></i>Cross-Strain Comparison of the Hypothesis</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-4.html"><a href="interpretation-questions-4.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
+<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cross-strain-comparison-of-the-hypothesis"><i class="fa fa-check"></i>Cross-Strain Comparison of the Hypothesis</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="save-results.html"><a href="save-results.html"><i class="fa fa-check"></i>Save Results</a></li>
 <li class="chapter" data-level="" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-1.html"><a href="interpretation-questions-1.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
 <ul>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-two-packages"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#strain-parameter"><i class="fa fa-check"></i>Strain parameter</a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#load-libraries"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html"><i class="fa fa-check"></i>Strain configuration and inputs</a></li>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis.html"><a href="load-results-from-differential-expression-analysis.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a>
+<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html"><i class="fa fa-check"></i>Strain configuration and inputs</a>
 <ul>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis.html"><a href="load-results-from-differential-expression-analysis.html#define-significance-and-check-against-the-de-table"><i class="fa fa-check"></i>Define significance and check against the DE table</a></li>
+<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#load-results-from-differential-expression-analysis"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
+<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#define-significance-and-check-against-the-de-table"><i class="fa fa-check"></i>Define significance and check against the DE table</a></li>
+<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#combine-gene-set-collections"><i class="fa fa-check"></i>Combine gene set collections</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="combine-gene-set-collections.html"><a href="combine-gene-set-collections.html"><i class="fa fa-check"></i>Combine gene set collections</a></li>
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
 <ul>
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#prepare-input"><i class="fa fa-check"></i>Prepare Input</a></li>
@@ -259,7 +256,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#critical-interpretation-watch-for-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Watch for Spurious Hits</a></li>
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#bar-plot-top-enriched-sets-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Enriched Sets by Direction</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
 <ul>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
@@ -274,18 +270,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea.html"><a href="part-3-comparing-ora-and-gsea.html#reading-the-biology"><i class="fa fa-check"></i>Reading the biology</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-6.html"><a href="interpretation-questions-6.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results.html"><a href="saving-results.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="part"><span><b>II Homo sapiens (dexamethasone)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-1.html"><a href="quality-control-1.html"><i class="fa fa-check"></i>Quality Control</a>
 <ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="getting-the-metadata.html"><a href="getting-the-metadata.html"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-<li class="chapter" data-level="" data-path="loading-count-data-1.html"><a href="loading-count-data-1.html"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html"><i class="fa fa-check"></i>Preparing the Data</a></li>
-<li class="chapter" data-level="" data-path="creating-the-deseqdataset-1.html"><a href="creating-the-deseqdataset-1.html"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html"><i class="fa fa-check"></i>Setup the Environment</a>
+<ul>
+<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#getting-the-metadata"><i class="fa fa-check"></i>Getting the Metadata</a></li>
+<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#loading-count-data-1"><i class="fa fa-check"></i>Loading Count Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html"><i class="fa fa-check"></i>Preparing the Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#creating-the-deseqdataset-1"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="sanity-checks-1.html"><a href="sanity-checks-1.html"><i class="fa fa-check"></i>Sanity Checks</a>
 <ul>
 <li class="chapter" data-level="" data-path="sanity-checks-1.html"><a href="sanity-checks-1.html#are-we-working-with-raw-counts"><i class="fa fa-check"></i>Are We Working with Raw Counts?</a></li>
@@ -296,30 +296,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#estimate-size-factors-1"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#sample-correlation-heatmap-1"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#detecting-outliers-1"><i class="fa fa-check"></i>Detecting Outliers</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sample-correlation-heatmap-1.html"><a href="sample-correlation-heatmap-1.html"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-pca-1.html"><a href="principal-component-analysis-pca-1.html"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-7.html"><a href="interpretation-questions-7.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
-<li class="chapter" data-level="" data-path="detecting-outliers-1.html"><a href="detecting-outliers-1.html"><i class="fa fa-check"></i>Detecting Outliers</a></li>
-<li class="chapter" data-level="" data-path="top-variable-genes-heatmap-1.html"><a href="top-variable-genes-heatmap-1.html"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-8.html"><a href="interpretation-questions-8.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-3.html"><a href="interpretation-questions-3.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i>Background</a>
+<li class="chapter" data-level="" data-path="differential-expression-analysis-1.html"><a href="differential-expression-analysis-1.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-1.html"><a href="differential-expression-analysis-1.html"><i class="fa fa-check"></i>Differential Expression Analysis</a></li>
+<li class="chapter" data-level="" data-path="running-deseq2.html"><a href="running-deseq2.html"><i class="fa fa-check"></i>Running DESeq2</a></li>
 <li class="chapter" data-level="" data-path="teaching-comparison-paired-vs-simple-design.html"><a href="teaching-comparison-paired-vs-simple-design.html"><i class="fa fa-check"></i>Teaching Comparison — Paired vs Simple Design</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-9.html"><a href="interpretation-questions-9.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
-<li class="chapter" data-level="" data-path="extracting-results.html"><a href="extracting-results.html"><i class="fa fa-check"></i>Extracting Results</a></li>
-<li class="chapter" data-level="" data-path="log2-fold-change-shrinkage.html"><a href="log2-fold-change-shrinkage.html"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
-<li class="chapter" data-level="" data-path="sorting-and-filtering-significant-genes.html"><a href="sorting-and-filtering-significant-genes.html"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-10.html"><a href="interpretation-questions-10.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
-<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html"><i class="fa fa-check"></i>Visualisation</a></li>
-<li class="chapter" data-level="" data-path="ma-plot.html"><a href="ma-plot.html"><i class="fa fa-check"></i>MA Plot</a></li>
-<li class="chapter" data-level="" data-path="top-gene-count-plot.html"><a href="top-gene-count-plot.html"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
-<li class="chapter" data-level="" data-path="heatmap-of-significant-genes.html"><a href="heatmap-of-significant-genes.html"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
+<li class="chapter" data-level="" data-path="extracting-results.html"><a href="extracting-results.html"><i class="fa fa-check"></i>Extracting Results</a>
+<ul>
+<li class="chapter" data-level="" data-path="extracting-results.html"><a href="extracting-results.html#log2-fold-change-shrinkage"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
+<li class="chapter" data-level="" data-path="extracting-results.html"><a href="extracting-results.html#sorting-and-filtering-significant-genes"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html"><i class="fa fa-check"></i>Visualisation</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html#ma-plot"><i class="fa fa-check"></i>MA Plot</a></li>
+<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html#top-gene-count-plot"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
+<li class="chapter" data-level="" data-path="visualisation.html"><a href="visualisation.html#heatmap-of-significant-genes"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-4.html"><a href="interpretation-questions-4.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
 <ul>
@@ -335,7 +337,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#interactive-manhattan-plot"><i class="fa fa-check"></i>Interactive Manhattan Plot</a></li>
 <li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#bar-plot-top-terms-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Terms by Direction</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-11.html"><a href="interpretation-questions-11.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
 <ul>
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#prepare-the-ranked-gene-list-1"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
@@ -346,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -483,6 +484,85 @@ the gene sets. The gene sets are keyed on locus tags (<code>SA_RS…</code> /
 <code>SAUSA300_RS…</code>), the same identifiers used in the DE table, so no ID
 conversion is needed.</p>
 </div>
+<div id="load-results-from-differential-expression-analysis" class="section level3 hasAnchor">
+<h3>Load Results from Differential Expression Analysis<a href="strain-configuration-and-inputs.html#load-results-from-differential-expression-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We read the lifestyle-additive DE table. It contains every gene tested by DESeq2 for this
+contrast, which is the correct background for enrichment.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="strain-configuration-and-inputs.html#cb166-1" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb166-2"><a href="strain-configuration-and-inputs.html#cb166-2" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, cfg<span class="sc">$</span>de),</span>
+<span id="cb166-3"><a href="strain-configuration-and-inputs.html#cb166-3" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">check.names =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb166-4"><a href="strain-configuration-and-inputs.html#cb166-4" tabindex="-1"></a>)</span>
+<span id="cb166-5"><a href="strain-configuration-and-inputs.html#cb166-5" tabindex="-1"></a></span>
+<span id="cb166-6"><a href="strain-configuration-and-inputs.html#cb166-6" tabindex="-1"></a><span class="co"># the DE tables use `gene_id` as the identifier column</span></span>
+<span id="cb166-7"><a href="strain-configuration-and-inputs.html#cb166-7" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="st">&quot;gene_id&quot;</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(res_df))</span>
+<span id="cb166-8"><a href="strain-configuration-and-inputs.html#cb166-8" tabindex="-1"></a></span>
+<span id="cb166-9"><a href="strain-configuration-and-inputs.html#cb166-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes tested (background):&quot;</span>, <span class="fu">nrow</span>(res_df), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Genes tested (background): 2288</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="strain-configuration-and-inputs.html#cb168-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Columns                  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">colnames</span>(res_df), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Columns                  : gene_id, baseMean, log2FoldChange, lfcSE, pvalue, padj, direction</code></pre>
+</div>
+<div id="define-significance-and-check-against-the-de-table" class="section level3 hasAnchor">
+<h3>Define significance and check against the DE table<a href="strain-configuration-and-inputs.html#define-significance-and-check-against-the-de-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We re-derive significance here (padj &lt; 0.05 and |log2FoldChange| &gt;= log2(3), i.e. a 3-fold
+change) so the threshold is visible in this script, and we check it against the <code>direction</code>
+column produced upstream. This is the same threshold used in the differential expression step
+(chosen to match the original paper’s 3-fold criterion), so the two should agree exactly; if
+they diverge, the check will flag it.</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="strain-configuration-and-inputs.html#cb170-1" tabindex="-1"></a>padj_cut <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb170-2"><a href="strain-configuration-and-inputs.html#cb170-2" tabindex="-1"></a>lfc_cut  <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">3</span>)   <span class="co"># paper&#39;s 3-fold threshold on the log2 scale (~1.585); matches script 02</span></span>
+<span id="cb170-3"><a href="strain-configuration-and-inputs.html#cb170-3" tabindex="-1"></a></span>
+<span id="cb170-4"><a href="strain-configuration-and-inputs.html#cb170-4" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
+<span id="cb170-5"><a href="strain-configuration-and-inputs.html#cb170-5" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb170-6"><a href="strain-configuration-and-inputs.html#cb170-6" tabindex="-1"></a>    <span class="at">sig_here =</span> <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_cut <span class="sc">&amp;</span> <span class="fu">abs</span>(log2FoldChange) <span class="sc">&gt;=</span> lfc_cut,</span>
+<span id="cb170-7"><a href="strain-configuration-and-inputs.html#cb170-7" tabindex="-1"></a>    <span class="at">dir_here =</span> <span class="fu">case_when</span>(</span>
+<span id="cb170-8"><a href="strain-configuration-and-inputs.html#cb170-8" tabindex="-1"></a>      sig_here <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;=</span>  lfc_cut <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
+<span id="cb170-9"><a href="strain-configuration-and-inputs.html#cb170-9" tabindex="-1"></a>      sig_here <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;=</span> <span class="sc">-</span>lfc_cut <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
+<span id="cb170-10"><a href="strain-configuration-and-inputs.html#cb170-10" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Not significant&quot;</span></span>
+<span id="cb170-11"><a href="strain-configuration-and-inputs.html#cb170-11" tabindex="-1"></a>    )</span>
+<span id="cb170-12"><a href="strain-configuration-and-inputs.html#cb170-12" tabindex="-1"></a>  )</span>
+<span id="cb170-13"><a href="strain-configuration-and-inputs.html#cb170-13" tabindex="-1"></a></span>
+<span id="cb170-14"><a href="strain-configuration-and-inputs.html#cb170-14" tabindex="-1"></a><span class="co"># Cross-check against the upstream `direction` column, if present</span></span>
+<span id="cb170-15"><a href="strain-configuration-and-inputs.html#cb170-15" tabindex="-1"></a><span class="cf">if</span> (<span class="st">&quot;direction&quot;</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(res_df)) {</span>
+<span id="cb170-16"><a href="strain-configuration-and-inputs.html#cb170-16" tabindex="-1"></a>  agree <span class="ot">&lt;-</span> <span class="fu">sum</span>(res_df<span class="sc">$</span>dir_here <span class="sc">==</span> res_df<span class="sc">$</span>direction)</span>
+<span id="cb170-17"><a href="strain-configuration-and-inputs.html#cb170-17" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Agreement with upstream &#39;direction&#39;:&quot;</span>, agree, <span class="st">&quot;/&quot;</span>, <span class="fu">nrow</span>(res_df),</span>
+<span id="cb170-18"><a href="strain-configuration-and-inputs.html#cb170-18" tabindex="-1"></a>      <span class="fu">sprintf</span>(<span class="st">&quot;(%.1f%%)</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="dv">100</span> <span class="sc">*</span> agree <span class="sc">/</span> <span class="fu">nrow</span>(res_df)))</span>
+<span id="cb170-19"><a href="strain-configuration-and-inputs.html#cb170-19" tabindex="-1"></a>  <span class="cf">if</span> (agree <span class="sc">&lt;</span> <span class="fu">nrow</span>(res_df)) {</span>
+<span id="cb170-20"><a href="strain-configuration-and-inputs.html#cb170-20" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">&quot;Re-derived significance disagrees with the upstream &#39;direction&#39; column.&quot;</span>)</span>
+<span id="cb170-21"><a href="strain-configuration-and-inputs.html#cb170-21" tabindex="-1"></a>  }</span>
+<span id="cb170-22"><a href="strain-configuration-and-inputs.html#cb170-22" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb170-23"><a href="strain-configuration-and-inputs.html#cb170-23" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No upstream &#39;direction&#39; column to check against.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb170-24"><a href="strain-configuration-and-inputs.html#cb170-24" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Agreement with upstream &#39;direction&#39;: 2288 / 2288 (100.0%)</code></pre>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="strain-configuration-and-inputs.html#cb172-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant (padj &lt;&quot;</span>, padj_cut, <span class="st">&quot;&amp; |LFC| &gt;= log2(3) ~&quot;</span>, <span class="fu">round</span>(lfc_cut, <span class="dv">3</span>), <span class="st">&quot;):&quot;</span>,</span>
+<span id="cb172-2"><a href="strain-configuration-and-inputs.html#cb172-2" tabindex="-1"></a>    <span class="fu">sum</span>(res_df<span class="sc">$</span>sig_here), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Significant (padj &lt; 0.05 &amp; |LFC| &gt;= log2(3) ~ 1.585 ): 282</code></pre>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="strain-configuration-and-inputs.html#cb174-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Up  :&quot;</span>, <span class="fu">sum</span>(res_df<span class="sc">$</span>dir_here <span class="sc">==</span> <span class="st">&quot;Up&quot;</span>),   <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>##   Up  : 156</code></pre>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="strain-configuration-and-inputs.html#cb176-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Down:&quot;</span>, <span class="fu">sum</span>(res_df<span class="sc">$</span>dir_here <span class="sc">==</span> <span class="st">&quot;Down&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>##   Down: 126</code></pre>
+</div>
+<div id="combine-gene-set-collections" class="section level3 hasAnchor">
+<h3>Combine gene set collections<a href="strain-configuration-and-inputs.html#combine-gene-set-collections" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>mulea</code> and <code>fgsea</code> both take one collection at a time. We tag each set with its source so
+results can be read back by collection, then keep them available both combined and separately.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="strain-configuration-and-inputs.html#cb178-1" tabindex="-1"></a>tag_source <span class="ot">&lt;-</span> <span class="cf">function</span>(gmt, src) gmt <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">source =</span> src)</span>
+<span id="cb178-2"><a href="strain-configuration-and-inputs.html#cb178-2" tabindex="-1"></a></span>
+<span id="cb178-3"><a href="strain-configuration-and-inputs.html#cb178-3" tabindex="-1"></a>all_gmt <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb178-4"><a href="strain-configuration-and-inputs.html#cb178-4" tabindex="-1"></a>  <span class="fu">tag_source</span>(kegg_gmt, <span class="st">&quot;KEGG&quot;</span>),</span>
+<span id="cb178-5"><a href="strain-configuration-and-inputs.html#cb178-5" tabindex="-1"></a>  <span class="fu">tag_source</span>(go_bp,    <span class="st">&quot;GO:BP&quot;</span>),</span>
+<span id="cb178-6"><a href="strain-configuration-and-inputs.html#cb178-6" tabindex="-1"></a>  <span class="fu">tag_source</span>(go_mf,    <span class="st">&quot;GO:MF&quot;</span>)</span>
+<span id="cb178-7"><a href="strain-configuration-and-inputs.html#cb178-7" tabindex="-1"></a>)</span>
+<span id="cb178-8"><a href="strain-configuration-and-inputs.html#cb178-8" tabindex="-1"></a></span>
+<span id="cb178-9"><a href="strain-configuration-and-inputs.html#cb178-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total gene sets across collections:&quot;</span>, <span class="fu">nrow</span>(all_gmt), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Total gene sets across collections: 216</code></pre>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="strain-configuration-and-inputs.html#cb180-1" tabindex="-1"></a><span class="fu">print</span>(all_gmt <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>(source, <span class="at">name =</span> <span class="st">&quot;sets&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 2
+##   source  sets
+##   &lt;chr&gt;  &lt;int&gt;
+## 1 GO:BP     54
+## 2 GO:MF     66
+## 3 KEGG      96</code></pre>
+</div>
 </div>
             </section>
 
@@ -490,7 +570,7 @@ conversion is needed.</p>
         </div>
       </div>
 <a href="gene-functional-enrichment-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="load-results-from-differential-expression-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="part-1-over-representation-analysis-ora.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

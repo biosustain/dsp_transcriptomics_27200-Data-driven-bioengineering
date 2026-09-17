@@ -78,7 +78,7 @@ library(kableExtra)
 library(DT)
 ```
 
-## Getting the Metadata
+### Getting the Metadata
 
 The metadata file describes the experimental design: which sample belongs to which donor and treatment group. This information is essential for `DESeq2` to model expression differences correctly.
 
@@ -118,7 +118,7 @@ DT::datatable(
 
 
 
-## Loading Count Data
+### Loading Count Data
 
 The nf-core/rnaseq pipeline was run with `STAR` for alignment and `Salmon` for quantification. We load the `SummarizedExperiment` object produced by the pipeline, extract the raw count matrix, and assign gene symbols as row names.
 
@@ -223,7 +223,7 @@ print(data.frame(count_col    = colnames(count_genes),
 ```
 
 
-## Creating the DESeqDataSet
+### Creating the DESeqDataSet
 
 The `DESeqDataSet` (DDS) holds the raw count matrix, sample metadata, and the design formula.
 
@@ -413,7 +413,7 @@ ggsave(
 )
 ```
 
-## Sample Correlation Heatmap
+### Sample Correlation Heatmap
 
 Euclidean distances between `VST-transformed` samples reveal how similar samples are to each other globally. Samples from the same treatment group (or the same donor) may cluster together. With a paired design, donor structure is often visible here — this is expected and is exactly what the `~ donor + condition` model accounts for.
 
@@ -464,7 +464,7 @@ ggsave(
 The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by treatment, by donor, or both. If donor is a strong driver of the distances, that is a signal the paired design is worthwhile.
 :::
 
-## Principal Component Analysis (PCA)
+### Principal Component Analysis (PCA)
 
 PCA reduces the high-dimensional expression space (one dimension per gene) to a small number of principal components that capture the largest sources of variance in the data. Inspect whether the treatment separates samples, and whether donor identity contributes to the remaining structure.
 
@@ -521,14 +521,7 @@ donors are spread along another, that is the classic signature of a paired desig
 effect on top of donor-to-donor baseline differences.
 :::
 
-## 🧠 Interpretation questions
-
-::: question
-1. Find each donor's treated and untreated points in your PCA. Which is bigger: the difference between donors, or the shift caused by treatment? Based on that, predict which model will find more differentially expressed genes in the next notebook — `~ condition` or `~ donor + condition` — and why. Write the prediction down: you will check it.
-:::
-
-
-## Detecting Outliers
+### Detecting Outliers
 
 The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.
 
@@ -592,7 +585,7 @@ ggsave(
 - Check whether the dominant axis aligns with treatment or with donor
 :::
 
-## Top Variable Genes Heatmap
+### Top Variable Genes Heatmap
 
 Clustering the 50 most variable genes across samples provides a gene-level view of the structure in the data. Truly treatment-responsive genes should show block structure by condition. This heatmap also helps reveal whether donor identity contributes strongly to the top variable genes.
 
@@ -666,13 +659,6 @@ dev.off()
 - Whether samples cluster by donor instead of (or in addition to) treatment — a visual argument for the paired design
 :::
 
-## 🧠 Interpretation questions
-
-::: question
-2. Pick the gene with the cleanest treated/untreated split in your heatmap. Which of these can you claim from it: more transcript? more protein? more activity? Then look for *NR3C1* — the receptor dexamethasone binds to. It is a pre-existing protein: did its transcript need to change for the response you see? What does that say about what RNA-seq can and cannot show?
-:::
-
-
 ## Summary
 
 Before proceeding to differential expression analysis, confirm the QC checks and note the design implication:
@@ -716,6 +702,13 @@ cat("   Dimensions  :", nrow(dds), "genes ×", ncol(dds), "samples\n")
 cat("   Design      : ~ donor + condition\n")
 cat("   Conditions  :", paste(levels(dds$condition), collapse = " vs "), "\n")
 ```
+
+## 🧠 Interpretation questions
+
+::: question
+1. Find each donor's treated and untreated points in your PCA. Which is bigger: the difference between donors, or the shift caused by treatment? Based on that, predict which model will find more differentially expressed genes in the next notebook — `~ condition` or `~ donor + condition` — and why. Write the prediction down: you will check it.
+2. Pick the gene with the cleanest treated/untreated split in your heatmap. Which of these can you claim from it: more transcript? more protein? more activity? Then look for *NR3C1* — the receptor dexamethasone binds to. It is a pre-existing protein: did its transcript need to change for the response you see? What does that say about what RNA-seq can and cannot show?
+:::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->
 
