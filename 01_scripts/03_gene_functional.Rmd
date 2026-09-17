@@ -516,28 +516,6 @@ if (nrow(gsea_bar) > 0) {
 }
 ```
 
-### Dot Plot — NES, p-value and Gene Set Size
-
-```{r human-fn-gsea-dotplot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-if (nrow(gsea_bar) > 0) {
-  gsea_dotplot <- ggplot(gsea_bar,
-                         aes(x = NES, y = pathway, size = size, color = pval)) +
-    geom_point(alpha = 0.85) +
-    geom_vline(xintercept = 0, linetype = "dashed", color = "grey50") +
-    scale_size_continuous(name = "Genes in set", range = c(3, 10)) +
-    theme_bw() +
-    theme(legend.position = "right") +
-    labs(
-      title    = "GSEA — Gene Set Dot Plot (nominal p)",
-      subtitle = "Point size = genes in set | Colour = nominal p-value",
-      x        = "NES",
-      y        = NULL
-    )
-
-  gsea_dotplot
-}
-```
-
 ### Enrichment Plot — Top Sets
 
 The enrichment plot shows the running sum of the enrichment score for a single gene set across the ranked gene list. The peak of the curve is the enrichment score; genes from the set are shown as vertical bars (the "rug") at the bottom.
