@@ -73,15 +73,18 @@ If everything went well you have a fully functional Nextflow environment for tod
 
 ## AI assistants in your Codespace
 
-AI-assisted workflows are allowed — and encouraged — in this course, as long as you **validate what the AI tells you**. Your Codespace comes with three assistants ready to try:
+AI-assisted workflows are allowed — and encouraged — in this course, as long as you **validate what the AI tells you**.
 
-| Assistant | Where | Account needed | Cost |
-|---|---|---|---|
-| **GitHub Copilot Chat** | Chat icon in the VS Code sidebar | Your GitHub account | Free for students via the [GitHub Student Developer Pack](https://education.github.com/pack) |
-| **Codex CLI** | Type `codex` in the terminal | OpenAI/ChatGPT login | Works with a **free** ChatGPT account |
-| **Claude Code** | Type `claude` in the terminal | Claude login | Requires a paid plan (Pro) or institutional access |
+**In class, use GitHub Copilot Chat** — click the chat icon in the VS Code sidebar. It uses the GitHub account you are already signed in with (free for students via the [GitHub Student Developer Pack](https://education.github.com/pack)), so there is nothing to install or configure. It can read the files in this repository, explain code, and help you debug errors.
 
-All three can read the files in this repository, explain code, help you debug errors, and even edit files when you ask them to. The terminal agents (Codex, Claude Code) are *agentic* — they can run commands and work through multi-step tasks, which is exactly the kind of workflow discussed later in the course.
+**Optional, for the curious:** your Codespace also has two *agentic* terminal assistants preinstalled — they can run commands and work through multi-step tasks, the kind of workflow discussed later in the course:
+
+| Assistant | Where | Account needed |
+|---|---|---|
+| **Codex CLI** | Type `codex` in the terminal | OpenAI/ChatGPT login |
+| **Claude Code** | Type `claude` in the terminal | Claude login (paid plan or institutional access) |
+
+Fair warning: signing in from a Codespace takes a few extra steps — the browser pop-up flow does not work remotely, so choose the **device code** option and follow its instructions (for Codex you may first need to enable device authorization under ChatGPT **Settings → Security**). If that is more setup than you want, Copilot does everything you need for this session.
 
 **Things to try**
 

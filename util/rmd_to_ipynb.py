@@ -244,7 +244,14 @@ def preamble(src_rel):
         "> To change anything, edit the Rmd and run `python3 util/rmd_to_ipynb.py`.\n"
         ">\n"
         "> Run the notebooks in order — **01 → 02 → 03** — with the **R** kernel; "
-        "each step saves results that the next one loads."
+        "each step saves results that the next one loads.\n"
+        "\n"
+        "**First time here? Four things to expect:**\n"
+        "\n"
+        "- 🌐 **Browser:** use **Chrome, Firefox or Edge** — Codespaces does not work reliably in Safari.\n"
+        "- 🧮 **Kernel:** when VS Code asks you to *Select Kernel*, choose **Jupyter Kernel...** → **R**. The notebooks run R, not Python.\n"
+        "- ⚠️ **\"No text editor active\" pop-up:** a harmless warning from the R extension — your code still runs. Just close it.\n"
+        "- ▶️ **Running cells:** use **Shift+Enter** or the ▶ button next to the cell — **not Ctrl+Enter**, which the R extension intercepts. The first cell can take a moment while the R kernel starts."
     )
     code = (
         "# Match the report's defaults: warnings hidden (warning=FALSE in the Rmd)\n"
