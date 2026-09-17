@@ -513,7 +513,12 @@ ggsave(
 ```
 
 :::boxy
-Colour encodes treatment, shape encodes donor. If treatment separates cleanly on one axis while donors are spread along another, that is the classic signature of a paired design: a consistent treatment effect on top of donor-to-donor baseline differences.
+**How to read this plot.** Each point is one sample; points close together have similar overall
+expression. Check the **% variance** printed on each axis first — it tells you how much of the total
+variation that axis carries, so a separation on PC1 means more than the same-looking separation on PC3.
+Here colour encodes treatment and shape encodes donor. If treatment separates cleanly on one axis while
+donors are spread along another, that is the classic signature of a paired design: a consistent treatment
+effect on top of donor-to-donor baseline differences.
 :::
 
 ## 🧠 Interpretation questions
@@ -629,6 +634,23 @@ dev.off()
 <div class="note">
   <strong>📘 Note:</strong> Rows are already gene symbols (from the human reference), so they are ready
   to use directly in the enrichment analysis (script 03) with no ID conversion step.
+</div>
+
+<div class="important">
+  <strong>⭐ Two things in this plot are not biology — spot them before you interpret it.</strong>
+  <ul>
+    <li><strong>Names ending in <code>_1</code>, <code>_2</code>, ...</strong> (e.g. <code>TUBB_6</code>,
+    <code>HLA-C_4</code>): this RefSeq annotation lists some symbols more than once, so R made the
+    duplicates unique by appending a number. They are separate annotated copies/entries of the same
+    symbol, not different genes — and they crowd this list because gene families like the MHC region and
+    the tubulins are annotated many times over.</li>
+    <li><strong>Sex-linked genes</strong> (e.g. <code>RPS4Y1</code>, <code>DDX3Y</code>,
+    <code>KDM5D</code>, <code>USP9Y</code>): the four donors are not all the same sex, so these genes are
+    among the most "variable" in the whole dataset — a donor property, unrelated to dexamethasone.</li>
+  </ul>
+  Most-variable is <em>not</em> most-relevant: only a handful of rows here (look for <code>FKBP5</code>,
+  <code>ZBTB16</code>, <code>GPX3</code>) are actual drug responses. That is why the next notebook tests a
+  specific contrast instead of trusting variance.
 </div>
 
 :::boxy

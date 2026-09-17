@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -454,8 +454,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="note">
 <p><strong>📘 Note:</strong> We use <code>apeglm</code> shrinkage, which requires the effect to be named via
 <code>coef</code> (a name from <code>resultsNames()</code>). Shrinkage pulls in the fold changes of noisy,
-low-count genes so that the large fold changes that remain are trustworthy. It changes fold-change estimates
-for ranking and plotting, not which genes are significant.</p>
+low-count genes so that the large fold changes that remain are trustworthy. Because our helper below applies
+the fold-change threshold to the <em>shrunken</em> values, shrinkage here also affects which genes are
+counted as Up/Down — deliberately: a noisy low-count gene with an inflated raw fold change should not pass.</p>
 </div>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-1" tabindex="-1"></a>get_results <span class="ot">&lt;-</span> <span class="cf">function</span>(dds, coef_name) {</span>
 <span id="cb82-2"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-2" tabindex="-1"></a>  <span class="fu">stopifnot</span>(coef_name <span class="sc">%in%</span> <span class="fu">resultsNames</span>(dds))</span>
@@ -489,29 +490,30 @@ for ranking and plotting, not which genes are significant.</p>
 <span id="cb82-30"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-30" tabindex="-1"></a>    <span class="at">lab            =</span> labels,</span>
 <span id="cb82-31"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-31" tabindex="-1"></a>    <span class="at">x              =</span> <span class="st">&quot;log2FoldChange&quot;</span>,</span>
 <span id="cb82-32"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-32" tabindex="-1"></a>    <span class="at">y              =</span> <span class="st">&quot;padj&quot;</span>,</span>
-<span id="cb82-33"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-33" tabindex="-1"></a>    <span class="at">pCutoff        =</span> padj_threshold,</span>
-<span id="cb82-34"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-34" tabindex="-1"></a>    <span class="at">FCcutoff       =</span> lfc_threshold,</span>
-<span id="cb82-35"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-35" tabindex="-1"></a>    <span class="at">title          =</span> title,</span>
-<span id="cb82-36"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-36" tabindex="-1"></a>    <span class="at">subtitle       =</span> sub,</span>
-<span id="cb82-37"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-37" tabindex="-1"></a>    <span class="at">legendPosition =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb82-38"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-38" tabindex="-1"></a>    <span class="at">drawConnectors =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb82-39"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-39" tabindex="-1"></a>    <span class="at">max.overlaps   =</span> <span class="cn">Inf</span></span>
-<span id="cb82-40"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-40" tabindex="-1"></a>  )</span>
-<span id="cb82-41"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-41" tabindex="-1"></a>}</span>
-<span id="cb82-42"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-42" tabindex="-1"></a></span>
-<span id="cb82-43"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-43" tabindex="-1"></a><span class="co"># Diagnostic: are the largest fold changes coming from well-expressed genes (real)</span></span>
-<span id="cb82-44"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-44" tabindex="-1"></a><span class="co"># or from low-count genes (unreliable)? Prints the 10 most extreme by |log2FC|</span></span>
-<span id="cb82-45"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-45" tabindex="-1"></a><span class="co"># with their baseMean (mean normalised count across samples).</span></span>
-<span id="cb82-46"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-46" tabindex="-1"></a>check_extreme_fc <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, <span class="at">n =</span> <span class="dv">10</span>) {</span>
-<span id="cb82-47"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-47" tabindex="-1"></a>  res_df <span class="sc">%&gt;%</span></span>
-<span id="cb82-48"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-48" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(log2FoldChange))) <span class="sc">%&gt;%</span></span>
-<span id="cb82-49"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-49" tabindex="-1"></a>    <span class="fu">transmute</span>(gene_id,</span>
-<span id="cb82-50"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-50" tabindex="-1"></a>              <span class="at">baseMean       =</span> <span class="fu">round</span>(baseMean, <span class="dv">1</span>),</span>
-<span id="cb82-51"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-51" tabindex="-1"></a>              <span class="at">log2FoldChange =</span> <span class="fu">round</span>(log2FoldChange, <span class="dv">2</span>),</span>
-<span id="cb82-52"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-52" tabindex="-1"></a>              <span class="at">padj           =</span> <span class="fu">signif</span>(padj, <span class="dv">3</span>),</span>
-<span id="cb82-53"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-53" tabindex="-1"></a>              direction) <span class="sc">%&gt;%</span></span>
-<span id="cb82-54"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-54" tabindex="-1"></a>    <span class="fu">head</span>(n)</span>
-<span id="cb82-55"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-55" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb82-33"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-33" tabindex="-1"></a>    <span class="at">ylab           =</span> <span class="fu">bquote</span>(<span class="sc">~-</span>Log[<span class="dv">10</span>] <span class="sc">~</span> <span class="st">&quot;adjusted&quot;</span> <span class="sc">~</span> <span class="fu">italic</span>(P)),</span>
+<span id="cb82-34"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-34" tabindex="-1"></a>    <span class="at">pCutoff        =</span> padj_threshold,</span>
+<span id="cb82-35"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-35" tabindex="-1"></a>    <span class="at">FCcutoff       =</span> lfc_threshold,</span>
+<span id="cb82-36"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-36" tabindex="-1"></a>    <span class="at">title          =</span> title,</span>
+<span id="cb82-37"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-37" tabindex="-1"></a>    <span class="at">subtitle       =</span> sub,</span>
+<span id="cb82-38"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-38" tabindex="-1"></a>    <span class="at">legendPosition =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb82-39"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-39" tabindex="-1"></a>    <span class="at">drawConnectors =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb82-40"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-40" tabindex="-1"></a>    <span class="at">max.overlaps   =</span> <span class="cn">Inf</span></span>
+<span id="cb82-41"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-41" tabindex="-1"></a>  )</span>
+<span id="cb82-42"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-42" tabindex="-1"></a>}</span>
+<span id="cb82-43"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-43" tabindex="-1"></a></span>
+<span id="cb82-44"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-44" tabindex="-1"></a><span class="co"># Diagnostic: are the largest fold changes coming from well-expressed genes (real)</span></span>
+<span id="cb82-45"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-45" tabindex="-1"></a><span class="co"># or from low-count genes (unreliable)? Prints the 10 most extreme by |log2FC|</span></span>
+<span id="cb82-46"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-46" tabindex="-1"></a><span class="co"># with their baseMean (mean normalised count across samples).</span></span>
+<span id="cb82-47"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-47" tabindex="-1"></a>check_extreme_fc <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, <span class="at">n =</span> <span class="dv">10</span>) {</span>
+<span id="cb82-48"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-48" tabindex="-1"></a>  res_df <span class="sc">%&gt;%</span></span>
+<span id="cb82-49"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-49" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(log2FoldChange))) <span class="sc">%&gt;%</span></span>
+<span id="cb82-50"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-50" tabindex="-1"></a>    <span class="fu">transmute</span>(gene_id,</span>
+<span id="cb82-51"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-51" tabindex="-1"></a>              <span class="at">baseMean       =</span> <span class="fu">round</span>(baseMean, <span class="dv">1</span>),</span>
+<span id="cb82-52"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-52" tabindex="-1"></a>              <span class="at">log2FoldChange =</span> <span class="fu">round</span>(log2FoldChange, <span class="dv">2</span>),</span>
+<span id="cb82-53"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-53" tabindex="-1"></a>              <span class="at">padj           =</span> <span class="fu">signif</span>(padj, <span class="dv">3</span>),</span>
+<span id="cb82-54"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-54" tabindex="-1"></a>              direction) <span class="sc">%&gt;%</span></span>
+<span id="cb82-55"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-55" tabindex="-1"></a>    <span class="fu">head</span>(n)</span>
+<span id="cb82-56"><a href="a-small-helper-for-extracting-and-classifying-results.html#cb82-56" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <!-- </div> -->
             </section>

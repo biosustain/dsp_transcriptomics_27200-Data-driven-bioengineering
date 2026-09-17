@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -508,10 +508,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;SA_RS00005&quot; &quot;SA_RS00010&quot; &quot;SA_RS00015&quot; &quot;SA_RS00020&quot; &quot;SA_RS00025&quot;
 ## [6] &quot;SA_RS00030&quot;</code></pre>
 <div class="note">
-<p><strong>📘 Note:</strong> This prokaryotic reference has no gene symbols, so <code>gene_id</code> and
-<code>gene_name</code> are the same locus tags. We keep the locus tags as row names throughout. This is
-expected for bacterial nf-core runs and is not a problem — locus tags are the stable identifiers used by
-KEGG for enrichment later.</p>
+<p><strong>📘 Note:</strong> In the pipeline output <code>gene_id</code> and <code>gene_name</code> are the
+same locus tags — the pipeline did not fill in symbols. We keep the locus tags as row names throughout:
+they are the stable identifiers used by KEGG for enrichment later. (The GTF itself does have symbols for
+about a third of genes; script 02 extracts them purely for readability.)</p>
 </div>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="choose-the-strain.html#cb20-1" tabindex="-1"></a><span class="co"># Confirm the two ID columns are identical (they are, for this GTF), and that</span></span>
 <span id="cb20-2"><a href="choose-the-strain.html#cb20-2" tabindex="-1"></a><span class="co"># the IDs look like S. aureus locus tags rather than symbols.</span></span>

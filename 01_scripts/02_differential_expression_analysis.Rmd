@@ -229,9 +229,11 @@ The results table contains one row per gene with the following columns:
  well-supported fold changes (high counts, consistent signal) largely
  unchanged. Think of it as a confidence-weighted adjustment.
 <div class="important">
-  <strong>⭐ Important:</strong> shrinkage does **not** change your p-values or which genes
- are significant — those come from the `results()` call above. Shrunken LFCs
- are used exclusively for **ranking and visualisation** (volcano plot, heatmap).
+  <strong>⭐ Important:</strong> shrinkage does **not** change your p-values — those come from the
+ `results()` call above and are carried over unchanged. It only changes the fold-change estimates.
+ Keep in mind, though, that the gene list further down applies a **|log2FC| ≥ 1** filter to these
+ *shrunken* values, so shrinkage does influence which genes end up in the final significant set —
+ by design: a noisy low-count gene with an inflated raw fold change should not qualify.
 </div>
 
  **Why `apeglm`?** Three shrinkage methods exist in DESeq2:
@@ -243,9 +245,13 @@ The results table contains one row per gene with the following columns:
  See [Zhu *et al.*, 2019](https://doi.org/10.1093/bioinformatics/btz585) for benchmarks.
 :::
 ```{r human-de-lfc-shrink, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+# Pass res = res so the shrunken object inherits the p-values and independent
+# filtering from the results() call above (alpha = 0.05) instead of recomputing
+# them at apeglm's default alpha.
 res_shrunk <- lfcShrink(dds,
                         coef  = "condition_treatment_vs_control",
-                        type  = "apeglm")
+                        type  = "apeglm",
+                        res   = res)
 
 summary(res_shrunk, alpha = 0.05)
 ```
@@ -339,7 +345,7 @@ DT::datatable(
 ## 🧠 Interpretation questions
 
 ::: question
-2. Dexamethasone works by binding the glucocorticoid receptor, made by the gene *NR3C1*. Before looking: predict where *NR3C1* sits in your results — top hit, modest, or absent? Now check your tables (remember the interactive table only shows genes passing both cutoffs). If the protein driving this whole response barely moves in the mRNA data, what does that tell you about what a count can measure?
+2. Dexamethasone works by binding the glucocorticoid receptor, made by the gene *NR3C1*. Before looking: predict where *NR3C1* sits in your results — top hit, modest, or absent? Now find it in `res_df` (not the interactive table — that only holds genes passing *both* cutoffs). Two surprises are waiting: which **direction** did it move, and does it appear in your significant table at all? The drug did not switch this gene on — it bound the protein that was already there. So what did your RNA-seq actually measure about the receptor, and what did it miss?
 :::
 
 

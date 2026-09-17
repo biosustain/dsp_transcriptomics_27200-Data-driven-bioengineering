@@ -58,8 +58,8 @@ This script reads the DE results produced by `02_differential_expression_analysi
 Make sure you have run that script first — it saves two files to `results/`:
 
 :::boxy
-- `results/DE_treatment_vs_control_all.tsv` — all tested genes with shrunken LFC
-- `results/DE_treatment_vs_control_significant.tsv` — significant DE genes (padj < 0.05, |LFC| >= 1)
+- `results/human/DE_treatment_vs_control_all.tsv` — all tested genes with shrunken LFC
+- `results/human/DE_treatment_vs_control_significant.tsv` — significant DE genes (padj < 0.05, |LFC| >= 1)
 :::
 
 ```{r human-fn-load-results, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -174,6 +174,17 @@ cat("Down — significant terms:", n_terms(ora_down), "\n")
 </div>
 
 ### Inspect Significant Terms
+
+:::boxy
+**How to read these tables.** Four columns carry the meaning:
+
+- **`term_size`** — how many genes the term contains in total. Very large terms ("signaling", 3,700 genes) are vague; very small ones (4 genes) are fragile.
+- **`intersection_size`** — how many of *your* query genes fall in it. This is the actual overlap.
+- **`p_value`** — already corrected by g:Profiler (g:SCS), so read it as an adjusted p-value.
+- **`source`** — which database the term came from (GO:BP, KEGG, REAC).
+
+A trustworthy hit has a decent overlap, a term size that is specific enough to mean something, and biology that makes sense for the treatment.
+:::
 
 **Up-regulated genes — enriched terms**
 
@@ -315,7 +326,7 @@ if (!is.null(ora_combined) && nrow(ora_combined) > 0) {
 ## 🧠 Interpretation questions
 
 ::: question
-1. Dexamethasone is prescribed to switch inflammation **off** — yet immune and cytokine terms show up in your ORA results. Check which direction they come from. Does an immune term among UP-regulated genes mean the drug switched inflammation on? Look at a few of the genes behind one such term: are they activators of inflammation, or brakes?
+1. Dexamethasone is prescribed to switch inflammation **off**. Find the immune and cytokine terms in your ORA results: which direction are they in — among the up-regulated or the down-regulated genes? Does that match the drug's job? Now look at the *other* direction's terms (adhesion, cytoskeleton, metal/mineral handling): those are not inflammation at all. What does that tell you about a drug that is described in one word ("anti-inflammatory") but acts through a receptor present in every cell?
 :::
 
 
@@ -422,19 +433,21 @@ cat("Nominal (pval < 0.05)    :", sum(gsea_results$pval < 0.05, na.rm = TRUE), "
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
 **What we see, and why it differs from ORA.** In this dataset GSEA finds **no gene set significant after
-multiple-testing correction** (padj < 0.05), even though ORA found strongly enriched cytokine and immune
-pathways. This is not a contradiction — the two methods ask different questions:
+multiple-testing correction** (padj < 0.05), even though ORA returned dozens of enriched terms. This is not
+a contradiction — the two methods ask different questions:
 
-- **ORA** asks whether the ~700 *significant* DE genes are concentrated in a pathway. They are (in cytokine
-  and immune pathways), so ORA lights up.
-- **GSEA** asks whether an *entire* gene set shifts coherently across all 20,000 genes. The dexamethasone
-  response here is carried by a few hundred strongly-changed genes scattered across many pathways, rather
-  than whole pathways moving together — so no set reaches the coordinated shift GSEA rewards.
+- **ORA** asks whether the ~700 *significant* DE genes are concentrated in a term. They are — mostly in
+  broad developmental and signalling terms, with cytokine/immune signalling among the **down**-regulated
+  genes and adhesion, cytoskeleton and metal-handling terms among the up-regulated ones — so ORA lights up.
+- **GSEA** asks whether an *entire* gene set shifts coherently across the full ranked list (every gene that
+  DESeq2 tested, printed above). The dexamethasone response here is carried by a few hundred
+  strongly-changed genes scattered across many pathways, rather than whole pathways moving together — so no
+  set reaches the coordinated shift GSEA rewards.
 
-This is a real biological result, not a failure: **the glucocorticoid effect is gene-specific, not
+This is a real result, not a failure: **the glucocorticoid effect here is gene-specific rather than
 pathway-coherent**, which is exactly the situation where ORA is the more sensitive tool. The nominal
-(uncorrected) top sets below still point at the right biology — immune and inflammatory pathways — showing
-GSEA *sees* the theme but cannot call it significant on this sample size.
+(uncorrected) sets below are worth reading as hypotheses only — note how mixed they are, and that they do
+not simply restate the ORA themes. Treat them as "GSEA could not settle this", not as findings.
 :::
 
 ### Inspect Gene Sets
@@ -529,6 +542,8 @@ if (nrow(gsea_bar) > 0) {
 
 The enrichment plot shows the running sum of the enrichment score for a single gene set across the ranked gene list. The peak of the curve is the enrichment score; genes from the set are shown as vertical bars (the "rug") at the bottom.
 
+**How to read it:** the x-axis is every tested gene, ordered from most up-regulated (left) to most down-regulated (right). Each tick in the rug is one gene of the set. Ticks bunched at one end drive the curve to a high peak — coordinated enrichment. Ticks spread evenly across the axis give a flat, wandering curve and no enrichment.
+
 ```{r human-fn-gsea-enrichment-plots, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 top_up <- gsea_nom %>% filter(NES > 0) %>% slice_min(pval, n = 1) %>% pull(pathway)
 top_down <- gsea_nom %>% filter(NES < 0) %>% slice_min(pval, n = 1) %>% pull(pathway)
@@ -552,7 +567,7 @@ if (length(top_down) > 0) {
 ## Part 3 — Comparing ORA and GSEA
 
 ORA and GSEA answer different questions, and in this dataset they give very different verdicts:
-**ORA finds strongly enriched cytokine and immune pathways, while GSEA finds no set that survives
+**ORA returns dozens of corrected-significant terms, while GSEA finds no set that survives
 multiple-testing correction.** This section makes that contrast explicit, because it is one of the most
 useful things to understand about enrichment analysis.
 
@@ -574,17 +589,25 @@ cat("GSEA sets at nominal p < 0.05 (suggestive):", length(gsea_nom_terms),  "\n"
 **The teaching point — why the two methods disagree here.**
 
 - **ORA** tests whether the ~700 genes that individually passed significance are *concentrated* in a
-  pathway. They are — in cytokine and immune pathways — so ORA reports strong, corrected-significant
-  enrichment that matches the paper's biology.
+  term. They are — in broad developmental and signalling terms, plus cytokine/immune signalling on the
+  down-regulated side, consistent with an anti-inflammatory drug — so ORA reports corrected-significant
+  enrichment.
 - **GSEA** tests whether an *entire* gene set moves *coherently* across the full ranked list. The
   dexamethasone response is carried by a few hundred strongly-changed genes spread across many pathways,
-  not by whole pathways shifting together, so no set reaches significance after correction — even though
-  the nominal top hits (immune, inflammatory, chemokine sets) point at the right biology.
+  not by whole pathways shifting together, so no set reaches significance after correction. The nominal
+  top hits are a mixed bag and should be treated as untested hypotheses, not as a second opinion that
+  happens to agree.
 
 **Bad results are results.** The GSEA "non-finding" is informative: it tells us the glucocorticoid effect
 here is **gene-specific rather than pathway-coordinated**. When the biology looks like this, ORA is the
 more appropriate tool — which is exactly why we report ORA as the primary enrichment result and GSEA as a
 secondary, directional check.
+:::
+
+## 🧠 Interpretation questions
+
+::: question
+2. Everything in this chapter came from transcript abundance. Yet the molecule whose *activity* changed most — the glucocorticoid receptor (*NR3C1*) — was switched on by drug binding, not by transcription. Name one claim your enrichment tables can honestly make, one they cannot, and one experiment that would measure activity instead of abundance.
 :::
 
 ## Saving Results
@@ -627,14 +650,16 @@ cat("  GSEA -> GSEA_Reactome_treatment_vs_control.tsv\n")
 | ORA background | All DESeq2-tested genes (`custom_bg`, `domain_scope = "custom"`) | Correct statistical background — not the whole genome |
 | ORA correction | g:SCS | g:Profiler's default; accounts for term overlap structure |
 | GSEA tool | `fgseaMultilevel` | Accurate small p-values; proper NES and permutation-based testing |
-| GSEA gene sets | MSigDB Reactome via `msigdbr` | Curated, detailed pathways; where the immune/inflammatory themes surfaced |
+| GSEA gene sets | MSigDB Reactome via `msigdbr` | Curated, detailed pathways covering signalling and immune processes |
 | GSEA rank metric | sign(LFC) x -log10(pvalue) | Encodes direction and significance; robust to lowly expressed gene noise |
-| Primary result | ORA (g:Profiler) | Cytokine/immune enrichment, corrected-significant, matches the paper |
-| GSEA outcome | No padj-significant sets | Effect is gene-specific, not pathway-coherent; nominal top sets still immune/inflammatory |
+| Primary result | ORA (g:Profiler) | Dozens of corrected-significant terms; cytokine/immune signalling among the down-regulated genes |
+| GSEA outcome | No padj-significant sets | Effect is gene-specific, not pathway-coherent; nominal sets are hypotheses only |
 
 Enrichment results are saved and ready for biological interpretation and reporting. The primary,
-statistically-supported finding is the ORA enrichment of cytokine and immune pathways, consistent with the
-glucocorticoid biology described by Himes *et al.* GSEA is reported as a secondary, directional check.
+statistically-supported findings are the ORA terms — broad developmental and signalling programmes, with
+cytokine and immune signalling **down** in the treated cells, consistent with the anti-inflammatory
+glucocorticoid biology described by Himes *et al.* GSEA is reported as a secondary check that, here, cannot
+settle anything on its own.
 
 
 <!-- --------------------- Do not edit this and below ---------------------- -->
@@ -648,11 +673,3 @@ sessionInfo()
 ```{r human-fn-render, eval=FALSE, echo=FALSE}
 rmarkdown::render("01_scripts/03_gene_functional.Rmd")
 ```
-
-## 🧠 Interpretation questions
-
-::: question
-2. Everything in this chapter came from transcript abundance. Yet the molecule whose *activity* changed most — the glucocorticoid receptor (*NR3C1*) — was switched on by drug binding, not by transcription. Name one claim your enrichment tables can honestly make, one they cannot, and one experiment that would measure activity instead of abundance.
-:::
-
-

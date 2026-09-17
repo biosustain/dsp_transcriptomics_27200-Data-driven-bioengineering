@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -450,7 +450,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="summary" class="section level2 hasAnchor">
 <h2>Summary<a href="summary.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Before proceeding to differential expression, confirm the QC checks and record the time-point decision:</p>
+<p>Before proceeding to differential expression, confirm the QC checks and record what you saw:</p>
 <div class="boxy">
 <table>
 <colgroup>
@@ -465,8 +465,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td>Size factors ≈ 1.0 across samples</td>
-<td>Library sizes are balanced</td>
+<td>Size factors are all of a similar order (here roughly 0.7–2)</td>
+<td>No sample needs an extreme rescaling; a far-out value is worth checking against its library size</td>
 </tr>
 <tr class="even">
 <td>Boxplots of normalised counts overlap</td>
@@ -485,17 +485,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>No technical outliers</td>
 </tr>
 <tr class="even">
-<td><strong>Time-point choice</strong></td>
-<td><strong>Record which time point you will take into script 02, and why</strong></td>
+<td><strong>Time structure</strong></td>
+<td><strong>Record how strongly time separates your samples — script 02’s models are built around it</strong></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div style="font-size: 0.9em; color: grey;">
-<p><em>This QC loads all three time points so the structure is visible. Differential expression (script 02) uses
-a single time point with the simple design <code>~ lifestyle</code> (biofilm vs planktonic), following the paper’s
-per-strain comparison. The two strains are never merged: they use different reference genomes and their
-locus tags are not comparable.</em></p>
+<p><em>This QC loads all three time points so the structure is visible. Differential expression (script 02) keeps
+all of them: it models maturation over time and lifestyle adjusted for time, and uses the single 24 h time
+point only for the final hypothesis test. The two strains are never merged: they use different reference
+genomes and their locus tags are not comparable.</em></p>
 </div>
 <div class="important">
 <p><strong>⭐ Important:</strong> If any check fails, investigate the cause before running DESeq2. Proceeding with outlier samples or a mis-specified design will compromise all downstream results.</p>

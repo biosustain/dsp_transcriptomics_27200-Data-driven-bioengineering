@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -451,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="gene-functional-enrichment-analysis" class="section level1 hasAnchor">
 <h1>Gene Functional Enrichment Analysis<a href="gene-functional-enrichment-analysis.html#gene-functional-enrichment-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This report covers functional enrichment of the genes that change between the <strong>biofilm</strong>
-and <strong>planktonic</strong> lifestyles in <em>Staphylococcus aureus</em> (<a href="https://doi.org/10.1128/mBio.03257-20">Tomlinson <em>et al.</em>,
+and <strong>planktonic</strong> lifestyles in <em>Staphylococcus aureus</em> (<a href="https://doi.org/10.1099/mgen.0.000598">Tomlinson <em>et al.</em>,
 2021</a>). The contrast analysed here is the
 <em>lifestyle (additive)</em> model from the differential expression step: the overall
 biofilm-versus-planktonic difference, controlling for time point.</p>
@@ -472,7 +472,7 @@ tags.</p>
 <div class="boxy">
 <p><code>mulea</code> provides empirical FDR correction for ORA but its GSEA function does not compute
 NES (Normalised Enrichment Scores). <code>fgsea</code> is the standard for preranked GSEA with proper
-NES and permutation-based p-values. Using the best tool for each task gives the most
+NES and well-calibrated p-values. Using the best tool for each task gives the most
 reliable results.</p>
 </div>
 </div>

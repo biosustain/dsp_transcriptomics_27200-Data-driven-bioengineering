@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -456,21 +456,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Clean column names in the count matrix to remove whitespace or special characters.</li>
 <li>Align the sample order between the count matrix and the metadata — <code>DESeq2</code> requires these to match exactly.</li>
 </ol>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="preparing-the-data-2.html#cb412-1" tabindex="-1"></a>condition_levels   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>)</span>
-<span id="cb412-2"><a href="preparing-the-data-2.html#cb412-2" tabindex="-1"></a>samples_info<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group, <span class="at">levels =</span> condition_levels)</span>
-<span id="cb412-3"><a href="preparing-the-data-2.html#cb412-3" tabindex="-1"></a></span>
-<span id="cb412-4"><a href="preparing-the-data-2.html#cb412-4" tabindex="-1"></a><span class="fu">colnames</span>(count_genes) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(</span>
-<span id="cb412-5"><a href="preparing-the-data-2.html#cb412-5" tabindex="-1"></a>  <span class="st">&quot;[^[:alnum:]_]&quot;</span>, <span class="st">&quot;&quot;</span>,</span>
-<span id="cb412-6"><a href="preparing-the-data-2.html#cb412-6" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">s+&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="fu">trimws</span>(<span class="fu">colnames</span>(count_genes)))</span>
-<span id="cb412-7"><a href="preparing-the-data-2.html#cb412-7" tabindex="-1"></a>)</span>
-<span id="cb412-8"><a href="preparing-the-data-2.html#cb412-8" tabindex="-1"></a></span>
-<span id="cb412-9"><a href="preparing-the-data-2.html#cb412-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(<span class="fu">colnames</span>(count_genes) <span class="sc">%in%</span> samples_info<span class="sc">$</span>sample)) {</span>
-<span id="cb412-10"><a href="preparing-the-data-2.html#cb412-10" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">&quot;⛔ Some samples in count matrix are NOT in metadata! Check sample names.&quot;</span>)</span>
-<span id="cb412-11"><a href="preparing-the-data-2.html#cb412-11" tabindex="-1"></a>}</span>
-<span id="cb412-12"><a href="preparing-the-data-2.html#cb412-12" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> samples_info[<span class="fu">match</span>(<span class="fu">colnames</span>(count_genes), samples_info<span class="sc">$</span>sample), ]</span>
-<span id="cb412-13"><a href="preparing-the-data-2.html#cb412-13" tabindex="-1"></a></span>
-<span id="cb412-14"><a href="preparing-the-data-2.html#cb412-14" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">count_col    =</span> <span class="fu">colnames</span>(count_genes),</span>
-<span id="cb412-15"><a href="preparing-the-data-2.html#cb412-15" tabindex="-1"></a>                 <span class="at">metadata_row =</span> samples_info<span class="sc">$</span>sample))</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="preparing-the-data-2.html#cb414-1" tabindex="-1"></a>condition_levels   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>)</span>
+<span id="cb414-2"><a href="preparing-the-data-2.html#cb414-2" tabindex="-1"></a>samples_info<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group, <span class="at">levels =</span> condition_levels)</span>
+<span id="cb414-3"><a href="preparing-the-data-2.html#cb414-3" tabindex="-1"></a></span>
+<span id="cb414-4"><a href="preparing-the-data-2.html#cb414-4" tabindex="-1"></a><span class="fu">colnames</span>(count_genes) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(</span>
+<span id="cb414-5"><a href="preparing-the-data-2.html#cb414-5" tabindex="-1"></a>  <span class="st">&quot;[^[:alnum:]_]&quot;</span>, <span class="st">&quot;&quot;</span>,</span>
+<span id="cb414-6"><a href="preparing-the-data-2.html#cb414-6" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">s+&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="fu">trimws</span>(<span class="fu">colnames</span>(count_genes)))</span>
+<span id="cb414-7"><a href="preparing-the-data-2.html#cb414-7" tabindex="-1"></a>)</span>
+<span id="cb414-8"><a href="preparing-the-data-2.html#cb414-8" tabindex="-1"></a></span>
+<span id="cb414-9"><a href="preparing-the-data-2.html#cb414-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(<span class="fu">colnames</span>(count_genes) <span class="sc">%in%</span> samples_info<span class="sc">$</span>sample)) {</span>
+<span id="cb414-10"><a href="preparing-the-data-2.html#cb414-10" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">&quot;⛔ Some samples in count matrix are NOT in metadata! Check sample names.&quot;</span>)</span>
+<span id="cb414-11"><a href="preparing-the-data-2.html#cb414-11" tabindex="-1"></a>}</span>
+<span id="cb414-12"><a href="preparing-the-data-2.html#cb414-12" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> samples_info[<span class="fu">match</span>(<span class="fu">colnames</span>(count_genes), samples_info<span class="sc">$</span>sample), ]</span>
+<span id="cb414-13"><a href="preparing-the-data-2.html#cb414-13" tabindex="-1"></a></span>
+<span id="cb414-14"><a href="preparing-the-data-2.html#cb414-14" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">count_col    =</span> <span class="fu">colnames</span>(count_genes),</span>
+<span id="cb414-15"><a href="preparing-the-data-2.html#cb414-15" tabindex="-1"></a>                 <span class="at">metadata_row =</span> samples_info<span class="sc">$</span>sample))</span></code></pre></div>
 <pre><code>##   count_col metadata_row
 ## 1        C1           C1
 ## 2        C2           C2

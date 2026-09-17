@@ -60,7 +60,7 @@ The material is designed for people with **no or little practical experience** i
 You can also explore the [27200 Data Driven Bioengineering - Transcriptomics repository](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 :::
 
-**Draft agenda** (4-hour block: ~2 h lecture + ~2 h guided exercises, in groups of 4)
+**Draft agenda** (4-hour block: lecture + guided exercises, in groups of 4)
 
 | Time | Session |
 |---|---|

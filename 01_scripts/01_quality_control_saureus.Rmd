@@ -28,7 +28,7 @@ The contrast of interest is:
 
 -   Exploratory data analyses
 -   Sanity Checks
--   Choosing a time point for downstream differential expression
+-   Understanding the time-point structure that the differential expression models build on
 
 **Data**
 
@@ -40,7 +40,7 @@ The contrast of interest is:
 <strong>📘 Note:</strong> Key points about this dataset:
 <ul>
 <li>Reads are aligned with a non-splice-aware aligner (Bowtie2), appropriate for bacterial genomes with no introns</li>
-<li>The prokaryotic reference GTF carries no gene symbols, so genes are labelled by their <strong>locus tags</strong> (e.g. <code>SA_RS00005</code> for N315, <code>SAUSA300_RS00010</code> for USA300). No symbol conversion is possible or needed at this stage</li>
+<li>The pipeline output labels genes by their <strong>locus tags</strong> (e.g. <code>SA_RS00005</code> for N315, <code>SAUSA300_RS00010</code> for USA300). The reference GTF does carry gene symbols for roughly a third of genes (<code>dnaA</code>, <code>arcA</code>, ...), and later scripts use them for readability — but the locus tag is the stable identifier throughout</li>
 <li>Because the two strains use different reference genomes, their gene identifiers are not comparable — the analyses are kept fully separate and are never merged</li>
 <li>Enrichment analysis (a later script) uses KEGG for <em>S. aureus</em>; g:Profiler does not support this organism</li>
 </ul>
@@ -49,8 +49,10 @@ The contrast of interest is:
 <div class="note">
 <strong>📘 Note on this experiment:</strong> The full dataset for each strain contains 32 samples: biofilm and
 planktonic cultures at 5 h (n = 4 each), 10 h (n = 4 each) and 24 h (n = 8 each). This QC script loads
-<strong>all 32 samples</strong> so the PCA can reveal the time-point structure. The choice of which time
-point to carry into differential expression is made <em>after</em> looking at this QC, not before.
+<strong>all 32 samples</strong> so the PCA can reveal the time-point structure. Script 02 also keeps all
+time points: it models maturation over time and lifestyle adjusted for time, and uses a single time point
+(24 h) only for the final hypothesis test — so what you learn here about the time structure directly shapes
+how you will read those models.
 </div>
 
 **Explanation of the QC analysis 🧾**
@@ -152,10 +154,10 @@ print(head(rownames(count_genes)))
 ```
 
 <div class="note">
-  <strong>📘 Note:</strong> This prokaryotic reference has no gene symbols, so <code>gene_id</code> and
-  <code>gene_name</code> are the same locus tags. We keep the locus tags as row names throughout. This is
-  expected for bacterial nf-core runs and is not a problem — locus tags are the stable identifiers used by
-  KEGG for enrichment later.
+  <strong>📘 Note:</strong> In the pipeline output <code>gene_id</code> and <code>gene_name</code> are the
+  same locus tags — the pipeline did not fill in symbols. We keep the locus tags as row names throughout:
+  they are the stable identifiers used by KEGG for enrichment later. (The GTF itself does have symbols for
+  about a third of genes; script 02 extracts them purely for readability.)
 </div>
 
 ```{r saureus-qc-check-idcols-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -200,7 +202,7 @@ print(table(samples_info$lifestyle, samples_info$timepoint))
 ::: {style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;"}
 <strong>💡 Tip:</strong> The table above is your design at a glance. Note it is <strong>unbalanced across
 time</strong>: 5 h and 10 h have 4 replicates per lifestyle, while 24 h has 8. This does not affect QC, but
-keep it in mind when choosing a time point for differential expression.
+keep it in mind when reading the models in script 02 — the 24 h groups carry twice the replicates.
 :::
 
 ```{r saureus-qc-view-metadata-0, echo=TRUE, include=TRUE, eval=TRUE, message=FALSE, warning=FALSE}
@@ -299,7 +301,7 @@ A bacterial genome has far fewer genes than a human one (roughly 2,500–2,900 f
 
 ### Pre-filtering Low-count Genes
 
-Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples (equal to the size of the smallest lifestyle group).
+Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples — here the size of the smallest **lifestyle** group (16). Note this is stricter than DESeq2's usual convention of the smallest design cell (4 samples in a lifestyle × time group): a gene expressed only in one lifestyle at one time point could be lost. With this dataset that cost is small, and the stricter filter keeps the later models stable.
 
 Unlike the human genome, most bacterial genes are expressed under standard growth, so expect only a modest fraction to be filtered out.
 
@@ -456,7 +458,7 @@ dev.off()
 ```
 
 :::boxy
-The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by lifestyle, by time point, or both. If time point is a strong driver of the distances, that is a signal that the time points should be analysed separately rather than pooled — which is exactly why we pick a single time point for differential expression.
+The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by lifestyle, by time point, or both. If time point is a strong driver of the distances, that is a signal that time must be part of the model rather than ignored — which is exactly why script 02 keeps time in its designs instead of pooling all samples into a plain biofilm-vs-planktonic comparison.
 :::
 
 ### Principal Component Analysis (PCA)
@@ -504,12 +506,13 @@ ggsave(
 ```
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
-<strong>⭐ Using the PCA to choose a time point.</strong> This is the decision the QC is built around.
-Look at which axis separates <strong>lifestyle</strong> (colour) and which separates <strong>time point</strong>
-(shape). The paper reports that differential expression between biofilm and planktonic grows with culture
-age, being strongest at 24 h. A good time point for the downstream simple two-group comparison is one where
-biofilm and planktonic separate cleanly <em>and</em> where you have adequate replication. Read the actual
-separation off this plot rather than assuming it — then set that time point in script 02.
+<strong>⭐ How to read this plot.</strong> Each point is one sample; samples that are close have similar
+overall expression. Check the % variance printed on each axis first — it tells you how much of the story
+that axis carries. Then look at which axis separates <strong>lifestyle</strong> (colour) and which separates
+<strong>time point</strong> (shape). The paper reports that the biofilm–planktonic difference grows with
+culture age, strongest at 24 h — read the actual separation off <em>your</em> plot rather than assuming it.
+Script 02 builds directly on this structure: it models change over time and lifestyle adjusted for time, and
+saves the plain two-group comparison for a single, well-replicated time point (24 h) at the very end.
 :::
 
 ### Detecting Outliers
@@ -539,7 +542,7 @@ ggsave(
 ```
 
 :::boxy
-**What to look for:** an isolated sample sitting far from every other point on the individuals plot, or a single sample dominating PC1 on the scree plot, is a candidate technical outlier. Investigate its library size and its MultiQC metrics before deciding whether to exclude it.
+**What to look for:** an isolated sample sitting far from every other point on the individuals plot — especially along a PC that the scree plot shows carrying a large share of the variance — is a candidate technical outlier. Investigate its library size and its MultiQC metrics before deciding whether to exclude it.
 :::
 
 ### Top Variable Genes Heatmap
@@ -606,24 +609,24 @@ dev.off()
 
 ## Summary
 
-Before proceeding to differential expression, confirm the QC checks and record the time-point decision:
+Before proceeding to differential expression, confirm the QC checks and record what you saw:
 
 :::boxy
 | Check | What to confirm |
 |---|---|
-| Size factors ≈ 1.0 across samples | Library sizes are balanced |
+| Size factors are all of a similar order (here roughly 0.7–2) | No sample needs an extreme rescaling; a far-out value is worth checking against its library size |
 | Boxplots of normalised counts overlap | No extreme outlier samples |
 | Correlation heatmap | Note whether structure is by lifestyle, by time point, or both |
 | PCA | Note which axis is lifestyle and which is time point |
 | No isolated samples | No technical outliers |
-| **Time-point choice** | **Record which time point you will take into script 02, and why** |
+| **Time structure** | **Record how strongly time separates your samples — script 02's models are built around it** |
 :::
 
 ::: {style="font-size: 0.9em; color: grey;"}
-*This QC loads all three time points so the structure is visible. Differential expression (script 02) uses
-a single time point with the simple design `~ lifestyle` (biofilm vs planktonic), following the paper's
-per-strain comparison. The two strains are never merged: they use different reference genomes and their
-locus tags are not comparable.*
+*This QC loads all three time points so the structure is visible. Differential expression (script 02) keeps
+all of them: it models maturation over time and lifestyle adjusted for time, and uses the single 24 h time
+point only for the final hypothesis test. The two strains are never merged: they use different reference
+genomes and their locus tags are not comparable.*
 :::
 
 <div class="important">

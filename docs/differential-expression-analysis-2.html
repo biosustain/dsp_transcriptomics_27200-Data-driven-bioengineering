@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -461,15 +461,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>⭐ Important:</strong> This script assumes you have already run the E. coli Quality Control chapter (<code>03_analysis_basics.Rmd</code>), which saves the <code>dds</code> object to <code>results/rds/</code>. If not, run that script first.</p>
 </div>
 <p><strong>Setup the Environment</strong></p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="differential-expression-analysis-2.html#cb442-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb442-2"><a href="differential-expression-analysis-2.html#cb442-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
-<span id="cb442-3"><a href="differential-expression-analysis-2.html#cb442-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb442-4"><a href="differential-expression-analysis-2.html#cb442-4" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb442-5"><a href="differential-expression-analysis-2.html#cb442-5" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb442-6"><a href="differential-expression-analysis-2.html#cb442-6" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb442-7"><a href="differential-expression-analysis-2.html#cb442-7" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb442-8"><a href="differential-expression-analysis-2.html#cb442-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb442-9"><a href="differential-expression-analysis-2.html#cb442-9" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="differential-expression-analysis-2.html#cb444-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb444-2"><a href="differential-expression-analysis-2.html#cb444-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb444-3"><a href="differential-expression-analysis-2.html#cb444-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb444-4"><a href="differential-expression-analysis-2.html#cb444-4" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb444-5"><a href="differential-expression-analysis-2.html#cb444-5" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb444-6"><a href="differential-expression-analysis-2.html#cb444-6" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb444-7"><a href="differential-expression-analysis-2.html#cb444-7" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb444-8"><a href="differential-expression-analysis-2.html#cb444-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb444-9"><a href="differential-expression-analysis-2.html#cb444-9" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
 </div>
             </section>
 

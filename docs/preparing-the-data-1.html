@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -457,25 +457,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Set <code>donor</code> as a factor (needed for the paired design).</li>
 <li>Align the sample order between the count matrix and the metadata — <code>DESeq2</code> requires these to match exactly.</li>
 </ol>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="preparing-the-data-1.html#cb268-1" tabindex="-1"></a>condition_levels   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>)</span>
-<span id="cb268-2"><a href="preparing-the-data-1.html#cb268-2" tabindex="-1"></a>samples_info<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group, <span class="at">levels =</span> condition_levels)</span>
-<span id="cb268-3"><a href="preparing-the-data-1.html#cb268-3" tabindex="-1"></a>samples_info<span class="sc">$</span>donor <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>donor)</span>
-<span id="cb268-4"><a href="preparing-the-data-1.html#cb268-4" tabindex="-1"></a></span>
-<span id="cb268-5"><a href="preparing-the-data-1.html#cb268-5" tabindex="-1"></a><span class="co"># Subset count matrix to the 8 samples of interest (drop albuterol arms)</span></span>
-<span id="cb268-6"><a href="preparing-the-data-1.html#cb268-6" tabindex="-1"></a>keep_samples <span class="ot">&lt;-</span> <span class="fu">intersect</span>(samples_info<span class="sc">$</span>sample, <span class="fu">colnames</span>(count_genes))</span>
-<span id="cb268-7"><a href="preparing-the-data-1.html#cb268-7" tabindex="-1"></a>missing      <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(samples_info<span class="sc">$</span>sample, <span class="fu">colnames</span>(count_genes))</span>
-<span id="cb268-8"><a href="preparing-the-data-1.html#cb268-8" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(missing) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb268-9"><a href="preparing-the-data-1.html#cb268-9" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">&quot;⛔ Metadata samples not found in count matrix: &quot;</span>, <span class="fu">paste</span>(missing, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>))</span>
-<span id="cb268-10"><a href="preparing-the-data-1.html#cb268-10" tabindex="-1"></a>}</span>
-<span id="cb268-11"><a href="preparing-the-data-1.html#cb268-11" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> count_genes[, keep_samples, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb268-12"><a href="preparing-the-data-1.html#cb268-12" tabindex="-1"></a></span>
-<span id="cb268-13"><a href="preparing-the-data-1.html#cb268-13" tabindex="-1"></a><span class="co"># Order metadata to match the count matrix columns exactly</span></span>
-<span id="cb268-14"><a href="preparing-the-data-1.html#cb268-14" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> samples_info[<span class="fu">match</span>(<span class="fu">colnames</span>(count_genes), samples_info<span class="sc">$</span>sample), ]</span>
-<span id="cb268-15"><a href="preparing-the-data-1.html#cb268-15" tabindex="-1"></a></span>
-<span id="cb268-16"><a href="preparing-the-data-1.html#cb268-16" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">count_col    =</span> <span class="fu">colnames</span>(count_genes),</span>
-<span id="cb268-17"><a href="preparing-the-data-1.html#cb268-17" tabindex="-1"></a>                 <span class="at">metadata_row =</span> samples_info<span class="sc">$</span>sample,</span>
-<span id="cb268-18"><a href="preparing-the-data-1.html#cb268-18" tabindex="-1"></a>                 <span class="at">donor        =</span> samples_info<span class="sc">$</span>donor,</span>
-<span id="cb268-19"><a href="preparing-the-data-1.html#cb268-19" tabindex="-1"></a>                 <span class="at">group        =</span> samples_info<span class="sc">$</span>group))</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="preparing-the-data-1.html#cb270-1" tabindex="-1"></a>condition_levels   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>)</span>
+<span id="cb270-2"><a href="preparing-the-data-1.html#cb270-2" tabindex="-1"></a>samples_info<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group, <span class="at">levels =</span> condition_levels)</span>
+<span id="cb270-3"><a href="preparing-the-data-1.html#cb270-3" tabindex="-1"></a>samples_info<span class="sc">$</span>donor <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>donor)</span>
+<span id="cb270-4"><a href="preparing-the-data-1.html#cb270-4" tabindex="-1"></a></span>
+<span id="cb270-5"><a href="preparing-the-data-1.html#cb270-5" tabindex="-1"></a><span class="co"># Subset count matrix to the 8 samples of interest (drop albuterol arms)</span></span>
+<span id="cb270-6"><a href="preparing-the-data-1.html#cb270-6" tabindex="-1"></a>keep_samples <span class="ot">&lt;-</span> <span class="fu">intersect</span>(samples_info<span class="sc">$</span>sample, <span class="fu">colnames</span>(count_genes))</span>
+<span id="cb270-7"><a href="preparing-the-data-1.html#cb270-7" tabindex="-1"></a>missing      <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(samples_info<span class="sc">$</span>sample, <span class="fu">colnames</span>(count_genes))</span>
+<span id="cb270-8"><a href="preparing-the-data-1.html#cb270-8" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(missing) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb270-9"><a href="preparing-the-data-1.html#cb270-9" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">&quot;⛔ Metadata samples not found in count matrix: &quot;</span>, <span class="fu">paste</span>(missing, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>))</span>
+<span id="cb270-10"><a href="preparing-the-data-1.html#cb270-10" tabindex="-1"></a>}</span>
+<span id="cb270-11"><a href="preparing-the-data-1.html#cb270-11" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> count_genes[, keep_samples, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb270-12"><a href="preparing-the-data-1.html#cb270-12" tabindex="-1"></a></span>
+<span id="cb270-13"><a href="preparing-the-data-1.html#cb270-13" tabindex="-1"></a><span class="co"># Order metadata to match the count matrix columns exactly</span></span>
+<span id="cb270-14"><a href="preparing-the-data-1.html#cb270-14" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> samples_info[<span class="fu">match</span>(<span class="fu">colnames</span>(count_genes), samples_info<span class="sc">$</span>sample), ]</span>
+<span id="cb270-15"><a href="preparing-the-data-1.html#cb270-15" tabindex="-1"></a></span>
+<span id="cb270-16"><a href="preparing-the-data-1.html#cb270-16" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">count_col    =</span> <span class="fu">colnames</span>(count_genes),</span>
+<span id="cb270-17"><a href="preparing-the-data-1.html#cb270-17" tabindex="-1"></a>                 <span class="at">metadata_row =</span> samples_info<span class="sc">$</span>sample,</span>
+<span id="cb270-18"><a href="preparing-the-data-1.html#cb270-18" tabindex="-1"></a>                 <span class="at">donor        =</span> samples_info<span class="sc">$</span>donor,</span>
+<span id="cb270-19"><a href="preparing-the-data-1.html#cb270-19" tabindex="-1"></a>                 <span class="at">group        =</span> samples_info<span class="sc">$</span>group))</span></code></pre></div>
 <pre><code>##               count_col          metadata_row   donor     group
 ## 1 N052611_dexamethasone N052611_dexamethasone N052611 treatment
 ## 2     N052611_untreated     N052611_untreated N052611   control

@@ -117,8 +117,9 @@ To avoid repeating the same code for every contrast, we define one helper that t
 <div class="note">
 <strong>📘 Note:</strong> We use <code>apeglm</code> shrinkage, which requires the effect to be named via
 <code>coef</code> (a name from <code>resultsNames()</code>). Shrinkage pulls in the fold changes of noisy,
-low-count genes so that the large fold changes that remain are trustworthy. It changes fold-change estimates
-for ranking and plotting, not which genes are significant.
+low-count genes so that the large fold changes that remain are trustworthy. Because our helper below applies
+the fold-change threshold to the <em>shrunken</em> values, shrinkage here also affects which genes are
+counted as Up/Down — deliberately: a noisy low-count gene with an inflated raw fold change should not pass.
 </div>
 
 ```{r saureus-de-helper-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -154,6 +155,7 @@ plot_volcano <- function(res_df, title, sub, n_label = 5) {
     lab            = labels,
     x              = "log2FoldChange",
     y              = "padj",
+    ylab           = bquote(~-Log[10] ~ "adjusted" ~ italic(P)),
     pCutoff        = padj_threshold,
     FCcutoff       = lfc_threshold,
     title          = title,
@@ -548,6 +550,9 @@ shrinkage.
 dds_lrt <- DESeq(dds_ls, test = "LRT", reduced = ~ timepoint + lifestyle)
 cat("resultsNames (full interaction model):\n"); print(resultsNames(dds_lrt))
 
+# Careful: in an LRT result the log2FoldChange column is NOT "the" lifestyle
+# effect — it is only the last interaction coefficient (timepoint24h.lifestyleBiofilm).
+# Use the padj for the test; describe effect sizes with the profile plots below.
 res_lrt <- as.data.frame(results(dds_lrt)) %>%
   rownames_to_column("gene_id") %>%
   arrange(padj)
@@ -556,6 +561,8 @@ n_sig_lrt <- sum(res_lrt$padj < padj_threshold, na.rm = TRUE)
 cat("\nGenes with a time-dependent lifestyle difference (LRT padj <", padj_threshold, "):",
     n_sig_lrt, "\n")
 ```
+
+**How to read the plot below:** each panel is one gene; the two lines show its expression over time in the two lifestyles. Parallel lines = no interaction; diverging, converging or crossing lines = the lifestyle difference changes with time.
 
 ```{r saureus-de-lifestyle-interaction-profiles-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8}
 top_int <- res_lrt %>% filter(!is.na(padj)) %>% slice_head(n = 9) %>% pull(gene_id)

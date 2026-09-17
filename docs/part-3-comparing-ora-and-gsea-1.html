@@ -29,7 +29,7 @@
   
   
 <link rel="prev" href="part-2-gene-set-enrichment-analysis-gsea-1.html"/>
-<link rel="next" href="saving-results-2.html"/>
+<link rel="next" href="interpretation-questions-12.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -451,33 +451,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="part-3-comparing-ora-and-gsea-1" class="section level2 hasAnchor">
 <h2>Part 3 — Comparing ORA and GSEA<a href="part-3-comparing-ora-and-gsea-1.html#part-3-comparing-ora-and-gsea-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>ORA and GSEA answer different questions, and in this dataset they give very different verdicts:
-<strong>ORA finds strongly enriched cytokine and immune pathways, while GSEA finds no set that survives
+<strong>ORA returns dozens of corrected-significant terms, while GSEA finds no set that survives
 multiple-testing correction.</strong> This section makes that contrast explicit, because it is one of the most
 useful things to understand about enrichment analysis.</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb389-1" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb389-2"><a href="part-3-comparing-ora-and-gsea-1.html#cb389-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up))   ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_up<span class="sc">$</span>term_name)</span>
-<span id="cb389-3"><a href="part-3-comparing-ora-and-gsea-1.html#cb389-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down)) ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_down<span class="sc">$</span>term_name)</span>
-<span id="cb389-4"><a href="part-3-comparing-ora-and-gsea-1.html#cb389-4" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">unique</span>(ora_terms)</span>
-<span id="cb389-5"><a href="part-3-comparing-ora-and-gsea-1.html#cb389-5" tabindex="-1"></a></span>
-<span id="cb389-6"><a href="part-3-comparing-ora-and-gsea-1.html#cb389-6" tabindex="-1"></a>gsea_padj_terms <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
-<span id="cb389-7"><a href="part-3-comparing-ora-and-gsea-1.html#cb389-7" tabindex="-1"></a>gsea_nom_terms  <span class="ot">&lt;-</span> gsea_nom<span class="sc">$</span>pathway</span>
-<span id="cb389-8"><a href="part-3-comparing-ora-and-gsea-1.html#cb389-8" tabindex="-1"></a></span>
-<span id="cb389-9"><a href="part-3-comparing-ora-and-gsea-1.html#cb389-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA significant terms (padj-corrected)   :&quot;</span>, <span class="fu">length</span>(ora_terms),        <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-1" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb391-2"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up))   ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_up<span class="sc">$</span>term_name)</span>
+<span id="cb391-3"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down)) ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_down<span class="sc">$</span>term_name)</span>
+<span id="cb391-4"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-4" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">unique</span>(ora_terms)</span>
+<span id="cb391-5"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-5" tabindex="-1"></a></span>
+<span id="cb391-6"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-6" tabindex="-1"></a>gsea_padj_terms <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
+<span id="cb391-7"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-7" tabindex="-1"></a>gsea_nom_terms  <span class="ot">&lt;-</span> gsea_nom<span class="sc">$</span>pathway</span>
+<span id="cb391-8"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-8" tabindex="-1"></a></span>
+<span id="cb391-9"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA significant terms (padj-corrected)   :&quot;</span>, <span class="fu">length</span>(ora_terms),        <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## ORA significant terms (padj-corrected)   : 107</code></pre>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets significant after correction   :&quot;</span>, <span class="fu">length</span>(gsea_padj_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb393-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets significant after correction   :&quot;</span>, <span class="fu">length</span>(gsea_padj_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## GSEA sets significant after correction   : 0</code></pre>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb393-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets at nominal p &lt; 0.05 (suggestive):&quot;</span>, <span class="fu">length</span>(gsea_nom_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb395-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets at nominal p &lt; 0.05 (suggestive):&quot;</span>, <span class="fu">length</span>(gsea_nom_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## GSEA sets at nominal p &lt; 0.05 (suggestive): 68</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
 <p><strong>The teaching point — why the two methods disagree here.</strong></p>
 <ul>
 <li><strong>ORA</strong> tests whether the ~700 genes that individually passed significance are <em>concentrated</em> in a
-pathway. They are — in cytokine and immune pathways — so ORA reports strong, corrected-significant
-enrichment that matches the paper’s biology.</li>
+term. They are — in broad developmental and signalling terms, plus cytokine/immune signalling on the
+down-regulated side, consistent with an anti-inflammatory drug — so ORA reports corrected-significant
+enrichment.</li>
 <li><strong>GSEA</strong> tests whether an <em>entire</em> gene set moves <em>coherently</em> across the full ranked list. The
 dexamethasone response is carried by a few hundred strongly-changed genes spread across many pathways,
-not by whole pathways shifting together, so no set reaches significance after correction — even though
-the nominal top hits (immune, inflammatory, chemokine sets) point at the right biology.</li>
+not by whole pathways shifting together, so no set reaches significance after correction. The nominal
+top hits are a mixed bag and should be treated as untested hypotheses, not as a second opinion that
+happens to agree.</li>
 </ul>
 <p><strong>Bad results are results.</strong> The GSEA “non-finding” is informative: it tells us the glucocorticoid effect
 here is <strong>gene-specific rather than pathway-coordinated</strong>. When the biology looks like this, ORA is the
@@ -491,7 +493,7 @@ secondary, directional check.</p>
         </div>
       </div>
 <a href="part-2-gene-set-enrichment-analysis-gsea-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="saving-results-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="interpretation-questions-12.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

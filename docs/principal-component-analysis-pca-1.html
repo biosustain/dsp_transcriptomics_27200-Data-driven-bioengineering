@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -452,47 +452,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Principal Component Analysis (PCA)<a href="principal-component-analysis-pca-1.html#principal-component-analysis-pca-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>PCA reduces the high-dimensional expression space (one dimension per gene) to a small number of principal components that capture the largest sources of variance in the data. Inspect whether the treatment separates samples, and whether donor identity contributes to the remaining structure.</p>
 <p>If a technical variable (batch, sequencing run, RNA quality) — or, here, donor — dominates PC1, that variance should be accounted for in the design before differential expression analysis (<a href="https://doi.org/10.1038/nrg2825">Leek <em>et al.</em>, 2010</a>).</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="principal-component-analysis-pca-1.html#cb291-1" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> <span class="fu">plotPCA</span>(vsd,</span>
-<span id="cb291-2"><a href="principal-component-analysis-pca-1.html#cb291-2" tabindex="-1"></a>                    <span class="at">intgroup  =</span> <span class="fu">c</span>(<span class="st">&quot;sample&quot;</span>, <span class="st">&quot;condition&quot;</span>, <span class="st">&quot;donor&quot;</span>),</span>
-<span id="cb291-3"><a href="principal-component-analysis-pca-1.html#cb291-3" tabindex="-1"></a>                    <span class="at">returnData =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb291-4"><a href="principal-component-analysis-pca-1.html#cb291-4" tabindex="-1"></a></span>
-<span id="cb291-5"><a href="principal-component-analysis-pca-1.html#cb291-5" tabindex="-1"></a>pct_var <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">attr</span>(pca_data, <span class="st">&quot;percentVar&quot;</span>), <span class="dv">1</span>)</span>
-<span id="cb291-6"><a href="principal-component-analysis-pca-1.html#cb291-6" tabindex="-1"></a></span>
-<span id="cb291-7"><a href="principal-component-analysis-pca-1.html#cb291-7" tabindex="-1"></a>PCAPlot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pca_data, <span class="fu">aes</span>(<span class="at">x     =</span> PC1,</span>
-<span id="cb291-8"><a href="principal-component-analysis-pca-1.html#cb291-8" tabindex="-1"></a>                                <span class="at">y     =</span> PC2,</span>
-<span id="cb291-9"><a href="principal-component-analysis-pca-1.html#cb291-9" tabindex="-1"></a>                                <span class="at">color =</span> condition,</span>
-<span id="cb291-10"><a href="principal-component-analysis-pca-1.html#cb291-10" tabindex="-1"></a>                                <span class="at">shape =</span> donor,</span>
-<span id="cb291-11"><a href="principal-component-analysis-pca-1.html#cb291-11" tabindex="-1"></a>                                <span class="at">label =</span> sample)) <span class="sc">+</span></span>
-<span id="cb291-12"><a href="principal-component-analysis-pca-1.html#cb291-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb291-13"><a href="principal-component-analysis-pca-1.html#cb291-13" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb291-14"><a href="principal-component-analysis-pca-1.html#cb291-14" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb291-15"><a href="principal-component-analysis-pca-1.html#cb291-15" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb291-16"><a href="principal-component-analysis-pca-1.html#cb291-16" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb291-17"><a href="principal-component-analysis-pca-1.html#cb291-17" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb291-18"><a href="principal-component-analysis-pca-1.html#cb291-18" tabindex="-1"></a>    <span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb291-19"><a href="principal-component-analysis-pca-1.html#cb291-19" tabindex="-1"></a>    <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb291-20"><a href="principal-component-analysis-pca-1.html#cb291-20" tabindex="-1"></a>    <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb291-21"><a href="principal-component-analysis-pca-1.html#cb291-21" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span></span>
-<span id="cb291-22"><a href="principal-component-analysis-pca-1.html#cb291-22" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb291-23"><a href="principal-component-analysis-pca-1.html#cb291-23" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb291-24"><a href="principal-component-analysis-pca-1.html#cb291-24" tabindex="-1"></a>    <span class="at">x     =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC1: &quot;</span>, pct_var[<span class="dv">1</span>], <span class="st">&quot;% variance&quot;</span>),</span>
-<span id="cb291-25"><a href="principal-component-analysis-pca-1.html#cb291-25" tabindex="-1"></a>    <span class="at">y     =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC2: &quot;</span>, pct_var[<span class="dv">2</span>], <span class="st">&quot;% variance&quot;</span>),</span>
-<span id="cb291-26"><a href="principal-component-analysis-pca-1.html#cb291-26" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;PCA — Human ASM (VST-transformed counts)&quot;</span>,</span>
-<span id="cb291-27"><a href="principal-component-analysis-pca-1.html#cb291-27" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Condition&quot;</span>,</span>
-<span id="cb291-28"><a href="principal-component-analysis-pca-1.html#cb291-28" tabindex="-1"></a>    <span class="at">shape =</span> <span class="st">&quot;Donor&quot;</span></span>
-<span id="cb291-29"><a href="principal-component-analysis-pca-1.html#cb291-29" tabindex="-1"></a>  )</span>
-<span id="cb291-30"><a href="principal-component-analysis-pca-1.html#cb291-30" tabindex="-1"></a></span>
-<span id="cb291-31"><a href="principal-component-analysis-pca-1.html#cb291-31" tabindex="-1"></a>PCAPlot</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="principal-component-analysis-pca-1.html#cb293-1" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> <span class="fu">plotPCA</span>(vsd,</span>
+<span id="cb293-2"><a href="principal-component-analysis-pca-1.html#cb293-2" tabindex="-1"></a>                    <span class="at">intgroup  =</span> <span class="fu">c</span>(<span class="st">&quot;sample&quot;</span>, <span class="st">&quot;condition&quot;</span>, <span class="st">&quot;donor&quot;</span>),</span>
+<span id="cb293-3"><a href="principal-component-analysis-pca-1.html#cb293-3" tabindex="-1"></a>                    <span class="at">returnData =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb293-4"><a href="principal-component-analysis-pca-1.html#cb293-4" tabindex="-1"></a></span>
+<span id="cb293-5"><a href="principal-component-analysis-pca-1.html#cb293-5" tabindex="-1"></a>pct_var <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">attr</span>(pca_data, <span class="st">&quot;percentVar&quot;</span>), <span class="dv">1</span>)</span>
+<span id="cb293-6"><a href="principal-component-analysis-pca-1.html#cb293-6" tabindex="-1"></a></span>
+<span id="cb293-7"><a href="principal-component-analysis-pca-1.html#cb293-7" tabindex="-1"></a>PCAPlot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pca_data, <span class="fu">aes</span>(<span class="at">x     =</span> PC1,</span>
+<span id="cb293-8"><a href="principal-component-analysis-pca-1.html#cb293-8" tabindex="-1"></a>                                <span class="at">y     =</span> PC2,</span>
+<span id="cb293-9"><a href="principal-component-analysis-pca-1.html#cb293-9" tabindex="-1"></a>                                <span class="at">color =</span> condition,</span>
+<span id="cb293-10"><a href="principal-component-analysis-pca-1.html#cb293-10" tabindex="-1"></a>                                <span class="at">shape =</span> donor,</span>
+<span id="cb293-11"><a href="principal-component-analysis-pca-1.html#cb293-11" tabindex="-1"></a>                                <span class="at">label =</span> sample)) <span class="sc">+</span></span>
+<span id="cb293-12"><a href="principal-component-analysis-pca-1.html#cb293-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb293-13"><a href="principal-component-analysis-pca-1.html#cb293-13" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb293-14"><a href="principal-component-analysis-pca-1.html#cb293-14" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb293-15"><a href="principal-component-analysis-pca-1.html#cb293-15" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb293-16"><a href="principal-component-analysis-pca-1.html#cb293-16" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb293-17"><a href="principal-component-analysis-pca-1.html#cb293-17" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb293-18"><a href="principal-component-analysis-pca-1.html#cb293-18" tabindex="-1"></a>    <span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb293-19"><a href="principal-component-analysis-pca-1.html#cb293-19" tabindex="-1"></a>    <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb293-20"><a href="principal-component-analysis-pca-1.html#cb293-20" tabindex="-1"></a>    <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb293-21"><a href="principal-component-analysis-pca-1.html#cb293-21" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span></span>
+<span id="cb293-22"><a href="principal-component-analysis-pca-1.html#cb293-22" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb293-23"><a href="principal-component-analysis-pca-1.html#cb293-23" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb293-24"><a href="principal-component-analysis-pca-1.html#cb293-24" tabindex="-1"></a>    <span class="at">x     =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC1: &quot;</span>, pct_var[<span class="dv">1</span>], <span class="st">&quot;% variance&quot;</span>),</span>
+<span id="cb293-25"><a href="principal-component-analysis-pca-1.html#cb293-25" tabindex="-1"></a>    <span class="at">y     =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC2: &quot;</span>, pct_var[<span class="dv">2</span>], <span class="st">&quot;% variance&quot;</span>),</span>
+<span id="cb293-26"><a href="principal-component-analysis-pca-1.html#cb293-26" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;PCA — Human ASM (VST-transformed counts)&quot;</span>,</span>
+<span id="cb293-27"><a href="principal-component-analysis-pca-1.html#cb293-27" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Condition&quot;</span>,</span>
+<span id="cb293-28"><a href="principal-component-analysis-pca-1.html#cb293-28" tabindex="-1"></a>    <span class="at">shape =</span> <span class="st">&quot;Donor&quot;</span></span>
+<span id="cb293-29"><a href="principal-component-analysis-pca-1.html#cb293-29" tabindex="-1"></a>  )</span>
+<span id="cb293-30"><a href="principal-component-analysis-pca-1.html#cb293-30" tabindex="-1"></a></span>
+<span id="cb293-31"><a href="principal-component-analysis-pca-1.html#cb293-31" tabindex="-1"></a>PCAPlot</span></code></pre></div>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-pca-0-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="principal-component-analysis-pca-1.html#cb292-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
-<span id="cb292-2"><a href="principal-component-analysis-pca-1.html#cb292-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;PCA_Plot.png&quot;</span>),</span>
-<span id="cb292-3"><a href="principal-component-analysis-pca-1.html#cb292-3" tabindex="-1"></a>  <span class="at">plot     =</span> PCAPlot,</span>
-<span id="cb292-4"><a href="principal-component-analysis-pca-1.html#cb292-4" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">8</span>,</span>
-<span id="cb292-5"><a href="principal-component-analysis-pca-1.html#cb292-5" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">6</span>,</span>
-<span id="cb292-6"><a href="principal-component-analysis-pca-1.html#cb292-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
-<span id="cb292-7"><a href="principal-component-analysis-pca-1.html#cb292-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="principal-component-analysis-pca-1.html#cb294-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
+<span id="cb294-2"><a href="principal-component-analysis-pca-1.html#cb294-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;PCA_Plot.png&quot;</span>),</span>
+<span id="cb294-3"><a href="principal-component-analysis-pca-1.html#cb294-3" tabindex="-1"></a>  <span class="at">plot     =</span> PCAPlot,</span>
+<span id="cb294-4"><a href="principal-component-analysis-pca-1.html#cb294-4" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">8</span>,</span>
+<span id="cb294-5"><a href="principal-component-analysis-pca-1.html#cb294-5" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">6</span>,</span>
+<span id="cb294-6"><a href="principal-component-analysis-pca-1.html#cb294-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
+<span id="cb294-7"><a href="principal-component-analysis-pca-1.html#cb294-7" tabindex="-1"></a>)</span></code></pre></div>
 <div class="boxy">
-<p>Colour encodes treatment, shape encodes donor. If treatment separates cleanly on one axis while donors are spread along another, that is the classic signature of a paired design: a consistent treatment effect on top of donor-to-donor baseline differences.</p>
+<p><strong>How to read this plot.</strong> Each point is one sample; points close together have similar overall
+expression. Check the <strong>% variance</strong> printed on each axis first — it tells you how much of the total
+variation that axis carries, so a separation on PC1 means more than the same-looking separation on PC3.
+Here colour encodes treatment and shape encodes donor. If treatment separates cleanly on one axis while
+donors are spread along another, that is the classic signature of a paired design: a consistent treatment
+effect on top of donor-to-donor baseline differences.</p>
 </div>
 </div>
             </section>

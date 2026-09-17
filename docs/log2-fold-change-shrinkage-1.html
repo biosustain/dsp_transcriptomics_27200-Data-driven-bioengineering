@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -472,11 +472,11 @@ are used exclusively for <strong>ranking and visualisation</strong> (volcano plo
 <p>For a treatment vs control design in <em>E. coli</em>, <code>apeglm</code> is the right choice.
 See <a href="https://doi.org/10.1093/bioinformatics/btz585">Zhu <em>et al.</em>, 2019</a> for benchmarks.</p>
 </div>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="log2-fold-change-shrinkage-1.html#cb453-1" tabindex="-1"></a>res_shrunk <span class="ot">&lt;-</span> <span class="fu">lfcShrink</span>(dds,</span>
-<span id="cb453-2"><a href="log2-fold-change-shrinkage-1.html#cb453-2" tabindex="-1"></a>                        <span class="at">coef  =</span> <span class="st">&quot;condition_treatment_vs_control&quot;</span>,</span>
-<span id="cb453-3"><a href="log2-fold-change-shrinkage-1.html#cb453-3" tabindex="-1"></a>                        <span class="at">type  =</span> <span class="st">&quot;apeglm&quot;</span>)</span>
-<span id="cb453-4"><a href="log2-fold-change-shrinkage-1.html#cb453-4" tabindex="-1"></a></span>
-<span id="cb453-5"><a href="log2-fold-change-shrinkage-1.html#cb453-5" tabindex="-1"></a><span class="fu">summary</span>(res_shrunk)</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="log2-fold-change-shrinkage-1.html#cb455-1" tabindex="-1"></a>res_shrunk <span class="ot">&lt;-</span> <span class="fu">lfcShrink</span>(dds,</span>
+<span id="cb455-2"><a href="log2-fold-change-shrinkage-1.html#cb455-2" tabindex="-1"></a>                        <span class="at">coef  =</span> <span class="st">&quot;condition_treatment_vs_control&quot;</span>,</span>
+<span id="cb455-3"><a href="log2-fold-change-shrinkage-1.html#cb455-3" tabindex="-1"></a>                        <span class="at">type  =</span> <span class="st">&quot;apeglm&quot;</span>)</span>
+<span id="cb455-4"><a href="log2-fold-change-shrinkage-1.html#cb455-4" tabindex="-1"></a></span>
+<span id="cb455-5"><a href="log2-fold-change-shrinkage-1.html#cb455-5" tabindex="-1"></a><span class="fu">summary</span>(res_shrunk)</span></code></pre></div>
 <pre><code>## 
 ## out of 3698 with nonzero total read count
 ## adjusted p-value &lt; 0.1

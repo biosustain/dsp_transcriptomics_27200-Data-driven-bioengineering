@@ -28,7 +28,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="interpretation-questions-12.html"/>
+<link rel="prev" href="summary-5.html"/>
 <link rel="next" href="key-parameters.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -458,13 +458,13 @@ It runs the pipeline’s standard <code>~ condition</code> model; the paired <co
 analysis in the Differential Expression chapter remains the primary analysis — comparing
 the two is a nice exercise in how much the design formula matters.</p>
 <p><strong>To process the data, run the following command:</strong></p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb403-1"><a href="extra-running-nf-coredifferentialabundance.html#cb403-1" tabindex="-1"></a><span class="ex">nextflow</span> run nf-core/differentialabundance <span class="dt">\</span></span>
-<span id="cb403-2"><a href="extra-running-nf-coredifferentialabundance.html#cb403-2" tabindex="-1"></a>    <span class="at">-r</span> 1.5.0 <span class="dt">\</span></span>
-<span id="cb403-3"><a href="extra-running-nf-coredifferentialabundance.html#cb403-3" tabindex="-1"></a>    <span class="at">-profile</span> docker <span class="dt">\</span></span>
-<span id="cb403-4"><a href="extra-running-nf-coredifferentialabundance.html#cb403-4" tabindex="-1"></a>    <span class="at">-params-file</span> params_degs.json <span class="dt">\</span></span>
-<span id="cb403-5"><a href="extra-running-nf-coredifferentialabundance.html#cb403-5" tabindex="-1"></a>    <span class="at">--outdir</span> results/human/differentialabundance</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb405-1"><a href="extra-running-nf-coredifferentialabundance.html#cb405-1" tabindex="-1"></a><span class="ex">nextflow</span> run nf-core/differentialabundance <span class="dt">\</span></span>
+<span id="cb405-2"><a href="extra-running-nf-coredifferentialabundance.html#cb405-2" tabindex="-1"></a>    <span class="at">-r</span> 1.5.0 <span class="dt">\</span></span>
+<span id="cb405-3"><a href="extra-running-nf-coredifferentialabundance.html#cb405-3" tabindex="-1"></a>    <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb405-4"><a href="extra-running-nf-coredifferentialabundance.html#cb405-4" tabindex="-1"></a>    <span class="at">-params-file</span> params_degs.json <span class="dt">\</span></span>
+<span id="cb405-5"><a href="extra-running-nf-coredifferentialabundance.html#cb405-5" tabindex="-1"></a>    <span class="at">--outdir</span> results/human/differentialabundance</span></code></pre></div>
 <p>The Nextflow command is stored in a bash script and can be executed by running:</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb404-1"><a href="extra-running-nf-coredifferentialabundance.html#cb404-1" tabindex="-1"></a><span class="fu">bash</span> 01_scripts/run_differentialabundance.sh</span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb406-1"><a href="extra-running-nf-coredifferentialabundance.html#cb406-1" tabindex="-1"></a><span class="fu">bash</span> 01_scripts/run_differentialabundance.sh</span></code></pre></div>
 <p>The processing time is about 5 minutes.</p>
 </div>
             </section>
@@ -472,7 +472,7 @@ the two is a nice exercise in how much the design formula matters.</p>
           </div>
         </div>
       </div>
-<a href="interpretation-questions-12.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summary-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="key-parameters.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -452,7 +452,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>🧠 Interpretation questions<a href="interpretation-questions-10.html#interpretation-questions-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="question">
 <ol start="2" style="list-style-type: decimal">
-<li>Dexamethasone works by binding the glucocorticoid receptor, made by the gene <em>NR3C1</em>. Before looking: predict where <em>NR3C1</em> sits in your results — top hit, modest, or absent? Now check your tables (remember the interactive table only shows genes passing both cutoffs). If the protein driving this whole response barely moves in the mRNA data, what does that tell you about what a count can measure?</li>
+<li>Dexamethasone works by binding the glucocorticoid receptor, made by the gene <em>NR3C1</em>. Before looking: predict where <em>NR3C1</em> sits in your results — top hit, modest, or absent? Now find it in <code>res_df</code> (not the interactive table — that only holds genes passing <em>both</em> cutoffs). Two surprises are waiting: which <strong>direction</strong> did it move, and does it appear in your significant table at all? The drug did not switch this gene on — it bound the protein that was already there. So what did your RNA-seq actually measure about the receptor, and what did it miss?</li>
 </ol>
 </div>
 </div>

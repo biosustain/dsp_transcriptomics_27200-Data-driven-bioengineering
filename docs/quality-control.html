@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -462,7 +462,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Exploratory data analyses</li>
 <li>Sanity Checks</li>
-<li>Choosing a time point for downstream differential expression</li>
+<li>Understanding the time-point structure that the differential expression models build on</li>
 </ul>
 <p><strong>Data</strong></p>
 <ul>
@@ -476,7 +476,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Reads are aligned with a non-splice-aware aligner (Bowtie2), appropriate for bacterial genomes with no introns
 </li>
 <li>
-The prokaryotic reference GTF carries no gene symbols, so genes are labelled by their <strong>locus tags</strong> (e.g. <code>SA_RS00005</code> for N315, <code>SAUSA300_RS00010</code> for USA300). No symbol conversion is possible or needed at this stage
+The pipeline output labels genes by their <strong>locus tags</strong> (e.g. <code>SA_RS00005</code> for N315, <code>SAUSA300_RS00010</code> for USA300). The reference GTF does carry gene symbols for roughly a third of genes (<code>dnaA</code>, <code>arcA</code>, …), and later scripts use them for readability — but the locus tag is the stable identifier throughout
 </li>
 <li>
 Because the two strains use different reference genomes, their gene identifiers are not comparable — the analyses are kept fully separate and are never merged
@@ -489,8 +489,10 @@ Enrichment analysis (a later script) uses KEGG for <em>S. aureus</em>; g:Profile
 <div class="note">
 <p><strong>📘 Note on this experiment:</strong> The full dataset for each strain contains 32 samples: biofilm and
 planktonic cultures at 5 h (n = 4 each), 10 h (n = 4 each) and 24 h (n = 8 each). This QC script loads
-<strong>all 32 samples</strong> so the PCA can reveal the time-point structure. The choice of which time
-point to carry into differential expression is made <em>after</em> looking at this QC, not before.</p>
+<strong>all 32 samples</strong> so the PCA can reveal the time-point structure. Script 02 also keeps all
+time points: it models maturation over time and lifestyle adjusted for time, and uses a single time point
+(24 h) only for the final hypothesis test — so what you learn here about the time structure directly shapes
+how you will read those models.</p>
 </div>
 <p><strong>Explanation of the QC analysis 🧾</strong></p>
 <p>This document guides you through the standard QC pipeline for bulk RNA-seq data processed with <a href="https://nf-co.re/rnaseq/">nf-core/rnaseq</a> (<code>Bowtie2</code> + <code>Salmon</code>, prokaryotic profile). It is structured to be both educational and reproducible.</p>

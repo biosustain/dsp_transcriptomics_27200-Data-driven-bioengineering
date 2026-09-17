@@ -35,7 +35,7 @@ Before creating the Codespace, change the **Machine type** to **4-core** (click 
 
 If you want to do it manually go to [course website](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
-Click on button **Code** and click on the Codespaces tab. There click on **Create codespace**. Now your Nextflow environment will be built following the instructions in devcontainer.json file (i.e. installing Ubuntu, Docker, Nextflow, R, Python, VSCode and RStudio server)
+Click on button **Code** and click on the Codespaces tab. There click on **Create codespace**. Your environment is then started from the prebuilt image named in `devcontainer.json` — Ubuntu with Docker, Nextflow, R (and the Jupyter R kernel), Python and the AI agent CLIs already installed, running in VS Code in your browser.
 
 To learn more about Github codespaces go [here](https://github.com/features/codespaces)
 

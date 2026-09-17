@@ -347,9 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
+<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 <li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-12.html"><a href="interpretation-questions-12.html"><i class="fa fa-check"></i>🧠 Interpretation questions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="extra-running-nf-coredifferentialabundance.html"><a href="extra-running-nf-coredifferentialabundance.html"><i class="fa fa-check"></i>EXTRA: Running nf-core/differentialabundance</a>
 <ul>
@@ -815,7 +815,7 @@ USA100_N315_Planktonic_5h_4
 <pre><code>## quartz_off_screen 
 ##                 2</code></pre>
 <div class="boxy">
-<p>The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by lifestyle, by time point, or both. If time point is a strong driver of the distances, that is a signal that the time points should be analysed separately rather than pooled — which is exactly why we pick a single time point for differential expression.</p>
+<p>The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by lifestyle, by time point, or both. If time point is a strong driver of the distances, that is a signal that time must be part of the model rather than ignored — which is exactly why script 02 keeps time in its designs instead of pooling all samples into a plain biofilm-vs-planktonic comparison.</p>
 </div>
 </div>
 <div id="principal-component-analysis-pca" class="section level3 hasAnchor">
@@ -859,12 +859,13 @@ USA100_N315_Planktonic_5h_4
 <span id="cb54-6"><a href="exploratory-data-analysis.html#cb54-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
 <span id="cb54-7"><a href="exploratory-data-analysis.html#cb54-7" tabindex="-1"></a>)</span></code></pre></div>
 <div style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
-<p><strong>⭐ Using the PCA to choose a time point.</strong> This is the decision the QC is built around.
-Look at which axis separates <strong>lifestyle</strong> (colour) and which separates <strong>time point</strong>
-(shape). The paper reports that differential expression between biofilm and planktonic grows with culture
-age, being strongest at 24 h. A good time point for the downstream simple two-group comparison is one where
-biofilm and planktonic separate cleanly <em>and</em> where you have adequate replication. Read the actual
-separation off this plot rather than assuming it — then set that time point in script 02.</p>
+<p><strong>⭐ How to read this plot.</strong> Each point is one sample; samples that are close have similar
+overall expression. Check the % variance printed on each axis first — it tells you how much of the story
+that axis carries. Then look at which axis separates <strong>lifestyle</strong> (colour) and which separates
+<strong>time point</strong> (shape). The paper reports that the biofilm–planktonic difference grows with
+culture age, strongest at 24 h — read the actual separation off <em>your</em> plot rather than assuming it.
+Script 02 builds directly on this structure: it models change over time and lifestyle adjusted for time, and
+saves the plain two-group comparison for a single, well-replicated time point (24 h) at the very end.</p>
 </div>
 </div>
 <div id="detecting-outliers" class="section level3 hasAnchor">
@@ -890,7 +891,7 @@ separation off this plot rather than assuming it — then set that time point in
 <span id="cb57-7"><a href="exploratory-data-analysis.html#cb57-7" tabindex="-1"></a>  <span class="at">plot     =</span> pca_ind, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">dpi =</span> <span class="dv">300</span></span>
 <span id="cb57-8"><a href="exploratory-data-analysis.html#cb57-8" tabindex="-1"></a>)</span></code></pre></div>
 <div class="boxy">
-<p><strong>What to look for:</strong> an isolated sample sitting far from every other point on the individuals plot, or a single sample dominating PC1 on the scree plot, is a candidate technical outlier. Investigate its library size and its MultiQC metrics before deciding whether to exclude it.</p>
+<p><strong>What to look for:</strong> an isolated sample sitting far from every other point on the individuals plot — especially along a PC that the scree plot shows carrying a large share of the variance — is a candidate technical outlier. Investigate its library size and its MultiQC metrics before deciding whether to exclude it.</p>
 </div>
 </div>
 <div id="top-variable-genes-heatmap" class="section level3 hasAnchor">
