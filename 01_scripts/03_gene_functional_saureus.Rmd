@@ -231,13 +231,6 @@ cat("Background (all tested) :", length(background), "\n")
   p-values.
 </div>
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
-
-1. Read 'Background (all tested)' off your own output and compare it to the size of your strain's reference genome (roughly 2,800-2,900 protein-coding genes for either strain). Where did the missing genes go, and if you put them back into the background, would your eFDR values become more or less significant? Name one kind of gene set whose verdict could flip, and explain why the smaller background is the honest one for THIS experiment.
-:::
-
-
 ### Run ORA
 
 ORA is run for each collection and each direction, with a helper to avoid code duplication.
@@ -415,10 +408,10 @@ if (!is.null(ora_plot_df) && nrow(ora_plot_df) > 0) {
 }
 ```
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
+### 🧠 Interpretation questions
 
-2. From your ORA bar plot and tables, pick the one enriched set you trust MOST and the one you trust LEAST, and defend both choices using at least three pieces of evidence from your own table (hits in query, hits in background, eFDR) plus biological plausibility for a biofilm-planktonic switch. Would 5 hits out of a 5-gene set impress you more or less than 30 hits out of a 120-gene set, and why?
+::: boxy
+1. From your ORA results, pick the enriched set you trust **most** and the one you trust **least**. Defend both using the numbers in your table (how many hits, how big the set, the eFDR) and whether the biology makes sense for a biofilm-planktonic switch.
 :::
 
 
@@ -462,13 +455,6 @@ cat("Infinite values      :", sum(!is.finite(rank_vector)), "\n")
 cat("Top 5 (biofilm)      :", paste(head(names(rank_vector), 5), collapse = ", "), "\n")
 cat("Bottom 5 (planktonic):", paste(tail(names(rank_vector), 5), collapse = ", "), "\n")
 ```
-
-::: boxy
-**🧠 Interpretation — discuss in your group**
-
-3. Compare 'Genes tested (background)' from the DE-loading step with 'Genes in ranked list' printed here. Genes vanish for two reasons: some got no p-value from DESeq2 at all, but the interesting ones have pvalue = 0 — below machine precision, i.e. your very STRONGEST hits — yet GSEA never sees them. Predict what their absence does to the NES of a pathway they belong to, then compare your GSEA table with your ORA table: is any set weakened or missing on the GSEA side that ORA found? Is dropping these genes a bug or a defensible modelling choice?
-:::
-
 
 ### Convert Gene Sets to fgsea Format
 
@@ -560,13 +546,6 @@ if (nrow(biofilm_sets) > 0) {
   cat("The biofilm-induced genes do not cluster into any annotated KEGG pathway or GO term.\n")
 }
 ```
-
-::: boxy
-**🧠 Interpretation — discuss in your group**
-
-4. Your DE output reports a substantial number of biofilm-UP genes, yet your GSEA output reports few or zero sets with positive NES. A colleague says: 'so biofilm induction is just noise.' List the plausible explanations — KEGG/GO annotation gaps for lifestyle-specific genes; the biofilm programme spread thinly across many sets; sets left with fewer than 10 detected genes being skipped by GSEA; co-regulated but functionally diverse genes — then rank them by likelihood AND by how fast you could test each one using only the tables and objects you already have. Finally: what does a 'no enrichment' result entitle you to write in a report?
-:::
-
 
 ### NES Bar Plot
 
@@ -699,10 +678,10 @@ cat("ORA sets among planktonic-up genes:", nrow(ora_down_sig), "\n")
    characterised. A "no enrichment" result here is itself a finding worth stating.
 :::
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
+### 🧠 Interpretation questions
 
-5. Read the strongest planktonic-side set off your own NES bar plot (and its enrichment plot if it was drawn): name it and note its NES. Translation, ribosome and aminoacyl-tRNA sets sit higher in PLANKTONIC cells — at the transcript level. A colleague concludes 'biofilm cells have shut down protein synthesis.' What does your data actually license you to claim, which alternative cellular states are equally consistent with lower ribosomal-gene transcripts in biofilm, and what single follow-up measurement would separate transcript abundance from translational activity?
+::: boxy
+2. Ribosome and translation gene sets score higher in planktonic cells — at the transcript level. A colleague concludes: "biofilm cells have shut down protein synthesis." Is that claim justified by your data? What else could explain fewer ribosomal transcripts in biofilm, and what measurement would settle it?
 :::
 
 

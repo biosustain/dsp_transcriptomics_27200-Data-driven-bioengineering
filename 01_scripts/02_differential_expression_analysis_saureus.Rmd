@@ -297,14 +297,6 @@ annotation (GTF/GFF) rather than the count matrix. If those coordinates are avai
 the section below draws the neighbourhood of the top hit automatically.
 </div>
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
-
-1. Sections 1a and 1b each print a DEG count table (Up / Down / Not significant) for the same 5 h → 24 h window. Write your two totals side by side — biofilm maturation from 1a, planktonic maturation from 1b — and work out roughly how many times larger one is than the other. Which lifestyle remodelled more of its transcriptome, and what physiological event in the culture explains the gap? Now commit: given that gap, how fair would a plain biofilm-vs-planktonic comparison at 24 h be, and what exactly would it be measuring?
-2. Look at the gene IDs in your extreme fold-change diagnostic table for planktonic maturation: several of the strongest hits are consecutive locus tags, all shut down hard, all with base means in the hundreds to thousands. Before scrolling on, list at least three explanations (a single operon switched off; a mapping or annotation artefact; independent genes coincidentally co-regulated) and rank them by how likely they are and by how fast you could test them with outputs you already have. Then check your ranking against the arrow plot in the next section: what in that plot settles it?
-:::
-
-
 ## Visualising the Operon: Genes as Arrows Along the Chromosome
 
 To see the coordinated shutdown directly, we read the gene coordinates from the reference GTF, take a window of genes centred on the strongest planktonic maturation hit, and draw them as arrows coloured by their fold change. A block of adjacent arrows all the same colour is the visual signature of an operon responding as a unit.
@@ -642,11 +634,10 @@ about whether a single "biofilm vs planktonic" number is meaningful for this str
 between USA100 and USA500?
 </div>
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
+### 🧠 Interpretation questions
 
-3. Your additive model (2a) calls a modest set of lifestyle genes; your likelihood-ratio test (2b) then flags a very large fraction of all tested genes as time-dependent. A colleague claims these two results contradict each other. Do they — and which single number would you put in an abstract claiming 'N biofilm-specific genes in this strain'? Defend your choice by naming the assumption each model makes and pointing to the profile panels in your 2b plot that break it.
-4. Pick one gene from your nine-panel profile plot and commit to a claim: its interaction is driven by (a) the biofilm cells doing something, (b) the planktonic cells doing something, or (c) a genuine crossover where the higher-expressing lifestyle reverses. Defend the claim from the line shapes and error bars — then say what this gene's 'lifestyle effect' would have looked like if sampling had stopped at 10 h, and what that means for who defines the answer: the biology or the measurement window.
+::: boxy
+1. Pick one gene from your nine-panel profile plot. Looking at its two lines: is the interaction driven by the biofilm cells changing, the planktonic cells changing, or a real crossover? Now imagine sampling had stopped at 10 h — what would you have concluded about this gene? What decides the answer: the biology, or the time window you measured?
 :::
 
 
@@ -740,10 +731,10 @@ plot_volcano(res_24,
              "Positive log2FC = higher in biofilm | note: growth-phase confounded")
 ```
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
+### 🧠 Interpretation questions
 
-5. The hypothesis was that USA500 — the strongest biofilm producer in the paper's crystal-violet assay — would also show the largest biofilm-vs-planktonic DEG count at 24 h. Read your cross-strain table (it needs both rows: render the other strain too, or borrow its count from a group that chose it). Does the hypothesis hold? Whatever you found, rank three explanations — (i) phenotype and transcriptome divergence are genuinely different things, (ii) the growth-phase confound built into a 24 h snapshot, (iii) USA500's reads being mapped to the USA300 reference — by how much each could move the DEG counts, and name the one you could probe with data you already have.
+::: boxy
+2. The hypothesis: USA500, the strongest biofilm producer in the paper's assay, should show the biggest biofilm-vs-planktonic difference at 24 h. Compare your cross-strain table with a group that analysed the other strain. Did the hypothesis hold? Suggest two possible explanations for what you see — one biological, one technical. (Hint: which reference genome were the USA500 reads mapped to?)
 :::
 
 

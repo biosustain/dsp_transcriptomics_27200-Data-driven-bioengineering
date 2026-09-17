@@ -130,13 +130,6 @@ cat("Background (all tested) :", length(background), "\n")
   to use exactly this background.
 </div>
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
-
-1. Your Prepare Input chunk prints three numbers — up-regulated, down-regulated, and 'Background (all tested)'. Compare that background count to the roughly 60,000 genes annotated in the human genome: thousands of genes are missing from your test. A neighbouring group re-ran ORA with the default background (all annotated human genes) and got far more significant terms than you. Which kinds of terms did they gain, and why is your smaller background the more honest test? (Hint: which genes exist in the genome but are never expressed in airway smooth muscle — and are those genes random with respect to pathways?)
-:::
-
-
 ### Run ORA
 
 g:Profiler is queried once per direction. The result object's `$result` slot is a data frame; we keep the
@@ -319,10 +312,10 @@ if (!is.null(ora_combined) && nrow(ora_combined) > 0) {
 }
 ```
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
+### 🧠 Interpretation questions
 
-2. Dexamethasone is prescribed to switch inflammation OFF, yet cytokine and immune-signalling terms appear in your ORA results — check your bar plot and tables to see which direction they come from. Does an immune term enriched among UP-regulated genes mean dexamethasone switched inflammation on in these cells? Pick one such term, note its Hits count, then go back to your significant up-regulated gene list from the differential expression chapter and find genes you can connect to inflammatory signalling. Are they activators of inflammation or brakes on it — and what does that do to the naive reading of the term name?
+::: boxy
+1. Dexamethasone is prescribed to switch inflammation **off** — yet immune and cytokine terms show up in your ORA results. Check which direction they come from. Does an immune term among UP-regulated genes mean the drug switched inflammation on? Look at a few of the genes behind one such term: are they activators of inflammation, or brakes?
 :::
 
 
@@ -371,13 +364,6 @@ cat("Infinite values      :", sum(!is.finite(rank_vector)), "\n")
 cat("Top 5 (upregulated)  :", paste(head(names(rank_vector), 5), collapse = ", "), "\n")
 cat("Bottom 5 (downreg.)  :", paste(tail(names(rank_vector), 5), collapse = ", "), "\n")
 ```
-
-::: boxy
-**🧠 Interpretation — discuss in your group**
-
-3. Look at the printed top-5 and bottom-5 genes of your ranked list, then find a gene in your full DE table whose fold change clears the |log2FC| ≥ 1 cutoff you used for significance but whose adjusted p-value fails it. Where would that gene sit if the list were ranked on fold change alone, and where does it actually sit under the signed −log10(p) metric the chapter uses? Which ranking do you want GSEA to trust, and why? (Hint: what kind of gene shows a large fold change and a weak p-value at the same time?)
-:::
-
 
 ### Retrieve MSigDB Gene Sets
 
@@ -601,15 +587,6 @@ more appropriate tool — which is exactly why we report ORA as the primary enri
 secondary, directional check.
 :::
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
-
-4. Your comparison chunk prints three counts: dozens of corrected-significant ORA terms, zero GSEA sets after correction, and some number of GSEA sets at nominal p < 0.05. A groupmate concludes 'GSEA failed on this dataset — leave it out of the report.' Open your nominal GSEA table: name two or three of its top pathways and their NES signs, and say whether they agree with the themes in your ORA tables. Then argue what the ORA/GSEA disagreement tells you about HOW dexamethasone rewires these cells — is the response a few strong genes or whole pathways moving together? — and state what you would actually write in the report.
-:::
-
-
-
-
 ## Saving Results
 
 ```{r human-fn-save-results-5, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -672,9 +649,10 @@ sessionInfo()
 rmarkdown::render("01_scripts/03_gene_functional.Rmd")
 ```
 
-::: boxy
-**🧠 Interpretation — discuss in your group**
+### 🧠 Interpretation questions
 
-5. Everything in this chapter was computed from transcript abundance — yet the molecule whose ACTIVITY changed most in this experiment, the glucocorticoid receptor (gene NR3C1), was switched on by dexamethasone binding, not by transcription. Find NR3C1 in your DE table: does its position there reflect its role as the driver of everything else you measured? Given that, state one claim your enrichment tables are entitled to make and one they are not, and name a follow-up measurement that would test activity rather than abundance.
+::: boxy
+2. Everything in this chapter came from transcript abundance. Yet the molecule whose *activity* changed most — the glucocorticoid receptor (*NR3C1*) — was switched on by drug binding, not by transcription. Name one claim your enrichment tables can honestly make, one they cannot, and one experiment that would measure activity instead of abundance.
 :::
+
 
