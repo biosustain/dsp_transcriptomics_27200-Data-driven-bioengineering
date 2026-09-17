@@ -84,5 +84,7 @@ jobs:
             python3 -c "import pandas, numpy, matplotlib, seaborn, scipy, statsmodels, sklearn"
             jupyter kernelspec list | grep -qw ir || { echo "MISSING: R kernel"; exit 1; }
             jupyter kernelspec list | grep -qw python3 || { echo "MISSING: Python kernel"; exit 1; }
-            echo "nextflow, Python stack and both Jupyter kernels OK"
+            claude --version >/dev/null 2>&1 || { echo "BROKEN: claude"; exit 1; }
+            codex --version >/dev/null 2>&1 || { echo "BROKEN: codex"; exit 1; }
+            echo "nextflow, Python stack, both Jupyter kernels and AI agent CLIs OK"
           '

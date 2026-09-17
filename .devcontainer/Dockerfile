@@ -49,6 +49,13 @@ RUN pip3 install --no-cache-dir --break-system-packages \
 
 RUN python3 -m ipykernel install --name python3 --display-name "Python 3" --sys-prefix
 
+# AI coding agents for the students to experiment with (see the
+# "AI assistants in your Codespace" section of the course book).
+# Node is only needed to install and run them.
+RUN apt-get update \
+    && apt-get install -y nodejs npm \
+    && npm install -g @anthropic-ai/claude-code @openai/codex
+
 COPY install_packages.R /tmp/install_packages.R
 RUN Rscript /tmp/install_packages.R && rm /tmp/install_packages.R
 
