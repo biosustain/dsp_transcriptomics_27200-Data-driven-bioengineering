@@ -71,6 +71,30 @@ docker --version
 If everything went well you have a fully functional Nextflow environment for today. Remember that we are going to use VS code as our editor to write code and handle our files.
 
 
+## AI assistants in your Codespace
+
+AI-assisted workflows are allowed — and encouraged — in this course, as long as you **validate what the AI tells you**. Your Codespace comes with three assistants ready to try:
+
+| Assistant | Where | Account needed | Cost |
+|---|---|---|---|
+| **GitHub Copilot Chat** | Chat icon in the VS Code sidebar | Your GitHub account | Free for students via the [GitHub Student Developer Pack](https://education.github.com/pack) |
+| **Codex CLI** | Type `codex` in the terminal | OpenAI/ChatGPT login | Works with a **free** ChatGPT account |
+| **Claude Code** | Type `claude` in the terminal | Claude login | Requires a paid plan (Pro) or institutional access |
+
+All three can read the files in this repository, explain code, help you debug errors, and even edit files when you ask them to. The terminal agents (Codex, Claude Code) are *agentic* — they can run commands and work through multi-step tasks, which is exactly the kind of workflow discussed later in the course.
+
+**Things to try**
+
+- Ask: *"Explain what the design formula `~ donor + condition` does in the human differential expression notebook, and why donor is included."* Then check the explanation against the chapter text.
+- Ask: *"Why does the quality control script round the Salmon counts before DESeq2 instead of truncating them?"* Verify the answer in the code.
+- When a notebook cell errors, paste the error and ask the agent to diagnose it — then make sure you understand the fix before applying it.
+- Ask an agent to interpret one of your PCA plots, and decide which parts of its answer the data actually supports.
+
+<div class="warning">
+  <strong>⚠️ Ground rules:</strong> AI assistants confidently make mistakes — treat every answer as a hypothesis to verify, not a fact. Never paste passwords, tokens, or API keys into a prompt. And you must be able to explain any AI-assisted result yourself.
+</div>
+
+
 
 ## Data processing using the nf-core/rnaseq pipeline
 

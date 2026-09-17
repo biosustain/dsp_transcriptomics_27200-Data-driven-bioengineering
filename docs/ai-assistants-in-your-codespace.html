@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Differential Expression Analysis | 27200 Data Driven Bioengineering - Transcriptomics</title>
-  <meta name="description" content="Differential Expression Analysis | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <title>AI assistants in your Codespace | 27200 Data Driven Bioengineering - Transcriptomics</title>
+  <meta name="description" content="AI assistants in your Codespace | 27200 Data Driven Bioengineering - Transcriptomics" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Differential Expression Analysis | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <meta property="og:title" content="AI assistants in your Codespace | 27200 Data Driven Bioengineering - Transcriptomics" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Differential Expression Analysis | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <meta name="twitter:title" content="AI assistants in your Codespace | 27200 Data Driven Bioengineering - Transcriptomics" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="summary-6.html"/>
-<link rel="next" href="differential-expression-analysis-3.html"/>
+<link rel="prev" href="initial-checks.html"/>
+<link rel="next" href="data-processing-using-the-nf-corernaseq-pipeline.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -433,36 +433,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="differential-expression-analysis-2" class="section level1 hasAnchor">
-<h1>Differential Expression Analysis<a href="differential-expression-analysis-2.html#differential-expression-analysis-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This report covers differential expression (DE) analysis of bulk RNA-seq data from <em>Escherichia coli</em> K-12 MG1655 using <code>DESeq2</code>.</p>
-<p>We test one contrast:</p>
-<div class="boxy">
+<div id="ai-assistants-in-your-codespace" class="section level2 hasAnchor">
+<h2>AI assistants in your Codespace<a href="ai-assistants-in-your-codespace.html#ai-assistants-in-your-codespace" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>AI-assisted workflows are allowed — and encouraged — in this course, as long as you <strong>validate what the AI tells you</strong>. Your Codespace comes with three assistants ready to try:</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Assistant</th>
+<th>Where</th>
+<th>Account needed</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>GitHub Copilot Chat</strong></td>
+<td>Chat icon in the VS Code sidebar</td>
+<td>Your GitHub account</td>
+<td>Free for students via the <a href="https://education.github.com/pack">GitHub Student Developer Pack</a></td>
+</tr>
+<tr class="even">
+<td><strong>Codex CLI</strong></td>
+<td>Type <code>codex</code> in the terminal</td>
+<td>OpenAI/ChatGPT login</td>
+<td>Works with a <strong>free</strong> ChatGPT account</td>
+</tr>
+<tr class="odd">
+<td><strong>Claude Code</strong></td>
+<td>Type <code>claude</code> in the terminal</td>
+<td>Claude login</td>
+<td>Requires a paid plan (Pro) or institutional access</td>
+</tr>
+</tbody>
+</table>
+<p>All three can read the files in this repository, explain code, help you debug errors, and even edit files when you ask them to. The terminal agents (Codex, Claude Code) are <em>agentic</em> — they can run commands and work through multi-step tasks, which is exactly the kind of workflow discussed later in the course.</p>
+<p><strong>Things to try</strong></p>
 <ul>
-<li><strong>Treatment vs Control</strong> — which genes change expression in response to treatment?</li>
+<li>Ask: <em>“Explain what the design formula <code>~ donor + condition</code> does in the human differential expression notebook, and why donor is included.”</em> Then check the explanation against the chapter text.</li>
+<li>Ask: <em>“Why does the quality control script round the Salmon counts before DESeq2 instead of truncating them?”</em> Verify the answer in the code.</li>
+<li>When a notebook cell errors, paste the error and ask the agent to diagnose it — then make sure you understand the fix before applying it.</li>
+<li>Ask an agent to interpret one of your PCA plots, and decide which parts of its answer the data actually supports.</li>
 </ul>
+<div class="warning">
+<p><strong>⚠️ Ground rules:</strong> AI assistants confidently make mistakes — treat every answer as a hypothesis to verify, not a fact. Never paste passwords, tokens, or API keys into a prompt. And you must be able to explain any AI-assisted result yourself.</p>
 </div>
-<div style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
-<p><strong>⭐ Important:</strong> This script assumes you have already run the E. coli Quality Control chapter (<code>03_analysis_basics.Rmd</code>), which saves the <code>dds</code> object to <code>results/rds/</code>. If not, run that script first.</p>
-</div>
-<p><strong>Setup the Environment</strong></p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="differential-expression-analysis-2.html#cb442-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb442-2"><a href="differential-expression-analysis-2.html#cb442-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
-<span id="cb442-3"><a href="differential-expression-analysis-2.html#cb442-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb442-4"><a href="differential-expression-analysis-2.html#cb442-4" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb442-5"><a href="differential-expression-analysis-2.html#cb442-5" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb442-6"><a href="differential-expression-analysis-2.html#cb442-6" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb442-7"><a href="differential-expression-analysis-2.html#cb442-7" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb442-8"><a href="differential-expression-analysis-2.html#cb442-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb442-9"><a href="differential-expression-analysis-2.html#cb442-9" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="summary-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="differential-expression-analysis-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="initial-checks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-processing-using-the-nf-corernaseq-pipeline.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
