@@ -769,7 +769,7 @@ the gene lists are never merged. Run this script once per strain by changing the
 at the top.
 </div>
 
-## 🧠 Interpretation questions
+## Interpretation questions
 
 ::: question
 1. Pick one gene from your nine-panel profile plot. Looking at its two lines: is the interaction driven by the biofilm cells changing, the planktonic cells changing, or a real crossover? Now imagine sampling had stopped at 10 h — what would you have concluded about this gene? What decides the answer: the biology, or the time window you measured?

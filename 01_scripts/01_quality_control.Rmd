@@ -703,7 +703,7 @@ cat("   Design      : ~ donor + condition\n")
 cat("   Conditions  :", paste(levels(dds$condition), collapse = " vs "), "\n")
 ```
 
-## 🧠 Interpretation questions
+## Interpretation questions
 
 ::: question
 1. Find each donor's treated and untreated points in your PCA. Which is bigger: the difference between donors, or the shift caused by treatment? Based on that, predict which model will find more differentially expressed genes in the next notebook — `~ condition` or `~ donor + condition` — and why. Write the prediction down: you will check it.

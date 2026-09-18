@@ -474,7 +474,7 @@ cat("Results saved to:", results_dir, "\n")
 
 Significant genes are saved and ready for gene set enrichment analysis in the next script.
 
-## 🧠 Interpretation questions
+## Interpretation questions
 
 ::: question
 1. Your table shows the paired model (`~ donor + condition`) finds over a thousand more significant genes than the simple model — same data, same treatment. What changed? Where did the donor-to-donor differences "go" in the simple model, and why does giving them a name in the paired model make the treatment effect easier to see? Was your prediction from the QC notebook right?

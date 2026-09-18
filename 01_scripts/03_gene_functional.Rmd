@@ -627,7 +627,7 @@ glucocorticoid biology described by Himes *et al.* GSEA is reported as a seconda
 settle anything on its own.
 
 
-## 🧠 Interpretation questions
+## Interpretation questions
 
 ::: question
 1. Dexamethasone is prescribed to switch inflammation **off**. Find the immune and cytokine terms in your ORA results: which direction are they in — among the up-regulated or the down-regulated genes? Does that match the drug's job? Now look at the *other* direction's terms (adhesion, cytoskeleton, metal/mineral handling): those are not inflammation at all. What does that tell you about a drug that is described in one word ("anti-inflammatory") but acts through a receptor present in every cell?

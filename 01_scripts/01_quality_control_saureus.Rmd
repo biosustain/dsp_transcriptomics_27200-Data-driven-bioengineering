@@ -625,7 +625,7 @@ cat("   Dimensions       :", nrow(dds), "genes ×", ncol(dds), "samples\n")
 cat("   Note             : this holds ALL time points. Script 02 subsets to the chosen one.\n")
 ```
 
-## 🧠 Interpretation questions
+## Interpretation questions
 
 ::: question
 1. Your output prints how many genes the filter removed. Pick one of them — a gene with almost no counts in any of your 32 samples — and suggest two possible reasons it is so quiet: one biological, one technical. (USA-500 groups: remember your reads were mapped to the USA300 genome.) How could you start telling the two apart with the data you already have?
