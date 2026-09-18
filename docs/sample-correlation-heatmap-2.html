@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -451,11 +452,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="boxy">
 <p>VST removes this mean–variance dependence, making distances meaningful across the full expression range (<a href="https://doi.org/10.1186/gb-2010-11-10-r106">Anders &amp; Huber, 2010</a>).</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="sample-correlation-heatmap-2.html#cb428-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</details>
 <div class="boxy">
 <p><strong><code>blind = TRUE</code></strong>,the VST is computed ignoring the experimental design. This is recommended for QC and exploratory analysis, where you want an unbiased view of sample similarity.</p>
 <p>Use <code>blind = FALSE</code> only when the transformation is feeding into a model that already accounts for the design.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="sample-correlation-heatmap-2.html#cb429-1" tabindex="-1"></a>sampleDists      <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">t</span>(<span class="fu">assay</span>(vsd)))</span>
 <span id="cb429-2"><a href="sample-correlation-heatmap-2.html#cb429-2" tabindex="-1"></a>sampleDistMatrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(sampleDists)</span>
 <span id="cb429-3"><a href="sample-correlation-heatmap-2.html#cb429-3" tabindex="-1"></a></span>
@@ -471,6 +475,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb429-13"><a href="sample-correlation-heatmap-2.html#cb429-13" tabindex="-1"></a>  <span class="at">main         =</span> <span class="st">&quot;Sample-to-sample distances (VST) — E. coli MG1655&quot;</span>,</span>
 <span id="cb429-14"><a href="sample-correlation-heatmap-2.html#cb429-14" tabindex="-1"></a>  <span class="at">fontsize     =</span> <span class="dv">10</span></span>
 <span id="cb429-15"><a href="sample-correlation-heatmap-2.html#cb429-15" tabindex="-1"></a>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/correlation-heatmap-0-1.png" alt="" width="672" /></p>
 </div>
             </section>

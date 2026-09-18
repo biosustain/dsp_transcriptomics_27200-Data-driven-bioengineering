@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -452,6 +453,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
 <p><strong>📌 Remember:</strong> Load all libraries at the start of every session before running any analysis.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="setup-the-environment-1.html#cb254-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb254-2"><a href="setup-the-environment-1.html#cb254-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
 <span id="cb254-3"><a href="setup-the-environment-1.html#cb254-3" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
@@ -462,9 +464,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb254-8"><a href="setup-the-environment-1.html#cb254-8" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb254-9"><a href="setup-the-environment-1.html#cb254-9" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
 <span id="cb254-10"><a href="setup-the-environment-1.html#cb254-10" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
+</details>
 <div id="getting-the-metadata" class="section level3 hasAnchor">
 <h3>Getting the Metadata<a href="setup-the-environment-1.html#getting-the-metadata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The metadata file describes the experimental design: which sample belongs to which donor and treatment group. This information is essential for <code>DESeq2</code> to model expression differences correctly.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="setup-the-environment-1.html#cb255-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb255-2"><a href="setup-the-environment-1.html#cb255-2" tabindex="-1"></a></span>
 <span id="cb255-3"><a href="setup-the-environment-1.html#cb255-3" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
@@ -473,9 +477,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb255-6"><a href="setup-the-environment-1.html#cb255-6" tabindex="-1"></a>  <span class="at">sep         =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
 <span id="cb255-7"><a href="setup-the-environment-1.html#cb255-7" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">TRUE</span></span>
 <span id="cb255-8"><a href="setup-the-environment-1.html#cb255-8" tabindex="-1"></a>)</span></code></pre></div>
+</details>
 <div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
 <p><strong>💡 Tip:</strong> Use the interactive table below to verify your sample metadata before proceeding.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="setup-the-environment-1.html#cb256-1" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
 <span id="cb256-2"><a href="setup-the-environment-1.html#cb256-2" tabindex="-1"></a>  <span class="at">data       =</span> samples_info,</span>
 <span id="cb256-3"><a href="setup-the-environment-1.html#cb256-3" tabindex="-1"></a>  <span class="at">rownames   =</span> <span class="cn">FALSE</span>,</span>
@@ -490,8 +496,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb256-12"><a href="setup-the-environment-1.html#cb256-12" tabindex="-1"></a>  ),</span>
 <span id="cb256-13"><a href="setup-the-environment-1.html#cb256-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;Sample metadata — Human ASM (dexamethasone vs untreated)&#39;</span></span>
 <span id="cb256-14"><a href="setup-the-environment-1.html#cb256-14" tabindex="-1"></a>)</span></code></pre></div>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-cc0b3cd9baf43e6d9dcb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-cc0b3cd9baf43e6d9dcb">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata &lt;U+2014&gt; Human ASM (dexamethasone vs untreated)<\/caption>","data":[["N052611_dexamethasone","N052611_untreated","N061011_dexamethasone","N061011_untreated","N080611_dexamethasone","N080611_untreated","N61311_dexamethasone","N61311_untreated"],["N052611","N052611","N061011","N061011","N080611","N080611","N61311","N61311"],["dexamethasone","untreated","dexamethasone","untreated","dexamethasone","untreated","dexamethasone","untreated"],["treatment","control","treatment","control","treatment","control","treatment","control"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>donor<\/th>\n      <th>treatment_full<\/th>\n      <th>group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"name":"sample","targets":0},{"name":"donor","targets":1},{"name":"treatment_full","targets":2},{"name":"group","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</details>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2fffa6ece43d8cf18398" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2fffa6ece43d8cf18398">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata &lt;U+2014&gt; Human ASM (dexamethasone vs untreated)<\/caption>","data":[["N052611_dexamethasone","N052611_untreated","N061011_dexamethasone","N061011_untreated","N080611_dexamethasone","N080611_untreated","N61311_dexamethasone","N61311_untreated"],["N052611","N052611","N061011","N061011","N080611","N080611","N61311","N61311"],["dexamethasone","untreated","dexamethasone","untreated","dexamethasone","untreated","dexamethasone","untreated"],["treatment","control","treatment","control","treatment","control","treatment","control"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>donor<\/th>\n      <th>treatment_full<\/th>\n      <th>group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"name":"sample","targets":0},{"name":"donor","targets":1},{"name":"treatment_full","targets":2},{"name":"group","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="loading-count-data-1" class="section level3 hasAnchor">
 <h3>Loading Count Data<a href="setup-the-environment-1.html#loading-count-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -502,6 +509,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
 <p><strong>💡 Tip:</strong> If you are unsure which assay name or rowData columns are available in your RDS, inspect them first with <code>assayNames(count_x)</code> and <code>names(rowData(count_x))</code>.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="setup-the-environment-1.html#cb257-1" tabindex="-1"></a>count_x <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
 <span id="cb257-2"><a href="setup-the-environment-1.html#cb257-2" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;data-02-Homo_sapiens&quot;</span>, <span class="st">&quot;hasapiens&quot;</span>, <span class="st">&quot;star_salmon&quot;</span>,</span>
 <span id="cb257-3"><a href="setup-the-environment-1.html#cb257-3" tabindex="-1"></a>            <span class="st">&quot;salmon.merged.gene.SummarizedExperiment.rds&quot;</span>)</span>
@@ -529,10 +537,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb257-25"><a href="setup-the-environment-1.html#cb257-25" tabindex="-1"></a><span class="fu">rownames</span>(count_genes) <span class="ot">&lt;-</span> gene_symbols_saved</span>
 <span id="cb257-26"><a href="setup-the-environment-1.html#cb257-26" tabindex="-1"></a></span>
 <span id="cb257-27"><a href="setup-the-environment-1.html#cb257-27" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions (genes × samples):&quot;</span>, <span class="fu">dim</span>(count_genes), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Dimensions (genes &lt;U+00D7&gt; samples): 25924 16</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="setup-the-environment-1.html#cb259-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(<span class="fu">rownames</span>(count_genes)))</span></code></pre></div>
+</details>
 <pre><code>## [1] &quot;A1BG&quot;  &quot;A1CF&quot;  &quot;A2BP1&quot; &quot;A2LD1&quot; &quot;A2M&quot;   &quot;A2ML1&quot;</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="setup-the-environment-1.html#cb261-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(count_genes))</span></code></pre></div>
+</details>
 <pre><code>##  [1] &quot;N052611_albuterol_dexamethasone&quot; &quot;N052611_albuterol&quot;              
 ##  [3] &quot;N052611_dexamethasone&quot;           &quot;N052611_untreated&quot;              
 ##  [5] &quot;N061011_albuterol_dexamethasone&quot; &quot;N061011_albuterol&quot;              
@@ -541,16 +554,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [11] &quot;N080611_dexamethasone&quot;           &quot;N080611_untreated&quot;              
 ## [13] &quot;N61311_albuterol_dexamethasone&quot;  &quot;N61311_albuterol&quot;               
 ## [15] &quot;N61311_dexamethasone&quot;            &quot;N61311_untreated&quot;</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="setup-the-environment-1.html#cb263-1" tabindex="-1"></a><span class="co"># Report what the gene_id / gene_name columns actually contain.</span></span>
 <span id="cb263-2"><a href="setup-the-environment-1.html#cb263-2" tabindex="-1"></a><span class="co"># This pipeline used a RefSeq GTF with gtf_extra_attributes = gene_name,</span></span>
 <span id="cb263-3"><a href="setup-the-environment-1.html#cb263-3" tabindex="-1"></a><span class="co"># so both are expected to be symbols (not ENSEMBL). Confirm here:</span></span>
 <span id="cb263-4"><a href="setup-the-environment-1.html#cb263-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Example gene_id  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">head</span>(gene_ids, <span class="dv">3</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## Example gene_id  : A1BG, A1CF, A2BP1</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="setup-the-environment-1.html#cb265-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Example gene_name:&quot;</span>, <span class="fu">paste</span>(<span class="fu">head</span>(gene_symbols, <span class="dv">3</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Example gene_name: A1BG, A1CF, A2BP1</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="setup-the-environment-1.html#cb267-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;gene_id look like ENSEMBL? :&quot;</span>,</span>
 <span id="cb267-2"><a href="setup-the-environment-1.html#cb267-2" tabindex="-1"></a>    <span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">&quot;^ENSG&quot;</span>, <span class="fu">head</span>(gene_ids, <span class="dv">50</span>))), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## gene_id look like ENSEMBL? : FALSE</code></pre>
 <div class="note">
 <p><strong>📘 Note:</strong> This dataset was processed against a <strong>RefSeq</strong> GRCh37 GTF with
@@ -559,6 +578,7 @@ hold gene <strong>symbols</strong> (e.g. <code>A1BG</code>), not ENSEMBL IDs. S
 g:Profiler and MSigDB accept, so no ID conversion is needed downstream. The check above prints the
 actual values so you can confirm this on your own RDS.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="setup-the-environment-1.html#cb269-1" tabindex="-1"></a><span class="co"># Persist gene_id &lt;-&gt; gene_name map for downstream scripts</span></span>
 <span id="cb269-2"><a href="setup-the-environment-1.html#cb269-2" tabindex="-1"></a>id_map <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb269-3"><a href="setup-the-environment-1.html#cb269-3" tabindex="-1"></a>  <span class="at">gene_id     =</span> <span class="fu">as.character</span>(gene_ids),</span>
@@ -567,6 +587,7 @@ actual values so you can confirm this on your own RDS.</p>
 <span id="cb269-6"><a href="setup-the-environment-1.html#cb269-6" tabindex="-1"></a>)</span>
 <span id="cb269-7"><a href="setup-the-environment-1.html#cb269-7" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb269-8"><a href="setup-the-environment-1.html#cb269-8" tabindex="-1"></a><span class="fu">saveRDS</span>(id_map, <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;gene_id_symbol_map.rds&quot;</span>))</span></code></pre></div>
+</details>
 </div>
 </div>
             </section>

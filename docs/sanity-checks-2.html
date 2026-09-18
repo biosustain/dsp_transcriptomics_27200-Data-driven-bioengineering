@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -455,7 +456,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="remember">
 <p><strong>📌 Remember:</strong> Always verify your input before proceeding.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="sanity-checks-2.html#cb414-1" tabindex="-1"></a><span class="fu">head</span>(count_genes[, <span class="dv">1</span><span class="sc">:</span><span class="fu">min</span>(<span class="dv">6</span>, <span class="fu">ncol</span>(count_genes))])</span></code></pre></div>
+</details>
 <pre><code>##         C1   C2   C3 sac1 sac2 sac3
 ## b0001    0    0    1    1    0    0
 ## b0002 2754 2375 8666 5901 4451 6523
@@ -463,6 +466,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## b0004 1851 1484 7284 2973 2182 3516
 ## b0005    4    4    3   15    9    5
 ## b0006  250  222 1011  269  288  439</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="sanity-checks-2.html#cb416-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">hist</span>(</span>
 <span id="cb416-2"><a href="sanity-checks-2.html#cb416-2" tabindex="-1"></a>  <span class="fu">as.numeric</span>(count_genes[<span class="dv">1</span>, ]),</span>
 <span id="cb416-3"><a href="sanity-checks-2.html#cb416-3" tabindex="-1"></a>  <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">&quot;Raw counts —&quot;</span>, <span class="fu">rownames</span>(count_genes)[<span class="dv">1</span>]),</span>
@@ -474,6 +478,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb416-9"><a href="sanity-checks-2.html#cb416-9" tabindex="-1"></a><span class="fu">plot</span>(p, <span class="at">col =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
 <span id="cb416-10"><a href="sanity-checks-2.html#cb416-10" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">&quot;Raw counts —&quot;</span>, <span class="fu">rownames</span>(count_genes)[<span class="dv">1</span>]),</span>
 <span id="cb416-11"><a href="sanity-checks-2.html#cb416-11" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Raw count&quot;</span>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/check-raw-0-1.png" alt="" width="672" /></p>
 <div class="boxy">
 <p>Raw <em>E. coli</em> RNA-seq counts are typically in the thousands to millions range (library sizes ~5–50 M reads for bacterial experiments).</p>
@@ -484,24 +489,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Pre-filtering Low-count Genes<a href="sanity-checks-2.html#pre-filtering-low-count-genes-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples (equal to the size of the smallest group, i.e., 3 replicates here).</p>
 <p><em>E. coli</em> has ~4,300 genes — after filtering you should retain the majority of them.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="sanity-checks-2.html#cb417-1" tabindex="-1"></a>smallestGroupSize <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>condition))</span>
 <span id="cb417-2"><a href="sanity-checks-2.html#cb417-2" tabindex="-1"></a></span>
 <span id="cb417-3"><a href="sanity-checks-2.html#cb417-3" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">counts</span>(dds) <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">&gt;=</span> smallestGroupSize</span>
 <span id="cb417-4"><a href="sanity-checks-2.html#cb417-4" tabindex="-1"></a>dds  <span class="ot">&lt;-</span> dds[keep, ]</span>
 <span id="cb417-5"><a href="sanity-checks-2.html#cb417-5" tabindex="-1"></a></span>
 <span id="cb417-6"><a href="sanity-checks-2.html#cb417-6" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes before filtering:&quot;</span>, <span class="fu">nrow</span>(<span class="fu">counts</span>(dds)) <span class="sc">+</span> <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Genes before filtering: 4523</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="sanity-checks-2.html#cb419-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes after  filtering:&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Genes after  filtering: 3698</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="sanity-checks-2.html#cb421-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes removed         :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Genes removed         : 825</code></pre>
 </div>
 <div id="factor-order-and-reference-level-2" class="section level3 hasAnchor">
 <h3>Factor Order and Reference Level<a href="sanity-checks-2.html#factor-order-and-reference-level-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first factor level is always the reference (denominator) in <code>DESeq2</code> comparisons. Setting it explicitly ensures that fold changes are computed in the intended direction: <strong>treatment vs control</strong>, not the reverse.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="sanity-checks-2.html#cb423-1" tabindex="-1"></a>dds<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">relevel</span>(dds<span class="sc">$</span>condition, <span class="at">ref =</span> <span class="st">&quot;control&quot;</span>)</span>
 <span id="cb423-2"><a href="sanity-checks-2.html#cb423-2" tabindex="-1"></a></span>
 <span id="cb423-3"><a href="sanity-checks-2.html#cb423-3" tabindex="-1"></a><span class="fu">levels</span>(dds<span class="sc">$</span>condition)</span></code></pre></div>
+</details>
 <pre><code>## [1] &quot;control&quot;   &quot;treatment&quot;</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
 <p><strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC means higher expression in the treatment relative to control.</p>

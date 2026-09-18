@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -446,6 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="setup-the-environment" class="section level2 hasAnchor">
 <h2>Setup the Environment<a href="setup-the-environment.html#setup-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="setup-the-environment.html#cb68-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb68-2"><a href="setup-the-environment.html#cb68-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
 <span id="cb68-3"><a href="setup-the-environment.html#cb68-3" tabindex="-1"></a><span class="fu">library</span>(apeglm)</span>
@@ -456,6 +458,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb68-8"><a href="setup-the-environment.html#cb68-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
 <span id="cb68-9"><a href="setup-the-environment.html#cb68-9" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
 <span id="cb68-10"><a href="setup-the-environment.html#cb68-10" tabindex="-1"></a><span class="fu">library</span>(gggenes)       <span class="co"># to draw genes as arrows along the chromosome (CRAN)</span></span></code></pre></div>
+</details>
 <div id="choose-the-strain-1" class="section level3 hasAnchor">
 <h3>Choose the Strain<a href="setup-the-environment.html#choose-the-strain-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As in the QC script, one setting drives the whole analysis. There are two ways to set it:</p>
@@ -463,6 +466,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Interactively</strong> (running chunks by hand in RStudio/VS Code): edit the <code>strain</code> line below.</li>
 <li><strong>When rendering</strong> (<code>rmarkdown::render</code>, or the <code>render_all_strains.R</code> driver): the value comes from the <code>params:strain</code> field in the YAML header, which overrides the line below.</li>
 </ol>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="setup-the-environment.html#cb69-1" tabindex="-1"></a><span class="co"># Interactive default. When the document is rendered, params$strain (from the YAML</span></span>
 <span id="cb69-2"><a href="setup-the-environment.html#cb69-2" tabindex="-1"></a><span class="co"># header, or passed by rmarkdown::render) takes precedence over this line.</span></span>
 <span id="cb69-3"><a href="setup-the-environment.html#cb69-3" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;USA-100&quot;</span>          <span class="co"># &quot;USA-100&quot; or &quot;USA-500&quot;</span></span>
@@ -489,31 +493,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb69-24"><a href="setup-the-environment.html#cb69-24" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
 <span id="cb69-25"><a href="setup-the-environment.html#cb69-25" tabindex="-1"></a></span>
 <span id="cb69-26"><a href="setup-the-environment.html#cb69-26" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain          :&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Strain          : USA-100</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="setup-the-environment.html#cb71-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GTF             :&quot;</span>, gtf_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## GTF             : /Users/jasge/Documents/GitHub/dsp_27200/data/genome_files/GCF_000009645.1_ASM964v1_genomic.gtf.gz</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="setup-the-environment.html#cb73-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;log2FC threshold:&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;( =&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold )</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## log2FC threshold: 1.585 ( = 3 -fold )</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="setup-the-environment.html#cb75-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;padj threshold  :&quot;</span>, padj_threshold, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## padj threshold  : 0.05</code></pre>
 </div>
 <div id="load-the-deseqdataset-from-qc" class="section level3 hasAnchor">
 <h3>Load the DESeqDataSet from QC<a href="setup-the-environment.html#load-the-deseqdataset-from-qc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The QC script saved a <code>DESeqDataSet</code> containing <strong>all</strong> time points. We load it here and subset as needed for each question.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="setup-the-environment.html#cb77-1" tabindex="-1"></a>dds_all <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
 <span id="cb77-2"><a href="setup-the-environment.html#cb77-2" tabindex="-1"></a>  <span class="fu">file.path</span>(results_dir, <span class="st">&quot;rds&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;dds_&quot;</span>, strain_tag, <span class="st">&quot;_all_timepoints.rds&quot;</span>))</span>
 <span id="cb77-3"><a href="setup-the-environment.html#cb77-3" tabindex="-1"></a>)</span>
 <span id="cb77-4"><a href="setup-the-environment.html#cb77-4" tabindex="-1"></a></span>
 <span id="cb77-5"><a href="setup-the-environment.html#cb77-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Loaded DDS:&quot;</span>, <span class="fu">nrow</span>(dds_all), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds_all), <span class="st">&quot;samples</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Loaded DDS: 2288 genes &lt;U+00D7&gt; 32 samples</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="setup-the-environment.html#cb79-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(dds_all<span class="sc">$</span>lifestyle, dds_all<span class="sc">$</span>timepoint))</span></code></pre></div>
+</details>
 <pre><code>##             
 ##              5h 10h 24h
 ##   Planktonic  4   4   8
 ##   Biofilm     4   4   8</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="setup-the-environment.html#cb81-1" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb81-2"><a href="setup-the-environment.html#cb81-2" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>),  <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb81-3"><a href="setup-the-environment.html#cb81-3" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;rds&quot;</span>),    <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</details>
 <div class="remember">
 <p><strong>📌 Remember:</strong> This object already had low-count genes filtered in the QC step. Below we set the
 reference (baseline) level explicitly for each analysis so the direction of every fold change is unambiguous.</p>
@@ -529,6 +546,7 @@ low-count genes so that the large fold changes that remain are trustworthy. Beca
 the fold-change threshold to the <em>shrunken</em> values, shrinkage here also affects which genes are
 counted as Up/Down — deliberately: a noisy low-count gene with an inflated raw fold change should not pass.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="setup-the-environment.html#cb82-1" tabindex="-1"></a>get_results <span class="ot">&lt;-</span> <span class="cf">function</span>(dds, coef_name) {</span>
 <span id="cb82-2"><a href="setup-the-environment.html#cb82-2" tabindex="-1"></a>  <span class="fu">stopifnot</span>(coef_name <span class="sc">%in%</span> <span class="fu">resultsNames</span>(dds))</span>
 <span id="cb82-3"><a href="setup-the-environment.html#cb82-3" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">lfcShrink</span>(dds, <span class="at">coef =</span> coef_name, <span class="at">type =</span> <span class="st">&quot;apeglm&quot;</span>)</span>
@@ -585,6 +603,7 @@ counted as Up/Down — deliberately: a noisy low-count gene with an inflated raw
 <span id="cb82-54"><a href="setup-the-environment.html#cb82-54" tabindex="-1"></a>              direction) <span class="sc">%&gt;%</span></span>
 <span id="cb82-55"><a href="setup-the-environment.html#cb82-55" tabindex="-1"></a>    <span class="fu">head</span>(n)</span>
 <span id="cb82-56"><a href="setup-the-environment.html#cb82-56" tabindex="-1"></a>}</span></code></pre></div>
+</details>
 </div>
 </div>
             </section>

@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -461,15 +462,21 @@ which is why we split the query set below. For a fully ranked approach, see Part
 </div>
 <div id="prepare-input" class="section level3 hasAnchor">
 <h3>Prepare Input<a href="part-1-over-representation-analysis-ora.html#prepare-input" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="part-1-over-representation-analysis-ora.html#cb182-1" tabindex="-1"></a>sig_up   <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dir_here <span class="sc">==</span> <span class="st">&quot;Up&quot;</span>)   <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
 <span id="cb182-2"><a href="part-1-over-representation-analysis-ora.html#cb182-2" tabindex="-1"></a>sig_down <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dir_here <span class="sc">==</span> <span class="st">&quot;Down&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
 <span id="cb182-3"><a href="part-1-over-representation-analysis-ora.html#cb182-3" tabindex="-1"></a>background <span class="ot">&lt;-</span> res_df<span class="sc">$</span>gene_id</span>
 <span id="cb182-4"><a href="part-1-over-representation-analysis-ora.html#cb182-4" tabindex="-1"></a></span>
 <span id="cb182-5"><a href="part-1-over-representation-analysis-ora.html#cb182-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Up-regulated genes      :&quot;</span>, <span class="fu">length</span>(sig_up),     <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Up-regulated genes      : 156</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="part-1-over-representation-analysis-ora.html#cb184-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Down-regulated genes    :&quot;</span>, <span class="fu">length</span>(sig_down),   <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Down-regulated genes    : 126</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="part-1-over-representation-analysis-ora.html#cb186-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Background (all tested) :&quot;</span>, <span class="fu">length</span>(background), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Background (all tested) : 2288</code></pre>
 <div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
 <p><strong>Tip:</strong> The background is all genes <em>tested</em> for this contrast, not
@@ -482,6 +489,7 @@ p-values.</p>
 <h3>Run ORA<a href="part-1-over-representation-analysis-ora.html#run-ora" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>ORA is run for each collection and each direction, with a helper to avoid code duplication.
 Empty query sets (no genes in that direction) are skipped and return <code>NULL</code>.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="part-1-over-representation-analysis-ora.html#cb188-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb188-2"><a href="part-1-over-representation-analysis-ora.html#cb188-2" tabindex="-1"></a></span>
 <span id="cb188-3"><a href="part-1-over-representation-analysis-ora.html#cb188-3" tabindex="-1"></a><span class="co"># mulea&#39;s ora() expects the gmt as a data.frame whose `list_of_values` is an</span></span>
@@ -523,8 +531,11 @@ Empty query sets (no genes in that direction) are skipped and return <code>NULL<
 <span id="cb188-39"><a href="part-1-over-representation-analysis-ora.html#cb188-39" tabindex="-1"></a></span>
 <span id="cb188-40"><a href="part-1-over-representation-analysis-ora.html#cb188-40" tabindex="-1"></a>n_sig <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="cf">if</span> (<span class="fu">is.null</span>(x) <span class="sc">||</span> <span class="fu">nrow</span>(x) <span class="sc">==</span> <span class="dv">0</span>) <span class="dv">0</span> <span class="cf">else</span> <span class="fu">sum</span>(x<span class="sc">$</span>eFDR <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb188-41"><a href="part-1-over-representation-analysis-ora.html#cb188-41" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Up   — significant sets (eFDR &lt; 0.05):&quot;</span>, <span class="fu">n_sig</span>(ora_up),   <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Up   &lt;U+2014&gt; significant sets (eFDR &lt; 0.05): 0</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="part-1-over-representation-analysis-ora.html#cb190-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Down — significant sets (eFDR &lt; 0.05):&quot;</span>, <span class="fu">n_sig</span>(ora_down), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Down &lt;U+2014&gt; significant sets (eFDR &lt; 0.05): 10</code></pre>
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
 <p><strong>Note:</strong> If a direction returns no significant sets, its table and plot below
@@ -540,6 +551,7 @@ and the <strong>eFDR</strong> — <code>mulea</code>’s empirical false-discove
 A hit you can trust has a reasonable overlap, a set size specific enough to mean something, and biology
 that fits a biofilm-planktonic switch.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="part-1-over-representation-analysis-ora.html#cb192-1" tabindex="-1"></a>get_sig <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb192-2"><a href="part-1-over-representation-analysis-ora.html#cb192-2" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(x) <span class="sc">||</span> <span class="fu">nrow</span>(x) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(x[<span class="dv">0</span>, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
 <span id="cb192-3"><a href="part-1-over-representation-analysis-ora.html#cb192-3" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">filter</span>(eFDR <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(eFDR)</span>
@@ -549,10 +561,14 @@ that fits a biofilm-planktonic switch.</p>
 <span id="cb192-7"><a href="part-1-over-representation-analysis-ora.html#cb192-7" tabindex="-1"></a>ora_down_sig <span class="ot">&lt;-</span> <span class="fu">get_sig</span>(ora_down)</span>
 <span id="cb192-8"><a href="part-1-over-representation-analysis-ora.html#cb192-8" tabindex="-1"></a></span>
 <span id="cb192-9"><a href="part-1-over-representation-analysis-ora.html#cb192-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant up sets  :&quot;</span>, <span class="fu">nrow</span>(ora_up_sig),   <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Significant up sets  : 0</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="part-1-over-representation-analysis-ora.html#cb194-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant down sets:&quot;</span>, <span class="fu">nrow</span>(ora_down_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Significant down sets: 10</code></pre>
 <p><strong>Up-regulated genes — enriched sets (biofilm-associated)</strong></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="part-1-over-representation-analysis-ora.html#cb196-1" tabindex="-1"></a>show_ora_table <span class="ot">&lt;-</span> <span class="cf">function</span>(sig, caption) {</span>
 <span id="cb196-2"><a href="part-1-over-representation-analysis-ora.html#cb196-2" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(sig) <span class="sc">==</span> <span class="dv">0</span>) { <span class="fu">cat</span>(<span class="st">&quot;No significant enriched sets.</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">return</span>(<span class="fu">invisible</span>()) }</span>
 <span id="cb196-3"><a href="part-1-over-representation-analysis-ora.html#cb196-3" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
@@ -571,11 +587,14 @@ that fits a biofilm-planktonic switch.</p>
 <span id="cb196-16"><a href="part-1-over-representation-analysis-ora.html#cb196-16" tabindex="-1"></a>  )</span>
 <span id="cb196-17"><a href="part-1-over-representation-analysis-ora.html#cb196-17" tabindex="-1"></a>}</span>
 <span id="cb196-18"><a href="part-1-over-representation-analysis-ora.html#cb196-18" tabindex="-1"></a><span class="fu">show_ora_table</span>(ora_up_sig, <span class="st">&quot;Significant ORA sets — UP-regulated (biofilm) genes&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## No significant enriched sets.</code></pre>
 <p><strong>Down-regulated genes — enriched sets (planktonic-associated)</strong></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="part-1-over-representation-analysis-ora.html#cb198-1" tabindex="-1"></a><span class="fu">show_ora_table</span>(ora_down_sig, <span class="st">&quot;Significant ORA sets — DOWN-regulated (planktonic) genes&quot;</span>)</span></code></pre></div>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-22ed6a3a09aaca8de151" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-22ed6a3a09aaca8de151">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Significant ORA sets &lt;U+2014&gt; DOWN-regulated (planktonic) genes<\/caption>","data":[["KEGG","KEGG","GO:BP","GO:MF","GO:BP","GO:BP","KEGG","KEGG","KEGG","GO:BP"],["sau00970","sau03010","GO:0006412","GO:0003735","GO:0009228","GO:0015986","sau00230","sau02060","sau00730","GO:0006189"],["Aminoacyl-tRNA biosynthesis","Ribosome","translation","structural constituent of ribosome","thiamine biosynthetic process","proton motive force-driven ATP synthesis","Purine metabolism","Phosphotransferase system (PTS)","Thiamine metabolism","'de novo' IMP biosynthetic process"],[17,22,22,22,4,4,9,6,4,3],[50,67,60,56,6,6,44,21,11,7],[2.86e-10,1.116e-12,8.016e-14,1.454e-14,0.0001208,0.0001208,0.0004802,0.0006780999999999999,0.002139,0.004849],[0,0,0,0,0.0006667,0.0006667,0.004,0.00625,0.018,0.0275]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source<\/th>\n      <th>ID<\/th>\n      <th>Set<\/th>\n      <th>Hits in query<\/th>\n      <th>Hits in background<\/th>\n      <th>p-value<\/th>\n      <th>eFDR<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"scrollX":true,"scrollY":300,"scroller":true,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]},{"name":"source","targets":0},{"name":"ontology_id","targets":1},{"name":"ontology_name","targets":2},{"name":"nr_common_with_tested_elements","targets":3},{"name":"nr_common_with_background_elements","targets":4},{"name":"p_value","targets":5},{"name":"eFDR","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</details>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-86da08630eaf0ae148a4" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-86da08630eaf0ae148a4">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Significant ORA sets &lt;U+2014&gt; DOWN-regulated (planktonic) genes<\/caption>","data":[["KEGG","KEGG","GO:BP","GO:MF","GO:BP","GO:BP","KEGG","KEGG","KEGG","GO:BP"],["sau00970","sau03010","GO:0006412","GO:0003735","GO:0009228","GO:0015986","sau00230","sau02060","sau00730","GO:0006189"],["Aminoacyl-tRNA biosynthesis","Ribosome","translation","structural constituent of ribosome","thiamine biosynthetic process","proton motive force-driven ATP synthesis","Purine metabolism","Phosphotransferase system (PTS)","Thiamine metabolism","'de novo' IMP biosynthetic process"],[17,22,22,22,4,4,9,6,4,3],[50,67,60,56,6,6,44,21,11,7],[2.86e-10,1.116e-12,8.016e-14,1.454e-14,0.0001208,0.0001208,0.0004802,0.0006780999999999999,0.002139,0.004849],[0,0,0,0,0.0006667,0.0006667,0.004,0.00625,0.018,0.0275]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source<\/th>\n      <th>ID<\/th>\n      <th>Set<\/th>\n      <th>Hits in query<\/th>\n      <th>Hits in background<\/th>\n      <th>p-value<\/th>\n      <th>eFDR<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"scrollX":true,"scrollY":300,"scroller":true,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]},{"name":"source","targets":0},{"name":"ontology_id","targets":1},{"name":"ontology_name","targets":2},{"name":"nr_common_with_tested_elements","targets":3},{"name":"nr_common_with_background_elements","targets":4},{"name":"p_value","targets":5},{"name":"eFDR","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="critical-interpretation-watch-for-spurious-hits" class="section level3 hasAnchor">
 <h3>Critical Interpretation — Watch for Spurious Hits<a href="part-1-over-representation-analysis-ora.html#critical-interpretation-watch-for-spurious-hits" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -599,6 +618,7 @@ still part of interpretation.</p>
 <p>The strongest sets in each direction, ranked by <code>-log10(eFDR)</code>. The number of DE genes hitting
 each set is printed at the end of each bar. Up-regulated (biofilm) and down-regulated
 (planktonic) are shown in separate facets.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="part-1-over-representation-analysis-ora.html#cb199-1" tabindex="-1"></a>prep_ora <span class="ot">&lt;-</span> <span class="cf">function</span>(sig, label, <span class="at">n =</span> <span class="dv">8</span>) {</span>
 <span id="cb199-2"><a href="part-1-over-representation-analysis-ora.html#cb199-2" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(sig) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
 <span id="cb199-3"><a href="part-1-over-representation-analysis-ora.html#cb199-3" tabindex="-1"></a>  sig <span class="sc">%&gt;%</span></span>
@@ -650,6 +670,7 @@ each set is printed at the end of each bar. Up-regulated (biofilm) and down-regu
 <span id="cb199-49"><a href="part-1-over-representation-analysis-ora.html#cb199-49" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb199-50"><a href="part-1-over-representation-analysis-ora.html#cb199-50" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No significant sets to plot.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb199-51"><a href="part-1-over-representation-analysis-ora.html#cb199-51" tabindex="-1"></a>}</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-fn-ora-barplot-1.png" alt="" width="672" /></p>
 </div>
 </div>

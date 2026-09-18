@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -447,12 +448,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="top-gene-count-plot-1" class="section level2 hasAnchor">
 <h2>Top Gene Count Plot<a href="top-gene-count-plot-1.html#top-gene-count-plot-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Plotting raw normalised counts for the most significant gene provides a sanity check: the direction and magnitude of the fold change should be visually obvious. If it isn’t, investigate further.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="top-gene-count-plot-1.html#cb466-1" tabindex="-1"></a>top_gene <span class="ot">&lt;-</span> res_sig<span class="sc">$</span>gene[<span class="dv">1</span>]</span>
 <span id="cb466-2"><a href="top-gene-count-plot-1.html#cb466-2" tabindex="-1"></a></span>
 <span id="cb466-3"><a href="top-gene-count-plot-1.html#cb466-3" tabindex="-1"></a><span class="fu">plotCounts</span>(dds,</span>
 <span id="cb466-4"><a href="top-gene-count-plot-1.html#cb466-4" tabindex="-1"></a>           <span class="at">gene     =</span> top_gene,</span>
 <span id="cb466-5"><a href="top-gene-count-plot-1.html#cb466-5" tabindex="-1"></a>           <span class="at">intgroup =</span> <span class="st">&quot;condition&quot;</span>,</span>
 <span id="cb466-6"><a href="top-gene-count-plot-1.html#cb466-6" tabindex="-1"></a>           <span class="at">main     =</span> <span class="fu">paste</span>(<span class="st">&quot;Normalised counts —&quot;</span>, top_gene))</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/top-gene-1.png" alt="" width="672" /></p>
 </div>
             </section>

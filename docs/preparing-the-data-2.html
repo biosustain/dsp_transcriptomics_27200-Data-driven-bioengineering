@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -452,6 +453,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Clean column names in the count matrix to remove whitespace or special characters.</li>
 <li>Align the sample order between the count matrix and the metadata — <code>DESeq2</code> requires these to match exactly.</li>
 </ol>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="preparing-the-data-2.html#cb411-1" tabindex="-1"></a>condition_levels   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>)</span>
 <span id="cb411-2"><a href="preparing-the-data-2.html#cb411-2" tabindex="-1"></a>samples_info<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group, <span class="at">levels =</span> condition_levels)</span>
 <span id="cb411-3"><a href="preparing-the-data-2.html#cb411-3" tabindex="-1"></a></span>
@@ -467,6 +469,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb411-13"><a href="preparing-the-data-2.html#cb411-13" tabindex="-1"></a></span>
 <span id="cb411-14"><a href="preparing-the-data-2.html#cb411-14" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">count_col    =</span> <span class="fu">colnames</span>(count_genes),</span>
 <span id="cb411-15"><a href="preparing-the-data-2.html#cb411-15" tabindex="-1"></a>                 <span class="at">metadata_row =</span> samples_info<span class="sc">$</span>sample))</span></code></pre></div>
+</details>
 <pre><code>##   count_col metadata_row
 ## 1        C1           C1
 ## 2        C2           C2

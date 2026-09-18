@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -447,6 +448,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="heatmap-of-significant-genes-1" class="section level2 hasAnchor">
 <h2>Heatmap of Significant Genes<a href="heatmap-of-significant-genes-1.html#heatmap-of-significant-genes-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Clustering significant DE genes across samples provides a gene-level view of the expression differences. Genes should show clear block structure: high expression in treatment and low in control (or vice versa). Replicates within each condition should cluster together.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="heatmap-of-significant-genes-1.html#cb467-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb467-2"><a href="heatmap-of-significant-genes-1.html#cb467-2" tabindex="-1"></a></span>
 <span id="cb467-3"><a href="heatmap-of-significant-genes-1.html#cb467-3" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> res_sig <span class="sc">%&gt;%</span></span>
@@ -473,6 +475,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb467-24"><a href="heatmap-of-significant-genes-1.html#cb467-24" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
 <span id="cb467-25"><a href="heatmap-of-significant-genes-1.html#cb467-25" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top DE genes — Treatment vs Control (VST, row-scaled)&quot;</span></span>
 <span id="cb467-26"><a href="heatmap-of-significant-genes-1.html#cb467-26" tabindex="-1"></a>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/de-heatmap-1.png" alt="" width="672" /></p>
 </div>
             </section>

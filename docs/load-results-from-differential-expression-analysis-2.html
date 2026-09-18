@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -454,6 +455,7 @@ Make sure you have run that script first — it saves two files to <code>results
 <li><code>results/DE_treatment_vs_control_significant.tsv</code> — significant DE genes (padj &lt; 0.05, |LFC| &gt;= 1)</li>
 </ul>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="load-results-from-differential-expression-analysis-2.html#cb473-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb473-2"><a href="load-results-from-differential-expression-analysis-2.html#cb473-2" tabindex="-1"></a></span>
 <span id="cb473-3"><a href="load-results-from-differential-expression-analysis-2.html#cb473-3" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
@@ -471,12 +473,19 @@ Make sure you have run that script first — it saves two files to <code>results
 <span id="cb473-15"><a href="load-results-from-differential-expression-analysis-2.html#cb473-15" tabindex="-1"></a>)</span>
 <span id="cb473-16"><a href="load-results-from-differential-expression-analysis-2.html#cb473-16" tabindex="-1"></a></span>
 <span id="cb473-17"><a href="load-results-from-differential-expression-analysis-2.html#cb473-17" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;All tested genes     :&quot;</span>, <span class="fu">nrow</span>(res_df), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## All tested genes     : 3698</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="load-results-from-differential-expression-analysis-2.html#cb475-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant DE genes :&quot;</span>, <span class="fu">nrow</span>(res_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Significant DE genes : 646</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="load-results-from-differential-expression-analysis-2.html#cb477-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Upregulated        :&quot;</span>, <span class="fu">sum</span>(res_sig<span class="sc">$</span>log2FoldChange <span class="sc">&gt;=</span> <span class="dv">1</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##   Upregulated        : 258</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="load-results-from-differential-expression-analysis-2.html#cb479-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Downregulated      :&quot;</span>, <span class="fu">sum</span>(res_sig<span class="sc">$</span>log2FoldChange <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">1</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##   Downregulated      : 388</code></pre>
 </div>
             </section>

@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -448,6 +449,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Strain configuration and inputs<a href="strain-configuration-and-inputs.html#strain-configuration-and-inputs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Everything strain-specific is set here: the DE table for the lifestyle contrast, the cached
 gene sets, and the output directory. The rest of the script is strain-agnostic.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="strain-configuration-and-inputs.html#cb158-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb158-2"><a href="strain-configuration-and-inputs.html#cb158-2" tabindex="-1"></a></span>
 <span id="cb158-3"><a href="strain-configuration-and-inputs.html#cb158-3" tabindex="-1"></a>cfg <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
@@ -470,12 +472,19 @@ gene sets, and the output directory. The rest of the script is strain-agnostic.<
 <span id="cb158-20"><a href="strain-configuration-and-inputs.html#cb158-20" tabindex="-1"></a>id_map   <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(db_dir, <span class="fu">sprintf</span>(<span class="st">&quot;locus_symbol_map_Saureus_%s.rds&quot;</span>, strain)))</span>
 <span id="cb158-21"><a href="strain-configuration-and-inputs.html#cb158-21" tabindex="-1"></a></span>
 <span id="cb158-22"><a href="strain-configuration-and-inputs.html#cb158-22" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain     :&quot;</span>, cfg<span class="sc">$</span>label, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Strain     : USA-100 / N315</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="strain-configuration-and-inputs.html#cb160-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;KEGG sets  :&quot;</span>, <span class="fu">nrow</span>(kegg_gmt), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## KEGG sets  : 96</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="strain-configuration-and-inputs.html#cb162-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GO:BP sets :&quot;</span>, <span class="fu">nrow</span>(go_bp), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## GO:BP sets : 54</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="strain-configuration-and-inputs.html#cb164-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GO:MF sets :&quot;</span>, <span class="fu">nrow</span>(go_mf), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## GO:MF sets : 66</code></pre>
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
 <p><strong>Note:</strong> If any of these files are missing, run
@@ -488,6 +497,7 @@ conversion is needed.</p>
 <h3>Load Results from Differential Expression Analysis<a href="strain-configuration-and-inputs.html#load-results-from-differential-expression-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We read the lifestyle-additive DE table. It contains every gene tested by DESeq2 for this
 contrast, which is the correct background for enrichment.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="strain-configuration-and-inputs.html#cb166-1" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
 <span id="cb166-2"><a href="strain-configuration-and-inputs.html#cb166-2" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, cfg<span class="sc">$</span>de),</span>
 <span id="cb166-3"><a href="strain-configuration-and-inputs.html#cb166-3" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">check.names =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
@@ -497,8 +507,11 @@ contrast, which is the correct background for enrichment.</p>
 <span id="cb166-7"><a href="strain-configuration-and-inputs.html#cb166-7" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="st">&quot;gene_id&quot;</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(res_df))</span>
 <span id="cb166-8"><a href="strain-configuration-and-inputs.html#cb166-8" tabindex="-1"></a></span>
 <span id="cb166-9"><a href="strain-configuration-and-inputs.html#cb166-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes tested (background):&quot;</span>, <span class="fu">nrow</span>(res_df), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Genes tested (background): 2288</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="strain-configuration-and-inputs.html#cb168-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Columns                  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">colnames</span>(res_df), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Columns                  : gene_id, baseMean, log2FoldChange, lfcSE, pvalue, padj, direction</code></pre>
 </div>
 <div id="define-significance-and-check-against-the-de-table" class="section level3 hasAnchor">
@@ -508,6 +521,7 @@ change) so the threshold is visible in this script, and we check it against the 
 column produced upstream. This is the same threshold used in the differential expression step
 (chosen to match the original paper’s 3-fold criterion), so the two should agree exactly; if
 they diverge, the check will flag it.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="strain-configuration-and-inputs.html#cb170-1" tabindex="-1"></a>padj_cut <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
 <span id="cb170-2"><a href="strain-configuration-and-inputs.html#cb170-2" tabindex="-1"></a>lfc_cut  <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">3</span>)   <span class="co"># paper&#39;s 3-fold threshold on the log2 scale (~1.585); matches script 02</span></span>
 <span id="cb170-3"><a href="strain-configuration-and-inputs.html#cb170-3" tabindex="-1"></a></span>
@@ -532,19 +546,27 @@ they diverge, the check will flag it.</p>
 <span id="cb170-22"><a href="strain-configuration-and-inputs.html#cb170-22" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb170-23"><a href="strain-configuration-and-inputs.html#cb170-23" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No upstream &#39;direction&#39; column to check against.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb170-24"><a href="strain-configuration-and-inputs.html#cb170-24" tabindex="-1"></a>}</span></code></pre></div>
+</details>
 <pre><code>## Agreement with upstream &#39;direction&#39;: 2288 / 2288 (100.0%)</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="strain-configuration-and-inputs.html#cb172-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant (padj &lt;&quot;</span>, padj_cut, <span class="st">&quot;&amp; |LFC| &gt;= log2(3) ~&quot;</span>, <span class="fu">round</span>(lfc_cut, <span class="dv">3</span>), <span class="st">&quot;):&quot;</span>,</span>
 <span id="cb172-2"><a href="strain-configuration-and-inputs.html#cb172-2" tabindex="-1"></a>    <span class="fu">sum</span>(res_df<span class="sc">$</span>sig_here), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Significant (padj &lt; 0.05 &amp; |LFC| &gt;= log2(3) ~ 1.585 ): 282</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="strain-configuration-and-inputs.html#cb174-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Up  :&quot;</span>, <span class="fu">sum</span>(res_df<span class="sc">$</span>dir_here <span class="sc">==</span> <span class="st">&quot;Up&quot;</span>),   <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##   Up  : 156</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="strain-configuration-and-inputs.html#cb176-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Down:&quot;</span>, <span class="fu">sum</span>(res_df<span class="sc">$</span>dir_here <span class="sc">==</span> <span class="st">&quot;Down&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##   Down: 126</code></pre>
 </div>
 <div id="combine-gene-set-collections" class="section level3 hasAnchor">
 <h3>Combine gene set collections<a href="strain-configuration-and-inputs.html#combine-gene-set-collections" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>mulea</code> and <code>fgsea</code> both take one collection at a time. We tag each set with its source so
 results can be read back by collection, then keep them available both combined and separately.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="strain-configuration-and-inputs.html#cb178-1" tabindex="-1"></a>tag_source <span class="ot">&lt;-</span> <span class="cf">function</span>(gmt, src) gmt <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">source =</span> src)</span>
 <span id="cb178-2"><a href="strain-configuration-and-inputs.html#cb178-2" tabindex="-1"></a></span>
 <span id="cb178-3"><a href="strain-configuration-and-inputs.html#cb178-3" tabindex="-1"></a>all_gmt <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
@@ -554,8 +576,11 @@ results can be read back by collection, then keep them available both combined a
 <span id="cb178-7"><a href="strain-configuration-and-inputs.html#cb178-7" tabindex="-1"></a>)</span>
 <span id="cb178-8"><a href="strain-configuration-and-inputs.html#cb178-8" tabindex="-1"></a></span>
 <span id="cb178-9"><a href="strain-configuration-and-inputs.html#cb178-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total gene sets across collections:&quot;</span>, <span class="fu">nrow</span>(all_gmt), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Total gene sets across collections: 216</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="strain-configuration-and-inputs.html#cb180-1" tabindex="-1"></a><span class="fu">print</span>(all_gmt <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>(source, <span class="at">name =</span> <span class="st">&quot;sets&quot;</span>))</span></code></pre></div>
+</details>
 <pre><code>## # A tibble: 3 x 2
 ##   source  sets
 ##   &lt;chr&gt;  &lt;int&gt;

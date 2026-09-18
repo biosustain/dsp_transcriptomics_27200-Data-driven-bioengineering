@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -447,6 +448,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ma-plot-1" class="section level2 hasAnchor">
 <h2>MA Plot<a href="ma-plot-1.html#ma-plot-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>An MA plot shows log2 fold change (y-axis) against mean expression (x-axis). It helps assess whether the fold change estimates are stable across the expression range. After shrinkage, estimates for lowly expressed genes (left side) should be pulled toward zero.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="ma-plot-1.html#cb465-1" tabindex="-1"></a><span class="fu">plotMA</span>(res_shrunk,</span>
 <span id="cb465-2"><a href="ma-plot-1.html#cb465-2" tabindex="-1"></a>       <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
 <span id="cb465-3"><a href="ma-plot-1.html#cb465-3" tabindex="-1"></a>       <span class="at">main  =</span> <span class="st">&quot;MA Plot — Treatment vs Control (shrunken LFC)&quot;</span>,</span>
@@ -454,6 +456,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb465-5"><a href="ma-plot-1.html#cb465-5" tabindex="-1"></a>       <span class="at">colNonSig =</span> <span class="st">&quot;grey70&quot;</span>,</span>
 <span id="cb465-6"><a href="ma-plot-1.html#cb465-6" tabindex="-1"></a>       <span class="at">ylab  =</span> <span class="st">&quot;log2 Fold Change&quot;</span>)</span>
 <span id="cb465-7"><a href="ma-plot-1.html#cb465-7" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/ma-plot-1.png" alt="" width="672" /></p>
 </div>
             </section>

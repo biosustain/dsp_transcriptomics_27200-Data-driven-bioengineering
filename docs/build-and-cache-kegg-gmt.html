@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -461,6 +462,7 @@ We build a locus tag to gene symbol map directly from KEGG and convert before an
 After that both RDS files load instantly. Do not delete the files in
 <code>data/databases/</code>.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="build-and-cache-kegg-gmt.html#cb481-1" tabindex="-1"></a>gmt_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;databases&quot;</span>,</span>
 <span id="cb481-2"><a href="build-and-cache-kegg-gmt.html#cb481-2" tabindex="-1"></a>                      <span class="st">&quot;KEGG_Pathways_Ecoli_MG1655_GeneSymbol.rds&quot;</span>)</span>
 <span id="cb481-3"><a href="build-and-cache-kegg-gmt.html#cb481-3" tabindex="-1"></a>map_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;databases&quot;</span>,</span>
@@ -523,12 +525,17 @@ After that both RDS files load instantly. Do not delete the files in
 <span id="cb481-60"><a href="build-and-cache-kegg-gmt.html#cb481-60" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;GMT saved    :&quot;</span>, <span class="fu">nrow</span>(kegg_gmt), <span class="st">&quot;pathways</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb481-61"><a href="build-and-cache-kegg-gmt.html#cb481-61" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;ID map saved :&quot;</span>, <span class="fu">nrow</span>(id_map), <span class="st">&quot;entries</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb481-62"><a href="build-and-cache-kegg-gmt.html#cb481-62" tabindex="-1"></a>}</span></code></pre></div>
+</details>
 <pre><code>## Loaded cached GMT    : 121 pathways
 ## Loaded cached ID map : 1765 entries</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="build-and-cache-kegg-gmt.html#cb483-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Example pathways:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## Example pathways:</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="build-and-cache-kegg-gmt.html#cb485-1" tabindex="-1"></a><span class="fu">head</span>(kegg_gmt<span class="sc">$</span>ontology_name, <span class="dv">6</span>)</span></code></pre></div>
+</details>
 <pre><code>## [1] &quot;Glycolysis / Gluconeogenesis&quot;            
 ## [2] &quot;Citrate cycle (TCA cycle)&quot;               
 ## [3] &quot;Pentose phosphate pathway&quot;               
@@ -537,6 +544,7 @@ After that both RDS files load instantly. Do not delete the files in
 ## [6] &quot;Galactose metabolism&quot;</code></pre>
 <div id="convert-locus-tags-to-gene-symbols" class="section level3 hasAnchor">
 <h3>Convert Locus Tags to Gene Symbols<a href="build-and-cache-kegg-gmt.html#convert-locus-tags-to-gene-symbols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="build-and-cache-kegg-gmt.html#cb487-1" tabindex="-1"></a>res_df_sym <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
 <span id="cb487-2"><a href="build-and-cache-kegg-gmt.html#cb487-2" tabindex="-1"></a>  <span class="fu">left_join</span>(id_map, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;gene&quot;</span> <span class="ot">=</span> <span class="st">&quot;locus_tag&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb487-3"><a href="build-and-cache-kegg-gmt.html#cb487-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gene =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(gene_symbol), gene_symbol, gene)) <span class="sc">%&gt;%</span></span>
@@ -549,14 +557,21 @@ After that both RDS files load instantly. Do not delete the files in
 <span id="cb487-10"><a href="build-and-cache-kegg-gmt.html#cb487-10" tabindex="-1"></a></span>
 <span id="cb487-11"><a href="build-and-cache-kegg-gmt.html#cb487-11" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes mapped to symbols  :&quot;</span>, <span class="fu">sum</span>(res_df<span class="sc">$</span>gene <span class="sc">%in%</span> id_map<span class="sc">$</span>locus_tag),</span>
 <span id="cb487-12"><a href="build-and-cache-kegg-gmt.html#cb487-12" tabindex="-1"></a>    <span class="st">&quot;of&quot;</span>, <span class="fu">nrow</span>(res_df), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Genes mapped to symbols  : 1576 of 3698</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="build-and-cache-kegg-gmt.html#cb489-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Remaining as locus tags  :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>res_df_sym<span class="sc">$</span>gene <span class="sc">%in%</span> id_map<span class="sc">$</span>gene_symbol),</span>
 <span id="cb489-2"><a href="build-and-cache-kegg-gmt.html#cb489-2" tabindex="-1"></a>    <span class="st">&quot;(unannotated in KEGG - expected)</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Remaining as locus tags  : 2122 (unannotated in KEGG - expected)</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="build-and-cache-kegg-gmt.html#cb491-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Example converted gene names:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## Example converted gene names:</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="build-and-cache-kegg-gmt.html#cb493-1" tabindex="-1"></a><span class="fu">head</span>(res_sig_sym<span class="sc">$</span>gene, <span class="dv">10</span>)</span></code></pre></div>
+</details>
 <pre><code>##  [1] &quot;ompF&quot;  &quot;b3508&quot; &quot;b3510&quot; &quot;garR&quot;  &quot;b0553&quot; &quot;b3127&quot; &quot;gadC&quot;  &quot;b3509&quot; &quot;gadB&quot; 
 ## [10] &quot;b3514&quot;</code></pre>
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">

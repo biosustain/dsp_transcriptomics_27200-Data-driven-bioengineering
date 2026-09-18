@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -446,6 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="saving-results" class="section level2 hasAnchor">
 <h2>Saving Results<a href="saving-results.html#saving-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="saving-results.html#cb246-1" tabindex="-1"></a>tables_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>)</span>
 <span id="cb246-2"><a href="saving-results.html#cb246-2" tabindex="-1"></a><span class="fu">dir.create</span>(tables_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb246-3"><a href="saving-results.html#cb246-3" tabindex="-1"></a></span>
@@ -471,10 +473,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb246-23"><a href="saving-results.html#cb246-23" tabindex="-1"></a>)</span>
 <span id="cb246-24"><a href="saving-results.html#cb246-24" tabindex="-1"></a></span>
 <span id="cb246-25"><a href="saving-results.html#cb246-25" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Saved to:&quot;</span>, <span class="fu">file.path</span>(cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Saved to: results/usa100/tables</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="saving-results.html#cb248-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  ORA  -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;ORA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##   ORA  -&gt;  ORA_lifestyle_usa100.tsv</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="saving-results.html#cb250-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;GSEA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##   GSEA -&gt;  GSEA_lifestyle_usa100.tsv</code></pre>
 </div>
             </section>

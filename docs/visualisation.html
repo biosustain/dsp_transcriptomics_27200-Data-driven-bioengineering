@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -449,6 +450,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Volcano Plot</strong></p>
 <p>A volcano plot combines fold change (x-axis) and statistical significance (y-axis) into a single view. Genes in the upper corners are both strongly and significantly changed — these are the most biologically interesting candidates.</p>
 <p>The dashed lines mark our thresholds: |log2FC| = 1 and padj = 0.05.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="visualisation.html#cb331-1" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
 <span id="cb331-2"><a href="visualisation.html#cb331-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb331-3"><a href="visualisation.html#cb331-3" tabindex="-1"></a>    <span class="at">significance =</span> <span class="fu">case_when</span>(</span>
@@ -481,31 +483,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb331-30"><a href="visualisation.html#cb331-30" tabindex="-1"></a>  )</span>
 <span id="cb331-31"><a href="visualisation.html#cb331-31" tabindex="-1"></a></span>
 <span id="cb331-32"><a href="visualisation.html#cb331-32" tabindex="-1"></a>volcano</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-volcano-1.png" alt="" width="672" /></p>
 <div id="ma-plot" class="section level3 hasAnchor">
 <h3>MA Plot<a href="visualisation.html#ma-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>An MA plot shows log2 fold change (y-axis) against mean expression (x-axis). It helps assess whether the fold change estimates are stable across the expression range. After shrinkage, estimates for lowly expressed genes (left side) should be pulled toward zero.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="visualisation.html#cb332-1" tabindex="-1"></a><span class="fu">plotMA</span>(res_shrunk,</span>
 <span id="cb332-2"><a href="visualisation.html#cb332-2" tabindex="-1"></a>       <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
 <span id="cb332-3"><a href="visualisation.html#cb332-3" tabindex="-1"></a>       <span class="at">main  =</span> <span class="st">&quot;MA Plot — Dexamethasone vs Untreated (shrunken LFC)&quot;</span>,</span>
 <span id="cb332-4"><a href="visualisation.html#cb332-4" tabindex="-1"></a>       <span class="at">ylab  =</span> <span class="st">&quot;log2 Fold Change&quot;</span>)</span>
 <span id="cb332-5"><a href="visualisation.html#cb332-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-ma-plot-1.png" alt="" width="672" /></p>
 </div>
 <div id="top-gene-count-plot" class="section level3 hasAnchor">
 <h3>Top Gene Count Plot<a href="visualisation.html#top-gene-count-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Plotting raw normalised counts for the most significant gene provides a sanity check: the direction and magnitude of the fold change should be visually obvious. If it isn’t, investigate further.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="visualisation.html#cb333-1" tabindex="-1"></a>top_gene <span class="ot">&lt;-</span> res_sig<span class="sc">$</span>gene[<span class="dv">1</span>]</span>
 <span id="cb333-2"><a href="visualisation.html#cb333-2" tabindex="-1"></a></span>
 <span id="cb333-3"><a href="visualisation.html#cb333-3" tabindex="-1"></a><span class="fu">plotCounts</span>(dds,</span>
 <span id="cb333-4"><a href="visualisation.html#cb333-4" tabindex="-1"></a>           <span class="at">gene     =</span> top_gene,</span>
 <span id="cb333-5"><a href="visualisation.html#cb333-5" tabindex="-1"></a>           <span class="at">intgroup =</span> <span class="st">&quot;condition&quot;</span>,</span>
 <span id="cb333-6"><a href="visualisation.html#cb333-6" tabindex="-1"></a>           <span class="at">main     =</span> <span class="fu">paste</span>(<span class="st">&quot;Normalised counts —&quot;</span>, top_gene))</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-top-gene-1.png" alt="" width="672" /></p>
 </div>
 <div id="heatmap-of-significant-genes" class="section level3 hasAnchor">
 <h3>Heatmap of Significant Genes<a href="visualisation.html#heatmap-of-significant-genes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Clustering significant DE genes across samples provides a gene-level view of the expression differences. Genes should show clear block structure: high expression in treatment and low in control (or vice versa). With the paired design, you can also annotate donor to see whether the treatment effect is consistent across donors.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="visualisation.html#cb334-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb334-2"><a href="visualisation.html#cb334-2" tabindex="-1"></a></span>
 <span id="cb334-3"><a href="visualisation.html#cb334-3" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> res_sig <span class="sc">%&gt;%</span></span>
@@ -527,6 +535,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb334-19"><a href="visualisation.html#cb334-19" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
 <span id="cb334-20"><a href="visualisation.html#cb334-20" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top DE genes — Dexamethasone vs Untreated (VST, row-scaled)&quot;</span></span>
 <span id="cb334-21"><a href="visualisation.html#cb334-21" tabindex="-1"></a>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-de-heatmap-1.png" alt="" width="672" /></p>
 </div>
 </div>

@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -450,12 +451,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="estimate-size-factors-1" class="section level3 hasAnchor">
 <h3>Estimate Size Factors<a href="exploratory-data-analysis-1.html#estimate-size-factors-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Library sizes (total mapped reads) differ between samples due to technical variation in sequencing depth. <code>DESeq2's</code> median-of-ratios normalisation corrects for this by computing a size factor per sample. Size factors close to 1.0 indicate balanced libraries; values far from 1.0 suggest uneven sequencing depth and warrant investigation.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="exploratory-data-analysis-1.html#cb287-1" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">estimateSizeFactors</span>(dds)</span>
 <span id="cb287-2"><a href="exploratory-data-analysis-1.html#cb287-2" tabindex="-1"></a></span>
 <span id="cb287-3"><a href="exploratory-data-analysis-1.html#cb287-3" tabindex="-1"></a><span class="fu">sizeFactors</span>(dds) <span class="sc">%&gt;%</span></span>
 <span id="cb287-4"><a href="exploratory-data-analysis-1.html#cb287-4" tabindex="-1"></a>  <span class="fu">enframe</span>(<span class="at">name =</span> <span class="st">&quot;sample&quot;</span>, <span class="at">value =</span> <span class="st">&quot;size_factor&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb287-5"><a href="exploratory-data-analysis-1.html#cb287-5" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">&quot;DESeq2 size factors per sample&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb287-6"><a href="exploratory-data-analysis-1.html#cb287-6" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</details>
 <table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:human-qc-size-factors-0">Table 11: </span><span id="tab:human-qc-size-factors-0">Table 12: </span>DESeq2 size factors per sample
@@ -544,6 +547,7 @@ N61311_untreated
 <div style="background:#f8d7da;border-left:4px solid #721c24;padding:10px;margin:10px 0;">
 <p><strong>📌 Remember:</strong> These normalised counts are for visualisation only. Always feed DESeq2 <strong>raw integer counts</strong>.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="exploratory-data-analysis-1.html#cb288-1" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">counts</span>(dds, <span class="at">normalized =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb288-2"><a href="exploratory-data-analysis-1.html#cb288-2" tabindex="-1"></a></span>
 <span id="cb288-3"><a href="exploratory-data-analysis-1.html#cb288-3" tabindex="-1"></a>counts_norm <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(</span>
@@ -572,7 +576,9 @@ N61311_untreated
 <span id="cb288-26"><a href="exploratory-data-analysis-1.html#cb288-26" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Normalised count distribution — Human ASM&quot;</span>)</span>
 <span id="cb288-27"><a href="exploratory-data-analysis-1.html#cb288-27" tabindex="-1"></a></span>
 <span id="cb288-28"><a href="exploratory-data-analysis-1.html#cb288-28" tabindex="-1"></a>distribution</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-distribution-0-1.png" alt="" width="672" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="exploratory-data-analysis-1.html#cb289-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
 <span id="cb289-2"><a href="exploratory-data-analysis-1.html#cb289-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;normalised_count_distribution.png&quot;</span>),</span>
 <span id="cb289-3"><a href="exploratory-data-analysis-1.html#cb289-3" tabindex="-1"></a>  <span class="at">plot     =</span> distribution,</span>
@@ -580,6 +586,7 @@ N61311_untreated
 <span id="cb289-5"><a href="exploratory-data-analysis-1.html#cb289-5" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">6</span>,</span>
 <span id="cb289-6"><a href="exploratory-data-analysis-1.html#cb289-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
 <span id="cb289-7"><a href="exploratory-data-analysis-1.html#cb289-7" tabindex="-1"></a>)</span></code></pre></div>
+</details>
 </div>
 <div id="sample-correlation-heatmap-1" class="section level3 hasAnchor">
 <h3>Sample Correlation Heatmap<a href="exploratory-data-analysis-1.html#sample-correlation-heatmap-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -588,11 +595,14 @@ N61311_untreated
 <div class="boxy">
 <p>VST removes this mean–variance dependence, making distances meaningful across the full expression range (<a href="https://doi.org/10.1186/gb-2010-11-10-r106">Anders &amp; Huber, 2010</a>).</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="exploratory-data-analysis-1.html#cb290-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</details>
 <div class="boxy">
 <p><strong><code>blind = TRUE</code></strong>, the VST is computed ignoring the experimental design. This is recommended for QC and exploratory analysis, where you want an unbiased view of sample similarity.</p>
 <p>Use <code>blind = FALSE</code> only when the transformation is feeding into a model that already accounts for the design.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="exploratory-data-analysis-1.html#cb291-1" tabindex="-1"></a>sampleDists      <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">t</span>(<span class="fu">assay</span>(vsd)))</span>
 <span id="cb291-2"><a href="exploratory-data-analysis-1.html#cb291-2" tabindex="-1"></a>sampleDistMatrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(sampleDists)</span>
 <span id="cb291-3"><a href="exploratory-data-analysis-1.html#cb291-3" tabindex="-1"></a></span>
@@ -606,7 +616,9 @@ N61311_untreated
 <span id="cb291-11"><a href="exploratory-data-analysis-1.html#cb291-11" tabindex="-1"></a>)</span>
 <span id="cb291-12"><a href="exploratory-data-analysis-1.html#cb291-12" tabindex="-1"></a></span>
 <span id="cb291-13"><a href="exploratory-data-analysis-1.html#cb291-13" tabindex="-1"></a>heat</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-correlation-heatmap-0-1.png" alt="" width="672" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="exploratory-data-analysis-1.html#cb292-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
 <span id="cb292-2"><a href="exploratory-data-analysis-1.html#cb292-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;heat.png&quot;</span>),</span>
 <span id="cb292-3"><a href="exploratory-data-analysis-1.html#cb292-3" tabindex="-1"></a>  <span class="at">plot     =</span> heat,</span>
@@ -614,6 +626,7 @@ N61311_untreated
 <span id="cb292-5"><a href="exploratory-data-analysis-1.html#cb292-5" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">12</span>,</span>
 <span id="cb292-6"><a href="exploratory-data-analysis-1.html#cb292-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
 <span id="cb292-7"><a href="exploratory-data-analysis-1.html#cb292-7" tabindex="-1"></a>)</span></code></pre></div>
+</details>
 <div class="boxy">
 <p>The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by treatment, by donor, or both. If donor is a strong driver of the distances, that is a signal the paired design is worthwhile.</p>
 </div>
@@ -622,6 +635,7 @@ N61311_untreated
 <h3>Principal Component Analysis (PCA)<a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>PCA reduces the high-dimensional expression space (one dimension per gene) to a small number of principal components that capture the largest sources of variance in the data. Inspect whether the treatment separates samples, and whether donor identity contributes to the remaining structure.</p>
 <p>If a technical variable (batch, sequencing run, RNA quality) — or, here, donor — dominates PC1, that variance should be accounted for in the design before differential expression analysis (<a href="https://doi.org/10.1038/nrg2825">Leek <em>et al.</em>, 2010</a>).</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="exploratory-data-analysis-1.html#cb293-1" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> <span class="fu">plotPCA</span>(vsd,</span>
 <span id="cb293-2"><a href="exploratory-data-analysis-1.html#cb293-2" tabindex="-1"></a>                    <span class="at">intgroup  =</span> <span class="fu">c</span>(<span class="st">&quot;sample&quot;</span>, <span class="st">&quot;condition&quot;</span>, <span class="st">&quot;donor&quot;</span>),</span>
 <span id="cb293-3"><a href="exploratory-data-analysis-1.html#cb293-3" tabindex="-1"></a>                    <span class="at">returnData =</span> <span class="cn">TRUE</span>)</span>
@@ -653,7 +667,9 @@ N61311_untreated
 <span id="cb293-29"><a href="exploratory-data-analysis-1.html#cb293-29" tabindex="-1"></a>  )</span>
 <span id="cb293-30"><a href="exploratory-data-analysis-1.html#cb293-30" tabindex="-1"></a></span>
 <span id="cb293-31"><a href="exploratory-data-analysis-1.html#cb293-31" tabindex="-1"></a>PCAPlot</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-pca-0-1.png" alt="" width="672" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="exploratory-data-analysis-1.html#cb294-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
 <span id="cb294-2"><a href="exploratory-data-analysis-1.html#cb294-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;PCA_Plot.png&quot;</span>),</span>
 <span id="cb294-3"><a href="exploratory-data-analysis-1.html#cb294-3" tabindex="-1"></a>  <span class="at">plot     =</span> PCAPlot,</span>
@@ -661,6 +677,7 @@ N61311_untreated
 <span id="cb294-5"><a href="exploratory-data-analysis-1.html#cb294-5" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">6</span>,</span>
 <span id="cb294-6"><a href="exploratory-data-analysis-1.html#cb294-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
 <span id="cb294-7"><a href="exploratory-data-analysis-1.html#cb294-7" tabindex="-1"></a>)</span></code></pre></div>
+</details>
 <div class="boxy">
 <p><strong>How to read this plot.</strong> Each point is one sample; points close together have similar overall
 expression. Check the <strong>% variance</strong> printed on each axis first — it tells you how much of the total
@@ -673,23 +690,30 @@ effect on top of donor-to-donor baseline differences.</p>
 <div id="detecting-outliers-1" class="section level3 hasAnchor">
 <h3>Detecting Outliers<a href="exploratory-data-analysis-1.html#detecting-outliers-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="exploratory-data-analysis-1.html#cb295-1" tabindex="-1"></a>pca_full <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(vsd)))</span>
 <span id="cb295-2"><a href="exploratory-data-analysis-1.html#cb295-2" tabindex="-1"></a></span>
 <span id="cb295-3"><a href="exploratory-data-analysis-1.html#cb295-3" tabindex="-1"></a>screeplot <span class="ot">&lt;-</span> <span class="fu">fviz_screeplot</span>(pca_full, <span class="at">addlabels =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb295-4"><a href="exploratory-data-analysis-1.html#cb295-4" tabindex="-1"></a>               <span class="at">main =</span> <span class="st">&quot;Scree plot — variance per PC&quot;</span>)</span>
 <span id="cb295-5"><a href="exploratory-data-analysis-1.html#cb295-5" tabindex="-1"></a>screeplot</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-outlier-detection-0-1.png" alt="" width="672" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="exploratory-data-analysis-1.html#cb296-1" tabindex="-1"></a>pca_ind <span class="ot">&lt;-</span> <span class="fu">fviz_pca_ind</span>(pca_full, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;text&quot;</span>), <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb296-2"><a href="exploratory-data-analysis-1.html#cb296-2" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;PCA — sample positions (full gene matrix)&quot;</span>)</span>
 <span id="cb296-3"><a href="exploratory-data-analysis-1.html#cb296-3" tabindex="-1"></a>pca_ind</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-outlier-detection-0-2.png" alt="" width="672" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="exploratory-data-analysis-1.html#cb297-1" tabindex="-1"></a>pca_biplot <span class="ot">&lt;-</span> <span class="fu">fviz_pca_biplot</span>(pca_full,</span>
 <span id="cb297-2"><a href="exploratory-data-analysis-1.html#cb297-2" tabindex="-1"></a>                <span class="at">repel        =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb297-3"><a href="exploratory-data-analysis-1.html#cb297-3" tabindex="-1"></a>                <span class="at">select.var   =</span> <span class="fu">list</span>(<span class="at">contrib =</span> <span class="dv">50</span>),  <span class="co"># top genes only</span></span>
 <span id="cb297-4"><a href="exploratory-data-analysis-1.html#cb297-4" tabindex="-1"></a>                <span class="at">title        =</span> <span class="st">&quot;Biplot — top 50 contributing genes and samples&quot;</span>)</span>
 <span id="cb297-5"><a href="exploratory-data-analysis-1.html#cb297-5" tabindex="-1"></a></span>
 <span id="cb297-6"><a href="exploratory-data-analysis-1.html#cb297-6" tabindex="-1"></a>pca_biplot</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-outlier-detection-0-3.png" alt="" width="672" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="exploratory-data-analysis-1.html#cb298-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
 <span id="cb298-2"><a href="exploratory-data-analysis-1.html#cb298-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;pca_screeplot.png&quot;</span>),</span>
 <span id="cb298-3"><a href="exploratory-data-analysis-1.html#cb298-3" tabindex="-1"></a>  <span class="at">plot     =</span> screeplot,</span>
@@ -713,6 +737,7 @@ effect on top of donor-to-donor baseline differences.</p>
 <span id="cb298-21"><a href="exploratory-data-analysis-1.html#cb298-21" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">6</span>,</span>
 <span id="cb298-22"><a href="exploratory-data-analysis-1.html#cb298-22" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
 <span id="cb298-23"><a href="exploratory-data-analysis-1.html#cb298-23" tabindex="-1"></a>)</span></code></pre></div>
+</details>
 <div class="boxy">
 <p><strong>How to read a biplot:</strong></p>
 <p><strong>Dots</strong> = samples</p>
@@ -734,6 +759,7 @@ effect on top of donor-to-donor baseline differences.</p>
 <h3>Top Variable Genes Heatmap<a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Clustering the 50 most variable genes across samples provides a gene-level view of the structure in the data. Truly treatment-responsive genes should show block structure by condition. This heatmap also helps reveal whether donor identity contributes strongly to the top variable genes.</p>
 <p>Row-scaling (z-score per gene) is applied so that highly expressed genes do not visually dominate over lowly expressed ones.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="exploratory-data-analysis-1.html#cb299-1" tabindex="-1"></a>topVarGenes <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">order</span>(<span class="fu">rowVars</span>(<span class="fu">assay</span>(vsd)), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), <span class="dv">50</span>)</span>
 <span id="cb299-2"><a href="exploratory-data-analysis-1.html#cb299-2" tabindex="-1"></a></span>
 <span id="cb299-3"><a href="exploratory-data-analysis-1.html#cb299-3" tabindex="-1"></a>df_anno <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;donor&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
@@ -753,7 +779,9 @@ effect on top of donor-to-donor baseline differences.</p>
 <span id="cb299-17"><a href="exploratory-data-analysis-1.html#cb299-17" tabindex="-1"></a>)</span>
 <span id="cb299-18"><a href="exploratory-data-analysis-1.html#cb299-18" tabindex="-1"></a></span>
 <span id="cb299-19"><a href="exploratory-data-analysis-1.html#cb299-19" tabindex="-1"></a>heat_plot</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-topvar-heatmap-0-1.png" alt="" width="768" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="exploratory-data-analysis-1.html#cb300-1" tabindex="-1"></a><span class="fu">png</span>(</span>
 <span id="cb300-2"><a href="exploratory-data-analysis-1.html#cb300-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;heatmap_top50_variable.png&quot;</span>),</span>
 <span id="cb300-3"><a href="exploratory-data-analysis-1.html#cb300-3" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">8</span>,</span>
@@ -763,6 +791,7 @@ effect on top of donor-to-donor baseline differences.</p>
 <span id="cb300-7"><a href="exploratory-data-analysis-1.html#cb300-7" tabindex="-1"></a>)</span>
 <span id="cb300-8"><a href="exploratory-data-analysis-1.html#cb300-8" tabindex="-1"></a>heat_plot</span>
 <span id="cb300-9"><a href="exploratory-data-analysis-1.html#cb300-9" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+</details>
 <pre><code>## quartz_off_screen 
 ##                 2</code></pre>
 <div class="note">

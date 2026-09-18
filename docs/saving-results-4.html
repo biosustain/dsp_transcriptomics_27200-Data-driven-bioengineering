@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -446,6 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="saving-results-4" class="section level2 hasAnchor">
 <h2>Saving Results<a href="saving-results-4.html#saving-results-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="saving-results-4.html#cb554-1" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>)</span>
 <span id="cb554-2"><a href="saving-results-4.html#cb554-2" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb554-3"><a href="saving-results-4.html#cb554-3" tabindex="-1"></a></span>
@@ -466,10 +468,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb554-18"><a href="saving-results-4.html#cb554-18" tabindex="-1"></a>)</span>
 <span id="cb554-19"><a href="saving-results-4.html#cb554-19" tabindex="-1"></a></span>
 <span id="cb554-20"><a href="saving-results-4.html#cb554-20" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Results saved to:&quot;</span>, results_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Results saved to: /Users/jasge/Documents/GitHub/dsp_27200/results</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="saving-results-4.html#cb556-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  ORA  -&gt; ORA_KEGG_treatment_vs_control.tsv</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##   ORA  -&gt; ORA_KEGG_treatment_vs_control.tsv</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="saving-results-4.html#cb558-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; GSEA_KEGG_treatment_vs_control.tsv</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##   GSEA -&gt; GSEA_KEGG_treatment_vs_control.tsv</code></pre>
 </div>
             </section>

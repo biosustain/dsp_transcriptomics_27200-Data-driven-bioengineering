@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -447,6 +448,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="teaching-comparison-paired-vs-simple-design" class="section level2 hasAnchor">
 <h2>Teaching Comparison — Paired vs Simple Design<a href="teaching-comparison-paired-vs-simple-design.html#teaching-comparison-paired-vs-simple-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Before extracting the final results, we fit the simple <code>~ condition</code> model on the same data and compare how many genes each design calls significant. This makes the effect of accounting for donor concrete.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-1" tabindex="-1"></a><span class="co"># Simple model: drop the donor term</span></span>
 <span id="cb316-2"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-2" tabindex="-1"></a>dds_simple <span class="ot">&lt;-</span> dds</span>
 <span id="cb316-3"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-3" tabindex="-1"></a><span class="fu">design</span>(dds_simple) <span class="ot">&lt;-</span> <span class="er">~</span> condition</span>
@@ -469,6 +471,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb316-20"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-20" tabindex="-1"></a></span>
 <span id="cb316-21"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-21" tabindex="-1"></a><span class="fu">kable</span>(comparison_tbl, <span class="at">caption =</span> <span class="st">&quot;Effect of design on the number of significant genes&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb316-22"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-22" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</details>
 <table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:human-de-design-comparison">Table 13: </span><span id="tab:human-de-design-comparison">Table 14: </span>Effect of design on the number of significant genes

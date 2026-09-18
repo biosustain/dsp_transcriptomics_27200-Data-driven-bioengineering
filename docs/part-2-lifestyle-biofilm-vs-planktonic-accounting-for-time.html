@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -448,13 +449,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Part 2 — Lifestyle: Biofilm vs Planktonic, Accounting for Time<a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now we ask how biofilm differs from planktonic. Because the two lifestyles are sampled at the same set of time points, we can model lifestyle <strong>while adjusting for time</strong>, instead of comparing at a single confounded snapshot. We show two models that ask subtly different questions.</p>
 <p>We use all three time points so the time term is meaningful.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-1" tabindex="-1"></a>dds_ls <span class="ot">&lt;-</span> dds_all</span>
 <span id="cb123-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-2" tabindex="-1"></a>dds_ls<span class="sc">$</span>lifestyle <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>lifestyle), <span class="at">ref =</span> <span class="st">&quot;Planktonic&quot;</span>)</span>
 <span id="cb123-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-3" tabindex="-1"></a>dds_ls<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>timepoint), <span class="at">ref =</span> <span class="st">&quot;5h&quot;</span>)</span>
 <span id="cb123-4"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-4" tabindex="-1"></a></span>
 <span id="cb123-5"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Design table:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Design table:</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb125-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(dds_ls<span class="sc">$</span>lifestyle, dds_ls<span class="sc">$</span>timepoint))</span></code></pre></div>
+</details>
 <pre><code>##             
 ##              5h 10h 24h
 ##   Planktonic  4   4   8
@@ -470,23 +475,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>A hit tells you:</strong> this gene differs by lifestyle in a way that is consistent across time — a candidate core biofilm-vs-planktonic gene, not just a growth-phase artefact.</li>
 </ul>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb127-1" tabindex="-1"></a><span class="fu">design</span>(dds_ls) <span class="ot">&lt;-</span> <span class="er">~</span> timepoint <span class="sc">+</span> lifestyle</span>
 <span id="cb127-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb127-2" tabindex="-1"></a>dds_add <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_ls)</span>
 <span id="cb127-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb127-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;resultsNames:</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">resultsNames</span>(dds_add))</span></code></pre></div>
+</details>
 <pre><code>## resultsNames:</code></pre>
 <pre><code>## [1] &quot;Intercept&quot;                       &quot;timepoint_10h_vs_5h&quot;            
 ## [3] &quot;timepoint_24h_vs_5h&quot;             &quot;lifestyle_Biofilm_vs_Planktonic&quot;</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb130-1" tabindex="-1"></a>res_add <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_add, <span class="st">&quot;lifestyle_Biofilm_vs_Planktonic&quot;</span>)</span>
 <span id="cb130-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb130-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## DEG counts (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ):</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb132-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_add<span class="sc">$</span>direction))</span></code></pre></div>
+</details>
 <pre><code>## 
 ##              Up            Down Not significant 
 ##             156             126            2006</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb134-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_add,</span>
 <span id="cb134-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb134-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — lifestyle (additive, time-adjusted)&quot;</span>),</span>
 <span id="cb134-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb134-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher in biofilm&quot;</span>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-lifestyle-additive-volcano-0-1.png" alt="" width="864" /></p>
 <p><em>Interpretation:</em> once the shared ageing trend is removed by the <code>timepoint</code> term, the number of lifestyle genes is much smaller than a naive single-time-point comparison would give. That drop is the growth-phase confound being taken out: many genes that look “biofilm-specific” at 24 h are really just ageing effects common to both cultures. What remains is a cleaner candidate set of genes that differ by lifestyle regardless of time.</p>
 <div class="important">
@@ -507,9 +520,11 @@ that.</p>
 <li><strong>A hit tells you:</strong> this gene’s biofilm-vs-planktonic difference is time-dependent — it is part of the “response strengthens (or weakens) with maturation” signal.</li>
 </ul>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb135-1" tabindex="-1"></a><span class="co"># Set the full (interaction) design. We fit it with an LRT below, comparing it</span></span>
 <span id="cb135-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb135-2" tabindex="-1"></a><span class="co"># to the additive model, so we do not need a separate Wald fit here.</span></span>
 <span id="cb135-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb135-3" tabindex="-1"></a><span class="fu">design</span>(dds_ls) <span class="ot">&lt;-</span> <span class="er">~</span> timepoint <span class="sc">+</span> lifestyle <span class="sc">+</span> timepoint<span class="sc">:</span>lifestyle</span></code></pre></div>
+</details>
 <div class="note">
 <p><strong>📘 Note — testing the interaction, not a single coefficient.</strong> “Does the lifestyle gap change
 with time?” is a question about <em>all</em> the interaction terms together, so we test them jointly with a
@@ -519,12 +534,15 @@ across time. Because significance here comes from comparing two models (not from
 we report the LRT p-value and use the model’s own fold-change columns for description rather than apeglm
 shrinkage.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb136-1" tabindex="-1"></a>dds_lrt <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_ls, <span class="at">test =</span> <span class="st">&quot;LRT&quot;</span>, <span class="at">reduced =</span> <span class="sc">~</span> timepoint <span class="sc">+</span> lifestyle)</span>
 <span id="cb136-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb136-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;resultsNames (full interaction model):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">resultsNames</span>(dds_lrt))</span></code></pre></div>
+</details>
 <pre><code>## resultsNames (full interaction model):</code></pre>
 <pre><code>## [1] &quot;Intercept&quot;                       &quot;timepoint_10h_vs_5h&quot;            
 ## [3] &quot;timepoint_24h_vs_5h&quot;             &quot;lifestyle_Biofilm_vs_Planktonic&quot;
 ## [5] &quot;timepoint10h.lifestyleBiofilm&quot;   &quot;timepoint24h.lifestyleBiofilm&quot;</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-1" tabindex="-1"></a><span class="co"># Careful: in an LRT result the log2FoldChange column is NOT &quot;the&quot; lifestyle</span></span>
 <span id="cb139-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-2" tabindex="-1"></a><span class="co"># effect — it is only the last interaction coefficient (timepoint24h.lifestyleBiofilm).</span></span>
 <span id="cb139-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-3" tabindex="-1"></a><span class="co"># Use the padj for the test; describe effect sizes with the profile plots below.</span></span>
@@ -535,9 +553,11 @@ shrinkage.</p>
 <span id="cb139-8"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-8" tabindex="-1"></a>n_sig_lrt <span class="ot">&lt;-</span> <span class="fu">sum</span>(res_lrt<span class="sc">$</span>padj <span class="sc">&lt;</span> padj_threshold, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb139-9"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Genes with a time-dependent lifestyle difference (LRT padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;):&quot;</span>,</span>
 <span id="cb139-10"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-10" tabindex="-1"></a>    n_sig_lrt, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## Genes with a time-dependent lifestyle difference (LRT padj &lt; 0.05 ): 2141</code></pre>
 <p><strong>How to read the plot below:</strong> each panel is one gene; the two lines show its expression over time in the two lifestyles. Parallel lines = no interaction; diverging, converging or crossing lines = the lifestyle difference changes with time.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-1" tabindex="-1"></a>top_int <span class="ot">&lt;-</span> res_lrt <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(padj)) <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
 <span id="cb141-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-2" tabindex="-1"></a></span>
 <span id="cb141-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-3" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(top_int) <span class="sc">&gt;=</span> <span class="dv">1</span>) {</span>
@@ -575,6 +595,7 @@ shrinkage.</p>
 <span id="cb141-35"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-35" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb141-36"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-36" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No time-dependent genes to plot.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb141-37"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-37" tabindex="-1"></a>}</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-lifestyle-interaction-profiles-0-1.png" alt="" width="960" /></p>
 <div class="important">
 <p><strong>⭐ How to read this interaction result.</strong> The LRT flags a very large fraction of all tested

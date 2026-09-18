@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -492,16 +493,20 @@ treatment effect. Script 02 runs this model and, for teaching, compares it again
 <div class="important">
 <p><strong>⭐ Important:</strong> If any check fails, investigate the cause before running DESeq2. Proceeding with outlier samples or a mis-specified design will compromise all downstream results.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="summary-3.html#cb302-1" tabindex="-1"></a><span class="co"># ── Export DDS for downstream analysis ────────────────────────────────────────</span></span>
 <span id="cb302-2"><a href="summary-3.html#cb302-2" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;rds&quot;</span>)</span>
 <span id="cb302-3"><a href="summary-3.html#cb302-3" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb302-4"><a href="summary-3.html#cb302-4" tabindex="-1"></a></span>
 <span id="cb302-5"><a href="summary-3.html#cb302-5" tabindex="-1"></a>dds_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;dds_human_asm.rds&quot;</span>)</span>
 <span id="cb302-6"><a href="summary-3.html#cb302-6" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> dds_path)</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="summary-3.html#cb303-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ DDS saved to:&quot;</span>, dds_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb303-2"><a href="summary-3.html#cb303-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb303-3"><a href="summary-3.html#cb303-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Design      : ~ donor + condition</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb303-4"><a href="summary-3.html#cb303-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Conditions  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">levels</span>(dds<span class="sc">$</span>condition), <span class="at">collapse =</span> <span class="st">&quot; vs &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 </div>
             </section>
 

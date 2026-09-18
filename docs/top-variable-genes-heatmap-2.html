@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -448,6 +449,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Top Variable Genes Heatmap<a href="top-variable-genes-heatmap-2.html#top-variable-genes-heatmap-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Clustering the 50 most variable genes across samples provides a gene-level view of the separation between conditions. Genes that are truly differentially expressed should show clear block structure, high expression in one condition, low in the other. This heatmap also helps identify whether replicates within a condition are consistent with each other.</p>
 <p>Row-scaling (z-score per gene) is applied so that highly expressed genes do not visually dominate over lowly expressed ones.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="top-variable-genes-heatmap-2.html#cb435-1" tabindex="-1"></a>topVarGenes <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">order</span>(<span class="fu">rowVars</span>(<span class="fu">assay</span>(vsd)), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), <span class="dv">50</span>)</span>
 <span id="cb435-2"><a href="top-variable-genes-heatmap-2.html#cb435-2" tabindex="-1"></a></span>
 <span id="cb435-3"><a href="top-variable-genes-heatmap-2.html#cb435-3" tabindex="-1"></a>df_anno <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="st">&quot;condition&quot;</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
@@ -474,8 +476,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb435-24"><a href="top-variable-genes-heatmap-2.html#cb435-24" tabindex="-1"></a>)</span>
 <span id="cb435-25"><a href="top-variable-genes-heatmap-2.html#cb435-25" tabindex="-1"></a></span>
 <span id="cb435-26"><a href="top-variable-genes-heatmap-2.html#cb435-26" tabindex="-1"></a>heat_plot</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/topvar-heatmap-0-1.png" alt="" width="672" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="top-variable-genes-heatmap-2.html#cb436-1" tabindex="-1"></a><span class="co">#install.packages(&quot;heatmaply&quot;)</span></span></code></pre></div>
+</details>
 </div>
             </section>
 

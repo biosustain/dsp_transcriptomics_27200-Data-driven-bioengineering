@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -450,6 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <strong>ORA returns dozens of corrected-significant terms, while GSEA finds no set that survives
 multiple-testing correction.</strong> This section makes that contrast explicit, because it is one of the most
 useful things to understand about enrichment analysis.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb390-1" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
 <span id="cb390-2"><a href="part-3-comparing-ora-and-gsea-1.html#cb390-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up))   ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_up<span class="sc">$</span>term_name)</span>
 <span id="cb390-3"><a href="part-3-comparing-ora-and-gsea-1.html#cb390-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down)) ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_down<span class="sc">$</span>term_name)</span>
@@ -459,10 +461,15 @@ useful things to understand about enrichment analysis.</p>
 <span id="cb390-7"><a href="part-3-comparing-ora-and-gsea-1.html#cb390-7" tabindex="-1"></a>gsea_nom_terms  <span class="ot">&lt;-</span> gsea_nom<span class="sc">$</span>pathway</span>
 <span id="cb390-8"><a href="part-3-comparing-ora-and-gsea-1.html#cb390-8" tabindex="-1"></a></span>
 <span id="cb390-9"><a href="part-3-comparing-ora-and-gsea-1.html#cb390-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA significant terms (padj-corrected)   :&quot;</span>, <span class="fu">length</span>(ora_terms),        <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## ORA significant terms (padj-corrected)   : 107</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb392-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets significant after correction   :&quot;</span>, <span class="fu">length</span>(gsea_padj_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## GSEA sets significant after correction   : 0</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb394-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets at nominal p &lt; 0.05 (suggestive):&quot;</span>, <span class="fu">length</span>(gsea_nom_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## GSEA sets at nominal p &lt; 0.05 (suggestive): 68</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
 <p><strong>The teaching point — why the two methods disagree here.</strong></p>

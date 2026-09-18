@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -454,8 +455,10 @@ has a 10 h time point: you are encouraged to repeat these analyses with <code>fi
 <code>last_tp</code> set to other pairs (e.g. 5 h vs 10 h, or 10 h vs 24 h) to see how the maturation signal
 builds up over time. Nothing else in the code needs to change.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb83-1" tabindex="-1"></a>first_tp <span class="ot">&lt;-</span> <span class="st">&quot;5h&quot;</span>    <span class="co"># baseline (reference)</span></span>
 <span id="cb83-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb83-2" tabindex="-1"></a>last_tp  <span class="ot">&lt;-</span> <span class="st">&quot;24h&quot;</span>   <span class="co"># compared against baseline</span></span></code></pre></div>
+</details>
 <div id="a-maturation-within-biofilm" class="section level3 hasAnchor">
 <h3>1a — Maturation within Biofilm<a href="part-1-maturation-how-a-culture-changes-over-time.html#a-maturation-within-biofilm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div style="background:#eef7ee;border-left:5px solid #2e7d32;padding:0.6em 1em;margin:1em 0;border-radius:6px;">
@@ -467,6 +470,7 @@ builds up over time. Nothing else in the code needs to change.</p>
 <li><strong>A hit tells you:</strong> this gene is part of the biofilm maturation programme.</li>
 </ul>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-1" tabindex="-1"></a>dds_bf <span class="ot">&lt;-</span> dds_all[, dds_all<span class="sc">$</span>lifestyle <span class="sc">==</span> <span class="st">&quot;Biofilm&quot;</span> <span class="sc">&amp;</span></span>
 <span id="cb84-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-2" tabindex="-1"></a>                    dds_all<span class="sc">$</span>timepoint <span class="sc">%in%</span> <span class="fu">c</span>(first_tp, last_tp)]</span>
 <span id="cb84-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-3" tabindex="-1"></a>dds_bf<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_bf<span class="sc">$</span>timepoint), <span class="at">ref =</span> first_tp)</span>
@@ -477,23 +481,34 @@ builds up over time. Nothing else in the code needs to change.</p>
 <span id="cb84-8"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-8" tabindex="-1"></a>res_bf  <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_bf, coef_bf)</span>
 <span id="cb84-9"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-9" tabindex="-1"></a></span>
 <span id="cb84-10"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb84-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples (biofilm):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">table</span>(dds_bf<span class="sc">$</span>timepoint))</span></code></pre></div>
+</details>
 <pre><code>## Samples (biofilm):</code></pre>
 <pre><code>## 
 ##  5h 24h 
 ##   4   8</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb87-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_bf, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## Coefficient: timepoint_24h_vs_5h</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb89-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## DEG counts (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ):</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb91-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_bf<span class="sc">$</span>direction))</span></code></pre></div>
+</details>
 <pre><code>## 
 ##              Up            Down Not significant 
 ##             154              70            2064</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb93-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## Most extreme fold changes (check baseMean &lt;U+2014&gt; high = real, single digits = low-count noise):</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb95-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">check_extreme_fc</span>(res_bf))</span></code></pre></div>
+</details>
 <pre><code>##       gene_id baseMean log2FoldChange
 ## 1  SA_RS09290     30.2           6.62
 ## 2  SA_RS13430   1315.3           6.39
@@ -527,9 +542,11 @@ builds up over time. Nothing else in the code needs to change.</p>
 ## 8         Up
 ## 9         Up
 ## 10        Up</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb97-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_bf,</span>
 <span id="cb97-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb97-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — biofilm maturation (&quot;</span>, last_tp, <span class="st">&quot; vs &quot;</span>, first_tp, <span class="st">&quot;)&quot;</span>),</span>
 <span id="cb97-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb97-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher at 24 h&quot;</span>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-maturation-biofilm-volcano-0-1.png" alt="" width="864" /></p>
 <p><em>Interpretation:</em> a substantial set of genes changes as the biofilm matures from 5 h to 24 h, split between genes induced and repressed with age. This is the biofilm’s own developmental programme, measured without any reference to the planktonic state.</p>
 </div>
@@ -544,6 +561,7 @@ builds up over time. Nothing else in the code needs to change.</p>
 <li><strong>A hit tells you:</strong> this gene responds to culture ageing in planktonic cells (largely the entry into stationary phase).</li>
 </ul>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-1" tabindex="-1"></a>dds_pk <span class="ot">&lt;-</span> dds_all[, dds_all<span class="sc">$</span>lifestyle <span class="sc">==</span> <span class="st">&quot;Planktonic&quot;</span> <span class="sc">&amp;</span></span>
 <span id="cb98-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-2" tabindex="-1"></a>                    dds_all<span class="sc">$</span>timepoint <span class="sc">%in%</span> <span class="fu">c</span>(first_tp, last_tp)]</span>
 <span id="cb98-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-3" tabindex="-1"></a>dds_pk<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_pk<span class="sc">$</span>timepoint), <span class="at">ref =</span> first_tp)</span>
@@ -554,23 +572,34 @@ builds up over time. Nothing else in the code needs to change.</p>
 <span id="cb98-8"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-8" tabindex="-1"></a>res_pk  <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_pk, coef_pk)</span>
 <span id="cb98-9"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-9" tabindex="-1"></a></span>
 <span id="cb98-10"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb98-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples (planktonic):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">table</span>(dds_pk<span class="sc">$</span>timepoint))</span></code></pre></div>
+</details>
 <pre><code>## Samples (planktonic):</code></pre>
 <pre><code>## 
 ##  5h 24h 
 ##   4   8</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb101-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_pk, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## Coefficient: timepoint_24h_vs_5h</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb103-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## DEG counts (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ):</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb105-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_pk<span class="sc">$</span>direction))</span></code></pre></div>
+</details>
 <pre><code>## 
 ##              Up            Down Not significant 
 ##             277             146            1865</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb107-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Most extreme fold changes (check baseMean — high = real, single digits = low-count noise):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## Most extreme fold changes (check baseMean &lt;U+2014&gt; high = real, single digits = low-count noise):</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb109-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">check_extreme_fc</span>(res_pk))</span></code></pre></div>
+</details>
 <pre><code>##       gene_id baseMean log2FoldChange         padj direction
 ## 1  SA_RS13915   2187.0          -8.71 0.0000000000      Down
 ## 2  SA_RS13920   3446.2          -8.51 0.0000000000      Down
@@ -582,9 +611,11 @@ builds up over time. Nothing else in the code needs to change.</p>
 ## 8  SA_RS07200    858.5          -5.63 0.0000000000      Down
 ## 9  SA_RS13900    772.4          -5.63 0.0000000000      Down
 ## 10 SA_RS00035     13.3           5.61 0.0000000212        Up</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb111-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_pk,</span>
 <span id="cb111-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb111-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — planktonic maturation (&quot;</span>, last_tp, <span class="st">&quot; vs &quot;</span>, first_tp, <span class="st">&quot;)&quot;</span>),</span>
 <span id="cb111-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb111-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher at 24 h&quot;</span>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-maturation-planktonic-volcano-0-1.png" alt="" width="864" /></p>
 <p><em>Interpretation:</em> planktonic cultures typically show an even larger maturation response than biofilm over the same window. This is expected: planktonic cells exhaust their medium and enter stationary phase between 5 h and 24 h, a dramatic physiological transition that remodels a large part of the transcriptome.</p>
 <div class="note">
@@ -613,6 +644,7 @@ the section below draws the neighbourhood of the top hit automatically.</p>
 <div id="visualising-the-operon-genes-as-arrows-along-the-chromosome" class="section level3 hasAnchor">
 <h3>Visualising the Operon: Genes as Arrows Along the Chromosome<a href="part-1-maturation-how-a-culture-changes-over-time.html#visualising-the-operon-genes-as-arrows-along-the-chromosome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To see the coordinated shutdown directly, we read the gene coordinates from the reference GTF, take a window of genes centred on the strongest planktonic maturation hit, and draw them as arrows coloured by their fold change. A block of adjacent arrows all the same colour is the visual signature of an operon responding as a unit.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-1" tabindex="-1"></a><span class="co"># A GTF is a tab-delimited text file, so we read it directly with readr — no</span></span>
 <span id="cb112-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-2" tabindex="-1"></a><span class="co"># specialised genomics package is needed. We keep only the &quot;gene&quot; feature rows,</span></span>
 <span id="cb112-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-3" tabindex="-1"></a><span class="co"># then pull the fields we want out of the free-text attributes column with regex.</span></span>
@@ -644,11 +676,16 @@ the section below draws the neighbourhood of the top hit automatically.</p>
 <span id="cb112-29"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-29" tabindex="-1"></a>  <span class="fu">distinct</span>(gene_id, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb112-30"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-30" tabindex="-1"></a></span>
 <span id="cb112-31"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb112-31" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes with coordinates parsed from GTF:&quot;</span>, <span class="fu">nrow</span>(coords), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Genes with coordinates parsed from GTF: 2816</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb114-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes in results also found in GTF     :&quot;</span>,</span>
 <span id="cb114-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb114-2" tabindex="-1"></a>    <span class="fu">sum</span>(res_pk<span class="sc">$</span>gene_id <span class="sc">%in%</span> coords<span class="sc">$</span>gene_id), <span class="st">&quot;of&quot;</span>, <span class="fu">nrow</span>(res_pk), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Genes in results also found in GTF     : 2288 of 2288</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb116-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(coords, <span class="dv">3</span>))</span></code></pre></div>
+</details>
 <pre><code>## # A tibble: 3 x 7
 ##   gene_id    gene_name locus_tag  seqname     start   end strand
 ##   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;       &lt;int&gt; &lt;int&gt; &lt;chr&gt; 
@@ -662,6 +699,7 @@ nicer labels when available and fall back to the locus tag otherwise. If the num
 than the number of genes, the identifier styles would differ between the count matrix and the GTF — here they
 are the same locus tags, so the match should be nearly complete.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-1" tabindex="-1"></a><span class="co"># --- Settings you can change --------------------------------------------------</span></span>
 <span id="cb118-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-2" tabindex="-1"></a>window_genes <span class="ot">&lt;-</span> <span class="dv">8</span>   <span class="co"># how many genes to show on each side of the central hit</span></span>
 <span id="cb118-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-3" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
@@ -693,7 +731,9 @@ are the same locus tags, so the match should be nearly complete.</p>
 <span id="cb118-29"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-29" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Central gene:&quot;</span>, central_gene,</span>
 <span id="cb118-30"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-30" tabindex="-1"></a>    <span class="st">&quot;| contig:&quot;</span>, central_row<span class="sc">$</span>seqname,</span>
 <span id="cb118-31"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb118-31" tabindex="-1"></a>    <span class="st">&quot;| window:&quot;</span>, <span class="fu">nrow</span>(region_window), <span class="st">&quot;genes</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Central gene: SA_RS13915 | contig: NC_002745.2 | window: 17 genes</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-1" tabindex="-1"></a><span class="co"># 3. Draw. We give gggenes the true start/end plus a &#39;forward&#39; flag for strand,</span></span>
 <span id="cb120-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-2" tabindex="-1"></a><span class="co">#    and let it draw the arrowhead direction. Assign then print() so the plot</span></span>
 <span id="cb120-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-3" tabindex="-1"></a><span class="co">#    always renders inside the chunk.</span></span>
@@ -718,9 +758,12 @@ are the same locus tags, so the match should be nearly complete.</p>
 <span id="cb120-22"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-22" tabindex="-1"></a>  )</span>
 <span id="cb120-23"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-23" tabindex="-1"></a></span>
 <span id="cb120-24"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb120-24" tabindex="-1"></a><span class="fu">print</span>(operon_plot)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-operon-plot-0-1.png" alt="" width="1056" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb121-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;operon_&quot;</span>, strain_tag, <span class="st">&quot;.png&quot;</span>)),</span>
 <span id="cb121-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb121-2" tabindex="-1"></a>       operon_plot, <span class="at">width =</span> <span class="dv">11</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div>
+</details>
 <div class="tip">
 <p><strong>💡 Tip:</strong> Increase or decrease <code>window_genes</code> to widen or narrow the region shown.
 Genes coloured white have no fold-change value (they were filtered out in QC for low counts, or are not in the
@@ -759,6 +802,7 @@ block can be confirmed directly against the published literature.</p>
 <div id="comparing-the-two-maturation-programmes" class="section level3 hasAnchor">
 <h3>Comparing the Two Maturation Programmes<a href="part-1-maturation-how-a-culture-changes-over-time.html#comparing-the-two-maturation-programmes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The two lists answer “what changes with time” in each lifestyle. Overlapping genes change with age regardless of lifestyle (general ageing / stationary-phase response); genes unique to one list are the lifestyle-specific part of maturation.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-1" tabindex="-1"></a>sig_bf <span class="ot">&lt;-</span> res_bf <span class="sc">%&gt;%</span> <span class="fu">filter</span>(direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
 <span id="cb122-2"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-2" tabindex="-1"></a>sig_pk <span class="ot">&lt;-</span> res_pk <span class="sc">%&gt;%</span> <span class="fu">filter</span>(direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
 <span id="cb122-3"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-3" tabindex="-1"></a></span>
@@ -772,6 +816,7 @@ block can be confirmed directly against the published literature.</p>
 <span id="cb122-11"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-11" tabindex="-1"></a>)</span>
 <span id="cb122-12"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-12" tabindex="-1"></a><span class="fu">kable</span>(overlap_tbl, <span class="at">caption =</span> <span class="st">&quot;Maturation DEGs: overlap between lifestyles&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb122-13"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb122-13" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</details>
 <table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:saureus-de-maturation-overlap-0">Table 5: </span><span id="tab:saureus-de-maturation-overlap-0">Table 6: </span>Maturation DEGs: overlap between lifestyles

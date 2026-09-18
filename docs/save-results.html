@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -446,6 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="save-results" class="section level2 hasAnchor">
 <h2>Save Results<a href="save-results.html#save-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="save-results.html#cb152-1" tabindex="-1"></a><span class="fu">write_tsv</span>(res_bf,  <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
 <span id="cb152-2"><a href="save-results.html#cb152-2" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_maturation_biofilm_&quot;</span>, last_tp, <span class="st">&quot;_vs_&quot;</span>, first_tp, <span class="st">&quot;.tsv&quot;</span>)))</span>
 <span id="cb152-3"><a href="save-results.html#cb152-3" tabindex="-1"></a><span class="fu">write_tsv</span>(res_pk,  <span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>,</span>
@@ -458,6 +460,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb152-10"><a href="save-results.html#cb152-10" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">&quot;DE_&quot;</span>, strain_tag, <span class="st">&quot;_biofilm_vs_planktonic_24h.tsv&quot;</span>)))</span>
 <span id="cb152-11"><a href="save-results.html#cb152-11" tabindex="-1"></a></span>
 <span id="cb152-12"><a href="save-results.html#cb152-12" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ Saved all result tables for&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## &lt;U+2705&gt; Saved all result tables for USA-100</code></pre>
 </div>
             </section>

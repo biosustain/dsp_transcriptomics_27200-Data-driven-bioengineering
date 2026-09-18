@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -450,22 +451,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>⚠️ Warning:</strong> Always use raw integer counts as input. Do not use TPM, FPKM, or any normalised values — DESeq2 handles normalisation internally.</p>
 </div>
 <p><code>DESeq2</code> fits a negative binomial model to the raw counts and performs a Wald test for each gene. Internally it runs three steps in sequence: size factor estimation (normalisation), dispersion estimation, and the Wald test. These can also be run separately, but <code>DESeq()</code> handles all three in one call.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="differential-expression-analysis-3.html#cb442-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb442-2"><a href="differential-expression-analysis-3.html#cb442-2" tabindex="-1"></a></span>
 <span id="cb442-3"><a href="differential-expression-analysis-3.html#cb442-3" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;rds&quot;</span>, <span class="st">&quot;dds_ecoli_MG1655.rds&quot;</span>))</span>
 <span id="cb442-4"><a href="differential-expression-analysis-3.html#cb442-4" tabindex="-1"></a></span>
 <span id="cb442-5"><a href="differential-expression-analysis-3.html#cb442-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ DDS loaded</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## &lt;U+2705&gt; DDS loaded</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="differential-expression-analysis-3.html#cb444-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##    Dimensions  : 3698 genes &lt;U+00D7&gt; 6 samples</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="differential-expression-analysis-3.html#cb446-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Conditions  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">levels</span>(dds<span class="sc">$</span>condition), <span class="at">collapse =</span> <span class="st">&quot; vs &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>##    Conditions  : control vs treatment</code></pre>
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
 <p><strong>📌 Remember:</strong> The variable of interest should be at the end of the design formula, and the control group must be the first (reference) factor level. Both were set in the QC script.</p>
 </div>
 <p><strong>Check the results</strong></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="differential-expression-analysis-3.html#cb448-1" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds)</span>
 <span id="cb448-2"><a href="differential-expression-analysis-3.html#cb448-2" tabindex="-1"></a><span class="fu">resultsNames</span>(dds)</span></code></pre></div>
+</details>
 <pre><code>## [1] &quot;Intercept&quot;                      &quot;condition_treatment_vs_control&quot;</code></pre>
 </div>
             </section>

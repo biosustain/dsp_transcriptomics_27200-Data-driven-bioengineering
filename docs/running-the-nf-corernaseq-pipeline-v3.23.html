@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -449,6 +450,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We will not process the original dataset because more computing power would be required. Instead, we will process only two size-reduced samples where 50,000 reads were randomly sampled from the original data (used script for sub-sampling: <code>util/subsample_50k_PRJNA1158806.sh</code>).</p>
 <p>We will use pipeline release <a href="https://nf-co.re/rnaseq/3.23.0">v3.23.0</a>. From this release, it is possible to use Bowtie2 for read alignment, which is advantageous for processing prokaryotic RNAseq data. For simplicity, we specify a “prokaryotic” profile which automatically uses Bowtie2 for read alignment and Salmon for read quantification.</p>
 <p><strong>To process the data, run the following command:</strong></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-1" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="st">&#39;https://github.com/nf-core/rnaseq&#39;</span> <span class="dt">\</span></span>
 <span id="cb6-2"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-2" tabindex="-1"></a>    <span class="at">-name</span> <span class="st">&#39;Ecoli_MG1655_saccharin_2_samples&#39;</span> <span class="dt">\</span></span>
 <span id="cb6-3"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-3" tabindex="-1"></a>    <span class="at">--outdir</span> <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/nfcore_rnaseq_processing_subsampled&#39;</span> <span class="dt">\</span></span>
@@ -458,6 +460,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-7"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-7" tabindex="-1"></a>    <span class="at">-r</span> 3.23.0 <span class="dt">\</span></span>
 <span id="cb6-8"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-8" tabindex="-1"></a>    <span class="at">-profile</span> prokaryotic,docker <span class="dt">\</span></span>
 <span id="cb6-9"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-9" tabindex="-1"></a>    <span class="at">-c</span> /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config</span></code></pre></div>
+</details>
 <p><strong>Parameter descriptions:</strong></p>
 <ul>
 <li><code>-name</code>: name of the processing run</li>

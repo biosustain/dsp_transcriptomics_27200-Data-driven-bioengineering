@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -447,6 +448,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="getting-the-metadata-1" class="section level2 hasAnchor">
 <h2>Getting the Metadata<a href="getting-the-metadata-1.html#getting-the-metadata-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The metadata file describes the experimental design: which sample belongs to which condition and replicate. This information is essential for <code>DESeq2</code> to model expression differences correctly.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="getting-the-metadata-1.html#cb405-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb405-2"><a href="getting-the-metadata-1.html#cb405-2" tabindex="-1"></a></span>
 <span id="cb405-3"><a href="getting-the-metadata-1.html#cb405-3" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
@@ -455,9 +457,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb405-6"><a href="getting-the-metadata-1.html#cb405-6" tabindex="-1"></a>  <span class="at">sep         =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
 <span id="cb405-7"><a href="getting-the-metadata-1.html#cb405-7" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">TRUE</span></span>
 <span id="cb405-8"><a href="getting-the-metadata-1.html#cb405-8" tabindex="-1"></a>)</span></code></pre></div>
+</details>
 <div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
 <p><strong>💡 Tip:</strong> Use the interactive table below to verify your sample metadata before proceeding.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="getting-the-metadata-1.html#cb406-1" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
 <span id="cb406-2"><a href="getting-the-metadata-1.html#cb406-2" tabindex="-1"></a>  <span class="at">data       =</span> samples_info,</span>
 <span id="cb406-3"><a href="getting-the-metadata-1.html#cb406-3" tabindex="-1"></a>  <span class="at">rownames   =</span> <span class="cn">FALSE</span>,</span>
@@ -472,8 +476,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb406-12"><a href="getting-the-metadata-1.html#cb406-12" tabindex="-1"></a>  ),</span>
 <span id="cb406-13"><a href="getting-the-metadata-1.html#cb406-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;Sample metadata — E. coli MG1655&#39;</span></span>
 <span id="cb406-14"><a href="getting-the-metadata-1.html#cb406-14" tabindex="-1"></a>)</span></code></pre></div>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e0de3eeced99c07cfb7f" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e0de3eeced99c07cfb7f">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata &lt;U+2014&gt; E. coli MG1655<\/caption>","data":[["C1","C2","C3","sac1","sac2","sac3"],["control","control","control","treatment","treatment","treatment"],[1,2,3,1,2,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>group<\/th>\n      <th>replicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":2},{"name":"sample","targets":0},{"name":"group","targets":1},{"name":"replicate","targets":2}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+</details>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-209a5cc0a13e4f7ed8ea" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-209a5cc0a13e4f7ed8ea">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata &lt;U+2014&gt; E. coli MG1655<\/caption>","data":[["C1","C2","C3","sac1","sac2","sac3"],["control","control","control","treatment","treatment","treatment"],[1,2,3,1,2,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>group<\/th>\n      <th>replicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":2},{"name":"sample","targets":0},{"name":"group","targets":1},{"name":"replicate","targets":2}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 </div>
             </section>
 

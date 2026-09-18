@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -448,13 +449,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Initial checks<a href="initial-checks.html#initial-checks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now, Nextflow should be ready to run in your GitHub Codespace environment! Let’s check that you have a fully functional environment with Nextflow, java and Docker properly installed</p>
 <p><strong>Verify java installation:</strong></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="initial-checks.html#cb2-1" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span></code></pre></div>
+</details>
 <p><strong>Verify Nextflow installation:</strong></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="initial-checks.html#cb3-1" tabindex="-1"></a><span class="ex">nextflow</span> <span class="at">-v</span></span></code></pre></div>
+</details>
 <p><strong>Nextflow current version, system and runtime:</strong></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="initial-checks.html#cb4-1" tabindex="-1"></a><span class="ex">nextflow</span> info</span></code></pre></div>
+</details>
 <p><strong>Verify Docker installation:</strong></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="initial-checks.html#cb5-1" tabindex="-1"></a><span class="ex">docker</span> <span class="at">--version</span></span></code></pre></div>
+</details>
 <p>If everything went well you have a fully functional Nextflow environment for today. Remember that we are going to use VS code as our editor to write code and handle our files.</p>
 </div>
             </section>

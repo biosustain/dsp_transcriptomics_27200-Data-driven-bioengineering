@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -455,6 +456,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
 <p><strong>💡 Tip:</strong> If you are unsure which assay name or rowData columns are available in your RDS, inspect them first with <code>assayNames(count_x)</code> and <code>names(rowData(count_x))</code>.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="loading-count-data-2.html#cb407-1" tabindex="-1"></a>count_x <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
 <span id="cb407-2"><a href="loading-count-data-2.html#cb407-2" tabindex="-1"></a>  <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;nf-core_rnaseq&quot;</span>,</span>
 <span id="cb407-3"><a href="loading-count-data-2.html#cb407-3" tabindex="-1"></a>            <span class="st">&quot;salmon.merged.gene.SummarizedExperiment.rds&quot;</span>)</span>
@@ -475,8 +477,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb407-18"><a href="loading-count-data-2.html#cb407-18" tabindex="-1"></a><span class="fu">rownames</span>(count_genes) <span class="ot">&lt;-</span> gene_symbols_saved</span>
 <span id="cb407-19"><a href="loading-count-data-2.html#cb407-19" tabindex="-1"></a></span>
 <span id="cb407-20"><a href="loading-count-data-2.html#cb407-20" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions (genes × samples):&quot;</span>, <span class="fu">dim</span>(count_genes), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## Dimensions (genes &lt;U+00D7&gt; samples): 4523 6</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="loading-count-data-2.html#cb409-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(<span class="fu">rownames</span>(count_genes)))</span></code></pre></div>
+</details>
 <pre><code>## [1] &quot;b0001&quot; &quot;b0002&quot; &quot;b0003&quot; &quot;b0004&quot; &quot;b0005&quot; &quot;b0006&quot;</code></pre>
 </div>
             </section>

@@ -47,6 +47,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -471,6 +472,7 @@ therefore mix <em>real biology</em> with <em>reference-mapping effects</em> (rea
 divergent genes may map imperfectly to USA300). Keep this in mind: a difference in counts is a starting point
 for discussion, not a clean quantitative comparison.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb142-1" tabindex="-1"></a><span class="co"># Biofilm vs planktonic at 24h only — the mature-biofilm snapshot</span></span>
 <span id="cb142-2"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb142-2" tabindex="-1"></a>dds_24 <span class="ot">&lt;-</span> dds_all[, dds_all<span class="sc">$</span>timepoint <span class="sc">==</span> <span class="st">&quot;24h&quot;</span>]</span>
 <span id="cb142-3"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb142-3" tabindex="-1"></a>dds_24<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(dds_24<span class="sc">$</span>timepoint)</span>
@@ -482,18 +484,24 @@ for discussion, not a clean quantitative comparison.</p>
 <span id="cb142-9"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb142-9" tabindex="-1"></a></span>
 <span id="cb142-10"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb142-10" tabindex="-1"></a>n_deg_24 <span class="ot">&lt;-</span> <span class="fu">sum</span>(res_24<span class="sc">$</span>direction <span class="sc">!=</span> <span class="st">&quot;Not significant&quot;</span>)</span>
 <span id="cb142-11"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb142-11" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples at 24h:</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">table</span>(dds_24<span class="sc">$</span>lifestyle))</span></code></pre></div>
+</details>
 <pre><code>## Samples at 24h:</code></pre>
 <pre><code>## 
 ## Planktonic    Biofilm 
 ##          8          8</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb145-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Biofilm vs planktonic DEGs at 24h (padj &lt;&quot;</span>, padj_threshold,</span>
 <span id="cb145-2"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb145-2" tabindex="-1"></a>    <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):&quot;</span>, n_deg_24, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ## Biofilm vs planktonic DEGs at 24h (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ): 608</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb147-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_24<span class="sc">$</span>direction))</span></code></pre></div>
+</details>
 <pre><code>## 
 ##              Up            Down Not significant 
 ##             319             289            1680</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb149-1" tabindex="-1"></a><span class="co"># Save this strain&#39;s result to a shared file so both strains can be compared</span></span>
 <span id="cb149-2"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb149-2" tabindex="-1"></a><span class="co"># after each has been rendered once.</span></span>
 <span id="cb149-3"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb149-3" tabindex="-1"></a>summary_dir  <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;cross_strain&quot;</span>)</span>
@@ -510,12 +518,15 @@ for discussion, not a clean quantitative comparison.</p>
 <span id="cb149-14"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb149-14" tabindex="-1"></a>  row <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(prev, row)</span>
 <span id="cb149-15"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb149-15" tabindex="-1"></a>}</span>
 <span id="cb149-16"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb149-16" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(row, summary_file)</span></code></pre></div>
+</details>
 <div id="cross-strain-comparison-of-the-hypothesis" class="section level3 hasAnchor">
 <h3>Cross-Strain Comparison of the Hypothesis<a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cross-strain-comparison-of-the-hypothesis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This table fills in as you render each strain. Run the script once with <code>strain &lt;- "USA-100"</code> and once with <code>strain &lt;- "USA-500"</code>; both rows will then appear.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb150-1" tabindex="-1"></a>cross <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(summary_file, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(strain)</span>
 <span id="cb150-2"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb150-2" tabindex="-1"></a><span class="fu">kable</span>(cross, <span class="at">caption =</span> <span class="st">&quot;Biofilm vs planktonic at 24h — DEG counts by strain&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb150-3"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb150-3" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</details>
 <table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:saureus-de-hypothesis-compare-0">Table 7: </span><span id="tab:saureus-de-hypothesis-compare-0">Table 8: </span>Biofilm vs planktonic at 24h &lt;U+2014&gt; DEG counts by strain
@@ -577,9 +588,11 @@ not agree.</strong> A strain can form abundant biofilm biomass while its biofilm
 remain relatively similar, or vice versa. Remember also the reference-mapping caveat above before drawing firm
 quantitative conclusions.</p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb151-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_24,</span>
 <span id="cb151-2"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb151-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — biofilm vs planktonic at 24h (mature biofilm)&quot;</span>),</span>
 <span id="cb151-3"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb151-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher in biofilm | note: growth-phase confounded&quot;</span>)</span></code></pre></div>
+</details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-hypothesis-24h-volcano-0-1.png" alt="" width="864" /></p>
 </div>
 </div>

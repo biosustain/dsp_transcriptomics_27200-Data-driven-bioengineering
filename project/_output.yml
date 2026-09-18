@@ -2,6 +2,7 @@ bookdown::gitbook:
   css: "assets/report.css"
   split_by: "section"
   number_sections: false
+  code_folding: hide
   config:
     toc:
       collapse: section
