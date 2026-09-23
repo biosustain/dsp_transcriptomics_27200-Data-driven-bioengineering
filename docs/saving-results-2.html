@@ -202,7 +202,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#distribution-of-normalised-counts"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#sample-correlation-heatmap"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#principal-component-analysis-pca"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#detecting-outliers"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-variable-genes-heatmap"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -299,7 +298,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#sample-correlation-heatmap-1"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#detecting-outliers-1"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -377,39 +375,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="saving-results-2" class="section level2 hasAnchor">
 <h2>Saving Results<a href="saving-results-2.html#saving-results-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="saving-results-2.html#cb397-1" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>)</span>
-<span id="cb397-2"><a href="saving-results-2.html#cb397-2" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb397-3"><a href="saving-results-2.html#cb397-3" tabindex="-1"></a></span>
-<span id="cb397-4"><a href="saving-results-2.html#cb397-4" tabindex="-1"></a>ora_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb397-5"><a href="saving-results-2.html#cb397-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up))   ora_up   <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Up-regulated&quot;</span>),</span>
-<span id="cb397-6"><a href="saving-results-2.html#cb397-6" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down)) ora_down <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Down-regulated&quot;</span>)</span>
-<span id="cb397-7"><a href="saving-results-2.html#cb397-7" tabindex="-1"></a>)</span>
-<span id="cb397-8"><a href="saving-results-2.html#cb397-8" tabindex="-1"></a></span>
-<span id="cb397-9"><a href="saving-results-2.html#cb397-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_all) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_all) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb397-10"><a href="saving-results-2.html#cb397-10" tabindex="-1"></a>  <span class="co"># gost result can contain list-columns (e.g. parents); drop them for TSV export</span></span>
-<span id="cb397-11"><a href="saving-results-2.html#cb397-11" tabindex="-1"></a>  ora_all_flat <span class="ot">&lt;-</span> ora_all <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">is.list</span>(.)))</span>
-<span id="cb397-12"><a href="saving-results-2.html#cb397-12" tabindex="-1"></a>  <span class="fu">write.table</span>(</span>
-<span id="cb397-13"><a href="saving-results-2.html#cb397-13" tabindex="-1"></a>    ora_all_flat,</span>
-<span id="cb397-14"><a href="saving-results-2.html#cb397-14" tabindex="-1"></a>    <span class="at">file      =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;ORA_gProfiler_treatment_vs_control.tsv&quot;</span>),</span>
-<span id="cb397-15"><a href="saving-results-2.html#cb397-15" tabindex="-1"></a>    <span class="at">sep       =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb397-16"><a href="saving-results-2.html#cb397-16" tabindex="-1"></a>  )</span>
-<span id="cb397-17"><a href="saving-results-2.html#cb397-17" tabindex="-1"></a>}</span>
-<span id="cb397-18"><a href="saving-results-2.html#cb397-18" tabindex="-1"></a></span>
-<span id="cb397-19"><a href="saving-results-2.html#cb397-19" tabindex="-1"></a><span class="fu">write.table</span>(</span>
-<span id="cb397-20"><a href="saving-results-2.html#cb397-20" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(gsea_results) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>leadingEdge),</span>
-<span id="cb397-21"><a href="saving-results-2.html#cb397-21" tabindex="-1"></a>  <span class="at">file      =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;GSEA_Reactome_treatment_vs_control.tsv&quot;</span>),</span>
-<span id="cb397-22"><a href="saving-results-2.html#cb397-22" tabindex="-1"></a>  <span class="at">sep       =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb397-23"><a href="saving-results-2.html#cb397-23" tabindex="-1"></a>)</span>
-<span id="cb397-24"><a href="saving-results-2.html#cb397-24" tabindex="-1"></a></span>
-<span id="cb397-25"><a href="saving-results-2.html#cb397-25" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Results saved to:&quot;</span>, results_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="saving-results-2.html#cb390-1" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>)</span>
+<span id="cb390-2"><a href="saving-results-2.html#cb390-2" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb390-3"><a href="saving-results-2.html#cb390-3" tabindex="-1"></a></span>
+<span id="cb390-4"><a href="saving-results-2.html#cb390-4" tabindex="-1"></a>ora_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb390-5"><a href="saving-results-2.html#cb390-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up))   ora_up   <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Up-regulated&quot;</span>),</span>
+<span id="cb390-6"><a href="saving-results-2.html#cb390-6" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down)) ora_down <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Down-regulated&quot;</span>)</span>
+<span id="cb390-7"><a href="saving-results-2.html#cb390-7" tabindex="-1"></a>)</span>
+<span id="cb390-8"><a href="saving-results-2.html#cb390-8" tabindex="-1"></a></span>
+<span id="cb390-9"><a href="saving-results-2.html#cb390-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_all) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_all) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb390-10"><a href="saving-results-2.html#cb390-10" tabindex="-1"></a>  <span class="co"># gost result can contain list-columns (e.g. parents); drop them for TSV export</span></span>
+<span id="cb390-11"><a href="saving-results-2.html#cb390-11" tabindex="-1"></a>  ora_all_flat <span class="ot">&lt;-</span> ora_all <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">is.list</span>(.)))</span>
+<span id="cb390-12"><a href="saving-results-2.html#cb390-12" tabindex="-1"></a>  <span class="fu">write.table</span>(</span>
+<span id="cb390-13"><a href="saving-results-2.html#cb390-13" tabindex="-1"></a>    ora_all_flat,</span>
+<span id="cb390-14"><a href="saving-results-2.html#cb390-14" tabindex="-1"></a>    <span class="at">file      =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;ORA_gProfiler_treatment_vs_control.tsv&quot;</span>),</span>
+<span id="cb390-15"><a href="saving-results-2.html#cb390-15" tabindex="-1"></a>    <span class="at">sep       =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb390-16"><a href="saving-results-2.html#cb390-16" tabindex="-1"></a>  )</span>
+<span id="cb390-17"><a href="saving-results-2.html#cb390-17" tabindex="-1"></a>}</span>
+<span id="cb390-18"><a href="saving-results-2.html#cb390-18" tabindex="-1"></a></span>
+<span id="cb390-19"><a href="saving-results-2.html#cb390-19" tabindex="-1"></a><span class="fu">write.table</span>(</span>
+<span id="cb390-20"><a href="saving-results-2.html#cb390-20" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(gsea_results) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>leadingEdge),</span>
+<span id="cb390-21"><a href="saving-results-2.html#cb390-21" tabindex="-1"></a>  <span class="at">file      =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;GSEA_Reactome_treatment_vs_control.tsv&quot;</span>),</span>
+<span id="cb390-22"><a href="saving-results-2.html#cb390-22" tabindex="-1"></a>  <span class="at">sep       =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb390-23"><a href="saving-results-2.html#cb390-23" tabindex="-1"></a>)</span>
+<span id="cb390-24"><a href="saving-results-2.html#cb390-24" tabindex="-1"></a></span>
+<span id="cb390-25"><a href="saving-results-2.html#cb390-25" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Results saved to:&quot;</span>, results_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Results saved to: /Users/jasge/Documents/GitHub/dsp_27200/results/human</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="saving-results-2.html#cb399-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  ORA  -&gt; ORA_gProfiler_treatment_vs_control.tsv</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="saving-results-2.html#cb392-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  ORA  -&gt; ORA_gProfiler_treatment_vs_control.tsv</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##   ORA  -&gt; ORA_gProfiler_treatment_vs_control.tsv</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="saving-results-2.html#cb401-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; GSEA_Reactome_treatment_vs_control.tsv</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="saving-results-2.html#cb394-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; GSEA_Reactome_treatment_vs_control.tsv</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##   GSEA -&gt; GSEA_Reactome_treatment_vs_control.tsv</code></pre>
 </div>

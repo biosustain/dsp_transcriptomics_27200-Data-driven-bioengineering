@@ -202,7 +202,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#distribution-of-normalised-counts"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#sample-correlation-heatmap"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#principal-component-analysis-pca"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#detecting-outliers"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-variable-genes-heatmap"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -299,7 +298,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#sample-correlation-heatmap-1"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#detecting-outliers-1"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -381,23 +379,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 multiple-testing correction.</strong> This section makes that contrast explicit, because it is one of the most
 useful things to understand about enrichment analysis.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-1" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb391-2"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up))   ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_up<span class="sc">$</span>term_name)</span>
-<span id="cb391-3"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down)) ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_down<span class="sc">$</span>term_name)</span>
-<span id="cb391-4"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-4" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">unique</span>(ora_terms)</span>
-<span id="cb391-5"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-5" tabindex="-1"></a></span>
-<span id="cb391-6"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-6" tabindex="-1"></a>gsea_padj_terms <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
-<span id="cb391-7"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-7" tabindex="-1"></a>gsea_nom_terms  <span class="ot">&lt;-</span> gsea_nom<span class="sc">$</span>pathway</span>
-<span id="cb391-8"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-8" tabindex="-1"></a></span>
-<span id="cb391-9"><a href="part-3-comparing-ora-and-gsea-1.html#cb391-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA significant terms (padj-corrected)   :&quot;</span>, <span class="fu">length</span>(ora_terms),        <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb384-1" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb384-2"><a href="part-3-comparing-ora-and-gsea-1.html#cb384-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up))   ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_up<span class="sc">$</span>term_name)</span>
+<span id="cb384-3"><a href="part-3-comparing-ora-and-gsea-1.html#cb384-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down)) ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_down<span class="sc">$</span>term_name)</span>
+<span id="cb384-4"><a href="part-3-comparing-ora-and-gsea-1.html#cb384-4" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">unique</span>(ora_terms)</span>
+<span id="cb384-5"><a href="part-3-comparing-ora-and-gsea-1.html#cb384-5" tabindex="-1"></a></span>
+<span id="cb384-6"><a href="part-3-comparing-ora-and-gsea-1.html#cb384-6" tabindex="-1"></a>gsea_padj_terms <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
+<span id="cb384-7"><a href="part-3-comparing-ora-and-gsea-1.html#cb384-7" tabindex="-1"></a>gsea_nom_terms  <span class="ot">&lt;-</span> gsea_nom<span class="sc">$</span>pathway</span>
+<span id="cb384-8"><a href="part-3-comparing-ora-and-gsea-1.html#cb384-8" tabindex="-1"></a></span>
+<span id="cb384-9"><a href="part-3-comparing-ora-and-gsea-1.html#cb384-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA significant terms (padj-corrected)   :&quot;</span>, <span class="fu">length</span>(ora_terms),        <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## ORA significant terms (padj-corrected)   : 107</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb393-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets significant after correction   :&quot;</span>, <span class="fu">length</span>(gsea_padj_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb386-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets significant after correction   :&quot;</span>, <span class="fu">length</span>(gsea_padj_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## GSEA sets significant after correction   : 0</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb395-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets at nominal p &lt; 0.05 (suggestive):&quot;</span>, <span class="fu">length</span>(gsea_nom_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="part-3-comparing-ora-and-gsea-1.html#cb388-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets at nominal p &lt; 0.05 (suggestive):&quot;</span>, <span class="fu">length</span>(gsea_nom_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## GSEA sets at nominal p &lt; 0.05 (suggestive): 68</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:0.5em 1em;margin:1em 0;border-radius:6px;">

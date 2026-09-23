@@ -83,7 +83,6 @@ library(DESeq2)
 library(ggpubr)
 library(RColorBrewer)
 library(pheatmap)
-library(factoextra)
 library(knitr)
 library(kableExtra)
 library(DT)
@@ -499,36 +498,6 @@ that axis carries. Then look at which axis separates <strong>lifestyle</strong> 
 culture age, strongest at 24 h — read the actual separation off <em>your</em> plot rather than assuming it.
 Script 02 builds directly on this structure: it models change over time and lifestyle adjusted for time, and
 saves the plain two-group comparison for a single, well-replicated time point (24 h) at the very end.
-:::
-
-### Detecting Outliers
-
-The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.
-
-```{r saureus-qc-outlier-detection-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-pca_full <- prcomp(t(assay(vsd)))
-
-screeplot <- fviz_screeplot(pca_full, addlabels = TRUE,
-               main = paste0("Scree plot — variance per PC (", strain, ")"))
-screeplot
-
-pca_ind <- fviz_pca_ind(pca_full, geom = c("point"), repel = TRUE,
-             habillage = samples_info$lifestyle,
-             title = paste0("PCA — sample positions, full gene matrix (", strain, ")"))
-pca_ind
-
-ggsave(
-  filename = file.path(results_dir, "plots", "pca_screeplot.png"),
-  plot     = screeplot, width = 8, height = 6, dpi = 300
-)
-ggsave(
-  filename = file.path(results_dir, "plots", "pca_individuals.png"),
-  plot     = pca_ind, width = 8, height = 6, dpi = 300
-)
-```
-
-:::boxy
-**What to look for:** an isolated sample sitting far from every other point on the individuals plot — especially along a PC that the scree plot shows carrying a large share of the variance — is a candidate technical outlier. Investigate its library size and its MultiQC metrics before deciding whether to exclude it.
 :::
 
 ### Top Variable Genes Heatmap

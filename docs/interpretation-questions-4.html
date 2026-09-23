@@ -202,7 +202,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#distribution-of-normalised-counts"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#sample-correlation-heatmap"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#principal-component-analysis-pca"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#detecting-outliers"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-variable-genes-heatmap"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -299,7 +298,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#sample-correlation-heatmap-1"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#detecting-outliers-1"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -385,7 +383,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- --------------------- Do not edit this and below ---------------------- -->
 <p></br></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="interpretation-questions-4.html#cb338-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="interpretation-questions-4.html#cb331-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 </details>
 <pre><code>## R version 4.4.1 (2024-06-14)
 ## Platform: aarch64-apple-darwin20
@@ -410,19 +408,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  [3] gggenes_0.6.0               EnhancedVolcano_1.24.0     
 ##  [5] ggrepel_0.9.8               apeglm_1.28.0              
 ##  [7] DT_0.34.0                   kableExtra_1.4.0           
-##  [9] knitr_1.52                  factoextra_2.0.0           
-## [11] pheatmap_1.0.13             RColorBrewer_1.1-3         
-## [13] ggpubr_0.6.3                DESeq2_1.46.0              
-## [15] SummarizedExperiment_1.36.0 Biobase_2.66.0             
-## [17] MatrixGenerics_1.18.1       matrixStats_1.5.0          
-## [19] GenomicRanges_1.58.0        GenomeInfoDb_1.42.3        
-## [21] IRanges_2.40.1              S4Vectors_0.44.0           
-## [23] BiocGenerics_0.52.0         reshape2_1.4.5             
-## [25] lubridate_1.9.5             forcats_1.0.1              
-## [27] stringr_1.6.0               dplyr_1.2.1                
-## [29] purrr_1.2.2                 readr_2.2.0                
-## [31] tidyr_1.3.2                 tibble_3.3.1               
-## [33] ggplot2_4.0.3               tidyverse_2.0.0            
+##  [9] knitr_1.52                  pheatmap_1.0.13            
+## [11] RColorBrewer_1.1-3          ggpubr_0.6.3               
+## [13] DESeq2_1.46.0               SummarizedExperiment_1.36.0
+## [15] Biobase_2.66.0              MatrixGenerics_1.18.1      
+## [17] matrixStats_1.5.0           GenomicRanges_1.58.0       
+## [19] GenomeInfoDb_1.42.3         IRanges_2.40.1             
+## [21] S4Vectors_0.44.0            BiocGenerics_0.52.0        
+## [23] reshape2_1.4.5              lubridate_1.9.5            
+## [25] forcats_1.0.1               stringr_1.6.0              
+## [27] dplyr_1.2.1                 purrr_1.2.2                
+## [29] readr_2.2.0                 tidyr_1.3.2                
+## [31] tibble_3.3.1                ggplot2_4.0.3              
+## [33] tidyverse_2.0.0            
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] rlang_1.3.0             magrittr_2.0.5          otel_0.2.0             

@@ -72,7 +72,6 @@ library(DESeq2)
 library(ggpubr)
 library(RColorBrewer)
 library(pheatmap)
-library(factoextra)
 library(knitr)
 library(kableExtra)
 library(DT)
@@ -519,70 +518,6 @@ variation that axis carries, so a separation on PC1 means more than the same-loo
 Here colour encodes treatment and shape encodes donor. If treatment separates cleanly on one axis while
 donors are spread along another, that is the classic signature of a paired design: a consistent treatment
 effect on top of donor-to-donor baseline differences.
-:::
-
-### Detecting Outliers
-
-The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.
-
-```{r human-qc-outlier-detection-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-
-pca_full <- prcomp(t(assay(vsd)))
-
-screeplot <- fviz_screeplot(pca_full, addlabels = TRUE,
-               main = "Scree plot — variance per PC")
-screeplot
-pca_ind <- fviz_pca_ind(pca_full, geom = c("point", "text"), repel = TRUE,
-             title = "PCA — sample positions (full gene matrix)")
-pca_ind
-pca_biplot <- fviz_pca_biplot(pca_full,
-                repel        = TRUE,
-                select.var   = list(contrib = 50),  # top genes only
-                title        = "Biplot — top 50 contributing genes and samples")
-
-pca_biplot
-
-ggsave(
-  filename = file.path(git_root, "results", "human", "plots", "pca_screeplot.png"),
-  plot     = screeplot,
-  width    = 8,
-  height   = 6,
-  dpi      = 300
-)
-
-ggsave(
-  filename = file.path(git_root, "results", "human", "plots", "pca_individuals.png"),
-  plot     = pca_ind,
-  width    = 8,
-  height   = 6,
-  dpi      = 300
-)
-
-ggsave(
-  filename = file.path(git_root, "results", "human", "plots", "pca_biplot.png"),
-  plot     = pca_biplot,
-  width    = 8,
-  height   = 6,
-  dpi      = 300
-)
-```
-
-:::boxy
-**How to read a biplot:**
-
-**Dots** = samples
-
-**Arrows/lines** = genes — the direction shows which samples that gene is highly expressed in, and the length shows how strongly it contributes to the PC:
-
-- Genes pointing **right** → higher expression in samples on the right
-- Genes pointing **left** → higher expression in samples on the left
-- Genes near the **centre** → contribute little to either PC
-
-**What to look for:**
-
-- Genes with long arrows are the strongest candidates for driving the dominant axis of variation
-- If many arrows point in the same direction, it suggests coordinated regulation (a pathway-level response)
-- Check whether the dominant axis aligns with treatment or with donor
 :::
 
 ### Top Variable Genes Heatmap

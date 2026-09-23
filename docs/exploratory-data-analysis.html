@@ -202,7 +202,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#distribution-of-normalised-counts"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#sample-correlation-heatmap"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#principal-component-analysis-pca"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#detecting-outliers"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-variable-genes-heatmap"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -299,7 +298,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#sample-correlation-heatmap-1"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#detecting-outliers-1"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -810,73 +808,41 @@ Script 02 builds directly on this structure: it models change over time and life
 saves the plain two-group comparison for a single, well-replicated time point (24 h) at the very end.</p>
 </div>
 </div>
-<div id="detecting-outliers" class="section level3 hasAnchor">
-<h3>Detecting Outliers<a href="exploratory-data-analysis.html#detecting-outliers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The PCA above uses only the top 500 most variable genes (DESeq2 default). Here we run PCA on the full VST matrix and inspect a scree plot and biplot to assess whether any single sample drives an unusual amount of variance, a common sign of a technical outlier.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="exploratory-data-analysis.html#cb56-1" tabindex="-1"></a>pca_full <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(vsd)))</span>
-<span id="cb56-2"><a href="exploratory-data-analysis.html#cb56-2" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="exploratory-data-analysis.html#cb56-3" tabindex="-1"></a>screeplot <span class="ot">&lt;-</span> <span class="fu">fviz_screeplot</span>(pca_full, <span class="at">addlabels =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb56-4"><a href="exploratory-data-analysis.html#cb56-4" tabindex="-1"></a>               <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Scree plot — variance per PC (&quot;</span>, strain, <span class="st">&quot;)&quot;</span>))</span>
-<span id="cb56-5"><a href="exploratory-data-analysis.html#cb56-5" tabindex="-1"></a>screeplot</span></code></pre></div>
-</details>
-<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-qc-outlier-detection-0-1.png" alt="" width="672" /></p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="exploratory-data-analysis.html#cb57-1" tabindex="-1"></a>pca_ind <span class="ot">&lt;-</span> <span class="fu">fviz_pca_ind</span>(pca_full, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">&quot;point&quot;</span>), <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb57-2"><a href="exploratory-data-analysis.html#cb57-2" tabindex="-1"></a>             <span class="at">habillage =</span> samples_info<span class="sc">$</span>lifestyle,</span>
-<span id="cb57-3"><a href="exploratory-data-analysis.html#cb57-3" tabindex="-1"></a>             <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;PCA — sample positions, full gene matrix (&quot;</span>, strain, <span class="st">&quot;)&quot;</span>))</span>
-<span id="cb57-4"><a href="exploratory-data-analysis.html#cb57-4" tabindex="-1"></a>pca_ind</span></code></pre></div>
-</details>
-<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-qc-outlier-detection-0-2.png" alt="" width="672" /></p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="exploratory-data-analysis.html#cb58-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
-<span id="cb58-2"><a href="exploratory-data-analysis.html#cb58-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;pca_screeplot.png&quot;</span>),</span>
-<span id="cb58-3"><a href="exploratory-data-analysis.html#cb58-3" tabindex="-1"></a>  <span class="at">plot     =</span> screeplot, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">dpi =</span> <span class="dv">300</span></span>
-<span id="cb58-4"><a href="exploratory-data-analysis.html#cb58-4" tabindex="-1"></a>)</span>
-<span id="cb58-5"><a href="exploratory-data-analysis.html#cb58-5" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
-<span id="cb58-6"><a href="exploratory-data-analysis.html#cb58-6" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;pca_individuals.png&quot;</span>),</span>
-<span id="cb58-7"><a href="exploratory-data-analysis.html#cb58-7" tabindex="-1"></a>  <span class="at">plot     =</span> pca_ind, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">dpi =</span> <span class="dv">300</span></span>
-<span id="cb58-8"><a href="exploratory-data-analysis.html#cb58-8" tabindex="-1"></a>)</span></code></pre></div>
-</details>
-<div class="boxy">
-<p><strong>What to look for:</strong> an isolated sample sitting far from every other point on the individuals plot — especially along a PC that the scree plot shows carrying a large share of the variance — is a candidate technical outlier. Investigate its library size and its MultiQC metrics before deciding whether to exclude it.</p>
-</div>
-</div>
 <div id="top-variable-genes-heatmap" class="section level3 hasAnchor">
 <h3>Top Variable Genes Heatmap<a href="exploratory-data-analysis.html#top-variable-genes-heatmap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Clustering the 50 most variable genes across samples gives a gene-level view of the structure in the data. Row-scaling (z-score per gene) is applied so that highly expressed genes do not visually dominate.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="exploratory-data-analysis.html#cb59-1" tabindex="-1"></a>topVarGenes <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">order</span>(<span class="fu">rowVars</span>(<span class="fu">assay</span>(vsd)), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), <span class="dv">50</span>)</span>
-<span id="cb59-2"><a href="exploratory-data-analysis.html#cb59-2" tabindex="-1"></a></span>
-<span id="cb59-3"><a href="exploratory-data-analysis.html#cb59-3" tabindex="-1"></a>df_anno <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;lifestyle&quot;</span>, <span class="st">&quot;timepoint&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb59-4"><a href="exploratory-data-analysis.html#cb59-4" tabindex="-1"></a></span>
-<span id="cb59-5"><a href="exploratory-data-analysis.html#cb59-5" tabindex="-1"></a>heat_plot <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
-<span id="cb59-6"><a href="exploratory-data-analysis.html#cb59-6" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[topVarGenes, ],</span>
-<span id="cb59-7"><a href="exploratory-data-analysis.html#cb59-7" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb59-8"><a href="exploratory-data-analysis.html#cb59-8" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb59-9"><a href="exploratory-data-analysis.html#cb59-9" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
-<span id="cb59-10"><a href="exploratory-data-analysis.html#cb59-10" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb59-11"><a href="exploratory-data-analysis.html#cb59-11" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb59-12"><a href="exploratory-data-analysis.html#cb59-12" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
-<span id="cb59-13"><a href="exploratory-data-analysis.html#cb59-13" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb59-14"><a href="exploratory-data-analysis.html#cb59-14" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb59-15"><a href="exploratory-data-analysis.html#cb59-15" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
-<span id="cb59-16"><a href="exploratory-data-analysis.html#cb59-16" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="fu">paste0</span>(<span class="st">&quot;Top 50 variable genes — &quot;</span>, strain, <span class="st">&quot; (VST, row-scaled)&quot;</span>)</span>
-<span id="cb59-17"><a href="exploratory-data-analysis.html#cb59-17" tabindex="-1"></a>)</span>
-<span id="cb59-18"><a href="exploratory-data-analysis.html#cb59-18" tabindex="-1"></a></span>
-<span id="cb59-19"><a href="exploratory-data-analysis.html#cb59-19" tabindex="-1"></a>heat_plot</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="exploratory-data-analysis.html#cb56-1" tabindex="-1"></a>topVarGenes <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">order</span>(<span class="fu">rowVars</span>(<span class="fu">assay</span>(vsd)), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), <span class="dv">50</span>)</span>
+<span id="cb56-2"><a href="exploratory-data-analysis.html#cb56-2" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="exploratory-data-analysis.html#cb56-3" tabindex="-1"></a>df_anno <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;lifestyle&quot;</span>, <span class="st">&quot;timepoint&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb56-4"><a href="exploratory-data-analysis.html#cb56-4" tabindex="-1"></a></span>
+<span id="cb56-5"><a href="exploratory-data-analysis.html#cb56-5" tabindex="-1"></a>heat_plot <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
+<span id="cb56-6"><a href="exploratory-data-analysis.html#cb56-6" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[topVarGenes, ],</span>
+<span id="cb56-7"><a href="exploratory-data-analysis.html#cb56-7" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb56-8"><a href="exploratory-data-analysis.html#cb56-8" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb56-9"><a href="exploratory-data-analysis.html#cb56-9" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
+<span id="cb56-10"><a href="exploratory-data-analysis.html#cb56-10" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb56-11"><a href="exploratory-data-analysis.html#cb56-11" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb56-12"><a href="exploratory-data-analysis.html#cb56-12" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
+<span id="cb56-13"><a href="exploratory-data-analysis.html#cb56-13" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb56-14"><a href="exploratory-data-analysis.html#cb56-14" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb56-15"><a href="exploratory-data-analysis.html#cb56-15" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
+<span id="cb56-16"><a href="exploratory-data-analysis.html#cb56-16" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="fu">paste0</span>(<span class="st">&quot;Top 50 variable genes — &quot;</span>, strain, <span class="st">&quot; (VST, row-scaled)&quot;</span>)</span>
+<span id="cb56-17"><a href="exploratory-data-analysis.html#cb56-17" tabindex="-1"></a>)</span>
+<span id="cb56-18"><a href="exploratory-data-analysis.html#cb56-18" tabindex="-1"></a></span>
+<span id="cb56-19"><a href="exploratory-data-analysis.html#cb56-19" tabindex="-1"></a>heat_plot</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-qc-topvar-heatmap-0-1.png" alt="" width="864" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="exploratory-data-analysis.html#cb60-1" tabindex="-1"></a><span class="fu">png</span>(</span>
-<span id="cb60-2"><a href="exploratory-data-analysis.html#cb60-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;heatmap_top50_variable.png&quot;</span>),</span>
-<span id="cb60-3"><a href="exploratory-data-analysis.html#cb60-3" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">9</span>,</span>
-<span id="cb60-4"><a href="exploratory-data-analysis.html#cb60-4" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">11</span>,</span>
-<span id="cb60-5"><a href="exploratory-data-analysis.html#cb60-5" tabindex="-1"></a>  <span class="at">units    =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb60-6"><a href="exploratory-data-analysis.html#cb60-6" tabindex="-1"></a>  <span class="at">res      =</span> <span class="dv">300</span></span>
-<span id="cb60-7"><a href="exploratory-data-analysis.html#cb60-7" tabindex="-1"></a>)</span>
-<span id="cb60-8"><a href="exploratory-data-analysis.html#cb60-8" tabindex="-1"></a>heat_plot</span>
-<span id="cb60-9"><a href="exploratory-data-analysis.html#cb60-9" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="exploratory-data-analysis.html#cb57-1" tabindex="-1"></a><span class="fu">png</span>(</span>
+<span id="cb57-2"><a href="exploratory-data-analysis.html#cb57-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;heatmap_top50_variable.png&quot;</span>),</span>
+<span id="cb57-3"><a href="exploratory-data-analysis.html#cb57-3" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">9</span>,</span>
+<span id="cb57-4"><a href="exploratory-data-analysis.html#cb57-4" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">11</span>,</span>
+<span id="cb57-5"><a href="exploratory-data-analysis.html#cb57-5" tabindex="-1"></a>  <span class="at">units    =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb57-6"><a href="exploratory-data-analysis.html#cb57-6" tabindex="-1"></a>  <span class="at">res      =</span> <span class="dv">300</span></span>
+<span id="cb57-7"><a href="exploratory-data-analysis.html#cb57-7" tabindex="-1"></a>)</span>
+<span id="cb57-8"><a href="exploratory-data-analysis.html#cb57-8" tabindex="-1"></a>heat_plot</span>
+<span id="cb57-9"><a href="exploratory-data-analysis.html#cb57-9" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 </details>
 <pre><code>## quartz_off_screen 
 ##                 2</code></pre>

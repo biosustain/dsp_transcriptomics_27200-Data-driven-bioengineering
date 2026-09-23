@@ -202,7 +202,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#distribution-of-normalised-counts"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#sample-correlation-heatmap"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#principal-component-analysis-pca"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#detecting-outliers"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#top-variable-genes-heatmap"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -299,7 +298,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#sample-correlation-heatmap-1"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#detecting-outliers-1"><i class="fa fa-check"></i>Detecting Outliers</a></li>
 <li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
@@ -402,14 +400,14 @@ The paired model is used for all downstream analysis.</p>
 </div>
 <p><strong>Setup the Environment</strong></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="differential-expression-analysis-1.html#cb306-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb306-2"><a href="differential-expression-analysis-1.html#cb306-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
-<span id="cb306-3"><a href="differential-expression-analysis-1.html#cb306-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb306-4"><a href="differential-expression-analysis-1.html#cb306-4" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb306-5"><a href="differential-expression-analysis-1.html#cb306-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb306-6"><a href="differential-expression-analysis-1.html#cb306-6" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb306-7"><a href="differential-expression-analysis-1.html#cb306-7" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb306-8"><a href="differential-expression-analysis-1.html#cb306-8" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="differential-expression-analysis-1.html#cb299-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb299-2"><a href="differential-expression-analysis-1.html#cb299-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb299-3"><a href="differential-expression-analysis-1.html#cb299-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb299-4"><a href="differential-expression-analysis-1.html#cb299-4" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb299-5"><a href="differential-expression-analysis-1.html#cb299-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb299-6"><a href="differential-expression-analysis-1.html#cb299-6" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb299-7"><a href="differential-expression-analysis-1.html#cb299-7" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb299-8"><a href="differential-expression-analysis-1.html#cb299-8" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
 </details>
 </div>
             </section>
