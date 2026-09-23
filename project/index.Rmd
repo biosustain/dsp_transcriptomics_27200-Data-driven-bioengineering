@@ -64,13 +64,13 @@ You can also explore the [27200 Data Driven Bioengineering - Transcriptomics rep
 
 | Time | Session |
 |---|---|
-| ☕ **10:00–10:15** | Welcome and setup |
-| 🔬 **10:15–11:00** | Theory: Illumina sequencing, RNA-seq workflow & the nf-core/rnaseq pipeline |
-| 📊 **11:00–11:45** | Theory: count matrices, normalization, PCA & differential expression (+ quizzes) |
-| ⏸️ **11:45–12:00** | Break |
-| 💻 **12:00–12:55** | Exercises: *Quality Control & Exploratory Data Analysis* |
-| 🧬 **12:55–13:50** | Exercises: *Differential Expression & Functional Enrichment (ORA/GSEA)* |
-| 🏁 **13:50–14:00** | Wrap-up: key insight + muddy point |
+| ☕ **8:00–8:15** | Welcome and setup |
+| 🔬 **8:15–9:00** | Theory: Illumina sequencing, RNA-seq workflow & the nf-core/rnaseq pipeline |
+| 📊 **9:00–9:45** | Theory: count matrices, normalization, PCA & differential expression (+ quizzes) |
+| ⏸️ **9:45–10:00** | Break |
+| 💻 **10:00–10:55** | Exercises: *Quality Control & Exploratory Data Analysis* |
+| 🧬 **10:55–11:50** | Exercises: *Differential Expression & Functional Enrichment (ORA/GSEA)* |
+| 🏁 **11:50–12:00** | Wrap-up: key insight + muddy point |
 
 
 :::boxy
