@@ -57,7 +57,6 @@ Each dataset has three scripts, run in order — every step saves results the ne
 
 - S. aureus → `results/usa100/`, `results/usa500/`, `results/cross_strain/`
 - Human → `results/human/`
-- E. coli (practice chapters in `project/`) → `results/` root and `results/rds/`
 
 All outputs are committed so the book builds from a fresh clone without re-running
 anything upstream.

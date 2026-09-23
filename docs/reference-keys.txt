@@ -6,4 +6,3 @@ tab:human-qc-check-raw-0
 tab:human-qc-size-factors-0
 tab:human-de-design-comparison
 tab:human-de-known-genes-check
-tab:size-factors-0

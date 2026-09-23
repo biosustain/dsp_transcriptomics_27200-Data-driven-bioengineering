@@ -14,7 +14,3 @@ rmd_files:
   - "../01_scripts/01_quality_control.Rmd"
   - "../01_scripts/02_differential_expression_analysis.Rmd"
   - "../01_scripts/03_gene_functional.Rmd"
-  - "part_ecoli.Rmd"
-  - "03_analysis_basics.Rmd"
-  - "04_viz_practice.Rmd"
-  - "05_wrapup.Rmd"

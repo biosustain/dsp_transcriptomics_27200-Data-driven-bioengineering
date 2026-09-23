@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-the-nf-corernaseq-pipeline-v3.23.html"><a href="running-the-nf-corernaseq-pipeline-v3.23.html"><i class="fa fa-check"></i>Running the nf-core/rnaseq pipeline v3.23.0</a>
 <ul>
 <li class="chapter" data-level="" data-path="structure-of-the-output-directory.html"><a href="structure-of-the-output-directory.html"><i class="fa fa-check"></i>Structure of the output directory</a></li>
-<li class="chapter" data-level="" data-path="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><a href="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><i class="fa fa-check"></i>Interpretation of RNAseq processing results using the multiQC report</a></li>
+<li class="chapter" data-level="" data-path="reading-the-multiqc-report.html"><a href="reading-the-multiqc-report.html"><i class="fa fa-check"></i>Reading the MultiQC report</a></li>
 </ul></li>
 <li class="part"><span><b>I Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -352,77 +352,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
-<li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-2.html"><a href="setup-the-environment-2.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="getting-the-metadata-1.html"><a href="getting-the-metadata-1.html"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-<li class="chapter" data-level="" data-path="loading-count-data-2.html"><a href="loading-count-data-2.html"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-2.html"><a href="preparing-the-data-2.html"><i class="fa fa-check"></i>Preparing the Data</a></li>
-<li class="chapter" data-level="" data-path="creating-the-deseqdataset-2.html"><a href="creating-the-deseqdataset-2.html"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html"><i class="fa fa-check"></i>Sanity Checks</a>
-<ul>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#are-we-working-with-raw-counts-1"><i class="fa fa-check"></i>Are We Working with Raw Counts?</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#pre-filtering-low-count-genes-2"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#factor-order-and-reference-level-2"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#estimate-size-factors-2"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#distribution-of-normalised-counts-2"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="sample-correlation-heatmap-2.html"><a href="sample-correlation-heatmap-2.html"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-pca-2.html"><a href="principal-component-analysis-pca-2.html"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="detecting-outliers-2.html"><a href="detecting-outliers-2.html"><i class="fa fa-check"></i>Detecting Outliers</a></li>
-<li class="chapter" data-level="" data-path="top-variable-genes-heatmap-2.html"><a href="top-variable-genes-heatmap-2.html"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-<li class="chapter" data-level="" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-2.html"><a href="differential-expression-analysis-2.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-3.html"><a href="differential-expression-analysis-3.html"><i class="fa fa-check"></i>Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="extracting-results-1.html"><a href="extracting-results-1.html"><i class="fa fa-check"></i>Extracting Results</a></li>
-<li class="chapter" data-level="" data-path="log2-fold-change-shrinkage-1.html"><a href="log2-fold-change-shrinkage-1.html"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
-<li class="chapter" data-level="" data-path="sorting-and-filtering-significant-genes-1.html"><a href="sorting-and-filtering-significant-genes-1.html"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="visualisation-1.html"><a href="visualisation-1.html"><i class="fa fa-check"></i>Visualisation</a></li>
-<li class="chapter" data-level="" data-path="ma-plot-1.html"><a href="ma-plot-1.html"><i class="fa fa-check"></i>MA Plot</a></li>
-<li class="chapter" data-level="" data-path="top-gene-count-plot-1.html"><a href="top-gene-count-plot-1.html"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
-<li class="chapter" data-level="" data-path="heatmap-of-significant-genes-1.html"><a href="heatmap-of-significant-genes-1.html"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="saving-results-3.html"><a href="saving-results-3.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-two-packages-1"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-kegg"><i class="fa fa-check"></i><strong>Why KEGG?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#load-libraries-2"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis-2.html"><a href="load-results-from-differential-expression-analysis-2.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html"><i class="fa fa-check"></i>Build and Cache KEGG GMT</a>
-<ul>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html#convert-locus-tags-to-gene-symbols"><i class="fa fa-check"></i>Convert Locus Tags to Gene Symbols</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#prepare-input-2"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#run-ora-2"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#filter-and-inspect-significant-pathways"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#bar-plot-enriched-pathways"><i class="fa fa-check"></i>Bar Plot — Enriched Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#lollipop-plot-gene-hits-per-pathway"><i class="fa fa-check"></i>Lollipop Plot — Gene Hits per Pathway</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#critical-interpretation-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Spurious Hits</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#prepare-the-ranked-gene-list-2"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#convert-gmt-to-fgsea-format"><i class="fa fa-check"></i>Convert GMT to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#run-gsea-2"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#filter-and-inspect-significant-pathways-1"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#nes-bar-plot-activated-and-suppressed-pathways"><i class="fa fa-check"></i>NES Bar Plot — Activated and Suppressed Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#dot-plot-nes-padj-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, padj and Gene Set Size</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#enrichment-plot-top-pathways"><i class="fa fa-check"></i>Enrichment Plot — Top Pathways</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-2.html"><a href="part-3-comparing-ora-and-gsea-2.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-4.html"><a href="saving-results-4.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — 27200 Data Driven Bioengineering - Transcriptomics Workshop
@@ -457,14 +386,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>📌 Remember:</strong> Always verify your input before proceeding.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="sanity-checks-1.html#cb273-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb273-2"><a href="sanity-checks-1.html#cb273-2" tabindex="-1"></a></span>
-<span id="cb273-3"><a href="sanity-checks-1.html#cb273-3" tabindex="-1"></a></span>
-<span id="cb273-4"><a href="sanity-checks-1.html#cb273-4" tabindex="-1"></a><span class="fu">kable</span>(count_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, ],</span>
-<span id="cb273-5"><a href="sanity-checks-1.html#cb273-5" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">&quot;Raw count matrix — first 6 genes&quot;</span>,</span>
-<span id="cb273-6"><a href="sanity-checks-1.html#cb273-6" tabindex="-1"></a>      <span class="at">format.args =</span> <span class="fu">list</span>(<span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb273-7"><a href="sanity-checks-1.html#cb273-7" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>),</span>
-<span id="cb273-8"><a href="sanity-checks-1.html#cb273-8" tabindex="-1"></a>                <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="sanity-checks-1.html#cb274-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb274-2"><a href="sanity-checks-1.html#cb274-2" tabindex="-1"></a></span>
+<span id="cb274-3"><a href="sanity-checks-1.html#cb274-3" tabindex="-1"></a></span>
+<span id="cb274-4"><a href="sanity-checks-1.html#cb274-4" tabindex="-1"></a><span class="fu">kable</span>(count_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, ],</span>
+<span id="cb274-5"><a href="sanity-checks-1.html#cb274-5" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">&quot;Raw count matrix — first 6 genes&quot;</span>,</span>
+<span id="cb274-6"><a href="sanity-checks-1.html#cb274-6" tabindex="-1"></a>      <span class="at">format.args =</span> <span class="fu">list</span>(<span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb274-7"><a href="sanity-checks-1.html#cb274-7" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>),</span>
+<span id="cb274-8"><a href="sanity-checks-1.html#cb274-8" tabindex="-1"></a>                <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </details>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -678,13 +607,13 @@ A2ML1
 </tbody>
 </table>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="sanity-checks-1.html#cb274-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">colSums</span>(count_genes),</span>
-<span id="cb274-2"><a href="sanity-checks-1.html#cb274-2" tabindex="-1"></a>        <span class="at">main   =</span> <span class="st">&quot;Library sizes (total counts per sample)&quot;</span>,</span>
-<span id="cb274-3"><a href="sanity-checks-1.html#cb274-3" tabindex="-1"></a>        <span class="at">ylab   =</span> <span class="st">&quot;Total raw counts&quot;</span>,</span>
-<span id="cb274-4"><a href="sanity-checks-1.html#cb274-4" tabindex="-1"></a>        <span class="at">xlab   =</span> <span class="cn">NULL</span>,</span>
-<span id="cb274-5"><a href="sanity-checks-1.html#cb274-5" tabindex="-1"></a>        <span class="at">col    =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
-<span id="cb274-6"><a href="sanity-checks-1.html#cb274-6" tabindex="-1"></a>        <span class="at">las    =</span> <span class="dv">2</span>,</span>
-<span id="cb274-7"><a href="sanity-checks-1.html#cb274-7" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">colnames</span>(count_genes))</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="sanity-checks-1.html#cb275-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">colSums</span>(count_genes),</span>
+<span id="cb275-2"><a href="sanity-checks-1.html#cb275-2" tabindex="-1"></a>        <span class="at">main   =</span> <span class="st">&quot;Library sizes (total counts per sample)&quot;</span>,</span>
+<span id="cb275-3"><a href="sanity-checks-1.html#cb275-3" tabindex="-1"></a>        <span class="at">ylab   =</span> <span class="st">&quot;Total raw counts&quot;</span>,</span>
+<span id="cb275-4"><a href="sanity-checks-1.html#cb275-4" tabindex="-1"></a>        <span class="at">xlab   =</span> <span class="cn">NULL</span>,</span>
+<span id="cb275-5"><a href="sanity-checks-1.html#cb275-5" tabindex="-1"></a>        <span class="at">col    =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb275-6"><a href="sanity-checks-1.html#cb275-6" tabindex="-1"></a>        <span class="at">las    =</span> <span class="dv">2</span>,</span>
+<span id="cb275-7"><a href="sanity-checks-1.html#cb275-7" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">colnames</span>(count_genes))</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-check-raw-0-1.png" alt="" width="672" /></p>
 <div class="tip">
@@ -699,29 +628,29 @@ A2ML1
 <p>Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples (equal to the size of the smallest group).</p>
 <p>The human genome has roughly 20,000 protein-coding genes plus many non-coding ones, and a large fraction are not expressed in ASM cells — expect a substantial number to be filtered out.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="sanity-checks-1.html#cb275-1" tabindex="-1"></a>smallestGroupSize <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>condition))</span>
-<span id="cb275-2"><a href="sanity-checks-1.html#cb275-2" tabindex="-1"></a></span>
-<span id="cb275-3"><a href="sanity-checks-1.html#cb275-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Smallest group size   :&quot;</span>, smallestGroupSize, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="sanity-checks-1.html#cb276-1" tabindex="-1"></a>smallestGroupSize <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>condition))</span>
+<span id="cb276-2"><a href="sanity-checks-1.html#cb276-2" tabindex="-1"></a></span>
+<span id="cb276-3"><a href="sanity-checks-1.html#cb276-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Smallest group size   :&quot;</span>, smallestGroupSize, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Smallest group size   : 4</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="sanity-checks-1.html#cb277-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Filtering threshold   : at least 10 counts in&quot;</span>, smallestGroupSize, <span class="st">&quot;or more samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="sanity-checks-1.html#cb278-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Filtering threshold   : at least 10 counts in&quot;</span>, smallestGroupSize, <span class="st">&quot;or more samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Filtering threshold   : at least 10 counts in 4 or more samples</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="sanity-checks-1.html#cb279-1" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">counts</span>(dds) <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">&gt;=</span> smallestGroupSize</span>
-<span id="cb279-2"><a href="sanity-checks-1.html#cb279-2" tabindex="-1"></a>n_before <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dds)</span>
-<span id="cb279-3"><a href="sanity-checks-1.html#cb279-3" tabindex="-1"></a>dds  <span class="ot">&lt;-</span> dds[keep, ]</span>
-<span id="cb279-4"><a href="sanity-checks-1.html#cb279-4" tabindex="-1"></a></span>
-<span id="cb279-5"><a href="sanity-checks-1.html#cb279-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes before filtering:&quot;</span>, n_before, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="sanity-checks-1.html#cb280-1" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">counts</span>(dds) <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">&gt;=</span> smallestGroupSize</span>
+<span id="cb280-2"><a href="sanity-checks-1.html#cb280-2" tabindex="-1"></a>n_before <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dds)</span>
+<span id="cb280-3"><a href="sanity-checks-1.html#cb280-3" tabindex="-1"></a>dds  <span class="ot">&lt;-</span> dds[keep, ]</span>
+<span id="cb280-4"><a href="sanity-checks-1.html#cb280-4" tabindex="-1"></a></span>
+<span id="cb280-5"><a href="sanity-checks-1.html#cb280-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes before filtering:&quot;</span>, n_before, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes before filtering: 25924</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="sanity-checks-1.html#cb281-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes after  filtering:&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="sanity-checks-1.html#cb282-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes after  filtering:&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes after  filtering: 14080</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="sanity-checks-1.html#cb283-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes removed         :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="sanity-checks-1.html#cb284-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes removed         :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes removed         : 11844</code></pre>
 </div>
@@ -729,9 +658,9 @@ A2ML1
 <h3>Factor Order and Reference Level<a href="sanity-checks-1.html#factor-order-and-reference-level-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first factor level is always the reference (denominator) in <code>DESeq2</code> comparisons. Setting it explicitly ensures fold changes are computed in the intended direction: <strong>treatment (dexamethasone) vs control (untreated)</strong>, not the reverse.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="sanity-checks-1.html#cb285-1" tabindex="-1"></a>dds<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">relevel</span>(dds<span class="sc">$</span>condition, <span class="at">ref =</span> <span class="st">&quot;control&quot;</span>)</span>
-<span id="cb285-2"><a href="sanity-checks-1.html#cb285-2" tabindex="-1"></a></span>
-<span id="cb285-3"><a href="sanity-checks-1.html#cb285-3" tabindex="-1"></a><span class="fu">levels</span>(dds<span class="sc">$</span>condition)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="sanity-checks-1.html#cb286-1" tabindex="-1"></a>dds<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">relevel</span>(dds<span class="sc">$</span>condition, <span class="at">ref =</span> <span class="st">&quot;control&quot;</span>)</span>
+<span id="cb286-2"><a href="sanity-checks-1.html#cb286-2" tabindex="-1"></a></span>
+<span id="cb286-3"><a href="sanity-checks-1.html#cb286-3" tabindex="-1"></a><span class="fu">levels</span>(dds<span class="sc">$</span>condition)</span></code></pre></div>
 </details>
 <pre><code>## [1] &quot;control&quot;   &quot;treatment&quot;</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">

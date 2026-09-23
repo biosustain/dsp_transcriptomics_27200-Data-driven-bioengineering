@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-the-nf-corernaseq-pipeline-v3.23.html"><a href="running-the-nf-corernaseq-pipeline-v3.23.html"><i class="fa fa-check"></i>Running the nf-core/rnaseq pipeline v3.23.0</a>
 <ul>
 <li class="chapter" data-level="" data-path="structure-of-the-output-directory.html"><a href="structure-of-the-output-directory.html"><i class="fa fa-check"></i>Structure of the output directory</a></li>
-<li class="chapter" data-level="" data-path="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><a href="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><i class="fa fa-check"></i>Interpretation of RNAseq processing results using the multiQC report</a></li>
+<li class="chapter" data-level="" data-path="reading-the-multiqc-report.html"><a href="reading-the-multiqc-report.html"><i class="fa fa-check"></i>Reading the MultiQC report</a></li>
 </ul></li>
 <li class="part"><span><b>I Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -352,77 +352,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
-<li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-2.html"><a href="setup-the-environment-2.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="getting-the-metadata-1.html"><a href="getting-the-metadata-1.html"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-<li class="chapter" data-level="" data-path="loading-count-data-2.html"><a href="loading-count-data-2.html"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-2.html"><a href="preparing-the-data-2.html"><i class="fa fa-check"></i>Preparing the Data</a></li>
-<li class="chapter" data-level="" data-path="creating-the-deseqdataset-2.html"><a href="creating-the-deseqdataset-2.html"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html"><i class="fa fa-check"></i>Sanity Checks</a>
-<ul>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#are-we-working-with-raw-counts-1"><i class="fa fa-check"></i>Are We Working with Raw Counts?</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#pre-filtering-low-count-genes-2"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#factor-order-and-reference-level-2"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#estimate-size-factors-2"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#distribution-of-normalised-counts-2"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="sample-correlation-heatmap-2.html"><a href="sample-correlation-heatmap-2.html"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-pca-2.html"><a href="principal-component-analysis-pca-2.html"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="detecting-outliers-2.html"><a href="detecting-outliers-2.html"><i class="fa fa-check"></i>Detecting Outliers</a></li>
-<li class="chapter" data-level="" data-path="top-variable-genes-heatmap-2.html"><a href="top-variable-genes-heatmap-2.html"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-<li class="chapter" data-level="" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-2.html"><a href="differential-expression-analysis-2.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-3.html"><a href="differential-expression-analysis-3.html"><i class="fa fa-check"></i>Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="extracting-results-1.html"><a href="extracting-results-1.html"><i class="fa fa-check"></i>Extracting Results</a></li>
-<li class="chapter" data-level="" data-path="log2-fold-change-shrinkage-1.html"><a href="log2-fold-change-shrinkage-1.html"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
-<li class="chapter" data-level="" data-path="sorting-and-filtering-significant-genes-1.html"><a href="sorting-and-filtering-significant-genes-1.html"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="visualisation-1.html"><a href="visualisation-1.html"><i class="fa fa-check"></i>Visualisation</a></li>
-<li class="chapter" data-level="" data-path="ma-plot-1.html"><a href="ma-plot-1.html"><i class="fa fa-check"></i>MA Plot</a></li>
-<li class="chapter" data-level="" data-path="top-gene-count-plot-1.html"><a href="top-gene-count-plot-1.html"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
-<li class="chapter" data-level="" data-path="heatmap-of-significant-genes-1.html"><a href="heatmap-of-significant-genes-1.html"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="saving-results-3.html"><a href="saving-results-3.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-two-packages-1"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-kegg"><i class="fa fa-check"></i><strong>Why KEGG?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#load-libraries-2"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis-2.html"><a href="load-results-from-differential-expression-analysis-2.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html"><i class="fa fa-check"></i>Build and Cache KEGG GMT</a>
-<ul>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html#convert-locus-tags-to-gene-symbols"><i class="fa fa-check"></i>Convert Locus Tags to Gene Symbols</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#prepare-input-2"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#run-ora-2"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#filter-and-inspect-significant-pathways"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#bar-plot-enriched-pathways"><i class="fa fa-check"></i>Bar Plot — Enriched Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#lollipop-plot-gene-hits-per-pathway"><i class="fa fa-check"></i>Lollipop Plot — Gene Hits per Pathway</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#critical-interpretation-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Spurious Hits</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#prepare-the-ranked-gene-list-2"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#convert-gmt-to-fgsea-format"><i class="fa fa-check"></i>Convert GMT to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#run-gsea-2"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#filter-and-inspect-significant-pathways-1"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#nes-bar-plot-activated-and-suppressed-pathways"><i class="fa fa-check"></i>NES Bar Plot — Activated and Suppressed Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#dot-plot-nes-padj-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, padj and Gene Set Size</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#enrichment-plot-top-pathways"><i class="fa fa-check"></i>Enrichment Plot — Top Pathways</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-2.html"><a href="part-3-comparing-ora-and-gsea-2.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-4.html"><a href="saving-results-4.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — 27200 Data Driven Bioengineering - Transcriptomics Workshop
@@ -448,39 +377,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="saving-results" class="section level2 hasAnchor">
 <h2>Saving Results<a href="saving-results.html#saving-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="saving-results.html#cb246-1" tabindex="-1"></a>tables_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>)</span>
-<span id="cb246-2"><a href="saving-results.html#cb246-2" tabindex="-1"></a><span class="fu">dir.create</span>(tables_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb246-3"><a href="saving-results.html#cb246-3" tabindex="-1"></a></span>
-<span id="cb246-4"><a href="saving-results.html#cb246-4" tabindex="-1"></a>ora_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb246-5"><a href="saving-results.html#cb246-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up)   <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_up)   <span class="sc">&gt;</span> <span class="dv">0</span>) ora_up   <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Up-biofilm&quot;</span>),</span>
-<span id="cb246-6"><a href="saving-results.html#cb246-6" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_down) <span class="sc">&gt;</span> <span class="dv">0</span>) ora_down <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Down-planktonic&quot;</span>)</span>
-<span id="cb246-7"><a href="saving-results.html#cb246-7" tabindex="-1"></a>)</span>
-<span id="cb246-8"><a href="saving-results.html#cb246-8" tabindex="-1"></a></span>
-<span id="cb246-9"><a href="saving-results.html#cb246-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_all) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_all) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb246-10"><a href="saving-results.html#cb246-10" tabindex="-1"></a>  <span class="fu">write.table</span>(</span>
-<span id="cb246-11"><a href="saving-results.html#cb246-11" tabindex="-1"></a>    ora_all <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">is.list</span>(.))),</span>
-<span id="cb246-12"><a href="saving-results.html#cb246-12" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">file.path</span>(tables_dir,</span>
-<span id="cb246-13"><a href="saving-results.html#cb246-13" tabindex="-1"></a>                     <span class="fu">sprintf</span>(<span class="st">&quot;ORA_lifestyle_%s.tsv&quot;</span>, strain)),</span>
-<span id="cb246-14"><a href="saving-results.html#cb246-14" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb246-15"><a href="saving-results.html#cb246-15" tabindex="-1"></a>  )</span>
-<span id="cb246-16"><a href="saving-results.html#cb246-16" tabindex="-1"></a>}</span>
-<span id="cb246-17"><a href="saving-results.html#cb246-17" tabindex="-1"></a></span>
-<span id="cb246-18"><a href="saving-results.html#cb246-18" tabindex="-1"></a><span class="fu">write.table</span>(</span>
-<span id="cb246-19"><a href="saving-results.html#cb246-19" tabindex="-1"></a>  gsea_results <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>leadingEdge),</span>
-<span id="cb246-20"><a href="saving-results.html#cb246-20" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">file.path</span>(tables_dir,</span>
-<span id="cb246-21"><a href="saving-results.html#cb246-21" tabindex="-1"></a>                   <span class="fu">sprintf</span>(<span class="st">&quot;GSEA_lifestyle_%s.tsv&quot;</span>, strain)),</span>
-<span id="cb246-22"><a href="saving-results.html#cb246-22" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb246-23"><a href="saving-results.html#cb246-23" tabindex="-1"></a>)</span>
-<span id="cb246-24"><a href="saving-results.html#cb246-24" tabindex="-1"></a></span>
-<span id="cb246-25"><a href="saving-results.html#cb246-25" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Saved to:&quot;</span>, <span class="fu">file.path</span>(cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="saving-results.html#cb247-1" tabindex="-1"></a>tables_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>)</span>
+<span id="cb247-2"><a href="saving-results.html#cb247-2" tabindex="-1"></a><span class="fu">dir.create</span>(tables_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb247-3"><a href="saving-results.html#cb247-3" tabindex="-1"></a></span>
+<span id="cb247-4"><a href="saving-results.html#cb247-4" tabindex="-1"></a>ora_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb247-5"><a href="saving-results.html#cb247-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up)   <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_up)   <span class="sc">&gt;</span> <span class="dv">0</span>) ora_up   <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Up-biofilm&quot;</span>),</span>
+<span id="cb247-6"><a href="saving-results.html#cb247-6" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_down) <span class="sc">&gt;</span> <span class="dv">0</span>) ora_down <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Down-planktonic&quot;</span>)</span>
+<span id="cb247-7"><a href="saving-results.html#cb247-7" tabindex="-1"></a>)</span>
+<span id="cb247-8"><a href="saving-results.html#cb247-8" tabindex="-1"></a></span>
+<span id="cb247-9"><a href="saving-results.html#cb247-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_all) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_all) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb247-10"><a href="saving-results.html#cb247-10" tabindex="-1"></a>  <span class="fu">write.table</span>(</span>
+<span id="cb247-11"><a href="saving-results.html#cb247-11" tabindex="-1"></a>    ora_all <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">is.list</span>(.))),</span>
+<span id="cb247-12"><a href="saving-results.html#cb247-12" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">file.path</span>(tables_dir,</span>
+<span id="cb247-13"><a href="saving-results.html#cb247-13" tabindex="-1"></a>                     <span class="fu">sprintf</span>(<span class="st">&quot;ORA_lifestyle_%s.tsv&quot;</span>, strain)),</span>
+<span id="cb247-14"><a href="saving-results.html#cb247-14" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb247-15"><a href="saving-results.html#cb247-15" tabindex="-1"></a>  )</span>
+<span id="cb247-16"><a href="saving-results.html#cb247-16" tabindex="-1"></a>}</span>
+<span id="cb247-17"><a href="saving-results.html#cb247-17" tabindex="-1"></a></span>
+<span id="cb247-18"><a href="saving-results.html#cb247-18" tabindex="-1"></a><span class="fu">write.table</span>(</span>
+<span id="cb247-19"><a href="saving-results.html#cb247-19" tabindex="-1"></a>  gsea_results <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>leadingEdge),</span>
+<span id="cb247-20"><a href="saving-results.html#cb247-20" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">file.path</span>(tables_dir,</span>
+<span id="cb247-21"><a href="saving-results.html#cb247-21" tabindex="-1"></a>                   <span class="fu">sprintf</span>(<span class="st">&quot;GSEA_lifestyle_%s.tsv&quot;</span>, strain)),</span>
+<span id="cb247-22"><a href="saving-results.html#cb247-22" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb247-23"><a href="saving-results.html#cb247-23" tabindex="-1"></a>)</span>
+<span id="cb247-24"><a href="saving-results.html#cb247-24" tabindex="-1"></a></span>
+<span id="cb247-25"><a href="saving-results.html#cb247-25" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Saved to:&quot;</span>, <span class="fu">file.path</span>(cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Saved to: results/usa100/tables</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="saving-results.html#cb248-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  ORA  -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;ORA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="saving-results.html#cb249-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  ORA  -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;ORA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##   ORA  -&gt;  ORA_lifestyle_usa100.tsv</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="saving-results.html#cb250-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;GSEA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="saving-results.html#cb251-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;GSEA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##   GSEA -&gt;  GSEA_lifestyle_usa100.tsv</code></pre>
 </div>

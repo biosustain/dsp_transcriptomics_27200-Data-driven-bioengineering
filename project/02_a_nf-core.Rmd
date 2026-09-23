@@ -1,45 +1,66 @@
 # Running the nf-core/rnaseq pipeline v3.23.0
 
-We will not process the original dataset because more computing power would be required. Instead, we will process only two size-reduced samples where 50,000 reads were randomly sampled from the original data (used script for sub-sampling: `util/subsample_50k_PRJNA1158806.sh`).
+Processing the whole dataset needs more compute than we have in a classroom, so
+for the hands-on run we use six *Staphylococcus aureus* USA-100 samples,
+sub-sampled to 50,000 reads each: three biofilm and three planktonic, all at the
+24 hour time point. The sub-sampling script is `util/subsample_50k_PRJNA685119_GSE163153_Sareus.sh`.
 
-We will use pipeline release [v3.23.0](https://nf-co.re/rnaseq/3.23.0). From this release, it is possible to use Bowtie2 for read alignment, which is advantageous for processing prokaryotic RNAseq data. For simplicity, we specify a "prokaryotic" profile which automatically uses Bowtie2 for read alignment and Salmon for read quantification.
+We use pipeline release [v3.23.0](https://nf-co.re/rnaseq/3.23.0). From this
+release you can align with Bowtie2, which suits bacterial RNA-seq because
+bacteria have no introns and a splice-aware aligner is unnecessary. The
+`prokaryotic` profile selects Bowtie2 for alignment and Salmon for
+quantification, so we do not have to set those separately.
 
 **To process the data, run the following command:**
 
 ```bash
 nextflow run 'https://github.com/nf-core/rnaseq' \
-    -name 'Ecoli_MG1655_saccharin_2_samples' \
-    --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/nfcore_rnaseq_processing_subsampled' \
-    --input '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/samplesheet_50k_subsampled_2samples.csv' \
-    --fasta '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/GCF_000005845.2_ASM584v2_genomic.fna.gz' \
-    --gtf '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/GCF_000005845.2_ASM584v2_genomic.gtf.gz' \
+    -name 'saureus_usa100_PRJNA685119_GSE163153' \
     -r 3.23.0 \
     -profile prokaryotic,docker \
+    --input  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA685119_GSE163153_saureus/usa100/samplesheet_PRJNA685119_usa100_subset_24h.csv' \
+    --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/saureus_usa100_nfcore_processing_downsampled' \
+    --fasta  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.fna.gz' \
+    --gtf    '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.gtf.gz' \
     -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config
 ```
 
-**Parameter descriptions:**
+**What the arguments mean:**
 
--   `-name`: name of the processing run
--   `--outdir`: (absolute) path to the output directory where results will be saved (the sub-directory is created automatically)
--   `--input`: (absolute) path to the sample sheet
--   `--fasta`: (absolute) path to the gzipped genome FASTA file
--   `--gtf`: (absolute) path to the gzipped genome annotation file
--   `-r`: nf-core/rnaseq pipeline release/version
--   `-profile`: profile(s) to run; here "prokaryotic" mode using "docker"
--   `-c`: (absolute) path to the custom configuration file; used here to limit the number of CPUs and memory
+-   `-name`: a name for this run
+-   `-r`: which release of the pipeline to use
+-   `-profile`: `prokaryotic` (Bowtie2 + Salmon) running in `docker`
+-   `--input`: the sample sheet, listing each sample and its two fastq files
+-   `--outdir`: where results go (the folder is created for you)
+-   `--fasta`: the genome sequence
+-   `--gtf`: the genome annotation
+-   `-c`: a small config file that caps CPUs and memory so the run fits in a Codespace
 
-The processing time is about 7 minutes.
+The same command is saved as a script, if you prefer to run it that way:
 
-The *S. aureus* and human datasets analysed in the next parts of this book were processed with this same pipeline; the human run is documented in `01_scripts/00_nfcore_rnaseq_processing.sh` (kept as provenance — its outputs are already committed, you do not need to run it).
+```bash
+bash 01_scripts/00_nfcore_rnaseq_processing_saureus.sh
+```
+
+It takes about 10 minutes.
 
 <div class="remember">
-  <strong>📌 Remember:</strong> Rather than configuring parameters manually, nf-core offers automatic parameter configuration. Go to the [pipeline page](https://nf-co.re/rnaseq/3.23.0) and press **Launch version 3.23.0** to see all pipeline parameters and change them as needed. A configuration file can be generated automatically for use with your Nextflow command.
+  <strong>📌 Remember:</strong> You can also set parameters through the nf-core website instead of typing them.
+  Go to the [pipeline page](https://nf-co.re/rnaseq/3.23.0), press **Launch version 3.23.0**, fill in the form,
+  and it generates a config file you can pass to Nextflow.
+</div>
+
+<div class="note">
+  <strong>📘 Note:</strong> The counts you analyse in the next chapters were made with this same pipeline, but
+  on the full dataset rather than these sub-sampled reads: all three time points for both <em>S. aureus</em>
+  strains, and the human samples with STAR instead of Bowtie2 (human genes do have introns). Those outputs are
+  already in the repository, so you do not have to run anything before starting the analysis.
 </div>
 
 ## Structure of the output directory
 
-The results of the pipeline run will be saved in `results/nfcore_rnaseq_processing_subsampled`. The top-level folder structure is as follows:
+Results are written to `results/saureus_usa100_nfcore_processing_downsampled`.
+The top level looks like this:
 
 ```
 .
@@ -51,137 +72,57 @@ The results of the pipeline run will be saved in `results/nfcore_rnaseq_processi
 └── trimgalore
 ```
 
-The detailed structure of the output directory:
+What each folder holds:
+
+-   **`bowtie2_salmon`** — the important one. Alignments (`.bam`), per-sample Salmon quantification, and the merged count matrices for the whole run. `salmon.merged.gene_counts.tsv` and `salmon.merged.gene.SummarizedExperiment.rds` are what an analysis like the next chapter starts from.
+-   **`fastqc`** — read quality reports, before (`raw`) and after (`trim`) trimming.
+-   **`fq_lint`** — format checks on the fastq files.
+-   **`multiqc`** — everything above gathered into one report. Start here.
+-   **`pipeline_info`** — what ran, for how long, with which software versions. This is your reproducibility record.
+-   **`trimgalore`** — adapter and quality trimming reports.
+
+A closer look inside `bowtie2_salmon`, for one sample:
 
 ```
-.
-├── bowtie2_salmon
-│   ├── control_1
-│   │   ├── aux_info
-│   │   ├── cmd_info.json
-│   │   ├── libParams
-│   │   ├── logs
-│   │   ├── quant.genes.sf
-│   │   └── quant.sf
-│   ├── control_1.markdup.sorted.bam
-│   ├── control_1.markdup.sorted.bam.bai
-│   ├── deseq2_qc
-│   │   ├── deseq2.dds.RData
-│   │   ├── deseq2.pca.vals.txt
-│   │   ├── deseq2.plots.pdf
-│   │   ├── deseq2.sample.dists.txt
-│   │   ├── R_sessionInfo.log
-│   │   └── size_factors
-│   ├── log
-│   │   ├── control_1.bowtie2.log
-│   │   └── saccharin_1.bowtie2.log
-│   ├── picard_metrics
-│   │   ├── control_1.markdup.sorted.MarkDuplicates.metrics.txt
-│   │   └── saccharin_1.markdup.sorted.MarkDuplicates.metrics.txt
-│   ├── saccharin_1
-│   │   ├── aux_info
-│   │   ├── cmd_info.json
-│   │   ├── libParams
-│   │   ├── logs
-│   │   ├── quant.genes.sf
-│   │   └── quant.sf
-│   ├── saccharin_1.markdup.sorted.bam
-│   ├── saccharin_1.markdup.sorted.bam.bai
-│   ├── salmon.merged.gene_counts_length_scaled.tsv
-│   ├── salmon.merged.gene_counts_scaled.tsv
-│   ├── salmon.merged.gene_counts.tsv
-│   ├── salmon.merged.gene_lengths.tsv
-│   ├── salmon.merged.gene.SummarizedExperiment.rds
-│   ├── salmon.merged.gene_tpm.tsv
-│   ├── salmon.merged.transcript_counts.tsv
-│   ├── salmon.merged.transcript_lengths.tsv
-│   ├── salmon.merged.transcript.SummarizedExperiment.rds
-│   ├── salmon.merged.transcript_tpm.tsv
-│   ├── salmon.merged.tx2gene.tsv
-│   ├── samtools_stats
-│   │   ├── control_1.markdup.sorted.bam.flagstat
-│   │   ├── control_1.markdup.sorted.bam.idxstats
-│   │   ├── control_1.markdup.sorted.bam.stats
-│   │   ├── control_1.sorted.bam.flagstat
-│   │   ├── control_1.sorted.bam.idxstats
-│   │   ├── control_1.sorted.bam.stats
-│   │   ├── saccharin_1.markdup.sorted.bam.flagstat
-│   │   ├── saccharin_1.markdup.sorted.bam.idxstats
-│   │   ├── saccharin_1.markdup.sorted.bam.stats
-│   │   ├── saccharin_1.sorted.bam.flagstat
-│   │   ├── saccharin_1.sorted.bam.idxstats
-│   │   └── saccharin_1.sorted.bam.stats
-│   └── stringtie
-│       ├── control_1.ballgown
-│       ├── control_1.coverage.gtf
-│       ├── control_1.gene.abundance.txt
-│       ├── control_1.transcripts.gtf
-│       ├── saccharin_1.ballgown
-│       ├── saccharin_1.coverage.gtf
-│       ├── saccharin_1.gene.abundance.txt
-│       └── saccharin_1.transcripts.gtf
-├── fastqc
-│   ├── raw
-│   │   ├── control_1_raw_1_fastqc.html
-│   │   ├── control_1_raw_1_fastqc.zip
-│   │   ├── control_1_raw_2_fastqc.html
-│   │   ├── control_1_raw_2_fastqc.zip
-│   │   ├── saccharin_1_raw_1_fastqc.html
-│   │   ├── saccharin_1_raw_1_fastqc.zip
-│   │   ├── saccharin_1_raw_2_fastqc.html
-│   │   └── saccharin_1_raw_2_fastqc.zip
-│   └── trim
-│       ├── control_1_trimmed_1_val_1_fastqc.html
-│       ├── control_1_trimmed_1_val_1_fastqc.zip
-│       ├── control_1_trimmed_2_val_2_fastqc.html
-│       ├── control_1_trimmed_2_val_2_fastqc.zip
-│       ├── saccharin_1_trimmed_1_val_1_fastqc.html
-│       ├── saccharin_1_trimmed_1_val_1_fastqc.zip
-│       ├── saccharin_1_trimmed_2_val_2_fastqc.html
-│       └── saccharin_1_trimmed_2_val_2_fastqc.zip
-├── fq_lint
-│   ├── raw
-│   │   ├── control_1.fq_lint.txt
-│   │   └── saccharin_1.fq_lint.txt
-│   └── trimmed
-│       ├── control_1.fq_lint.txt
-│       └── saccharin_1.fq_lint.txt
-├── multiqc
-│   └── bowtie2_salmon
-│       ├── multiqc_report_data
-│       ├── multiqc_report.html
-│       └── multiqc_report_plots
-├── pipeline_info
-│   ├── execution_report_2026-05-15_15-41-45.html
-│   ├── execution_timeline_2026-05-15_15-41-45.html
-│   ├── execution_trace_2026-05-15_15-41-45.txt
-│   ├── nf_core_rnaseq_software_mqc_versions.yml
-│   ├── params_2026-05-15_15-42-05.json
-│   └── pipeline_dag_2026-05-15_15-41-45.html
-└── trimgalore
-    ├── control_1_trimmed_1.fastq.gz_trimming_report.txt
-    ├── control_1_trimmed_2.fastq.gz_trimming_report.txt
-    ├── saccharin_1_trimmed_1.fastq.gz_trimming_report.txt
-    └── saccharin_1_trimmed_2.fastq.gz_trimming_report.txt
+bowtie2_salmon
+├── USA100_N315_Biofilm_24h_1/          # per-sample Salmon output
+│   ├── quant.sf                        #   transcript-level estimates
+│   └── quant.genes.sf                  #   gene-level estimates
+├── USA100_N315_Biofilm_24h_1.markdup.sorted.bam
+├── log/                                # Bowtie2 alignment logs
+├── samtools_stats/                     # alignment summaries per sample
+├── picard_metrics/                     # duplication metrics
+├── deseq2_qc/                          # a quick PCA and sample distances
+├── salmon.merged.gene_counts.tsv       # merged counts, genes x samples
+├── salmon.merged.gene_tpm.tsv          # merged TPM
+├── salmon.merged.gene.SummarizedExperiment.rds
+└── salmon.merged.tx2gene.tsv           # transcript to gene mapping
 ```
 
+## Reading the MultiQC report
 
-## Interpretation of RNAseq processing results using the multiQC report
+MultiQC collects the quality metrics from every step into a single page, so you
+can compare all samples side by side instead of opening reports one at a time.
 
-The nf-core/rnaseq pipeline generates a multiQC report which consolidates all quality control (QC) metrics from the pipeline run.  
-We will be analyzing the [multiQC report from processing the entire dataset](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/results/multiqc_nfcore_rnaseq_full_dataset/multiQC_Ecoli_sac_ctrl_deDios_2025_full_dataset.html) - which we have done prior to this course - rather than the one generated in your test run. (On GitHub, click **Download raw file** and open the downloaded HTML in your browser; in a Codespace, right-click the file under `results/multiqc_nfcore_rnaseq_full_dataset/` and choose **Open Preview** or download it.)
+Your own run only has six sub-sampled files, which is too little to judge an
+experiment by. So we will look at the report from the full USA-100 dataset,
+processed before the course:
+[MultiQC report, USA-100](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureusUSA100_multiqc_report.html).
+On GitHub, click **Download raw file** and open it in your browser. In a
+Codespace, right-click the file and choose **Open Preview**.
 
-The multiQC reports summarizes important QC metrics from RNAseq data processing. This includes for example:
+Things worth looking at:
 
-- Tabular overview of general statistics
-- QC metrics from FastQC and other software tools, e.g. read quality scores, GC and adaptor content before and after read trimming, % duplication, % read alignmnt, etc
-- PCA plot and Euclidean distance heatmap
-- Versions of the software tools used (see the end of the report)
+- The general statistics table at the top, one row per sample
+- FastQC metrics: read quality, GC content, adapter content, duplication, before and after trimming
+- How many reads aligned, per sample
+- The PCA and sample-distance heatmap from DESeq2
+- Software versions, at the very end
 
-
-Please take a few minutes to inspect the multiQC report. You can use the left panel for navigating the report. We will discuss details and your questions afterwards.   
+Spend a few minutes going through it. Use the menu on the left to move around.
+We will talk about what you found afterwards.
 
 :::boxy
-The three control samples are ```C1```, ```C2``` and ```C3```.  
-The three saccharin treatment samples are ```sac1```, ```sac2```and ```sac3```.
+Sample names tell you the strain, the lifestyle and the time point, for example
+`USA100_N315_Biofilm_24h_1` is the first biofilm replicate at 24 hours.
 :::

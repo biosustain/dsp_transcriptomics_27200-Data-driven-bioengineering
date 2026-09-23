@@ -153,8 +153,7 @@ bioc_pkgs <- c(
   "apeglm",       # recommended shrinkage estimator used with DESeq2
   "fgsea",
   "KEGGREST",
-  "EnhancedVolcano",
-  "org.EcK12.eg.db"  # E. coli gene annotation (E. coli chapters)
+  "EnhancedVolcano"
 )
 
 for (pkg in bioc_pkgs) {

@@ -29,7 +29,7 @@
   
   
 <link rel="prev" href="running-the-nf-corernaseq-pipeline-v3.23.html"/>
-<link rel="next" href="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"/>
+<link rel="next" href="reading-the-multiqc-report.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-the-nf-corernaseq-pipeline-v3.23.html"><a href="running-the-nf-corernaseq-pipeline-v3.23.html"><i class="fa fa-check"></i>Running the nf-core/rnaseq pipeline v3.23.0</a>
 <ul>
 <li class="chapter" data-level="" data-path="structure-of-the-output-directory.html"><a href="structure-of-the-output-directory.html"><i class="fa fa-check"></i>Structure of the output directory</a></li>
-<li class="chapter" data-level="" data-path="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><a href="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><i class="fa fa-check"></i>Interpretation of RNAseq processing results using the multiQC report</a></li>
+<li class="chapter" data-level="" data-path="reading-the-multiqc-report.html"><a href="reading-the-multiqc-report.html"><i class="fa fa-check"></i>Reading the MultiQC report</a></li>
 </ul></li>
 <li class="part"><span><b>I Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -352,77 +352,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
-<li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-2.html"><a href="setup-the-environment-2.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="getting-the-metadata-1.html"><a href="getting-the-metadata-1.html"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-<li class="chapter" data-level="" data-path="loading-count-data-2.html"><a href="loading-count-data-2.html"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-2.html"><a href="preparing-the-data-2.html"><i class="fa fa-check"></i>Preparing the Data</a></li>
-<li class="chapter" data-level="" data-path="creating-the-deseqdataset-2.html"><a href="creating-the-deseqdataset-2.html"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html"><i class="fa fa-check"></i>Sanity Checks</a>
-<ul>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#are-we-working-with-raw-counts-1"><i class="fa fa-check"></i>Are We Working with Raw Counts?</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#pre-filtering-low-count-genes-2"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#factor-order-and-reference-level-2"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#estimate-size-factors-2"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#distribution-of-normalised-counts-2"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="sample-correlation-heatmap-2.html"><a href="sample-correlation-heatmap-2.html"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-pca-2.html"><a href="principal-component-analysis-pca-2.html"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="detecting-outliers-2.html"><a href="detecting-outliers-2.html"><i class="fa fa-check"></i>Detecting Outliers</a></li>
-<li class="chapter" data-level="" data-path="top-variable-genes-heatmap-2.html"><a href="top-variable-genes-heatmap-2.html"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-<li class="chapter" data-level="" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-2.html"><a href="differential-expression-analysis-2.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-3.html"><a href="differential-expression-analysis-3.html"><i class="fa fa-check"></i>Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="extracting-results-1.html"><a href="extracting-results-1.html"><i class="fa fa-check"></i>Extracting Results</a></li>
-<li class="chapter" data-level="" data-path="log2-fold-change-shrinkage-1.html"><a href="log2-fold-change-shrinkage-1.html"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
-<li class="chapter" data-level="" data-path="sorting-and-filtering-significant-genes-1.html"><a href="sorting-and-filtering-significant-genes-1.html"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="visualisation-1.html"><a href="visualisation-1.html"><i class="fa fa-check"></i>Visualisation</a></li>
-<li class="chapter" data-level="" data-path="ma-plot-1.html"><a href="ma-plot-1.html"><i class="fa fa-check"></i>MA Plot</a></li>
-<li class="chapter" data-level="" data-path="top-gene-count-plot-1.html"><a href="top-gene-count-plot-1.html"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
-<li class="chapter" data-level="" data-path="heatmap-of-significant-genes-1.html"><a href="heatmap-of-significant-genes-1.html"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="saving-results-3.html"><a href="saving-results-3.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-two-packages-1"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-kegg"><i class="fa fa-check"></i><strong>Why KEGG?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#load-libraries-2"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis-2.html"><a href="load-results-from-differential-expression-analysis-2.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html"><i class="fa fa-check"></i>Build and Cache KEGG GMT</a>
-<ul>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html#convert-locus-tags-to-gene-symbols"><i class="fa fa-check"></i>Convert Locus Tags to Gene Symbols</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#prepare-input-2"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#run-ora-2"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#filter-and-inspect-significant-pathways"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#bar-plot-enriched-pathways"><i class="fa fa-check"></i>Bar Plot — Enriched Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#lollipop-plot-gene-hits-per-pathway"><i class="fa fa-check"></i>Lollipop Plot — Gene Hits per Pathway</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#critical-interpretation-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Spurious Hits</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#prepare-the-ranked-gene-list-2"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#convert-gmt-to-fgsea-format"><i class="fa fa-check"></i>Convert GMT to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#run-gsea-2"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#filter-and-inspect-significant-pathways-1"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#nes-bar-plot-activated-and-suppressed-pathways"><i class="fa fa-check"></i>NES Bar Plot — Activated and Suppressed Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#dot-plot-nes-padj-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, padj and Gene Set Size</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#enrichment-plot-top-pathways"><i class="fa fa-check"></i>Enrichment Plot — Top Pathways</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-2.html"><a href="part-3-comparing-ora-and-gsea-2.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-4.html"><a href="saving-results-4.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — 27200 Data Driven Bioengineering - Transcriptomics Workshop
@@ -447,7 +376,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="structure-of-the-output-directory" class="section level2 hasAnchor">
 <h2>Structure of the output directory<a href="structure-of-the-output-directory.html#structure-of-the-output-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The results of the pipeline run will be saved in <code>results/nfcore_rnaseq_processing_subsampled</code>. The top-level folder structure is as follows:</p>
+<p>Results are written to <code>results/saureus_usa100_nfcore_processing_downsampled</code>.
+The top level looks like this:</p>
 <pre><code>.
 ├── bowtie2_salmon
 ├── fastqc
@@ -455,116 +385,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ├── multiqc
 ├── pipeline_info
 └── trimgalore</code></pre>
-<p>The detailed structure of the output directory:</p>
-<pre><code>.
-├── bowtie2_salmon
-│   ├── control_1
-│   │   ├── aux_info
-│   │   ├── cmd_info.json
-│   │   ├── libParams
-│   │   ├── logs
-│   │   ├── quant.genes.sf
-│   │   └── quant.sf
-│   ├── control_1.markdup.sorted.bam
-│   ├── control_1.markdup.sorted.bam.bai
-│   ├── deseq2_qc
-│   │   ├── deseq2.dds.RData
-│   │   ├── deseq2.pca.vals.txt
-│   │   ├── deseq2.plots.pdf
-│   │   ├── deseq2.sample.dists.txt
-│   │   ├── R_sessionInfo.log
-│   │   └── size_factors
-│   ├── log
-│   │   ├── control_1.bowtie2.log
-│   │   └── saccharin_1.bowtie2.log
-│   ├── picard_metrics
-│   │   ├── control_1.markdup.sorted.MarkDuplicates.metrics.txt
-│   │   └── saccharin_1.markdup.sorted.MarkDuplicates.metrics.txt
-│   ├── saccharin_1
-│   │   ├── aux_info
-│   │   ├── cmd_info.json
-│   │   ├── libParams
-│   │   ├── logs
-│   │   ├── quant.genes.sf
-│   │   └── quant.sf
-│   ├── saccharin_1.markdup.sorted.bam
-│   ├── saccharin_1.markdup.sorted.bam.bai
-│   ├── salmon.merged.gene_counts_length_scaled.tsv
-│   ├── salmon.merged.gene_counts_scaled.tsv
-│   ├── salmon.merged.gene_counts.tsv
-│   ├── salmon.merged.gene_lengths.tsv
-│   ├── salmon.merged.gene.SummarizedExperiment.rds
-│   ├── salmon.merged.gene_tpm.tsv
-│   ├── salmon.merged.transcript_counts.tsv
-│   ├── salmon.merged.transcript_lengths.tsv
-│   ├── salmon.merged.transcript.SummarizedExperiment.rds
-│   ├── salmon.merged.transcript_tpm.tsv
-│   ├── salmon.merged.tx2gene.tsv
-│   ├── samtools_stats
-│   │   ├── control_1.markdup.sorted.bam.flagstat
-│   │   ├── control_1.markdup.sorted.bam.idxstats
-│   │   ├── control_1.markdup.sorted.bam.stats
-│   │   ├── control_1.sorted.bam.flagstat
-│   │   ├── control_1.sorted.bam.idxstats
-│   │   ├── control_1.sorted.bam.stats
-│   │   ├── saccharin_1.markdup.sorted.bam.flagstat
-│   │   ├── saccharin_1.markdup.sorted.bam.idxstats
-│   │   ├── saccharin_1.markdup.sorted.bam.stats
-│   │   ├── saccharin_1.sorted.bam.flagstat
-│   │   ├── saccharin_1.sorted.bam.idxstats
-│   │   └── saccharin_1.sorted.bam.stats
-│   └── stringtie
-│       ├── control_1.ballgown
-│       ├── control_1.coverage.gtf
-│       ├── control_1.gene.abundance.txt
-│       ├── control_1.transcripts.gtf
-│       ├── saccharin_1.ballgown
-│       ├── saccharin_1.coverage.gtf
-│       ├── saccharin_1.gene.abundance.txt
-│       └── saccharin_1.transcripts.gtf
-├── fastqc
-│   ├── raw
-│   │   ├── control_1_raw_1_fastqc.html
-│   │   ├── control_1_raw_1_fastqc.zip
-│   │   ├── control_1_raw_2_fastqc.html
-│   │   ├── control_1_raw_2_fastqc.zip
-│   │   ├── saccharin_1_raw_1_fastqc.html
-│   │   ├── saccharin_1_raw_1_fastqc.zip
-│   │   ├── saccharin_1_raw_2_fastqc.html
-│   │   └── saccharin_1_raw_2_fastqc.zip
-│   └── trim
-│       ├── control_1_trimmed_1_val_1_fastqc.html
-│       ├── control_1_trimmed_1_val_1_fastqc.zip
-│       ├── control_1_trimmed_2_val_2_fastqc.html
-│       ├── control_1_trimmed_2_val_2_fastqc.zip
-│       ├── saccharin_1_trimmed_1_val_1_fastqc.html
-│       ├── saccharin_1_trimmed_1_val_1_fastqc.zip
-│       ├── saccharin_1_trimmed_2_val_2_fastqc.html
-│       └── saccharin_1_trimmed_2_val_2_fastqc.zip
-├── fq_lint
-│   ├── raw
-│   │   ├── control_1.fq_lint.txt
-│   │   └── saccharin_1.fq_lint.txt
-│   └── trimmed
-│       ├── control_1.fq_lint.txt
-│       └── saccharin_1.fq_lint.txt
-├── multiqc
-│   └── bowtie2_salmon
-│       ├── multiqc_report_data
-│       ├── multiqc_report.html
-│       └── multiqc_report_plots
-├── pipeline_info
-│   ├── execution_report_2026-05-15_15-41-45.html
-│   ├── execution_timeline_2026-05-15_15-41-45.html
-│   ├── execution_trace_2026-05-15_15-41-45.txt
-│   ├── nf_core_rnaseq_software_mqc_versions.yml
-│   ├── params_2026-05-15_15-42-05.json
-│   └── pipeline_dag_2026-05-15_15-41-45.html
-└── trimgalore
-    ├── control_1_trimmed_1.fastq.gz_trimming_report.txt
-    ├── control_1_trimmed_2.fastq.gz_trimming_report.txt
-    ├── saccharin_1_trimmed_1.fastq.gz_trimming_report.txt
-    └── saccharin_1_trimmed_2.fastq.gz_trimming_report.txt</code></pre>
+<p>What each folder holds:</p>
+<ul>
+<li><strong><code>bowtie2_salmon</code></strong> — the important one. Alignments (<code>.bam</code>), per-sample Salmon quantification, and the merged count matrices for the whole run. <code>salmon.merged.gene_counts.tsv</code> and <code>salmon.merged.gene.SummarizedExperiment.rds</code> are what an analysis like the next chapter starts from.</li>
+<li><strong><code>fastqc</code></strong> — read quality reports, before (<code>raw</code>) and after (<code>trim</code>) trimming.</li>
+<li><strong><code>fq_lint</code></strong> — format checks on the fastq files.</li>
+<li><strong><code>multiqc</code></strong> — everything above gathered into one report. Start here.</li>
+<li><strong><code>pipeline_info</code></strong> — what ran, for how long, with which software versions. This is your reproducibility record.</li>
+<li><strong><code>trimgalore</code></strong> — adapter and quality trimming reports.</li>
+</ul>
+<p>A closer look inside <code>bowtie2_salmon</code>, for one sample:</p>
+<pre><code>bowtie2_salmon
+├── USA100_N315_Biofilm_24h_1/          # per-sample Salmon output
+│   ├── quant.sf                        #   transcript-level estimates
+│   └── quant.genes.sf                  #   gene-level estimates
+├── USA100_N315_Biofilm_24h_1.markdup.sorted.bam
+├── log/                                # Bowtie2 alignment logs
+├── samtools_stats/                     # alignment summaries per sample
+├── picard_metrics/                     # duplication metrics
+├── deseq2_qc/                          # a quick PCA and sample distances
+├── salmon.merged.gene_counts.tsv       # merged counts, genes x samples
+├── salmon.merged.gene_tpm.tsv          # merged TPM
+├── salmon.merged.gene.SummarizedExperiment.rds
+└── salmon.merged.tx2gene.tsv           # transcript to gene mapping</code></pre>
 </div>
             </section>
 
@@ -572,7 +415,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="running-the-nf-corernaseq-pipeline-v3.23.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reading-the-multiqc-report.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

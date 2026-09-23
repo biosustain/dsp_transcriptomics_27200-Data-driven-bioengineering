@@ -217,7 +217,7 @@ kegg_by_path_rs <- map(kegg_by_path_old, function(old_tags) {
 }) %>%
   keep(~ length(.x) >= 5)
 
-# assemble the mulea-style GMT data frame (matches the E. coli script's structure)
+# assemble the mulea-style GMT data frame
 kegg_gmt <- tibble(
   ontology_id    = names(kegg_by_path_rs),
   ontology_name  = pathway_names[names(kegg_by_path_rs)],

@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-the-nf-corernaseq-pipeline-v3.23.html"><a href="running-the-nf-corernaseq-pipeline-v3.23.html"><i class="fa fa-check"></i>Running the nf-core/rnaseq pipeline v3.23.0</a>
 <ul>
 <li class="chapter" data-level="" data-path="structure-of-the-output-directory.html"><a href="structure-of-the-output-directory.html"><i class="fa fa-check"></i>Structure of the output directory</a></li>
-<li class="chapter" data-level="" data-path="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><a href="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><i class="fa fa-check"></i>Interpretation of RNAseq processing results using the multiQC report</a></li>
+<li class="chapter" data-level="" data-path="reading-the-multiqc-report.html"><a href="reading-the-multiqc-report.html"><i class="fa fa-check"></i>Reading the MultiQC report</a></li>
 </ul></li>
 <li class="part"><span><b>I Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -352,77 +352,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
-<li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-2.html"><a href="setup-the-environment-2.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="getting-the-metadata-1.html"><a href="getting-the-metadata-1.html"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-<li class="chapter" data-level="" data-path="loading-count-data-2.html"><a href="loading-count-data-2.html"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-2.html"><a href="preparing-the-data-2.html"><i class="fa fa-check"></i>Preparing the Data</a></li>
-<li class="chapter" data-level="" data-path="creating-the-deseqdataset-2.html"><a href="creating-the-deseqdataset-2.html"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html"><i class="fa fa-check"></i>Sanity Checks</a>
-<ul>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#are-we-working-with-raw-counts-1"><i class="fa fa-check"></i>Are We Working with Raw Counts?</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#pre-filtering-low-count-genes-2"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#factor-order-and-reference-level-2"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#estimate-size-factors-2"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#distribution-of-normalised-counts-2"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="sample-correlation-heatmap-2.html"><a href="sample-correlation-heatmap-2.html"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-pca-2.html"><a href="principal-component-analysis-pca-2.html"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="detecting-outliers-2.html"><a href="detecting-outliers-2.html"><i class="fa fa-check"></i>Detecting Outliers</a></li>
-<li class="chapter" data-level="" data-path="top-variable-genes-heatmap-2.html"><a href="top-variable-genes-heatmap-2.html"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-<li class="chapter" data-level="" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-2.html"><a href="differential-expression-analysis-2.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-3.html"><a href="differential-expression-analysis-3.html"><i class="fa fa-check"></i>Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="extracting-results-1.html"><a href="extracting-results-1.html"><i class="fa fa-check"></i>Extracting Results</a></li>
-<li class="chapter" data-level="" data-path="log2-fold-change-shrinkage-1.html"><a href="log2-fold-change-shrinkage-1.html"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
-<li class="chapter" data-level="" data-path="sorting-and-filtering-significant-genes-1.html"><a href="sorting-and-filtering-significant-genes-1.html"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="visualisation-1.html"><a href="visualisation-1.html"><i class="fa fa-check"></i>Visualisation</a></li>
-<li class="chapter" data-level="" data-path="ma-plot-1.html"><a href="ma-plot-1.html"><i class="fa fa-check"></i>MA Plot</a></li>
-<li class="chapter" data-level="" data-path="top-gene-count-plot-1.html"><a href="top-gene-count-plot-1.html"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
-<li class="chapter" data-level="" data-path="heatmap-of-significant-genes-1.html"><a href="heatmap-of-significant-genes-1.html"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="saving-results-3.html"><a href="saving-results-3.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-two-packages-1"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-kegg"><i class="fa fa-check"></i><strong>Why KEGG?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#load-libraries-2"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis-2.html"><a href="load-results-from-differential-expression-analysis-2.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html"><i class="fa fa-check"></i>Build and Cache KEGG GMT</a>
-<ul>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html#convert-locus-tags-to-gene-symbols"><i class="fa fa-check"></i>Convert Locus Tags to Gene Symbols</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#prepare-input-2"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#run-ora-2"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#filter-and-inspect-significant-pathways"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#bar-plot-enriched-pathways"><i class="fa fa-check"></i>Bar Plot — Enriched Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#lollipop-plot-gene-hits-per-pathway"><i class="fa fa-check"></i>Lollipop Plot — Gene Hits per Pathway</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#critical-interpretation-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Spurious Hits</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#prepare-the-ranked-gene-list-2"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#convert-gmt-to-fgsea-format"><i class="fa fa-check"></i>Convert GMT to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#run-gsea-2"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#filter-and-inspect-significant-pathways-1"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#nes-bar-plot-activated-and-suppressed-pathways"><i class="fa fa-check"></i>NES Bar Plot — Activated and Suppressed Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#dot-plot-nes-padj-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, padj and Gene Set Size</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#enrichment-plot-top-pathways"><i class="fa fa-check"></i>Enrichment Plot — Top Pathways</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-2.html"><a href="part-3-comparing-ora-and-gsea-2.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-4.html"><a href="saving-results-4.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — 27200 Data Driven Bioengineering - Transcriptomics Workshop
@@ -447,35 +376,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="running-the-nf-corernaseq-pipeline-v3.23.0" class="section level1 hasAnchor">
 <h1>Running the nf-core/rnaseq pipeline v3.23.0<a href="running-the-nf-corernaseq-pipeline-v3.23.html#running-the-nf-corernaseq-pipeline-v3.23.0" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>We will not process the original dataset because more computing power would be required. Instead, we will process only two size-reduced samples where 50,000 reads were randomly sampled from the original data (used script for sub-sampling: <code>util/subsample_50k_PRJNA1158806.sh</code>).</p>
-<p>We will use pipeline release <a href="https://nf-co.re/rnaseq/3.23.0">v3.23.0</a>. From this release, it is possible to use Bowtie2 for read alignment, which is advantageous for processing prokaryotic RNAseq data. For simplicity, we specify a “prokaryotic” profile which automatically uses Bowtie2 for read alignment and Salmon for read quantification.</p>
+<p>Processing the whole dataset needs more compute than we have in a classroom, so
+for the hands-on run we use six <em>Staphylococcus aureus</em> USA-100 samples,
+sub-sampled to 50,000 reads each: three biofilm and three planktonic, all at the
+24 hour time point. The sub-sampling script is <code>util/subsample_50k_PRJNA685119_GSE163153_Sareus.sh</code>.</p>
+<p>We use pipeline release <a href="https://nf-co.re/rnaseq/3.23.0">v3.23.0</a>. From this
+release you can align with Bowtie2, which suits bacterial RNA-seq because
+bacteria have no introns and a splice-aware aligner is unnecessary. The
+<code>prokaryotic</code> profile selects Bowtie2 for alignment and Salmon for
+quantification, so we do not have to set those separately.</p>
 <p><strong>To process the data, run the following command:</strong></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-1" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="st">&#39;https://github.com/nf-core/rnaseq&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-2"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-2" tabindex="-1"></a>    <span class="at">-name</span> <span class="st">&#39;Ecoli_MG1655_saccharin_2_samples&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-3"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-3" tabindex="-1"></a>    <span class="at">--outdir</span> <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/nfcore_rnaseq_processing_subsampled&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-4"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-4" tabindex="-1"></a>    <span class="at">--input</span> <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/samplesheet_50k_subsampled_2samples.csv&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-5"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-5" tabindex="-1"></a>    <span class="at">--fasta</span> <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/GCF_000005845.2_ASM584v2_genomic.fna.gz&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-6"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-6" tabindex="-1"></a>    <span class="at">--gtf</span> <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/GCF_000005845.2_ASM584v2_genomic.gtf.gz&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-7"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-7" tabindex="-1"></a>    <span class="at">-r</span> 3.23.0 <span class="dt">\</span></span>
-<span id="cb6-8"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-8" tabindex="-1"></a>    <span class="at">-profile</span> prokaryotic,docker <span class="dt">\</span></span>
+<span id="cb6-2"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-2" tabindex="-1"></a>    <span class="at">-name</span> <span class="st">&#39;saureus_usa100_PRJNA685119_GSE163153&#39;</span> <span class="dt">\</span></span>
+<span id="cb6-3"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-3" tabindex="-1"></a>    <span class="at">-r</span> 3.23.0 <span class="dt">\</span></span>
+<span id="cb6-4"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-4" tabindex="-1"></a>    <span class="at">-profile</span> prokaryotic,docker <span class="dt">\</span></span>
+<span id="cb6-5"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-5" tabindex="-1"></a>    <span class="at">--input</span>  <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA685119_GSE163153_saureus/usa100/samplesheet_PRJNA685119_usa100_subset_24h.csv&#39;</span> <span class="dt">\</span></span>
+<span id="cb6-6"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-6" tabindex="-1"></a>    <span class="at">--outdir</span> <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/saureus_usa100_nfcore_processing_downsampled&#39;</span> <span class="dt">\</span></span>
+<span id="cb6-7"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-7" tabindex="-1"></a>    <span class="at">--fasta</span>  <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.fna.gz&#39;</span> <span class="dt">\</span></span>
+<span id="cb6-8"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-8" tabindex="-1"></a>    <span class="at">--gtf</span>    <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.gtf.gz&#39;</span> <span class="dt">\</span></span>
 <span id="cb6-9"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-9" tabindex="-1"></a>    <span class="at">-c</span> /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config</span></code></pre></div>
 </details>
-<p><strong>Parameter descriptions:</strong></p>
+<p><strong>What the arguments mean:</strong></p>
 <ul>
-<li><code>-name</code>: name of the processing run</li>
-<li><code>--outdir</code>: (absolute) path to the output directory where results will be saved (the sub-directory is created automatically)</li>
-<li><code>--input</code>: (absolute) path to the sample sheet</li>
-<li><code>--fasta</code>: (absolute) path to the gzipped genome FASTA file</li>
-<li><code>--gtf</code>: (absolute) path to the gzipped genome annotation file</li>
-<li><code>-r</code>: nf-core/rnaseq pipeline release/version</li>
-<li><code>-profile</code>: profile(s) to run; here “prokaryotic” mode using “docker”</li>
-<li><code>-c</code>: (absolute) path to the custom configuration file; used here to limit the number of CPUs and memory</li>
+<li><code>-name</code>: a name for this run</li>
+<li><code>-r</code>: which release of the pipeline to use</li>
+<li><code>-profile</code>: <code>prokaryotic</code> (Bowtie2 + Salmon) running in <code>docker</code></li>
+<li><code>--input</code>: the sample sheet, listing each sample and its two fastq files</li>
+<li><code>--outdir</code>: where results go (the folder is created for you)</li>
+<li><code>--fasta</code>: the genome sequence</li>
+<li><code>--gtf</code>: the genome annotation</li>
+<li><code>-c</code>: a small config file that caps CPUs and memory so the run fits in a Codespace</li>
 </ul>
-<p>The processing time is about 7 minutes.</p>
-<p>The <em>S. aureus</em> and human datasets analysed in the next parts of this book were processed with this same pipeline; the human run is documented in <code>01_scripts/00_nfcore_rnaseq_processing.sh</code> (kept as provenance — its outputs are already committed, you do not need to run it).</p>
+<p>The same command is saved as a script, if you prefer to run it that way:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-1" tabindex="-1"></a><span class="fu">bash</span> 01_scripts/00_nfcore_rnaseq_processing_saureus.sh</span></code></pre></div>
+</details>
+<p>It takes about 10 minutes.</p>
 <div class="remember">
-<p><strong>📌 Remember:</strong> Rather than configuring parameters manually, nf-core offers automatic parameter configuration. Go to the <a href="https://nf-co.re/rnaseq/3.23.0">pipeline page</a> and press <strong>Launch version 3.23.0</strong> to see all pipeline parameters and change them as needed. A configuration file can be generated automatically for use with your Nextflow command.</p>
+<p><strong>📌 Remember:</strong> You can also set parameters through the nf-core website instead of typing them.
+Go to the <a href="https://nf-co.re/rnaseq/3.23.0">pipeline page</a>, press <strong>Launch version 3.23.0</strong>, fill in the form,
+and it generates a config file you can pass to Nextflow.</p>
+</div>
+<div class="note">
+<p><strong>📘 Note:</strong> The counts you analyse in the next chapters were made with this same pipeline, but
+on the full dataset rather than these sub-sampled reads: all three time points for both <em>S. aureus</em>
+strains, and the human samples with STAR instead of Bowtie2 (human genes do have introns). Those outputs are
+already in the repository, so you do not have to run anything before starting the analysis.</p>
 </div>
 </div>
             </section>

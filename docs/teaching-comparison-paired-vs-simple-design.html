@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-the-nf-corernaseq-pipeline-v3.23.html"><a href="running-the-nf-corernaseq-pipeline-v3.23.html"><i class="fa fa-check"></i>Running the nf-core/rnaseq pipeline v3.23.0</a>
 <ul>
 <li class="chapter" data-level="" data-path="structure-of-the-output-directory.html"><a href="structure-of-the-output-directory.html"><i class="fa fa-check"></i>Structure of the output directory</a></li>
-<li class="chapter" data-level="" data-path="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><a href="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><i class="fa fa-check"></i>Interpretation of RNAseq processing results using the multiQC report</a></li>
+<li class="chapter" data-level="" data-path="reading-the-multiqc-report.html"><a href="reading-the-multiqc-report.html"><i class="fa fa-check"></i>Reading the MultiQC report</a></li>
 </ul></li>
 <li class="part"><span><b>I Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -352,77 +352,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
-<li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-2.html"><a href="setup-the-environment-2.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="getting-the-metadata-1.html"><a href="getting-the-metadata-1.html"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-<li class="chapter" data-level="" data-path="loading-count-data-2.html"><a href="loading-count-data-2.html"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-2.html"><a href="preparing-the-data-2.html"><i class="fa fa-check"></i>Preparing the Data</a></li>
-<li class="chapter" data-level="" data-path="creating-the-deseqdataset-2.html"><a href="creating-the-deseqdataset-2.html"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html"><i class="fa fa-check"></i>Sanity Checks</a>
-<ul>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#are-we-working-with-raw-counts-1"><i class="fa fa-check"></i>Are We Working with Raw Counts?</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#pre-filtering-low-count-genes-2"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#factor-order-and-reference-level-2"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#estimate-size-factors-2"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#distribution-of-normalised-counts-2"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="sample-correlation-heatmap-2.html"><a href="sample-correlation-heatmap-2.html"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-pca-2.html"><a href="principal-component-analysis-pca-2.html"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="detecting-outliers-2.html"><a href="detecting-outliers-2.html"><i class="fa fa-check"></i>Detecting Outliers</a></li>
-<li class="chapter" data-level="" data-path="top-variable-genes-heatmap-2.html"><a href="top-variable-genes-heatmap-2.html"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-<li class="chapter" data-level="" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-2.html"><a href="differential-expression-analysis-2.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-3.html"><a href="differential-expression-analysis-3.html"><i class="fa fa-check"></i>Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="extracting-results-1.html"><a href="extracting-results-1.html"><i class="fa fa-check"></i>Extracting Results</a></li>
-<li class="chapter" data-level="" data-path="log2-fold-change-shrinkage-1.html"><a href="log2-fold-change-shrinkage-1.html"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
-<li class="chapter" data-level="" data-path="sorting-and-filtering-significant-genes-1.html"><a href="sorting-and-filtering-significant-genes-1.html"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="visualisation-1.html"><a href="visualisation-1.html"><i class="fa fa-check"></i>Visualisation</a></li>
-<li class="chapter" data-level="" data-path="ma-plot-1.html"><a href="ma-plot-1.html"><i class="fa fa-check"></i>MA Plot</a></li>
-<li class="chapter" data-level="" data-path="top-gene-count-plot-1.html"><a href="top-gene-count-plot-1.html"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
-<li class="chapter" data-level="" data-path="heatmap-of-significant-genes-1.html"><a href="heatmap-of-significant-genes-1.html"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="saving-results-3.html"><a href="saving-results-3.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-two-packages-1"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-kegg"><i class="fa fa-check"></i><strong>Why KEGG?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#load-libraries-2"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis-2.html"><a href="load-results-from-differential-expression-analysis-2.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html"><i class="fa fa-check"></i>Build and Cache KEGG GMT</a>
-<ul>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html#convert-locus-tags-to-gene-symbols"><i class="fa fa-check"></i>Convert Locus Tags to Gene Symbols</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#prepare-input-2"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#run-ora-2"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#filter-and-inspect-significant-pathways"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#bar-plot-enriched-pathways"><i class="fa fa-check"></i>Bar Plot — Enriched Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#lollipop-plot-gene-hits-per-pathway"><i class="fa fa-check"></i>Lollipop Plot — Gene Hits per Pathway</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#critical-interpretation-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Spurious Hits</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#prepare-the-ranked-gene-list-2"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#convert-gmt-to-fgsea-format"><i class="fa fa-check"></i>Convert GMT to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#run-gsea-2"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#filter-and-inspect-significant-pathways-1"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#nes-bar-plot-activated-and-suppressed-pathways"><i class="fa fa-check"></i>NES Bar Plot — Activated and Suppressed Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#dot-plot-nes-padj-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, padj and Gene Set Size</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#enrichment-plot-top-pathways"><i class="fa fa-check"></i>Enrichment Plot — Top Pathways</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-2.html"><a href="part-3-comparing-ora-and-gsea-2.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-4.html"><a href="saving-results-4.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — 27200 Data Driven Bioengineering - Transcriptomics Workshop
@@ -449,28 +378,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Teaching Comparison — Paired vs Simple Design<a href="teaching-comparison-paired-vs-simple-design.html#teaching-comparison-paired-vs-simple-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Before extracting the final results, we fit the simple <code>~ condition</code> model on the same data and compare how many genes each design calls significant. This makes the effect of accounting for donor concrete.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-1" tabindex="-1"></a><span class="co"># Simple model: drop the donor term</span></span>
-<span id="cb316-2"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-2" tabindex="-1"></a>dds_simple <span class="ot">&lt;-</span> dds</span>
-<span id="cb316-3"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-3" tabindex="-1"></a><span class="fu">design</span>(dds_simple) <span class="ot">&lt;-</span> <span class="er">~</span> condition</span>
-<span id="cb316-4"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-4" tabindex="-1"></a>dds_simple <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_simple)</span>
-<span id="cb316-5"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-5" tabindex="-1"></a></span>
-<span id="cb316-6"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-6" tabindex="-1"></a>res_paired_tmp <span class="ot">&lt;-</span> <span class="fu">results</span>(dds,</span>
-<span id="cb316-7"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-7" tabindex="-1"></a>                          <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;control&quot;</span>),</span>
-<span id="cb316-8"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-8" tabindex="-1"></a>                          <span class="at">alpha    =</span> <span class="fl">0.05</span>)</span>
-<span id="cb316-9"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-9" tabindex="-1"></a>res_simple_tmp <span class="ot">&lt;-</span> <span class="fu">results</span>(dds_simple,</span>
-<span id="cb316-10"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-10" tabindex="-1"></a>                          <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;control&quot;</span>),</span>
-<span id="cb316-11"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-11" tabindex="-1"></a>                          <span class="at">alpha    =</span> <span class="fl">0.05</span>)</span>
-<span id="cb316-12"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-12" tabindex="-1"></a></span>
-<span id="cb316-13"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-13" tabindex="-1"></a>n_sig <span class="ot">&lt;-</span> <span class="cf">function</span>(r) <span class="fu">sum</span>(r<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb316-14"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-14" tabindex="-1"></a></span>
-<span id="cb316-15"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-15" tabindex="-1"></a>comparison_tbl <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb316-16"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-16" tabindex="-1"></a>  <span class="at">Design            =</span> <span class="fu">c</span>(<span class="st">&quot;~ donor + condition (paired)&quot;</span>, <span class="st">&quot;~ condition (simple)&quot;</span>),</span>
-<span id="cb316-17"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-17" tabindex="-1"></a>  <span class="st">`</span><span class="at">Significant genes (padj &lt; 0.05)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">n_sig</span>(res_paired_tmp), <span class="fu">n_sig</span>(res_simple_tmp)),</span>
-<span id="cb316-18"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-18" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb316-19"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-19" tabindex="-1"></a>)</span>
-<span id="cb316-20"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-20" tabindex="-1"></a></span>
-<span id="cb316-21"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-21" tabindex="-1"></a><span class="fu">kable</span>(comparison_tbl, <span class="at">caption =</span> <span class="st">&quot;Effect of design on the number of significant genes&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb316-22"><a href="teaching-comparison-paired-vs-simple-design.html#cb316-22" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-1" tabindex="-1"></a><span class="co"># Simple model: drop the donor term</span></span>
+<span id="cb317-2"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-2" tabindex="-1"></a>dds_simple <span class="ot">&lt;-</span> dds</span>
+<span id="cb317-3"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-3" tabindex="-1"></a><span class="fu">design</span>(dds_simple) <span class="ot">&lt;-</span> <span class="er">~</span> condition</span>
+<span id="cb317-4"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-4" tabindex="-1"></a>dds_simple <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_simple)</span>
+<span id="cb317-5"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-5" tabindex="-1"></a></span>
+<span id="cb317-6"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-6" tabindex="-1"></a>res_paired_tmp <span class="ot">&lt;-</span> <span class="fu">results</span>(dds,</span>
+<span id="cb317-7"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-7" tabindex="-1"></a>                          <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;control&quot;</span>),</span>
+<span id="cb317-8"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-8" tabindex="-1"></a>                          <span class="at">alpha    =</span> <span class="fl">0.05</span>)</span>
+<span id="cb317-9"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-9" tabindex="-1"></a>res_simple_tmp <span class="ot">&lt;-</span> <span class="fu">results</span>(dds_simple,</span>
+<span id="cb317-10"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-10" tabindex="-1"></a>                          <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;control&quot;</span>),</span>
+<span id="cb317-11"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-11" tabindex="-1"></a>                          <span class="at">alpha    =</span> <span class="fl">0.05</span>)</span>
+<span id="cb317-12"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-12" tabindex="-1"></a></span>
+<span id="cb317-13"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-13" tabindex="-1"></a>n_sig <span class="ot">&lt;-</span> <span class="cf">function</span>(r) <span class="fu">sum</span>(r<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb317-14"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-14" tabindex="-1"></a></span>
+<span id="cb317-15"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-15" tabindex="-1"></a>comparison_tbl <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb317-16"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-16" tabindex="-1"></a>  <span class="at">Design            =</span> <span class="fu">c</span>(<span class="st">&quot;~ donor + condition (paired)&quot;</span>, <span class="st">&quot;~ condition (simple)&quot;</span>),</span>
+<span id="cb317-17"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-17" tabindex="-1"></a>  <span class="st">`</span><span class="at">Significant genes (padj &lt; 0.05)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">n_sig</span>(res_paired_tmp), <span class="fu">n_sig</span>(res_simple_tmp)),</span>
+<span id="cb317-18"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-18" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb317-19"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-19" tabindex="-1"></a>)</span>
+<span id="cb317-20"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-20" tabindex="-1"></a></span>
+<span id="cb317-21"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-21" tabindex="-1"></a><span class="fu">kable</span>(comparison_tbl, <span class="at">caption =</span> <span class="st">&quot;Effect of design on the number of significant genes&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb317-22"><a href="teaching-comparison-paired-vs-simple-design.html#cb317-22" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </details>
 <table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>

@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-the-nf-corernaseq-pipeline-v3.23.html"><a href="running-the-nf-corernaseq-pipeline-v3.23.html"><i class="fa fa-check"></i>Running the nf-core/rnaseq pipeline v3.23.0</a>
 <ul>
 <li class="chapter" data-level="" data-path="structure-of-the-output-directory.html"><a href="structure-of-the-output-directory.html"><i class="fa fa-check"></i>Structure of the output directory</a></li>
-<li class="chapter" data-level="" data-path="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><a href="interpretation-of-rnaseq-processing-results-using-the-multiqc-report.html"><i class="fa fa-check"></i>Interpretation of RNAseq processing results using the multiQC report</a></li>
+<li class="chapter" data-level="" data-path="reading-the-multiqc-report.html"><a href="reading-the-multiqc-report.html"><i class="fa fa-check"></i>Reading the MultiQC report</a></li>
 </ul></li>
 <li class="part"><span><b>I Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
 <li class="chapter" data-level="" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i>Quality Control</a>
@@ -352,77 +352,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
-<li class="part"><span><b>III E. coli (saccharin treatment)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-2.html"><a href="quality-control-2.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-2.html"><a href="setup-the-environment-2.html"><i class="fa fa-check"></i>Setup the Environment</a></li>
-<li class="chapter" data-level="" data-path="getting-the-metadata-1.html"><a href="getting-the-metadata-1.html"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-<li class="chapter" data-level="" data-path="loading-count-data-2.html"><a href="loading-count-data-2.html"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-2.html"><a href="preparing-the-data-2.html"><i class="fa fa-check"></i>Preparing the Data</a></li>
-<li class="chapter" data-level="" data-path="creating-the-deseqdataset-2.html"><a href="creating-the-deseqdataset-2.html"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html"><i class="fa fa-check"></i>Sanity Checks</a>
-<ul>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#are-we-working-with-raw-counts-1"><i class="fa fa-check"></i>Are We Working with Raw Counts?</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#pre-filtering-low-count-genes-2"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-<li class="chapter" data-level="" data-path="sanity-checks-2.html"><a href="sanity-checks-2.html#factor-order-and-reference-level-2"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#estimate-size-factors-2"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-2.html"><a href="exploratory-data-analysis-2.html#distribution-of-normalised-counts-2"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="sample-correlation-heatmap-2.html"><a href="sample-correlation-heatmap-2.html"><i class="fa fa-check"></i>Sample Correlation Heatmap</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-pca-2.html"><a href="principal-component-analysis-pca-2.html"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="detecting-outliers-2.html"><a href="detecting-outliers-2.html"><i class="fa fa-check"></i>Detecting Outliers</a></li>
-<li class="chapter" data-level="" data-path="top-variable-genes-heatmap-2.html"><a href="top-variable-genes-heatmap-2.html"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-<li class="chapter" data-level="" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-2.html"><a href="differential-expression-analysis-2.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-3.html"><a href="differential-expression-analysis-3.html"><i class="fa fa-check"></i>Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="extracting-results-1.html"><a href="extracting-results-1.html"><i class="fa fa-check"></i>Extracting Results</a></li>
-<li class="chapter" data-level="" data-path="log2-fold-change-shrinkage-1.html"><a href="log2-fold-change-shrinkage-1.html"><i class="fa fa-check"></i>Log2 Fold Change Shrinkage</a></li>
-<li class="chapter" data-level="" data-path="sorting-and-filtering-significant-genes-1.html"><a href="sorting-and-filtering-significant-genes-1.html"><i class="fa fa-check"></i>Sorting and Filtering Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="visualisation-1.html"><a href="visualisation-1.html"><i class="fa fa-check"></i>Visualisation</a></li>
-<li class="chapter" data-level="" data-path="ma-plot-1.html"><a href="ma-plot-1.html"><i class="fa fa-check"></i>MA Plot</a></li>
-<li class="chapter" data-level="" data-path="top-gene-count-plot-1.html"><a href="top-gene-count-plot-1.html"><i class="fa fa-check"></i>Top Gene Count Plot</a></li>
-<li class="chapter" data-level="" data-path="heatmap-of-significant-genes-1.html"><a href="heatmap-of-significant-genes-1.html"><i class="fa fa-check"></i>Heatmap of Significant Genes</a></li>
-<li class="chapter" data-level="" data-path="saving-results-3.html"><a href="saving-results-3.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-two-packages-1"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#why-kegg"><i class="fa fa-check"></i><strong>Why KEGG?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-2.html"><a href="gene-functional-enrichment-analysis-2.html#load-libraries-2"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis-2.html"><a href="load-results-from-differential-expression-analysis-2.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html"><i class="fa fa-check"></i>Build and Cache KEGG GMT</a>
-<ul>
-<li class="chapter" data-level="" data-path="build-and-cache-kegg-gmt.html"><a href="build-and-cache-kegg-gmt.html#convert-locus-tags-to-gene-symbols"><i class="fa fa-check"></i>Convert Locus Tags to Gene Symbols</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#prepare-input-2"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#run-ora-2"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#filter-and-inspect-significant-pathways"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#bar-plot-enriched-pathways"><i class="fa fa-check"></i>Bar Plot — Enriched Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#lollipop-plot-gene-hits-per-pathway"><i class="fa fa-check"></i>Lollipop Plot — Gene Hits per Pathway</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-1.html"><a href="part-1-over-representation-analysis-ora-1.html#critical-interpretation-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Spurious Hits</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#prepare-the-ranked-gene-list-2"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#convert-gmt-to-fgsea-format"><i class="fa fa-check"></i>Convert GMT to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#run-gsea-2"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#filter-and-inspect-significant-pathways-1"><i class="fa fa-check"></i>Filter and Inspect Significant Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#nes-bar-plot-activated-and-suppressed-pathways"><i class="fa fa-check"></i>NES Bar Plot — Activated and Suppressed Pathways</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#dot-plot-nes-padj-and-gene-set-size"><i class="fa fa-check"></i>Dot Plot — NES, padj and Gene Set Size</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-2.html"><a href="part-2-gene-set-enrichment-analysis-gsea-2.html#enrichment-plot-top-pathways"><i class="fa fa-check"></i>Enrichment Plot — Top Pathways</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-2.html"><a href="part-3-comparing-ora-and-gsea-2.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-4.html"><a href="saving-results-4.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i>Summary</a></li>
-</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — 27200 Data Driven Bioengineering - Transcriptomics Workshop
@@ -450,15 +379,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now we ask how biofilm differs from planktonic. Because the two lifestyles are sampled at the same set of time points, we can model lifestyle <strong>while adjusting for time</strong>, instead of comparing at a single confounded snapshot. We show two models that ask subtly different questions.</p>
 <p>We use all three time points so the time term is meaningful.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-1" tabindex="-1"></a>dds_ls <span class="ot">&lt;-</span> dds_all</span>
-<span id="cb123-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-2" tabindex="-1"></a>dds_ls<span class="sc">$</span>lifestyle <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>lifestyle), <span class="at">ref =</span> <span class="st">&quot;Planktonic&quot;</span>)</span>
-<span id="cb123-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-3" tabindex="-1"></a>dds_ls<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>timepoint), <span class="at">ref =</span> <span class="st">&quot;5h&quot;</span>)</span>
-<span id="cb123-4"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-4" tabindex="-1"></a></span>
-<span id="cb123-5"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb123-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Design table:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-1" tabindex="-1"></a>dds_ls <span class="ot">&lt;-</span> dds_all</span>
+<span id="cb124-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-2" tabindex="-1"></a>dds_ls<span class="sc">$</span>lifestyle <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>lifestyle), <span class="at">ref =</span> <span class="st">&quot;Planktonic&quot;</span>)</span>
+<span id="cb124-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-3" tabindex="-1"></a>dds_ls<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">droplevels</span>(dds_ls<span class="sc">$</span>timepoint), <span class="at">ref =</span> <span class="st">&quot;5h&quot;</span>)</span>
+<span id="cb124-4"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-4" tabindex="-1"></a></span>
+<span id="cb124-5"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb124-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Design table:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Design table:</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb125-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(dds_ls<span class="sc">$</span>lifestyle, dds_ls<span class="sc">$</span>timepoint))</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb126-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(dds_ls<span class="sc">$</span>lifestyle, dds_ls<span class="sc">$</span>timepoint))</span></code></pre></div>
 </details>
 <pre><code>##             
 ##              5h 10h 24h
@@ -476,29 +405,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb127-1" tabindex="-1"></a><span class="fu">design</span>(dds_ls) <span class="ot">&lt;-</span> <span class="er">~</span> timepoint <span class="sc">+</span> lifestyle</span>
-<span id="cb127-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb127-2" tabindex="-1"></a>dds_add <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_ls)</span>
-<span id="cb127-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb127-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;resultsNames:</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">resultsNames</span>(dds_add))</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb128-1" tabindex="-1"></a><span class="fu">design</span>(dds_ls) <span class="ot">&lt;-</span> <span class="er">~</span> timepoint <span class="sc">+</span> lifestyle</span>
+<span id="cb128-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb128-2" tabindex="-1"></a>dds_add <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_ls)</span>
+<span id="cb128-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb128-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;resultsNames:</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">resultsNames</span>(dds_add))</span></code></pre></div>
 </details>
 <pre><code>## resultsNames:</code></pre>
 <pre><code>## [1] &quot;Intercept&quot;                       &quot;timepoint_10h_vs_5h&quot;            
 ## [3] &quot;timepoint_24h_vs_5h&quot;             &quot;lifestyle_Biofilm_vs_Planktonic&quot;</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb130-1" tabindex="-1"></a>res_add <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_add, <span class="st">&quot;lifestyle_Biofilm_vs_Planktonic&quot;</span>)</span>
-<span id="cb130-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb130-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb131-1" tabindex="-1"></a>res_add <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_add, <span class="st">&quot;lifestyle_Biofilm_vs_Planktonic&quot;</span>)</span>
+<span id="cb131-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb131-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## 
 ## DEG counts (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ):</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb132-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_add<span class="sc">$</span>direction))</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb133-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_add<span class="sc">$</span>direction))</span></code></pre></div>
 </details>
 <pre><code>## 
 ##              Up            Down Not significant 
 ##             156             126            2006</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb134-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_add,</span>
-<span id="cb134-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb134-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — lifestyle (additive, time-adjusted)&quot;</span>),</span>
-<span id="cb134-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb134-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher in biofilm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb135-1" tabindex="-1"></a><span class="fu">plot_volcano</span>(res_add,</span>
+<span id="cb135-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb135-2" tabindex="-1"></a>             <span class="fu">paste0</span>(strain, <span class="st">&quot; — lifestyle (additive, time-adjusted)&quot;</span>),</span>
+<span id="cb135-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb135-3" tabindex="-1"></a>             <span class="st">&quot;Positive log2FC = higher in biofilm&quot;</span>)</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-lifestyle-additive-volcano-0-1.png" alt="" width="864" /></p>
 <p><em>Interpretation:</em> once the shared ageing trend is removed by the <code>timepoint</code> term, the number of lifestyle genes is much smaller than a naive single-time-point comparison would give. That drop is the growth-phase confound being taken out: many genes that look “biofilm-specific” at 24 h are really just ageing effects common to both cultures. What remains is a cleaner candidate set of genes that differ by lifestyle regardless of time.</p>
@@ -521,9 +450,9 @@ that.</p>
 </ul>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb135-1" tabindex="-1"></a><span class="co"># Set the full (interaction) design. We fit it with an LRT below, comparing it</span></span>
-<span id="cb135-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb135-2" tabindex="-1"></a><span class="co"># to the additive model, so we do not need a separate Wald fit here.</span></span>
-<span id="cb135-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb135-3" tabindex="-1"></a><span class="fu">design</span>(dds_ls) <span class="ot">&lt;-</span> <span class="er">~</span> timepoint <span class="sc">+</span> lifestyle <span class="sc">+</span> timepoint<span class="sc">:</span>lifestyle</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb136-1" tabindex="-1"></a><span class="co"># Set the full (interaction) design. We fit it with an LRT below, comparing it</span></span>
+<span id="cb136-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb136-2" tabindex="-1"></a><span class="co"># to the additive model, so we do not need a separate Wald fit here.</span></span>
+<span id="cb136-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb136-3" tabindex="-1"></a><span class="fu">design</span>(dds_ls) <span class="ot">&lt;-</span> <span class="er">~</span> timepoint <span class="sc">+</span> lifestyle <span class="sc">+</span> timepoint<span class="sc">:</span>lifestyle</span></code></pre></div>
 </details>
 <div class="note">
 <p><strong>📘 Note — testing the interaction, not a single coefficient.</strong> “Does the lifestyle gap change
@@ -535,66 +464,66 @@ we report the LRT p-value and use the model’s own fold-change columns for desc
 shrinkage.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb136-1" tabindex="-1"></a>dds_lrt <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_ls, <span class="at">test =</span> <span class="st">&quot;LRT&quot;</span>, <span class="at">reduced =</span> <span class="sc">~</span> timepoint <span class="sc">+</span> lifestyle)</span>
-<span id="cb136-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb136-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;resultsNames (full interaction model):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">resultsNames</span>(dds_lrt))</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb137-1" tabindex="-1"></a>dds_lrt <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds_ls, <span class="at">test =</span> <span class="st">&quot;LRT&quot;</span>, <span class="at">reduced =</span> <span class="sc">~</span> timepoint <span class="sc">+</span> lifestyle)</span>
+<span id="cb137-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb137-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;resultsNames (full interaction model):</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">print</span>(<span class="fu">resultsNames</span>(dds_lrt))</span></code></pre></div>
 </details>
 <pre><code>## resultsNames (full interaction model):</code></pre>
 <pre><code>## [1] &quot;Intercept&quot;                       &quot;timepoint_10h_vs_5h&quot;            
 ## [3] &quot;timepoint_24h_vs_5h&quot;             &quot;lifestyle_Biofilm_vs_Planktonic&quot;
 ## [5] &quot;timepoint10h.lifestyleBiofilm&quot;   &quot;timepoint24h.lifestyleBiofilm&quot;</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-1" tabindex="-1"></a><span class="co"># Careful: in an LRT result the log2FoldChange column is NOT &quot;the&quot; lifestyle</span></span>
-<span id="cb139-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-2" tabindex="-1"></a><span class="co"># effect — it is only the last interaction coefficient (timepoint24h.lifestyleBiofilm).</span></span>
-<span id="cb139-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-3" tabindex="-1"></a><span class="co"># Use the padj for the test; describe effect sizes with the profile plots below.</span></span>
-<span id="cb139-4"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-4" tabindex="-1"></a>res_lrt <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">results</span>(dds_lrt)) <span class="sc">%&gt;%</span></span>
-<span id="cb139-5"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-5" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene_id&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb139-6"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-6" tabindex="-1"></a>  <span class="fu">arrange</span>(padj)</span>
-<span id="cb139-7"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-7" tabindex="-1"></a></span>
-<span id="cb139-8"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-8" tabindex="-1"></a>n_sig_lrt <span class="ot">&lt;-</span> <span class="fu">sum</span>(res_lrt<span class="sc">$</span>padj <span class="sc">&lt;</span> padj_threshold, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb139-9"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Genes with a time-dependent lifestyle difference (LRT padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;):&quot;</span>,</span>
-<span id="cb139-10"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb139-10" tabindex="-1"></a>    n_sig_lrt, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-1" tabindex="-1"></a><span class="co"># Careful: in an LRT result the log2FoldChange column is NOT &quot;the&quot; lifestyle</span></span>
+<span id="cb140-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-2" tabindex="-1"></a><span class="co"># effect — it is only the last interaction coefficient (timepoint24h.lifestyleBiofilm).</span></span>
+<span id="cb140-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-3" tabindex="-1"></a><span class="co"># Use the padj for the test; describe effect sizes with the profile plots below.</span></span>
+<span id="cb140-4"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-4" tabindex="-1"></a>res_lrt <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">results</span>(dds_lrt)) <span class="sc">%&gt;%</span></span>
+<span id="cb140-5"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-5" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb140-6"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-6" tabindex="-1"></a>  <span class="fu">arrange</span>(padj)</span>
+<span id="cb140-7"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-7" tabindex="-1"></a></span>
+<span id="cb140-8"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-8" tabindex="-1"></a>n_sig_lrt <span class="ot">&lt;-</span> <span class="fu">sum</span>(res_lrt<span class="sc">$</span>padj <span class="sc">&lt;</span> padj_threshold, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb140-9"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Genes with a time-dependent lifestyle difference (LRT padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;):&quot;</span>,</span>
+<span id="cb140-10"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb140-10" tabindex="-1"></a>    n_sig_lrt, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## 
 ## Genes with a time-dependent lifestyle difference (LRT padj &lt; 0.05 ): 2141</code></pre>
 <p><strong>How to read the plot below:</strong> each panel is one gene; the two lines show its expression over time in the two lifestyles. Parallel lines = no interaction; diverging, converging or crossing lines = the lifestyle difference changes with time.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-1" tabindex="-1"></a>top_int <span class="ot">&lt;-</span> res_lrt <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(padj)) <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
-<span id="cb141-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-2" tabindex="-1"></a></span>
-<span id="cb141-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-3" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(top_int) <span class="sc">&gt;=</span> <span class="dv">1</span>) {</span>
-<span id="cb141-4"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-4" tabindex="-1"></a>  norm_ls <span class="ot">&lt;-</span> <span class="fu">counts</span>(dds_lrt, <span class="at">normalized =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb141-5"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-5" tabindex="-1"></a></span>
-<span id="cb141-6"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-6" tabindex="-1"></a>  profile_df <span class="ot">&lt;-</span> norm_ls[top_int, , drop <span class="ot">=</span> <span class="cn">FALSE</span>] <span class="sc">%&gt;%</span></span>
-<span id="cb141-7"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-7" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb141-8"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-8" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene_id&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb141-9"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-9" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>gene_id, <span class="at">names_to =</span> <span class="st">&quot;sample&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;norm_count&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb141-10"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-10" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
-<span id="cb141-11"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-11" tabindex="-1"></a>      <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(dds_lrt)) <span class="sc">%&gt;%</span></span>
-<span id="cb141-12"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-12" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">sample =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb141-13"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-13" tabindex="-1"></a>        <span class="fu">select</span>(sample, lifestyle, timepoint),</span>
-<span id="cb141-14"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-14" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;sample&quot;</span></span>
-<span id="cb141-15"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-15" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb141-16"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-16" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">timepoint =</span> <span class="fu">factor</span>(timepoint, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;5h&quot;</span>, <span class="st">&quot;10h&quot;</span>, <span class="st">&quot;24h&quot;</span>)))</span>
-<span id="cb141-17"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-17" tabindex="-1"></a></span>
-<span id="cb141-18"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-18" tabindex="-1"></a>  profile_summary <span class="ot">&lt;-</span> profile_df <span class="sc">%&gt;%</span></span>
-<span id="cb141-19"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-19" tabindex="-1"></a>    <span class="fu">group_by</span>(gene_id, lifestyle, timepoint) <span class="sc">%&gt;%</span></span>
-<span id="cb141-20"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-20" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_count =</span> <span class="fu">mean</span>(norm_count),</span>
-<span id="cb141-21"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-21" tabindex="-1"></a>              <span class="at">se         =</span> <span class="fu">sd</span>(norm_count) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
-<span id="cb141-22"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-22" tabindex="-1"></a>              <span class="at">.groups    =</span> <span class="st">&quot;drop&quot;</span>)</span>
-<span id="cb141-23"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-23" tabindex="-1"></a></span>
-<span id="cb141-24"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-24" tabindex="-1"></a>  <span class="fu">ggplot</span>(profile_summary,</span>
-<span id="cb141-25"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-25" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> timepoint, <span class="at">y =</span> mean_count, <span class="at">colour =</span> lifestyle, <span class="at">group =</span> lifestyle)) <span class="sc">+</span></span>
-<span id="cb141-26"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-26" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb141-27"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-27" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb141-28"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-28" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_count <span class="sc">-</span> se, <span class="at">ymax =</span> mean_count <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
-<span id="cb141-29"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-29" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> gene_id, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
-<span id="cb141-30"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-30" tabindex="-1"></a>    <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb141-31"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-31" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb141-32"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-32" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time point&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Normalised count (mean ± SE)&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;Lifestyle&quot;</span>,</span>
-<span id="cb141-33"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-33" tabindex="-1"></a>         <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;Top time-dependent lifestyle genes — &quot;</span>, strain),</span>
-<span id="cb141-34"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-34" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">&quot;Genes whose biofilm vs planktonic difference changes across time&quot;</span>)</span>
-<span id="cb141-35"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-35" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb141-36"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-36" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No time-dependent genes to plot.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb141-37"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb141-37" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-1" tabindex="-1"></a>top_int <span class="ot">&lt;-</span> res_lrt <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(padj)) <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(gene_id)</span>
+<span id="cb142-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-2" tabindex="-1"></a></span>
+<span id="cb142-3"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-3" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(top_int) <span class="sc">&gt;=</span> <span class="dv">1</span>) {</span>
+<span id="cb142-4"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-4" tabindex="-1"></a>  norm_ls <span class="ot">&lt;-</span> <span class="fu">counts</span>(dds_lrt, <span class="at">normalized =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb142-5"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-5" tabindex="-1"></a></span>
+<span id="cb142-6"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-6" tabindex="-1"></a>  profile_df <span class="ot">&lt;-</span> norm_ls[top_int, , drop <span class="ot">=</span> <span class="cn">FALSE</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb142-7"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-7" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb142-8"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-8" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb142-9"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-9" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>gene_id, <span class="at">names_to =</span> <span class="st">&quot;sample&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;norm_count&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb142-10"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-10" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb142-11"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-11" tabindex="-1"></a>      <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(dds_lrt)) <span class="sc">%&gt;%</span></span>
+<span id="cb142-12"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-12" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">sample =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb142-13"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-13" tabindex="-1"></a>        <span class="fu">select</span>(sample, lifestyle, timepoint),</span>
+<span id="cb142-14"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-14" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;sample&quot;</span></span>
+<span id="cb142-15"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-15" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb142-16"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-16" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">timepoint =</span> <span class="fu">factor</span>(timepoint, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;5h&quot;</span>, <span class="st">&quot;10h&quot;</span>, <span class="st">&quot;24h&quot;</span>)))</span>
+<span id="cb142-17"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-17" tabindex="-1"></a></span>
+<span id="cb142-18"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-18" tabindex="-1"></a>  profile_summary <span class="ot">&lt;-</span> profile_df <span class="sc">%&gt;%</span></span>
+<span id="cb142-19"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-19" tabindex="-1"></a>    <span class="fu">group_by</span>(gene_id, lifestyle, timepoint) <span class="sc">%&gt;%</span></span>
+<span id="cb142-20"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-20" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_count =</span> <span class="fu">mean</span>(norm_count),</span>
+<span id="cb142-21"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-21" tabindex="-1"></a>              <span class="at">se         =</span> <span class="fu">sd</span>(norm_count) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb142-22"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-22" tabindex="-1"></a>              <span class="at">.groups    =</span> <span class="st">&quot;drop&quot;</span>)</span>
+<span id="cb142-23"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-23" tabindex="-1"></a></span>
+<span id="cb142-24"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-24" tabindex="-1"></a>  <span class="fu">ggplot</span>(profile_summary,</span>
+<span id="cb142-25"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-25" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> timepoint, <span class="at">y =</span> mean_count, <span class="at">colour =</span> lifestyle, <span class="at">group =</span> lifestyle)) <span class="sc">+</span></span>
+<span id="cb142-26"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-26" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb142-27"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-27" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb142-28"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-28" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_count <span class="sc">-</span> se, <span class="at">ymax =</span> mean_count <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb142-29"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-29" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> gene_id, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb142-30"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-30" tabindex="-1"></a>    <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb142-31"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-31" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb142-32"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-32" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time point&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Normalised count (mean ± SE)&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;Lifestyle&quot;</span>,</span>
+<span id="cb142-33"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-33" tabindex="-1"></a>         <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;Top time-dependent lifestyle genes — &quot;</span>, strain),</span>
+<span id="cb142-34"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-34" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">&quot;Genes whose biofilm vs planktonic difference changes across time&quot;</span>)</span>
+<span id="cb142-35"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-35" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb142-36"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-36" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No time-dependent genes to plot.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb142-37"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb142-37" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-de-lifestyle-interaction-profiles-0-1.png" alt="" width="960" /></p>
 <div class="important">
