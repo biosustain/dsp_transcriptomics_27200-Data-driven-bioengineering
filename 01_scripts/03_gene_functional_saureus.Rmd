@@ -556,12 +556,57 @@ if (nrow(biofilm_sets) > 0) {
 }
 ```
 
+### Summary Table of the Top Sets
+
+`plotGseaTable()` lines the strongest sets up next to a miniature of each one's running
+enrichment score. Read the little curves before the names: a real enrichment peaks sharply
+with the gene ticks bunched at one end, while a weak one wanders and its ticks are spread
+across the width.
+
+```{r saureus-fn-gsea-table-plot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=14, fig.height=6}
+# Keep the source tag when shortening, as in the bar plot below.
+tidy_top <- function(x) {
+  src  <- str_extract(x, "\\s\\[[^]]+\\]$")
+  base <- str_remove(x, "\\s\\[[^]]+\\]$")
+  paste0(str_trunc(base, 45), ifelse(is.na(src), "", src))
+}
+
+# NB: fgsea loads IRanges, whose slice() masks dplyr's - hence dplyr::slice here.
+top_sets <- (if (nrow(gsea_sig) > 0) gsea_sig else gsea_results %>% filter(pval < 0.05)) %>%
+  arrange(desc(NES)) %>%
+  dplyr::slice(c(1:min(5, dplyr::n()), max(1, dplyr::n() - 4):dplyr::n())) %>%
+  dplyr::pull(pathway) %>%
+  unique()
+
+if (length(top_sets) > 0) {
+  top_pathways <- pathways_list[top_sets]
+  names(top_pathways) <- tidy_top(names(top_pathways))
+
+  plotGseaTable(
+    pathways  = top_pathways,
+    stats     = rank_vector,
+    fgseaRes  = gsea_results %>% mutate(pathway = tidy_top(pathway)),
+    gseaParam = 0.5
+  )
+} else {
+  cat("No sets to show.\n")
+}
+```
+
 ### NES Bar Plot
 
 If any sets survive correction we plot them; otherwise we fall back to the top sets by nominal
 p-value and label them clearly as directional, not confirmed.
 
 ```{r saureus-fn-gsea-nes-barplot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+# A handful of GO names run to 70+ characters, which squeezes the bars.
+# Trim the name but keep the "[KEGG]" / "[GO:BP]" tag, which says where the set came from.
+tidy_set_name <- function(x) {
+  src  <- str_extract(x, "\\s\\[[^]]+\\]$")
+  base <- str_remove(x, "\\s\\[[^]]+\\]$")
+  paste0(str_trunc(base, 45), ifelse(is.na(src), "", src))
+}
+
 use_padj <- nrow(gsea_sig) > 0
 
 gsea_bar <- (if (use_padj) gsea_sig
@@ -569,7 +614,7 @@ gsea_bar <- (if (use_padj) gsea_sig
   slice_max(abs(NES), n = 20) %>%
   mutate(
     direction = ifelse(NES > 0, "Biofilm", "Planktonic"),
-    set_label = fct_reorder(pathway, NES)
+    set_label = fct_reorder(tidy_set_name(pathway), NES)
   )
 
 if (nrow(gsea_bar) > 0) {
