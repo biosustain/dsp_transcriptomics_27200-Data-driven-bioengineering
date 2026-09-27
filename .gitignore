@@ -21,3 +21,12 @@ __pycache__/
 
 # Internal planning material (presentations, master plan) — not course content
 material/
+
+# Analysis outputs. Students generate these by running the notebooks, so the
+# folder starts empty rather than pre-filled with results they have not made yet.
+# The cross-strain summary is the exception: it collects a row per strain, and a
+# single student only ever renders one of them.
+results/*
+!results/cross_strain/
+results/cross_strain/*
+!results/cross_strain/biofilm_vs_planktonic_24h.tsv

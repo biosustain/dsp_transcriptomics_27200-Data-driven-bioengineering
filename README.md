@@ -80,7 +80,8 @@ course and two strains.
 
 - The [course book](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/), built from this repository
 - Slides in [`slides/`](slides/)
-- Example pipeline output and a MultiQC report in [`data/nf-core_rnaseq/`](data/nf-core_rnaseq/) and [`results/`](results/)
+- MultiQC reports from the full pipeline runs, next to each dataset in [`data/`](data/)
+- The `results/` folder is not in the repository. It is created when you run the notebooks
 
 ## Setting up
 

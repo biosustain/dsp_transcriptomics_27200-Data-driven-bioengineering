@@ -17,9 +17,14 @@
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "customizations": {
+    // Opens the short instructions as soon as the Codespace is ready, so
+    // students do not have to find them. Keeps the README free for GitHub.
+    "codespaces": {
+      "openFiles": ["START_HERE.md"]
+    },
     "vscode": {
       // jupyter-renderers adds the plotly renderer VS Code needs for the
-      // g:Profiler Manhattan plot (gostplot) in the enrichment notebook.
+      // interactive widgets in the notebooks.
       // Copilot extensions give students a free AI chat option (GitHub
       // Student Pack) without any extra account setup.
       "extensions": ["REditorSupport.r", "ms-toolsai.jupyter", "ms-toolsai.jupyter-renderers", "GitHub.copilot", "GitHub.copilot-chat"],

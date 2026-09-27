@@ -58,5 +58,10 @@ Each dataset has three scripts, run in order — every step saves results the ne
 - S. aureus → `results/usa100/`, `results/usa500/`, `results/cross_strain/`
 - Human → `results/human/`
 
-All outputs are committed so the book builds from a fresh clone without re-running
-anything upstream.
+These outputs are **not** committed: the folder starts empty and fills up as the
+scripts run, so students never open it and find results they have not produced. Run
+the three scripts of a dataset in order and each one writes what the next one reads.
+
+The one exception is `results/cross_strain/biofilm_vs_planktonic_24h.tsv`, which
+collects one row per strain. A single run only ever produces its own row, so the file
+is kept in the repository with both.
