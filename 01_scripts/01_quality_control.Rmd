@@ -38,7 +38,7 @@ The list of contrasts of interest is:
 <ul>
 <li>Reads are aligned with a splice-aware aligner (STAR), appropriate for spliced human transcripts</li>
 <li>The reference GTF carries gene symbols, so genes are labelled directly (no ID conversion needed)</li>
-<li>Enrichment analysis uses g:Profiler with human gene sets (GO, KEGG, Reactome)</li>
+<li>Enrichment analysis (a later script) uses GSEA with the MSigDB Reactome gene sets</li>
 <li>Cells come from four donors → donor is a candidate confounder in the design (addressed below)</li>
 </ul>
 </div>
@@ -175,7 +175,7 @@ cat("gene_id look like ENSEMBL? :",
   <strong>📘 Note:</strong> This dataset was processed against a <strong>RefSeq</strong> GRCh37 GTF with
   <code>gtf_extra_attributes = gene_name</code>, so both <code>gene_id</code> and <code>gene_name</code>
   hold gene <strong>symbols</strong> (e.g. <code>A1BG</code>), not ENSEMBL IDs. Symbols are exactly what
-  g:Profiler and MSigDB accept, so no ID conversion is needed downstream. The check above prints the
+  MSigDB accepts, so no ID conversion is needed downstream. The check above prints the
   actual values so you can confirm this on your own RDS.
 </div>
 

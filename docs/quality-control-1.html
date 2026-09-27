@@ -164,7 +164,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-1-codespaces-recommended"><i class="fa fa-check"></i>Option 1: Codespaces (recommended)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-2-docker"><i class="fa fa-check"></i>Option 2: Docker</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-3-your-own-r-installation"><i class="fa fa-check"></i>Option 3: your own R installation</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a>
 <ul>
 <li class="chapter" data-level="" data-path="opening-the-nextflow-environment.html"><a href="opening-the-nextflow-environment.html"><i class="fa fa-check"></i>Opening the Nextflow environment</a></li>
@@ -425,15 +430,15 @@ further edits.</p>
 <p><strong>📌 Remember:</strong> Load all libraries at the start of every session before running any analysis.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="quality-control-1.html#cb140-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb140-2"><a href="quality-control-1.html#cb140-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb140-3"><a href="quality-control-1.html#cb140-3" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
-<span id="cb140-4"><a href="quality-control-1.html#cb140-4" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb140-5"><a href="quality-control-1.html#cb140-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb140-6"><a href="quality-control-1.html#cb140-6" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb140-7"><a href="quality-control-1.html#cb140-7" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb140-8"><a href="quality-control-1.html#cb140-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb140-9"><a href="quality-control-1.html#cb140-9" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="quality-control-1.html#cb141-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb141-2"><a href="quality-control-1.html#cb141-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb141-3"><a href="quality-control-1.html#cb141-3" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb141-4"><a href="quality-control-1.html#cb141-4" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb141-5"><a href="quality-control-1.html#cb141-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb141-6"><a href="quality-control-1.html#cb141-6" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb141-7"><a href="quality-control-1.html#cb141-7" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb141-8"><a href="quality-control-1.html#cb141-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb141-9"><a href="quality-control-1.html#cb141-9" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
 </details>
 </div>
             </section>

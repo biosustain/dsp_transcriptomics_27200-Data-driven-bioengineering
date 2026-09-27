@@ -164,7 +164,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-1-codespaces-recommended"><i class="fa fa-check"></i>Option 1: Codespaces (recommended)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-2-docker"><i class="fa fa-check"></i>Option 2: Docker</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-3-your-own-r-installation"><i class="fa fa-check"></i>Option 3: your own R installation</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a>
 <ul>
 <li class="chapter" data-level="" data-path="opening-the-nextflow-environment.html"><a href="opening-the-nextflow-environment.html"><i class="fa fa-check"></i>Opening the Nextflow environment</a></li>
@@ -371,16 +376,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Align the sample order between the count matrix and the metadata — <code>DESeq2</code> requires these to match exactly.</li>
 </ol>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="preparing-the-data-1.html#cb160-1" tabindex="-1"></a><span class="co"># Order metadata to match the count matrix columns exactly</span></span>
-<span id="cb160-2"><a href="preparing-the-data-1.html#cb160-2" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> samples_info[<span class="fu">match</span>(<span class="fu">colnames</span>(count_genes), samples_info<span class="sc">$</span>sample), ]</span>
-<span id="cb160-3"><a href="preparing-the-data-1.html#cb160-3" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(samples_info)</span>
-<span id="cb160-4"><a href="preparing-the-data-1.html#cb160-4" tabindex="-1"></a><span class="fu">rownames</span>(samples_info) <span class="ot">&lt;-</span> samples_info<span class="sc">$</span>sample</span>
-<span id="cb160-5"><a href="preparing-the-data-1.html#cb160-5" tabindex="-1"></a></span>
-<span id="cb160-6"><a href="preparing-the-data-1.html#cb160-6" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(<span class="fu">colnames</span>(count_genes), samples_info<span class="sc">$</span>sample))</span>
-<span id="cb160-7"><a href="preparing-the-data-1.html#cb160-7" tabindex="-1"></a></span>
-<span id="cb160-8"><a href="preparing-the-data-1.html#cb160-8" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">count_col =</span> <span class="fu">colnames</span>(count_genes),</span>
-<span id="cb160-9"><a href="preparing-the-data-1.html#cb160-9" tabindex="-1"></a>                 <span class="at">lifestyle =</span> samples_info<span class="sc">$</span>lifestyle,</span>
-<span id="cb160-10"><a href="preparing-the-data-1.html#cb160-10" tabindex="-1"></a>                 <span class="at">timepoint =</span> samples_info<span class="sc">$</span>timepoint))</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="preparing-the-data-1.html#cb161-1" tabindex="-1"></a><span class="co"># Order metadata to match the count matrix columns exactly</span></span>
+<span id="cb161-2"><a href="preparing-the-data-1.html#cb161-2" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> samples_info[<span class="fu">match</span>(<span class="fu">colnames</span>(count_genes), samples_info<span class="sc">$</span>sample), ]</span>
+<span id="cb161-3"><a href="preparing-the-data-1.html#cb161-3" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(samples_info)</span>
+<span id="cb161-4"><a href="preparing-the-data-1.html#cb161-4" tabindex="-1"></a><span class="fu">rownames</span>(samples_info) <span class="ot">&lt;-</span> samples_info<span class="sc">$</span>sample</span>
+<span id="cb161-5"><a href="preparing-the-data-1.html#cb161-5" tabindex="-1"></a></span>
+<span id="cb161-6"><a href="preparing-the-data-1.html#cb161-6" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(<span class="fu">colnames</span>(count_genes), samples_info<span class="sc">$</span>sample))</span>
+<span id="cb161-7"><a href="preparing-the-data-1.html#cb161-7" tabindex="-1"></a></span>
+<span id="cb161-8"><a href="preparing-the-data-1.html#cb161-8" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">count_col =</span> <span class="fu">colnames</span>(count_genes),</span>
+<span id="cb161-9"><a href="preparing-the-data-1.html#cb161-9" tabindex="-1"></a>                 <span class="at">lifestyle =</span> samples_info<span class="sc">$</span>lifestyle,</span>
+<span id="cb161-10"><a href="preparing-the-data-1.html#cb161-10" tabindex="-1"></a>                 <span class="at">timepoint =</span> samples_info<span class="sc">$</span>timepoint))</span></code></pre></div>
 </details>
 <pre><code>##                       count_col  lifestyle timepoint
 ## 1     USA100_N315_Biofilm_10h_1    Biofilm       10h
@@ -426,11 +431,11 @@ the design entirely and gives an unbiased view of sample similarity. The design 
 set in the differential expression script, once a time point has been chosen.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="preparing-the-data-1.html#cb162-1" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(</span>
-<span id="cb162-2"><a href="preparing-the-data-1.html#cb162-2" tabindex="-1"></a>  <span class="at">countData =</span> count_genes,</span>
-<span id="cb162-3"><a href="preparing-the-data-1.html#cb162-3" tabindex="-1"></a>  <span class="at">colData   =</span> samples_info,</span>
-<span id="cb162-4"><a href="preparing-the-data-1.html#cb162-4" tabindex="-1"></a>  <span class="at">design    =</span> <span class="sc">~</span> lifestyle</span>
-<span id="cb162-5"><a href="preparing-the-data-1.html#cb162-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="preparing-the-data-1.html#cb163-1" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(</span>
+<span id="cb163-2"><a href="preparing-the-data-1.html#cb163-2" tabindex="-1"></a>  <span class="at">countData =</span> count_genes,</span>
+<span id="cb163-3"><a href="preparing-the-data-1.html#cb163-3" tabindex="-1"></a>  <span class="at">colData   =</span> samples_info,</span>
+<span id="cb163-4"><a href="preparing-the-data-1.html#cb163-4" tabindex="-1"></a>  <span class="at">design    =</span> <span class="sc">~</span> lifestyle</span>
+<span id="cb163-5"><a href="preparing-the-data-1.html#cb163-5" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 </div>
 <div id="sanity-checks-1" class="section level3 hasAnchor">
@@ -442,16 +447,16 @@ set in the differential expression script, once a time point has been chosen.</p
 <p>Before anything else, check how many reads ended up in each sample. DESeq2 needs
 <strong>raw, un-normalised integer counts</strong>; if you feed it TPM or FPKM the results are wrong.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="preparing-the-data-1.html#cb163-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb163-2"><a href="preparing-the-data-1.html#cb163-2" tabindex="-1"></a></span>
-<span id="cb163-3"><a href="preparing-the-data-1.html#cb163-3" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">colSums</span>(count_genes),</span>
-<span id="cb163-4"><a href="preparing-the-data-1.html#cb163-4" tabindex="-1"></a>        <span class="at">main   =</span> <span class="fu">paste0</span>(<span class="st">&quot;Library sizes (total counts per sample) - &quot;</span>, strain),</span>
-<span id="cb163-5"><a href="preparing-the-data-1.html#cb163-5" tabindex="-1"></a>        <span class="at">ylab   =</span> <span class="st">&quot;Total raw counts&quot;</span>,</span>
-<span id="cb163-6"><a href="preparing-the-data-1.html#cb163-6" tabindex="-1"></a>        <span class="at">xlab   =</span> <span class="cn">NULL</span>,</span>
-<span id="cb163-7"><a href="preparing-the-data-1.html#cb163-7" tabindex="-1"></a>        <span class="at">col    =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
-<span id="cb163-8"><a href="preparing-the-data-1.html#cb163-8" tabindex="-1"></a>        <span class="at">las    =</span> <span class="dv">2</span>,</span>
-<span id="cb163-9"><a href="preparing-the-data-1.html#cb163-9" tabindex="-1"></a>        <span class="at">cex.names =</span> <span class="fl">0.5</span>,</span>
-<span id="cb163-10"><a href="preparing-the-data-1.html#cb163-10" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">colnames</span>(count_genes))</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="preparing-the-data-1.html#cb164-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb164-2"><a href="preparing-the-data-1.html#cb164-2" tabindex="-1"></a></span>
+<span id="cb164-3"><a href="preparing-the-data-1.html#cb164-3" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">colSums</span>(count_genes),</span>
+<span id="cb164-4"><a href="preparing-the-data-1.html#cb164-4" tabindex="-1"></a>        <span class="at">main   =</span> <span class="fu">paste0</span>(<span class="st">&quot;Library sizes (total counts per sample) - &quot;</span>, strain),</span>
+<span id="cb164-5"><a href="preparing-the-data-1.html#cb164-5" tabindex="-1"></a>        <span class="at">ylab   =</span> <span class="st">&quot;Total raw counts&quot;</span>,</span>
+<span id="cb164-6"><a href="preparing-the-data-1.html#cb164-6" tabindex="-1"></a>        <span class="at">xlab   =</span> <span class="cn">NULL</span>,</span>
+<span id="cb164-7"><a href="preparing-the-data-1.html#cb164-7" tabindex="-1"></a>        <span class="at">col    =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb164-8"><a href="preparing-the-data-1.html#cb164-8" tabindex="-1"></a>        <span class="at">las    =</span> <span class="dv">2</span>,</span>
+<span id="cb164-9"><a href="preparing-the-data-1.html#cb164-9" tabindex="-1"></a>        <span class="at">cex.names =</span> <span class="fl">0.5</span>,</span>
+<span id="cb164-10"><a href="preparing-the-data-1.html#cb164-10" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">colnames</span>(count_genes))</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-qc-check-raw-0-1.png" alt="" width="672" /></p>
 <div class="boxy">
@@ -465,29 +470,29 @@ information about that sample, whatever you do afterwards.</p>
 <p>Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples — here the size of the smallest <strong>lifestyle</strong> group (16). Note this is stricter than DESeq2’s usual convention of the smallest design cell (4 samples in a lifestyle × time group): a gene expressed only in one lifestyle at one time point could be lost. With this dataset that cost is small, and the stricter filter keeps the later models stable.</p>
 <p>Unlike the human genome, most bacterial genes are expressed under standard growth, so expect only a modest fraction to be filtered out.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="preparing-the-data-1.html#cb164-1" tabindex="-1"></a>smallestGroupSize <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>lifestyle))</span>
-<span id="cb164-2"><a href="preparing-the-data-1.html#cb164-2" tabindex="-1"></a></span>
-<span id="cb164-3"><a href="preparing-the-data-1.html#cb164-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Smallest lifestyle group size:&quot;</span>, smallestGroupSize, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="preparing-the-data-1.html#cb165-1" tabindex="-1"></a>smallestGroupSize <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>lifestyle))</span>
+<span id="cb165-2"><a href="preparing-the-data-1.html#cb165-2" tabindex="-1"></a></span>
+<span id="cb165-3"><a href="preparing-the-data-1.html#cb165-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Smallest lifestyle group size:&quot;</span>, smallestGroupSize, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Smallest lifestyle group size: 16</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="preparing-the-data-1.html#cb166-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Filtering threshold          : at least 10 counts in&quot;</span>, smallestGroupSize, <span class="st">&quot;or more samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="preparing-the-data-1.html#cb167-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Filtering threshold          : at least 10 counts in&quot;</span>, smallestGroupSize, <span class="st">&quot;or more samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Filtering threshold          : at least 10 counts in 16 or more samples</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="preparing-the-data-1.html#cb168-1" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">counts</span>(dds) <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">&gt;=</span> smallestGroupSize</span>
-<span id="cb168-2"><a href="preparing-the-data-1.html#cb168-2" tabindex="-1"></a>n_before <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dds)</span>
-<span id="cb168-3"><a href="preparing-the-data-1.html#cb168-3" tabindex="-1"></a>dds  <span class="ot">&lt;-</span> dds[keep, ]</span>
-<span id="cb168-4"><a href="preparing-the-data-1.html#cb168-4" tabindex="-1"></a></span>
-<span id="cb168-5"><a href="preparing-the-data-1.html#cb168-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes before filtering:&quot;</span>, n_before, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="preparing-the-data-1.html#cb169-1" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">counts</span>(dds) <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">&gt;=</span> smallestGroupSize</span>
+<span id="cb169-2"><a href="preparing-the-data-1.html#cb169-2" tabindex="-1"></a>n_before <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dds)</span>
+<span id="cb169-3"><a href="preparing-the-data-1.html#cb169-3" tabindex="-1"></a>dds  <span class="ot">&lt;-</span> dds[keep, ]</span>
+<span id="cb169-4"><a href="preparing-the-data-1.html#cb169-4" tabindex="-1"></a></span>
+<span id="cb169-5"><a href="preparing-the-data-1.html#cb169-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes before filtering:&quot;</span>, n_before, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes before filtering: 2816</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="preparing-the-data-1.html#cb170-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes after  filtering:&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="preparing-the-data-1.html#cb171-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes after  filtering:&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes after  filtering: 2288</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="preparing-the-data-1.html#cb172-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes removed         :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="preparing-the-data-1.html#cb173-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes removed         :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes removed         : 528</code></pre>
 </div>

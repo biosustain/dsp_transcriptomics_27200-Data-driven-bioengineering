@@ -84,9 +84,11 @@ course and two strains.
 
 ## Setting up
 
-There are two ways to do this. The cloud option is easier and is what we will use in class.
+**Use GitHub Codespaces.** That is what we do in class, it needs nothing installed,
+and everyone gets the same environment. The other two options exist for people who
+specifically want them, and are not supported during the session.
 
-### Option 1: in the cloud
+### Option 1: Codespaces (recommended)
 
 Nothing to install.
 
@@ -103,11 +105,32 @@ A few things that surprise people the first time:
 - You may get a pop-up saying "No text editor active". It is harmless, just close it. Your code still runs.
 - Run cells with **Shift+Enter** or the play button, not Ctrl+Enter. The first cell takes a moment while R starts up.
 
-### Option 2: on your own machine
+### Option 2: Docker
+
+The Codespace is built from an image you can also run yourself. Everything is already
+inside it: R, all the packages, Jupyter with the R kernel, and Nextflow. From the
+folder where you cloned this repository:
+
+```bash
+docker run --rm -it -p 8888:8888 -v "$PWD":/work -w /work \
+  ghcr.io/biosustain/dsp_transcriptomics_27200-data-driven-bioengineering:1.1.0 \
+  jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+```
+
+Then open the link it prints (the one starting `http://127.0.0.1:8888/lab?token=...`)
+and go to `02_notebooks/`. On an Apple Silicon Mac add `--platform linux/amd64`, since
+the image is built for amd64.
+
+### Option 3: your own R installation
+
+Only worth it if you are comfortable with R and with fixing package installations
+yourself. Bioconductor packages in particular can take a while and occasionally need
+system libraries. If it goes wrong on the morning of the class, use a Codespace instead
+rather than losing the session to it.
 
 > Stuck? Write to me: Juliana Assis (jasge@dtu.dk)
 
-Run this once before the class to install the packages you need:
+Run this once, well before the class, to install the packages you need:
 
 ```{r, eval=FALSE}
 # ============================================================
@@ -136,16 +159,13 @@ cran_pkgs <- c(
   "reshape2",
   "RColorBrewer",
   "pheatmap",
-  "heatmaply",
-  "factoextra",
   "knitr",
   "kableExtra",
   "DT",
-  "plotly",
   "ggpubr",
   "gggenes",     # operon plots (S. aureus)
-  "gprofiler2",  # ORA via g:Profiler (human)
   "msigdbr",     # MSigDB gene sets for GSEA (human)
+  "ragg",        # draws plots with proper unicode
   "remotes"      # needed for GitHub installs below
 )
 
@@ -166,7 +186,6 @@ bioc_pkgs <- c(
   "DESeq2",
   "apeglm",       # recommended shrinkage estimator used with DESeq2
   "fgsea",
-  "KEGGREST",
   "EnhancedVolcano"
 )
 

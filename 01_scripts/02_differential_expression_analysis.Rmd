@@ -511,7 +511,7 @@ cat("Results saved to:", results_dir, "\n")
 | LFC shrinkage | `apeglm` method |
 | Significance threshold | padj < 0.05 |
 | Fold change threshold | \|log2FC\| ≥ 1 (2-fold) |
-| Enrichment (next script) | g:Profiler via `gprofiler2` (human) |
+| Enrichment (next script) | GSEA with `fgsea` and MSigDB Reactome sets |
 
 Significant genes are saved and ready for gene set enrichment analysis in the next script.
 

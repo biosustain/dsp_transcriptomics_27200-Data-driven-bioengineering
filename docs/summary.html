@@ -164,7 +164,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-1-codespaces-recommended"><i class="fa fa-check"></i>Option 1: Codespaces (recommended)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-2-docker"><i class="fa fa-check"></i>Option 2: Docker</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-3-your-own-r-installation"><i class="fa fa-check"></i>Option 3: your own R installation</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a>
 <ul>
 <li class="chapter" data-level="" data-path="opening-the-nextflow-environment.html"><a href="opening-the-nextflow-environment.html"><i class="fa fa-check"></i>Opening the Nextflow environment</a></li>
@@ -412,18 +417,18 @@ treatment effect. Script 02 runs this model and, for teaching, compares it again
 <p><strong>⭐ Important:</strong> If any check fails, investigate the cause before running DESeq2. Proceeding with outlier samples or a mis-specified design will compromise all downstream results.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="summary.html#cb49-1" tabindex="-1"></a><span class="co"># ── Export DDS for downstream analysis ────────────────────────────────────────</span></span>
-<span id="cb49-2"><a href="summary.html#cb49-2" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;rds&quot;</span>)</span>
-<span id="cb49-3"><a href="summary.html#cb49-3" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb49-4"><a href="summary.html#cb49-4" tabindex="-1"></a></span>
-<span id="cb49-5"><a href="summary.html#cb49-5" tabindex="-1"></a>dds_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;dds_human_asm.rds&quot;</span>)</span>
-<span id="cb49-6"><a href="summary.html#cb49-6" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> dds_path)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="summary.html#cb50-1" tabindex="-1"></a><span class="co"># ── Export DDS for downstream analysis ────────────────────────────────────────</span></span>
+<span id="cb50-2"><a href="summary.html#cb50-2" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;rds&quot;</span>)</span>
+<span id="cb50-3"><a href="summary.html#cb50-3" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb50-4"><a href="summary.html#cb50-4" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="summary.html#cb50-5" tabindex="-1"></a>dds_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;dds_human_asm.rds&quot;</span>)</span>
+<span id="cb50-6"><a href="summary.html#cb50-6" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> dds_path)</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="summary.html#cb50-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ DDS saved to:&quot;</span>, dds_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb50-2"><a href="summary.html#cb50-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb50-3"><a href="summary.html#cb50-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Design      : ~ donor + condition</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb50-4"><a href="summary.html#cb50-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Conditions  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">levels</span>(dds<span class="sc">$</span>condition), <span class="at">collapse =</span> <span class="st">&quot; vs &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="summary.html#cb51-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ DDS saved to:&quot;</span>, dds_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb51-2"><a href="summary.html#cb51-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb51-3"><a href="summary.html#cb51-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Design      : ~ donor + condition</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb51-4"><a href="summary.html#cb51-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Conditions  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">levels</span>(dds<span class="sc">$</span>condition), <span class="at">collapse =</span> <span class="st">&quot; vs &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 </div>
             </section>

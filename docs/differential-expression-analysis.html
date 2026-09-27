@@ -164,7 +164,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-1-codespaces-recommended"><i class="fa fa-check"></i>Option 1: Codespaces (recommended)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-2-docker"><i class="fa fa-check"></i>Option 2: Docker</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-3-your-own-r-installation"><i class="fa fa-check"></i>Option 3: your own R installation</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a>
 <ul>
 <li class="chapter" data-level="" data-path="opening-the-nextflow-environment.html"><a href="opening-the-nextflow-environment.html"><i class="fa fa-check"></i>Opening the Nextflow environment</a></li>
@@ -391,14 +396,14 @@ The paired model is used for all downstream analysis.</p>
 </div>
 <p><strong>Setup the Environment</strong></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="differential-expression-analysis.html#cb52-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb52-2"><a href="differential-expression-analysis.html#cb52-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
-<span id="cb52-3"><a href="differential-expression-analysis.html#cb52-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb52-4"><a href="differential-expression-analysis.html#cb52-4" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb52-5"><a href="differential-expression-analysis.html#cb52-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb52-6"><a href="differential-expression-analysis.html#cb52-6" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb52-7"><a href="differential-expression-analysis.html#cb52-7" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb52-8"><a href="differential-expression-analysis.html#cb52-8" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="differential-expression-analysis.html#cb53-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb53-2"><a href="differential-expression-analysis.html#cb53-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb53-3"><a href="differential-expression-analysis.html#cb53-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb53-4"><a href="differential-expression-analysis.html#cb53-4" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb53-5"><a href="differential-expression-analysis.html#cb53-5" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb53-6"><a href="differential-expression-analysis.html#cb53-6" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb53-7"><a href="differential-expression-analysis.html#cb53-7" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb53-8"><a href="differential-expression-analysis.html#cb53-8" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code></pre></div>
 </details>
 </div>
             </section>

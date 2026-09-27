@@ -164,7 +164,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-1-codespaces-recommended"><i class="fa fa-check"></i>Option 1: Codespaces (recommended)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-2-docker"><i class="fa fa-check"></i>Option 2: Docker</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-3-your-own-r-installation"><i class="fa fa-check"></i>Option 3: your own R installation</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a>
 <ul>
 <li class="chapter" data-level="" data-path="opening-the-nextflow-environment.html"><a href="opening-the-nextflow-environment.html"><i class="fa fa-check"></i>Opening the Nextflow environment</a></li>
@@ -366,20 +371,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="saving-results-1" class="section level2 hasAnchor">
 <h2>Saving Results<a href="saving-results-1.html#saving-results-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="saving-results-1.html#cb134-1" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>)</span>
-<span id="cb134-2"><a href="saving-results-1.html#cb134-2" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb134-3"><a href="saving-results-1.html#cb134-3" tabindex="-1"></a></span>
-<span id="cb134-4"><a href="saving-results-1.html#cb134-4" tabindex="-1"></a><span class="fu">write.table</span>(</span>
-<span id="cb134-5"><a href="saving-results-1.html#cb134-5" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(gsea_results) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>leadingEdge),</span>
-<span id="cb134-6"><a href="saving-results-1.html#cb134-6" tabindex="-1"></a>  <span class="at">file      =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;GSEA_Reactome_treatment_vs_control.tsv&quot;</span>),</span>
-<span id="cb134-7"><a href="saving-results-1.html#cb134-7" tabindex="-1"></a>  <span class="at">sep       =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb134-8"><a href="saving-results-1.html#cb134-8" tabindex="-1"></a>)</span>
-<span id="cb134-9"><a href="saving-results-1.html#cb134-9" tabindex="-1"></a></span>
-<span id="cb134-10"><a href="saving-results-1.html#cb134-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Results saved to:&quot;</span>, results_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="saving-results-1.html#cb135-1" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>)</span>
+<span id="cb135-2"><a href="saving-results-1.html#cb135-2" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb135-3"><a href="saving-results-1.html#cb135-3" tabindex="-1"></a></span>
+<span id="cb135-4"><a href="saving-results-1.html#cb135-4" tabindex="-1"></a><span class="fu">write.table</span>(</span>
+<span id="cb135-5"><a href="saving-results-1.html#cb135-5" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(gsea_results) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>leadingEdge),</span>
+<span id="cb135-6"><a href="saving-results-1.html#cb135-6" tabindex="-1"></a>  <span class="at">file      =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;GSEA_Reactome_treatment_vs_control.tsv&quot;</span>),</span>
+<span id="cb135-7"><a href="saving-results-1.html#cb135-7" tabindex="-1"></a>  <span class="at">sep       =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb135-8"><a href="saving-results-1.html#cb135-8" tabindex="-1"></a>)</span>
+<span id="cb135-9"><a href="saving-results-1.html#cb135-9" tabindex="-1"></a></span>
+<span id="cb135-10"><a href="saving-results-1.html#cb135-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Results saved to:&quot;</span>, results_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Results saved to: /Users/jasge/Documents/GitHub/dsp_27200/results/human</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="saving-results-1.html#cb136-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; GSEA_Reactome_treatment_vs_control.tsv</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="saving-results-1.html#cb137-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; GSEA_Reactome_treatment_vs_control.tsv</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##   GSEA -&gt; GSEA_Reactome_treatment_vs_control.tsv</code></pre>
 </div>

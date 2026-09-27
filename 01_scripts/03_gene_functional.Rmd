@@ -92,7 +92,7 @@ cat("  Downregulated      :", sum(res_sig$log2FoldChange <= -1), "\n")
 
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
   <strong>Note:</strong> The <code>gene</code> column holds human gene symbols (from the reference GTF).
-  g:Profiler and MSigDB both accept gene symbols directly, so the gene names from the pipeline are used
+  MSigDB gene sets use gene symbols directly, so the gene names from the pipeline are used
   as-is with no ID conversion step.
 </div>
 

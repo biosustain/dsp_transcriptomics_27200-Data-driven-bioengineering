@@ -84,22 +84,41 @@ Material for the workshop is located at:
 [dsp_transcriptomics_27200-Data-driven-bioengineering](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 :::
 
-Below are two setup options for the practical activities:
+**How to run the practicals.** Use **GitHub Codespaces** — that is what we use in class,
+it needs nothing installed, and everyone gets an identical environment. The other two
+options below are for people who specifically want them, and are not supported during
+the session.
 
->Run the workshop in the cloud (no need to install anything).
+### Option 1: Codespaces (recommended)
 
 <div class="warning">
-  <strong>⚠️ Warning:</strong> Change the configuration at the Machine type: increase it to 4-core.
+  <strong>⚠️ Before you start:</strong> change the Machine type to <strong>4-core</strong> when you create the Codespace.
 </div>
-
-**Launch the app:**
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
+When it has started, open `02_notebooks/` and begin with the human dataset.
 
->Run the workshop locally on your machine. 
+### Option 2: Docker
 
-To run it on your own machine, install the following packages:
+The Codespace runs from an image you can also start yourself. It already contains R, all
+the packages, Jupyter with the R kernel, and Nextflow. From the folder where you cloned
+the repository:
+
+```bash
+docker run --rm -it -p 8888:8888 -v "$PWD":/work -w /work \
+  ghcr.io/biosustain/dsp_transcriptomics_27200-data-driven-bioengineering:1.1.0 \
+  jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+```
+
+Open the `http://127.0.0.1:8888/lab?token=...` link it prints, then go to `02_notebooks/`.
+On an Apple Silicon Mac add `--platform linux/amd64`.
+
+### Option 3: your own R installation
+
+Only sensible if you are comfortable with R and with sorting out package installations
+yourself, Bioconductor ones included. If it breaks on the morning of the class, switch to
+a Codespace rather than lose the session to it. Install the packages well in advance:
 
 ```{r, eval=FALSE}
 # ============================================================
@@ -128,16 +147,13 @@ cran_pkgs <- c(
   "reshape2",
   "RColorBrewer",
   "pheatmap",
-  "heatmaply",
-  "factoextra",
   "knitr",
   "kableExtra",
   "DT",
-  "plotly",
   "ggpubr",
   "gggenes",     # operon plots (S. aureus)
-  "gprofiler2",  # ORA via g:Profiler (human)
   "msigdbr",     # MSigDB gene sets for GSEA (human)
+  "ragg",        # draws plots with proper unicode
   "remotes"      # needed for GitHub installs below
 )
 
@@ -158,7 +174,6 @@ bioc_pkgs <- c(
   "DESeq2",
   "apeglm",       # recommended shrinkage estimator used with DESeq2
   "fgsea",
-  "KEGGREST",
   "EnhancedVolcano"
 )
 

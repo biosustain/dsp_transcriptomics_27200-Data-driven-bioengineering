@@ -164,7 +164,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-1-codespaces-recommended"><i class="fa fa-check"></i>Option 1: Codespaces (recommended)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-2-docker"><i class="fa fa-check"></i>Option 2: Docker</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#option-3-your-own-r-installation"><i class="fa fa-check"></i>Option 3: your own R installation</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a>
 <ul>
 <li class="chapter" data-level="" data-path="opening-the-nextflow-environment.html"><a href="opening-the-nextflow-environment.html"><i class="fa fa-check"></i>Opening the Nextflow environment</a></li>
@@ -376,15 +381,15 @@ bacteria have no introns and a splice-aware aligner is unnecessary. The
 quantification, so we do not have to set those separately.</p>
 <p><strong>To process the data, run the following command:</strong></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-1" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="st">&#39;https://github.com/nf-core/rnaseq&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-2"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-2" tabindex="-1"></a>    <span class="at">-name</span> <span class="st">&#39;saureus_usa100_PRJNA685119_GSE163153&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-3"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-3" tabindex="-1"></a>    <span class="at">-r</span> 3.23.0 <span class="dt">\</span></span>
-<span id="cb6-4"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-4" tabindex="-1"></a>    <span class="at">-profile</span> prokaryotic,docker <span class="dt">\</span></span>
-<span id="cb6-5"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-5" tabindex="-1"></a>    <span class="at">--input</span>  <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA685119_GSE163153_saureus/usa100/samplesheet_PRJNA685119_usa100_subset_24h.csv&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-6"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-6" tabindex="-1"></a>    <span class="at">--outdir</span> <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/saureus_usa100_nfcore_processing_downsampled&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-7"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-7" tabindex="-1"></a>    <span class="at">--fasta</span>  <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.fna.gz&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-8"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-8" tabindex="-1"></a>    <span class="at">--gtf</span>    <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.gtf.gz&#39;</span> <span class="dt">\</span></span>
-<span id="cb6-9"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb6-9" tabindex="-1"></a>    <span class="at">-c</span> /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-1" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="st">&#39;https://github.com/nf-core/rnaseq&#39;</span> <span class="dt">\</span></span>
+<span id="cb7-2"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-2" tabindex="-1"></a>    <span class="at">-name</span> <span class="st">&#39;saureus_usa100_PRJNA685119_GSE163153&#39;</span> <span class="dt">\</span></span>
+<span id="cb7-3"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-3" tabindex="-1"></a>    <span class="at">-r</span> 3.23.0 <span class="dt">\</span></span>
+<span id="cb7-4"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-4" tabindex="-1"></a>    <span class="at">-profile</span> prokaryotic,docker <span class="dt">\</span></span>
+<span id="cb7-5"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-5" tabindex="-1"></a>    <span class="at">--input</span>  <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA685119_GSE163153_saureus/usa100/samplesheet_PRJNA685119_usa100_subset_24h.csv&#39;</span> <span class="dt">\</span></span>
+<span id="cb7-6"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-6" tabindex="-1"></a>    <span class="at">--outdir</span> <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/saureus_usa100_nfcore_processing_downsampled&#39;</span> <span class="dt">\</span></span>
+<span id="cb7-7"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-7" tabindex="-1"></a>    <span class="at">--fasta</span>  <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.fna.gz&#39;</span> <span class="dt">\</span></span>
+<span id="cb7-8"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-8" tabindex="-1"></a>    <span class="at">--gtf</span>    <span class="st">&#39;/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.gtf.gz&#39;</span> <span class="dt">\</span></span>
+<span id="cb7-9"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-9" tabindex="-1"></a>    <span class="at">-c</span> /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config</span></code></pre></div>
 </details>
 <p><strong>What the arguments mean:</strong></p>
 <ul>
@@ -399,7 +404,7 @@ quantification, so we do not have to set those separately.</p>
 </ul>
 <p>The same command is saved as a script, if you prefer to run it that way:</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb7-1" tabindex="-1"></a><span class="fu">bash</span> 01_scripts/00_nfcore_rnaseq_processing_saureus.sh</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="running-the-nf-corernaseq-pipeline-v3.23.html#cb8-1" tabindex="-1"></a><span class="fu">bash</span> 01_scripts/00_nfcore_rnaseq_processing_saureus.sh</span></code></pre></div>
 </details>
 <p>It takes about 10 minutes.</p>
 <div class="remember">
