@@ -168,33 +168,26 @@ cat("Example locus tags                 :",
     paste(head(gene_ids, 3), collapse = ", "), "\n")
 ```
 
-### Building the Metadata from Sample Names
+### Getting the Metadata
 
-The sample names encode the full experimental design in a fixed pattern:
+The metadata file says what each sample is: which lifestyle, which time point,
+which replicate. It sits next to the counts, in the folder for your strain.
 
-`{STRAIN}_{REF}_{LIFESTYLE}_{TIMEPOINT}h_{REPLICATE}` — e.g. `USA100_N315_Biofilm_24h_5`.
+```{r saureus-qc-load-metadata-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+samples_info <- read.table(
+  file.path(data_dir, "metadata.tsv"),
+  header      = TRUE,
+  sep         = "\t",
+  check.names = TRUE
+)
 
-Rather than maintain a separate metadata file that could drift out of sync with the count matrix, we parse the design directly from the column names. This guarantees the metadata always matches the samples actually present in the data.
-
-```{r saureus-qc-build-metadata-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-samples_info <- tibble(sample = colnames(count_genes)) %>%
-  tidyr::separate(
-    sample,
-    into   = c("strain_id", "ref", "lifestyle", "timepoint", "replicate"),
-    sep    = "_",
-    remove = FALSE
-  ) %>%
+samples_info <- samples_info %>%
   mutate(
     lifestyle = factor(lifestyle, levels = c("Planktonic", "Biofilm")),  # Planktonic = reference
-    timepoint = factor(timepoint, levels = c("5h", "10h", "24h")),
-    replicate = as.integer(replicate)
+    timepoint = factor(timepoint, levels = c("5h", "10h", "24h"))
   )
 
-# Sanity: every column parsed into exactly the expected fields
-stopifnot(!any(is.na(samples_info$lifestyle)),
-          !any(is.na(samples_info$timepoint)))
-
-cat("Samples parsed:", nrow(samples_info), "\n\n")
+cat("Samples:", nrow(samples_info), "\n\n")
 print(table(samples_info$lifestyle, samples_info$timepoint))
 ```
 
@@ -217,7 +210,7 @@ DT::datatable(
     scrollY     = 200,
     scroller    = TRUE
   ),
-  caption = paste0('Sample metadata — ', strain, ' (parsed from sample names)')
+  caption = paste0('Sample metadata — ', strain)
 )
 ```
 
@@ -267,18 +260,13 @@ dds <- DESeqDataSetFromMatrix(
   <strong>📌 Remember:</strong> Always do a sanity check!
 </div>
 
-**Are We Working with Raw Counts?**
+**Library sizes**
 
-`DESeq2` requires **raw, un-normalised integer counts**. Feeding it normalised values (TPM, FPKM) will produce incorrect results.
+Before anything else, check how many reads ended up in each sample. DESeq2 needs
+**raw, un-normalised integer counts**; if you feed it TPM or FPKM the results are wrong.
 
 ```{r saureus-qc-check-raw-0, echo=TRUE, eval=TRUE, include=TRUE, warning=FALSE, message=FALSE}
 options(scipen = 999)
-
-kable(count_genes[1:6, 1:min(8, ncol(count_genes))],
-      caption = "Raw count matrix — first 6 genes, first samples",
-      format.args = list(big.mark = ",")) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
-                full_width = FALSE)
 
 barplot(colSums(count_genes),
         main   = paste0("Library sizes (total counts per sample) — ", strain),
@@ -290,12 +278,10 @@ barplot(colSums(count_genes),
         names.arg = colnames(count_genes))
 ```
 
-<div class="tip">
-  <strong>💡 Tip:</strong> scipen = 999 is a penalty against scientific notation. R uses it to decide when to switch between fixed (150000) and scientific (1.5e+05) format. The default is scipen = 0 — by setting it to 999 you make the penalty so high that R almost never switches to scientific notation, preferring plain numbers instead.
-</div>
-
 :::boxy
-A bacterial genome has far fewer genes than a human one (roughly 2,500–2,900 for *S. aureus*), so this count matrix is much smaller than a eukaryotic one. A right-skewed count distribution (many low-count genes, a few very high) is still expected and correct.
+Samples differ in depth, which is exactly what the size factors further down correct for.
+What would worry you is one sample far below the rest: too few reads means too little
+information about that sample, whatever you do afterwards.
 :::
 
 ### Pre-filtering Low-count Genes
@@ -318,19 +304,6 @@ cat("Genes before filtering:", n_before, "\n")
 cat("Genes after  filtering:", nrow(dds), "\n")
 cat("Genes removed         :", sum(!keep), "\n")
 ```
-
-### Factor Order and Reference Level
-
-The first factor level is always the reference (denominator) in `DESeq2` comparisons. Setting `Planktonic` as the reference ensures fold changes are computed in the intended direction: **biofilm vs planktonic**, not the reverse.
-
-```{r saureus-qc-factor-order-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-dds$lifestyle <- relevel(dds$lifestyle, ref = "Planktonic")
-levels(dds$lifestyle)
-```
-
-::: {style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;"}
-<strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC will mean higher expression in biofilm relative to planktonic.
-:::
 
 ## Exploratory Data Analysis
 
@@ -396,54 +369,24 @@ ggsave(
 )
 ```
 
-### Sample Correlation Heatmap
+### Variance-Stabilising Transformation
 
-Euclidean distances between `VST-transformed` samples reveal how similar samples are to each other globally. Samples from the same lifestyle, or the same time point, may cluster together.
-
-`Variance-stabilising transformation (VST)` is applied because raw or normalised counts have heteroscedastic variance (high-count genes have much larger absolute variance).
-
-:::boxy
-VST removes this mean–variance dependence, making distances meaningful across the full expression range ([Anders & Huber, 2010](https://doi.org/10.1186/gb-2010-11-10-r106)).
-:::
+The plots below compare samples to each other, and for that the counts need one more
+step. In raw or normalised counts the highly expressed genes vary far more in absolute
+terms than quiet ones, so they would dominate any distance or PCA calculation. The
+variance-stabilising transformation (VST) removes that dependence between a gene's mean
+and its variance, so every gene contributes on a comparable scale
+([Anders & Huber, 2010](https://doi.org/10.1186/gb-2010-11-10-r106)).
 
 ```{r saureus-qc-vst-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 vsd <- varianceStabilizingTransformation(dds, blind = TRUE)
 ```
 
 :::boxy
-With **`blind = TRUE`**, the VST is computed ignoring the experimental design. This is recommended for QC and exploratory analysis, where you want an unbiased view of sample similarity.
-
-Use `blind = FALSE` only when the transformation is feeding into a model that already accounts for the design.
-:::
-
-```{r saureus-qc-correlation-heatmap-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-sampleDists      <- dist(t(assay(vsd)))
-sampleDistMatrix <- as.matrix(sampleDists)
-
-rownames(sampleDistMatrix) <- paste(vsd$lifestyle, vsd$timepoint, vsd$replicate, sep = " | ")
-colnames(sampleDistMatrix) <- rownames(sampleDistMatrix)
-
-heat <- pheatmap(
-  sampleDistMatrix,
-  main     = paste0("Sample-to-sample distances (VST) — ", strain),
-  fontsize = 7
-)
-
-heat
-
-png(
-  filename = file.path(results_dir, "plots", "sample_distance_heatmap.png"),
-  width    = 9,
-  height   = 9,
-  units    = "in",
-  res      = 300
-)
-heat
-dev.off()
-```
-
-:::boxy
-The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by lifestyle, by time point, or both. If time point is a strong driver of the distances, that is a signal that time must be part of the model rather than ignored — which is exactly why script 02 keeps time in its designs instead of pooling all samples into a plain biofilm-vs-planktonic comparison.
+**`blind = TRUE`** computes the transformation ignoring the experimental design. That is
+what you want for QC: an unbiased view of how samples relate, not one shaped by the answer
+you are hoping for. Use `blind = FALSE` only when the transformed values feed a model that
+already accounts for the design.
 :::
 
 ### Principal Component Analysis (PCA)
@@ -598,8 +541,7 @@ cat("   Note             : this holds ALL time points. Script 02 subsets to the 
 
 ::: question
 1. Your output prints how many genes the filter removed. Pick one of them — a gene with almost no counts in any of your 32 samples — and suggest two possible reasons it is so quiet: one biological, one technical. (USA-500 groups: remember your reads were mapped to the USA300 genome.) How could you start telling the two apart with the data you already have?
-2. The script sets planktonic as the reference, so a positive fold change means "up in biofilm". If you swapped the reference, what would change in the numbers — and what would change only in how you tell the story? For *S. aureus* living on a catheter in a patient, which lifestyle is really the "normal" one?
-3. These 50 genes are the most *variable* — not necessarily the most *important*. Could a gene that is essential for biofilm formation be missing from this heatmap? Give one reason how. (Hint: what does a count measure — and what does it miss?)
+2. These 50 genes are the most *variable* — not necessarily the most *important*. Could a gene that is essential for biofilm formation be missing from this heatmap? Give one reason how. (Hint: what does a count measure — and what does it miss?)
 :::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->

@@ -58,8 +58,8 @@ library(DT)
 
 `DESeq2` fits a negative binomial model to the raw counts and performs a Wald test for each gene. Internally it runs three steps in sequence: size factor estimation (normalisation), dispersion estimation, and the Wald test. These can also be run separately, but `DESeq()` handles all three in one call.
 
-:::boxy
-**What DESeq2 does internally — three steps:**
+<details>
+<summary><strong>What DESeq2 does internally — three steps</strong> (click to expand)</summary>
 
 **1. Size factor estimation (normalisation)**
 
@@ -100,7 +100,8 @@ will list `condition_treatment_vs_control` — the fold change is calculated as 
 
 If control were not set as the reference level, the fold change would be
 inverted and your biological interpretation would be backwards.
-:::
+
+</details>
 
 ```{r human-de-load-dds, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 git_root <- system("git rev-parse --show-toplevel", intern = TRUE)
@@ -117,11 +118,51 @@ cat("   Conditions  :", paste(levels(dds$condition), collapse = " vs "), "\n")
   <strong>📌 Remember:</strong> The variable of interest is at the end of the design formula, and the control group is the first (reference) factor level. Both were set in the QC script.
 </div>
 
+### Factor Order and Reference Level
+
+Before fitting, make sure the comparison points the way you think it does.
+The first factor level is always the reference (denominator) in `DESeq2` comparisons. Setting it explicitly ensures fold changes are computed in the intended direction: **treatment (dexamethasone) vs control (untreated)**, not the reverse.
+
+```{r human-de-factor-order-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+
+dds$condition <- relevel(dds$condition, ref = "control")
+
+levels(dds$condition)
+```
+
+::: {style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;"}
+<strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC means higher expression in dexamethasone-treated cells relative to untreated.
+:::
+
+
 **Run DESeq2 (paired design)**
 ```{r human-de-run-deseq, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 dds <- DESeq(dds)
 resultsNames(dds)
 ```
+
+**Did the model behave?**
+
+`DESeq()` estimates how variable each gene is between replicates (its dispersion), then
+pulls the noisy per-gene estimates towards the overall trend. This plot is where you check
+that it worked.
+
+```{r human-de-disp-plot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
+plotDispEsts(dds, main = "Dispersion estimates")
+```
+
+:::boxy
+**How to read it.** Each black dot is one gene, placed by its mean expression (left to right)
+and its dispersion (bottom to top). The red line is the trend DESeq2 fitted across all genes.
+The blue dots are the final estimates, pulled from the black dots towards that line — the pull
+is strongest for low-count genes on the left, where a single odd replicate can otherwise make
+a gene look far more variable than it really is. Points circled in blue were left alone,
+treated as genuinely variable rather than noisy.
+
+What you want to see: dispersion falling as expression rises, and blue dots hugging the red
+line. A cloud with no trend means the model has not fitted well, and nothing downstream is
+trustworthy.
+:::
 
 ## Teaching Comparison — Paired vs Simple Design
 

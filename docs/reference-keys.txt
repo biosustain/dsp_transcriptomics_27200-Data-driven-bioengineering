@@ -1,8 +1,6 @@
-tab:saureus-qc-check-raw-0
-tab:saureus-qc-size-factors-0
-tab:saureus-de-maturation-overlap-0
-tab:saureus-de-hypothesis-compare-0
-tab:human-qc-check-raw-0
 tab:human-qc-size-factors-0
 tab:human-de-design-comparison
 tab:human-de-known-genes-check
+tab:saureus-qc-size-factors-0
+tab:saureus-de-maturation-overlap-0
+tab:saureus-de-hypothesis-compare-0

@@ -110,6 +110,20 @@ dir.create(file.path(results_dir, "rds"),    recursive = TRUE, showWarnings = FA
 reference (baseline) level explicitly for each analysis so the direction of every fold change is unambiguous.
 </div>
 
+### Factor Order and Reference Level
+
+Before extracting any result, make sure the comparison points the way you think it does.
+The first factor level is always the reference (denominator) in `DESeq2` comparisons. Setting `Planktonic` as the reference ensures fold changes are computed in the intended direction: **biofilm vs planktonic**, not the reverse.
+
+```{r saureus-de-factor-order-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+dds_all$lifestyle <- relevel(dds_all$lifestyle, ref = "Planktonic")
+levels(dds_all$lifestyle)
+```
+
+::: {style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;"}
+<strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC will mean higher expression in biofilm relative to planktonic.
+:::
+
 ### A Small Helper for Extracting and Classifying Results
 
 To avoid repeating the same code for every contrast, we define one helper that takes a fitted `DESeqDataSet`, extracts shrunken results for a named coefficient, and classifies each gene as up, down, or not significant using the shared thresholds.
@@ -772,8 +786,9 @@ at the top.
 ## Interpretation questions
 
 ::: question
-1. Pick one gene from your nine-panel profile plot. Looking at its two lines: is the interaction driven by the biofilm cells changing, the planktonic cells changing, or a real crossover? Now imagine sampling had stopped at 10 h — what would you have concluded about this gene? What decides the answer: the biology, or the time window you measured?
-2. The hypothesis: USA500, the strongest biofilm producer in the paper's assay, should show the biggest biofilm-vs-planktonic difference at 24 h. Compare your cross-strain table with a group that analysed the other strain. Did the hypothesis hold? Suggest two possible explanations for what you see — one biological, one technical. (Hint: which reference genome were the USA500 reads mapped to?)
+1. The script sets planktonic as the reference, so a positive fold change means "up in biofilm". If you swapped the reference, what would change in the numbers — and what would change only in how you tell the story? For *S. aureus* living on a catheter in a patient, which lifestyle is really the "normal" one?
+2. Pick one gene from your nine-panel profile plot. Looking at its two lines: is the interaction driven by the biofilm cells changing, the planktonic cells changing, or a real crossover? Now imagine sampling had stopped at 10 h — what would you have concluded about this gene? What decides the answer: the biology, or the time window you measured?
+3. The hypothesis: USA500, the strongest biofilm producer in the paper's assay, should show the biggest biofilm-vs-planktonic difference at 24 h. Compare your cross-strain table with a group that analysed the other strain. Did the hypothesis hold? Suggest two possible explanations for what you see — one biological, one technical. (Hint: which reference genome were the USA500 reads mapped to?)
 :::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->

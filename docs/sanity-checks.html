@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Data processing using the nf-core/rnaseq pipeline | 27200 Data Driven Bioengineering - Transcriptomics</title>
-  <meta name="description" content="Data processing using the nf-core/rnaseq pipeline | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <title>Sanity Checks | 27200 Data Driven Bioengineering - Transcriptomics</title>
+  <meta name="description" content="Sanity Checks | 27200 Data Driven Bioengineering - Transcriptomics" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Data processing using the nf-core/rnaseq pipeline | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <meta property="og:title" content="Sanity Checks | 27200 Data Driven Bioengineering - Transcriptomics" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data processing using the nf-core/rnaseq pipeline | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <meta name="twitter:title" content="Sanity Checks | 27200 Data Driven Bioengineering - Transcriptomics" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ai-assistants-in-your-codespace.html"/>
-<link rel="next" href="running-the-nf-corernaseq-pipeline-v3.23.html"/>
+<link rel="prev" href="preparing-the-data.html"/>
+<link rel="next" href="exploratory-data-analysis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -373,25 +373,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-processing-using-the-nf-corernaseq-pipeline" class="section level2 hasAnchor">
-<h2>Data processing using the nf-core/rnaseq pipeline<a href="data-processing-using-the-nf-corernaseq-pipeline.html#data-processing-using-the-nf-corernaseq-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Sources of data and genome files</strong></p>
-<p>For the hands-on run we use six <em>S. aureus</em> USA-100 samples (three biofilm, three planktonic, all at 24 h), sub-sampled to 50,000 reads each so the pipeline finishes within class time. Nothing has to be downloaded: the reads and the genome files are already in the repository.</p>
-<ul>
-<li>Reads: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE163153">PRJNA685119 / GSE163153</a>, sub-sampled, under <code>data/seq_files_subsampled/PRJNA685119_GSE163153_saureus/usa100/</code></li>
-<li>Genome sequence and annotation: <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009645.1/">GCF_000009645.1</a> (N315), under <code>data/genome_files/saureus/usa100_NC_002745/</code></li>
-</ul>
-<p>The count matrices analysed in the following chapters were made with this same pipeline on the <strong>full</strong> datasets: all time points for both <em>S. aureus</em> strains with the prokaryotic profile, and the human samples with STAR (human genes have introns, so a splice-aware aligner is needed). Those outputs, along with their MultiQC reports, are provided under <code>data/</code>, so the analysis notebooks can start directly from the counts.</p>
-
+<div id="sanity-checks" class="section level2 hasAnchor">
+<h2>Sanity Checks<a href="sanity-checks.html#sanity-checks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="remember">
+<p><strong>📌 Remember:</strong> Always do a sanity check!</p>
 </div>
-<!-- </div> -->
+<p><strong>Library sizes</strong></p>
+<p>Before anything else, check how many reads ended up in each sample. DESeq2 needs
+<strong>raw, un-normalised integer counts</strong>; if you feed it TPM or FPKM the results are wrong.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="sanity-checks.html#cb29-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb29-2"><a href="sanity-checks.html#cb29-2" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="sanity-checks.html#cb29-3" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">colSums</span>(count_genes),</span>
+<span id="cb29-4"><a href="sanity-checks.html#cb29-4" tabindex="-1"></a>        <span class="at">main   =</span> <span class="st">&quot;Library sizes (total counts per sample)&quot;</span>,</span>
+<span id="cb29-5"><a href="sanity-checks.html#cb29-5" tabindex="-1"></a>        <span class="at">ylab   =</span> <span class="st">&quot;Total raw counts&quot;</span>,</span>
+<span id="cb29-6"><a href="sanity-checks.html#cb29-6" tabindex="-1"></a>        <span class="at">xlab   =</span> <span class="cn">NULL</span>,</span>
+<span id="cb29-7"><a href="sanity-checks.html#cb29-7" tabindex="-1"></a>        <span class="at">col    =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb29-8"><a href="sanity-checks.html#cb29-8" tabindex="-1"></a>        <span class="at">las    =</span> <span class="dv">2</span>,</span>
+<span id="cb29-9"><a href="sanity-checks.html#cb29-9" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">colnames</span>(count_genes))</span></code></pre></div>
+</details>
+<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-check-raw-0-1.png" alt="" width="672" /></p>
+<div class="boxy">
+<p>Samples differ in depth, which is exactly what the size factors further down correct for.
+What would worry you is one sample far below the rest: too few reads means too little
+information about that sample, whatever you do afterwards.</p>
+</div>
+<div id="pre-filtering-low-count-genes" class="section level3 hasAnchor">
+<h3>Pre-filtering Low-count Genes<a href="sanity-checks.html#pre-filtering-low-count-genes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples (equal to the size of the smallest group).</p>
+<p>The human genome has roughly 20,000 protein-coding genes plus many non-coding ones, and a large fraction are not expressed in ASM cells — expect a substantial number to be filtered out.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sanity-checks.html#cb30-1" tabindex="-1"></a>smallestGroupSize <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>condition))</span>
+<span id="cb30-2"><a href="sanity-checks.html#cb30-2" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="sanity-checks.html#cb30-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Smallest group size   :&quot;</span>, smallestGroupSize, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## Smallest group size   : 4</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sanity-checks.html#cb32-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Filtering threshold   : at least 10 counts in&quot;</span>, smallestGroupSize, <span class="st">&quot;or more samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## Filtering threshold   : at least 10 counts in 4 or more samples</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sanity-checks.html#cb34-1" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">counts</span>(dds) <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">&gt;=</span> smallestGroupSize</span>
+<span id="cb34-2"><a href="sanity-checks.html#cb34-2" tabindex="-1"></a>n_before <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dds)</span>
+<span id="cb34-3"><a href="sanity-checks.html#cb34-3" tabindex="-1"></a>dds  <span class="ot">&lt;-</span> dds[keep, ]</span>
+<span id="cb34-4"><a href="sanity-checks.html#cb34-4" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="sanity-checks.html#cb34-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes before filtering:&quot;</span>, n_before, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## Genes before filtering: 25924</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sanity-checks.html#cb36-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes after  filtering:&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## Genes after  filtering: 14080</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sanity-checks.html#cb38-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes removed         :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## Genes removed         : 11844</code></pre>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="ai-assistants-in-your-codespace.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="running-the-nf-corernaseq-pipeline-v3.23.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="preparing-the-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exploratory-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

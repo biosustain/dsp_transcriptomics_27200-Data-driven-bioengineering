@@ -45,20 +45,21 @@ between how much RNA is present and what the cell is actually doing.
 The practical work is in [`02_notebooks/`](02_notebooks/), as Jupyter notebooks
 with an R kernel. They are generated from the scripts in [`01_scripts/`](01_scripts/).
 
-**Pick one dataset** and run its three notebooks in order (01, then 02, then 03).
-Each one saves results that the next one reads, so the order matters. If you
-finish early, have a look at the other dataset.
+**Work through the human dataset**, running its three notebooks in order (01,
+then 02, then 03). Each one saves results that the next one reads, so the order
+matters. If you finish early, the *S. aureus* material goes further: a time
+course and two strains.
 
 | Notebook | What it does |
 |---|---|
-| *Staphylococcus aureus*, biofilm vs planktonic | |
-| [`01_quality_control`](02_notebooks/staphylococcus_aureus/01_quality_control.ipynb) | Quality checks and first look at the data, one strain at a time |
-| [`02_differential_expression_analysis`](02_notebooks/staphylococcus_aureus/02_differential_expression_analysis.ipynb) | DESeq2: how cultures change over time, and biofilm vs planktonic |
-| [`03_gene_functional`](02_notebooks/staphylococcus_aureus/03_gene_functional.ipynb) | Enrichment with KEGG and GO gene sets |
 | *Homo sapiens*, airway smooth muscle with and without dexamethasone | |
 | [`01_quality_control`](02_notebooks/homo_sapiens/01_quality_control.ipynb) | Quality checks, taking the donors into account |
 | [`02_differential_expression_analysis`](02_notebooks/homo_sapiens/02_differential_expression_analysis.ipynb) | DESeq2 with a paired design (`~ donor + condition`) |
 | [`03_gene_functional`](02_notebooks/homo_sapiens/03_gene_functional.ipynb) | Enrichment with g:Profiler and MSigDB |
+| **Advanced** — *Staphylococcus aureus*, biofilm vs planktonic | |
+| [`01_quality_control`](02_notebooks/staphylococcus_aureus/01_quality_control.ipynb) | Quality checks and first look at the data, one strain at a time |
+| [`02_differential_expression_analysis`](02_notebooks/staphylococcus_aureus/02_differential_expression_analysis.ipynb) | DESeq2: how cultures change over time, and biofilm vs planktonic |
+| [`03_gene_functional`](02_notebooks/staphylococcus_aureus/03_gene_functional.ipynb) | Enrichment with KEGG and GO gene sets |
 
 ## Software and data
 
@@ -71,8 +72,8 @@ finish early, have a look at the other dataset.
 
 **Data** (small versions, so everything runs in class)
 
-- *Staphylococcus aureus*, biofilm vs planktonic over time, strains USA-100 and USA-500: [`data/data-01-Staphylococcus_aureus/`](data/data-01-Staphylococcus_aureus/)
-- *Homo sapiens*, airway smooth muscle with and without dexamethasone, four donors: [`data/data-02-Homo_sapiens/`](data/data-02-Homo_sapiens/)
+- *Homo sapiens*, airway smooth muscle with and without dexamethasone, four donors: [`data/data-02-Homo_sapiens/`](data/data-02-Homo_sapiens/). This is the dataset we work on together.
+- *Staphylococcus aureus*, biofilm vs planktonic over time, strains USA-100 and USA-500: [`data/data-01-Staphylococcus_aureus/`](data/data-01-Staphylococcus_aureus/). Advanced material.
 - Gene sets for enrichment (KEGG, GO): [`data/databases/`](data/databases/)
 
 **Other**

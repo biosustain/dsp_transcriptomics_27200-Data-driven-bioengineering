@@ -49,11 +49,11 @@ The material is designed for people with **no or little practical experience** i
 
 **Datasets**
 
-* 🦠 *Staphylococcus aureus* — biofilm vs planktonic lifestyle over time (strains USA-100 and USA-500)
-* 🧑‍🔬 *Homo sapiens* — airway smooth muscle cells treated with dexamethasone (paired donor design)
+* 🧑‍🔬 *Homo sapiens* — airway smooth muscle cells treated with dexamethasone (paired donor design). This is the one we work on together.
+* 🦠 *Staphylococcus aureus* — biofilm vs planktonic over time, strains USA-100 and USA-500. Advanced material, if you want to go further.
 
 :::boxy
-**Pick ONE dataset** — whichever interests you more, microbial or biomedical — and work through its three notebooks in order (**01 quality control → 02 differential expression → 03 functional enrichment**). Depth beats coverage: it is better to interpret one dataset well than to rush through both. If your group finishes early, start on the other dataset.
+**Work through the human dataset**: the three notebooks in order (**01 quality control → 02 differential expression → 03 functional enrichment**). Each one saves results that the next one reads, so the order matters. Depth beats coverage: it is better to interpret one dataset well than to rush. If you finish early, the *S. aureus* material takes the same ideas further, with a time course and two strains.
 :::
 
 :::boxy

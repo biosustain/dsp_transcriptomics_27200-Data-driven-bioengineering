@@ -269,25 +269,13 @@ The variable of interest (`condition`) goes **last**; the terms before it are ad
 </div>
 
 
-### Are We Working with Raw Counts?
+**Library sizes**
 
-`DESeq2` requires **raw, un-normalised integer counts**. Feeding it normalised values (TPM, FPKM) will produce incorrect results.
-
-<div class="remember">
-  <strong>📌 Remember:</strong> Always verify your input before proceeding.
-</div>
-
+Before anything else, check how many reads ended up in each sample. DESeq2 needs
+**raw, un-normalised integer counts**; if you feed it TPM or FPKM the results are wrong.
 
 ```{r human-qc-check-raw-0, echo=TRUE, eval=TRUE, include=TRUE, warning=FALSE, message=FALSE}
 options(scipen = 999)
-
-
-kable(count_genes[1:6, ],
-      caption = "Raw count matrix — first 6 genes",
-      format.args = list(big.mark = ",")) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
-                full_width = FALSE)
-
 
 barplot(colSums(count_genes),
         main   = "Library sizes (total counts per sample)",
@@ -298,16 +286,11 @@ barplot(colSums(count_genes),
         names.arg = colnames(count_genes))
 ```
 
-<div class="tip">
-  <strong>💡 Tip:</strong> scipen = 999 is a penalty against scientific notation. R uses it to decide when to switch between fixed (150000) and scientific (1.5e+05) format. The default is scipen = 0 — by setting it to 999 you make the penalty so high that R almost never switches to scientific notation, preferring plain numbers instead.
-</div>
-
-
-
 :::boxy
-Raw human RNA-seq counts span a very wide range (many genes near zero, a few in the hundreds of thousands). A highly right-skewed distribution is expected and correct at this stage.
+Samples differ in depth, which is exactly what the size factors further down correct for.
+What would worry you is one sample far below the rest: too few reads means too little
+information about that sample, whatever you do afterwards.
 :::
-
 
 ### Pre-filtering Low-count Genes
 
@@ -330,22 +313,6 @@ cat("Genes before filtering:", n_before, "\n")
 cat("Genes after  filtering:", nrow(dds), "\n")
 cat("Genes removed         :", sum(!keep), "\n")
 ```
-
-### Factor Order and Reference Level
-
-The first factor level is always the reference (denominator) in `DESeq2` comparisons. Setting it explicitly ensures fold changes are computed in the intended direction: **treatment (dexamethasone) vs control (untreated)**, not the reverse.
-
-```{r human-qc-factor-order-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-
-dds$condition <- relevel(dds$condition, ref = "control")
-
-levels(dds$condition)
-```
-
-::: {style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;"}
-<strong>📌 Remember:</strong> The reference level determines the direction of fold changes. A positive log2FC means higher expression in dexamethasone-treated cells relative to untreated.
-:::
-
 
 ## Exploratory Data Analysis
 
@@ -412,55 +379,24 @@ ggsave(
 )
 ```
 
-### Sample Correlation Heatmap
+### Variance-Stabilising Transformation
 
-Euclidean distances between `VST-transformed` samples reveal how similar samples are to each other globally. Samples from the same treatment group (or the same donor) may cluster together. With a paired design, donor structure is often visible here — this is expected and is exactly what the `~ donor + condition` model accounts for.
-
-`Variance-stabilising transformation (VST)` is applied here because raw or normalised counts have heteroscedastic variance (high-count genes have much larger absolute variance).
-
-:::boxy
-VST removes this mean–variance dependence, making distances meaningful across the full expression range ([Anders & Huber, 2010](https://doi.org/10.1186/gb-2010-11-10-r106)).
-:::
+The plots below compare samples to each other, and for that the counts need one more
+step. In raw or normalised counts the highly expressed genes vary far more in absolute
+terms than quiet ones, so they would dominate any distance or PCA calculation. The
+variance-stabilising transformation (VST) removes that dependence between a gene's mean
+and its variance, so every gene contributes on a comparable scale
+([Anders & Huber, 2010](https://doi.org/10.1186/gb-2010-11-10-r106)).
 
 ```{r human-qc-vst-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-
 vsd <- varianceStabilizingTransformation(dds, blind = TRUE)
 ```
 
-
 :::boxy
-**`blind = TRUE`**, the VST is computed ignoring the experimental design. This is recommended for QC and exploratory analysis, where you want an unbiased view of sample similarity.
-
-Use `blind = FALSE` only when the transformation is feeding into a model that already accounts for the design.
-:::
-
-```{r human-qc-correlation-heatmap-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-
-sampleDists      <- dist(t(assay(vsd)))
-sampleDistMatrix <- as.matrix(sampleDists)
-
-rownames(sampleDistMatrix) <- paste(vsd$sample, vsd$condition, sep = " | ")
-colnames(sampleDistMatrix) <- rownames(sampleDistMatrix)
-
-heat <- pheatmap(
-  sampleDistMatrix,
-  main         = "Sample-to-sample distances (VST) — Human ASM",
-  fontsize     = 10
-)
-
-heat
-
-ggsave(
-  filename = file.path(git_root, "results", "human", "plots", "heat.png"),
-  plot     = heat,
-  width    = 8,
-  height   = 12,
-  dpi      = 300
-)
-```
-
-:::boxy
-The diagonal is always zero (a sample compared to itself). Dark = similar, light = distant. Look at whether samples group by treatment, by donor, or both. If donor is a strong driver of the distances, that is a signal the paired design is worthwhile.
+**`blind = TRUE`** computes the transformation ignoring the experimental design. That is
+what you want for QC: an unbiased view of how samples relate, not one shaped by the answer
+you are hoping for. Use `blind = FALSE` only when the transformed values feed a model that
+already accounts for the design.
 :::
 
 ### Principal Component Analysis (PCA)
