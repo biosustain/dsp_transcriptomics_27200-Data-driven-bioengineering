@@ -29,7 +29,7 @@
   
   
 <link rel="prev" href="part-2-gene-set-enrichment-analysis-gsea.html"/>
-<link rel="next" href="saving-results-1.html"/>
+<link rel="next" href="saving-results-2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -71,10 +71,6 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -232,124 +228,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-two-tools"><i class="fa fa-check"></i><strong>Why two tools?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
+<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#what-gsea-does"><i class="fa fa-check"></i>What GSEA does</a></li>
+<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i>Why these gene sets?</a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#load-libraries"><i class="fa fa-check"></i>Load Libraries</a></li>
 <li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis.html"><a href="load-results-from-differential-expression-analysis.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA) with g:Profiler</a>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html"><i class="fa fa-check"></i>Running GSEA</a>
 <ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#prepare-input"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#run-ora"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#inspect-significant-terms"><i class="fa fa-check"></i>Inspect Significant Terms</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#interactive-manhattan-plot"><i class="fa fa-check"></i>Interactive Manhattan Plot</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#bar-plot-top-terms-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Terms by Direction</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#retrieve-msigdb-gene-sets"><i class="fa fa-check"></i>Retrieve MSigDB Gene Sets</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#run-gsea"><i class="fa fa-check"></i>Run GSEA</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#retrieve-msigdb-gene-sets"><i class="fa fa-check"></i>Retrieve MSigDB Gene Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#run-gsea"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#inspect-gene-sets"><i class="fa fa-check"></i>Inspect Gene Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea.html"><a href="part-3-comparing-ora-and-gsea.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="part"><span><b>II Advanced: Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-1.html"><a href="quality-control-1.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html"><i class="fa fa-check"></i>Choose the Strain</a>
-<ul>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#loading-count-data-1"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#getting-the-metadata-1"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html"><i class="fa fa-check"></i>Preparing the Data</a>
-<ul>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#creating-the-deseqdataset-1"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#sanity-checks-1"><i class="fa fa-check"></i>Sanity Checks</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#pre-filtering-low-count-genes-1"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#estimate-size-factors-1"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#variance-stabilising-transformation-1"><i class="fa fa-check"></i>Variance-Stabilising Transformation</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-3.html"><a href="interpretation-questions-3.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-1.html"><a href="differential-expression-analysis-1.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html"><i class="fa fa-check"></i>Setup the Environment</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#choose-the-strain-1"><i class="fa fa-check"></i>Choose the Strain</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#load-the-deseqdataset-from-qc"><i class="fa fa-check"></i>Load the DESeqDataSet from QC</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#factor-order-and-reference-level-1"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#a-small-helper-for-extracting-and-classifying-results"><i class="fa fa-check"></i>A Small Helper for Extracting and Classifying Results</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html"><i class="fa fa-check"></i>Part 1 — Maturation: How a Culture Changes Over Time</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#a-maturation-within-biofilm"><i class="fa fa-check"></i>1a — Maturation within Biofilm</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#b-maturation-within-planktonic"><i class="fa fa-check"></i>1b — Maturation within Planktonic</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#visualising-the-operon-genes-as-arrows-along-the-chromosome"><i class="fa fa-check"></i>Visualising the Operon: Genes as Arrows Along the Chromosome</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#comparing-the-two-maturation-programmes"><i class="fa fa-check"></i>Comparing the Two Maturation Programmes</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><i class="fa fa-check"></i>Part 2 — Lifestyle: Biofilm vs Planktonic, Accounting for Time</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#a-additive-model-the-lifestyle-effect-adjusted-for-time"><i class="fa fa-check"></i>2a — Additive Model: the Lifestyle Effect, Adjusted for Time</a></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#b-interaction-model-does-the-lifestyle-difference-change-with-time"><i class="fa fa-check"></i>2b — Interaction Model: Does the Lifestyle Difference Change with Time?</a></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#additive-vs-interaction-which-should-you-use"><i class="fa fa-check"></i>Additive vs Interaction: Which Should You Use?</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><i class="fa fa-check"></i>Part 3 — Hypothesis Test: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cross-strain-comparison-of-the-hypothesis"><i class="fa fa-check"></i>Cross-Strain Comparison of the Hypothesis</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="save-results.html"><a href="save-results.html"><i class="fa fa-check"></i>Save Results</a></li>
-<li class="chapter" data-level="" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-4.html"><a href="interpretation-questions-4.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#why-two-packages"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#why-these-gene-sets-1"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#strain-parameter"><i class="fa fa-check"></i>Strain parameter</a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#load-libraries-1"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html"><i class="fa fa-check"></i>Strain configuration and inputs</a>
-<ul>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#load-results-from-differential-expression-analysis-1"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#define-significance-and-check-against-the-de-table"><i class="fa fa-check"></i>Define significance and check against the DE table</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#combine-gene-set-collections"><i class="fa fa-check"></i>Combine gene set collections</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#prepare-input-1"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#run-ora-1"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#filter-and-inspect-significant-sets"><i class="fa fa-check"></i>Filter and Inspect Significant Sets</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#critical-interpretation-watch-for-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Watch for Spurious Hits</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#bar-plot-top-enriched-sets-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Enriched Sets by Direction</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#prepare-the-ranked-gene-list-1"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#convert-gene-sets-to-fgsea-format"><i class="fa fa-check"></i>Convert Gene Sets to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#run-gsea-1"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#inspect-significant-sets"><i class="fa fa-check"></i>Inspect Significant Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#the-biofilm-activated-signal"><i class="fa fa-check"></i>The biofilm-activated signal</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#nes-bar-plot"><i class="fa fa-check"></i>NES Bar Plot</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets-in-each-direction"><i class="fa fa-check"></i>Enrichment Plot — Top Sets in Each Direction</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html#reading-the-biology"><i class="fa fa-check"></i>Reading the biology</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
@@ -375,47 +263,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="part-3-comparing-ora-and-gsea" class="section level2 hasAnchor">
 <h2>Part 3 — Comparing ORA and GSEA<a href="part-3-comparing-ora-and-gsea.html#part-3-comparing-ora-and-gsea" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>ORA and GSEA answer different questions, and in this dataset they give very different verdicts:
-<strong>ORA returns dozens of corrected-significant terms, while GSEA finds no set that survives
-multiple-testing correction.</strong> This section makes that contrast explicit, because it is one of the most
-useful things to understand about enrichment analysis.</p>
+<p>ORA and GSEA answer different questions and will not always agree. Sets found by both are the
+highest-confidence results.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="part-3-comparing-ora-and-gsea.html#cb140-1" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb140-2"><a href="part-3-comparing-ora-and-gsea.html#cb140-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up))   ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_up<span class="sc">$</span>term_name)</span>
-<span id="cb140-3"><a href="part-3-comparing-ora-and-gsea.html#cb140-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down)) ora_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(ora_terms, ora_down<span class="sc">$</span>term_name)</span>
-<span id="cb140-4"><a href="part-3-comparing-ora-and-gsea.html#cb140-4" tabindex="-1"></a>ora_terms <span class="ot">&lt;-</span> <span class="fu">unique</span>(ora_terms)</span>
-<span id="cb140-5"><a href="part-3-comparing-ora-and-gsea.html#cb140-5" tabindex="-1"></a></span>
-<span id="cb140-6"><a href="part-3-comparing-ora-and-gsea.html#cb140-6" tabindex="-1"></a>gsea_padj_terms <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
-<span id="cb140-7"><a href="part-3-comparing-ora-and-gsea.html#cb140-7" tabindex="-1"></a>gsea_nom_terms  <span class="ot">&lt;-</span> gsea_nom<span class="sc">$</span>pathway</span>
-<span id="cb140-8"><a href="part-3-comparing-ora-and-gsea.html#cb140-8" tabindex="-1"></a></span>
-<span id="cb140-9"><a href="part-3-comparing-ora-and-gsea.html#cb140-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA significant terms (padj-corrected)   :&quot;</span>, <span class="fu">length</span>(ora_terms),        <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="part-3-comparing-ora-and-gsea.html#cb354-1" tabindex="-1"></a><span class="co"># ORA hits get the same &quot;name [source]&quot; labels as the GSEA list, so identically</span></span>
+<span id="cb354-2"><a href="part-3-comparing-ora-and-gsea.html#cb354-2" tabindex="-1"></a><span class="co"># named sets from different collections are never conflated.</span></span>
+<span id="cb354-3"><a href="part-3-comparing-ora-and-gsea.html#cb354-3" tabindex="-1"></a>ora_hits <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(</span>
+<span id="cb354-4"><a href="part-3-comparing-ora-and-gsea.html#cb354-4" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(ora_up_sig)   <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">paste0</span>(ora_up_sig<span class="sc">$</span>ontology_name,   <span class="st">&quot; [&quot;</span>, ora_up_sig<span class="sc">$</span>source,   <span class="st">&quot;]&quot;</span>) <span class="cf">else</span> <span class="fu">character</span>(<span class="dv">0</span>),</span>
+<span id="cb354-5"><a href="part-3-comparing-ora-and-gsea.html#cb354-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(ora_down_sig) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">paste0</span>(ora_down_sig<span class="sc">$</span>ontology_name, <span class="st">&quot; [&quot;</span>, ora_down_sig<span class="sc">$</span>source, <span class="st">&quot;]&quot;</span>) <span class="cf">else</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb354-6"><a href="part-3-comparing-ora-and-gsea.html#cb354-6" tabindex="-1"></a>))</span>
+<span id="cb354-7"><a href="part-3-comparing-ora-and-gsea.html#cb354-7" tabindex="-1"></a>gsea_hits <span class="ot">&lt;-</span> gsea_sig<span class="sc">$</span>pathway</span>
+<span id="cb354-8"><a href="part-3-comparing-ora-and-gsea.html#cb354-8" tabindex="-1"></a></span>
+<span id="cb354-9"><a href="part-3-comparing-ora-and-gsea.html#cb354-9" tabindex="-1"></a>both      <span class="ot">&lt;-</span> <span class="fu">intersect</span>(ora_hits, gsea_hits)</span>
+<span id="cb354-10"><a href="part-3-comparing-ora-and-gsea.html#cb354-10" tabindex="-1"></a>ora_only  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(ora_hits, gsea_hits)</span>
+<span id="cb354-11"><a href="part-3-comparing-ora-and-gsea.html#cb354-11" tabindex="-1"></a>gsea_only <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(gsea_hits, ora_hits)</span>
+<span id="cb354-12"><a href="part-3-comparing-ora-and-gsea.html#cb354-12" tabindex="-1"></a></span>
+<span id="cb354-13"><a href="part-3-comparing-ora-and-gsea.html#cb354-13" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets significant in BOTH :&quot;</span>, <span class="fu">length</span>(both),      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## ORA significant terms (padj-corrected)   : 107</code></pre>
+<pre><code>## Sets significant in BOTH : 5</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="part-3-comparing-ora-and-gsea.html#cb142-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets significant after correction   :&quot;</span>, <span class="fu">length</span>(gsea_padj_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="part-3-comparing-ora-and-gsea.html#cb356-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets in ORA only         :&quot;</span>, <span class="fu">length</span>(ora_only),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## GSEA sets significant after correction   : 0</code></pre>
+<pre><code>## Sets in ORA only         : 5</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="part-3-comparing-ora-and-gsea.html#cb144-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets at nominal p &lt; 0.05 (suggestive):&quot;</span>, <span class="fu">length</span>(gsea_nom_terms),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="part-3-comparing-ora-and-gsea.html#cb358-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets in GSEA only        :&quot;</span>, <span class="fu">length</span>(gsea_only), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## GSEA sets at nominal p &lt; 0.05 (suggestive): 68</code></pre>
-<div style="background:#d4edda;border-left:4px solid #28a745;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
-<p><strong>The teaching point — why the two methods disagree here.</strong></p>
+<pre><code>## Sets in GSEA only        : 14</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="part-3-comparing-ora-and-gsea.html#cb360-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(both) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb360-2"><a href="part-3-comparing-ora-and-gsea.html#cb360-2" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Found by both methods:</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">&quot; -&quot;</span>, both), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb360-3"><a href="part-3-comparing-ora-and-gsea.html#cb360-3" tabindex="-1"></a>}</span></code></pre></div>
+</details>
+<pre><code>## 
+## Found by both methods:
+##  - Aminoacyl-tRNA biosynthesis [KEGG]
+##  - Ribosome [KEGG]
+##  - translation [GO:BP]
+##  - structural constituent of ribosome [GO:MF]
+##  - Purine metabolism [KEGG]</code></pre>
+<div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
+<strong>Interpretation guide:</strong>
 <ul>
-<li><strong>ORA</strong> tests whether the ~700 genes that individually passed significance are <em>concentrated</em> in a
-term. They are — in broad developmental and signalling terms, plus cytokine/immune signalling on the
-down-regulated side, consistent with an anti-inflammatory drug — so ORA reports corrected-significant
-enrichment.</li>
-<li><strong>GSEA</strong> tests whether an <em>entire</em> gene set moves <em>coherently</em> across the full ranked list. The
-dexamethasone response is carried by a few hundred strongly-changed genes spread across many pathways,
-not by whole pathways shifting together, so no set reaches significance after correction. The nominal
-top hits are a mixed bag and should be treated as untested hypotheses, not as a second opinion that
-happens to agree.</li>
+<li>
+<strong>Both significant</strong> — high confidence; a strong shift driven by many
+genes.
+</li>
+<li>
+<strong>ORA only</strong> — genes crossing the significance threshold cluster in this
+set, but the overall coordinated shift may be modest.
+</li>
+<li>
+<strong>GSEA only</strong> — a coordinated but subtle shift below the threshold; the
+genes move together without individually being significant.
+</li>
 </ul>
-<p><strong>Bad results are results.</strong> The GSEA “non-finding” is informative: it tells us the glucocorticoid effect
-here is <strong>gene-specific rather than pathway-coordinated</strong>. When the biology looks like this, ORA is the
-more appropriate tool — which is exactly why we report ORA as the primary enrichment result and GSEA as a
-secondary, directional check.</p>
+</div>
+<div id="reading-the-biology" class="section level3 hasAnchor">
+<h3>Reading the biology<a href="part-3-comparing-ora-and-gsea.html#reading-the-biology" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="part-3-comparing-ora-and-gsea.html#cb362-1" tabindex="-1"></a>n_biofilm_sets    <span class="ot">&lt;-</span> <span class="fu">sum</span>(gsea_sig<span class="sc">$</span>NES <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb362-2"><a href="part-3-comparing-ora-and-gsea.html#cb362-2" tabindex="-1"></a>n_planktonic_sets <span class="ot">&lt;-</span> <span class="fu">sum</span>(gsea_sig<span class="sc">$</span>NES <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb362-3"><a href="part-3-comparing-ora-and-gsea.html#cb362-3" tabindex="-1"></a></span>
+<span id="cb362-4"><a href="part-3-comparing-ora-and-gsea.html#cb362-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets higher in planktonic:&quot;</span>, n_planktonic_sets, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## GSEA sets higher in planktonic: 18</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="part-3-comparing-ora-and-gsea.html#cb364-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets higher in biofilm   :&quot;</span>, n_biofilm_sets, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## GSEA sets higher in biofilm   : 1</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="part-3-comparing-ora-and-gsea.html#cb366-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA sets among biofilm-up genes:&quot;</span>, <span class="fu">nrow</span>(ora_up_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## ORA sets among biofilm-up genes: 0</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="part-3-comparing-ora-and-gsea.html#cb368-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA sets among planktonic-up genes:&quot;</span>, <span class="fu">nrow</span>(ora_down_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## ORA sets among planktonic-up genes: 10</code></pre>
+<div class="boxy">
+<p><strong>Two things this contrast tells us.</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Planktonic cells run the growth machinery.</strong> The enrichment signal is dominated by
+translation, ribosome, aminoacyl-tRNA and nucleotide-metabolism sets, all higher in the
+planktonic state. Remember this contrast is the <em>additive</em> model — the lifestyle difference
+averaged across all three time points — and over that whole window the planktonic cultures
+spend more of their time growing exponentially, while cells inside a maturing biofilm are
+increasingly nutrient-limited and slow-growing. (At the 24 h endpoint alone the picture is
+less clean: by then the planktonic culture has entered deep stationary phase, which is
+exactly why script 02 avoided a single-snapshot comparison.) GSEA detects this coordinated
+shift regardless of where the significance threshold is drawn, which makes it a robust
+result rather than an artefact of the cutoff.</p></li>
+<li><p><strong>The biofilm-induced programme is largely invisible to enrichment.</strong> Many genes go <em>up</em> in
+biofilm, yet few or none form an enriched annotated set. The biology that switches <em>on</em> in
+biofilm lives disproportionately in genes that KEGG and GO do not annotate. This is a real
+limitation of enrichment analysis, not a failure of the pipeline: these methods can only
+see what has been annotated, and the most lifestyle-specific biology is often the least
+characterised. A “no enrichment” result here is itself a finding worth stating.</p></li>
+</ol>
+</div>
 </div>
 </div>
             </section>
@@ -424,7 +368,7 @@ secondary, directional check.</p>
         </div>
       </div>
 <a href="part-2-gene-set-enrichment-analysis-gsea.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="saving-results-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="saving-results-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

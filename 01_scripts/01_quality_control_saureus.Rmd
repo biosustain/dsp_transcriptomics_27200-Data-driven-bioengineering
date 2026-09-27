@@ -269,7 +269,7 @@ Before anything else, check how many reads ended up in each sample. DESeq2 needs
 options(scipen = 999)
 
 barplot(colSums(count_genes),
-        main   = paste0("Library sizes (total counts per sample) — ", strain),
+        main   = paste0("Library sizes (total counts per sample) - ", strain),
         ylab   = "Total raw counts",
         xlab   = NULL,
         col    = "steelblue",
@@ -417,7 +417,7 @@ PCAPlot <- ggplot(pca_data, aes(x     = PC1,
   labs(
     x     = paste0("PC1: ", pct_var[1], "% variance"),
     y     = paste0("PC2: ", pct_var[2], "% variance"),
-    title = paste0("PCA — ", strain, " (VST-transformed counts)"),
+    title = paste0("PCA - ", strain, " (VST-transformed counts)"),
     color = "Lifestyle",
     shape = "Time point"
   )
@@ -463,7 +463,7 @@ heat_plot <- pheatmap(
   show_colnames            = FALSE,
   show_rownames            = TRUE,
   fontsize_row             = 7,
-  main                     = paste0("Top 50 variable genes — ", strain, " (VST, row-scaled)")
+  main                     = paste0("Top 50 variable genes - ", strain, " (VST, row-scaled)")
 )
 
 heat_plot

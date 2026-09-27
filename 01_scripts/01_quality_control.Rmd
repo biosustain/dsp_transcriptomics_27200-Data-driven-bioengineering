@@ -431,7 +431,7 @@ PCAPlot <- ggplot(pca_data, aes(x     = PC1,
   labs(
     x     = paste0("PC1: ", pct_var[1], "% variance"),
     y     = paste0("PC2: ", pct_var[2], "% variance"),
-    title = "PCA — Human ASM (VST-transformed counts)",
+    title = "PCA - Human ASM (VST-transformed counts)",
     color = "Condition",
     shape = "Donor"
   )
@@ -479,7 +479,7 @@ heat_plot <- pheatmap(
   show_colnames            = TRUE,
   show_rownames            = TRUE,
   fontsize_row             = 7,
-  main                     = "Top 50 variable genes — Human ASM (VST, row-scaled)"
+  main                     = "Top 50 variable genes - Human ASM (VST, row-scaled)"
 )
 
 heat_plot

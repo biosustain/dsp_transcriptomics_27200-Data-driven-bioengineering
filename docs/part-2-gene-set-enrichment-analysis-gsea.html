@@ -28,7 +28,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="part-1-over-representation-analysis-ora-with-gprofiler.html"/>
+<link rel="prev" href="part-1-over-representation-analysis-ora.html"/>
 <link rel="next" href="part-3-comparing-ora-and-gsea.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -71,10 +71,6 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -232,124 +228,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-two-tools"><i class="fa fa-check"></i><strong>Why two tools?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
+<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#what-gsea-does"><i class="fa fa-check"></i>What GSEA does</a></li>
+<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i>Why these gene sets?</a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#load-libraries"><i class="fa fa-check"></i>Load Libraries</a></li>
 <li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis.html"><a href="load-results-from-differential-expression-analysis.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA) with g:Profiler</a>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html"><i class="fa fa-check"></i>Running GSEA</a>
 <ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#prepare-input"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#run-ora"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#inspect-significant-terms"><i class="fa fa-check"></i>Inspect Significant Terms</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#interactive-manhattan-plot"><i class="fa fa-check"></i>Interactive Manhattan Plot</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#bar-plot-top-terms-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Terms by Direction</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#retrieve-msigdb-gene-sets"><i class="fa fa-check"></i>Retrieve MSigDB Gene Sets</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#run-gsea"><i class="fa fa-check"></i>Run GSEA</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#retrieve-msigdb-gene-sets"><i class="fa fa-check"></i>Retrieve MSigDB Gene Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#run-gsea"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#inspect-gene-sets"><i class="fa fa-check"></i>Inspect Gene Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea.html"><a href="part-3-comparing-ora-and-gsea.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="part"><span><b>II Advanced: Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-1.html"><a href="quality-control-1.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html"><i class="fa fa-check"></i>Choose the Strain</a>
-<ul>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#loading-count-data-1"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#getting-the-metadata-1"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html"><i class="fa fa-check"></i>Preparing the Data</a>
-<ul>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#creating-the-deseqdataset-1"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#sanity-checks-1"><i class="fa fa-check"></i>Sanity Checks</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#pre-filtering-low-count-genes-1"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#estimate-size-factors-1"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#variance-stabilising-transformation-1"><i class="fa fa-check"></i>Variance-Stabilising Transformation</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-3.html"><a href="interpretation-questions-3.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-1.html"><a href="differential-expression-analysis-1.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html"><i class="fa fa-check"></i>Setup the Environment</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#choose-the-strain-1"><i class="fa fa-check"></i>Choose the Strain</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#load-the-deseqdataset-from-qc"><i class="fa fa-check"></i>Load the DESeqDataSet from QC</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#factor-order-and-reference-level-1"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#a-small-helper-for-extracting-and-classifying-results"><i class="fa fa-check"></i>A Small Helper for Extracting and Classifying Results</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html"><i class="fa fa-check"></i>Part 1 — Maturation: How a Culture Changes Over Time</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#a-maturation-within-biofilm"><i class="fa fa-check"></i>1a — Maturation within Biofilm</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#b-maturation-within-planktonic"><i class="fa fa-check"></i>1b — Maturation within Planktonic</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#visualising-the-operon-genes-as-arrows-along-the-chromosome"><i class="fa fa-check"></i>Visualising the Operon: Genes as Arrows Along the Chromosome</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#comparing-the-two-maturation-programmes"><i class="fa fa-check"></i>Comparing the Two Maturation Programmes</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><i class="fa fa-check"></i>Part 2 — Lifestyle: Biofilm vs Planktonic, Accounting for Time</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#a-additive-model-the-lifestyle-effect-adjusted-for-time"><i class="fa fa-check"></i>2a — Additive Model: the Lifestyle Effect, Adjusted for Time</a></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#b-interaction-model-does-the-lifestyle-difference-change-with-time"><i class="fa fa-check"></i>2b — Interaction Model: Does the Lifestyle Difference Change with Time?</a></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#additive-vs-interaction-which-should-you-use"><i class="fa fa-check"></i>Additive vs Interaction: Which Should You Use?</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><i class="fa fa-check"></i>Part 3 — Hypothesis Test: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cross-strain-comparison-of-the-hypothesis"><i class="fa fa-check"></i>Cross-Strain Comparison of the Hypothesis</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="save-results.html"><a href="save-results.html"><i class="fa fa-check"></i>Save Results</a></li>
-<li class="chapter" data-level="" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-4.html"><a href="interpretation-questions-4.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#why-two-packages"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#why-these-gene-sets-1"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#strain-parameter"><i class="fa fa-check"></i>Strain parameter</a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#load-libraries-1"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html"><i class="fa fa-check"></i>Strain configuration and inputs</a>
-<ul>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#load-results-from-differential-expression-analysis-1"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#define-significance-and-check-against-the-de-table"><i class="fa fa-check"></i>Define significance and check against the DE table</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#combine-gene-set-collections"><i class="fa fa-check"></i>Combine gene set collections</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#prepare-input-1"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#run-ora-1"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#filter-and-inspect-significant-sets"><i class="fa fa-check"></i>Filter and Inspect Significant Sets</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#critical-interpretation-watch-for-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Watch for Spurious Hits</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#bar-plot-top-enriched-sets-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Enriched Sets by Direction</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#prepare-the-ranked-gene-list-1"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#convert-gene-sets-to-fgsea-format"><i class="fa fa-check"></i>Convert Gene Sets to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#run-gsea-1"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#inspect-significant-sets"><i class="fa fa-check"></i>Inspect Significant Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#the-biofilm-activated-signal"><i class="fa fa-check"></i>The biofilm-activated signal</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#nes-bar-plot"><i class="fa fa-check"></i>NES Bar Plot</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets-in-each-direction"><i class="fa fa-check"></i>Enrichment Plot — Top Sets in Each Direction</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html#reading-the-biology"><i class="fa fa-check"></i>Reading the biology</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
@@ -375,236 +263,240 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="part-2-gene-set-enrichment-analysis-gsea" class="section level2 hasAnchor">
 <h2>Part 2 — Gene Set Enrichment Analysis (GSEA)<a href="part-2-gene-set-enrichment-analysis-gsea.html#part-2-gene-set-enrichment-analysis-gsea" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>What is GSEA?</strong></p>
-<p><strong>GSEA asks: <em>“Are genes in a gene set coordinately shifting up or down across my full ranked list?”</em></strong></p>
-<p>Unlike ORA, GSEA:</p>
-<ul>
-<li>Uses <strong>all tested genes</strong> — capturing coordinated but subtle changes</li>
-<li><strong>Ranks genes</strong> by a metric encoding both significance and direction</li>
-<li>Returns a <strong>Normalised Enrichment Score (NES)</strong>: positive = up in treatment; negative = down</li>
-</ul>
+<p><strong>GSEA asks: <em>“Are genes in a set coordinately shifting up or down across the full ranked list?”</em></strong></p>
+<p>Unlike ORA, GSEA uses <strong>all tested genes</strong>, ranks them by a metric encoding significance and
+direction, and returns a <strong>Normalised Enrichment Score (NES)</strong>: positive = up in biofilm,
+negative = up in planktonic.</p>
 <div class="boxy">
 <p><strong>Why signed log p-value for ranking?</strong></p>
 <p><code>rank = sign(LFC) x -log10(pvalue)</code></p>
-<p>Genes at the top are significantly upregulated; genes at the bottom are significantly
-downregulated. This is more robust than ranking on LFC alone, which can place noisy
+<p>Genes at the top are significantly up in biofilm; genes at the bottom are significantly up
+in planktonic. This is more robust than ranking on fold change alone, which can place noisy
 high-fold-change genes from lowly expressed genes at the extremes.</p>
-<div class="note">
-<p><strong>📘 Note:</strong> Genes with <code>pvalue = 0</code> (below machine precision in DESeq2) are excluded
-because <code>-log10(0) = Inf</code> is not a valid ranking score.</p>
+<div style="background:#eef;border-left:4px solid #557;padding:8px;margin:8px 0;">
+<p><strong>Note:</strong> A few genes have <code>pvalue = 0</code> — below machine precision, i.e. the
+<em>strongest</em> hits in the contrast. Since <code>-log10(0) = Inf</code> is not a valid ranking
+score, we clamp those p-values to the smallest representable number instead of dropping them, so the
+top genes keep their place at the extremes of the list.</p>
 </div>
 </div>
-<div id="prepare-the-ranked-gene-list" class="section level3 hasAnchor">
-<h3>Prepare the Ranked Gene List<a href="part-2-gene-set-enrichment-analysis-gsea.html#prepare-the-ranked-gene-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="prepare-the-ranked-gene-list-1" class="section level3 hasAnchor">
+<h3>Prepare the Ranked Gene List<a href="part-2-gene-set-enrichment-analysis-gsea.html#prepare-the-ranked-gene-list-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-1" tabindex="-1"></a>ranked_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
-<span id="cb112-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pvalue), <span class="sc">!</span><span class="fu">is.na</span>(log2FoldChange)) <span class="sc">%&gt;%</span></span>
-<span id="cb112-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-3" tabindex="-1"></a>  <span class="fu">filter</span>(pvalue <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb112-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank_metric =</span> <span class="fu">sign</span>(log2FoldChange) <span class="sc">*</span> <span class="sc">-</span><span class="fu">log10</span>(pvalue)) <span class="sc">%&gt;%</span></span>
-<span id="cb112-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-5" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(rank_metric)) <span class="sc">%&gt;%</span></span>
-<span id="cb112-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-6" tabindex="-1"></a>  <span class="fu">distinct</span>(gene, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb112-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-7" tabindex="-1"></a></span>
-<span id="cb112-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-8" tabindex="-1"></a>rank_vector        <span class="ot">&lt;-</span> ranked_df<span class="sc">$</span>rank_metric</span>
-<span id="cb112-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-9" tabindex="-1"></a><span class="fu">names</span>(rank_vector) <span class="ot">&lt;-</span> ranked_df<span class="sc">$</span>gene</span>
-<span id="cb112-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-10" tabindex="-1"></a></span>
-<span id="cb112-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb112-11" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes in ranked list :&quot;</span>, <span class="fu">length</span>(rank_vector), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-1" tabindex="-1"></a>ranked_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
+<span id="cb324-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pvalue), <span class="sc">!</span><span class="fu">is.na</span>(log2FoldChange)) <span class="sc">%&gt;%</span></span>
+<span id="cb324-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pvalue =</span> <span class="fu">pmax</span>(pvalue, .Machine<span class="sc">$</span>double.xmin)) <span class="sc">%&gt;%</span></span>
+<span id="cb324-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank_metric =</span> <span class="fu">sign</span>(log2FoldChange) <span class="sc">*</span> <span class="sc">-</span><span class="fu">log10</span>(pvalue)) <span class="sc">%&gt;%</span></span>
+<span id="cb324-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-5" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(rank_metric)) <span class="sc">%&gt;%</span></span>
+<span id="cb324-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-6" tabindex="-1"></a>  <span class="fu">distinct</span>(gene_id, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb324-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-7" tabindex="-1"></a></span>
+<span id="cb324-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-8" tabindex="-1"></a>rank_vector        <span class="ot">&lt;-</span> ranked_df<span class="sc">$</span>rank_metric</span>
+<span id="cb324-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-9" tabindex="-1"></a><span class="fu">names</span>(rank_vector) <span class="ot">&lt;-</span> ranked_df<span class="sc">$</span>gene_id</span>
+<span id="cb324-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-10" tabindex="-1"></a></span>
+<span id="cb324-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb324-11" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes in ranked list :&quot;</span>, <span class="fu">length</span>(rank_vector), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Genes in ranked list : 14080</code></pre>
+<pre><code>## Genes in ranked list : 2288</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb114-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Infinite values      :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.finite</span>(rank_vector)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb326-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Infinite values      :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.finite</span>(rank_vector)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Infinite values      : 0</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb116-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Top 5 (upregulated)  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">head</span>(<span class="fu">names</span>(rank_vector), <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb328-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Top 5 (biofilm)      :&quot;</span>, <span class="fu">paste</span>(<span class="fu">head</span>(<span class="fu">names</span>(rank_vector), <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Top 5 (upregulated)  : CACNB2, DUSP1, SPARCL1, SAMHD1, MAOA</code></pre>
+<pre><code>## Top 5 (biofilm)      : SA_RS13765, SA_RS11435, SA_RS08185, SA_RS04655, SA_RS03880</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb118-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Bottom 5 (downreg.)  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">tail</span>(<span class="fu">names</span>(rank_vector), <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb330-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Bottom 5 (planktonic):&quot;</span>, <span class="fu">paste</span>(<span class="fu">tail</span>(<span class="fu">names</span>(rank_vector), <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Bottom 5 (downreg.)  : CXCL12, PRSS35, KCTD12, ADAM12, VCAM1</code></pre>
+<pre><code>## Bottom 5 (planktonic): SA_RS05255, SA_RS05590, SA_RS05835, SA_RS07385, SA_RS11270</code></pre>
 </div>
-<div id="retrieve-msigdb-gene-sets" class="section level3 hasAnchor">
-<h3>Retrieve MSigDB Gene Sets<a href="part-2-gene-set-enrichment-analysis-gsea.html#retrieve-msigdb-gene-sets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We use the MSigDB <strong>Reactome</strong> collection (<code>C2: CP:REACTOME</code>) for human, reshaped into the named list
-<code>fgsea</code> expects. Reactome is a good fit here: it is a large, curated pathway collection that includes
-detailed immune, inflammatory and signalling pathways — the biology this experiment is about.</p>
-<div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
-<p><strong>Tip:</strong> To use a different collection, change the arguments below (e.g. Hallmark via
-<code>collection = “H”</code>, or <a href="GO:BP" class="uri">GO:BP</a> via <code>C5</code> / <code><a href="GO:BP" class="uri">GO:BP</a></code>). The subcollection
-and argument names for <code>msigdbr()</code> changed between versions, so the call below detects the
-right names automatically.</p>
+<div id="convert-gene-sets-to-fgsea-format" class="section level3 hasAnchor">
+<h3>Convert Gene Sets to fgsea Format<a href="part-2-gene-set-enrichment-analysis-gsea.html#convert-gene-sets-to-fgsea-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>fgsea</code> takes a named list of gene vectors. We convert all three collections and keep a lookup
+of each set’s source for labelling.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb332-1" tabindex="-1"></a><span class="co"># Some set names exist in more than one collection (e.g. &quot;DNA replication&quot; is both</span></span>
+<span id="cb332-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb332-2" tabindex="-1"></a><span class="co"># a KEGG pathway and a GO:BP set), so we key on &quot;name [source]&quot; to keep them apart.</span></span>
+<span id="cb332-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb332-3" tabindex="-1"></a>set_labels    <span class="ot">&lt;-</span> <span class="fu">paste0</span>(all_gmt<span class="sc">$</span>ontology_name, <span class="st">&quot; [&quot;</span>, all_gmt<span class="sc">$</span>source, <span class="st">&quot;]&quot;</span>)</span>
+<span id="cb332-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb332-4" tabindex="-1"></a>pathways_list <span class="ot">&lt;-</span> <span class="fu">setNames</span>(all_gmt<span class="sc">$</span>list_of_values, set_labels)</span>
+<span id="cb332-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb332-5" tabindex="-1"></a>set_source    <span class="ot">&lt;-</span> <span class="fu">setNames</span>(all_gmt<span class="sc">$</span>source,         set_labels)</span>
+<span id="cb332-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb332-6" tabindex="-1"></a></span>
+<span id="cb332-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb332-7" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets in fgsea list:&quot;</span>, <span class="fu">length</span>(pathways_list), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## Sets in fgsea list: 216</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb334-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Duplicate bare names disambiguated:&quot;</span>,</span>
+<span id="cb334-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb334-2" tabindex="-1"></a>    <span class="fu">sum</span>(<span class="fu">duplicated</span>(all_gmt<span class="sc">$</span>ontology_name)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## Duplicate bare names disambiguated: 1</code></pre>
 </div>
+<div id="run-gsea-1" class="section level3 hasAnchor">
+<h3>Run GSEA<a href="part-2-gene-set-enrichment-analysis-gsea.html#run-gsea-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We use <code>fgseaMultilevel</code>, which resolves very small p-values more accurately than simple
+permutation, with <code>minSize = 10</code> and <code>maxSize = 500</code>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-1" tabindex="-1"></a><span class="co"># msigdbr argument names differ by version (collection/subcollection vs category/subcategory),</span></span>
-<span id="cb120-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-2" tabindex="-1"></a><span class="co"># and the KEGG subcollection was renamed, so we detect the available names first.</span></span>
-<span id="cb120-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-3" tabindex="-1"></a>get_sets <span class="ot">&lt;-</span> <span class="cf">function</span>(collection, <span class="at">subcollection =</span> <span class="cn">NULL</span>) {</span>
-<span id="cb120-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-4" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(</span>
-<span id="cb120-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-5" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(subcollection)) <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">collection =</span> collection)</span>
-<span id="cb120-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-6" tabindex="-1"></a>    <span class="cf">else</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">collection =</span> collection, <span class="at">subcollection =</span> subcollection),</span>
-<span id="cb120-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-7" tabindex="-1"></a>    <span class="at">error =</span> <span class="cf">function</span>(e)</span>
-<span id="cb120-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-8" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">is.null</span>(subcollection)) <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">category =</span> collection)</span>
-<span id="cb120-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-9" tabindex="-1"></a>      <span class="cf">else</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">category =</span> collection, <span class="at">subcategory =</span> subcollection)</span>
-<span id="cb120-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-10" tabindex="-1"></a>  )</span>
-<span id="cb120-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-11" tabindex="-1"></a>  <span class="fu">split</span>(<span class="at">x =</span> df<span class="sc">$</span>gene_symbol, <span class="at">f =</span> df<span class="sc">$</span>gs_name)</span>
-<span id="cb120-12"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-12" tabindex="-1"></a>}</span>
-<span id="cb120-13"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-13" tabindex="-1"></a></span>
-<span id="cb120-14"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-14" tabindex="-1"></a>pathways_list <span class="ot">&lt;-</span> <span class="fu">get_sets</span>(<span class="st">&quot;C2&quot;</span>, <span class="st">&quot;CP:REACTOME&quot;</span>)</span>
-<span id="cb120-15"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-15" tabindex="-1"></a></span>
-<span id="cb120-16"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb120-16" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Gene sets retrieved:&quot;</span>, <span class="fu">length</span>(pathways_list), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb336-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-2" tabindex="-1"></a></span>
+<span id="cb336-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-3" tabindex="-1"></a>gsea_results <span class="ot">&lt;-</span> <span class="fu">fgseaMultilevel</span>(</span>
+<span id="cb336-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-4" tabindex="-1"></a>  <span class="at">pathways =</span> pathways_list,</span>
+<span id="cb336-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-5" tabindex="-1"></a>  <span class="at">stats    =</span> rank_vector,</span>
+<span id="cb336-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-6" tabindex="-1"></a>  <span class="at">minSize  =</span> <span class="dv">10</span>,</span>
+<span id="cb336-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-7" tabindex="-1"></a>  <span class="at">maxSize  =</span> <span class="dv">500</span></span>
+<span id="cb336-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-8" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb336-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-9" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb336-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> set_source[pathway])</span>
+<span id="cb336-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-11" tabindex="-1"></a></span>
+<span id="cb336-12"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb336-12" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets tested              :&quot;</span>, <span class="fu">nrow</span>(gsea_results), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Gene sets retrieved: 1839</code></pre>
+<pre><code>## Sets tested              : 122</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb122-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Example set        :&quot;</span>, <span class="fu">names</span>(pathways_list)[<span class="dv">1</span>], <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb338-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant (padj &lt; 0.05):&quot;</span>, <span class="fu">sum</span>(gsea_results<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Example set        : REACTOME_2_LTR_CIRCLE_FORMATION</code></pre>
+<pre><code>## Significant (padj &lt; 0.05): 19</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb124-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;First 5 genes      :&quot;</span>, <span class="fu">paste</span>(<span class="fu">head</span>(pathways_list[[<span class="dv">1</span>]], <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb340-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Nominal (pval &lt; 0.05)    :&quot;</span>, <span class="fu">sum</span>(gsea_results<span class="sc">$</span>pval <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## First 5 genes      : BANF1, HMGA1, LIG4, PSIP1, XRCC4</code></pre>
+<pre><code>## Nominal (pval &lt; 0.05)    : 26</code></pre>
 </div>
-<div id="run-gsea" class="section level3 hasAnchor">
-<h3>Run GSEA<a href="part-2-gene-set-enrichment-analysis-gsea.html#run-gsea" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We use <code>fgseaMultilevel</code>, which resolves very small p-values more accurately than the simple-permutation
-<code>fgsea()</code>, with <code>minSize = 15</code> and <code>maxSize = 1000</code> to skip tiny unstable sets and enormous, uninformative
-ones.</p>
+<div id="inspect-significant-sets" class="section level3 hasAnchor">
+<h3>Inspect Significant Sets<a href="part-2-gene-set-enrichment-analysis-gsea.html#inspect-significant-sets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb126-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-2" tabindex="-1"></a></span>
-<span id="cb126-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-3" tabindex="-1"></a>gsea_results <span class="ot">&lt;-</span> <span class="fu">fgseaMultilevel</span>(</span>
-<span id="cb126-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-4" tabindex="-1"></a>  <span class="at">pathways =</span> pathways_list,</span>
-<span id="cb126-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-5" tabindex="-1"></a>  <span class="at">stats    =</span> rank_vector,</span>
-<span id="cb126-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-6" tabindex="-1"></a>  <span class="at">minSize  =</span> <span class="dv">15</span>,</span>
-<span id="cb126-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-7" tabindex="-1"></a>  <span class="at">maxSize  =</span> <span class="dv">1000</span></span>
-<span id="cb126-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-8" tabindex="-1"></a>)</span>
-<span id="cb126-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-9" tabindex="-1"></a></span>
-<span id="cb126-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb126-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Gene sets tested         :&quot;</span>, <span class="fu">nrow</span>(gsea_results), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb342-1" tabindex="-1"></a>gsea_sig <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span></span>
+<span id="cb342-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb342-2" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb342-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb342-3" tabindex="-1"></a>  <span class="fu">arrange</span>(padj)</span>
+<span id="cb342-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb342-4" tabindex="-1"></a></span>
+<span id="cb342-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb342-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant GSEA sets:&quot;</span>, <span class="fu">nrow</span>(gsea_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Gene sets tested         : 994</code></pre>
+<pre><code>## Significant GSEA sets: 19</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb128-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant (padj &lt; 0.05):&quot;</span>, <span class="fu">sum</span>(gsea_results<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb344-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Activated in biofilm    (NES &gt; 0):&quot;</span>, <span class="fu">sum</span>(gsea_sig<span class="sc">$</span>NES <span class="sc">&gt;</span> <span class="dv">0</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Significant (padj &lt; 0.05): 0</code></pre>
+<pre><code>##   Activated in biofilm    (NES &gt; 0): 1</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb130-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Nominal (pval &lt; 0.05)    :&quot;</span>, <span class="fu">sum</span>(gsea_results<span class="sc">$</span>pval <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb346-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Activated in planktonic (NES &lt; 0):&quot;</span>, <span class="fu">sum</span>(gsea_sig<span class="sc">$</span>NES <span class="sc">&lt;</span> <span class="dv">0</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Nominal (pval &lt; 0.05)    : 68</code></pre>
-<div style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
-<p><strong>What we see, and why it differs from ORA.</strong> In this dataset GSEA finds <strong>no gene set significant after
-multiple-testing correction</strong> (padj &lt; 0.05), even though ORA returned dozens of enriched terms. This is not
-a contradiction — the two methods ask different questions:</p>
-<ul>
-<li><strong>ORA</strong> asks whether the ~700 <em>significant</em> DE genes are concentrated in a term. They are — mostly in
-broad developmental and signalling terms, with cytokine/immune signalling among the <strong>down</strong>-regulated
-genes and adhesion, cytoskeleton and metal-handling terms among the up-regulated ones — so ORA lights up.</li>
-<li><strong>GSEA</strong> asks whether an <em>entire</em> gene set shifts coherently across the full ranked list (every gene that
-DESeq2 tested, printed above). The dexamethasone response here is carried by a few hundred
-strongly-changed genes scattered across many pathways, rather than whole pathways moving together — so no
-set reaches the coordinated shift GSEA rewards.</li>
-</ul>
-<p>This is a real result, not a failure: <strong>the glucocorticoid effect here is gene-specific rather than
-pathway-coherent</strong>, which is exactly the situation where ORA is the more sensitive tool. The nominal
-(uncorrected) sets below are worth reading as hypotheses only — note how mixed they are, and that they do
-not simply restate the ORA themes. Treat them as “GSEA could not settle this”, not as findings.</p>
+<pre><code>##   Activated in planktonic (NES &lt; 0): 18</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(gsea_sig) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb348-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-2" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb348-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-3" tabindex="-1"></a>    gsea_sig <span class="sc">%&gt;%</span></span>
+<span id="cb348-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-4" tabindex="-1"></a>      <span class="fu">select</span>(source, pathway, NES, pval, padj, size) <span class="sc">%&gt;%</span></span>
+<span id="cb348-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-5" tabindex="-1"></a>      <span class="fu">mutate</span>(</span>
+<span id="cb348-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-6" tabindex="-1"></a>        <span class="at">direction =</span> <span class="fu">ifelse</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Biofilm&quot;</span>, <span class="st">&quot;Planktonic&quot;</span>),</span>
+<span id="cb348-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-7" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">signif</span>(x, <span class="dv">3</span>))</span>
+<span id="cb348-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-8" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span></span>
+<span id="cb348-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-9" tabindex="-1"></a>      <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(NES))),</span>
+<span id="cb348-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-10" tabindex="-1"></a>    <span class="at">rownames   =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb348-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-11" tabindex="-1"></a>    <span class="at">colnames   =</span> <span class="fu">c</span>(<span class="st">&quot;Source&quot;</span>, <span class="st">&quot;Set&quot;</span>, <span class="st">&quot;NES&quot;</span>, <span class="st">&quot;p-value&quot;</span>, <span class="st">&quot;padj&quot;</span>, <span class="st">&quot;Size&quot;</span>, <span class="st">&quot;Higher in&quot;</span>),</span>
+<span id="cb348-12"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-12" tabindex="-1"></a>    <span class="at">extensions =</span> <span class="fu">c</span>(<span class="st">&quot;Buttons&quot;</span>, <span class="st">&quot;Scroller&quot;</span>),</span>
+<span id="cb348-13"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-13" tabindex="-1"></a>    <span class="at">options    =</span> <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">&quot;Bfrtip&quot;</span>, <span class="at">buttons =</span> <span class="fu">c</span>(<span class="st">&quot;copy&quot;</span>, <span class="st">&quot;csv&quot;</span>),</span>
+<span id="cb348-14"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-14" tabindex="-1"></a>                      <span class="at">scrollX =</span> <span class="cn">TRUE</span>, <span class="at">scrollY =</span> <span class="dv">300</span>, <span class="at">scroller =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb348-15"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-15" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Significant GSEA sets (padj &lt; 0.05)&quot;</span></span>
+<span id="cb348-16"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-16" tabindex="-1"></a>  )</span>
+<span id="cb348-17"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-17" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb348-18"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-18" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No sets significant after correction. The nominal top sets below are directional only.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb348-19"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb348-19" tabindex="-1"></a>}</span></code></pre></div>
+</details>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-571e7b66b0f948a7d646" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-571e7b66b0f948a7d646">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Significant GSEA sets (padj &lt; 0.05)<\/caption>","data":[["KEGG","GO:MF","GO:BP","KEGG","KEGG","GO:MF","GO:BP","GO:MF","KEGG","GO:BP","KEGG","GO:MF","KEGG","KEGG","GO:BP","KEGG","KEGG","KEGG","KEGG"],["Purine metabolism [KEGG]","structural constituent of ribosome [GO:MF]","translation [GO:BP]","Biosynthesis of cofactors [KEGG]","Arginine and proline metabolism [KEGG]","ATP binding [GO:MF]","peptidoglycan biosynthetic process [GO:BP]","amino acid transmembrane transporter activity [GO:MF]","Aminoacyl-tRNA biosynthesis [KEGG]","transmembrane transport [GO:BP]","Ribosome [KEGG]","transmembrane transporter activity [GO:MF]","Peptidoglycan biosynthesis [KEGG]","Pyrimidine metabolism [KEGG]","amino acid transport [GO:BP]","Nucleotide metabolism [KEGG]","Porphyrin metabolism [KEGG]","Metabolic pathways [KEGG]","Biosynthesis of secondary metabolites [KEGG]"],[-1.97,-1.94,-1.92,-1.73,1.71,-1.7,-1.68,-1.66,-1.65,-1.64,-1.63,-1.63,-1.62,-1.62,-1.61,-1.6,-1.6,-1.55,-1.47],[4.47e-07,1.17e-06,1.36e-06,0.000258,0.00284,0.000127,0.00119,0.00271,0.00343,0.00225,0.00285,0.00407,0.00246,0.00249,0.00566,0.00593,0.00709,2.45e-06,0.00163],[5.45e-05,5.55e-05,5.55e-05,0.00525,0.0248,0.00311,0.0207,0.0248,0.0279,0.0248,0.0248,0.0311,0.0248,0.0248,0.0402,0.0402,0.0455,7.46e-05,0.0248],[44,56,60,107,10,145,14,11,50,54,67,50,27,27,14,31,15,499,257],["Planktonic","Planktonic","Planktonic","Planktonic","Biofilm","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source<\/th>\n      <th>Set<\/th>\n      <th>NES<\/th>\n      <th>p-value<\/th>\n      <th>padj<\/th>\n      <th>Size<\/th>\n      <th>Higher in<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"scrollX":true,"scrollY":300,"scroller":true,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"name":"source","targets":0},{"name":"pathway","targets":1},{"name":"NES","targets":2},{"name":"pval","targets":3},{"name":"padj","targets":4},{"name":"size","targets":5},{"name":"direction","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
+<div id="the-biofilm-activated-signal" class="section level3 hasAnchor">
+<h3>The biofilm-activated signal<a href="part-2-gene-set-enrichment-analysis-gsea.html#the-biofilm-activated-signal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Almost all significant enrichment in this contrast points to processes that are <em>higher in
+planktonic</em> (negative NES). The genes induced <em>in biofilm</em> rarely fall into a coherent
+annotated set. It is therefore worth naming explicitly any set that is significantly
+<strong>activated in biofilm</strong> (positive NES), because that is the exception, not the rule.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-1" tabindex="-1"></a>biofilm_sets <span class="ot">&lt;-</span> gsea_sig <span class="sc">%&gt;%</span> <span class="fu">filter</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(NES))</span>
+<span id="cb349-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-2" tabindex="-1"></a></span>
+<span id="cb349-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-3" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(biofilm_sets) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb349-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-4" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Sets significantly activated in biofilm (padj &lt; 0.05, NES &gt; 0):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb349-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-5" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(biofilm_sets))) {</span>
+<span id="cb349-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-6" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;  - %s  NES = %.2f, padj = %.3g, size = %d</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb349-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-7" tabindex="-1"></a>                biofilm_sets<span class="sc">$</span>pathway[i],</span>
+<span id="cb349-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-8" tabindex="-1"></a>                biofilm_sets<span class="sc">$</span>NES[i], biofilm_sets<span class="sc">$</span>padj[i], biofilm_sets<span class="sc">$</span>size[i]))</span>
+<span id="cb349-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-9" tabindex="-1"></a>  }</span>
+<span id="cb349-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-10" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Interpret small sets with care: a high NES on a set of only a few genes&quot;</span>,</span>
+<span id="cb349-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-11" tabindex="-1"></a>      <span class="st">&quot;is fragile. Check the size column above.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb349-12"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-12" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb349-13"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-13" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No gene set is significantly activated in biofilm.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb349-14"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-14" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;The biofilm-induced genes do not cluster into any annotated KEGG pathway or GO term.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb349-15"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb349-15" tabindex="-1"></a>}</span></code></pre></div>
+</details>
+<pre><code>## Sets significantly activated in biofilm (padj &lt; 0.05, NES &gt; 0):
+##   - Arginine and proline metabolism [KEGG]  NES = 1.71, padj = 0.0248, size = 10
+## 
+## Interpret small sets with care: a high NES on a set of only a few genes is fragile. Check the size column above.</code></pre>
 </div>
-<div id="inspect-gene-sets" class="section level3 hasAnchor">
-<h3>Inspect Gene Sets<a href="part-2-gene-set-enrichment-analysis-gsea.html#inspect-gene-sets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="nes-bar-plot" class="section level3 hasAnchor">
+<h3>NES Bar Plot<a href="part-2-gene-set-enrichment-analysis-gsea.html#nes-bar-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If any sets survive correction we plot them; otherwise we fall back to the top sets by nominal
+p-value and label them clearly as directional, not confirmed.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-1" tabindex="-1"></a><span class="co"># Sets passing multiple-testing correction (expected: none in this dataset)</span></span>
-<span id="cb132-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-2" tabindex="-1"></a>gsea_padj_sig <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
-<span id="cb132-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-3" tabindex="-1"></a></span>
-<span id="cb132-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-4" tabindex="-1"></a><span class="co"># Sets passing the nominal (uncorrected) threshold — for inspecting the biology</span></span>
-<span id="cb132-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-5" tabindex="-1"></a>gsea_nom <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span></span>
-<span id="cb132-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-6" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb132-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-7" tabindex="-1"></a>  <span class="fu">filter</span>(pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb132-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-8" tabindex="-1"></a>  <span class="fu">arrange</span>(pval)</span>
-<span id="cb132-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-9" tabindex="-1"></a></span>
-<span id="cb132-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb132-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets significant after correction (padj &lt; 0.05):&quot;</span>, <span class="fu">nrow</span>(gsea_padj_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-1" tabindex="-1"></a>use_padj <span class="ot">&lt;-</span> <span class="fu">nrow</span>(gsea_sig) <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb351-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-2" tabindex="-1"></a></span>
+<span id="cb351-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-3" tabindex="-1"></a>gsea_bar <span class="ot">&lt;-</span> (<span class="cf">if</span> (use_padj) gsea_sig</span>
+<span id="cb351-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-4" tabindex="-1"></a>             <span class="cf">else</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">filter</span>(pval <span class="sc">&lt;</span> <span class="fl">0.05</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb351-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-5" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="fu">abs</span>(NES), <span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb351-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-6" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb351-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-7" tabindex="-1"></a>    <span class="at">direction =</span> <span class="fu">ifelse</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Biofilm&quot;</span>, <span class="st">&quot;Planktonic&quot;</span>),</span>
+<span id="cb351-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-8" tabindex="-1"></a>    <span class="at">set_label =</span> <span class="fu">fct_reorder</span>(pathway, NES)</span>
+<span id="cb351-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-9" tabindex="-1"></a>  )</span>
+<span id="cb351-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-10" tabindex="-1"></a></span>
+<span id="cb351-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-11" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(gsea_bar) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb351-12"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-12" tabindex="-1"></a>  ttl <span class="ot">&lt;-</span> <span class="cf">if</span> (use_padj) <span class="st">&quot;GSEA — Significant Sets (padj &lt; 0.05)&quot;</span></span>
+<span id="cb351-13"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-13" tabindex="-1"></a>         <span class="cf">else</span> <span class="st">&quot;GSEA — Top Sets by Nominal p-value (directional only, not padj-significant)&quot;</span></span>
+<span id="cb351-14"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-14" tabindex="-1"></a>  <span class="fu">ggplot</span>(gsea_bar, <span class="fu">aes</span>(<span class="at">x =</span> NES, <span class="at">y =</span> set_label, <span class="at">fill =</span> direction)) <span class="sc">+</span></span>
+<span id="cb351-15"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-15" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb351-16"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-16" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb351-17"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-17" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Biofilm&quot;</span> <span class="ot">=</span> <span class="st">&quot;firebrick&quot;</span>, <span class="st">&quot;Planktonic&quot;</span> <span class="ot">=</span> <span class="st">&quot;steelblue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb351-18"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-18" tabindex="-1"></a>    <span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
+<span id="cb351-19"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-19" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb351-20"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-20" tabindex="-1"></a>          <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb351-21"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-21" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb351-22"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-22" tabindex="-1"></a>      <span class="at">title    =</span> ttl,</span>
+<span id="cb351-23"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-23" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">&quot;Biofilm vs planktonic | &quot;</span>, cfg<span class="sc">$</span>label),</span>
+<span id="cb351-24"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-24" tabindex="-1"></a>      <span class="at">x        =</span> <span class="st">&quot;Normalised Enrichment Score (NES)&quot;</span>,</span>
+<span id="cb351-25"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-25" tabindex="-1"></a>      <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
+<span id="cb351-26"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-26" tabindex="-1"></a>      <span class="at">fill     =</span> <span class="st">&quot;Higher in&quot;</span></span>
+<span id="cb351-27"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-27" tabindex="-1"></a>    )</span>
+<span id="cb351-28"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-28" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb351-29"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-29" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No sets to plot at nominal p &lt; 0.05.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb351-30"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb351-30" tabindex="-1"></a>}</span></code></pre></div>
 </details>
-<pre><code>## Sets significant after correction (padj &lt; 0.05): 0</code></pre>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb134-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets at nominal pval &lt; 0.05                    :&quot;</span>, <span class="fu">nrow</span>(gsea_nom), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-</details>
-<pre><code>## Sets at nominal pval &lt; 0.05                    : 68</code></pre>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-1" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
-<span id="cb136-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-2" tabindex="-1"></a>  gsea_nom <span class="sc">%&gt;%</span></span>
-<span id="cb136-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-3" tabindex="-1"></a>    <span class="fu">select</span>(pathway, NES, pval, padj, size) <span class="sc">%&gt;%</span></span>
-<span id="cb136-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-4" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb136-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-5" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">ifelse</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Activated&quot;</span>, <span class="st">&quot;Suppressed&quot;</span>),</span>
-<span id="cb136-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-6" tabindex="-1"></a>      <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">signif</span>(x, <span class="dv">3</span>))</span>
-<span id="cb136-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-7" tabindex="-1"></a>    ),</span>
-<span id="cb136-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-8" tabindex="-1"></a>  <span class="at">rownames   =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb136-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-9" tabindex="-1"></a>  <span class="at">colnames   =</span> <span class="fu">c</span>(<span class="st">&quot;Gene set&quot;</span>, <span class="st">&quot;NES&quot;</span>, <span class="st">&quot;p-value&quot;</span>, <span class="st">&quot;padj&quot;</span>, <span class="st">&quot;Size&quot;</span>, <span class="st">&quot;Direction&quot;</span>),</span>
-<span id="cb136-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-10" tabindex="-1"></a>  <span class="at">extensions =</span> <span class="fu">c</span>(<span class="st">&quot;Buttons&quot;</span>, <span class="st">&quot;Scroller&quot;</span>),</span>
-<span id="cb136-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-11" tabindex="-1"></a>  <span class="at">options    =</span> <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">&quot;Bfrtip&quot;</span>, <span class="at">buttons =</span> <span class="fu">c</span>(<span class="st">&quot;copy&quot;</span>, <span class="st">&quot;csv&quot;</span>),</span>
-<span id="cb136-12"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-12" tabindex="-1"></a>                    <span class="at">scrollX =</span> <span class="cn">TRUE</span>, <span class="at">scrollY =</span> <span class="dv">300</span>, <span class="at">scroller =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb136-13"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;GSEA gene sets at nominal p &lt; 0.05 (none survive padj correction — see note above)&quot;</span></span>
-<span id="cb136-14"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb136-14" tabindex="-1"></a>)</span></code></pre></div>
-</details>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-be6156a4fee985b49a91" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-be6156a4fee985b49a91">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>GSEA gene sets at nominal p &lt; 0.05 (none survive padj correction &lt;U+2014&gt; see note above)<\/caption>","data":[["REACTOME_THE_ROLE_OF_GTSE1_IN_G2_M_PROGRESSION_AFTER_G2_CHECKPOINT","REACTOME_HEDGEHOG_OFF_STATE","REACTOME_IMMUNOREGULATORY_INTERACTIONS_BETWEEN_A_LYMPHOID_AND_A_NON_LYMPHOID_CELL","REACTOME_SELENOAMINO_ACID_METABOLISM","REACTOME_AGGREPHAGY","REACTOME_NEUTROPHIL_DEGRANULATION","REACTOME_TRANSCRIPTIONAL_REGULATION_BY_RUNX2","REACTOME_CARBOXYTERMINAL_POST_TRANSLATIONAL_MODIFICATIONS_OF_TUBULIN","REACTOME_REGULATION_OF_INSULIN_LIKE_GROWTH_FACTOR_IGF_TRANSPORT_AND_UPTAKE_BY_INSULIN_LIKE_GROWTH_FACTOR_BINDING_PROTEINS_IGFBPS","REACTOME_RUNX2_REGULATES_BONE_DEVELOPMENT","REACTOME_POST_CHAPERONIN_TUBULIN_FOLDING_PATHWAY","REACTOME_ASSEMBLY_AND_CELL_SURFACE_PRESENTATION_OF_NMDA_RECEPTORS","REACTOME_ONCOGENE_INDUCED_SENESCENCE","REACTOME_SIGNALING_BY_HEDGEHOG","REACTOME_COPI_INDEPENDENT_GOLGI_TO_ER_RETROGRADE_TRAFFIC","REACTOME_MUSCLE_CONTRACTION","REACTOME_GAP_JUNCTION_ASSEMBLY","REACTOME_RECRUITMENT_OF_NUMA_TO_MITOTIC_CENTROSOMES","REACTOME_NEUROTRANSMITTER_RELEASE_CYCLE","REACTOME_SEMA4D_IN_SEMAPHORIN_SIGNALING","REACTOME_INNATE_IMMUNE_SYSTEM","REACTOME_TP53_REGULATES_TRANSCRIPTION_OF_CELL_CYCLE_GENES","REACTOME_GAP_JUNCTION_TRAFFICKING_AND_REGULATION","REACTOME_MAPK_FAMILY_SIGNALING_CASCADES","REACTOME_RECYCLING_PATHWAY_OF_L1","REACTOME_SULFUR_AMINO_ACID_METABOLISM","REACTOME_INTRAFLAGELLAR_TRANSPORT","REACTOME_RHO_GTPASES_ACTIVATE_PAKS","REACTOME_ENERGY_DEPENDENT_REGULATION_OF_MTOR_BY_LKB1_AMPK","REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE","REACTOME_SEALING_OF_THE_NUCLEAR_ENVELOPE_NE_BY_ESCRT_III","REACTOME_BMAL1_CLOCK_NPAS2_ACTIVATES_CIRCADIAN_EXPRESSION","REACTOME_SUMOYLATION_OF_TRANSCRIPTION_FACTORS","REACTOME_G_ALPHA_I_SIGNALLING_EVENTS","REACTOME_RHO_GTPASES_ACTIVATE_PKNS","REACTOME_PURINERGIC_SIGNALING_IN_LEISHMANIASIS_INFECTION","REACTOME_RUNX2_REGULATES_OSTEOBLAST_DIFFERENTIATION","REACTOME_FORMATION_OF_TUBULIN_FOLDING_INTERMEDIATES_BY_CCT_TRIC","REACTOME_MTOR_SIGNALLING","REACTOME_METABOLIC_DISORDERS_OF_BIOLOGICAL_OXIDATION_ENZYMES","REACTOME_RHO_GTPASES_ACTIVATE_ROCKS","REACTOME_SEMA4D_INDUCED_CELL_MIGRATION_AND_GROWTH_CONE_COLLAPSE","REACTOME_COOPERATION_OF_PREFOLDIN_AND_TRIC_CCT_IN_ACTIN_AND_TUBULIN_FOLDING","REACTOME_G1_S_DNA_DAMAGE_CHECKPOINTS","REACTOME_MITOTIC_G2_G2_M_PHASES","REACTOME_CLASS_A_1_RHODOPSIN_LIKE_RECEPTORS","REACTOME_DISEASES_OF_MITOTIC_CELL_CYCLE","REACTOME_SENSORY_PROCESSING_OF_SOUND","REACTOME_GPCR_LIGAND_BINDING","REACTOME_P53_DEPENDENT_G1_DNA_DAMAGE_RESPONSE","REACTOME_SUMOYLATION_OF_TRANSCRIPTION_COFACTORS","REACTOME_RECRUITMENT_OF_MITOTIC_CENTROSOME_PROTEINS_AND_COMPLEXES","REACTOME_DNA_DOUBLE_STRAND_BREAK_RESPONSE","REACTOME_CHAPERONE_MEDIATED_AUTOPHAGY","REACTOME_PEPTIDE_LIGAND_BINDING_RECEPTORS","REACTOME_SYNDECAN_INTERACTIONS","REACTOME_METABOLISM_OF_AMINO_ACIDS_AND_DERIVATIVES","REACTOME_REGULATION_OF_ENDOGENOUS_RETROELEMENTS_BY_KRAB_ZFP_PROTEINS","REACTOME_REGULATION_OF_MITF_M_DEPENDENT_GENES_INVOLVED_IN_CELL_CYCLE_AND_PROLIFERATION","REACTOME_AURKA_ACTIVATION_BY_TPX2","REACTOME_HCMV_EARLY_EVENTS","REACTOME_SCF_SKP2_MEDIATED_DEGRADATION_OF_P27_P21","REACTOME_LAMININ_INTERACTIONS","REACTOME_CDC42_GTPASE_CYCLE","REACTOME_BIOLOGICAL_OXIDATIONS","REACTOME_SIGNALING_BY_ERYTHROPOIETIN","REACTOME_L1CAM_INTERACTIONS","REACTOME_RHOC_GTPASE_CYCLE"],[-1.87,-1.75,-1.86,1.7,-1.81,1.5,-1.67,-1.74,1.67,-1.73,-1.71,-1.73,-1.72,-1.58,-1.67,1.55,-1.62,-1.58,1.68,1.63,1.32,-1.57,-1.64,1.44,-1.63,1.6,-1.62,1.59,1.66,-1.52,-1.62,1.57,-1.58,-1.45,1.64,-1.62,-1.62,-1.6,1.63,1.56,1.59,1.59,-1.6,-1.49,-1.38,-1.43,-1.51,1.55,-1.37,-1.5,1.53,-1.44,-1.51,-1.49,-1.46,-1.51,1.34,-1.47,-1.53,-1.44,-1.44,-1.45,1.55,1.41,1.41,1.52,-1.33,1.46],[8.97e-05,0.000237,0.000315,0.000597,0.000954,0.0014,0.00193,0.0022,0.00239,0.00257,0.0026,0.00398,0.00461,0.00468,0.00486,0.00506,0.00637,0.00645,0.00672,0.00698,0.008189999999999999,0.00886,0.009010000000000001,0.00962,0.0101,0.0108,0.0116,0.0117,0.0118,0.0133,0.014,0.0147,0.0154,0.0154,0.0157,0.0159,0.0161,0.0182,0.0183,0.0187,0.0206,0.0206,0.0212,0.0225,0.0244,0.0249,0.0252,0.0254,0.0259,0.026,0.0282,0.0288,0.0296,0.03,0.0318,0.0327,0.0333,0.0357,0.0379,0.0387,0.0387,0.0401,0.0409,0.0427,0.0432,0.0465,0.0467,0.0497],[0.0892,0.104,0.104,0.148,0.19,0.232,0.235,0.235,0.235,0.235,0.235,0.314,0.314,0.314,0.314,0.314,0.347,0.347,0.347,0.347,0.388,0.39,0.39,0.399,0.401,0.405,0.405,0.405,0.405,0.433,0.433,0.433,0.433,0.433,0.433,0.433,0.433,0.464,0.464,0.464,0.488,0.488,0.49,0.508,0.517,0.517,0.517,0.517,0.517,0.517,0.55,0.55,0.551,0.551,0.574,0.58,0.581,0.612,0.63,0.63,0.63,0.642,0.645,0.661,0.661,0.6929999999999999,0.6929999999999999,0.726],[54,92,29,101,31,330,93,25,73,25,16,27,29,121,42,117,15,75,31,21,678,40,28,225,36,23,36,20,19,83,20,20,17,129,28,19,19,19,31,21,18,18,24,64,159,78,35,41,117,50,43,66,37,15,43,27,256,45,18,62,62,47,28,122,109,21,89,62],["Suppressed","Suppressed","Suppressed","Activated","Suppressed","Activated","Suppressed","Suppressed","Activated","Suppressed","Suppressed","Suppressed","Suppressed","Suppressed","Suppressed","Activated","Suppressed","Suppressed","Activated","Activated","Activated","Suppressed","Suppressed","Activated","Suppressed","Activated","Suppressed","Activated","Activated","Suppressed","Suppressed","Activated","Suppressed","Suppressed","Activated","Suppressed","Suppressed","Suppressed","Activated","Activated","Activated","Activated","Suppressed","Suppressed","Suppressed","Suppressed","Suppressed","Activated","Suppressed","Suppressed","Activated","Suppressed","Suppressed","Suppressed","Suppressed","Suppressed","Activated","Suppressed","Suppressed","Suppressed","Suppressed","Suppressed","Activated","Activated","Activated","Activated","Suppressed","Activated"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Gene set<\/th>\n      <th>NES<\/th>\n      <th>p-value<\/th>\n      <th>padj<\/th>\n      <th>Size<\/th>\n      <th>Direction<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"scrollX":true,"scrollY":300,"scroller":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"name":"pathway","targets":0},{"name":"NES","targets":1},{"name":"pval","targets":2},{"name":"padj","targets":3},{"name":"size","targets":4},{"name":"direction","targets":5}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-fn-gsea-nes-barplot-1.png" alt="" width="672" /></p>
 </div>
-<div id="nes-bar-plot-top-sets-by-nominal-p-value" class="section level3 hasAnchor">
-<h3>NES Bar Plot — Top Sets by Nominal p-value<a href="part-2-gene-set-enrichment-analysis-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Because no set survives correction, we plot the top sets by <strong>nominal</strong> p-value. These do not represent
-statistically confirmed enrichment; they show the <em>direction</em> of the biology GSEA detects. Read them as
-suggestive, not conclusive.</p>
+<div id="enrichment-plot-top-sets-in-each-direction" class="section level3 hasAnchor">
+<h3>Enrichment Plot — Top Sets in Each Direction<a href="part-2-gene-set-enrichment-analysis-gsea.html#enrichment-plot-top-sets-in-each-direction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The running enrichment score for the single strongest set in each direction. The peak is the
+enrichment score; the “rug” at the bottom marks where that set’s genes fall in the ranked list.</p>
+<p><strong>How to read it:</strong> the x-axis is every gene, ordered from most biofilm-up (left) to most planktonic-up
+(right). Each tick in the rug is one gene of the set. If the ticks bunch near one end, the curve climbs
+to a high peak there — that is coordinated enrichment. Ticks spread evenly across the axis give a flat,
+wandering curve and no enrichment.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-1" tabindex="-1"></a>gsea_bar <span class="ot">&lt;-</span> gsea_nom <span class="sc">%&gt;%</span></span>
-<span id="cb137-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-2" tabindex="-1"></a>  <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb137-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb137-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-4" tabindex="-1"></a>    <span class="at">direction =</span> <span class="fu">ifelse</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Activated&quot;</span>, <span class="st">&quot;Suppressed&quot;</span>),</span>
-<span id="cb137-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-5" tabindex="-1"></a>    <span class="at">pathway   =</span> <span class="fu">fct_reorder</span>(pathway, NES)</span>
-<span id="cb137-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-6" tabindex="-1"></a>  )</span>
-<span id="cb137-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-7" tabindex="-1"></a></span>
-<span id="cb137-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-8" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(gsea_bar) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb137-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-9" tabindex="-1"></a>  gsea_nesplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(gsea_bar,</span>
-<span id="cb137-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-10" tabindex="-1"></a>                         <span class="fu">aes</span>(<span class="at">x =</span> NES, <span class="at">y =</span> pathway, <span class="at">fill =</span> direction)) <span class="sc">+</span></span>
-<span id="cb137-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-11" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb137-12"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-12" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb137-13"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-13" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb137-14"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-14" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb137-15"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-15" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb137-16"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-16" tabindex="-1"></a>      <span class="at">title    =</span> <span class="st">&quot;GSEA — top sets by nominal p-value (not padj-significant)&quot;</span>,</span>
-<span id="cb137-17"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-17" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">&quot;Dexamethasone vs Untreated | Human ASM (Reactome)&quot;</span>,</span>
-<span id="cb137-18"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-18" tabindex="-1"></a>      <span class="at">x        =</span> <span class="st">&quot;Normalised Enrichment Score (NES)&quot;</span>,</span>
-<span id="cb137-19"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-19" tabindex="-1"></a>      <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
-<span id="cb137-20"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-20" tabindex="-1"></a>      <span class="at">fill     =</span> <span class="cn">NULL</span></span>
-<span id="cb137-21"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-21" tabindex="-1"></a>    )</span>
-<span id="cb137-22"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-22" tabindex="-1"></a></span>
-<span id="cb137-23"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-23" tabindex="-1"></a>  gsea_nesplot</span>
-<span id="cb137-24"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-24" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb137-25"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-25" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No gene sets with nominal pval &lt; 0.05 to plot.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb137-26"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb137-26" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-1" tabindex="-1"></a>pick_top <span class="ot">&lt;-</span> <span class="cf">function</span>(res, positive) {</span>
+<span id="cb352-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-2" tabindex="-1"></a>  d <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="cf">if</span> (positive) NES <span class="sc">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> NES <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb352-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-3" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">nrow</span>(gsea_sig) <span class="sc">&gt;</span> <span class="dv">0</span>) d <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="cf">else</span> d <span class="sc">%&gt;%</span> <span class="fu">filter</span>(pval <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb352-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-4" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(d) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb352-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-5" tabindex="-1"></a>  d <span class="sc">%&gt;%</span> <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
+<span id="cb352-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-6" tabindex="-1"></a>}</span>
+<span id="cb352-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-7" tabindex="-1"></a></span>
+<span id="cb352-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-8" tabindex="-1"></a>top_biofilm    <span class="ot">&lt;-</span> <span class="fu">pick_top</span>(gsea_results, <span class="cn">TRUE</span>)</span>
+<span id="cb352-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-9" tabindex="-1"></a>top_planktonic <span class="ot">&lt;-</span> <span class="fu">pick_top</span>(gsea_results, <span class="cn">FALSE</span>)</span>
+<span id="cb352-10"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-10" tabindex="-1"></a></span>
+<span id="cb352-11"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-11" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(top_biofilm)) {</span>
+<span id="cb352-12"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-12" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plotEnrichment</span>(pathways_list[[top_biofilm]], rank_vector) <span class="sc">+</span></span>
+<span id="cb352-13"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-13" tabindex="-1"></a>          <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Top biofilm-activated:&quot;</span>, top_biofilm)))</span>
+<span id="cb352-14"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb352-14" tabindex="-1"></a>}</span></code></pre></div>
 </details>
-<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-fn-gsea-nes-barplot-1.png" alt="" width="672" /></p>
-</div>
-<div id="enrichment-plot-top-sets" class="section level3 hasAnchor">
-<h3>Enrichment Plot — Top Sets<a href="part-2-gene-set-enrichment-analysis-gsea.html#enrichment-plot-top-sets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The enrichment plot shows the running sum of the enrichment score for a single gene set across the ranked gene list. The peak of the curve is the enrichment score; genes from the set are shown as vertical bars (the “rug”) at the bottom.</p>
-<p><strong>How to read it:</strong> the x-axis is every tested gene, ordered from most up-regulated (left) to most down-regulated (right). Each tick in the rug is one gene of the set. Ticks bunched at one end drive the curve to a high peak — coordinated enrichment. Ticks spread evenly across the axis give a flat, wandering curve and no enrichment.</p>
+<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-fn-gsea-enrichment-plots-1.png" alt="" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb138-1" tabindex="-1"></a>top_up <span class="ot">&lt;-</span> gsea_nom <span class="sc">%&gt;%</span> <span class="fu">filter</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
-<span id="cb138-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb138-2" tabindex="-1"></a>top_down <span class="ot">&lt;-</span> gsea_nom <span class="sc">%&gt;%</span> <span class="fu">filter</span>(NES <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
-<span id="cb138-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb138-3" tabindex="-1"></a></span>
-<span id="cb138-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb138-4" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(top_up) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb138-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb138-5" tabindex="-1"></a>  <span class="fu">print</span>(</span>
-<span id="cb138-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb138-6" tabindex="-1"></a>    <span class="fu">plotEnrichment</span>(pathways_list[[top_up]], rank_vector) <span class="sc">+</span></span>
-<span id="cb138-7"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb138-7" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Top activated (nominal):&quot;</span>, top_up))</span>
-<span id="cb138-8"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb138-8" tabindex="-1"></a>  )</span>
-<span id="cb138-9"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb138-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb353-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(top_planktonic)) {</span>
+<span id="cb353-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb353-2" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plotEnrichment</span>(pathways_list[[top_planktonic]], rank_vector) <span class="sc">+</span></span>
+<span id="cb353-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb353-3" tabindex="-1"></a>          <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Top planktonic-activated:&quot;</span>, top_planktonic)))</span>
+<span id="cb353-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb353-4" tabindex="-1"></a>}</span></code></pre></div>
 </details>
-<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-fn-gsea-enrichment-plots-1.png" alt="" width="672" /></p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb139-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(top_down) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb139-2"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb139-2" tabindex="-1"></a>  <span class="fu">print</span>(</span>
-<span id="cb139-3"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb139-3" tabindex="-1"></a>    <span class="fu">plotEnrichment</span>(pathways_list[[top_down]], rank_vector) <span class="sc">+</span></span>
-<span id="cb139-4"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb139-4" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Top suppressed (nominal):&quot;</span>, top_down))</span>
-<span id="cb139-5"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb139-5" tabindex="-1"></a>  )</span>
-<span id="cb139-6"><a href="part-2-gene-set-enrichment-analysis-gsea.html#cb139-6" tabindex="-1"></a>}</span></code></pre></div>
-</details>
-<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-fn-gsea-enrichment-plots-2.png" alt="" width="672" /></p>
+<p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-fn-gsea-enrichment-plots-2.png" alt="" width="672" /></p>
 </div>
 </div>
             </section>
@@ -612,7 +504,7 @@ suggestive, not conclusive.</p>
           </div>
         </div>
       </div>
-<a href="part-1-over-representation-analysis-ora-with-gprofiler.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="part-1-over-representation-analysis-ora.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="part-3-comparing-ora-and-gsea.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

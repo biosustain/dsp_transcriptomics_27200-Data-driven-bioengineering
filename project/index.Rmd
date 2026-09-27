@@ -9,6 +9,12 @@ output:
 # Welcome
  
 ```{r,echo=FALSE,include=FALSE}
+# R starts in the C/US-ASCII locale here, which makes every non-ascii character
+# in a plot come out as a literal escape (Palleja<U+00E0>, GSEA <U+2014> ...).
+# Asking for a UTF-8 locale fixes all of them at once; ragg draws them cleanly.
+invisible(Sys.setlocale("LC_CTYPE", "en_US.UTF-8"))
+knitr::opts_chunk$set(dev = "ragg_png")
+
 #  variables
 rep_lecturer <- "Lasse Ebdrup Pedersen (laeb@dtu.dk), Senior Researcher - DTU Bioengineering"
 

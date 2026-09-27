@@ -71,10 +71,6 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -232,124 +228,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-two-tools"><i class="fa fa-check"></i><strong>Why two tools?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
+<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#what-gsea-does"><i class="fa fa-check"></i>What GSEA does</a></li>
+<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i>Why these gene sets?</a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#load-libraries"><i class="fa fa-check"></i>Load Libraries</a></li>
 <li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis.html"><a href="load-results-from-differential-expression-analysis.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA) with g:Profiler</a>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html"><i class="fa fa-check"></i>Running GSEA</a>
 <ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#prepare-input"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#run-ora"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#inspect-significant-terms"><i class="fa fa-check"></i>Inspect Significant Terms</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#interactive-manhattan-plot"><i class="fa fa-check"></i>Interactive Manhattan Plot</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#bar-plot-top-terms-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Terms by Direction</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#retrieve-msigdb-gene-sets"><i class="fa fa-check"></i>Retrieve MSigDB Gene Sets</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#run-gsea"><i class="fa fa-check"></i>Run GSEA</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#retrieve-msigdb-gene-sets"><i class="fa fa-check"></i>Retrieve MSigDB Gene Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#run-gsea"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#inspect-gene-sets"><i class="fa fa-check"></i>Inspect Gene Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea.html"><a href="part-3-comparing-ora-and-gsea.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="part"><span><b>II Advanced: Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-1.html"><a href="quality-control-1.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html"><i class="fa fa-check"></i>Choose the Strain</a>
-<ul>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#loading-count-data-1"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#getting-the-metadata-1"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html"><i class="fa fa-check"></i>Preparing the Data</a>
-<ul>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#creating-the-deseqdataset-1"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#sanity-checks-1"><i class="fa fa-check"></i>Sanity Checks</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#pre-filtering-low-count-genes-1"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#estimate-size-factors-1"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#variance-stabilising-transformation-1"><i class="fa fa-check"></i>Variance-Stabilising Transformation</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-3.html"><a href="interpretation-questions-3.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-1.html"><a href="differential-expression-analysis-1.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html"><i class="fa fa-check"></i>Setup the Environment</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#choose-the-strain-1"><i class="fa fa-check"></i>Choose the Strain</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#load-the-deseqdataset-from-qc"><i class="fa fa-check"></i>Load the DESeqDataSet from QC</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#factor-order-and-reference-level-1"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#a-small-helper-for-extracting-and-classifying-results"><i class="fa fa-check"></i>A Small Helper for Extracting and Classifying Results</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html"><i class="fa fa-check"></i>Part 1 — Maturation: How a Culture Changes Over Time</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#a-maturation-within-biofilm"><i class="fa fa-check"></i>1a — Maturation within Biofilm</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#b-maturation-within-planktonic"><i class="fa fa-check"></i>1b — Maturation within Planktonic</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#visualising-the-operon-genes-as-arrows-along-the-chromosome"><i class="fa fa-check"></i>Visualising the Operon: Genes as Arrows Along the Chromosome</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#comparing-the-two-maturation-programmes"><i class="fa fa-check"></i>Comparing the Two Maturation Programmes</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><i class="fa fa-check"></i>Part 2 — Lifestyle: Biofilm vs Planktonic, Accounting for Time</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#a-additive-model-the-lifestyle-effect-adjusted-for-time"><i class="fa fa-check"></i>2a — Additive Model: the Lifestyle Effect, Adjusted for Time</a></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#b-interaction-model-does-the-lifestyle-difference-change-with-time"><i class="fa fa-check"></i>2b — Interaction Model: Does the Lifestyle Difference Change with Time?</a></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#additive-vs-interaction-which-should-you-use"><i class="fa fa-check"></i>Additive vs Interaction: Which Should You Use?</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><i class="fa fa-check"></i>Part 3 — Hypothesis Test: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cross-strain-comparison-of-the-hypothesis"><i class="fa fa-check"></i>Cross-Strain Comparison of the Hypothesis</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="save-results.html"><a href="save-results.html"><i class="fa fa-check"></i>Save Results</a></li>
-<li class="chapter" data-level="" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-4.html"><a href="interpretation-questions-4.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#why-two-packages"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#why-these-gene-sets-1"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#strain-parameter"><i class="fa fa-check"></i>Strain parameter</a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#load-libraries-1"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html"><i class="fa fa-check"></i>Strain configuration and inputs</a>
-<ul>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#load-results-from-differential-expression-analysis-1"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#define-significance-and-check-against-the-de-table"><i class="fa fa-check"></i>Define significance and check against the DE table</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#combine-gene-set-collections"><i class="fa fa-check"></i>Combine gene set collections</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#prepare-input-1"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#run-ora-1"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#filter-and-inspect-significant-sets"><i class="fa fa-check"></i>Filter and Inspect Significant Sets</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#critical-interpretation-watch-for-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Watch for Spurious Hits</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#bar-plot-top-enriched-sets-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Enriched Sets by Direction</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#prepare-the-ranked-gene-list-1"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#convert-gene-sets-to-fgsea-format"><i class="fa fa-check"></i>Convert Gene Sets to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#run-gsea-1"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#inspect-significant-sets"><i class="fa fa-check"></i>Inspect Significant Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#the-biofilm-activated-signal"><i class="fa fa-check"></i>The biofilm-activated signal</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#nes-bar-plot"><i class="fa fa-check"></i>NES Bar Plot</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets-in-each-direction"><i class="fa fa-check"></i>Enrichment Plot — Top Sets in Each Direction</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html#reading-the-biology"><i class="fa fa-check"></i>Reading the biology</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
@@ -376,16 +264,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="setup-the-environment-1" class="section level2 hasAnchor">
 <h2>Setup the Environment<a href="setup-the-environment-1.html#setup-the-environment-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="setup-the-environment-1.html#cb204-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb204-2"><a href="setup-the-environment-1.html#cb204-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
-<span id="cb204-3"><a href="setup-the-environment-1.html#cb204-3" tabindex="-1"></a><span class="fu">library</span>(apeglm)</span>
-<span id="cb204-4"><a href="setup-the-environment-1.html#cb204-4" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb204-5"><a href="setup-the-environment-1.html#cb204-5" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb204-6"><a href="setup-the-environment-1.html#cb204-6" tabindex="-1"></a><span class="fu">library</span>(EnhancedVolcano)</span>
-<span id="cb204-7"><a href="setup-the-environment-1.html#cb204-7" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb204-8"><a href="setup-the-environment-1.html#cb204-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb204-9"><a href="setup-the-environment-1.html#cb204-9" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
-<span id="cb204-10"><a href="setup-the-environment-1.html#cb204-10" tabindex="-1"></a><span class="fu">library</span>(gggenes)       <span class="co"># to draw genes as arrows along the chromosome (CRAN)</span></span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="setup-the-environment-1.html#cb190-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb190-2"><a href="setup-the-environment-1.html#cb190-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb190-3"><a href="setup-the-environment-1.html#cb190-3" tabindex="-1"></a><span class="fu">library</span>(apeglm)</span>
+<span id="cb190-4"><a href="setup-the-environment-1.html#cb190-4" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb190-5"><a href="setup-the-environment-1.html#cb190-5" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb190-6"><a href="setup-the-environment-1.html#cb190-6" tabindex="-1"></a><span class="fu">library</span>(EnhancedVolcano)</span>
+<span id="cb190-7"><a href="setup-the-environment-1.html#cb190-7" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb190-8"><a href="setup-the-environment-1.html#cb190-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb190-9"><a href="setup-the-environment-1.html#cb190-9" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb190-10"><a href="setup-the-environment-1.html#cb190-10" tabindex="-1"></a><span class="fu">library</span>(gggenes)       <span class="co"># to draw genes as arrows along the chromosome (CRAN)</span></span></code></pre></div>
 </details>
 <div id="choose-the-strain-1" class="section level3 hasAnchor">
 <h3>Choose the Strain<a href="setup-the-environment-1.html#choose-the-strain-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -395,44 +283,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>When rendering</strong> (<code>rmarkdown::render</code>, or the <code>render_all_strains.R</code> driver): the value comes from the <code>params:strain</code> field in the YAML header, which overrides the line below.</li>
 </ol>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="setup-the-environment-1.html#cb205-1" tabindex="-1"></a><span class="co"># Interactive default. When the document is rendered, params$strain (from the YAML</span></span>
-<span id="cb205-2"><a href="setup-the-environment-1.html#cb205-2" tabindex="-1"></a><span class="co"># header, or passed by rmarkdown::render) takes precedence over this line.</span></span>
-<span id="cb205-3"><a href="setup-the-environment-1.html#cb205-3" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;USA-100&quot;</span>          <span class="co"># &quot;USA-100&quot; or &quot;USA-500&quot;</span></span>
-<span id="cb205-4"><a href="setup-the-environment-1.html#cb205-4" tabindex="-1"></a></span>
-<span id="cb205-5"><a href="setup-the-environment-1.html#cb205-5" tabindex="-1"></a><span class="co"># If rendered with a params value, use it.</span></span>
-<span id="cb205-6"><a href="setup-the-environment-1.html#cb205-6" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;params&quot;</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">is.list</span>(params) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(params<span class="sc">$</span>strain)) strain <span class="ot">&lt;-</span> params<span class="sc">$</span>strain</span>
-<span id="cb205-7"><a href="setup-the-environment-1.html#cb205-7" tabindex="-1"></a></span>
-<span id="cb205-8"><a href="setup-the-environment-1.html#cb205-8" tabindex="-1"></a><span class="fu">stopifnot</span>(strain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;USA-100&quot;</span>, <span class="st">&quot;USA-500&quot;</span>))</span>
-<span id="cb205-9"><a href="setup-the-environment-1.html#cb205-9" tabindex="-1"></a>strain_tag <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">gsub</span>(<span class="st">&quot;-&quot;</span>, <span class="st">&quot;&quot;</span>, strain))</span>
-<span id="cb205-10"><a href="setup-the-environment-1.html#cb205-10" tabindex="-1"></a></span>
-<span id="cb205-11"><a href="setup-the-environment-1.html#cb205-11" tabindex="-1"></a>git_root    <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb205-12"><a href="setup-the-environment-1.html#cb205-12" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, strain_tag)</span>
-<span id="cb205-13"><a href="setup-the-environment-1.html#cb205-13" tabindex="-1"></a></span>
-<span id="cb205-14"><a href="setup-the-environment-1.html#cb205-14" tabindex="-1"></a><span class="co"># Each strain was aligned to its own reference genome, so each has its own GTF.</span></span>
-<span id="cb205-15"><a href="setup-the-environment-1.html#cb205-15" tabindex="-1"></a>gtf_file <span class="ot">&lt;-</span> <span class="cf">switch</span>(strain,</span>
-<span id="cb205-16"><a href="setup-the-environment-1.html#cb205-16" tabindex="-1"></a>  <span class="st">&quot;USA-100&quot;</span> <span class="ot">=</span> <span class="st">&quot;GCF_000009645.1_ASM964v1_genomic.gtf.gz&quot;</span>,   <span class="co"># N315 reference</span></span>
-<span id="cb205-17"><a href="setup-the-environment-1.html#cb205-17" tabindex="-1"></a>  <span class="st">&quot;USA-500&quot;</span> <span class="ot">=</span> <span class="st">&quot;GCF_000013465.1_ASM1346v1_genomic.gtf.gz&quot;</span>   <span class="co"># USA300 reference</span></span>
-<span id="cb205-18"><a href="setup-the-environment-1.html#cb205-18" tabindex="-1"></a>)</span>
-<span id="cb205-19"><a href="setup-the-environment-1.html#cb205-19" tabindex="-1"></a>gtf_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;genome_files&quot;</span>, gtf_file)</span>
-<span id="cb205-20"><a href="setup-the-environment-1.html#cb205-20" tabindex="-1"></a></span>
-<span id="cb205-21"><a href="setup-the-environment-1.html#cb205-21" tabindex="-1"></a><span class="co"># --- Analysis choices, set once and reused everywhere -------------------------</span></span>
-<span id="cb205-22"><a href="setup-the-environment-1.html#cb205-22" tabindex="-1"></a>lfc_threshold  <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">3</span>)  <span class="co"># paper&#39;s 3-fold threshold, on the log2 scale (~1.585)</span></span>
-<span id="cb205-23"><a href="setup-the-environment-1.html#cb205-23" tabindex="-1"></a>padj_threshold <span class="ot">&lt;-</span> <span class="fl">0.05</span>     <span class="co"># FDR cutoff</span></span>
-<span id="cb205-24"><a href="setup-the-environment-1.html#cb205-24" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
-<span id="cb205-25"><a href="setup-the-environment-1.html#cb205-25" tabindex="-1"></a></span>
-<span id="cb205-26"><a href="setup-the-environment-1.html#cb205-26" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain          :&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="setup-the-environment-1.html#cb191-1" tabindex="-1"></a><span class="co"># Interactive default. When the document is rendered, params$strain (from the YAML</span></span>
+<span id="cb191-2"><a href="setup-the-environment-1.html#cb191-2" tabindex="-1"></a><span class="co"># header, or passed by rmarkdown::render) takes precedence over this line.</span></span>
+<span id="cb191-3"><a href="setup-the-environment-1.html#cb191-3" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;USA-100&quot;</span>          <span class="co"># &quot;USA-100&quot; or &quot;USA-500&quot;</span></span>
+<span id="cb191-4"><a href="setup-the-environment-1.html#cb191-4" tabindex="-1"></a></span>
+<span id="cb191-5"><a href="setup-the-environment-1.html#cb191-5" tabindex="-1"></a><span class="co"># If rendered with a params value, use it.</span></span>
+<span id="cb191-6"><a href="setup-the-environment-1.html#cb191-6" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;params&quot;</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">is.list</span>(params) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(params<span class="sc">$</span>strain)) strain <span class="ot">&lt;-</span> params<span class="sc">$</span>strain</span>
+<span id="cb191-7"><a href="setup-the-environment-1.html#cb191-7" tabindex="-1"></a></span>
+<span id="cb191-8"><a href="setup-the-environment-1.html#cb191-8" tabindex="-1"></a><span class="fu">stopifnot</span>(strain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;USA-100&quot;</span>, <span class="st">&quot;USA-500&quot;</span>))</span>
+<span id="cb191-9"><a href="setup-the-environment-1.html#cb191-9" tabindex="-1"></a>strain_tag <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">gsub</span>(<span class="st">&quot;-&quot;</span>, <span class="st">&quot;&quot;</span>, strain))</span>
+<span id="cb191-10"><a href="setup-the-environment-1.html#cb191-10" tabindex="-1"></a></span>
+<span id="cb191-11"><a href="setup-the-environment-1.html#cb191-11" tabindex="-1"></a>git_root    <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb191-12"><a href="setup-the-environment-1.html#cb191-12" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, strain_tag)</span>
+<span id="cb191-13"><a href="setup-the-environment-1.html#cb191-13" tabindex="-1"></a></span>
+<span id="cb191-14"><a href="setup-the-environment-1.html#cb191-14" tabindex="-1"></a><span class="co"># Each strain was aligned to its own reference genome, so each has its own GTF.</span></span>
+<span id="cb191-15"><a href="setup-the-environment-1.html#cb191-15" tabindex="-1"></a>gtf_file <span class="ot">&lt;-</span> <span class="cf">switch</span>(strain,</span>
+<span id="cb191-16"><a href="setup-the-environment-1.html#cb191-16" tabindex="-1"></a>  <span class="st">&quot;USA-100&quot;</span> <span class="ot">=</span> <span class="st">&quot;GCF_000009645.1_ASM964v1_genomic.gtf.gz&quot;</span>,   <span class="co"># N315 reference</span></span>
+<span id="cb191-17"><a href="setup-the-environment-1.html#cb191-17" tabindex="-1"></a>  <span class="st">&quot;USA-500&quot;</span> <span class="ot">=</span> <span class="st">&quot;GCF_000013465.1_ASM1346v1_genomic.gtf.gz&quot;</span>   <span class="co"># USA300 reference</span></span>
+<span id="cb191-18"><a href="setup-the-environment-1.html#cb191-18" tabindex="-1"></a>)</span>
+<span id="cb191-19"><a href="setup-the-environment-1.html#cb191-19" tabindex="-1"></a>gtf_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;genome_files&quot;</span>, gtf_file)</span>
+<span id="cb191-20"><a href="setup-the-environment-1.html#cb191-20" tabindex="-1"></a></span>
+<span id="cb191-21"><a href="setup-the-environment-1.html#cb191-21" tabindex="-1"></a><span class="co"># --- Analysis choices, set once and reused everywhere -------------------------</span></span>
+<span id="cb191-22"><a href="setup-the-environment-1.html#cb191-22" tabindex="-1"></a>lfc_threshold  <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">3</span>)  <span class="co"># paper&#39;s 3-fold threshold, on the log2 scale (~1.585)</span></span>
+<span id="cb191-23"><a href="setup-the-environment-1.html#cb191-23" tabindex="-1"></a>padj_threshold <span class="ot">&lt;-</span> <span class="fl">0.05</span>     <span class="co"># FDR cutoff</span></span>
+<span id="cb191-24"><a href="setup-the-environment-1.html#cb191-24" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
+<span id="cb191-25"><a href="setup-the-environment-1.html#cb191-25" tabindex="-1"></a></span>
+<span id="cb191-26"><a href="setup-the-environment-1.html#cb191-26" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain          :&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Strain          : USA-100</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="setup-the-environment-1.html#cb207-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GTF             :&quot;</span>, gtf_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="setup-the-environment-1.html#cb193-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GTF             :&quot;</span>, gtf_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## GTF             : /Users/jasge/Documents/GitHub/dsp_27200/data/genome_files/GCF_000009645.1_ASM964v1_genomic.gtf.gz</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="setup-the-environment-1.html#cb209-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;log2FC threshold:&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;( =&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold )</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="setup-the-environment-1.html#cb195-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;log2FC threshold:&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;( =&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold )</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## log2FC threshold: 1.585 ( = 3 -fold )</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="setup-the-environment-1.html#cb211-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;padj threshold  :&quot;</span>, padj_threshold, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="setup-the-environment-1.html#cb197-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;padj threshold  :&quot;</span>, padj_threshold, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## padj threshold  : 0.05</code></pre>
 </div>
@@ -440,24 +328,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Load the DESeqDataSet from QC<a href="setup-the-environment-1.html#load-the-deseqdataset-from-qc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The QC script saved a <code>DESeqDataSet</code> containing <strong>all</strong> time points. We load it here and subset as needed for each question.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="setup-the-environment-1.html#cb213-1" tabindex="-1"></a>dds_all <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
-<span id="cb213-2"><a href="setup-the-environment-1.html#cb213-2" tabindex="-1"></a>  <span class="fu">file.path</span>(results_dir, <span class="st">&quot;rds&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;dds_&quot;</span>, strain_tag, <span class="st">&quot;_all_timepoints.rds&quot;</span>))</span>
-<span id="cb213-3"><a href="setup-the-environment-1.html#cb213-3" tabindex="-1"></a>)</span>
-<span id="cb213-4"><a href="setup-the-environment-1.html#cb213-4" tabindex="-1"></a></span>
-<span id="cb213-5"><a href="setup-the-environment-1.html#cb213-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Loaded DDS:&quot;</span>, <span class="fu">nrow</span>(dds_all), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds_all), <span class="st">&quot;samples</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="setup-the-environment-1.html#cb199-1" tabindex="-1"></a>dds_all <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb199-2"><a href="setup-the-environment-1.html#cb199-2" tabindex="-1"></a>  <span class="fu">file.path</span>(results_dir, <span class="st">&quot;rds&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;dds_&quot;</span>, strain_tag, <span class="st">&quot;_all_timepoints.rds&quot;</span>))</span>
+<span id="cb199-3"><a href="setup-the-environment-1.html#cb199-3" tabindex="-1"></a>)</span>
+<span id="cb199-4"><a href="setup-the-environment-1.html#cb199-4" tabindex="-1"></a></span>
+<span id="cb199-5"><a href="setup-the-environment-1.html#cb199-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Loaded DDS:&quot;</span>, <span class="fu">nrow</span>(dds_all), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds_all), <span class="st">&quot;samples</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Loaded DDS: 2288 genes &lt;U+00D7&gt; 32 samples</code></pre>
+<pre><code>## Loaded DDS: 2288 genes × 32 samples</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="setup-the-environment-1.html#cb215-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(dds_all<span class="sc">$</span>lifestyle, dds_all<span class="sc">$</span>timepoint))</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="setup-the-environment-1.html#cb201-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(dds_all<span class="sc">$</span>lifestyle, dds_all<span class="sc">$</span>timepoint))</span></code></pre></div>
 </details>
 <pre><code>##             
 ##              5h 10h 24h
 ##   Planktonic  4   4   8
 ##   Biofilm     4   4   8</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="setup-the-environment-1.html#cb217-1" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb217-2"><a href="setup-the-environment-1.html#cb217-2" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>),  <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb217-3"><a href="setup-the-environment-1.html#cb217-3" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;rds&quot;</span>),    <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="setup-the-environment-1.html#cb203-1" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;tables&quot;</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb203-2"><a href="setup-the-environment-1.html#cb203-2" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>),  <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb203-3"><a href="setup-the-environment-1.html#cb203-3" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;rds&quot;</span>),    <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </details>
 <div class="remember">
 <p><strong>📌 Remember:</strong> This object already had low-count genes filtered in the QC step. Below we set the
@@ -469,8 +357,8 @@ reference (baseline) level explicitly for each analysis so the direction of ever
 <p>Before extracting any result, make sure the comparison points the way you think it does.
 The first factor level is always the reference (denominator) in <code>DESeq2</code> comparisons. Setting <code>Planktonic</code> as the reference ensures fold changes are computed in the intended direction: <strong>biofilm vs planktonic</strong>, not the reverse.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="setup-the-environment-1.html#cb218-1" tabindex="-1"></a>dds_all<span class="sc">$</span>lifestyle <span class="ot">&lt;-</span> <span class="fu">relevel</span>(dds_all<span class="sc">$</span>lifestyle, <span class="at">ref =</span> <span class="st">&quot;Planktonic&quot;</span>)</span>
-<span id="cb218-2"><a href="setup-the-environment-1.html#cb218-2" tabindex="-1"></a><span class="fu">levels</span>(dds_all<span class="sc">$</span>lifestyle)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="setup-the-environment-1.html#cb204-1" tabindex="-1"></a>dds_all<span class="sc">$</span>lifestyle <span class="ot">&lt;-</span> <span class="fu">relevel</span>(dds_all<span class="sc">$</span>lifestyle, <span class="at">ref =</span> <span class="st">&quot;Planktonic&quot;</span>)</span>
+<span id="cb204-2"><a href="setup-the-environment-1.html#cb204-2" tabindex="-1"></a><span class="fu">levels</span>(dds_all<span class="sc">$</span>lifestyle)</span></code></pre></div>
 </details>
 <pre><code>## [1] &quot;Planktonic&quot; &quot;Biofilm&quot;</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
@@ -488,62 +376,62 @@ the fold-change threshold to the <em>shrunken</em> values, shrinkage here also a
 counted as Up/Down — deliberately: a noisy low-count gene with an inflated raw fold change should not pass.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="setup-the-environment-1.html#cb220-1" tabindex="-1"></a>get_results <span class="ot">&lt;-</span> <span class="cf">function</span>(dds, coef_name) {</span>
-<span id="cb220-2"><a href="setup-the-environment-1.html#cb220-2" tabindex="-1"></a>  <span class="fu">stopifnot</span>(coef_name <span class="sc">%in%</span> <span class="fu">resultsNames</span>(dds))</span>
-<span id="cb220-3"><a href="setup-the-environment-1.html#cb220-3" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">lfcShrink</span>(dds, <span class="at">coef =</span> coef_name, <span class="at">type =</span> <span class="st">&quot;apeglm&quot;</span>)</span>
-<span id="cb220-4"><a href="setup-the-environment-1.html#cb220-4" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(res) <span class="sc">%&gt;%</span></span>
-<span id="cb220-5"><a href="setup-the-environment-1.html#cb220-5" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene_id&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb220-6"><a href="setup-the-environment-1.html#cb220-6" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb220-7"><a href="setup-the-environment-1.html#cb220-7" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">case_when</span>(</span>
-<span id="cb220-8"><a href="setup-the-environment-1.html#cb220-8" tabindex="-1"></a>        <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_threshold <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span>  lfc_threshold <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
-<span id="cb220-9"><a href="setup-the-environment-1.html#cb220-9" tabindex="-1"></a>        <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_threshold <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="sc">-</span>lfc_threshold <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
-<span id="cb220-10"><a href="setup-the-environment-1.html#cb220-10" tabindex="-1"></a>        <span class="cn">TRUE</span>                                                                    <span class="sc">~</span> <span class="st">&quot;Not significant&quot;</span></span>
-<span id="cb220-11"><a href="setup-the-environment-1.html#cb220-11" tabindex="-1"></a>      ),</span>
-<span id="cb220-12"><a href="setup-the-environment-1.html#cb220-12" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">factor</span>(direction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>, <span class="st">&quot;Not significant&quot;</span>))</span>
-<span id="cb220-13"><a href="setup-the-environment-1.html#cb220-13" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb220-14"><a href="setup-the-environment-1.html#cb220-14" tabindex="-1"></a>    <span class="fu">arrange</span>(padj)</span>
-<span id="cb220-15"><a href="setup-the-environment-1.html#cb220-15" tabindex="-1"></a>}</span>
-<span id="cb220-16"><a href="setup-the-environment-1.html#cb220-16" tabindex="-1"></a></span>
-<span id="cb220-17"><a href="setup-the-environment-1.html#cb220-17" tabindex="-1"></a><span class="co"># Compact volcano wrapper so every contrast is plotted the same way.</span></span>
-<span id="cb220-18"><a href="setup-the-environment-1.html#cb220-18" tabindex="-1"></a><span class="co"># Only the top 5 genes by adjusted p-value are labelled, to keep the plot readable.</span></span>
-<span id="cb220-19"><a href="setup-the-environment-1.html#cb220-19" tabindex="-1"></a>plot_volcano <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, title, sub, <span class="at">n_label =</span> <span class="dv">5</span>) {</span>
-<span id="cb220-20"><a href="setup-the-environment-1.html#cb220-20" tabindex="-1"></a>  top_genes <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
-<span id="cb220-21"><a href="setup-the-environment-1.html#cb220-21" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(padj)) <span class="sc">%&gt;%</span></span>
-<span id="cb220-22"><a href="setup-the-environment-1.html#cb220-22" tabindex="-1"></a>    <span class="fu">arrange</span>(padj) <span class="sc">%&gt;%</span></span>
-<span id="cb220-23"><a href="setup-the-environment-1.html#cb220-23" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n =</span> n_label) <span class="sc">%&gt;%</span></span>
-<span id="cb220-24"><a href="setup-the-environment-1.html#cb220-24" tabindex="-1"></a>    <span class="fu">pull</span>(gene_id)</span>
-<span id="cb220-25"><a href="setup-the-environment-1.html#cb220-25" tabindex="-1"></a></span>
-<span id="cb220-26"><a href="setup-the-environment-1.html#cb220-26" tabindex="-1"></a>  labels <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(res_df<span class="sc">$</span>gene_id <span class="sc">%in%</span> top_genes, res_df<span class="sc">$</span>gene_id, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb220-27"><a href="setup-the-environment-1.html#cb220-27" tabindex="-1"></a></span>
-<span id="cb220-28"><a href="setup-the-environment-1.html#cb220-28" tabindex="-1"></a>  <span class="fu">EnhancedVolcano</span>(</span>
-<span id="cb220-29"><a href="setup-the-environment-1.html#cb220-29" tabindex="-1"></a>    res_df,</span>
-<span id="cb220-30"><a href="setup-the-environment-1.html#cb220-30" tabindex="-1"></a>    <span class="at">lab            =</span> labels,</span>
-<span id="cb220-31"><a href="setup-the-environment-1.html#cb220-31" tabindex="-1"></a>    <span class="at">x              =</span> <span class="st">&quot;log2FoldChange&quot;</span>,</span>
-<span id="cb220-32"><a href="setup-the-environment-1.html#cb220-32" tabindex="-1"></a>    <span class="at">y              =</span> <span class="st">&quot;padj&quot;</span>,</span>
-<span id="cb220-33"><a href="setup-the-environment-1.html#cb220-33" tabindex="-1"></a>    <span class="at">ylab           =</span> <span class="fu">bquote</span>(<span class="sc">~-</span>Log[<span class="dv">10</span>] <span class="sc">~</span> <span class="st">&quot;adjusted&quot;</span> <span class="sc">~</span> <span class="fu">italic</span>(P)),</span>
-<span id="cb220-34"><a href="setup-the-environment-1.html#cb220-34" tabindex="-1"></a>    <span class="at">pCutoff        =</span> padj_threshold,</span>
-<span id="cb220-35"><a href="setup-the-environment-1.html#cb220-35" tabindex="-1"></a>    <span class="at">FCcutoff       =</span> lfc_threshold,</span>
-<span id="cb220-36"><a href="setup-the-environment-1.html#cb220-36" tabindex="-1"></a>    <span class="at">title          =</span> title,</span>
-<span id="cb220-37"><a href="setup-the-environment-1.html#cb220-37" tabindex="-1"></a>    <span class="at">subtitle       =</span> sub,</span>
-<span id="cb220-38"><a href="setup-the-environment-1.html#cb220-38" tabindex="-1"></a>    <span class="at">legendPosition =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb220-39"><a href="setup-the-environment-1.html#cb220-39" tabindex="-1"></a>    <span class="at">drawConnectors =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb220-40"><a href="setup-the-environment-1.html#cb220-40" tabindex="-1"></a>    <span class="at">max.overlaps   =</span> <span class="cn">Inf</span></span>
-<span id="cb220-41"><a href="setup-the-environment-1.html#cb220-41" tabindex="-1"></a>  )</span>
-<span id="cb220-42"><a href="setup-the-environment-1.html#cb220-42" tabindex="-1"></a>}</span>
-<span id="cb220-43"><a href="setup-the-environment-1.html#cb220-43" tabindex="-1"></a></span>
-<span id="cb220-44"><a href="setup-the-environment-1.html#cb220-44" tabindex="-1"></a><span class="co"># Diagnostic: are the largest fold changes coming from well-expressed genes (real)</span></span>
-<span id="cb220-45"><a href="setup-the-environment-1.html#cb220-45" tabindex="-1"></a><span class="co"># or from low-count genes (unreliable)? Prints the 10 most extreme by |log2FC|</span></span>
-<span id="cb220-46"><a href="setup-the-environment-1.html#cb220-46" tabindex="-1"></a><span class="co"># with their baseMean (mean normalised count across samples).</span></span>
-<span id="cb220-47"><a href="setup-the-environment-1.html#cb220-47" tabindex="-1"></a>check_extreme_fc <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, <span class="at">n =</span> <span class="dv">10</span>) {</span>
-<span id="cb220-48"><a href="setup-the-environment-1.html#cb220-48" tabindex="-1"></a>  res_df <span class="sc">%&gt;%</span></span>
-<span id="cb220-49"><a href="setup-the-environment-1.html#cb220-49" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(log2FoldChange))) <span class="sc">%&gt;%</span></span>
-<span id="cb220-50"><a href="setup-the-environment-1.html#cb220-50" tabindex="-1"></a>    <span class="fu">transmute</span>(gene_id,</span>
-<span id="cb220-51"><a href="setup-the-environment-1.html#cb220-51" tabindex="-1"></a>              <span class="at">baseMean       =</span> <span class="fu">round</span>(baseMean, <span class="dv">1</span>),</span>
-<span id="cb220-52"><a href="setup-the-environment-1.html#cb220-52" tabindex="-1"></a>              <span class="at">log2FoldChange =</span> <span class="fu">round</span>(log2FoldChange, <span class="dv">2</span>),</span>
-<span id="cb220-53"><a href="setup-the-environment-1.html#cb220-53" tabindex="-1"></a>              <span class="at">padj           =</span> <span class="fu">signif</span>(padj, <span class="dv">3</span>),</span>
-<span id="cb220-54"><a href="setup-the-environment-1.html#cb220-54" tabindex="-1"></a>              direction) <span class="sc">%&gt;%</span></span>
-<span id="cb220-55"><a href="setup-the-environment-1.html#cb220-55" tabindex="-1"></a>    <span class="fu">head</span>(n)</span>
-<span id="cb220-56"><a href="setup-the-environment-1.html#cb220-56" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="setup-the-environment-1.html#cb206-1" tabindex="-1"></a>get_results <span class="ot">&lt;-</span> <span class="cf">function</span>(dds, coef_name) {</span>
+<span id="cb206-2"><a href="setup-the-environment-1.html#cb206-2" tabindex="-1"></a>  <span class="fu">stopifnot</span>(coef_name <span class="sc">%in%</span> <span class="fu">resultsNames</span>(dds))</span>
+<span id="cb206-3"><a href="setup-the-environment-1.html#cb206-3" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">lfcShrink</span>(dds, <span class="at">coef =</span> coef_name, <span class="at">type =</span> <span class="st">&quot;apeglm&quot;</span>)</span>
+<span id="cb206-4"><a href="setup-the-environment-1.html#cb206-4" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(res) <span class="sc">%&gt;%</span></span>
+<span id="cb206-5"><a href="setup-the-environment-1.html#cb206-5" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb206-6"><a href="setup-the-environment-1.html#cb206-6" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb206-7"><a href="setup-the-environment-1.html#cb206-7" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">case_when</span>(</span>
+<span id="cb206-8"><a href="setup-the-environment-1.html#cb206-8" tabindex="-1"></a>        <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_threshold <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span>  lfc_threshold <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
+<span id="cb206-9"><a href="setup-the-environment-1.html#cb206-9" tabindex="-1"></a>        <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_threshold <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="sc">-</span>lfc_threshold <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
+<span id="cb206-10"><a href="setup-the-environment-1.html#cb206-10" tabindex="-1"></a>        <span class="cn">TRUE</span>                                                                    <span class="sc">~</span> <span class="st">&quot;Not significant&quot;</span></span>
+<span id="cb206-11"><a href="setup-the-environment-1.html#cb206-11" tabindex="-1"></a>      ),</span>
+<span id="cb206-12"><a href="setup-the-environment-1.html#cb206-12" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">factor</span>(direction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>, <span class="st">&quot;Not significant&quot;</span>))</span>
+<span id="cb206-13"><a href="setup-the-environment-1.html#cb206-13" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb206-14"><a href="setup-the-environment-1.html#cb206-14" tabindex="-1"></a>    <span class="fu">arrange</span>(padj)</span>
+<span id="cb206-15"><a href="setup-the-environment-1.html#cb206-15" tabindex="-1"></a>}</span>
+<span id="cb206-16"><a href="setup-the-environment-1.html#cb206-16" tabindex="-1"></a></span>
+<span id="cb206-17"><a href="setup-the-environment-1.html#cb206-17" tabindex="-1"></a><span class="co"># Compact volcano wrapper so every contrast is plotted the same way.</span></span>
+<span id="cb206-18"><a href="setup-the-environment-1.html#cb206-18" tabindex="-1"></a><span class="co"># Only the top 5 genes by adjusted p-value are labelled, to keep the plot readable.</span></span>
+<span id="cb206-19"><a href="setup-the-environment-1.html#cb206-19" tabindex="-1"></a>plot_volcano <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, title, sub, <span class="at">n_label =</span> <span class="dv">5</span>) {</span>
+<span id="cb206-20"><a href="setup-the-environment-1.html#cb206-20" tabindex="-1"></a>  top_genes <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
+<span id="cb206-21"><a href="setup-the-environment-1.html#cb206-21" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(padj)) <span class="sc">%&gt;%</span></span>
+<span id="cb206-22"><a href="setup-the-environment-1.html#cb206-22" tabindex="-1"></a>    <span class="fu">arrange</span>(padj) <span class="sc">%&gt;%</span></span>
+<span id="cb206-23"><a href="setup-the-environment-1.html#cb206-23" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n =</span> n_label) <span class="sc">%&gt;%</span></span>
+<span id="cb206-24"><a href="setup-the-environment-1.html#cb206-24" tabindex="-1"></a>    <span class="fu">pull</span>(gene_id)</span>
+<span id="cb206-25"><a href="setup-the-environment-1.html#cb206-25" tabindex="-1"></a></span>
+<span id="cb206-26"><a href="setup-the-environment-1.html#cb206-26" tabindex="-1"></a>  labels <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(res_df<span class="sc">$</span>gene_id <span class="sc">%in%</span> top_genes, res_df<span class="sc">$</span>gene_id, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb206-27"><a href="setup-the-environment-1.html#cb206-27" tabindex="-1"></a></span>
+<span id="cb206-28"><a href="setup-the-environment-1.html#cb206-28" tabindex="-1"></a>  <span class="fu">EnhancedVolcano</span>(</span>
+<span id="cb206-29"><a href="setup-the-environment-1.html#cb206-29" tabindex="-1"></a>    res_df,</span>
+<span id="cb206-30"><a href="setup-the-environment-1.html#cb206-30" tabindex="-1"></a>    <span class="at">lab            =</span> labels,</span>
+<span id="cb206-31"><a href="setup-the-environment-1.html#cb206-31" tabindex="-1"></a>    <span class="at">x              =</span> <span class="st">&quot;log2FoldChange&quot;</span>,</span>
+<span id="cb206-32"><a href="setup-the-environment-1.html#cb206-32" tabindex="-1"></a>    <span class="at">y              =</span> <span class="st">&quot;padj&quot;</span>,</span>
+<span id="cb206-33"><a href="setup-the-environment-1.html#cb206-33" tabindex="-1"></a>    <span class="at">ylab           =</span> <span class="fu">bquote</span>(<span class="sc">~-</span>Log[<span class="dv">10</span>] <span class="sc">~</span> <span class="st">&quot;adjusted&quot;</span> <span class="sc">~</span> <span class="fu">italic</span>(P)),</span>
+<span id="cb206-34"><a href="setup-the-environment-1.html#cb206-34" tabindex="-1"></a>    <span class="at">pCutoff        =</span> padj_threshold,</span>
+<span id="cb206-35"><a href="setup-the-environment-1.html#cb206-35" tabindex="-1"></a>    <span class="at">FCcutoff       =</span> lfc_threshold,</span>
+<span id="cb206-36"><a href="setup-the-environment-1.html#cb206-36" tabindex="-1"></a>    <span class="at">title          =</span> title,</span>
+<span id="cb206-37"><a href="setup-the-environment-1.html#cb206-37" tabindex="-1"></a>    <span class="at">subtitle       =</span> sub,</span>
+<span id="cb206-38"><a href="setup-the-environment-1.html#cb206-38" tabindex="-1"></a>    <span class="at">legendPosition =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb206-39"><a href="setup-the-environment-1.html#cb206-39" tabindex="-1"></a>    <span class="at">drawConnectors =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb206-40"><a href="setup-the-environment-1.html#cb206-40" tabindex="-1"></a>    <span class="at">max.overlaps   =</span> <span class="cn">Inf</span></span>
+<span id="cb206-41"><a href="setup-the-environment-1.html#cb206-41" tabindex="-1"></a>  )</span>
+<span id="cb206-42"><a href="setup-the-environment-1.html#cb206-42" tabindex="-1"></a>}</span>
+<span id="cb206-43"><a href="setup-the-environment-1.html#cb206-43" tabindex="-1"></a></span>
+<span id="cb206-44"><a href="setup-the-environment-1.html#cb206-44" tabindex="-1"></a><span class="co"># Diagnostic: are the largest fold changes coming from well-expressed genes (real)</span></span>
+<span id="cb206-45"><a href="setup-the-environment-1.html#cb206-45" tabindex="-1"></a><span class="co"># or from low-count genes (unreliable)? Prints the 10 most extreme by |log2FC|</span></span>
+<span id="cb206-46"><a href="setup-the-environment-1.html#cb206-46" tabindex="-1"></a><span class="co"># with their baseMean (mean normalised count across samples).</span></span>
+<span id="cb206-47"><a href="setup-the-environment-1.html#cb206-47" tabindex="-1"></a>check_extreme_fc <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, <span class="at">n =</span> <span class="dv">10</span>) {</span>
+<span id="cb206-48"><a href="setup-the-environment-1.html#cb206-48" tabindex="-1"></a>  res_df <span class="sc">%&gt;%</span></span>
+<span id="cb206-49"><a href="setup-the-environment-1.html#cb206-49" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(log2FoldChange))) <span class="sc">%&gt;%</span></span>
+<span id="cb206-50"><a href="setup-the-environment-1.html#cb206-50" tabindex="-1"></a>    <span class="fu">transmute</span>(gene_id,</span>
+<span id="cb206-51"><a href="setup-the-environment-1.html#cb206-51" tabindex="-1"></a>              <span class="at">baseMean       =</span> <span class="fu">round</span>(baseMean, <span class="dv">1</span>),</span>
+<span id="cb206-52"><a href="setup-the-environment-1.html#cb206-52" tabindex="-1"></a>              <span class="at">log2FoldChange =</span> <span class="fu">round</span>(log2FoldChange, <span class="dv">2</span>),</span>
+<span id="cb206-53"><a href="setup-the-environment-1.html#cb206-53" tabindex="-1"></a>              <span class="at">padj           =</span> <span class="fu">signif</span>(padj, <span class="dv">3</span>),</span>
+<span id="cb206-54"><a href="setup-the-environment-1.html#cb206-54" tabindex="-1"></a>              direction) <span class="sc">%&gt;%</span></span>
+<span id="cb206-55"><a href="setup-the-environment-1.html#cb206-55" tabindex="-1"></a>    <span class="fu">head</span>(n)</span>
+<span id="cb206-56"><a href="setup-the-environment-1.html#cb206-56" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 </div>
 </div>

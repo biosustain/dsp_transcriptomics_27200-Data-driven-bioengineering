@@ -71,10 +71,6 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -232,124 +228,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-two-tools"><i class="fa fa-check"></i><strong>Why two tools?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
+<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#what-gsea-does"><i class="fa fa-check"></i>What GSEA does</a></li>
+<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#why-these-gene-sets"><i class="fa fa-check"></i>Why these gene sets?</a></li>
 <li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis.html"><a href="gene-functional-enrichment-analysis.html#load-libraries"><i class="fa fa-check"></i>Load Libraries</a></li>
 <li class="chapter" data-level="" data-path="load-results-from-differential-expression-analysis.html"><a href="load-results-from-differential-expression-analysis.html"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA) with g:Profiler</a>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html"><i class="fa fa-check"></i>Running GSEA</a>
 <ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#prepare-input"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#run-ora"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#inspect-significant-terms"><i class="fa fa-check"></i>Inspect Significant Terms</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#interactive-manhattan-plot"><i class="fa fa-check"></i>Interactive Manhattan Plot</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora-with-gprofiler.html"><a href="part-1-over-representation-analysis-ora-with-gprofiler.html#bar-plot-top-terms-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Terms by Direction</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#retrieve-msigdb-gene-sets"><i class="fa fa-check"></i>Retrieve MSigDB Gene Sets</a></li>
+<li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#run-gsea"><i class="fa fa-check"></i>Run GSEA</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#prepare-the-ranked-gene-list"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#retrieve-msigdb-gene-sets"><i class="fa fa-check"></i>Retrieve MSigDB Gene Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#run-gsea"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#inspect-gene-sets"><i class="fa fa-check"></i>Inspect Gene Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea.html"><a href="part-2-gene-set-enrichment-analysis-gsea.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea.html"><a href="part-3-comparing-ora-and-gsea.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a></li>
-<li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="part"><span><b>II Advanced: Staphylococcus aureus (biofilm vs planktonic)</b></span></li>
-<li class="chapter" data-level="" data-path="quality-control-1.html"><a href="quality-control-1.html"><i class="fa fa-check"></i>Quality Control</a>
-<ul>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html"><i class="fa fa-check"></i>Choose the Strain</a>
-<ul>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#loading-count-data-1"><i class="fa fa-check"></i>Loading Count Data</a></li>
-<li class="chapter" data-level="" data-path="choose-the-strain.html"><a href="choose-the-strain.html#getting-the-metadata-1"><i class="fa fa-check"></i>Getting the Metadata</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html"><i class="fa fa-check"></i>Preparing the Data</a>
-<ul>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#creating-the-deseqdataset-1"><i class="fa fa-check"></i>Creating the DESeqDataSet</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#sanity-checks-1"><i class="fa fa-check"></i>Sanity Checks</a></li>
-<li class="chapter" data-level="" data-path="preparing-the-data-1.html"><a href="preparing-the-data-1.html#pre-filtering-low-count-genes-1"><i class="fa fa-check"></i>Pre-filtering Low-count Genes</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html"><i class="fa fa-check"></i>Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#estimate-size-factors-1"><i class="fa fa-check"></i>Estimate Size Factors</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#distribution-of-normalised-counts-1"><i class="fa fa-check"></i>Distribution of Normalised Counts</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#variance-stabilising-transformation-1"><i class="fa fa-check"></i>Variance-Stabilising Transformation</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1"><i class="fa fa-check"></i>Top Variable Genes Heatmap</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-3.html"><a href="interpretation-questions-3.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="differential-expression-analysis-1.html"><a href="differential-expression-analysis-1.html"><i class="fa fa-check"></i>Differential Expression Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html"><i class="fa fa-check"></i>Setup the Environment</a>
-<ul>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#choose-the-strain-1"><i class="fa fa-check"></i>Choose the Strain</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#load-the-deseqdataset-from-qc"><i class="fa fa-check"></i>Load the DESeqDataSet from QC</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#factor-order-and-reference-level-1"><i class="fa fa-check"></i>Factor Order and Reference Level</a></li>
-<li class="chapter" data-level="" data-path="setup-the-environment-1.html"><a href="setup-the-environment-1.html#a-small-helper-for-extracting-and-classifying-results"><i class="fa fa-check"></i>A Small Helper for Extracting and Classifying Results</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html"><i class="fa fa-check"></i>Part 1 — Maturation: How a Culture Changes Over Time</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#a-maturation-within-biofilm"><i class="fa fa-check"></i>1a — Maturation within Biofilm</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#b-maturation-within-planktonic"><i class="fa fa-check"></i>1b — Maturation within Planktonic</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#visualising-the-operon-genes-as-arrows-along-the-chromosome"><i class="fa fa-check"></i>Visualising the Operon: Genes as Arrows Along the Chromosome</a></li>
-<li class="chapter" data-level="" data-path="part-1-maturation-how-a-culture-changes-over-time.html"><a href="part-1-maturation-how-a-culture-changes-over-time.html#comparing-the-two-maturation-programmes"><i class="fa fa-check"></i>Comparing the Two Maturation Programmes</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><i class="fa fa-check"></i>Part 2 — Lifestyle: Biofilm vs Planktonic, Accounting for Time</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#a-additive-model-the-lifestyle-effect-adjusted-for-time"><i class="fa fa-check"></i>2a — Additive Model: the Lifestyle Effect, Adjusted for Time</a></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#b-interaction-model-does-the-lifestyle-difference-change-with-time"><i class="fa fa-check"></i>2b — Interaction Model: Does the Lifestyle Difference Change with Time?</a></li>
-<li class="chapter" data-level="" data-path="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#additive-vs-interaction-which-should-you-use"><i class="fa fa-check"></i>Additive vs Interaction: Which Should You Use?</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><i class="fa fa-check"></i>Part 3 — Hypothesis Test: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cross-strain-comparison-of-the-hypothesis"><i class="fa fa-check"></i>Cross-Strain Comparison of the Hypothesis</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="save-results.html"><a href="save-results.html"><i class="fa fa-check"></i>Save Results</a></li>
-<li class="chapter" data-level="" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-4.html"><a href="interpretation-questions-4.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html"><i class="fa fa-check"></i>Gene Functional Enrichment Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#why-two-packages"><i class="fa fa-check"></i><strong>Why two packages?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#why-these-gene-sets-1"><i class="fa fa-check"></i><strong>Why these gene sets?</strong></a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#strain-parameter"><i class="fa fa-check"></i>Strain parameter</a></li>
-<li class="chapter" data-level="" data-path="gene-functional-enrichment-analysis-1.html"><a href="gene-functional-enrichment-analysis-1.html#load-libraries-1"><i class="fa fa-check"></i>Load Libraries</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html"><i class="fa fa-check"></i>Strain configuration and inputs</a>
-<ul>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#load-results-from-differential-expression-analysis-1"><i class="fa fa-check"></i>Load Results from Differential Expression Analysis</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#define-significance-and-check-against-the-de-table"><i class="fa fa-check"></i>Define significance and check against the DE table</a></li>
-<li class="chapter" data-level="" data-path="strain-configuration-and-inputs.html"><a href="strain-configuration-and-inputs.html#combine-gene-set-collections"><i class="fa fa-check"></i>Combine gene set collections</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html"><i class="fa fa-check"></i>Part 1 — Over-Representation Analysis (ORA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#prepare-input-1"><i class="fa fa-check"></i>Prepare Input</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#run-ora-1"><i class="fa fa-check"></i>Run ORA</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#filter-and-inspect-significant-sets"><i class="fa fa-check"></i>Filter and Inspect Significant Sets</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#critical-interpretation-watch-for-spurious-hits"><i class="fa fa-check"></i>Critical Interpretation — Watch for Spurious Hits</a></li>
-<li class="chapter" data-level="" data-path="part-1-over-representation-analysis-ora.html"><a href="part-1-over-representation-analysis-ora.html#bar-plot-top-enriched-sets-by-direction"><i class="fa fa-check"></i>Bar Plot — Top Enriched Sets by Direction</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html"><i class="fa fa-check"></i>Part 2 — Gene Set Enrichment Analysis (GSEA)</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#prepare-the-ranked-gene-list-1"><i class="fa fa-check"></i>Prepare the Ranked Gene List</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#convert-gene-sets-to-fgsea-format"><i class="fa fa-check"></i>Convert Gene Sets to fgsea Format</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#run-gsea-1"><i class="fa fa-check"></i>Run GSEA</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#inspect-significant-sets"><i class="fa fa-check"></i>Inspect Significant Sets</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#the-biofilm-activated-signal"><i class="fa fa-check"></i>The biofilm-activated signal</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#nes-bar-plot"><i class="fa fa-check"></i>NES Bar Plot</a></li>
-<li class="chapter" data-level="" data-path="part-2-gene-set-enrichment-analysis-gsea-1.html"><a href="part-2-gene-set-enrichment-analysis-gsea-1.html#enrichment-plot-top-sets-in-each-direction"><i class="fa fa-check"></i>Enrichment Plot — Top Sets in Each Direction</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html"><i class="fa fa-check"></i>Part 3 — Comparing ORA and GSEA</a>
-<ul>
-<li class="chapter" data-level="" data-path="part-3-comparing-ora-and-gsea-1.html"><a href="part-3-comparing-ora-and-gsea-1.html#reading-the-biology"><i class="fa fa-check"></i>Reading the biology</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="saving-results-2.html"><a href="saving-results-2.html"><i class="fa fa-check"></i>Saving Results</a></li>
-<li class="chapter" data-level="" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i>Summary</a></li>
-<li class="chapter" data-level="" data-path="interpretation-questions-5.html"><a href="interpretation-questions-5.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
 </ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
@@ -380,16 +268,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Estimate Size Factors<a href="exploratory-data-analysis-1.html#estimate-size-factors-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Library sizes differ between samples due to technical variation in sequencing depth. <code>DESeq2</code>’s median-of-ratios normalisation corrects for this with a size factor per sample. Values close to 1.0 indicate balanced libraries; values far from 1.0 warrant investigation.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="exploratory-data-analysis-1.html#cb188-1" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">estimateSizeFactors</span>(dds)</span>
-<span id="cb188-2"><a href="exploratory-data-analysis-1.html#cb188-2" tabindex="-1"></a></span>
-<span id="cb188-3"><a href="exploratory-data-analysis-1.html#cb188-3" tabindex="-1"></a><span class="fu">sizeFactors</span>(dds) <span class="sc">%&gt;%</span></span>
-<span id="cb188-4"><a href="exploratory-data-analysis-1.html#cb188-4" tabindex="-1"></a>  <span class="fu">enframe</span>(<span class="at">name =</span> <span class="st">&quot;sample&quot;</span>, <span class="at">value =</span> <span class="st">&quot;size_factor&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb188-5"><a href="exploratory-data-analysis-1.html#cb188-5" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">&quot;DESeq2 size factors per sample&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb188-6"><a href="exploratory-data-analysis-1.html#cb188-6" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="exploratory-data-analysis-1.html#cb174-1" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">estimateSizeFactors</span>(dds)</span>
+<span id="cb174-2"><a href="exploratory-data-analysis-1.html#cb174-2" tabindex="-1"></a></span>
+<span id="cb174-3"><a href="exploratory-data-analysis-1.html#cb174-3" tabindex="-1"></a><span class="fu">sizeFactors</span>(dds) <span class="sc">%&gt;%</span></span>
+<span id="cb174-4"><a href="exploratory-data-analysis-1.html#cb174-4" tabindex="-1"></a>  <span class="fu">enframe</span>(<span class="at">name =</span> <span class="st">&quot;sample&quot;</span>, <span class="at">value =</span> <span class="st">&quot;size_factor&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb174-5"><a href="exploratory-data-analysis-1.html#cb174-5" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">&quot;DESeq2 size factors per sample&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb174-6"><a href="exploratory-data-analysis-1.html#cb174-6" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </details>
 <table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:saureus-qc-size-factors-0">Table 7: </span><span id="tab:saureus-qc-size-factors-0">Table 8: </span>DESeq2 size factors per sample
+<span id="tab:saureus-qc-size-factors-0">Table 9: </span><span id="tab:saureus-qc-size-factors-0">Table 10: </span>DESeq2 size factors per sample
 </caption>
 <thead>
 <tr>
@@ -668,44 +556,44 @@ USA100_N315_Planktonic_5h_4
 <p><strong>📌 Remember:</strong> These normalised counts are for visualisation only. Always feed DESeq2 <strong>raw integer counts</strong>.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="exploratory-data-analysis-1.html#cb189-1" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">counts</span>(dds, <span class="at">normalized =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb189-2"><a href="exploratory-data-analysis-1.html#cb189-2" tabindex="-1"></a></span>
-<span id="cb189-3"><a href="exploratory-data-analysis-1.html#cb189-3" tabindex="-1"></a>counts_norm <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(</span>
-<span id="cb189-4"><a href="exploratory-data-analysis-1.html#cb189-4" tabindex="-1"></a>  normalized_counts,</span>
-<span id="cb189-5"><a href="exploratory-data-analysis-1.html#cb189-5" tabindex="-1"></a>  <span class="at">varnames   =</span> <span class="fu">c</span>(<span class="st">&quot;gene_id&quot;</span>, <span class="st">&quot;sample&quot;</span>),</span>
-<span id="cb189-6"><a href="exploratory-data-analysis-1.html#cb189-6" tabindex="-1"></a>  <span class="at">value.name =</span> <span class="st">&quot;counts&quot;</span></span>
-<span id="cb189-7"><a href="exploratory-data-analysis-1.html#cb189-7" tabindex="-1"></a>)</span>
-<span id="cb189-8"><a href="exploratory-data-analysis-1.html#cb189-8" tabindex="-1"></a></span>
-<span id="cb189-9"><a href="exploratory-data-analysis-1.html#cb189-9" tabindex="-1"></a>counts_norm <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
-<span id="cb189-10"><a href="exploratory-data-analysis-1.html#cb189-10" tabindex="-1"></a>  counts_norm,</span>
-<span id="cb189-11"><a href="exploratory-data-analysis-1.html#cb189-11" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(dds)),</span>
-<span id="cb189-12"><a href="exploratory-data-analysis-1.html#cb189-12" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;sample&quot;</span></span>
-<span id="cb189-13"><a href="exploratory-data-analysis-1.html#cb189-13" tabindex="-1"></a>)</span>
-<span id="cb189-14"><a href="exploratory-data-analysis-1.html#cb189-14" tabindex="-1"></a></span>
-<span id="cb189-15"><a href="exploratory-data-analysis-1.html#cb189-15" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb189-16"><a href="exploratory-data-analysis-1.html#cb189-16" tabindex="-1"></a></span>
-<span id="cb189-17"><a href="exploratory-data-analysis-1.html#cb189-17" tabindex="-1"></a>distribution <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(counts_norm,</span>
-<span id="cb189-18"><a href="exploratory-data-analysis-1.html#cb189-18" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x    =</span> sample,</span>
-<span id="cb189-19"><a href="exploratory-data-analysis-1.html#cb189-19" tabindex="-1"></a>                           <span class="at">y    =</span> <span class="fu">log2</span>(counts <span class="sc">+</span> <span class="dv">1</span>),</span>
-<span id="cb189-20"><a href="exploratory-data-analysis-1.html#cb189-20" tabindex="-1"></a>                           <span class="at">fill =</span> lifestyle)) <span class="sc">+</span></span>
-<span id="cb189-21"><a href="exploratory-data-analysis-1.html#cb189-21" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.size =</span> <span class="fl">0.3</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb189-22"><a href="exploratory-data-analysis-1.html#cb189-22" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb189-23"><a href="exploratory-data-analysis-1.html#cb189-23" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb189-24"><a href="exploratory-data-analysis-1.html#cb189-24" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sample&quot;</span>) <span class="sc">+</span></span>
-<span id="cb189-25"><a href="exploratory-data-analysis-1.html#cb189-25" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;log2(normalised counts + 1)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb189-26"><a href="exploratory-data-analysis-1.html#cb189-26" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(<span class="st">&quot;Normalised count distribution — &quot;</span>, strain))</span>
-<span id="cb189-27"><a href="exploratory-data-analysis-1.html#cb189-27" tabindex="-1"></a></span>
-<span id="cb189-28"><a href="exploratory-data-analysis-1.html#cb189-28" tabindex="-1"></a>distribution</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="exploratory-data-analysis-1.html#cb175-1" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">counts</span>(dds, <span class="at">normalized =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb175-2"><a href="exploratory-data-analysis-1.html#cb175-2" tabindex="-1"></a></span>
+<span id="cb175-3"><a href="exploratory-data-analysis-1.html#cb175-3" tabindex="-1"></a>counts_norm <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(</span>
+<span id="cb175-4"><a href="exploratory-data-analysis-1.html#cb175-4" tabindex="-1"></a>  normalized_counts,</span>
+<span id="cb175-5"><a href="exploratory-data-analysis-1.html#cb175-5" tabindex="-1"></a>  <span class="at">varnames   =</span> <span class="fu">c</span>(<span class="st">&quot;gene_id&quot;</span>, <span class="st">&quot;sample&quot;</span>),</span>
+<span id="cb175-6"><a href="exploratory-data-analysis-1.html#cb175-6" tabindex="-1"></a>  <span class="at">value.name =</span> <span class="st">&quot;counts&quot;</span></span>
+<span id="cb175-7"><a href="exploratory-data-analysis-1.html#cb175-7" tabindex="-1"></a>)</span>
+<span id="cb175-8"><a href="exploratory-data-analysis-1.html#cb175-8" tabindex="-1"></a></span>
+<span id="cb175-9"><a href="exploratory-data-analysis-1.html#cb175-9" tabindex="-1"></a>counts_norm <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
+<span id="cb175-10"><a href="exploratory-data-analysis-1.html#cb175-10" tabindex="-1"></a>  counts_norm,</span>
+<span id="cb175-11"><a href="exploratory-data-analysis-1.html#cb175-11" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(dds)),</span>
+<span id="cb175-12"><a href="exploratory-data-analysis-1.html#cb175-12" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;sample&quot;</span></span>
+<span id="cb175-13"><a href="exploratory-data-analysis-1.html#cb175-13" tabindex="-1"></a>)</span>
+<span id="cb175-14"><a href="exploratory-data-analysis-1.html#cb175-14" tabindex="-1"></a></span>
+<span id="cb175-15"><a href="exploratory-data-analysis-1.html#cb175-15" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb175-16"><a href="exploratory-data-analysis-1.html#cb175-16" tabindex="-1"></a></span>
+<span id="cb175-17"><a href="exploratory-data-analysis-1.html#cb175-17" tabindex="-1"></a>distribution <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(counts_norm,</span>
+<span id="cb175-18"><a href="exploratory-data-analysis-1.html#cb175-18" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x    =</span> sample,</span>
+<span id="cb175-19"><a href="exploratory-data-analysis-1.html#cb175-19" tabindex="-1"></a>                           <span class="at">y    =</span> <span class="fu">log2</span>(counts <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb175-20"><a href="exploratory-data-analysis-1.html#cb175-20" tabindex="-1"></a>                           <span class="at">fill =</span> lifestyle)) <span class="sc">+</span></span>
+<span id="cb175-21"><a href="exploratory-data-analysis-1.html#cb175-21" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.size =</span> <span class="fl">0.3</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb175-22"><a href="exploratory-data-analysis-1.html#cb175-22" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb175-23"><a href="exploratory-data-analysis-1.html#cb175-23" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb175-24"><a href="exploratory-data-analysis-1.html#cb175-24" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sample&quot;</span>) <span class="sc">+</span></span>
+<span id="cb175-25"><a href="exploratory-data-analysis-1.html#cb175-25" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;log2(normalised counts + 1)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb175-26"><a href="exploratory-data-analysis-1.html#cb175-26" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(<span class="st">&quot;Normalised count distribution — &quot;</span>, strain))</span>
+<span id="cb175-27"><a href="exploratory-data-analysis-1.html#cb175-27" tabindex="-1"></a></span>
+<span id="cb175-28"><a href="exploratory-data-analysis-1.html#cb175-28" tabindex="-1"></a>distribution</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-qc-distribution-0-1.png" alt="" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="exploratory-data-analysis-1.html#cb190-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
-<span id="cb190-2"><a href="exploratory-data-analysis-1.html#cb190-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;normalised_count_distribution.png&quot;</span>),</span>
-<span id="cb190-3"><a href="exploratory-data-analysis-1.html#cb190-3" tabindex="-1"></a>  <span class="at">plot     =</span> distribution,</span>
-<span id="cb190-4"><a href="exploratory-data-analysis-1.html#cb190-4" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">8</span>,</span>
-<span id="cb190-5"><a href="exploratory-data-analysis-1.html#cb190-5" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">8</span>,</span>
-<span id="cb190-6"><a href="exploratory-data-analysis-1.html#cb190-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
-<span id="cb190-7"><a href="exploratory-data-analysis-1.html#cb190-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="exploratory-data-analysis-1.html#cb176-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
+<span id="cb176-2"><a href="exploratory-data-analysis-1.html#cb176-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;normalised_count_distribution.png&quot;</span>),</span>
+<span id="cb176-3"><a href="exploratory-data-analysis-1.html#cb176-3" tabindex="-1"></a>  <span class="at">plot     =</span> distribution,</span>
+<span id="cb176-4"><a href="exploratory-data-analysis-1.html#cb176-4" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">8</span>,</span>
+<span id="cb176-5"><a href="exploratory-data-analysis-1.html#cb176-5" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">8</span>,</span>
+<span id="cb176-6"><a href="exploratory-data-analysis-1.html#cb176-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
+<span id="cb176-7"><a href="exploratory-data-analysis-1.html#cb176-7" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 </div>
 <div id="variance-stabilising-transformation-1" class="section level3 hasAnchor">
@@ -717,7 +605,7 @@ variance-stabilising transformation (VST) removes that dependence between a gene
 and its variance, so every gene contributes on a comparable scale
 (<a href="https://doi.org/10.1186/gb-2010-11-10-r106">Anders &amp; Huber, 2010</a>).</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="exploratory-data-analysis-1.html#cb191-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="exploratory-data-analysis-1.html#cb177-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </details>
 <div class="boxy">
 <p><strong><code>blind = TRUE</code></strong> computes the transformation ignoring the experimental design. That is
@@ -730,45 +618,45 @@ already accounts for the design.</p>
 <h3>Principal Component Analysis (PCA)<a href="exploratory-data-analysis-1.html#principal-component-analysis-pca-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>PCA reduces the high-dimensional expression space (one dimension per gene) to a few principal components capturing the largest sources of variance. Here it answers two questions at once: does lifestyle (biofilm vs planktonic) separate the samples, and how much of the structure is driven by time point?</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="exploratory-data-analysis-1.html#cb192-1" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> <span class="fu">plotPCA</span>(vsd,</span>
-<span id="cb192-2"><a href="exploratory-data-analysis-1.html#cb192-2" tabindex="-1"></a>                    <span class="at">intgroup   =</span> <span class="fu">c</span>(<span class="st">&quot;lifestyle&quot;</span>, <span class="st">&quot;timepoint&quot;</span>),</span>
-<span id="cb192-3"><a href="exploratory-data-analysis-1.html#cb192-3" tabindex="-1"></a>                    <span class="at">returnData =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb192-4"><a href="exploratory-data-analysis-1.html#cb192-4" tabindex="-1"></a></span>
-<span id="cb192-5"><a href="exploratory-data-analysis-1.html#cb192-5" tabindex="-1"></a>pct_var <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">attr</span>(pca_data, <span class="st">&quot;percentVar&quot;</span>), <span class="dv">1</span>)</span>
-<span id="cb192-6"><a href="exploratory-data-analysis-1.html#cb192-6" tabindex="-1"></a></span>
-<span id="cb192-7"><a href="exploratory-data-analysis-1.html#cb192-7" tabindex="-1"></a>PCAPlot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pca_data, <span class="fu">aes</span>(<span class="at">x     =</span> PC1,</span>
-<span id="cb192-8"><a href="exploratory-data-analysis-1.html#cb192-8" tabindex="-1"></a>                                <span class="at">y     =</span> PC2,</span>
-<span id="cb192-9"><a href="exploratory-data-analysis-1.html#cb192-9" tabindex="-1"></a>                                <span class="at">color =</span> lifestyle,</span>
-<span id="cb192-10"><a href="exploratory-data-analysis-1.html#cb192-10" tabindex="-1"></a>                                <span class="at">shape =</span> timepoint)) <span class="sc">+</span></span>
-<span id="cb192-11"><a href="exploratory-data-analysis-1.html#cb192-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
-<span id="cb192-12"><a href="exploratory-data-analysis-1.html#cb192-12" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb192-13"><a href="exploratory-data-analysis-1.html#cb192-13" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb192-14"><a href="exploratory-data-analysis-1.html#cb192-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb192-15"><a href="exploratory-data-analysis-1.html#cb192-15" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb192-16"><a href="exploratory-data-analysis-1.html#cb192-16" tabindex="-1"></a>    <span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb192-17"><a href="exploratory-data-analysis-1.html#cb192-17" tabindex="-1"></a>    <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb192-18"><a href="exploratory-data-analysis-1.html#cb192-18" tabindex="-1"></a>    <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb192-19"><a href="exploratory-data-analysis-1.html#cb192-19" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span></span>
-<span id="cb192-20"><a href="exploratory-data-analysis-1.html#cb192-20" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb192-21"><a href="exploratory-data-analysis-1.html#cb192-21" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb192-22"><a href="exploratory-data-analysis-1.html#cb192-22" tabindex="-1"></a>    <span class="at">x     =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC1: &quot;</span>, pct_var[<span class="dv">1</span>], <span class="st">&quot;% variance&quot;</span>),</span>
-<span id="cb192-23"><a href="exploratory-data-analysis-1.html#cb192-23" tabindex="-1"></a>    <span class="at">y     =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC2: &quot;</span>, pct_var[<span class="dv">2</span>], <span class="st">&quot;% variance&quot;</span>),</span>
-<span id="cb192-24"><a href="exploratory-data-analysis-1.html#cb192-24" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;PCA — &quot;</span>, strain, <span class="st">&quot; (VST-transformed counts)&quot;</span>),</span>
-<span id="cb192-25"><a href="exploratory-data-analysis-1.html#cb192-25" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Lifestyle&quot;</span>,</span>
-<span id="cb192-26"><a href="exploratory-data-analysis-1.html#cb192-26" tabindex="-1"></a>    <span class="at">shape =</span> <span class="st">&quot;Time point&quot;</span></span>
-<span id="cb192-27"><a href="exploratory-data-analysis-1.html#cb192-27" tabindex="-1"></a>  )</span>
-<span id="cb192-28"><a href="exploratory-data-analysis-1.html#cb192-28" tabindex="-1"></a></span>
-<span id="cb192-29"><a href="exploratory-data-analysis-1.html#cb192-29" tabindex="-1"></a>PCAPlot</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="exploratory-data-analysis-1.html#cb178-1" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> <span class="fu">plotPCA</span>(vsd,</span>
+<span id="cb178-2"><a href="exploratory-data-analysis-1.html#cb178-2" tabindex="-1"></a>                    <span class="at">intgroup   =</span> <span class="fu">c</span>(<span class="st">&quot;lifestyle&quot;</span>, <span class="st">&quot;timepoint&quot;</span>),</span>
+<span id="cb178-3"><a href="exploratory-data-analysis-1.html#cb178-3" tabindex="-1"></a>                    <span class="at">returnData =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb178-4"><a href="exploratory-data-analysis-1.html#cb178-4" tabindex="-1"></a></span>
+<span id="cb178-5"><a href="exploratory-data-analysis-1.html#cb178-5" tabindex="-1"></a>pct_var <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">attr</span>(pca_data, <span class="st">&quot;percentVar&quot;</span>), <span class="dv">1</span>)</span>
+<span id="cb178-6"><a href="exploratory-data-analysis-1.html#cb178-6" tabindex="-1"></a></span>
+<span id="cb178-7"><a href="exploratory-data-analysis-1.html#cb178-7" tabindex="-1"></a>PCAPlot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pca_data, <span class="fu">aes</span>(<span class="at">x     =</span> PC1,</span>
+<span id="cb178-8"><a href="exploratory-data-analysis-1.html#cb178-8" tabindex="-1"></a>                                <span class="at">y     =</span> PC2,</span>
+<span id="cb178-9"><a href="exploratory-data-analysis-1.html#cb178-9" tabindex="-1"></a>                                <span class="at">color =</span> lifestyle,</span>
+<span id="cb178-10"><a href="exploratory-data-analysis-1.html#cb178-10" tabindex="-1"></a>                                <span class="at">shape =</span> timepoint)) <span class="sc">+</span></span>
+<span id="cb178-11"><a href="exploratory-data-analysis-1.html#cb178-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb178-12"><a href="exploratory-data-analysis-1.html#cb178-12" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb178-13"><a href="exploratory-data-analysis-1.html#cb178-13" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb178-14"><a href="exploratory-data-analysis-1.html#cb178-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb178-15"><a href="exploratory-data-analysis-1.html#cb178-15" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb178-16"><a href="exploratory-data-analysis-1.html#cb178-16" tabindex="-1"></a>    <span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb178-17"><a href="exploratory-data-analysis-1.html#cb178-17" tabindex="-1"></a>    <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb178-18"><a href="exploratory-data-analysis-1.html#cb178-18" tabindex="-1"></a>    <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb178-19"><a href="exploratory-data-analysis-1.html#cb178-19" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span></span>
+<span id="cb178-20"><a href="exploratory-data-analysis-1.html#cb178-20" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb178-21"><a href="exploratory-data-analysis-1.html#cb178-21" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb178-22"><a href="exploratory-data-analysis-1.html#cb178-22" tabindex="-1"></a>    <span class="at">x     =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC1: &quot;</span>, pct_var[<span class="dv">1</span>], <span class="st">&quot;% variance&quot;</span>),</span>
+<span id="cb178-23"><a href="exploratory-data-analysis-1.html#cb178-23" tabindex="-1"></a>    <span class="at">y     =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC2: &quot;</span>, pct_var[<span class="dv">2</span>], <span class="st">&quot;% variance&quot;</span>),</span>
+<span id="cb178-24"><a href="exploratory-data-analysis-1.html#cb178-24" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;PCA - &quot;</span>, strain, <span class="st">&quot; (VST-transformed counts)&quot;</span>),</span>
+<span id="cb178-25"><a href="exploratory-data-analysis-1.html#cb178-25" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Lifestyle&quot;</span>,</span>
+<span id="cb178-26"><a href="exploratory-data-analysis-1.html#cb178-26" tabindex="-1"></a>    <span class="at">shape =</span> <span class="st">&quot;Time point&quot;</span></span>
+<span id="cb178-27"><a href="exploratory-data-analysis-1.html#cb178-27" tabindex="-1"></a>  )</span>
+<span id="cb178-28"><a href="exploratory-data-analysis-1.html#cb178-28" tabindex="-1"></a></span>
+<span id="cb178-29"><a href="exploratory-data-analysis-1.html#cb178-29" tabindex="-1"></a>PCAPlot</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-qc-pca-0-1.png" alt="" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="exploratory-data-analysis-1.html#cb193-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
-<span id="cb193-2"><a href="exploratory-data-analysis-1.html#cb193-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;PCA_Plot.png&quot;</span>),</span>
-<span id="cb193-3"><a href="exploratory-data-analysis-1.html#cb193-3" tabindex="-1"></a>  <span class="at">plot     =</span> PCAPlot,</span>
-<span id="cb193-4"><a href="exploratory-data-analysis-1.html#cb193-4" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">8</span>,</span>
-<span id="cb193-5"><a href="exploratory-data-analysis-1.html#cb193-5" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">6</span>,</span>
-<span id="cb193-6"><a href="exploratory-data-analysis-1.html#cb193-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
-<span id="cb193-7"><a href="exploratory-data-analysis-1.html#cb193-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="exploratory-data-analysis-1.html#cb179-1" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
+<span id="cb179-2"><a href="exploratory-data-analysis-1.html#cb179-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;PCA_Plot.png&quot;</span>),</span>
+<span id="cb179-3"><a href="exploratory-data-analysis-1.html#cb179-3" tabindex="-1"></a>  <span class="at">plot     =</span> PCAPlot,</span>
+<span id="cb179-4"><a href="exploratory-data-analysis-1.html#cb179-4" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">8</span>,</span>
+<span id="cb179-5"><a href="exploratory-data-analysis-1.html#cb179-5" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">6</span>,</span>
+<span id="cb179-6"><a href="exploratory-data-analysis-1.html#cb179-6" tabindex="-1"></a>  <span class="at">dpi      =</span> <span class="dv">300</span></span>
+<span id="cb179-7"><a href="exploratory-data-analysis-1.html#cb179-7" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 <div style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
 <p><strong>⭐ How to read this plot.</strong> Each point is one sample; samples that are close have similar
@@ -784,40 +672,40 @@ saves the plain two-group comparison for a single, well-replicated time point (2
 <h3>Top Variable Genes Heatmap<a href="exploratory-data-analysis-1.html#top-variable-genes-heatmap-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Clustering the 50 most variable genes across samples gives a gene-level view of the structure in the data. Row-scaling (z-score per gene) is applied so that highly expressed genes do not visually dominate.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="exploratory-data-analysis-1.html#cb194-1" tabindex="-1"></a>topVarGenes <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">order</span>(<span class="fu">rowVars</span>(<span class="fu">assay</span>(vsd)), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), <span class="dv">50</span>)</span>
-<span id="cb194-2"><a href="exploratory-data-analysis-1.html#cb194-2" tabindex="-1"></a></span>
-<span id="cb194-3"><a href="exploratory-data-analysis-1.html#cb194-3" tabindex="-1"></a>df_anno <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;lifestyle&quot;</span>, <span class="st">&quot;timepoint&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb194-4"><a href="exploratory-data-analysis-1.html#cb194-4" tabindex="-1"></a></span>
-<span id="cb194-5"><a href="exploratory-data-analysis-1.html#cb194-5" tabindex="-1"></a>heat_plot <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
-<span id="cb194-6"><a href="exploratory-data-analysis-1.html#cb194-6" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[topVarGenes, ],</span>
-<span id="cb194-7"><a href="exploratory-data-analysis-1.html#cb194-7" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb194-8"><a href="exploratory-data-analysis-1.html#cb194-8" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb194-9"><a href="exploratory-data-analysis-1.html#cb194-9" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
-<span id="cb194-10"><a href="exploratory-data-analysis-1.html#cb194-10" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb194-11"><a href="exploratory-data-analysis-1.html#cb194-11" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb194-12"><a href="exploratory-data-analysis-1.html#cb194-12" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
-<span id="cb194-13"><a href="exploratory-data-analysis-1.html#cb194-13" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb194-14"><a href="exploratory-data-analysis-1.html#cb194-14" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb194-15"><a href="exploratory-data-analysis-1.html#cb194-15" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
-<span id="cb194-16"><a href="exploratory-data-analysis-1.html#cb194-16" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="fu">paste0</span>(<span class="st">&quot;Top 50 variable genes — &quot;</span>, strain, <span class="st">&quot; (VST, row-scaled)&quot;</span>)</span>
-<span id="cb194-17"><a href="exploratory-data-analysis-1.html#cb194-17" tabindex="-1"></a>)</span>
-<span id="cb194-18"><a href="exploratory-data-analysis-1.html#cb194-18" tabindex="-1"></a></span>
-<span id="cb194-19"><a href="exploratory-data-analysis-1.html#cb194-19" tabindex="-1"></a>heat_plot</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="exploratory-data-analysis-1.html#cb180-1" tabindex="-1"></a>topVarGenes <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">order</span>(<span class="fu">rowVars</span>(<span class="fu">assay</span>(vsd)), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), <span class="dv">50</span>)</span>
+<span id="cb180-2"><a href="exploratory-data-analysis-1.html#cb180-2" tabindex="-1"></a></span>
+<span id="cb180-3"><a href="exploratory-data-analysis-1.html#cb180-3" tabindex="-1"></a>df_anno <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;lifestyle&quot;</span>, <span class="st">&quot;timepoint&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb180-4"><a href="exploratory-data-analysis-1.html#cb180-4" tabindex="-1"></a></span>
+<span id="cb180-5"><a href="exploratory-data-analysis-1.html#cb180-5" tabindex="-1"></a>heat_plot <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
+<span id="cb180-6"><a href="exploratory-data-analysis-1.html#cb180-6" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[topVarGenes, ],</span>
+<span id="cb180-7"><a href="exploratory-data-analysis-1.html#cb180-7" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb180-8"><a href="exploratory-data-analysis-1.html#cb180-8" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb180-9"><a href="exploratory-data-analysis-1.html#cb180-9" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
+<span id="cb180-10"><a href="exploratory-data-analysis-1.html#cb180-10" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb180-11"><a href="exploratory-data-analysis-1.html#cb180-11" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb180-12"><a href="exploratory-data-analysis-1.html#cb180-12" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
+<span id="cb180-13"><a href="exploratory-data-analysis-1.html#cb180-13" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb180-14"><a href="exploratory-data-analysis-1.html#cb180-14" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb180-15"><a href="exploratory-data-analysis-1.html#cb180-15" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
+<span id="cb180-16"><a href="exploratory-data-analysis-1.html#cb180-16" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="fu">paste0</span>(<span class="st">&quot;Top 50 variable genes - &quot;</span>, strain, <span class="st">&quot; (VST, row-scaled)&quot;</span>)</span>
+<span id="cb180-17"><a href="exploratory-data-analysis-1.html#cb180-17" tabindex="-1"></a>)</span>
+<span id="cb180-18"><a href="exploratory-data-analysis-1.html#cb180-18" tabindex="-1"></a></span>
+<span id="cb180-19"><a href="exploratory-data-analysis-1.html#cb180-19" tabindex="-1"></a>heat_plot</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/saureus-qc-topvar-heatmap-0-1.png" alt="" width="864" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="exploratory-data-analysis-1.html#cb195-1" tabindex="-1"></a><span class="fu">png</span>(</span>
-<span id="cb195-2"><a href="exploratory-data-analysis-1.html#cb195-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;heatmap_top50_variable.png&quot;</span>),</span>
-<span id="cb195-3"><a href="exploratory-data-analysis-1.html#cb195-3" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">9</span>,</span>
-<span id="cb195-4"><a href="exploratory-data-analysis-1.html#cb195-4" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">11</span>,</span>
-<span id="cb195-5"><a href="exploratory-data-analysis-1.html#cb195-5" tabindex="-1"></a>  <span class="at">units    =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb195-6"><a href="exploratory-data-analysis-1.html#cb195-6" tabindex="-1"></a>  <span class="at">res      =</span> <span class="dv">300</span></span>
-<span id="cb195-7"><a href="exploratory-data-analysis-1.html#cb195-7" tabindex="-1"></a>)</span>
-<span id="cb195-8"><a href="exploratory-data-analysis-1.html#cb195-8" tabindex="-1"></a>heat_plot</span>
-<span id="cb195-9"><a href="exploratory-data-analysis-1.html#cb195-9" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="exploratory-data-analysis-1.html#cb181-1" tabindex="-1"></a><span class="fu">png</span>(</span>
+<span id="cb181-2"><a href="exploratory-data-analysis-1.html#cb181-2" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;plots&quot;</span>, <span class="st">&quot;heatmap_top50_variable.png&quot;</span>),</span>
+<span id="cb181-3"><a href="exploratory-data-analysis-1.html#cb181-3" tabindex="-1"></a>  <span class="at">width    =</span> <span class="dv">9</span>,</span>
+<span id="cb181-4"><a href="exploratory-data-analysis-1.html#cb181-4" tabindex="-1"></a>  <span class="at">height   =</span> <span class="dv">11</span>,</span>
+<span id="cb181-5"><a href="exploratory-data-analysis-1.html#cb181-5" tabindex="-1"></a>  <span class="at">units    =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb181-6"><a href="exploratory-data-analysis-1.html#cb181-6" tabindex="-1"></a>  <span class="at">res      =</span> <span class="dv">300</span></span>
+<span id="cb181-7"><a href="exploratory-data-analysis-1.html#cb181-7" tabindex="-1"></a>)</span>
+<span id="cb181-8"><a href="exploratory-data-analysis-1.html#cb181-8" tabindex="-1"></a>heat_plot</span>
+<span id="cb181-9"><a href="exploratory-data-analysis-1.html#cb181-9" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 </details>
-<pre><code>## quartz_off_screen 
-##                 2</code></pre>
+<pre><code>## agg_png 
+##       2</code></pre>
 <div class="note">
 <p><strong>📘 Note:</strong> Rows are locus tags (this prokaryotic reference has no gene symbols). They are
 the same identifiers KEGG uses, so they can be carried directly into the enrichment analysis with no

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Summary | 27200 Data Driven Bioengineering - Transcriptomics</title>
-  <meta name="description" content="Summary | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <title>Is the pipeline broken, or is this the biology? | 27200 Data Driven Bioengineering - Transcriptomics</title>
+  <meta name="description" content="Is the pipeline broken, or is this the biology? | 27200 Data Driven Bioengineering - Transcriptomics" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Summary | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <meta property="og:title" content="Is the pipeline broken, or is this the biology? | 27200 Data Driven Bioengineering - Transcriptomics" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Summary | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <meta name="twitter:title" content="Is the pipeline broken, or is this the biology? | 27200 Data Driven Bioengineering - Transcriptomics" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="exploratory-data-analysis-1.html"/>
-<link rel="next" href="interpretation-questions-3.html"/>
+<link rel="prev" href="running-gsea.html"/>
+<link rel="next" href="saving-results-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -261,85 +261,150 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="summary-3" class="section level2 hasAnchor">
-<h2>Summary<a href="summary-3.html#summary-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Before proceeding to differential expression, confirm the QC checks and record what you saw:</p>
-<div class="boxy">
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
+<div id="is-the-pipeline-broken-or-is-this-the-biology" class="section level2 hasAnchor">
+<h2>Is the pipeline broken, or is this the biology?<a href="is-the-pipeline-broken-or-is-this-the-biology.html#is-the-pipeline-broken-or-is-this-the-biology" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A result where nothing survives correction is uncomfortable, and the first question to ask is
+whether something went wrong. It did not, and we can show that: the differential expression
+chapter found hundreds of genes that change convincingly on their own.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb127-1" tabindex="-1"></a>known_genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;FKBP5&quot;</span>, <span class="st">&quot;TSC22D3&quot;</span>, <span class="st">&quot;ZBTB16&quot;</span>, <span class="st">&quot;KLF15&quot;</span>, <span class="st">&quot;PER1&quot;</span>, <span class="st">&quot;CRISPLD2&quot;</span>)</span>
+<span id="cb127-2"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb127-2" tabindex="-1"></a></span>
+<span id="cb127-3"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb127-3" tabindex="-1"></a>res_df <span class="sc">%&gt;%</span></span>
+<span id="cb127-4"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb127-4" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> known_genes) <span class="sc">%&gt;%</span></span>
+<span id="cb127-5"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb127-5" tabindex="-1"></a>  <span class="fu">select</span>(gene, log2FoldChange, padj) <span class="sc">%&gt;%</span></span>
+<span id="cb127-6"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb127-6" tabindex="-1"></a>  <span class="fu">arrange</span>(padj) <span class="sc">%&gt;%</span></span>
+<span id="cb127-7"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb127-7" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Known dexamethasone-responsive genes, tested one at a time&quot;</span>,</span>
+<span id="cb127-8"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb127-8" tabindex="-1"></a>        <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">30</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb127-9"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb127-9" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</details>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:human-fn-gsea-vs-genes">Table 7: </span><span id="tab:human-fn-gsea-vs-genes">Table 8: </span>Known dexamethasone-responsive genes, tested one at a time
+</caption>
 <thead>
-<tr class="header">
-<th>Check</th>
-<th>What to confirm</th>
+<tr>
+<th style="text-align:left;">
+gene
+</th>
+<th style="text-align:right;">
+log2FoldChange
+</th>
+<th style="text-align:right;">
+padj
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>Size factors are all of a similar order (here roughly 0.7–2)</td>
-<td>No sample needs an extreme rescaling; a far-out value is worth checking against its library size</td>
+<tr>
+<td style="text-align:left;">
+PER1
+</td>
+<td style="text-align:right;">
+3.17
+</td>
+<td style="text-align:right;">
+0.00000000000000000000000000000
+</td>
 </tr>
-<tr class="even">
-<td>Boxplots of normalised counts overlap</td>
-<td>No extreme outlier samples</td>
+<tr>
+<td style="text-align:left;">
+KLF15
+</td>
+<td style="text-align:right;">
+4.42
+</td>
+<td style="text-align:right;">
+0.00000000000000000000000000000
+</td>
 </tr>
-<tr class="odd">
-<td>Correlation heatmap</td>
-<td>Note whether structure is by lifestyle, by time point, or both</td>
+<tr>
+<td style="text-align:left;">
+CRISPLD2
+</td>
+<td style="text-align:right;">
+2.59
+</td>
+<td style="text-align:right;">
+0.00000000000000000000000000000
+</td>
 </tr>
-<tr class="even">
-<td>PCA</td>
-<td>Note which axis is lifestyle and which is time point</td>
+<tr>
+<td style="text-align:left;">
+ZBTB16
+</td>
+<td style="text-align:right;">
+7.25
+</td>
+<td style="text-align:right;">
+0.00000000000000000000000000000
+</td>
 </tr>
-<tr class="odd">
-<td>No isolated samples</td>
-<td>No technical outliers</td>
+<tr>
+<td style="text-align:left;">
+FKBP5
+</td>
+<td style="text-align:right;">
+3.96
+</td>
+<td style="text-align:right;">
+0.00000000000000000000000018611
+</td>
 </tr>
-<tr class="even">
-<td><strong>Time structure</strong></td>
-<td><strong>Record how strongly time separates your samples — script 02’s models are built around it</strong></td>
+<tr>
+<td style="text-align:left;">
+TSC22D3
+</td>
+<td style="text-align:right;">
+3.08
+</td>
+<td style="text-align:right;">
+0.00000000000000000064536870589
+</td>
 </tr>
 </tbody>
 </table>
-</div>
-<div style="font-size: 0.9em; color: grey;">
-<p><em>This QC loads all three time points so the structure is visible. Differential expression (script 02) keeps
-all of them: it models maturation over time and lifestyle adjusted for time, and uses the single 24 h time
-point only for the final hypothesis test. The two strains are never merged: they use different reference
-genomes and their locus tags are not comparable.</em></p>
-</div>
-<div class="important">
-<p><strong>⭐ Important:</strong> If any check fails, investigate the cause before running DESeq2. Proceeding with outlier samples or a mis-specified design will compromise all downstream results.</p>
-</div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="summary-3.html#cb183-1" tabindex="-1"></a><span class="co"># ── Export the full (all-timepoints) DDS for reference ────────────────────────</span></span>
-<span id="cb183-2"><a href="summary-3.html#cb183-2" tabindex="-1"></a>rds_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;rds&quot;</span>)</span>
-<span id="cb183-3"><a href="summary-3.html#cb183-3" tabindex="-1"></a><span class="fu">dir.create</span>(rds_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb183-4"><a href="summary-3.html#cb183-4" tabindex="-1"></a></span>
-<span id="cb183-5"><a href="summary-3.html#cb183-5" tabindex="-1"></a>dds_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(rds_dir, <span class="fu">paste0</span>(<span class="st">&quot;dds_&quot;</span>, strain_tag, <span class="st">&quot;_all_timepoints.rds&quot;</span>))</span>
-<span id="cb183-6"><a href="summary-3.html#cb183-6" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> dds_path)</span>
-<span id="cb183-7"><a href="summary-3.html#cb183-7" tabindex="-1"></a></span>
-<span id="cb183-8"><a href="summary-3.html#cb183-8" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ Full DDS saved to:&quot;</span>, dds_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb128-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Genes significant on their own (padj &lt; 0.05):&quot;</span>,</span>
+<span id="cb128-2"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb128-2" tabindex="-1"></a>    <span class="fu">sum</span>(res_df<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;of&quot;</span>, <span class="fu">nrow</span>(res_df), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## ✅ Full DDS saved to: /Users/jasge/Documents/GitHub/dsp_27200/results/usa100/rds/dds_usa100_all_timepoints.rds</code></pre>
+<pre><code>## 
+## Genes significant on their own (padj &lt; 0.05): 3833 of 14080</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="summary-3.html#cb185-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions       :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb130-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Gene sets significant after correction      :&quot;</span>,</span>
+<span id="cb130-2"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb130-2" tabindex="-1"></a>    <span class="fu">sum</span>(gsea_results<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;of&quot;</span>, <span class="fu">nrow</span>(gsea_results), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>##    Dimensions       : 2288 genes × 32 samples</code></pre>
+<pre><code>## Gene sets significant after correction      : 0 of 994</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="summary-3.html#cb187-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Note             : this holds ALL time points. Script 02 subsets to the chosen one.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb132-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Largest |NES| anywhere in the results       :&quot;</span>,</span>
+<span id="cb132-2"><a href="is-the-pipeline-broken-or-is-this-the-biology.html#cb132-2" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">max</span>(<span class="fu">abs</span>(gsea_results<span class="sc">$</span>NES), <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>##    Note             : this holds ALL time points. Script 02 subsets to the chosen one.</code></pre>
+<pre><code>## Largest |NES| anywhere in the results       : 1.87</code></pre>
+<div style="background:#d4edda;border-left:4px solid #28a745;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
+<p><strong>Bad results are results.</strong></p>
+<p>Thousands of genes respond to dexamethasone individually, and the canonical targets respond
+strongly. So the data are fine and the analysis ran correctly. What the GSEA result adds is a
+statement about <em>how</em> the response is organised: it is <strong>gene-specific rather than
+pathway-coordinated</strong>. Dexamethasone does not push a tidy Reactome pathway up or down as a block;
+it hits particular genes hard, scattered across many pathways.</p>
+<p>Two other things are working against a significant result here, and both are worth naming rather
+than hiding:</p>
+<ul>
+<li><strong>Sample size.</strong> Four donors. GSEA’s p-values come from resampling, and there is only so much a
+design this small can support.</li>
+<li><strong>Multiple testing.</strong> We tested every Reactome set in the collection. Correcting across that many
+sets is a high bar, and it should be.</li>
+</ul>
+<p>This is what an honest negative looks like. Writing “no pathways were significantly enriched” in a
+report is a real finding, as long as you can say what you did and why you believe it.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="exploratory-data-analysis-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="interpretation-questions-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="running-gsea.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="saving-results-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
