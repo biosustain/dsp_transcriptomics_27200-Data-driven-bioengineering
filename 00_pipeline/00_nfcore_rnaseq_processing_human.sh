@@ -25,8 +25,8 @@ nextflow run 'https://github.com/nf-core/rnaseq' \
     --input  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA229998_GSE52778_human/samplesheet_PRJNA229998_subsampled_2samples.csv' \
     --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/human/nfcore_rnaseq_processing_downsampled' \
     --fasta '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/chr19_5Mb_GRCh37.fa.gz' \
-    --gtf '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/GCF_000001405.13_GRCh37_genomic.gtf.gz' \
-    --gtf_extra_attributes 'gene_name' \
+    --gtf '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/chr19_5Mb_GRCh37.gtf.gz' \
+    --gtf_extra_attributes 'gene' \
     --gtf_group_features 'gene_id' \
     --featurecounts_feature_type 'exon' \
     --featurecounts_group_type 'transcript_biotype' \
