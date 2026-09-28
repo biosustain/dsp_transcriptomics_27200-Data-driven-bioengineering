@@ -27,6 +27,9 @@ nextflow run 'https://github.com/nf-core/rnaseq' \
     --fasta '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/chr19_5Mb_GRCh37.fa.gz' \
     --gtf '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/GCF_000001405.13_GRCh37_genomic.gtf.gz' \
     --gtf_extra_attributes 'gene_name' \
+    --gtf_group_features 'gene_id' \
+    --featurecounts_feature_type 'exon' \
+    --featurecounts_group_type 'transcript_biotype' \
     --remove_ribo_rna \
     --skip_biotype_qc \
     --skip_preseq \
