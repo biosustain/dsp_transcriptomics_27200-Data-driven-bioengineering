@@ -1,0 +1,9 @@
+﻿sample,fastq_1,fastq_2,strandedness,seq_platform,sample_title_ena_metadata
+N052611_dexamethasone,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039513_1.fastq.gz,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039513_2.fastq.gz,auto,ILLUMINA,N052611_Dex
+N052611_untreated,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039512_1.fastq.gz,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039512_2.fastq.gz,auto,ILLUMINA,N052611_untreated
+N061011_dexamethasone,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039521_1.fastq.gz,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039521_2.fastq.gz,auto,ILLUMINA,N061011_Dex
+N061011_untreated,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039520_1.fastq.gz,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039520_2.fastq.gz,auto,ILLUMINA,N061011_untreated
+N080611_dexamethasone,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039517_1.fastq.gz,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039517_2.fastq.gz,auto,ILLUMINA,N080611_Dex
+N080611_untreated,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039516_1.fastq.gz,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039516_2.fastq.gz,auto,ILLUMINA,N080611_untreated
+N61311_dexamethasone,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039509_1.fastq.gz,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039509_2.fastq.gz,auto,ILLUMINA,N61311_Dex
+N61311_untreated,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039508_1.fastq.gz,./data/seq_files_subsampled/PRJNA229998_GSE52778_human/SRR1039508_2.fastq.gz,auto,ILLUMINA,N61311_untreated
