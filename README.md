@@ -45,6 +45,11 @@ between how much RNA is present and what the cell is actually doing.
 The practical work is in [`02_notebooks/`](02_notebooks/), as Jupyter notebooks
 with an R kernel. They are generated from the scripts in [`01_scripts/`](01_scripts/).
 
+**Before the notebooks**, you run the nf-core/rnaseq pipeline yourself on six sub-sampled
+files, from [`00_pipeline/`](00_pipeline/). That run is a demonstration of how reads become
+counts; it is too small to analyse, so the notebooks then start from the full count matrices
+in [`data/`](data/), made with the same pipeline.
+
 **Work through the human dataset**, running its three notebooks in order (01,
 then 02, then 03). Each one saves results that the next one reads, so the order
 matters. If you finish early, the *S. aureus* material goes further: a time

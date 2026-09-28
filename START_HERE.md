@@ -1,9 +1,24 @@
 # Start here
 
 Welcome to the transcriptomics session. Everything you need is already installed
-in this Codespace, so you can go straight to the analysis.
+in this Codespace: R, all the packages, Nextflow and Docker. Nothing to set up.
 
 ## What to do
+
+**First, make a count matrix yourself.** Follow the *Running the nf-core/rnaseq pipeline*
+chapter in the [course book](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/),
+or run it directly:
+
+```bash
+bash 00_pipeline/00_nfcore_rnaseq_processing_saureus.sh
+```
+
+It takes about 10 minutes on six small files. That run is a demonstration: it is far too
+small to analyse, so you will **not** use its output afterwards. The point is to see how
+reads become a table of counts, and to read the quality report it produces.
+
+**Then analyse real counts.** The notebooks start from full count matrices, made with the
+same pipeline, already in `data/`.
 
 1. Open **`02_notebooks/homo_sapiens/01_quality_control.ipynb`** in the file tree on the left.
 2. When VS Code asks you to *Select Kernel*, choose **Jupyter Kernel... → R**. The notebooks are R, not Python.

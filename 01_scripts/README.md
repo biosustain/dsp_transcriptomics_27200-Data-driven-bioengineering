@@ -1,6 +1,7 @@
 # Analysis scripts — 27200 Transcriptomics week
 
 R Markdown source scripts for the two main datasets of the transcriptomics session.
+The nf-core/rnaseq scripts that come *before* this step live in [`00_pipeline/`](../00_pipeline/).
 They are rendered into the course book (see `project/_bookdown.yml`) and converted to
 Jupyter notebooks in `02_notebooks/` (regenerate with `python util/rmd_to_ipynb.py`).
 
@@ -24,13 +25,11 @@ Each dataset has three scripts, run in order — every step saves results the ne
 
 | File | Purpose |
 |---|---|
-| `00_nfcore_rnaseq_processing.sh` | Provenance: the nf-core/rnaseq command used to process the **human** dataset (outputs already committed — no need to run) |
 | `02b_prepare_genesets_saureus.Rmd` | Builds the KEGG/GO gene-set `.rds` caches in `data/databases/` used by the S. aureus functional script (cached outputs committed) |
 | `render_all_strains.R` | Renders the parameterized S. aureus scripts for **both** strains (USA-100 and USA-500); HTML lands next to the scripts |
 | `gsea_collection_comparison.Rmd` | One-off sensitivity check: human GSEA with filtered vs unfiltered gene-set collections |
 | `params_degs.json` | Parameters for the optional nf-core/differentialabundance run (human dataset) |
 | `run_differentialabundance.sh` | Optional comparison track: nf-core/differentialabundance with the simple `~ condition` model (the paired `~ donor + condition` DESeq2 analysis in script 02 is the primary analysis) |
-| `custom.config` | Nextflow resource limits (CPUs/memory) for the in-class pipeline run — **to be added** |
 
 ## Scientific decisions baked into the scripts
 

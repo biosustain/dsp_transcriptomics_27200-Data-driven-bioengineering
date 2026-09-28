@@ -28,7 +28,7 @@ nextflow run 'https://github.com/nf-core/rnaseq' \
     --skip_biotype_qc \
     --skip_preseq \
     --skip_bbsplit \
-    -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config
+    -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/00_pipeline/custom.config
 
 # -----------------------------------------------------------------------------
 # Original Seqera/Azure run (for the record — not runnable from the repo):

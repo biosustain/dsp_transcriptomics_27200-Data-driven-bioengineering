@@ -1,9 +1,22 @@
 # Running the nf-core/rnaseq pipeline v3.23.0
 
-Processing the whole dataset needs more compute than we have in a classroom, so
-for the hands-on run we use six *Staphylococcus aureus* USA-100 samples,
-sub-sampled to 50,000 reads each: three biofilm and three planktonic, all at the
-24 hour time point. The sub-sampling script is `util/subsample_50k_PRJNA685119_GSE163153_Sareus.sh`.
+**This is the first thing you do today.** Before analysing anyone else's count
+matrix, you produce one yourself, so that the table the notebooks start from is not
+a black box.
+
+Processing a whole dataset needs more compute than we have in a classroom, so you run
+six *Staphylococcus aureus* USA-100 samples, sub-sampled to 50,000 reads each: three
+biofilm and three planktonic, all at the 24 hour time point. The sub-sampling script is
+`util/subsample_50k_PRJNA685119_GSE163153_Sareus.sh`.
+
+<div class="important">
+  <strong>⭐ What this run is, and what it is not.</strong> Six files of 50,000 reads are
+  enough to watch the pipeline work and to read its quality report. They are far too few
+  to draw biology from, so <strong>you will not analyse your own output</strong>. Once you
+  have seen how reads become counts, the notebooks pick up from the full count matrices,
+  made with this same pipeline, which are already in <code>data/</code>. If you go looking
+  for your pipeline output in notebook 01, you will not find it — that is expected.
+</div>
 
 We use pipeline release [v3.23.0](https://nf-co.re/rnaseq/3.23.0). From this
 release you can align with Bowtie2, which suits bacterial RNA-seq because
@@ -22,7 +35,7 @@ nextflow run 'https://github.com/nf-core/rnaseq' \
     --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/saureus_usa100_nfcore_processing_downsampled' \
     --fasta  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.fna.gz' \
     --gtf    '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.gtf.gz' \
-    -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config
+    -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/00_pipeline/custom.config
 ```
 
 **What the arguments mean:**
@@ -39,7 +52,7 @@ nextflow run 'https://github.com/nf-core/rnaseq' \
 The same command is saved as a script, if you prefer to run it that way:
 
 ```bash
-bash 01_scripts/00_nfcore_rnaseq_processing_saureus.sh
+bash 00_pipeline/00_nfcore_rnaseq_processing_saureus.sh
 ```
 
 It takes about 10 minutes.
@@ -51,10 +64,10 @@ It takes about 10 minutes.
 </div>
 
 <div class="note">
-  <strong>📘 Note:</strong> The counts you analyse in the next chapters were made with this same pipeline, but
-  on the full dataset rather than these sub-sampled reads: all three time points for both <em>S. aureus</em>
-  strains, and the human samples with STAR instead of Bowtie2 (human genes do have introns). Those outputs are
-  already in the repository, so you do not have to run anything before starting the analysis.
+  <strong>📘 Note:</strong> The counts the notebooks use were made with this same pipeline on the full
+  datasets: all three time points for both <em>S. aureus</em> strains, and the human samples with STAR
+  rather than Bowtie2, because human genes do have introns. The scripts for those runs are in
+  <code>00_pipeline/</code> if you want to see the exact commands.
 </div>
 
 ## Structure of the output directory

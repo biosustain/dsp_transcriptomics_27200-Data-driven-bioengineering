@@ -68,10 +68,6 @@ further edits.
 
 **Setup the Environment**
 
-::: {style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;"}
-<strong>💡 Tip:</strong> Install packages only once!
-:::
-
 ::: {style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;"}
 <strong>📌 Remember:</strong> Load all libraries at the start of every session before running any analysis.
 :::
