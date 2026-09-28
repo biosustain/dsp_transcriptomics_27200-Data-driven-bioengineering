@@ -14,15 +14,18 @@
 # the comment block below for reference; the repo itself only stores the
 # downstream output needed for teaching.
 
+# Due to too high computational load, this example uses downsampled read files (50 0000 reads each) and approximately 5 Mb of chromsome 19 as the reference. Two samples are processed only as example.
+
+
 nextflow run 'https://github.com/nf-core/rnaseq' \
     -name 'hsapiens_PRJNA229998_GSE52778' \
     -r 3.26.0 \
     -profile docker \
     --aligner star_salmon \
-    --input  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/data-02-Homo_sapiens/metadata/samplesheet_PRJNA229998.csv' \
-    --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/human/nfcore_rnaseq_processing' \
-    --fasta  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/data-02-Homo_sapiens/genome_files/GCF_000001405.13_GRCh37_genomic.fna.gz' \
-    --gtf    '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/data-02-Homo_sapiens/genome_files/GCF_000001405.13_GRCh37_genomic.gtf.gz' \
+    --input  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA229998_GSE52778_human/samplesheet_PRJNA229998_subsampled_2samples.csv' \
+    --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/human/nfcore_rnaseq_processing_downsampled' \
+    --fasta '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/chr19_5Mb_GRCh37.fa.gz' \
+    --gtf '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/GCF_000001405.13_GRCh37_genomic.gtf.gz' \
     --gtf_extra_attributes 'gene_name' \
     --remove_ribo_rna \
     --skip_biotype_qc \
