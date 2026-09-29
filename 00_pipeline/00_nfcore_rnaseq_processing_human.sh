@@ -18,19 +18,19 @@
 
 
 nextflow run 'https://github.com/nf-core/rnaseq' \
-    -name 'hsapiens_PRJNA229998_GSE52778' \
+    -name 'onesample_hsapiens_PRJNA229998_GSE52778' \
     -r 3.26.0 \
     -profile docker \
     --aligner star_salmon \
-    --input  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA229998_GSE52778_human/samplesheet_PRJNA229998_subsampled_2samples.csv' \
+    --input  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA229998_GSE52778_human/samplesheet_PRJNA229998_subsampled_1sample.csv' \
     --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/human/nfcore_rnaseq_processing_downsampled' \
-    --fasta '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/chr19_5Mb_GRCh37.fa.gz' \
-    --gtf '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/chr19_5Mb_GRCh37.gtf.gz' \
+    --fasta '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/chr19_GRCh37.fa.gz' \
+    --gtf '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/human/GCF_000001405.13_GRCh37_genomic.gtf.gz' \
     --gtf_extra_attributes 'gene' \
     --gtf_group_features 'gene_id' \
     --featurecounts_feature_type 'exon' \
     --featurecounts_group_type 'transcript_biotype' \
-    --remove_ribo_rna \
+    --skip_markduplicates \
     --skip_biotype_qc \
     --skip_preseq \
     --skip_bbsplit \
