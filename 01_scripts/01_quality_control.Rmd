@@ -29,7 +29,7 @@ The list of contrasts of interest is:
 
 **Data**
 
--   Reference genome: human GRCh37 (hg19), as used in the original paper.
+-   Reference genome: human GRCh38 primary assembly with the GENCODE v50 annotation.
 
 -   Input data is the output from the [nf-core/rnaseq pipeline](https://nf-co.re/rnaseq/) `salmon.merged.gene.SummarizedExperiment.rds` (STAR + Salmon).
 
@@ -159,8 +159,8 @@ print(head(rownames(count_genes)))
 print(colnames(count_genes))
 
 # Report what the gene_id / gene_name columns actually contain.
-# This pipeline used a RefSeq GTF with gtf_extra_attributes = gene_name,
-# so both are expected to be symbols (not ENSEMBL). Confirm here:
+# This pipeline used the GENCODE GTF, so gene_id holds ENSEMBL IDs and
+# gene_name holds symbols. Confirm here:
 cat("\nExample gene_id  :", paste(head(gene_ids, 3), collapse = ", "), "\n")
 cat("Example gene_name:", paste(head(gene_symbols, 3), collapse = ", "), "\n")
 cat("gene_id look like ENSEMBL? :",
@@ -168,9 +168,9 @@ cat("gene_id look like ENSEMBL? :",
 ```
 
 <div class="note">
-  <strong>📘 Note:</strong> This dataset was processed against a <strong>RefSeq</strong> GRCh37 GTF with
-  <code>gtf_extra_attributes = gene_name</code>, so both <code>gene_id</code> and <code>gene_name</code>
-  hold gene <strong>symbols</strong> (e.g. <code>A1BG</code>), not ENSEMBL IDs. Symbols are exactly what
+  <strong>📘 Note:</strong> This dataset was processed against the <strong>GENCODE</strong> v50 GTF (GRCh38), so
+  <code>gene_id</code> holds ENSEMBL IDs and <code>gene_name</code> holds gene <strong>symbols</strong>
+  (e.g. <code>TSPAN6</code>). We use the symbols as row names. Symbols are exactly what
   MSigDB accepts, so no ID conversion is needed downstream. The check above prints the
   actual values so you can confirm this on your own RDS.
 </div>
@@ -464,6 +464,12 @@ topVarGenes <- head(order(rowVars(assay(vsd)), decreasing = TRUE), 50)
 
 df_anno <- as.data.frame(colData(vsd)[, c("condition", "donor"), drop = FALSE])
 
+# The metadata does not record donor sex, but the data do: Y-chromosome genes are
+# expressed only in cells from male donors.
+y_genes <- intersect(c("RPS4Y1", "DDX3Y", "KDM5D", "USP9Y"), rownames(vsd))
+y_expr  <- colMeans(assay(vsd)[y_genes, , drop = FALSE])
+df_anno$sex_inferred <- ifelse(y_expr > mean(range(y_expr)), "male", "female")
+
 heat_plot <- pheatmap(
   assay(vsd)[topVarGenes, ],
   cluster_cols             = TRUE,
@@ -499,17 +505,15 @@ dev.off()
 <div class="important">
   <strong>⭐ Two things in this plot are not biology — spot them before you interpret it.</strong>
   <ul>
-    <li><strong>Names ending in <code>_1</code>, <code>_2</code>, ...</strong> (e.g. <code>TUBB_6</code>,
-    <code>HLA-C_4</code>): this RefSeq annotation lists some symbols more than once, so R made the
-    duplicates unique by appending a number. They are separate annotated copies/entries of the same
-    symbol, not different genes — and they crowd this list because gene families like the MHC region and
-    the tubulins are annotated many times over.</li>
+    <li><strong>Names ending in <code>.1</code>, <code>.2</code>, ...</strong> (e.g. <code>TXLNGY.1</code>):
+    a few symbols belong to more than one gene ID in the annotation, so R made the row names unique by
+    appending a number.</li>
     <li><strong>Sex-linked genes</strong> (e.g. <code>RPS4Y1</code>, <code>DDX3Y</code>,
-    <code>KDM5D</code>, <code>USP9Y</code>): the four donors are not all the same sex, so these genes are
+    <code>KDM5D</code>, <code>USP9Y</code>): the four donors are not all the same sex (the <code>sex_inferred</code> bar is derived from these genes), so these genes are
     among the most "variable" in the whole dataset — a donor property, unrelated to dexamethasone.</li>
   </ul>
-  Most-variable is <em>not</em> most-relevant: only a handful of rows here (look for <code>FKBP5</code>,
-  <code>ZBTB16</code>, <code>GPX3</code>) are actual drug responses. That is why the next notebook tests a
+  Most-variable is <em>not</em> most-relevant: the drug-response rows (look for <code>FKBP5</code>,
+  <code>ZBTB16</code>, <code>GPX3</code>) sit next to rows that only separate donors. That is why the next notebook tests a
   specific contrast instead of trusting variance.
 </div>
 

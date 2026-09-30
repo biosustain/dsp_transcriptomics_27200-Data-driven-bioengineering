@@ -19,7 +19,7 @@ All datasets are bulk RNA-seq. The codes are in the [GitHub repository](https://
 -   🦠 ***Staphylococcus aureus*** — biofilm vs planktonic lifestyle over time, strains USA-100 and USA-500, from [Tomlinson *et al.*, 2021](https://doi.org/10.1099/mgen.0.000598) (GEO: [GSE163153](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE163153), PRJNA685119).
     Reference genomes are strain-specific: **USA-100** → N315 ([GCF_000009645.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009645.1/)); **USA-500** → USA300_FPR3757 ([GCF_000013465.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000013465.1/)), its closest finished relative, as in the paper.
 -   🧑‍🔬 ***Homo sapiens*** — primary airway smooth muscle (ASM) cells treated with dexamethasone, paired donor design, from [Himes *et al.*, 2014](https://doi.org/10.1371/journal.pone.0099625) (GEO: [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778), PRJNA229998).
-    Reference genome: GRCh37 ([GCF_000001405.13](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.13/)), RefSeq annotation.
+    Reference genome: GRCh38 primary assembly, [GENCODE](https://www.gencodegenes.org/human/) v50 annotation.
 
 Both count matrices were produced with the nf-core/rnaseq pipeline and are provided **precomputed** in the repository, so the analysis notebooks start from those. For the hands-on pipeline run below we use six sub-sampled *S. aureus* USA-100 files, so it finishes within class time.
 

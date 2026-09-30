@@ -3,8 +3,8 @@
 # The script was generated using Claude and the following prompt: 
 # "On chr19, select the sequence with the highest density of exons within a total of approximately 5 million consecutive base pairs. Use the gtf file GCF_000001405.13_GRCh37_genomic.gtf.gz for this. Generate a new gtf.gz file with selected genes and exons. Then use this information to select approximately 5 million base pairs fom chr19 using file chr19_GRCh37.fa.gz. Save it as a new fna.gz file. Make sure that index positions between gtf file and the newly generated subsequence of chromsome 19 are matching. Save everything in a folder called gtf_density_exons"
 
-"""Find the ~5 Mb window of chr19 (GRCh37) with the most exons, subset the
-RefSeq GTF to it and extract the matching sequence, re-indexed to position 1.
+"""Find the ~5 Mb window of chr19 (GRCh38) with the most exons, subset the
+GENCODE GTF to it and extract the matching sequence, re-indexed to position 1.
 
 Exon density:
   * exons are counted as UNIQUE intervals (start, end, strand), so an exon
@@ -25,9 +25,9 @@ from collections import defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-FASTA_IN = HERE.parent / "chr19_GRCh37.fa.gz"
-GTF_IN = HERE.parent / "GCF_000001405.13_GRCh37_genomic.gtf.gz"
-CHROM = "NC_000019.9"
+FASTA_IN = HERE.parent / "chr19_GRCh38.fa.gz"   # chr19 only, from GRCh38.primary_assembly.genome.fa.gz (GENCODE 50)
+GTF_IN = HERE.parent / "gencode.v50.primary_assembly.annotation.gtf.gz"
+CHROM = "chr19"
 WINDOW = 5_000_000
 
 gid_re = re.compile(r'gene_id "([^"]*)"')
@@ -70,14 +70,14 @@ for s in sorted({lo for lo, _ in extent.values()}):
 (n_exons, n_genes, _), START, END, kept_ids = best
 OFFSET = START - 1
 NEW_NAME = f"{CHROM}_{START}_{END}"
-stem = f"chr19_GRCh37_{START}-{END}"
+stem = f"chr19_GRCh38_{START}-{END}"
 
 # ---- FASTA ----
 sub = seq[START - 1:END]
 assert len(sub) == WINDOW
 n_count = sub.upper().count("N")
 with open(HERE / f"{stem}.fna", "w") as out:
-    out.write(f">{NEW_NAME} {CHROM}:{START}-{END} GRCh37 exon-dense window\n")
+    out.write(f">{NEW_NAME} {CHROM}:{START}-{END} GRCh38 exon-dense window\n")
     for i in range(0, len(sub), 60):
         out.write(sub[i:i + 60] + "\n")
 

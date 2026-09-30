@@ -105,28 +105,20 @@ the set sits towards the up-regulated end, negative towards the down-regulated e
 :::boxy
 **How we rank the genes**
 
-`rank = sign(log2FoldChange) x -log10(pvalue)`
+`rank = stat`, the Wald statistic from `DESeq2` (log2FoldChange divided by its standard error)
 
 This puts the genes that went up *and* are statistically convincing at the top, the ones that went
 down and are convincing at the bottom, and the uncertain ones in the middle. Ranking on fold change
 alone would be worse: a gene with 1 count in one group and 3 in the other shows a 3-fold change and
 would land at an extreme, despite telling us nothing.
-
-<div class="note">
-<strong>📘 Note:</strong> A few genes have <code>pvalue = 0</code> — below machine precision, which
-means they are the <em>strongest</em> hits. Since <code>-log10(0) = Inf</code> is not a usable score,
-we clamp them to the smallest representable number rather than dropping them, so they keep their
-place at the extremes.
-</div>
 :::
 
 ### Prepare the Ranked Gene List
 
 ```{r human-fn-gsea-rank, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 ranked_df <- res_df %>%
-  filter(!is.na(pvalue), !is.na(log2FoldChange)) %>%
-  mutate(pvalue = pmax(pvalue, .Machine$double.xmin)) %>%
-  mutate(rank_metric = sign(log2FoldChange) * -log10(pvalue)) %>%
+  filter(!is.na(stat)) %>%
+  mutate(rank_metric = stat) %>%
   arrange(desc(rank_metric)) %>%
   distinct(gene, .keep_all = TRUE)
 
@@ -195,25 +187,23 @@ cat("Nominal (pval < 0.05)    :", sum(gsea_results$pval < 0.05, na.rm = TRUE), "
 ```
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
-**What we see.** In this dataset **no gene set is significant after multiple-testing correction**
-(padj < 0.05), while a few dozen reach the uncorrected threshold. Before reading anything into those,
-be clear about what the two numbers mean.
+**What we see.** In this dataset **about two dozen gene sets are significant after multiple-testing
+correction** (padj < 0.05), while several times as many reach the uncorrected threshold. Before reading
+anything into those, be clear about what the two numbers mean.
 
 - The **corrected** count is the one you may report. It asks: out of all the Reactome sets we tested,
-  which stand out after accounting for the fact that we tested them all? Answer here: none.
+  which stand out after accounting for the fact that we tested them all?
 - The **nominal** count is every set that looked interesting before that correction. In a collection
   this size you expect a crop of those by chance alone, so on their own they are leads to follow, not
   results to publish.
 
-We keep going and plot the nominal sets, because looking at them teaches you what a weak signal looks
-like. But read them as "GSEA could not settle this", and hold on to that when you reach the end of the
-chapter, where we check whether the analysis actually worked.
+In the table and plots below, check the `padj` column before you read a set as a finding.
 :::
 
 ### Inspect Gene Sets
 
 ```{r human-fn-gsea-table, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-# Sets passing multiple-testing correction (expected: none in this dataset)
+# Sets passing multiple-testing correction
 gsea_padj_sig <- gsea_results %>% as.data.frame() %>% filter(padj < 0.05)
 
 # Sets passing the nominal (uncorrected) threshold — for inspecting the biology
@@ -237,7 +227,7 @@ DT::datatable(
   extensions = c("Buttons", "Scroller"),
   options    = list(dom = "Bfrtip", buttons = c("copy", "csv"),
                     scrollX = TRUE, scrollY = 300, scroller = TRUE),
-  caption = "GSEA gene sets at nominal p < 0.05 (none survive padj correction - see note above)"
+  caption = "GSEA gene sets at nominal p < 0.05 (check padj for those that survive correction)"
 )
 ```
 
@@ -279,16 +269,13 @@ plotGseaTable(
 ```
 
 :::boxy
-**Look at the little curves before you read the names.** In this dataset they are shallow and the
-tick marks are spread out, which is the visual version of the result you are about to see in the
-numbers: nothing here is strongly coordinated.
+**Look at the little curves before you read the names.** A set with a clear peak and ticks bunched at
+one end is a coordinated shift; compare the small sets with the very large ones.
 :::
 
 ### NES Bar Plot — Top Sets by Nominal p-value
 
-Because no set survives correction, we plot the top sets by **nominal** p-value. These do not represent
-statistically confirmed enrichment; they show the *direction* of the biology GSEA detects. Read them as
-suggestive, not conclusive.
+We plot the top sets by **nominal** p-value. In this dataset all of the top 20 also pass padj < 0.05.
 
 ```{r human-fn-gsea-nes-barplot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=7}
 gsea_bar <- gsea_nom %>%
@@ -306,7 +293,7 @@ if (nrow(gsea_bar) > 0) {
     theme_bw() +
     theme(legend.position = "bottom") +
     labs(
-      title    = "GSEA - top sets by nominal p-value (not padj-significant)",
+      title    = "GSEA - top sets by nominal p-value",
       subtitle = "Dexamethasone vs Untreated | Human ASM (Reactome)",
       x        = "Normalised Enrichment Score (NES)",
       y        = NULL,
@@ -345,11 +332,10 @@ if (length(top_down) > 0) {
 ```
 
 
-## Is the pipeline broken, or is this the biology?
+## Do the gene sets agree with the genes?
 
-A result where nothing survives correction is uncomfortable, and the first question to ask is
-whether something went wrong. It did not, and we can show that: the differential expression
-chapter found hundreds of genes that change convincingly on their own.
+The differential expression chapter found thousands of genes that change on their own, including the
+canonical dexamethasone targets. Compare that with the gene-set result.
 
 ```{r human-fn-gsea-vs-genes, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 known_genes <- c("FKBP5", "TSC22D3", "ZBTB16", "KLF15", "PER1", "CRISPLD2")
@@ -371,24 +357,20 @@ cat("Largest |NES| anywhere in the results       :",
 ```
 
 ::: {style="background:#d4edda;border-left:4px solid #28a745;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
-**Bad results are results.**
+**Read the set, not just its name.**
 
-Thousands of genes respond to dexamethasone individually, and the canonical targets respond
-strongly. So the data are fine and the analysis ran correctly. What the GSEA result adds is a
-statement about *how* the response is organised: it is **gene-specific rather than
-pathway-coordinated**. Dexamethasone does not push a tidy Reactome pathway up or down as a block;
-it hits particular genes hard, scattered across many pathways.
+The specific sets fit airway smooth muscle cells: smooth muscle contraction goes up, and the cytosolic
+tRNA synthetases go down. The largest sets need more care. "Innate immune system" and "Neutrophil
+degranulation" contain several hundred genes each, and there are no immune cells in this culture. Look
+at the `leadingEdge` column of `gsea_results` (the genes that put a set where it is) before you
+interpret a set name.
 
-Two other things are working against a significant result here, and both are worth naming rather
-than hiding:
+Two limits apply to everything here:
 
 - **Sample size.** Four donors. GSEA's p-values come from resampling, and there is only so much a
   design this small can support.
 - **Multiple testing.** We tested every Reactome set in the collection. Correcting across that many
   sets is a high bar, and it should be.
-
-This is what an honest negative looks like. Writing "no pathways were significantly enriched" in a
-report is a real finding, as long as you can say what you did and why you believe it.
 :::
 
 ## Saving Results
@@ -413,20 +395,18 @@ cat("  GSEA -> GSEA_Reactome_treatment_vs_control.tsv\n")
 |---|---|---|
 | Method | GSEA (`fgseaMultilevel`) | Uses every tested gene, so a pathway can register even when no single gene passes a cutoff |
 | Gene sets | MSigDB Reactome via `msigdbr` | Curated human pathways, fetched directly rather than from a stored file that would go stale |
-| Ranking | sign(log2FC) x -log10(pvalue) | Encodes direction and confidence together; fold change alone would reward noisy low-count genes |
-| p = 0 genes | Clamped, not dropped | They are the strongest hits in the contrast and belong at the extremes of the ranking |
-| Outcome | No set significant after correction | The response is gene-specific, not pathway-coordinated. Nominal hits are hypotheses, not findings |
+| Ranking | DESeq2 Wald statistic (`stat`) | Encodes direction and confidence together; fold change alone would reward noisy low-count genes |
+| Outcome | About two dozen sets significant after correction | Specific sets fit the cell type; large sets must be read through their leading-edge genes. Nominal hits are hypotheses, not findings |
 
-The honest summary of this analysis: dexamethasone changes a great many genes in these cells, but
-it does not move whole Reactome pathways as blocks, so no gene set survives correction across the
-collection. The gene-level results from the previous chapter remain the solid finding; the GSEA
-result tells you about the *shape* of the response rather than adding new pathways to the story.
+The summary of this analysis: dexamethasone changes a great many genes in these cells, and a modest
+number of Reactome pathways shift as a whole. Check the genes behind a pathway name before you
+interpret it.
 
 
 ## Interpretation questions
 
 ::: question
-1. Your GSEA found nothing significant after correction, yet the previous chapter found thousands of genes that change. A groupmate says "the enrichment analysis failed, leave it out of the report." Argue the other side: what does this result actually tell you about *how* dexamethasone acts on these cells? Then look at your ranked list: the drug works through a receptor present in every cell type, so would you expect its targets to sit inside one tidy pathway, or scattered across many?
+1. "Innate immune system" came out as activated, yet dexamethasone is a classic anti-inflammatory drug and there are no immune cells in this culture. Look at the set's leading-edge genes (`gsea_results$leadingEdge`). What is actually driving it, and how would you phrase the result in a report so that it is correct? Then compare with a small set such as smooth muscle contraction: why is a small, specific set easier to interpret?
 2. Everything in this chapter came from transcript abundance. Yet the molecule whose *activity* changed most — the glucocorticoid receptor (*NR3C1*) — was switched on by drug binding, not by transcription. Name one claim your enrichment tables can honestly make, one they cannot, and one experiment that would measure activity instead of abundance.
 :::
 

@@ -202,9 +202,9 @@ correct specification given the experimental design, so we keep it.
 :::
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
-**What we see in this dataset.** The paired model (`~ donor + condition`) calls roughly **3,800**
-genes significant at padj < 0.05, versus about **2,600** for the simple model (`~ condition`) — an
-increase of around 1,200 genes (~50%). This is a large, concrete demonstration of the paired-design
+**What we see in this dataset.** The paired model (`~ donor + condition`) calls roughly **4,150**
+genes significant at padj < 0.05, versus about **2,900** for the simple model (`~ condition`) — an
+increase of around 1,300 genes (~45%). This is a large, concrete demonstration of the paired-design
 benefit: the four donors differ substantially in their baseline expression, and once that donor
 variation is accounted for, the treatment signal becomes much easier to detect. This is exactly the
 inter-patient variability the study design anticipated, and it is why we use the paired model for all
@@ -226,8 +226,8 @@ summary(res)
 ```
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
-**Reading the summary.** Of 14,080 tested genes, about **2,060 are up** and **1,770 are down** at
-padj < 0.05 (roughly 15% and 13%). Two lines are worth noting: **outliers = 0** means no gene was
+**Reading the summary.** Of 16,238 tested genes, about **2,290 are up** and **1,870 are down** at
+padj < 0.05 (roughly 14% and 11%). Two lines are worth noting: **outliers = 0** means no gene was
 flagged by Cook's distance as driven by a single extreme sample, and **low counts = 0** means
 independent filtering did not need to remove additional low-expression genes (the pre-filtering in
 script 01 already handled them). A large but balanced set of up- and down-regulated genes is the
@@ -299,6 +299,7 @@ We order genes by adjusted p-value and filter to retain only those passing our s
 ```{r human-de-filter-results, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 res_df <- as.data.frame(res_shrunk) %>%
   rownames_to_column("gene") %>%
+  mutate(stat = res[gene, "stat"]) %>%   # Wald statistic from results(); lfcShrink() drops it. Used to rank genes for GSEA
   arrange(padj) %>%
   filter(!is.na(padj))
 
@@ -312,9 +313,9 @@ cat("  Downregulated (LFC ≤ -1):", sum(res_sig$log2FoldChange <= -1), "\n")
 ```
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
-**What the fold-change filter does.** The `summary()` above counted ~3,800 genes at padj < 0.05 alone.
-Adding the **|log2FC| ≥ 1** requirement (at least a 2-fold change) narrows this to about **700** genes
-(~380 up, ~320 down). The difference is the large group of genes that are statistically significant but
+**What the fold-change filter does.** The `summary()` above counted ~4,150 genes at padj < 0.05 alone.
+Adding the **|log2FC| ≥ 1** requirement (at least a 2-fold change) narrows this to about **780** genes
+(~420 up, ~360 down). The difference is the large group of genes that are statistically significant but
 only modestly changed — real, but small in magnitude. Filtering on effect size as well as significance
 focuses the downstream analysis on the genes most likely to be biologically meaningful. The up/down
 split being roughly balanced is consistent with a broad regulatory response rather than a one-directional

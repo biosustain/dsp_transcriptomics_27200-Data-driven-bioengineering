@@ -48,8 +48,8 @@ Each dataset has three scripts, run in order — every step saves results the ne
   `~ condition` side by side for teaching.
 - Enrichment: g:Profiler (`gprofiler2::gost`, live API — needs internet) for ORA;
   `fgsea` + MSigDB Hallmark (`msigdbr`) for GSEA.
-- Gene IDs: the RefSeq GRCh37 GTF yields gene **symbols** in both `gene_id` and
-  `gene_name`, so no ID conversion is needed.
+- Gene IDs: the GENCODE v50 GTF (GRCh38) gives ENSEMBL IDs in `gene_id` and symbols in
+  `gene_name`; symbols are used as row names, so no ID conversion is needed.
 - Counts: Salmon estimates are fractional; script 01 rounds to integers before DESeq2.
 
 ## Outputs
