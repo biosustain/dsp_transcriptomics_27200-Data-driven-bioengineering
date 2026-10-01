@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="is-the-pipeline-broken-or-is-this-the-biology.html"><a href="is-the-pipeline-broken-or-is-this-the-biology.html"><i class="fa fa-check"></i>Is the pipeline broken, or is this the biology?</a></li>
+<li class="chapter" data-level="" data-path="do-the-gene-sets-agree-with-the-genes.html"><a href="do-the-gene-sets-agree-with-the-genes.html"><i class="fa fa-check"></i>Do the gene sets agree with the genes?</a></li>
 <li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
@@ -421,7 +421,7 @@ inverted and your biological interpretation would be backwards.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="running-deseq2.html#cb56-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>##    Dimensions  : 14080 genes × 8 samples</code></pre>
+<pre><code>##    Dimensions  : 16238 genes × 8 samples</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="running-deseq2.html#cb58-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Design      :&quot;</span>, <span class="fu">paste</span>(<span class="fu">deparse</span>(<span class="fu">design</span>(dds)), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>

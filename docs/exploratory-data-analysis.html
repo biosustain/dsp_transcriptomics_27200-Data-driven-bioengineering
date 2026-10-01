@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="is-the-pipeline-broken-or-is-this-the-biology.html"><a href="is-the-pipeline-broken-or-is-this-the-biology.html"><i class="fa fa-check"></i>Is the pipeline broken, or is this the biology?</a></li>
+<li class="chapter" data-level="" data-path="do-the-gene-sets-agree-with-the-genes.html"><a href="do-the-gene-sets-agree-with-the-genes.html"><i class="fa fa-check"></i>Do the gene sets agree with the genes?</a></li>
 <li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
@@ -402,7 +402,7 @@ size_factor
 N052611_dexamethasone
 </td>
 <td style="text-align:right;">
-0.667
+0.670
 </td>
 </tr>
 <tr>
@@ -410,7 +410,7 @@ N052611_dexamethasone
 N052611_untreated
 </td>
 <td style="text-align:right;">
-1.170
+1.177
 </td>
 </tr>
 <tr>
@@ -418,7 +418,7 @@ N052611_untreated
 N061011_dexamethasone
 </td>
 <td style="text-align:right;">
-0.951
+0.944
 </td>
 </tr>
 <tr>
@@ -426,7 +426,7 @@ N061011_dexamethasone
 N061011_untreated
 </td>
 <td style="text-align:right;">
-0.911
+0.918
 </td>
 </tr>
 <tr>
@@ -434,7 +434,7 @@ N061011_untreated
 N080611_dexamethasone
 </td>
 <td style="text-align:right;">
-1.406
+1.395
 </td>
 </tr>
 <tr>
@@ -442,7 +442,7 @@ N080611_dexamethasone
 N080611_untreated
 </td>
 <td style="text-align:right;">
-1.168
+1.175
 </td>
 </tr>
 <tr>
@@ -450,7 +450,7 @@ N080611_untreated
 N61311_dexamethasone
 </td>
 <td style="text-align:right;">
-0.897
+0.896
 </td>
 </tr>
 <tr>
@@ -458,7 +458,7 @@ N61311_dexamethasone
 N61311_untreated
 </td>
 <td style="text-align:right;">
-1.022
+1.026
 </td>
 </tr>
 </tbody>
@@ -594,21 +594,27 @@ effect on top of donor-to-donor baseline differences.</p>
 <span id="cb47-2"><a href="exploratory-data-analysis.html#cb47-2" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="exploratory-data-analysis.html#cb47-3" tabindex="-1"></a>df_anno <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;donor&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
 <span id="cb47-4"><a href="exploratory-data-analysis.html#cb47-4" tabindex="-1"></a></span>
-<span id="cb47-5"><a href="exploratory-data-analysis.html#cb47-5" tabindex="-1"></a>heat_plot <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
-<span id="cb47-6"><a href="exploratory-data-analysis.html#cb47-6" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[topVarGenes, ],</span>
-<span id="cb47-7"><a href="exploratory-data-analysis.html#cb47-7" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb47-8"><a href="exploratory-data-analysis.html#cb47-8" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb47-9"><a href="exploratory-data-analysis.html#cb47-9" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
-<span id="cb47-10"><a href="exploratory-data-analysis.html#cb47-10" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb47-11"><a href="exploratory-data-analysis.html#cb47-11" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb47-12"><a href="exploratory-data-analysis.html#cb47-12" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
-<span id="cb47-13"><a href="exploratory-data-analysis.html#cb47-13" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb47-14"><a href="exploratory-data-analysis.html#cb47-14" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb47-15"><a href="exploratory-data-analysis.html#cb47-15" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
-<span id="cb47-16"><a href="exploratory-data-analysis.html#cb47-16" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top 50 variable genes - Human ASM (VST, row-scaled)&quot;</span></span>
-<span id="cb47-17"><a href="exploratory-data-analysis.html#cb47-17" tabindex="-1"></a>)</span>
-<span id="cb47-18"><a href="exploratory-data-analysis.html#cb47-18" tabindex="-1"></a></span>
-<span id="cb47-19"><a href="exploratory-data-analysis.html#cb47-19" tabindex="-1"></a>heat_plot</span></code></pre></div>
+<span id="cb47-5"><a href="exploratory-data-analysis.html#cb47-5" tabindex="-1"></a><span class="co"># The metadata does not record donor sex, but the data do: Y-chromosome genes are</span></span>
+<span id="cb47-6"><a href="exploratory-data-analysis.html#cb47-6" tabindex="-1"></a><span class="co"># expressed only in cells from male donors.</span></span>
+<span id="cb47-7"><a href="exploratory-data-analysis.html#cb47-7" tabindex="-1"></a>y_genes <span class="ot">&lt;-</span> <span class="fu">intersect</span>(<span class="fu">c</span>(<span class="st">&quot;RPS4Y1&quot;</span>, <span class="st">&quot;DDX3Y&quot;</span>, <span class="st">&quot;KDM5D&quot;</span>, <span class="st">&quot;USP9Y&quot;</span>), <span class="fu">rownames</span>(vsd))</span>
+<span id="cb47-8"><a href="exploratory-data-analysis.html#cb47-8" tabindex="-1"></a>y_expr  <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(<span class="fu">assay</span>(vsd)[y_genes, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb47-9"><a href="exploratory-data-analysis.html#cb47-9" tabindex="-1"></a>df_anno<span class="sc">$</span>sex_inferred <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y_expr <span class="sc">&gt;</span> <span class="fu">mean</span>(<span class="fu">range</span>(y_expr)), <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb47-10"><a href="exploratory-data-analysis.html#cb47-10" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="exploratory-data-analysis.html#cb47-11" tabindex="-1"></a>heat_plot <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
+<span id="cb47-12"><a href="exploratory-data-analysis.html#cb47-12" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[topVarGenes, ],</span>
+<span id="cb47-13"><a href="exploratory-data-analysis.html#cb47-13" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb47-14"><a href="exploratory-data-analysis.html#cb47-14" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb47-15"><a href="exploratory-data-analysis.html#cb47-15" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
+<span id="cb47-16"><a href="exploratory-data-analysis.html#cb47-16" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb47-17"><a href="exploratory-data-analysis.html#cb47-17" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb47-18"><a href="exploratory-data-analysis.html#cb47-18" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
+<span id="cb47-19"><a href="exploratory-data-analysis.html#cb47-19" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb47-20"><a href="exploratory-data-analysis.html#cb47-20" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb47-21"><a href="exploratory-data-analysis.html#cb47-21" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
+<span id="cb47-22"><a href="exploratory-data-analysis.html#cb47-22" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top 50 variable genes - Human ASM (VST, row-scaled)&quot;</span></span>
+<span id="cb47-23"><a href="exploratory-data-analysis.html#cb47-23" tabindex="-1"></a>)</span>
+<span id="cb47-24"><a href="exploratory-data-analysis.html#cb47-24" tabindex="-1"></a></span>
+<span id="cb47-25"><a href="exploratory-data-analysis.html#cb47-25" tabindex="-1"></a>heat_plot</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-topvar-heatmap-0-1.png" alt="" width="768" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -632,20 +638,18 @@ to use directly in the enrichment analysis (script 03) with no ID conversion ste
 <strong>⭐ Two things in this plot are not biology — spot them before you interpret it.</strong>
 <ul>
 <li>
-<strong>Names ending in <code>_1</code>, <code>_2</code>, …</strong> (e.g. <code>TUBB_6</code>,
-<code>HLA-C_4</code>): this RefSeq annotation lists some symbols more than once, so R made the
-duplicates unique by appending a number. They are separate annotated copies/entries of the same
-symbol, not different genes — and they crowd this list because gene families like the MHC region and
-the tubulins are annotated many times over.
+<strong>Names ending in <code>.1</code>, <code>.2</code>, …</strong> (e.g. <code>TXLNGY.1</code>):
+a few symbols belong to more than one gene ID in the annotation, so R made the row names unique by
+appending a number.
 </li>
 <li>
 <strong>Sex-linked genes</strong> (e.g. <code>RPS4Y1</code>, <code>DDX3Y</code>,
-<code>KDM5D</code>, <code>USP9Y</code>): the four donors are not all the same sex, so these genes are
+<code>KDM5D</code>, <code>USP9Y</code>): the four donors are not all the same sex (the <code>sex_inferred</code> bar is derived from these genes), so these genes are
 among the most “variable” in the whole dataset — a donor property, unrelated to dexamethasone.
 </li>
 </ul>
-<p>Most-variable is <em>not</em> most-relevant: only a handful of rows here (look for <code>FKBP5</code>,
-<code>ZBTB16</code>, <code>GPX3</code>) are actual drug responses. That is why the next notebook tests a
+<p>Most-variable is <em>not</em> most-relevant: the drug-response rows (look for <code>FKBP5</code>,
+<code>ZBTB16</code>, <code>GPX3</code>) sit next to rows that only separate donors. That is why the next notebook tests a
 specific contrast instead of trusting variance.</p>
 </div>
 <div class="boxy">

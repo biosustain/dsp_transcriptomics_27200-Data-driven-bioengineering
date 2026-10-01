@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="is-the-pipeline-broken-or-is-this-the-biology.html"><a href="is-the-pipeline-broken-or-is-this-the-biology.html"><i class="fa fa-check"></i>Is the pipeline broken, or is this the biology?</a></li>
+<li class="chapter" data-level="" data-path="do-the-gene-sets-agree-with-the-genes.html"><a href="do-the-gene-sets-agree-with-the-genes.html"><i class="fa fa-check"></i>Do the gene sets agree with the genes?</a></li>
 <li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
@@ -405,23 +405,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb192-13"><a href="setup-the-environment-1.html#cb192-13" tabindex="-1"></a></span>
 <span id="cb192-14"><a href="setup-the-environment-1.html#cb192-14" tabindex="-1"></a><span class="co"># Each strain was aligned to its own reference genome, so each has its own GTF.</span></span>
 <span id="cb192-15"><a href="setup-the-environment-1.html#cb192-15" tabindex="-1"></a>gtf_file <span class="ot">&lt;-</span> <span class="cf">switch</span>(strain,</span>
-<span id="cb192-16"><a href="setup-the-environment-1.html#cb192-16" tabindex="-1"></a>  <span class="st">&quot;USA-100&quot;</span> <span class="ot">=</span> <span class="st">&quot;GCF_000009645.1_ASM964v1_genomic.gtf.gz&quot;</span>,   <span class="co"># N315 reference</span></span>
-<span id="cb192-17"><a href="setup-the-environment-1.html#cb192-17" tabindex="-1"></a>  <span class="st">&quot;USA-500&quot;</span> <span class="ot">=</span> <span class="st">&quot;GCF_000013465.1_ASM1346v1_genomic.gtf.gz&quot;</span>   <span class="co"># USA300 reference</span></span>
+<span id="cb192-16"><a href="setup-the-environment-1.html#cb192-16" tabindex="-1"></a>  <span class="st">&quot;USA-100&quot;</span> <span class="ot">=</span> <span class="st">&quot;saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.gtf.gz&quot;</span>,  <span class="co"># N315</span></span>
+<span id="cb192-17"><a href="setup-the-environment-1.html#cb192-17" tabindex="-1"></a>  <span class="st">&quot;USA-500&quot;</span> <span class="ot">=</span> <span class="st">&quot;saureus/usa500_USA300/GCF_000013465.1_ASM1346v1_genomic.gtf.gz&quot;</span>     <span class="co"># USA300</span></span>
 <span id="cb192-18"><a href="setup-the-environment-1.html#cb192-18" tabindex="-1"></a>)</span>
 <span id="cb192-19"><a href="setup-the-environment-1.html#cb192-19" tabindex="-1"></a>gtf_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;genome_files&quot;</span>, gtf_file)</span>
-<span id="cb192-20"><a href="setup-the-environment-1.html#cb192-20" tabindex="-1"></a></span>
-<span id="cb192-21"><a href="setup-the-environment-1.html#cb192-21" tabindex="-1"></a><span class="co"># --- Analysis choices, set once and reused everywhere -------------------------</span></span>
-<span id="cb192-22"><a href="setup-the-environment-1.html#cb192-22" tabindex="-1"></a>lfc_threshold  <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">3</span>)  <span class="co"># paper&#39;s 3-fold threshold, on the log2 scale (~1.585)</span></span>
-<span id="cb192-23"><a href="setup-the-environment-1.html#cb192-23" tabindex="-1"></a>padj_threshold <span class="ot">&lt;-</span> <span class="fl">0.05</span>     <span class="co"># FDR cutoff</span></span>
-<span id="cb192-24"><a href="setup-the-environment-1.html#cb192-24" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
-<span id="cb192-25"><a href="setup-the-environment-1.html#cb192-25" tabindex="-1"></a></span>
-<span id="cb192-26"><a href="setup-the-environment-1.html#cb192-26" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain          :&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<span id="cb192-20"><a href="setup-the-environment-1.html#cb192-20" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="st">&quot;reference GTF not found - see data/genome_files/&quot;</span> <span class="ot">=</span> <span class="fu">file.exists</span>(gtf_path))</span>
+<span id="cb192-21"><a href="setup-the-environment-1.html#cb192-21" tabindex="-1"></a></span>
+<span id="cb192-22"><a href="setup-the-environment-1.html#cb192-22" tabindex="-1"></a><span class="co"># --- Analysis choices, set once and reused everywhere -------------------------</span></span>
+<span id="cb192-23"><a href="setup-the-environment-1.html#cb192-23" tabindex="-1"></a>lfc_threshold  <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">3</span>)  <span class="co"># paper&#39;s 3-fold threshold, on the log2 scale (~1.585)</span></span>
+<span id="cb192-24"><a href="setup-the-environment-1.html#cb192-24" tabindex="-1"></a>padj_threshold <span class="ot">&lt;-</span> <span class="fl">0.05</span>     <span class="co"># FDR cutoff</span></span>
+<span id="cb192-25"><a href="setup-the-environment-1.html#cb192-25" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
+<span id="cb192-26"><a href="setup-the-environment-1.html#cb192-26" tabindex="-1"></a></span>
+<span id="cb192-27"><a href="setup-the-environment-1.html#cb192-27" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain          :&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Strain          : USA-100</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="setup-the-environment-1.html#cb194-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GTF             :&quot;</span>, gtf_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## GTF             : /Users/jasge/Documents/GitHub/dsp_27200/data/genome_files/GCF_000009645.1_ASM964v1_genomic.gtf.gz</code></pre>
+<pre><code>## GTF             : /Users/jasge/Documents/GitHub/dsp_27200/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.gtf.gz</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="setup-the-environment-1.html#cb196-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;log2FC threshold:&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;( =&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold )</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>

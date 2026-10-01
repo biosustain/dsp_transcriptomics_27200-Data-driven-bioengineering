@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="is-the-pipeline-broken-or-is-this-the-biology.html"><a href="is-the-pipeline-broken-or-is-this-the-biology.html"><i class="fa fa-check"></i>Is the pipeline broken, or is this the biology?</a></li>
+<li class="chapter" data-level="" data-path="do-the-gene-sets-agree-with-the-genes.html"><a href="do-the-gene-sets-agree-with-the-genes.html"><i class="fa fa-check"></i>Do the gene sets agree with the genes?</a></li>
 <li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
@@ -396,25 +396,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="odd">
 <td>Ranking</td>
-<td>sign(log2FC) x -log10(pvalue)</td>
+<td>DESeq2 Wald statistic (<code>stat</code>)</td>
 <td>Encodes direction and confidence together; fold change alone would reward noisy low-count genes</td>
 </tr>
 <tr class="even">
-<td>p = 0 genes</td>
-<td>Clamped, not dropped</td>
-<td>They are the strongest hits in the contrast and belong at the extremes of the ranking</td>
-</tr>
-<tr class="odd">
 <td>Outcome</td>
-<td>No set significant after correction</td>
-<td>The response is gene-specific, not pathway-coordinated. Nominal hits are hypotheses, not findings</td>
+<td>About two dozen sets significant after correction</td>
+<td>Specific sets fit the cell type; large sets must be read through their leading-edge genes. Nominal hits are hypotheses, not findings</td>
 </tr>
 </tbody>
 </table>
-<p>The honest summary of this analysis: dexamethasone changes a great many genes in these cells, but
-it does not move whole Reactome pathways as blocks, so no gene set survives correction across the
-collection. The gene-level results from the previous chapter remain the solid finding; the GSEA
-result tells you about the <em>shape</em> of the response rather than adding new pathways to the story.</p>
+<p>The summary of this analysis: dexamethasone changes a great many genes in these cells, and a modest
+number of Reactome pathways shift as a whole. Check the genes behind a pathway name before you
+interpret it.</p>
 </div>
             </section>
 

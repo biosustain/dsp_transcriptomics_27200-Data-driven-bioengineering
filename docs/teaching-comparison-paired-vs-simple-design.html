@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#nes-bar-plot-top-sets-by-nominal-p-value"><i class="fa fa-check"></i>NES Bar Plot — Top Sets by Nominal p-value</a></li>
 <li class="chapter" data-level="" data-path="running-gsea.html"><a href="running-gsea.html#enrichment-plot-top-sets"><i class="fa fa-check"></i>Enrichment Plot — Top Sets</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="is-the-pipeline-broken-or-is-this-the-biology.html"><a href="is-the-pipeline-broken-or-is-this-the-biology.html"><i class="fa fa-check"></i>Is the pipeline broken, or is this the biology?</a></li>
+<li class="chapter" data-level="" data-path="do-the-gene-sets-agree-with-the-genes.html"><a href="do-the-gene-sets-agree-with-the-genes.html"><i class="fa fa-check"></i>Do the gene sets agree with the genes?</a></li>
 <li class="chapter" data-level="" data-path="saving-results-1.html"><a href="saving-results-1.html"><i class="fa fa-check"></i>Saving Results</a></li>
 <li class="chapter" data-level="" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i>Summary</a></li>
 <li class="chapter" data-level="" data-path="interpretation-questions-2.html"><a href="interpretation-questions-2.html"><i class="fa fa-check"></i>Interpretation questions</a></li>
@@ -415,7 +415,7 @@ Significant genes (padj &lt; 0.05)
 ~ donor + condition (paired)
 </td>
 <td style="text-align:right;">
-3833
+4154
 </td>
 </tr>
 <tr>
@@ -423,7 +423,7 @@ Significant genes (padj &lt; 0.05)
 ~ condition (simple)
 </td>
 <td style="text-align:right;">
-2574
+2883
 </td>
 </tr>
 </tbody>
@@ -436,9 +436,9 @@ similar, donor happened to explain little variance in this subset — but the pa
 correct specification given the experimental design, so we keep it.</p>
 </div>
 <div style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
-<p><strong>What we see in this dataset.</strong> The paired model (<code>~ donor + condition</code>) calls roughly <strong>3,800</strong>
-genes significant at padj &lt; 0.05, versus about <strong>2,600</strong> for the simple model (<code>~ condition</code>) — an
-increase of around 1,200 genes (~50%). This is a large, concrete demonstration of the paired-design
+<p><strong>What we see in this dataset.</strong> The paired model (<code>~ donor + condition</code>) calls roughly <strong>4,150</strong>
+genes significant at padj &lt; 0.05, versus about <strong>2,900</strong> for the simple model (<code>~ condition</code>) — an
+increase of around 1,300 genes (~45%). This is a large, concrete demonstration of the paired-design
 benefit: the four donors differ substantially in their baseline expression, and once that donor
 variation is accounted for, the treatment signal becomes much easier to detect. This is exactly the
 inter-patient variability the study design anticipated, and it is why we use the paired model for all
