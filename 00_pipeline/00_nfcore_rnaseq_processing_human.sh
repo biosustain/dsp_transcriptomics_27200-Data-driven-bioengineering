@@ -13,7 +13,7 @@
 # the comment block below for reference; the repo itself only stores the
 # downstream output needed for teaching.
 
-# Due to too high computational load, this example uses downsampled read files (50 0000 reads each) and approximately 5 Mb of chromsome 19 as the reference. Two samples are processed only as example.
+# Due to too high computational load, this example uses downsampled read files (50,000 reads each) and approximately 5 Mb of chromosome 19 as the reference. Two samples are processed only as example.
 
 
 # gencode and the skip_* switches are set in human_demo.config, not here.
