@@ -411,23 +411,23 @@ a minority of <em>S. aureus</em> genes carry a curated pathway assignment.</p>
 <p>This report is parameterised by <code>strain</code>. The two strains use different reference genomes,
 so they load different DE tables and different cached gene sets.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="gene-functional-enrichment-analysis-1.html#cb280-1" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;usa100&quot;</span>          <span class="co"># &quot;usa100&quot; or &quot;usa500&quot; (interactive default)</span></span>
-<span id="cb280-2"><a href="gene-functional-enrichment-analysis-1.html#cb280-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;params&quot;</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">is.list</span>(params) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(params<span class="sc">$</span>strain)) strain <span class="ot">&lt;-</span> params<span class="sc">$</span>strain</span>
-<span id="cb280-3"><a href="gene-functional-enrichment-analysis-1.html#cb280-3" tabindex="-1"></a><span class="fu">stopifnot</span>(strain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;usa100&quot;</span>, <span class="st">&quot;usa500&quot;</span>))</span>
-<span id="cb280-4"><a href="gene-functional-enrichment-analysis-1.html#cb280-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Enrichment for strain:&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="gene-functional-enrichment-analysis-1.html#cb282-1" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;usa100&quot;</span>          <span class="co"># &quot;usa100&quot; or &quot;usa500&quot; (interactive default)</span></span>
+<span id="cb282-2"><a href="gene-functional-enrichment-analysis-1.html#cb282-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;params&quot;</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">is.list</span>(params) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(params<span class="sc">$</span>strain)) strain <span class="ot">&lt;-</span> params<span class="sc">$</span>strain</span>
+<span id="cb282-3"><a href="gene-functional-enrichment-analysis-1.html#cb282-3" tabindex="-1"></a><span class="fu">stopifnot</span>(strain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;usa100&quot;</span>, <span class="st">&quot;usa500&quot;</span>))</span>
+<span id="cb282-4"><a href="gene-functional-enrichment-analysis-1.html#cb282-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Enrichment for strain:&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Enrichment for strain: usa100</code></pre>
 </div>
 <div id="load-libraries-1" class="section level3 hasAnchor">
 <h3>Load Libraries<a href="gene-functional-enrichment-analysis-1.html#load-libraries-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="gene-functional-enrichment-analysis-1.html#cb282-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb282-2"><a href="gene-functional-enrichment-analysis-1.html#cb282-2" tabindex="-1"></a><span class="fu">library</span>(mulea)</span>
-<span id="cb282-3"><a href="gene-functional-enrichment-analysis-1.html#cb282-3" tabindex="-1"></a><span class="fu">library</span>(fgsea)</span>
-<span id="cb282-4"><a href="gene-functional-enrichment-analysis-1.html#cb282-4" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb282-5"><a href="gene-functional-enrichment-analysis-1.html#cb282-5" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb282-6"><a href="gene-functional-enrichment-analysis-1.html#cb282-6" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
-<span id="cb282-7"><a href="gene-functional-enrichment-analysis-1.html#cb282-7" tabindex="-1"></a><span class="fu">library</span>(ggpubr)   <span class="co"># theme_pubr</span></span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="gene-functional-enrichment-analysis-1.html#cb284-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb284-2"><a href="gene-functional-enrichment-analysis-1.html#cb284-2" tabindex="-1"></a><span class="fu">library</span>(mulea)</span>
+<span id="cb284-3"><a href="gene-functional-enrichment-analysis-1.html#cb284-3" tabindex="-1"></a><span class="fu">library</span>(fgsea)</span>
+<span id="cb284-4"><a href="gene-functional-enrichment-analysis-1.html#cb284-4" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb284-5"><a href="gene-functional-enrichment-analysis-1.html#cb284-5" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb284-6"><a href="gene-functional-enrichment-analysis-1.html#cb284-6" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb284-7"><a href="gene-functional-enrichment-analysis-1.html#cb284-7" tabindex="-1"></a><span class="fu">library</span>(ggpubr)   <span class="co"># theme_pubr</span></span></code></pre></div>
 </details>
 </div>
 </div>

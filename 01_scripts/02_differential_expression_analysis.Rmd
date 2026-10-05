@@ -225,6 +225,34 @@ res <- results(dds,
 summary(res)
 ```
 
+We report genes that change by at least 2-fold, so that is what we should test for. The call above
+asks whether the fold change differs from **zero**; a gene can clear that bar comfortably and still
+be nowhere near 2-fold. Filtering the output afterwards on `|log2FC| >= 1` does not fix this,
+because the filter is applied to the estimate, not to the hypothesis: nothing bounds how many genes
+with a true change below 2-fold slip through on a lucky estimate.
+
+`results()` can test against the threshold directly. `lfcThreshold = 1` moves the null hypothesis
+from "no change" to "no more than 2-fold", and `altHypothesis = "greaterAbs"` asks for changes
+larger than that in either direction. The adjusted p-values then control the error rate for the
+claim we actually make.
+
+```{r human-de-extract-results-threshold, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+res_thr <- results(dds,
+                   contrast      = c("condition", "treatment", "control"),
+                   lfcThreshold  = 1,
+                   altHypothesis = "greaterAbs",
+                   alpha         = 0.05)
+
+summary(res_thr)
+```
+
+<div class="note">
+  <strong>📘 Note:</strong> We keep both results objects. <code>res_thr</code> decides significance.
+  <code>res</code> still provides the Wald statistic used to rank genes for GSEA in script 03 — that
+  ranking must stay on the test against zero, because with a threshold the statistic is pulled to
+  zero for every gene near the boundary and the ranking would be distorted.
+</div>
+
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
 **Reading the summary.** Of 16,238 tested genes, about **2,290 are up** and **1,870 are down** at
 padj < 0.05 (roughly 14% and 11%). Two lines are worth noting: **outliers = 0** means no gene was
@@ -265,9 +293,9 @@ The results table contains one row per gene with the following columns:
 <div class="important">
   <strong>⭐ Important:</strong> shrinkage does **not** change your p-values — those come from the
  `results()` call above and are carried over unchanged. It only changes the fold-change estimates.
- Keep in mind, though, that the gene list further down applies a **|log2FC| ≥ 1** filter to these
- *shrunken* values, so shrinkage does influence which genes end up in the final significant set —
- by design: a noisy low-count gene with an inflated raw fold change should not qualify.
+ Significance now comes from the test against the 2-fold threshold, so shrinkage no longer decides
+ which genes qualify. It still matters for everything that reads the fold change itself: the volcano,
+ the heatmap and the ranking of the strongest effects.
 </div>
 
  **Why `apeglm`?** Three shrinkage methods exist in DESeq2:
@@ -294,32 +322,43 @@ summary(res_shrunk, alpha = 0.05)
 
 ### Sorting and Filtering Significant Genes
 
-We order genes by adjusted p-value and filter to retain only those passing our significance thresholds: **padj < 0.05** and **|log2FC| ≥ 1** (i.e., at least a 2-fold change).
+We order genes by adjusted p-value and keep those with **padj < 0.05** from the thresholded test.
+There is no separate fold-change filter: the 2-fold requirement is already part of the hypothesis.
 
 ```{r human-de-filter-results, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 res_df <- as.data.frame(res_shrunk) %>%
   rownames_to_column("gene") %>%
-  mutate(stat = res[gene, "stat"]) %>%   # Wald statistic from results(); lfcShrink() drops it. Used to rank genes for GSEA
+  mutate(
+    stat   = res[gene, "stat"],         # Wald statistic vs zero; lfcShrink() drops it. Ranks genes for GSEA in script 03
+    pvalue = res_thr[gene, "pvalue"],   # significance comes from the test against the 2-fold threshold
+    padj   = res_thr[gene, "padj"]
+  ) %>%
   arrange(padj) %>%
   filter(!is.na(padj))
 
+# No fold-change filter here: the 2-fold requirement is already inside the test.
 res_sig <- res_df %>%
-  filter(padj < 0.05, abs(log2FoldChange) >= 1)
+  filter(padj < 0.05)
 
 cat("Total genes tested        :", nrow(res_df), "\n")
 cat("Significant genes         :", nrow(res_sig), "\n")
-cat("  Upregulated (LFC ≥ 1)   :", sum(res_sig$log2FoldChange >= 1), "\n")
-cat("  Downregulated (LFC ≤ -1):", sum(res_sig$log2FoldChange <= -1), "\n")
+cat("  Upregulated             :", sum(res_sig$log2FoldChange > 0), "\n")
+cat("  Downregulated           :", sum(res_sig$log2FoldChange < 0), "\n")
 ```
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
-**What the fold-change filter does.** The `summary()` above counted ~4,150 genes at padj < 0.05 alone.
-Adding the **|log2FC| ≥ 1** requirement (at least a 2-fold change) narrows this to about **780** genes
-(~420 up, ~360 down). The difference is the large group of genes that are statistically significant but
-only modestly changed — real, but small in magnitude. Filtering on effect size as well as significance
-focuses the downstream analysis on the genes most likely to be biologically meaningful. The up/down
-split being roughly balanced is consistent with a broad regulatory response rather than a one-directional
-shift.
+**What testing against the threshold does.** Testing against zero called ~4,150 genes at
+padj < 0.05. Requiring the change to be *significantly* larger than 2-fold leaves **238** genes
+(145 up, 93 down).
+
+It is worth seeing how much of a difference the hypothesis makes. Filtering the old way — padj from
+the test against zero, then `|log2FC| >= 1` on the shrunken estimates — gave **784** genes. Of those,
+547 do not survive the proper test. They are not errors: their fold changes really do look larger than
+2-fold. There is simply not enough evidence to say they *exceed* 2-fold rather than sitting just above
+it by chance. Only one gene is gained.
+
+So the shorter list is not a stricter cutoff applied to the same question. It is the answer to the
+question we were claiming to ask all along.
 :::
 
 **Biological sanity check — known dexamethasone-responsive genes**
@@ -383,15 +422,17 @@ DT::datatable(
 
 A volcano plot combines fold change (x-axis) and statistical significance (y-axis) into a single view. Genes in the upper corners are both strongly and significantly changed — these are the most biologically interesting candidates.
 
-The dashed lines mark our thresholds: |log2FC| = 1 and padj = 0.05.
+The dashed lines mark |log2FC| = 1 and padj = 0.05. Note that points are now coloured by padj alone,
+because the 2-fold requirement is inside the test: a gene to the right of the line is not significant
+unless it also clears padj, and the vertical line is a reference, no longer part of the rule.
 
 ```{r human-de-volcano, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 res_df <- res_df %>%
   mutate(
     significance = case_when(
-      padj < 0.05 & log2FoldChange >=  1 ~ "Up",
-      padj < 0.05 & log2FoldChange <= -1 ~ "Down",
-      TRUE                               ~ "NS"
+      padj < 0.05 & log2FoldChange > 0 ~ "Up",
+      padj < 0.05 & log2FoldChange < 0 ~ "Down",
+      TRUE                             ~ "NS"
     )
   )
 
@@ -511,7 +552,7 @@ cat("Results saved to:", results_dir, "\n")
 | Contrast | dexamethasone (treatment) vs untreated (control) |
 | LFC shrinkage | `apeglm` method |
 | Significance threshold | padj < 0.05 |
-| Fold change threshold | \|log2FC\| ≥ 1 (2-fold) |
+| Fold change threshold | tested, not filtered: `lfcThreshold = 1`, `altHypothesis = "greaterAbs"` |
 | Enrichment (next script) | GSEA with `fgsea` and MSigDB Reactome sets |
 
 Significant genes are saved and ready for gene set enrichment analysis in the next script.

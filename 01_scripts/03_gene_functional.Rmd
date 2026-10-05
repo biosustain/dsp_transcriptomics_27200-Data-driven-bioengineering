@@ -86,8 +86,8 @@ res_sig <- read.table(
 
 cat("All tested genes     :", nrow(res_df), "\n")
 cat("Significant DE genes :", nrow(res_sig), "\n")
-cat("  Upregulated        :", sum(res_sig$log2FoldChange >= 1), "\n")
-cat("  Downregulated      :", sum(res_sig$log2FoldChange <= -1), "\n")
+cat("  Upregulated        :", sum(res_sig$log2FoldChange > 0), "\n")
+cat("  Downregulated      :", sum(res_sig$log2FoldChange < 0), "\n")
 ```
 
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
