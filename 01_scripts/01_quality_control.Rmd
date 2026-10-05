@@ -107,7 +107,7 @@ DT::datatable(
     scrollY     = 200,
     scroller    = TRUE
   ),
-  caption = 'Sample metadata — Human ASM (dexamethasone vs untreated)'
+  caption = 'Sample metadata - Human ASM (dexamethasone vs untreated)'
 )
 ```
 
@@ -190,10 +190,10 @@ saveRDS(id_map, file.path(git_root, "results", "human", "gene_id_symbol_map.rds"
 
 Before building the `DESeq2` object we:
 
-1.  Subset the count matrix to the samples in the metadata (dexamethasone + untreated only — the albuterol arms are excluded).
+1.  Subset the count matrix to the samples in the metadata (dexamethasone + untreated only - the albuterol arms are excluded).
 2.  Set factor levels so that `control` is the **reference level** (the denominator in fold-change calculations).
 3.  Set `donor` as a factor (needed for the paired design).
-4.  Align the sample order between the count matrix and the metadata — `DESeq2` requires these to match exactly.
+4.  Align the sample order between the count matrix and the metadata - `DESeq2` requires these to match exactly.
 
 ```{r human-qc-prepare-data-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 condition_levels   <- c("control", "treatment")
@@ -250,11 +250,10 @@ donor and condition"*.
 In a general linear model, the tilde separates the **response variable** (left side) from
 the **predictors** (right side). For example:
 
-- `gene_expression ~ condition` — model expression as a function of condition only
-- `gene_expression ~ donor + condition` — adjust for donor, then test condition
+- `gene_expression ~ condition` - model expression as a function of condition only
+- `gene_expression ~ donor + condition` - adjust for donor, then test condition
 
-In DESeq2, the left side is omitted because the count matrix is already the response —
-you only need to specify which variables explain the differences between samples.
+In DESeq2, the left side is omitted because the count matrix is already the response - you only need to specify which variables explain the differences between samples.
 The variable of interest (`condition`) goes **last**; the terms before it are adjusted for.
 </div>
 
@@ -292,7 +291,7 @@ information about that sample, whatever you do afterwards.
 
 Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples (equal to the size of the smallest group).
 
-The human genome has roughly 20,000 protein-coding genes plus many non-coding ones, and a large fraction are not expressed in ASM cells — expect a substantial number to be filtered out.
+The human genome has roughly 20,000 protein-coding genes plus many non-coding ones, and a large fraction are not expressed in ASM cells - expect a substantial number to be filtered out.
 
 ```{r human-qc-prefilter-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 
@@ -362,7 +361,7 @@ distribution <- ggplot(counts_norm,
   theme_pubr(border = TRUE) +
   xlab("Sample") +
   ylab("log2(normalised counts + 1)") +
-  ggtitle("Normalised count distribution — Human ASM")
+  ggtitle("Normalised count distribution - Human ASM")
 
 distribution
 
@@ -399,7 +398,7 @@ already accounts for the design.
 
 PCA reduces the high-dimensional expression space (one dimension per gene) to a small number of principal components that capture the largest sources of variance in the data. Inspect whether the treatment separates samples, and whether donor identity contributes to the remaining structure.
 
-If a technical variable (batch, sequencing run, RNA quality) — or, here, donor — dominates PC1, that variance should be accounted for in the design before differential expression analysis ([Leek *et al.*, 2010](https://doi.org/10.1038/nrg2825)).
+If a technical variable (batch, sequencing run, RNA quality) - or, here, donor - dominates PC1, that variance should be accounted for in the design before differential expression analysis ([Leek *et al.*, 2010](https://doi.org/10.1038/nrg2825)).
 
 ```{r human-qc-pca-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 pca_data <- plotPCA(vsd,
@@ -445,7 +444,7 @@ ggsave(
 
 :::boxy
 **How to read this plot.** Each point is one sample; points close together have similar overall
-expression. Check the **% variance** printed on each axis first — it tells you how much of the total
+expression. Check the **% variance** printed on each axis first - it tells you how much of the total
 variation that axis carries, so a separation on PC1 means more than the same-looking separation on PC3.
 Here colour encodes treatment and shape encodes donor. If treatment separates cleanly on one axis while
 donors are spread along another, that is the classic signature of a paired design: a consistent treatment
@@ -505,7 +504,7 @@ dev.off()
 </div>
 
 <div class="important">
-  <strong>⭐ Three things in this plot are not biology — spot them before you interpret it.</strong>
+  <strong>⭐ Three things in this plot are not biology - spot them before you interpret it.</strong>
   <ul>
     <li><strong>Names ending in <code>.1</code>, <code>.2</code>, ...</strong> (e.g. <code>TXLNGY.1</code>):
     a few symbols belong to more than one gene ID in the annotation, so R made the row names unique by
@@ -514,7 +513,7 @@ dev.off()
     annotation uses their ENSEMBL identifier as the name. They are real genes, just unnamed ones.</li>
     <li><strong>Sex-linked genes</strong> (e.g. <code>RPS4Y1</code>, <code>DDX3Y</code>,
     <code>KDM5D</code>, <code>USP9Y</code>): the four donors are not all the same sex (the <code>sex_inferred</code> bar is derived from these genes), so these genes are
-    among the most "variable" in the whole dataset — a donor property, unrelated to dexamethasone.</li>
+    among the most "variable" in the whole dataset - a donor property, unrelated to dexamethasone.</li>
   </ul>
   Most-variable is <em>not</em> most-relevant: the drug-response rows (look for <code>FKBP5</code>,
   <code>ZBTB16</code>, <code>GPX3</code>) sit next to rows that only separate donors. That is why the next notebook tests a
@@ -525,13 +524,13 @@ dev.off()
 **How to read this heatmap:**
 
 - Each **row** is a gene, each **column** is a sample
-- Colours show the **z-score** (row-scaled expression) — red = higher than average for that gene, blue = lower
-- The **dendrograms** show hierarchical clustering — samples/genes that behave similarly are grouped together
+- Colours show the **z-score** (row-scaled expression) - red = higher than average for that gene, blue = lower
+- The **dendrograms** show hierarchical clustering - samples/genes that behave similarly are grouped together
 
 **What to look for:**
 
 - Clear colour blocks by condition → the treatment has a strong, consistent transcriptional effect
-- Whether samples cluster by donor instead of (or in addition to) treatment — a visual argument for the paired design
+- Whether samples cluster by donor instead of (or in addition to) treatment - a visual argument for the paired design
 :::
 
 ## Summary
@@ -581,8 +580,8 @@ cat("   Conditions  :", paste(levels(dds$condition), collapse = " vs "), "\n")
 ## Interpretation questions
 
 ::: question
-1. Find each donor's treated and untreated points in your PCA. Which is bigger: the difference between donors, or the shift caused by treatment? Based on that, predict which model will find more differentially expressed genes in the next notebook — `~ condition` or `~ donor + condition` — and why. Write the prediction down: you will check it.
-2. Pick the gene with the cleanest treated/untreated split in your heatmap. Which of these can you claim from it: more transcript? more protein? more activity? Then look for *NR3C1* — the receptor dexamethasone binds to. It is a pre-existing protein: did its transcript need to change for the response you see? What does that say about what RNA-seq can and cannot show?
+1. Find each donor's treated and untreated points in your PCA. Which is bigger: the difference between donors, or the shift caused by treatment? Based on that, predict which model will find more differentially expressed genes in the next notebook - `~ condition` or `~ donor + condition` - and why. Write the prediction down: you will check it.
+2. Pick the gene with the cleanest treated/untreated split in your heatmap. Which of these can you claim from it: more transcript? more protein? more activity? Then look for *NR3C1* - the receptor dexamethasone binds to. It is a pre-existing protein: did its transcript need to change for the response you see? What does that say about what RNA-seq can and cannot show?
 :::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->

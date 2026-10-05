@@ -24,11 +24,9 @@ biofilm-versus-planktonic difference, controlling for time point.
 
 We apply two complementary approaches:
 
-- **ORA** (Over-Representation Analysis) using [`mulea`](https://github.com/ELTEbioinformatics/mulea) —
-  tests whether the significant DE genes are enriched in a gene set more than expected by
+- **ORA** (Over-Representation Analysis) using [`mulea`](https://github.com/ELTEbioinformatics/mulea) - tests whether the significant DE genes are enriched in a gene set more than expected by
   chance, with empirical FDR correction.
-- **GSEA** (Gene Set Enrichment Analysis) using [`fgsea`](https://bioconductor.org/packages/fgsea/) —
-  uses the full ranked gene list to detect coordinated shifts, including changes below the
+- **GSEA** (Gene Set Enrichment Analysis) using [`fgsea`](https://bioconductor.org/packages/fgsea/) - uses the full ranked gene list to detect coordinated shifts, including changes below the
   significance threshold.
 
 Both use the gene sets built by `02b_prepare_genesets_saureus.Rmd`: **KEGG pathways**,
@@ -113,7 +111,7 @@ cat("GO:MF sets :", nrow(go_mf), "\n")
 
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
   <strong>Note:</strong> If any of these files are missing, run
-  <code>02b_prepare_genesets_saureus.Rmd</code> for this strain first — it builds and caches
+  <code>02b_prepare_genesets_saureus.Rmd</code> for this strain first - it builds and caches
   the gene sets. The gene sets are keyed on locus tags (<code>SA_RS...</code> /
   <code>SAUSA300_RS...</code>), the same identifiers used in the DE table, so no ID
   conversion is needed.
@@ -195,19 +193,19 @@ cat("Total gene sets across collections:", nrow(all_gmt), "\n")
 print(all_gmt %>% dplyr::count(source, name = "sets"))
 ```
 
-## Part 1 — Over-Representation Analysis (ORA)
+## Part 1 Over-Representation Analysis (ORA)
 
 **ORA asks: *"Are my significant DE genes enriched in any gene set more than expected by chance?"***
 
 It uses a hypergeometric test with empirical FDR (eFDR) correction via resampling, which
 accounts for interdependence between gene sets.
 
-- **Query set** — significant DE genes (padj < 0.05, |LFC| >= log2(3), a 3-fold change), split by direction
-- **Background** — all genes tested by DESeq2 for this contrast
-- **Gene sets** — KEGG, GO:BP, GO:MF
+- **Query set** - significant DE genes (padj < 0.05, |LFC| >= log2(3), a 3-fold change), split by direction
+- **Background** - all genes tested by DESeq2 for this contrast
+- **Gene sets** - KEGG, GO:BP, GO:MF
 
 :::boxy
-**Key assumption:** ORA treats all significant genes equally — it ignores the magnitude of
+**Key assumption:** ORA treats all significant genes equally - it ignores the magnitude of
 fold change. Running it separately on up- and down-regulated genes partially addresses this,
 which is why we split the query set below. For a fully ranked approach, see Part 2 (GSEA).
 :::
@@ -277,8 +275,8 @@ ora_up   <- ora_by_source(sig_up,   background)
 ora_down <- ora_by_source(sig_down, background)
 
 n_sig <- function(x) if (is.null(x) || nrow(x) == 0) 0 else sum(x$eFDR < 0.05, na.rm = TRUE)
-cat("Up   — significant sets (eFDR < 0.05):", n_sig(ora_up),   "\n")
-cat("Down — significant sets (eFDR < 0.05):", n_sig(ora_down), "\n")
+cat("Up - significant sets (eFDR < 0.05):", n_sig(ora_up),   "\n")
+cat("Down - significant sets (eFDR < 0.05):", n_sig(ora_down), "\n")
 ```
 
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
@@ -291,7 +289,7 @@ cat("Down — significant sets (eFDR < 0.05):", n_sig(ora_down), "\n")
 :::boxy
 **How to read these tables.** The columns that matter: how many genes the set contains in total
 (a huge set is vague, a 3-gene set is fragile), how many of *your* genes fall in it (the real overlap),
-and the **eFDR** — `mulea`'s empirical false-discovery rate, so read it as an already-corrected p-value.
+and the **eFDR** - `mulea`'s empirical false-discovery rate, so read it as an already-corrected p-value.
 A hit you can trust has a reasonable overlap, a set size specific enough to mean something, and biology
 that fits a biofilm-planktonic switch.
 :::
@@ -309,7 +307,7 @@ cat("Significant up sets  :", nrow(ora_up_sig),   "\n")
 cat("Significant down sets:", nrow(ora_down_sig), "\n")
 ```
 
-**Up-regulated genes — enriched sets (biofilm-associated)**
+**Up-regulated genes - enriched sets (biofilm-associated)**
 
 ```{r saureus-fn-ora-table-up, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 show_ora_table <- function(sig, caption) {
@@ -329,16 +327,16 @@ show_ora_table <- function(sig, caption) {
     caption = caption
   )
 }
-show_ora_table(ora_up_sig, "Significant ORA sets — UP-regulated (biofilm) genes")
+show_ora_table(ora_up_sig, "Significant ORA sets - UP-regulated (biofilm) genes")
 ```
 
-**Down-regulated genes — enriched sets (planktonic-associated)**
+**Down-regulated genes - enriched sets (planktonic-associated)**
 
 ```{r saureus-fn-ora-table-down, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-show_ora_table(ora_down_sig, "Significant ORA sets — DOWN-regulated (planktonic) genes")
+show_ora_table(ora_down_sig, "Significant ORA sets - DOWN-regulated (planktonic) genes")
 ```
 
-### Critical Interpretation — Watch for Spurious Hits
+### Critical Interpretation: Watch for Spurious Hits
 
 :::boxy
 **Always ask: does this set make biological sense, and is it big enough to trust?**
@@ -347,16 +345,16 @@ Very small gene sets are prone to spurious enrichment: if a set has only 3–4 g
 background and they all happen to be DE, it scores as maximally significant regardless of
 biological relevance. When reading the tables above:
 
-1. Check the set size — very small sets (few genes) are fragile.
-2. Check the overlap — 100% overlap in a tiny set is statistically inevitable, not impressive.
+1. Check the set size - very small sets (few genes) are fragile.
+2. Check the overlap - 100% overlap in a tiny set is statistically inevitable, not impressive.
 3. Ask whether the set is plausible for *S. aureus* and for a biofilm/planktonic switch.
-4. Cross-reference with GSEA — a set found by both methods is higher confidence.
+4. Cross-reference with GSEA - a set found by both methods is higher confidence.
 
 We built the collections with a minimum of 5 genes per set to reduce this, but scrutiny is
 still part of interpretation.
 :::
 
-### Bar Plot — Top Enriched Sets by Direction
+### Bar Plot: Top Enriched Sets by Direction
 
 The strongest sets in each direction, ranked by `-log10(eFDR)`. The number of DE genes hitting
 each set is printed at the end of each bar. Up-regulated (biofilm) and down-regulated
@@ -416,7 +414,7 @@ if (!is.null(ora_plot_df) && nrow(ora_plot_df) > 0) {
 }
 ```
 
-## Part 2 — Gene Set Enrichment Analysis (GSEA)
+## Part 2 Gene Set Enrichment Analysis (GSEA)
 
 **GSEA asks: *"Are genes in a set coordinately shifting up or down across the full ranked list?"***
 
@@ -613,8 +611,8 @@ gsea_bar <- (if (use_padj) gsea_sig
   )
 
 if (nrow(gsea_bar) > 0) {
-  ttl <- if (use_padj) "GSEA — Significant Sets (padj < 0.05)"
-         else "GSEA — Top Sets by Nominal p-value (directional only, not padj-significant)"
+  ttl <- if (use_padj) "GSEA - Significant Sets (padj < 0.05)"
+         else "GSEA - Top Sets by Nominal p-value (directional only, not padj-significant)"
   ggplot(gsea_bar, aes(x = NES, y = set_label, fill = direction)) +
     geom_col(width = 0.7) +
     geom_vline(xintercept = 0, linewidth = 0.5) +
@@ -634,14 +632,14 @@ if (nrow(gsea_bar) > 0) {
 }
 ```
 
-### Enrichment Plot — Top Sets in Each Direction
+### Enrichment Plot: Top Sets in Each Direction
 
 The running enrichment score for the single strongest set in each direction. The peak is the
 enrichment score; the "rug" at the bottom marks where that set's genes fall in the ranked list.
 
 **How to read it:** the x-axis is every gene, ordered from most biofilm-up (left) to most planktonic-up
 (right). Each tick in the rug is one gene of the set. If the ticks bunch near one end, the curve climbs
-to a high peak there — that is coordinated enrichment. Ticks spread evenly across the axis give a flat,
+to a high peak there - that is coordinated enrichment. Ticks spread evenly across the axis give a flat,
 wandering curve and no enrichment.
 
 ```{r saureus-fn-gsea-enrichment-plots, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -665,7 +663,7 @@ if (!is.null(top_planktonic)) {
 }
 ```
 
-## Part 3 — Comparing ORA and GSEA
+## Part 3 Comparing ORA and GSEA
 
 ORA and GSEA answer different questions and will not always agree. Sets found by both are the
 highest-confidence results.
@@ -694,11 +692,11 @@ if (length(both) > 0) {
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
   <strong>Interpretation guide:</strong>
   <ul>
-    <li><strong>Both significant</strong> — high confidence; a strong shift driven by many
+    <li><strong>Both significant</strong> - high confidence; a strong shift driven by many
     genes.</li>
-    <li><strong>ORA only</strong> — genes crossing the significance threshold cluster in this
+    <li><strong>ORA only</strong> - genes crossing the significance threshold cluster in this
     set, but the overall coordinated shift may be modest.</li>
-    <li><strong>GSEA only</strong> — a coordinated but subtle shift below the threshold; the
+    <li><strong>GSEA only</strong> - a coordinated but subtle shift below the threshold; the
     genes move together without individually being significant.</li>
   </ul>
 </div>
@@ -720,8 +718,8 @@ cat("ORA sets among planktonic-up genes:", nrow(ora_down_sig), "\n")
 
 1. **Planktonic cells run the growth machinery.** The enrichment signal is dominated by
    translation, ribosome, aminoacyl-tRNA and nucleotide-metabolism sets, all higher in the
-   planktonic state. Remember this contrast is the *additive* model — the lifestyle difference
-   averaged across all three time points — and over that whole window the planktonic cultures
+   planktonic state. Remember this contrast is the *additive* model - the lifestyle difference
+   averaged across all three time points - and over that whole window the planktonic cultures
    spend more of their time growing exponentially, while cells inside a maturing biofilm are
    increasingly nutrient-limited and slow-growing. (At the 24 h endpoint alone the picture is
    less clean: by then the planktonic culture has entered deep stationary phase, which is
@@ -790,7 +788,7 @@ together: agreement across collections and between ORA and GSEA is the strongest
 
 ::: question
 1. From your ORA results, pick the enriched set you trust **most** and the one you trust **least**. Defend both using the numbers in your table (how many hits, how big the set, the eFDR) and whether the biology makes sense for a biofilm-planktonic switch.
-2. Ribosome and translation gene sets score higher in planktonic cells — at the transcript level. A colleague concludes: "biofilm cells have shut down protein synthesis." Is that claim justified by your data? What else could explain fewer ribosomal transcripts in biofilm, and what measurement would settle it?
+2. Ribosome and translation gene sets score higher in planktonic cells - at the transcript level. A colleague concludes: "biofilm cells have shut down protein synthesis." Is that claim justified by your data? What else could explain fewer ribosomal transcripts in biofilm, and what measurement would settle it?
 :::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->

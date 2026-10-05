@@ -17,7 +17,7 @@ This report covers differential expression (DE) analysis of bulk RNA-seq data fr
 We test one contrast:
 
 ::: boxy
-- **Dexamethasone (treatment) vs untreated (control)** — which genes change expression in response to the glucocorticoid?
+- **Dexamethasone (treatment) vs untreated (control)** - which genes change expression in response to the glucocorticoid?
 :::
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
@@ -28,8 +28,8 @@ We test one contrast:
 <strong>🎓 Teaching design.</strong> Each donor contributes a treated and an untreated sample, so donor
 is a paired factor. We run two models:
 <ul>
-<li><strong>Paired (recommended):</strong> <code>~ donor + condition</code> — adjusts for donor baseline before testing treatment.</li>
-<li><strong>Simple (for comparison):</strong> <code>~ condition</code> — ignores donor.</li>
+<li><strong>Paired (recommended):</strong> <code>~ donor + condition</code> - adjusts for donor baseline before testing treatment.</li>
+<li><strong>Simple (for comparison):</strong> <code>~ condition</code> - ignores donor.</li>
 </ul>
 Comparing them shows how accounting for a known confounder changes power and the gene list.
 The paired model is used for all downstream analysis.
@@ -53,13 +53,13 @@ library(DT)
 ## Running DESeq2
 
 <div style="background:#f8d7da;border-left:4px solid #721c24;padding:10px;margin:10px 0;">
-  <strong>⚠️ Warning:</strong> Always use raw integer counts as input. Do not use TPM, FPKM, or any normalised values — DESeq2 handles normalisation internally.
+  <strong>⚠️ Warning:</strong> Always use raw integer counts as input. Do not use TPM, FPKM, or any normalised values - DESeq2 handles normalisation internally.
 </div>
 
 `DESeq2` fits a negative binomial model to the raw counts and performs a Wald test for each gene. Internally it runs three steps in sequence: size factor estimation (normalisation), dispersion estimation, and the Wald test. These can also be run separately, but `DESeq()` handles all three in one call.
 
 <details>
-<summary><strong>What DESeq2 does internally — three steps</strong> (click to expand)</summary>
+<summary><strong>What DESeq2 does internally - three steps</strong> (click to expand)</summary>
 
 **1. Size factor estimation (normalisation)**
 
@@ -72,13 +72,13 @@ highly expressed genes dominating the library.
 
 **2. Dispersion estimation**
 
-RNA-seq count data is overdispersed — the variance is greater than the mean
+RNA-seq count data is overdispersed - the variance is greater than the mean
 (unlike a Poisson distribution which assumes variance = mean). DESeq2 models
 this with a **negative binomial distribution** and estimates a dispersion
 parameter per gene, which describes how much counts vary between replicates
 beyond what is expected by chance. Genes with few replicates get their
 dispersion estimates shrunk toward a fitted trend across all genes
-(**empirical Bayes shrinkage**) — this stabilises estimates for genes with
+(**empirical Bayes shrinkage**) - this stabilises estimates for genes with
 low counts.
 
 **3. Wald test**
@@ -93,7 +93,7 @@ using the **Benjamini-Hochberg** procedure to control the false discovery rate (
 **Why does the order matter?**
 
 With the design `~ donor + condition`, the last term is the one tested. `resultsNames(dds)`
-will list `condition_treatment_vs_control` — the fold change is calculated as **treatment / control**:
+will list `condition_treatment_vs_control` - the fold change is calculated as **treatment / control**:
 
 - **Positive LFC** → gene is upregulated in dexamethasone-treated cells
 - **Negative LFC** → gene is downregulated in dexamethasone-treated cells
@@ -154,7 +154,7 @@ plotDispEsts(dds, main = "Dispersion estimates")
 :::boxy
 **How to read it.** Each black dot is one gene, placed by its mean expression (left to right)
 and its dispersion (bottom to top). The red line is the trend DESeq2 fitted across all genes.
-The blue dots are the final estimates, pulled from the black dots towards that line — the pull
+The blue dots are the final estimates, pulled from the black dots towards that line - the pull
 is strongest for low-count genes on the left, where a single odd replicate can otherwise make
 a gene look far more variable than it really is. Points circled in blue were left alone,
 treated as genuinely variable rather than noisy.
@@ -164,7 +164,7 @@ line. A cloud with no trend means the model has not fitted well, and nothing dow
 trustworthy.
 :::
 
-## Teaching Comparison — Paired vs Simple Design
+## Teaching Comparison: Paired vs Simple Design
 
 Before extracting the final results, we fit the simple `~ condition` model on the same data and compare how many genes each design calls significant. This makes the effect of accounting for donor concrete.
 
@@ -197,13 +197,13 @@ kable(comparison_tbl, caption = "Effect of design on the number of significant g
 **How to read this comparison.** Pairing on donor removes the between-donor baseline variation from
 the residual, which usually *lowers* the per-gene noise and *increases* power to detect the treatment
 effect. If the paired model calls more genes significant here, that is the mechanism. If the two are
-similar, donor happened to explain little variance in this subset — but the paired model is still the
+similar, donor happened to explain little variance in this subset - but the paired model is still the
 correct specification given the experimental design, so we keep it.
 :::
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
 **What we see in this dataset.** The paired model (`~ donor + condition`) calls roughly **4,150**
-genes significant at padj < 0.05, versus about **2,900** for the simple model (`~ condition`) — an
+genes significant at padj < 0.05, versus about **2,900** for the simple model (`~ condition`) - an
 increase of around 1,300 genes (~45%). This is a large, concrete demonstration of the paired-design
 benefit: the four donors differ substantially in their baseline expression, and once that donor
 variation is accounted for, the treatment signal becomes much easier to detect. This is exactly the
@@ -213,7 +213,7 @@ downstream steps.
 
 ## Extracting Results
 
-`results()` extracts the Wald test output for a given contrast. By default DESeq2 applies **independent filtering** — it removes genes with very low mean counts before multiple testing correction, which increases power to detect DE genes at a given FDR threshold.
+`results()` extracts the Wald test output for a given contrast. By default DESeq2 applies **independent filtering** - it removes genes with very low mean counts before multiple testing correction, which increases power to detect DE genes at a given FDR threshold.
 
 We set `alpha = 0.05` to optimise filtering for a 5% FDR cutoff.
 
@@ -248,7 +248,7 @@ summary(res_thr)
 
 <div class="note">
   <strong>📘 Note:</strong> We keep both results objects. <code>res_thr</code> decides significance.
-  <code>res</code> still provides the Wald statistic used to rank genes for GSEA in script 03 — that
+  <code>res</code> still provides the Wald statistic used to rank genes for GSEA in script 03 - that
   ranking must stay on the test against zero, because with a threshold the statistic is pulled to
   zero for every gene near the boundary and the ranking would be distorted.
 </div>
@@ -259,7 +259,7 @@ padj < 0.05 (roughly 14% and 11%). Two lines are worth noting: **outliers = 0** 
 flagged by Cook's distance as driven by a single extreme sample, and **low counts = 0** means
 independent filtering did not need to remove additional low-expression genes (the pre-filtering in
 script 01 already handled them). A large but balanced set of up- and down-regulated genes is the
-expected signature of a strong, genome-wide treatment response — dexamethasone is a potent
+expected signature of a strong, genome-wide treatment response - dexamethasone is a potent
 transcriptional regulator, so this magnitude is biologically plausible.
 :::
 
@@ -282,7 +282,7 @@ The results table contains one row per gene with the following columns:
 **What is this step and why do we need it?**
 
  After running DESeq2, every gene gets a raw log2 fold change (LFC) estimate.
- For **lowly expressed genes**, these estimates are unreliable — a gene with
+ For **lowly expressed genes**, these estimates are unreliable - a gene with
  1 count in control and 3 in treatment looks like a 3-fold change, but this
  is just noise from low counts.
 
@@ -291,7 +291,7 @@ The results table contains one row per gene with the following columns:
  well-supported fold changes (high counts, consistent signal) largely
  unchanged. Think of it as a confidence-weighted adjustment.
 <div class="important">
-  <strong>⭐ Important:</strong> shrinkage does **not** change your p-values — those come from the
+  <strong>⭐ Important:</strong> shrinkage does **not** change your p-values - those come from the
  `results()` call above and are carried over unchanged. It only changes the fold-change estimates.
  Significance now comes from the test against the 2-fold threshold, so shrinkage no longer decides
  which genes qualify. It still matters for everything that reads the fold change itself: the volcano,
@@ -299,9 +299,9 @@ The results table contains one row per gene with the following columns:
 </div>
 
  **Why `apeglm`?** Three shrinkage methods exist in DESeq2:
- - `apeglm` — most accurate for simple two-group comparisons like ours ✅
- - `ashr` — more flexible; needed when comparing two non-reference groups
- - `normal` — the original method, now outdated and not recommended
+ - `apeglm` - most accurate for simple two-group comparisons like ours ✅
+ - `ashr` - more flexible; needed when comparing two non-reference groups
+ - `normal` - the original method, now outdated and not recommended
 
  For a treatment vs control design, `apeglm` is the right choice.
  See [Zhu *et al.*, 2019](https://doi.org/10.1093/bioinformatics/btz585) for benchmarks.
@@ -351,8 +351,8 @@ cat("  Downregulated           :", sum(res_sig$log2FoldChange < 0), "\n")
 padj < 0.05. Requiring the change to be *significantly* larger than 2-fold leaves **238** genes
 (145 up, 93 down).
 
-It is worth seeing how much of a difference the hypothesis makes. Filtering the old way — padj from
-the test against zero, then `|log2FC| >= 1` on the shrunken estimates — gave **784** genes. Of those,
+It is worth seeing how much of a difference the hypothesis makes. Filtering the old way - padj from
+the test against zero, then `|log2FC| >= 1` on the shrunken estimates - gave **784** genes. Of those,
 547 do not survive the proper test. They are not errors: their fold changes really do look larger than
 2-fold. There is simply not enough evidence to say they *exceed* 2-fold rather than sitting just above
 it by chance. Only one gene is gained.
@@ -361,10 +361,10 @@ So the shorter list is not a stricter cutoff applied to the same question. It is
 question we were claiming to ask all along.
 :::
 
-**Biological sanity check — known dexamethasone-responsive genes**
+**Biological sanity check - known dexamethasone-responsive genes**
 
 Himes *et al.* highlighted several well-established glucocorticoid-responsive genes. We check where they
-land in our results rather than assuming — if the pipeline is working, these should be significant and in
+land in our results rather than assuming - if the pipeline is working, these should be significant and in
 the expected direction (dexamethasone typically *induces* these).
 
 ```{r human-de-known-genes-check, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -384,7 +384,7 @@ res_df %>%
 evidence the analysis is capturing real glucocorticoid biology, not noise. A gene missing from the table
 was filtered out earlier for low counts (not expressed in these cells); that is not a problem in itself.
 In this dataset all of the recovered markers are strongly **induced** (positive log2FC) and highly
-significant — including FKBP5, TSC22D3 (GILZ) and ZBTB16, three of the most reliable glucocorticoid-response
+significant - including FKBP5, TSC22D3 (GILZ) and ZBTB16, three of the most reliable glucocorticoid-response
 genes, and CRISPLD2, the gene the original study is named after. This is the expected positive-control
 result and confirms the pipeline is working correctly.
 :::
@@ -392,8 +392,7 @@ result and confirms the pipeline is working correctly.
 <div class="note">
   <strong>📘 Note:</strong> Known dexamethasone-responsive genes reported by Himes <em>et al.</em>
   include <em>DUSP1</em>, <em>KLF15</em>, <em>PER1</em>, <em>TSC22D3</em> and <em>CRISPLD2</em>.
-  Checking whether these appear among your top hits is a good biological sanity check —
-  but let the analysis produce them rather than assuming their rank.
+  Checking whether these appear among your top hits is a good biological sanity check - but let the analysis produce them rather than assuming their rank.
 </div>
 
 ---
@@ -412,7 +411,7 @@ DT::datatable(
     scrollY     = 300,
     scroller    = TRUE
   ),
-  caption = 'Significant DE genes — dexamethasone vs untreated (padj < 0.05, |LFC| ≥ 1)'
+  caption = 'Significant DE genes - dexamethasone vs untreated (padj < 0.05, |LFC| ≥ 1)'
 )
 ```
 
@@ -420,7 +419,7 @@ DT::datatable(
 
 **Volcano Plot**
 
-A volcano plot combines fold change (x-axis) and statistical significance (y-axis) into a single view. Genes in the upper corners are both strongly and significantly changed — these are the most biologically interesting candidates.
+A volcano plot combines fold change (x-axis) and statistical significance (y-axis) into a single view. Genes in the upper corners are both strongly and significantly changed - these are the most biologically interesting candidates.
 
 The dashed lines mark |log2FC| = 1 and padj = 0.05. Note that points are now coloured by padj alone,
 because the 2-fold requirement is inside the test: a gene to the right of the line is not significant
@@ -560,8 +559,8 @@ Significant genes are saved and ready for gene set enrichment analysis in the ne
 ## Interpretation questions
 
 ::: question
-1. Your table shows the paired model (`~ donor + condition`) finds over a thousand more significant genes than the simple model — same data, same treatment. What changed? Where did the donor-to-donor differences "go" in the simple model, and why does giving them a name in the paired model make the treatment effect easier to see? Was your prediction from the QC notebook right?
-2. Dexamethasone works by binding the glucocorticoid receptor, made by the gene *NR3C1*. Before looking: predict where *NR3C1* sits in your results — top hit, modest, or absent? Now find it in `res_df` (not the interactive table — that only holds genes passing *both* cutoffs). Two surprises are waiting: which **direction** did it move, and does it appear in your significant table at all? The drug did not switch this gene on — it bound the protein that was already there. So what did your RNA-seq actually measure about the receptor, and what did it miss?
+1. Your table shows the paired model (`~ donor + condition`) finds over a thousand more significant genes than the simple model - same data, same treatment. What changed? Where did the donor-to-donor differences "go" in the simple model, and why does giving them a name in the paired model make the treatment effect easier to see? Was your prediction from the QC notebook right?
+2. Dexamethasone works by binding the glucocorticoid receptor, made by the gene *NR3C1*. Before looking: predict where *NR3C1* sits in your results - top hit, modest, or absent? Now find it in `res_df` (not the interactive table - that only holds genes passing *both* cutoffs). Two surprises are waiting: which **direction** did it move, and does it appear in your significant table at all? The drug did not switch this gene on - it bound the protein that was already there. So what did your RNA-seq actually measure about the receptor, and what did it miss?
 :::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->

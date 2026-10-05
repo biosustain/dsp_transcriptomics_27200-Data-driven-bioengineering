@@ -1,4 +1,4 @@
-# Analysis scripts — 27200 Transcriptomics week
+# Analysis scripts - 27200 Transcriptomics week
 
 R Markdown source scripts for the two main datasets of the transcriptomics session.
 The nf-core/rnaseq scripts that come *before* this step live in [`00_pipeline/`](../00_pipeline/).
@@ -12,14 +12,14 @@ run unchanged on a local machine or in a Codespace.
 
 | Dataset | Source | Scripts |
 |---|---|---|
-| *Staphylococcus aureus* — biofilm vs planktonic over time, strains USA-100/USA-500 | Tomlinson *et al.* 2021, GEO GSE163153 / PRJNA685119 | `*_saureus.Rmd` |
-| *Homo sapiens* — airway smooth muscle ± dexamethasone, paired donor design | Himes *et al.* 2014, GEO GSE52778 / PRJNA229998 | unsuffixed `.Rmd` |
+| *Staphylococcus aureus* - biofilm vs planktonic over time, strains USA-100/USA-500 | Tomlinson *et al.* 2021, GEO GSE163153 / PRJNA685119 | `*_saureus.Rmd` |
+| *Homo sapiens* - airway smooth muscle ± dexamethasone, paired donor design | Himes *et al.* 2014, GEO GSE52778 / PRJNA229998 | unsuffixed `.Rmd` |
 
-Each dataset has three scripts, run in order — every step saves results the next one loads:
+Each dataset has three scripts, run in order - every step saves results the next one loads:
 
-1. `01_quality_control[_saureus].Rmd` — QC and exploratory analysis (PCA, correlation, outliers)
-2. `02_differential_expression_analysis[_saureus].Rmd` — DESeq2
-3. `03_gene_functional[_saureus].Rmd` — functional enrichment (ORA & GSEA)
+1. `01_quality_control[_saureus].Rmd` - QC and exploratory analysis (PCA, correlation, outliers)
+2. `02_differential_expression_analysis[_saureus].Rmd` - DESeq2
+3. `03_gene_functional[_saureus].Rmd` - functional enrichment (ORA & GSEA)
 
 ## Helper and provenance files
 
@@ -45,7 +45,7 @@ Each dataset has three scripts, run in order — every step saves results the ne
 - Contrast: dexamethasone vs untreated, n = 4 donors per group; albuterol arms excluded.
 - Design: `~ donor + condition` (paired) is the primary model; script 02 also runs plain
   `~ condition` side by side for teaching.
-- Enrichment: g:Profiler (`gprofiler2::gost`, live API — needs internet) for ORA;
+- Enrichment: g:Profiler (`gprofiler2::gost`, live API - needs internet) for ORA;
   `fgsea` + MSigDB Hallmark (`msigdbr`) for GSEA.
 - Gene IDs: the GENCODE v50 GTF (GRCh38) gives ENSEMBL IDs in `gene_id` and symbols in
   `gene_name`; symbols are used as row names, so no ID conversion is needed.

@@ -21,8 +21,8 @@ This report analyses bulk RNA-seq data from *Staphylococcus aureus* grown as bio
 The experiment has two experimental factors: **lifestyle** (biofilm vs planktonic) and **time point** (5 h, 10 h, 24 h). This gives us two distinct biological questions, which we treat separately because they are not the same question:
 
 :::boxy
-1. **Maturation** — how does a culture change over time, *within* one lifestyle? (biofilm at 24 h vs 5 h; planktonic at 24 h vs 5 h)
-2. **Lifestyle** — how do biofilm and planktonic differ, *accounting for* time? (two models: additive and interaction)
+1. **Maturation** - how does a culture change over time, *within* one lifestyle? (biofilm at 24 h vs 5 h; planktonic at 24 h vs 5 h)
+2. **Lifestyle** - how do biofilm and planktonic differ, *accounting for* time? (two models: additive and interaction)
 :::
 
 <div class="important">
@@ -134,7 +134,7 @@ To avoid repeating the same code for every contrast, we define one helper that t
 <code>coef</code> (a name from <code>resultsNames()</code>). Shrinkage pulls in the fold changes of noisy,
 low-count genes so that the large fold changes that remain are trustworthy. Because our helper below applies
 the fold-change threshold to the <em>shrunken</em> values, shrinkage here also affects which genes are
-counted as Up/Down — deliberately: a noisy low-count gene with an inflated raw fold change should not pass.
+counted as Up/Down - deliberately: a noisy low-count gene with an inflated raw fold change should not pass.
 </div>
 
 ```{r saureus-de-helper-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -199,12 +199,12 @@ check_extreme_fc <- function(res_df, n = 10) {
 }
 ```
 
-## Part 1 — Maturation: How a Culture Changes Over Time
+## Part 1 Maturation: How a Culture Changes Over Time
 
 Here we compare the **last** time point to the **first** *within a single lifestyle*. This isolates the effect of time (culture ageing / maturation) with lifestyle held constant, so nothing here is confounded by the biofilm-vs-planktonic difference.
 
 <div class="note">
-<strong>📘 Note — first vs last, and an invitation to explore.</strong> We compare <strong>24 h vs 5 h</strong>
+<strong>📘 Note - first vs last, and an invitation to explore.</strong> We compare <strong>24 h vs 5 h</strong>
 (last vs first). This is the largest maturation window and the clearest teaching contrast. The dataset also
 has a 10 h time point: you are encouraged to repeat these analyses with <code>first_tp</code> and
 <code>last_tp</code> set to other pairs (e.g. 5 h vs 10 h, or 10 h vs 24 h) to see how the maturation signal
@@ -216,7 +216,7 @@ first_tp <- "5h"    # baseline (reference)
 last_tp  <- "24h"   # compared against baseline
 ```
 
-### 1a — Maturation within Biofilm
+### 1a Maturation within Biofilm
 
 ::: {style="background:#eef7ee;border-left:5px solid #2e7d32;padding:0.6em 1em;margin:1em 0;border-radius:6px;"}
 <strong>❓ The question we are answering</strong>
@@ -242,19 +242,19 @@ cat("\nCoefficient:", coef_bf, "\n")
 cat("DEG counts (padj <", padj_threshold, "& |log2FC| >", round(lfc_threshold, 3), "):\n")
 print(table(res_bf$direction))
 
-cat("\nMost extreme fold changes (check baseMean — high = real, single digits = low-count noise):\n")
+cat("\nMost extreme fold changes (check baseMean - high = real, single digits = low-count noise):\n")
 print(check_extreme_fc(res_bf))
 ```
 
 ```{r saureus-de-maturation-biofilm-volcano-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=9, fig.height=8}
 plot_volcano(res_bf,
-             paste0(strain, " — biofilm maturation (", last_tp, " vs ", first_tp, ")"),
+             paste0(strain, " - biofilm maturation (", last_tp, " vs ", first_tp, ")"),
              "Positive log2FC = higher at 24 h")
 ```
 
 *Interpretation:* a substantial set of genes changes as the biofilm matures from 5 h to 24 h, split between genes induced and repressed with age. This is the biofilm's own developmental programme, measured without any reference to the planktonic state.
 
-### 1b — Maturation within Planktonic
+### 1b Maturation within Planktonic
 
 ::: {style="background:#eef7ee;border-left:5px solid #2e7d32;padding:0.6em 1em;margin:1em 0;border-radius:6px;"}
 <strong>❓ The question we are answering</strong>
@@ -280,37 +280,37 @@ cat("\nCoefficient:", coef_pk, "\n")
 cat("DEG counts (padj <", padj_threshold, "& |log2FC| >", round(lfc_threshold, 3), "):\n")
 print(table(res_pk$direction))
 
-cat("\nMost extreme fold changes (check baseMean — high = real, single digits = low-count noise):\n")
+cat("\nMost extreme fold changes (check baseMean - high = real, single digits = low-count noise):\n")
 print(check_extreme_fc(res_pk))
 ```
 
 ```{r saureus-de-maturation-planktonic-volcano-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=9, fig.height=8}
 plot_volcano(res_pk,
-             paste0(strain, " — planktonic maturation (", last_tp, " vs ", first_tp, ")"),
+             paste0(strain, " - planktonic maturation (", last_tp, " vs ", first_tp, ")"),
              "Positive log2FC = higher at 24 h")
 ```
 
 *Interpretation:* planktonic cultures typically show an even larger maturation response than biofilm over the same window. This is expected: planktonic cells exhaust their medium and enter stationary phase between 5 h and 24 h, a dramatic physiological transition that remodels a large part of the transcriptome.
 
 <div class="note">
-<strong>📘 Look closely at the most extreme genes — a biology lesson hiding in a sanity check.</strong> The
+<strong>📘 Look closely at the most extreme genes - a biology lesson hiding in a sanity check.</strong> The
 diagnostic table above was meant only to confirm that big fold changes come from well-expressed genes (they
-do — base means in the hundreds to thousands). But look at the <em>gene IDs</em> of the strongest planktonic
+do - base means in the hundreds to thousands). But look at the <em>gene IDs</em> of the strongest planktonic
 hits: several are <strong>consecutive locus tags</strong> (e.g. a run of neighbouring <code>SA_RS139xx</code>
 genes), all changing strongly in the <strong>same direction</strong>, all highly expressed. In bacteria,
-consecutive genes transcribed together usually form an <strong>operon</strong> — a group of genes controlled
+consecutive genes transcribed together usually form an <strong>operon</strong> - a group of genes controlled
 as a single unit. Seeing a whole run of adjacent genes coordinately switched off is the transcriptional
 signature of an operon being shut down as the culture ages.
 
 <strong>Challenge:</strong> look up a few of these <code>SA_RS139xx</code> locus tags (e.g. on NCBI Gene or
 in the reference annotation). What do they encode? A coordinated shutdown of highly-expressed adjacent genes
 at 24 h is a classic sign of the cell reducing a major energy-expensive process as it enters stationary
-phase — which functional category would you expect, and does it match the "dormancy" biology described in
+phase - which functional category would you expect, and does it match the "dormancy" biology described in
 the paper?
 </div>
 
 <div class="tip">
-<strong>💡 Tip — visualising operons in R.</strong> Genes along a chromosome can be drawn as arrows with the
+<strong>💡 Tip - visualising operons in R.</strong> Genes along a chromosome can be drawn as arrows with the
 <code>gggenes</code> package (a ggplot extension), coloured by fold change to show a coordinated operon
 response at a glance. This needs each gene's genomic start/end/strand, which come from the reference
 annotation (GTF/GFF) rather than the count matrix. If those coordinates are available in the analysis object,
@@ -322,7 +322,7 @@ the section below draws the neighbourhood of the top hit automatically.
 To see the coordinated shutdown directly, we read the gene coordinates from the reference GTF, take a window of genes centred on the strongest planktonic maturation hit, and draw them as arrows coloured by their fold change. A block of adjacent arrows all the same colour is the visual signature of an operon responding as a unit.
 
 ```{r saureus-de-load-gtf-coords-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-# A GTF is a tab-delimited text file, so we read it directly with readr — no
+# A GTF is a tab-delimited text file, so we read it directly with readr - no
 # specialised genomics package is needed. We keep only the "gene" feature rows,
 # then pull the fields we want out of the free-text attributes column with regex.
 gtf_raw <- readr::read_tsv(
@@ -362,7 +362,7 @@ print(head(coords, 3))
 <strong>📘 Note:</strong> We match the DE results to the GTF by <code>gene_id</code> (the locus tag). This GTF
 also carries a <code>gene</code> attribute with the real gene symbol (e.g. <em>dnaA</em>), which we use for
 nicer labels when available and fall back to the locus tag otherwise. If the number matched were much lower
-than the number of genes, the identifier styles would differ between the count matrix and the GTF — here they
+than the number of genes, the identifier styles would differ between the count matrix and the GTF - here they
 are the same locus tags, so the match should be nearly complete.
 </div>
 
@@ -436,14 +436,14 @@ at a single transcriptional unit.
 </div>
 
 <div class="note">
-<strong>📘 Interpreting the plot — is this really an operon?</strong> Three features together justify calling
+<strong>📘 Interpreting the plot - is this really an operon?</strong> Three features together justify calling
 a block of genes an operon, and you can read all three straight off this figure:
 <ul>
-<li><strong>Co-location</strong> — the strongly-coloured genes are immediate neighbours on the chromosome,
+<li><strong>Co-location</strong> - the strongly-coloured genes are immediate neighbours on the chromosome,
 with no unrelated genes breaking up the block.</li>
-<li><strong>Co-orientation</strong> — the arrows all point the same way (same strand), which is required for
+<li><strong>Co-orientation</strong> - the arrows all point the same way (same strand), which is required for
 genes to be transcribed together into one mRNA.</li>
-<li><strong>Co-regulation</strong> — they all change by a similar, large amount in the same direction (here a
+<li><strong>Co-regulation</strong> - they all change by a similar, large amount in the same direction (here a
 coordinated shutdown of roughly 7–8 log2 units in planktonic cells by 24 h).</li>
 </ul>
 
@@ -455,7 +455,7 @@ paper describes.
 
 <strong>A note on rigour:</strong> co-location + co-orientation + co-regulation make a very strong
 <em>inference</em> that these genes form an operon, but strictly, "operon" means transcription from a single
-promoter into one mRNA — proving that needs operon-mapping evidence (e.g. transcript read-through across gene
+promoter into one mRNA - proving that needs operon-mapping evidence (e.g. transcript read-through across gene
 boundaries) or prior literature. For well-studied organisms like <em>S. aureus</em>, the identity of the
 block can be confirmed directly against the published literature.
 </div>
@@ -481,12 +481,12 @@ kable(overlap_tbl, caption = "Maturation DEGs: overlap between lifestyles") %>%
 ```
 
 <div class="note">
-<strong>📘 Note:</strong> A large "Shared" set is expected — both cultures age over the same 5 h → 24 h window
+<strong>📘 Note:</strong> A large "Shared" set is expected - both cultures age over the same 5 h → 24 h window
 and share the general stationary-phase / growth-slowdown response. The lifestyle-specific genes (in only one
 column) are often the more biologically interesting part of maturation.
 </div>
 
-## Part 2 — Lifestyle: Biofilm vs Planktonic, Accounting for Time
+## Part 2 Lifestyle: Biofilm vs Planktonic, Accounting for Time
 
 Now we ask how biofilm differs from planktonic. Because the two lifestyles are sampled at the same set of time points, we can model lifestyle **while adjusting for time**, instead of comparing at a single confounded snapshot. We show two models that ask subtly different questions.
 
@@ -501,7 +501,7 @@ cat("Design table:\n")
 print(table(dds_ls$lifestyle, dds_ls$timepoint))
 ```
 
-### 2a — Additive Model: the Lifestyle Effect, Adjusted for Time
+### 2a Additive Model: the Lifestyle Effect, Adjusted for Time
 
 ::: {style="background:#eef7ee;border-left:5px solid #2e7d32;padding:0.6em 1em;margin:1em 0;border-radius:6px;"}
 <strong>❓ The question we are answering</strong>
@@ -509,7 +509,7 @@ print(table(dds_ls$lifestyle, dds_ls$timepoint))
 - <strong>Question:</strong> Averaging across time, which genes differ between biofilm and planktonic once the shared time trend is removed?
 - <strong>Model:</strong> `~ timepoint + lifestyle`. The `timepoint` term absorbs the ageing effect common to both lifestyles; the `lifestyle` term is then the biofilm-vs-planktonic difference on top of that.
 - <strong>A positive log2FC means:</strong> higher in biofilm.
-- <strong>A hit tells you:</strong> this gene differs by lifestyle in a way that is consistent across time — a candidate core biofilm-vs-planktonic gene, not just a growth-phase artefact.
+- <strong>A hit tells you:</strong> this gene differs by lifestyle in a way that is consistent across time - a candidate core biofilm-vs-planktonic gene, not just a growth-phase artefact.
 :::
 
 ```{r saureus-de-lifestyle-additive-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -524,7 +524,7 @@ print(table(res_add$direction))
 
 ```{r saureus-de-lifestyle-additive-volcano-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=9, fig.height=8}
 plot_volcano(res_add,
-             paste0(strain, " — lifestyle (additive, time-adjusted)"),
+             paste0(strain, " - lifestyle (additive, time-adjusted)"),
              "Positive log2FC = higher in biofilm")
 ```
 
@@ -533,19 +533,18 @@ plot_volcano(res_add,
 <div class="important">
 <strong>⭐ What the additive model assumes.</strong> It assumes the lifestyle difference is <em>the same size at
 every time point</em> (only the baseline shifts with time, not the lifestyle gap). This is a strong
-assumption. If the biofilm-vs-planktonic difference actually grows with age — which the paper suggests —
-then a single "average" lifestyle effect is an oversimplification. The interaction model below tests exactly
+assumption. If the biofilm-vs-planktonic difference actually grows with age - which the paper suggests - then a single "average" lifestyle effect is an oversimplification. The interaction model below tests exactly
 that.
 </div>
 
-### 2b — Interaction Model: Does the Lifestyle Difference Change with Time?
+### 2b Interaction Model: Does the Lifestyle Difference Change with Time?
 
 ::: {style="background:#eef7ee;border-left:5px solid #2e7d32;padding:0.6em 1em;margin:1em 0;border-radius:6px;"}
 <strong>❓ The question we are answering</strong>
 
 - <strong>Question:</strong> Is the biofilm-vs-planktonic difference the same at every time point, or does it change as the cultures age?
 - <strong>Model:</strong> `~ timepoint + lifestyle + timepoint:lifestyle`. The interaction terms capture how much the lifestyle gap at 10 h or 24 h differs from the lifestyle gap at 5 h.
-- <strong>A hit tells you:</strong> this gene's biofilm-vs-planktonic difference is time-dependent — it is part of the "response strengthens (or weakens) with maturation" signal.
+- <strong>A hit tells you:</strong> this gene's biofilm-vs-planktonic difference is time-dependent - it is part of the "response strengthens (or weakens) with maturation" signal.
 :::
 
 ```{r saureus-de-lifestyle-interaction-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -555,10 +554,10 @@ design(dds_ls) <- ~ timepoint + lifestyle + timepoint:lifestyle
 ```
 
 <div class="note">
-<strong>📘 Note — testing the interaction, not a single coefficient.</strong> "Does the lifestyle gap change
+<strong>📘 Note - testing the interaction, not a single coefficient.</strong> "Does the lifestyle gap change
 with time?" is a question about <em>all</em> the interaction terms together, so we test them jointly with a
 likelihood-ratio test (LRT): the full model above versus a reduced model without the interaction. A gene is
-significant if adding the interaction terms improves the fit — i.e. its lifestyle difference is not constant
+significant if adding the interaction terms improves the fit - i.e. its lifestyle difference is not constant
 across time. Because significance here comes from comparing two models (not from one fold-change coefficient),
 we report the LRT p-value and use the model's own fold-change columns for description rather than apeglm
 shrinkage.
@@ -569,7 +568,7 @@ dds_lrt <- DESeq(dds_ls, test = "LRT", reduced = ~ timepoint + lifestyle)
 cat("resultsNames (full interaction model):\n"); print(resultsNames(dds_lrt))
 
 # Careful: in an LRT result the log2FoldChange column is NOT "the" lifestyle
-# effect — it is only the last interaction coefficient (timepoint24h.lifestyleBiofilm).
+# effect - it is only the last interaction coefficient (timepoint24h.lifestyleBiofilm).
 # Use the padj for the test; describe effect sizes with the profile plots below.
 res_lrt <- as.data.frame(results(dds_lrt)) %>%
   rownames_to_column("gene_id") %>%
@@ -625,7 +624,7 @@ if (length(top_int) >= 1) {
 <div class="important">
 <strong>⭐ How to read this interaction result.</strong> The LRT flags a very large fraction of all tested
 genes as having a time-dependent lifestyle difference. When a test calls almost everything significant, the
-<em>count</em> is not a useful headline — it mainly tells you that biofilm and planktonic follow globally
+<em>count</em> is not a useful headline - it mainly tells you that biofilm and planktonic follow globally
 different trajectories over time, which we already knew from the QC. The informative output here is not the
 number but the <strong>shapes</strong> of the top genes above. Notice that many are driven by the
 <strong>planktonic</strong> cultures changing sharply between 10 h and 24 h (entry into stationary phase),
@@ -636,10 +635,10 @@ raw significant-gene count.
 </div>
 
 <div class="note">
-<strong>📘 Note — a subtlety about the two models.</strong> The additive model's single lifestyle effect and
+<strong>📘 Note - a subtlety about the two models.</strong> The additive model's single lifestyle effect and
 the interaction test's near-universal significance are not in conflict: the additive effect is the
 lifestyle difference <em>averaged</em> over time, while the interaction asks whether that difference is
-<em>constant</em>. Both can be true at once — there is an average difference, and it also changes with time.
+<em>constant</em>. Both can be true at once - there is an average difference, and it also changes with time.
 Which one you report depends on the question you are asking.
 </div>
 
@@ -647,19 +646,19 @@ Which one you report depends on the question you are asking.
 
 :::boxy
 - The **additive model** (`~ timepoint + lifestyle`) gives one clean lifestyle effect, averaged over time. Use it when the lifestyle difference is roughly constant across time, and when you want a single, interpretable biofilm-vs-planktonic gene list.
-- The **interaction model** (`+ timepoint:lifestyle`) asks whether that difference *changes* with age. Use it when the timing of the response is the biology of interest — as it is in this paper, where biofilm divergence is reported to grow in mature biofilms.
+- The **interaction model** (`+ timepoint:lifestyle`) asks whether that difference *changes* with age. Use it when the timing of the response is the biology of interest - as it is in this paper, where biofilm divergence is reported to grow in mature biofilms.
 
 They are not competitors so much as answers to different questions. A common workflow is to look at the interaction first: if few genes have a significant interaction, the additive model is a fair summary; if many do, the "average" lifestyle effect hides important time-dependence and should be interpreted with care.
 :::
 
 <div class="note">
-<strong>📘 Note — for you to write in class.</strong> Compare the number of significant genes from the additive
+<strong>📘 Note - for you to write in class.</strong> Compare the number of significant genes from the additive
 model (2a) with the number of time-dependent genes from the interaction (2b). What does the ratio tell you
 about whether a single "biofilm vs planktonic" number is meaningful for this strain? Does the answer differ
 between USA100 and USA500?
 </div>
 
-## Part 3 — Hypothesis Test: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?
+## Part 3 Hypothesis Test: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?
 
 ::: {style="background:#eef7ee;border-left:5px solid #2e7d32;padding:0.6em 1em;margin:1em 0;border-radius:6px;"}
 <strong>❓ The question we are answering</strong>
@@ -671,7 +670,7 @@ between USA100 and USA500?
 
 <div class="important">
 <strong>⭐ A deliberate, clearly-labelled trade-off.</strong> This single-time-point contrast is
-<strong>confounded with growth phase</strong> — at 24 h, planktonic cells are deep in stationary phase, so
+<strong>confounded with growth phase</strong> - at 24 h, planktonic cells are deep in stationary phase, so
 some of the difference reflects growth state rather than lifestyle. We know this (it is exactly why the main
 lifestyle analysis in Part 2 adjusts for time). We compute it here <em>anyway</em>, and only for this
 specific hypothesis, because "biofilm biomass" is a mature-culture phenotype and the 24 h snapshot is its
@@ -689,7 +688,7 @@ for discussion, not a clean quantitative comparison.
 </div>
 
 ```{r saureus-de-hypothesis-24h-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-# Biofilm vs planktonic at 24h only — the mature-biofilm snapshot
+# Biofilm vs planktonic at 24h only - the mature-biofilm snapshot
 dds_24 <- dds_all[, dds_all$timepoint == "24h"]
 dds_24$timepoint <- droplevels(dds_24$timepoint)
 dds_24$lifestyle <- relevel(droplevels(dds_24$lifestyle), ref = "Planktonic")
@@ -745,7 +744,7 @@ quantitative conclusions.
 
 ```{r saureus-de-hypothesis-24h-volcano-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=9, fig.height=8}
 plot_volcano(res_24,
-             paste0(strain, " — biofilm vs planktonic at 24h (mature biofilm)"),
+             paste0(strain, " - biofilm vs planktonic at 24h (mature biofilm)"),
              "Positive log2FC = higher in biofilm | note: growth-phase confounded")
 ```
 
@@ -776,7 +775,7 @@ cat("✅ Saved all result tables for", strain, "\n")
 | 1a | What changes as biofilm matures? | `~ timepoint` (biofilm only) | 5 h |
 | 1b | What changes as planktonic ages? | `~ timepoint` (planktonic only) | 5 h |
 | 2a | Lifestyle effect, averaged over time | `~ timepoint + lifestyle` | Planktonic |
-| 2b | Does the lifestyle effect change with time? | LRT: interaction vs additive | — |
+| 2b | Does the lifestyle effect change with time? | LRT: interaction vs additive | - |
 | 3 | Does the strongest biofilm producer show the strongest biofilm-vs-planktonic difference? | `~ lifestyle` (24 h only) | Planktonic |
 :::
 
@@ -790,9 +789,9 @@ at the top.
 ## Interpretation questions
 
 ::: question
-1. The script sets planktonic as the reference, so a positive fold change means "up in biofilm". If you swapped the reference, what would change in the numbers — and what would change only in how you tell the story? For *S. aureus* living on a catheter in a patient, which lifestyle is really the "normal" one?
-2. Pick one gene from your nine-panel profile plot. Looking at its two lines: is the interaction driven by the biofilm cells changing, the planktonic cells changing, or a real crossover? Now imagine sampling had stopped at 10 h — what would you have concluded about this gene? What decides the answer: the biology, or the time window you measured?
-3. The hypothesis: USA500, the strongest biofilm producer in the paper's assay, should show the biggest biofilm-vs-planktonic difference at 24 h. Compare your cross-strain table with a group that analysed the other strain. Did the hypothesis hold? Suggest two possible explanations for what you see — one biological, one technical. (Hint: which reference genome were the USA500 reads mapped to?)
+1. The script sets planktonic as the reference, so a positive fold change means "up in biofilm". If you swapped the reference, what would change in the numbers - and what would change only in how you tell the story? For *S. aureus* living on a catheter in a patient, which lifestyle is really the "normal" one?
+2. Pick one gene from your nine-panel profile plot. Looking at its two lines: is the interaction driven by the biofilm cells changing, the planktonic cells changing, or a real crossover? Now imagine sampling had stopped at 10 h - what would you have concluded about this gene? What decides the answer: the biology, or the time window you measured?
+3. The hypothesis: USA500, the strongest biofilm producer in the paper's assay, should show the biggest biofilm-vs-planktonic difference at 24 h. Compare your cross-strain table with a group that analysed the other strain. Did the hypothesis hold? Suggest two possible explanations for what you see - one biological, one technical. (Hint: which reference genome were the USA500 reads mapped to?)
 :::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->

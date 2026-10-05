@@ -40,8 +40,8 @@ The contrast of interest is:
 <strong>📘 Note:</strong> Key points about this dataset:
 <ul>
 <li>Reads are aligned with a non-splice-aware aligner (Bowtie2), appropriate for bacterial genomes with no introns</li>
-<li>The pipeline output labels genes by their <strong>locus tags</strong> (e.g. <code>SA_RS00005</code> for N315, <code>SAUSA300_RS00010</code> for USA300). The reference GTF does carry gene symbols for roughly a third of genes (<code>dnaA</code>, <code>arcA</code>, ...), and later scripts use them for readability — but the locus tag is the stable identifier throughout</li>
-<li>Because the two strains use different reference genomes, their gene identifiers are not comparable — the analyses are kept fully separate and are never merged</li>
+<li>The pipeline output labels genes by their <strong>locus tags</strong> (e.g. <code>SA_RS00005</code> for N315, <code>SAUSA300_RS00010</code> for USA300). The reference GTF does carry gene symbols for roughly a third of genes (<code>dnaA</code>, <code>arcA</code>, ...), and later scripts use them for readability - but the locus tag is the stable identifier throughout</li>
+<li>Because the two strains use different reference genomes, their gene identifiers are not comparable - the analyses are kept fully separate and are never merged</li>
 <li>Enrichment analysis (a later script) uses KEGG for <em>S. aureus</em>; g:Profiler does not support this organism</li>
 </ul>
 </div>
@@ -51,7 +51,7 @@ The contrast of interest is:
 planktonic cultures at 5 h (n = 4 each), 10 h (n = 4 each) and 24 h (n = 8 each). This QC script loads
 <strong>all 32 samples</strong> so the PCA can reveal the time-point structure. Script 02 also keeps all
 time points: it models maturation over time and lifestyle adjusted for time, and uses a single time point
-(24 h) only for the final hypothesis test — so what you learn here about the time structure directly shapes
+(24 h) only for the final hypothesis test - so what you learn here about the time structure directly shapes
 how you will read those models.
 </div>
 
@@ -150,7 +150,7 @@ print(head(rownames(count_genes)))
 
 <div class="note">
   <strong>📘 Note:</strong> In the pipeline output <code>gene_id</code> and <code>gene_name</code> are the
-  same locus tags — the pipeline did not fill in symbols. We keep the locus tags as row names throughout:
+  same locus tags - the pipeline did not fill in symbols. We keep the locus tags as row names throughout:
   they are the stable identifiers used by KEGG for enrichment later. (The GTF itself does have symbols for
   about a third of genes; script 02 extracts them purely for readability.)
 </div>
@@ -190,7 +190,7 @@ print(table(samples_info$lifestyle, samples_info$timepoint))
 ::: {style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;"}
 <strong>💡 Tip:</strong> The table above is your design at a glance. Note it is <strong>unbalanced across
 time</strong>: 5 h and 10 h have 4 replicates per lifestyle, while 24 h has 8. This does not affect QC, but
-keep it in mind when reading the models in script 02 — the 24 h groups carry twice the replicates.
+keep it in mind when reading the models in script 02 - the 24 h groups carry twice the replicates.
 :::
 
 ```{r saureus-qc-view-metadata-0, echo=TRUE, include=TRUE, eval=TRUE, message=FALSE, warning=FALSE}
@@ -206,7 +206,7 @@ DT::datatable(
     scrollY     = 200,
     scroller    = TRUE
   ),
-  caption = paste0('Sample metadata — ', strain)
+  caption = paste0('Sample metadata - ', strain)
 )
 ```
 
@@ -214,8 +214,8 @@ DT::datatable(
 
 Before building the `DESeqDataSet` we:
 
-1.  Set factor levels so that `Planktonic` is the **reference level** (the denominator in fold-change calculations — biofilm is compared *to* planktonic).
-2.  Align the sample order between the count matrix and the metadata — `DESeq2` requires these to match exactly.
+1.  Set factor levels so that `Planktonic` is the **reference level** (the denominator in fold-change calculations - biofilm is compared *to* planktonic).
+2.  Align the sample order between the count matrix and the metadata - `DESeq2` requires these to match exactly.
 
 ```{r saureus-qc-prepare-data-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 # Order metadata to match the count matrix columns exactly
@@ -282,7 +282,7 @@ information about that sample, whatever you do afterwards.
 
 ### Pre-filtering Low-count Genes
 
-Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples — here the size of the smallest **lifestyle** group (16). Note this is stricter than DESeq2's usual convention of the smallest design cell (4 samples in a lifestyle × time group): a gene expressed only in one lifestyle at one time point could be lost. With this dataset that cost is small, and the stricter filter keeps the later models stable.
+Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples - here the size of the smallest **lifestyle** group (16). Note this is stricter than DESeq2's usual convention of the smallest design cell (4 samples in a lifestyle × time group): a gene expressed only in one lifestyle at one time point could be lost. With this dataset that cost is small, and the stricter filter keeps the later models stable.
 
 Unlike the human genome, most bacterial genes are expressed under standard growth, so expect only a modest fraction to be filtered out.
 
@@ -303,7 +303,7 @@ cat("Genes removed         :", sum(!keep), "\n")
 
 ## Exploratory Data Analysis
 
-In this section we do **not** perform statistical tests. The goal is **quality control:** check count distributions, detect technical outliers, and confirm that samples cluster as expected — and, specifically for this dataset, to see how strongly time point structures the data.
+In this section we do **not** perform statistical tests. The goal is **quality control:** check count distributions, detect technical outliers, and confirm that samples cluster as expected - and, specifically for this dataset, to see how strongly time point structures the data.
 
 ### Estimate Size Factors
 
@@ -352,7 +352,7 @@ distribution <- ggplot(counts_norm,
   theme_pubr(border = TRUE) +
   xlab("Sample") +
   ylab("log2(normalised counts + 1)") +
-  ggtitle(paste0("Normalised count distribution — ", strain))
+  ggtitle(paste0("Normalised count distribution - ", strain))
 
 distribution
 
@@ -431,10 +431,10 @@ ggsave(
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
 <strong>⭐ How to read this plot.</strong> Each point is one sample; samples that are close have similar
-overall expression. Check the % variance printed on each axis first — it tells you how much of the story
+overall expression. Check the % variance printed on each axis first - it tells you how much of the story
 that axis carries. Then look at which axis separates <strong>lifestyle</strong> (colour) and which separates
 <strong>time point</strong> (shape). The paper reports that the biofilm–planktonic difference grows with
-culture age, strongest at 24 h — read the actual separation off <em>your</em> plot rather than assuming it.
+culture age, strongest at 24 h - read the actual separation off <em>your</em> plot rather than assuming it.
 Script 02 builds directly on this structure: it models change over time and lifestyle adjusted for time, and
 saves the plain two-group comparison for a single, well-replicated time point (24 h) at the very end.
 :::
@@ -485,8 +485,8 @@ dev.off()
 **How to read this heatmap:**
 
 - Each **row** is a gene, each **column** is a sample
-- Colours show the **z-score** (row-scaled expression) — red = higher than average for that gene, blue = lower
-- The **dendrograms** show hierarchical clustering — samples/genes that behave similarly are grouped together
+- Colours show the **z-score** (row-scaled expression) - red = higher than average for that gene, blue = lower
+- The **dendrograms** show hierarchical clustering - samples/genes that behave similarly are grouped together
 
 **What to look for:**
 
@@ -506,7 +506,7 @@ Before proceeding to differential expression, confirm the QC checks and record w
 | Correlation heatmap | Note whether structure is by lifestyle, by time point, or both |
 | PCA | Note which axis is lifestyle and which is time point |
 | No isolated samples | No technical outliers |
-| **Time structure** | **Record how strongly time separates your samples — script 02's models are built around it** |
+| **Time structure** | **Record how strongly time separates your samples - script 02's models are built around it** |
 :::
 
 ::: {style="font-size: 0.9em; color: grey;"}
@@ -536,8 +536,8 @@ cat("   Note             : this holds ALL time points. Script 02 subsets to the 
 ## Interpretation questions
 
 ::: question
-1. Your output prints how many genes the filter removed. Pick one of them — a gene with almost no counts in any of your 32 samples — and suggest two possible reasons it is so quiet: one biological, one technical. (USA-500 groups: remember your reads were mapped to the USA300 genome.) How could you start telling the two apart with the data you already have?
-2. These 50 genes are the most *variable* — not necessarily the most *important*. Could a gene that is essential for biofilm formation be missing from this heatmap? Give one reason how. (Hint: what does a count measure — and what does it miss?)
+1. Your output prints how many genes the filter removed. Pick one of them - a gene with almost no counts in any of your 32 samples - and suggest two possible reasons it is so quiet: one biological, one technical. (USA-500 groups: remember your reads were mapped to the USA300 genome.) How could you start telling the two apart with the data you already have?
+2. These 50 genes are the most *variable* - not necessarily the most *important*. Could a gene that is essential for biofilm formation be missing from this heatmap? Give one reason how. (Hint: what does a count measure - and what does it miss?)
 :::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->

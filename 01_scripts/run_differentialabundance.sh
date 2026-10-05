@@ -2,7 +2,7 @@
 
 # =============================================================================
 # nf-core/differentialabundance run script
-# Study: Human ASM — dexamethasone vs untreated (Himes 2014, PRJNA229998)
+# Study: Human ASM - dexamethasone vs untreated (Himes 2014, PRJNA229998)
 # Working directory: /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering
 #
 # NOTE: This track uses a simple ~ condition contrast (differentialabundance's

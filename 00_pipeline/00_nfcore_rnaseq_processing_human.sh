@@ -1,6 +1,6 @@
-# Script to process RNA sequencing files — Human ASM (dexamethasone), Himes 2014
+# Script to process RNA sequencing files - Human ASM (dexamethasone), Himes 2014
 # =============================================================================
-# PROVENANCE ONLY — this run has already been completed on the DTU HPC.
+# PROVENANCE ONLY - this run has already been completed on the DTU HPC.
 # Kept here to document how the star_salmon output under
 #   data/data-02-Homo_sapiens/hasapiens/star_salmon/
 # was generated. You do NOT need to re-run this for the workshop.
@@ -38,7 +38,7 @@ nextflow run 'https://github.com/nf-core/rnaseq' \
     -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/00_pipeline/human_demo.config
 
 # -----------------------------------------------------------------------------
-# Full run on the DTU HPC (for the record — not runnable from the repo):
+# Full run on the DTU HPC (for the record - not runnable from the repo):
 #   nf-core/rnaseq 3.27.0, -profile conda, LSF; 8 samples (dexamethasone + untreated), FASTQs from ENA
 #   fasta:  GRCh38.primary_assembly.genome.fa            (GENCODE release 50)
 #   gtf:    gencode.v50.primary_assembly.annotation.gtf  (GENCODE release 50)

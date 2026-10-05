@@ -2,7 +2,7 @@
     "study_name": "Human_ASM_dexamethasone",
     "study_type": "rnaseq",
     "study_abundance_type": "counts",
-    "report_title": "Human ASM — dexamethasone vs untreated",
+    "report_title": "Human ASM - dexamethasone vs untreated",
     "report_contributors": "Himes 2014 (PRJNA229998)",
 
     "input": "/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/data-02-Homo_sapiens/metadata/samplesheet_PRJNA229998-seq_DEG.csv",

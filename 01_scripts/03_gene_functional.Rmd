@@ -60,11 +60,11 @@ library(DT)
 ## Load Results from Differential Expression Analysis
 
 This script reads the DE results produced by `02_differential_expression_analysis.Rmd`.
-Make sure you have run that script first — it saves two files to `results/`:
+Make sure you have run that script first - it saves two files to `results/`:
 
 :::boxy
-- `results/human/DE_treatment_vs_control_all.tsv` — all tested genes with shrunken LFC
-- `results/human/DE_treatment_vs_control_significant.tsv` — significant DE genes (padj < 0.05, |LFC| >= 1)
+- `results/human/DE_treatment_vs_control_all.tsv` - all tested genes with shrunken LFC
+- `results/human/DE_treatment_vs_control_significant.tsv` - significant DE genes (padj < 0.05, |LFC| >= 1)
 :::
 
 ```{r human-fn-load-results, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -99,7 +99,7 @@ cat("  Downregulated      :", sum(res_sig$log2FoldChange < 0), "\n")
 ## Running GSEA
 
 Everything below follows from one idea: rank the genes, then look at where each gene set falls in
-that ranking. The score GSEA reports is the **Normalised Enrichment Score (NES)** — positive means
+that ranking. The score GSEA reports is the **Normalised Enrichment Score (NES)** - positive means
 the set sits towards the up-regulated end, negative towards the down-regulated end.
 
 :::boxy
@@ -135,7 +135,7 @@ cat("Bottom 5 (downreg.)  :", paste(tail(names(rank_vector), 5), collapse = ", "
 
 We use the MSigDB **Reactome** collection (`C2: CP:REACTOME`) for human, reshaped into the named list
 `fgsea` expects. Reactome is a good fit here: it is a large, curated pathway collection that includes
-detailed immune, inflammatory and signalling pathways — the biology this experiment is about.
+detailed immune, inflammatory and signalling pathways - the biology this experiment is about.
 
 <div style="background:#fff3cd;border-left:4px solid #ffc107;padding:10px;margin:10px 0;">
   <strong>Tip:</strong> To use a different collection, change the arguments below (e.g. Hallmark via
@@ -206,7 +206,7 @@ In the table and plots below, check the `padj` column before you read a set as a
 # Sets passing multiple-testing correction
 gsea_padj_sig <- gsea_results %>% as.data.frame() %>% filter(padj < 0.05)
 
-# Sets passing the nominal (uncorrected) threshold — for inspecting the biology
+# Sets passing the nominal (uncorrected) threshold - for inspecting the biology
 gsea_nom <- gsea_results %>%
   as.data.frame() %>%
   filter(pval < 0.05) %>%
@@ -273,7 +273,7 @@ plotGseaTable(
 one end is a coordinated shift; compare the small sets with the very large ones.
 :::
 
-### NES Bar Plot — Top Sets by Nominal p-value
+### NES Bar Plot: Top Sets by Nominal p-value
 
 We plot the top sets by **nominal** p-value. In this dataset all of the top 20 also pass padj < 0.05.
 
@@ -306,11 +306,11 @@ if (nrow(gsea_bar) > 0) {
 }
 ```
 
-### Enrichment Plot — Top Sets
+### Enrichment Plot: Top Sets
 
 The enrichment plot shows the running sum of the enrichment score for a single gene set across the ranked gene list. The peak of the curve is the enrichment score; genes from the set are shown as vertical bars (the "rug") at the bottom.
 
-**How to read it:** the x-axis is every tested gene, ordered from most up-regulated (left) to most down-regulated (right). Each tick in the rug is one gene of the set. Ticks bunched at one end drive the curve to a high peak — coordinated enrichment. Ticks spread evenly across the axis give a flat, wandering curve and no enrichment.
+**How to read it:** the x-axis is every tested gene, ordered from most up-regulated (left) to most down-regulated (right). Each tick in the rug is one gene of the set. Ticks bunched at one end drive the curve to a high peak - coordinated enrichment. Ticks spread evenly across the axis give a flat, wandering curve and no enrichment.
 
 ```{r human-fn-gsea-enrichment-plots, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 top_up <- gsea_nom %>% filter(NES > 0) %>% slice_min(pval, n = 1) %>% pull(pathway)
@@ -407,7 +407,7 @@ interpret it.
 
 ::: question
 1. "Innate immune system" came out as activated, yet dexamethasone is a classic anti-inflammatory drug and there are no immune cells in this culture. Look at the set's leading-edge genes (`gsea_results$leadingEdge`). What is actually driving it, and how would you phrase the result in a report so that it is correct? Then compare with a small set such as smooth muscle contraction: why is a small, specific set easier to interpret?
-2. Everything in this chapter came from transcript abundance. Yet the molecule whose *activity* changed most — the glucocorticoid receptor (*NR3C1*) — was switched on by drug binding, not by transcription. Name one claim your enrichment tables can honestly make, one they cannot, and one experiment that would measure activity instead of abundance.
+2. Everything in this chapter came from transcript abundance. Yet the molecule whose *activity* changed most - the glucocorticoid receptor (*NR3C1*) - was switched on by drug binding, not by transcription. Name one claim your enrichment tables can honestly make, one they cannot, and one experiment that would measure activity instead of abundance.
 :::
 
 <!-- --------------------- Do not edit this and below ---------------------- -->

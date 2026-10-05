@@ -27,12 +27,12 @@ internet connection.
 Three collections are built, all keyed on the **locus tags produced by the nf-core/rnaseq
 pipeline** (`SA_RS...` for USA-100 / N315, `SAUSA300_RS...` for USA-500 / USA-300):
 
-- **KEGG pathways** — retrieved from the KEGG REST API with `KEGGREST`. KEGG stores
+- **KEGG pathways** - retrieved from the KEGG REST API with `KEGGREST`. KEGG stores
   *S. aureus* genes under the older locus tags (`SA0001`, `SAUSA300_0001`), so we remap
   them to the current `_RS` tags using the reference genome annotation.
-- **GO Biological Process (BP)** — the processes a gene takes part in. Read directly from
+- **GO Biological Process (BP)** - the processes a gene takes part in. Read directly from
   the reference GTF (`go_process`), which already carries GO terms on each gene.
-- **GO Molecular Function (MF)** — the biochemical activities a gene product carries out
+- **GO Molecular Function (MF)** - the biochemical activities a gene product carries out
   (e.g. binding, catalytic activities). Also read from the GTF (`go_function`). MF is
   better annotated than BP for this genome and roughly doubles GO coverage, which is useful
   given how few *S. aureus* genes carry a curated pathway assignment.
@@ -41,7 +41,7 @@ pipeline** (`SA_RS...` for USA-100 / N315, `SAUSA300_RS...` for USA-500 / USA-30
 **Why read GO from the GTF rather than NCBI gene2go?**
 The reference GTF already embeds GO terms on every coding gene, so the collections are built
 entirely offline with no download. The alternative, NCBI `gene2go`, would need each gene's
-numeric NCBI GeneID to join — but this genome's GTF annotates proteins by GenBank accession
+numeric NCBI GeneID to join - but this genome's GTF annotates proteins by GenBank accession
 (`WP_...`) and carries no GeneID, so that route is not available from the local files. The
 GTF is the authoritative, self-contained source here.
 :::
@@ -51,7 +51,7 @@ GTF is the authoritative, self-contained source here.
 Building the gene sets involves live KEGG API calls and parsing the genome annotation.
 Doing this once and caching the result keeps the analysis script fast, reproducible, and
 runnable offline. The two strains use different reference genomes and different KEGG
-organism codes, so each is prepared separately — exactly the same per-strain
+organism codes, so each is prepared separately - exactly the same per-strain
 parameterisation used in the differential expression script.
 :::
 
@@ -156,7 +156,7 @@ cat("  with symbol (display)     :", sum(!is.na(id_map$symbol)), "\n")
 
 ### Cross-check against the count matrix
 
-Every gene in the count matrix should be present in the map — this confirms the GTF and
+Every gene in the count matrix should be present in the map - this confirms the GTF and
 the pipeline output are the same annotation.
 
 ```{r id-map-check, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -169,7 +169,7 @@ cat("Matched in GTF map          :", matched,
     sprintf("(%.1f%%)\n", 100 * matched / length(ids)))
 
 if (matched < length(ids)) {
-  warning("Some count-matrix genes are not in the GTF map — check the GTF/assembly match.")
+  warning("Some count-matrix genes are not in the GTF map - check the GTF/assembly match.")
 }
 ```
 
@@ -248,9 +248,8 @@ eukaryotes. As with KEGG, sets are keyed on RS locus tags and require at least 5
 
 :::boxy
 **How to read the two namespaces.**
-BP names the process a gene participates in (e.g. cell wall organisation, stress response) —
-the most direct read on a lifestyle contrast. MF names an isolated activity (e.g. ATP
-binding, oxidoreductase activity) — more abstract, but better annotated in this genome and a
+BP names the process a gene participates in (e.g. cell wall organisation, stress response) - the most direct read on a lifestyle contrast. MF names an isolated activity (e.g. ATP
+binding, oxidoreductase activity) - more abstract, but better annotated in this genome and a
 useful complement when a lifestyle switch is largely metabolic. Keeping them separate lets
 you tell process-level from activity-level enrichment.
 :::
@@ -308,7 +307,7 @@ if (nrow(go_mf_gmt) > 0) cat("Example MF set     :", go_mf_gmt$ontology_name[1],
 ## Coverage summary
 
 How much of the tested genome each collection annotates. Partial coverage is normal for a
-bacterium — many genes are uncharacterised — and is itself worth discussing when
+bacterium - many genes are uncharacterised - and is itself worth discussing when
 interpreting results.
 
 ```{r coverage, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}

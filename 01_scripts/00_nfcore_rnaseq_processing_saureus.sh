@@ -1,4 +1,4 @@
-# Script to process RNA sequencing files — Staphylococcus aureus USA100
+# Script to process RNA sequencing files - Staphylococcus aureus USA100
 
 nextflow run 'https://github.com/nf-core/rnaseq' \
     -name 'saureus_usa100_PRJNA685119_GSE163153' \

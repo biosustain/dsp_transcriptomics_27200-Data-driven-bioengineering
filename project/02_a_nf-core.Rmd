@@ -15,7 +15,7 @@ biofilm and three planktonic, all at the 24 hour time point. The sub-sampling sc
   to draw biology from, so <strong>you will not analyse your own output</strong>. Once you
   have seen how reads become counts, the notebooks pick up from the full count matrices,
   made with this same pipeline, which are already in <code>data/</code>. If you go looking
-  for your pipeline output in notebook 01, you will not find it — that is expected.
+  for your pipeline output in notebook 01, you will not find it - that is expected.
 </div>
 
 We use pipeline release [v3.23.0](https://nf-co.re/rnaseq/3.23.0). From this
@@ -87,12 +87,12 @@ The top level looks like this:
 
 What each folder holds:
 
--   **`bowtie2_salmon`** — the important one. Alignments (`.bam`), per-sample Salmon quantification, and the merged count matrices for the whole run. `salmon.merged.gene_counts.tsv` and `salmon.merged.gene.SummarizedExperiment.rds` are what an analysis like the next chapter starts from.
--   **`fastqc`** — read quality reports, before (`raw`) and after (`trim`) trimming.
--   **`fq_lint`** — format checks on the fastq files.
--   **`multiqc`** — everything above gathered into one report. Start here.
--   **`pipeline_info`** — what ran, for how long, with which software versions. This is your reproducibility record.
--   **`trimgalore`** — adapter and quality trimming reports.
+-   **`bowtie2_salmon`** - the important one. Alignments (`.bam`), per-sample Salmon quantification, and the merged count matrices for the whole run. `salmon.merged.gene_counts.tsv` and `salmon.merged.gene.SummarizedExperiment.rds` are what an analysis like the next chapter starts from.
+-   **`fastqc`** - read quality reports, before (`raw`) and after (`trim`) trimming.
+-   **`fq_lint`** - format checks on the fastq files.
+-   **`multiqc`** - everything above gathered into one report. Start here.
+-   **`pipeline_info`** - what ran, for how long, with which software versions. This is your reproducibility record.
+-   **`trimgalore`** - adapter and quality trimming reports.
 
 A closer look inside `bowtie2_salmon`, for one sample:
 

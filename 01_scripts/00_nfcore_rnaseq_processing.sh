@@ -1,6 +1,6 @@
-# Script to process RNA sequencing files — Human ASM (dexamethasone), Himes 2014
+# Script to process RNA sequencing files - Human ASM (dexamethasone), Himes 2014
 # =============================================================================
-# PROVENANCE ONLY — this run has already been completed on Seqera/Azure.
+# PROVENANCE ONLY - this run has already been completed on Seqera/Azure.
 # Kept here to document how the star_salmon output under
 #   data/data-02-Homo_sapiens/hasapiens/star_salmon/
 # was generated. You do NOT need to re-run this for the workshop.
@@ -8,7 +8,7 @@
 #
 # Eukaryotic dataset: aligner = star_salmon (STAR + Salmon), prokaryotic = false.
 # Reference: RefSeq GRCh37 / hg19 (GCF_000001405.13), with gene_name as an extra
-# GTF attribute — which is why the count matrix carries gene symbols.
+# GTF attribute - which is why the count matrix carries gene symbols.
 #
 # The actual run used Azure blob (az://) paths on Seqera. Those are recorded in
 # the comment block below for reference; the repo itself only stores the
@@ -31,7 +31,7 @@ nextflow run 'https://github.com/nf-core/rnaseq' \
     -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/01_scripts/custom.config
 
 # -----------------------------------------------------------------------------
-# Original Seqera/Azure run (for the record — not runnable from the repo):
+# Original Seqera/Azure run (for the record - not runnable from the repo):
 #   input:  az://seqera/raw/teaching_bioengineering_08_Oct_2026/PRJNA229998_GSE52778/samplesheet_PRJNA229998.csv
 #   outdir: az://seqera/results/teaching_bioengineering_08_Oct_2026/hsapiens_PRJNA229998_GSE52778_3Sept_E16_v326_all_samples/
 #   fasta:  az://seqera/databases/ref-genomes/H_sapiens_GRCh37_hg19/GCF_000001405.13_GRCh37_genomic.fna.gz

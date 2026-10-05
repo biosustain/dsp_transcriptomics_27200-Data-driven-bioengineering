@@ -1,4 +1,4 @@
-# Pipeline — turning reads into counts
+# Pipeline - turning reads into counts
 
 This is the first step of the session. Before analysing a count matrix, you make one.
 
