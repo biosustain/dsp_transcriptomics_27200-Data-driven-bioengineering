@@ -387,11 +387,11 @@ highest-confidence results.</p>
 <span id="cb356-12"><a href="part-3-comparing-ora-and-gsea.html#cb356-12" tabindex="-1"></a></span>
 <span id="cb356-13"><a href="part-3-comparing-ora-and-gsea.html#cb356-13" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets significant in BOTH :&quot;</span>, <span class="fu">length</span>(both),      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Sets significant in BOTH : 5</code></pre>
+<pre><code>## Sets significant in BOTH : 6</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="part-3-comparing-ora-and-gsea.html#cb358-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets in ORA only         :&quot;</span>, <span class="fu">length</span>(ora_only),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Sets in ORA only         : 5</code></pre>
+<pre><code>## Sets in ORA only         : 4</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="part-3-comparing-ora-and-gsea.html#cb360-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets in GSEA only        :&quot;</span>, <span class="fu">length</span>(gsea_only), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
@@ -407,7 +407,8 @@ highest-confidence results.</p>
 ##  - Ribosome [KEGG]
 ##  - translation [GO:BP]
 ##  - structural constituent of ribosome [GO:MF]
-##  - Purine metabolism [KEGG]</code></pre>
+##  - Purine metabolism [KEGG]
+##  - Thiamine metabolism [KEGG]</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
 <strong>Interpretation guide:</strong>
 <ul>
@@ -437,7 +438,7 @@ genes move together without individually being significant.
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="part-3-comparing-ora-and-gsea.html#cb366-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets higher in biofilm   :&quot;</span>, n_biofilm_sets, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## GSEA sets higher in biofilm   : 1</code></pre>
+<pre><code>## GSEA sets higher in biofilm   : 2</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="part-3-comparing-ora-and-gsea.html#cb368-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA sets among biofilm-up genes:&quot;</span>, <span class="fu">nrow</span>(ora_up_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>

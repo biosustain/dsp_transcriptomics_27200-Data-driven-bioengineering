@@ -486,60 +486,63 @@ counted as Up/Down — deliberately: a noisy low-count gene with an inflated raw
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="setup-the-environment-1.html#cb207-1" tabindex="-1"></a>get_results <span class="ot">&lt;-</span> <span class="cf">function</span>(dds, coef_name) {</span>
 <span id="cb207-2"><a href="setup-the-environment-1.html#cb207-2" tabindex="-1"></a>  <span class="fu">stopifnot</span>(coef_name <span class="sc">%in%</span> <span class="fu">resultsNames</span>(dds))</span>
-<span id="cb207-3"><a href="setup-the-environment-1.html#cb207-3" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">lfcShrink</span>(dds, <span class="at">coef =</span> coef_name, <span class="at">type =</span> <span class="st">&quot;apeglm&quot;</span>)</span>
-<span id="cb207-4"><a href="setup-the-environment-1.html#cb207-4" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(res) <span class="sc">%&gt;%</span></span>
-<span id="cb207-5"><a href="setup-the-environment-1.html#cb207-5" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene_id&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb207-6"><a href="setup-the-environment-1.html#cb207-6" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb207-7"><a href="setup-the-environment-1.html#cb207-7" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">case_when</span>(</span>
-<span id="cb207-8"><a href="setup-the-environment-1.html#cb207-8" tabindex="-1"></a>        <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_threshold <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span>  lfc_threshold <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
-<span id="cb207-9"><a href="setup-the-environment-1.html#cb207-9" tabindex="-1"></a>        <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_threshold <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="sc">-</span>lfc_threshold <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
-<span id="cb207-10"><a href="setup-the-environment-1.html#cb207-10" tabindex="-1"></a>        <span class="cn">TRUE</span>                                                                    <span class="sc">~</span> <span class="st">&quot;Not significant&quot;</span></span>
-<span id="cb207-11"><a href="setup-the-environment-1.html#cb207-11" tabindex="-1"></a>      ),</span>
-<span id="cb207-12"><a href="setup-the-environment-1.html#cb207-12" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">factor</span>(direction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>, <span class="st">&quot;Not significant&quot;</span>))</span>
-<span id="cb207-13"><a href="setup-the-environment-1.html#cb207-13" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb207-14"><a href="setup-the-environment-1.html#cb207-14" tabindex="-1"></a>    <span class="fu">arrange</span>(padj)</span>
-<span id="cb207-15"><a href="setup-the-environment-1.html#cb207-15" tabindex="-1"></a>}</span>
-<span id="cb207-16"><a href="setup-the-environment-1.html#cb207-16" tabindex="-1"></a></span>
-<span id="cb207-17"><a href="setup-the-environment-1.html#cb207-17" tabindex="-1"></a><span class="co"># Compact volcano wrapper so every contrast is plotted the same way.</span></span>
-<span id="cb207-18"><a href="setup-the-environment-1.html#cb207-18" tabindex="-1"></a><span class="co"># Only the top 5 genes by adjusted p-value are labelled, to keep the plot readable.</span></span>
-<span id="cb207-19"><a href="setup-the-environment-1.html#cb207-19" tabindex="-1"></a>plot_volcano <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, title, sub, <span class="at">n_label =</span> <span class="dv">5</span>) {</span>
-<span id="cb207-20"><a href="setup-the-environment-1.html#cb207-20" tabindex="-1"></a>  top_genes <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
-<span id="cb207-21"><a href="setup-the-environment-1.html#cb207-21" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(padj)) <span class="sc">%&gt;%</span></span>
-<span id="cb207-22"><a href="setup-the-environment-1.html#cb207-22" tabindex="-1"></a>    <span class="fu">arrange</span>(padj) <span class="sc">%&gt;%</span></span>
-<span id="cb207-23"><a href="setup-the-environment-1.html#cb207-23" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n =</span> n_label) <span class="sc">%&gt;%</span></span>
-<span id="cb207-24"><a href="setup-the-environment-1.html#cb207-24" tabindex="-1"></a>    <span class="fu">pull</span>(gene_id)</span>
-<span id="cb207-25"><a href="setup-the-environment-1.html#cb207-25" tabindex="-1"></a></span>
-<span id="cb207-26"><a href="setup-the-environment-1.html#cb207-26" tabindex="-1"></a>  labels <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(res_df<span class="sc">$</span>gene_id <span class="sc">%in%</span> top_genes, res_df<span class="sc">$</span>gene_id, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb207-27"><a href="setup-the-environment-1.html#cb207-27" tabindex="-1"></a></span>
-<span id="cb207-28"><a href="setup-the-environment-1.html#cb207-28" tabindex="-1"></a>  <span class="fu">EnhancedVolcano</span>(</span>
-<span id="cb207-29"><a href="setup-the-environment-1.html#cb207-29" tabindex="-1"></a>    res_df,</span>
-<span id="cb207-30"><a href="setup-the-environment-1.html#cb207-30" tabindex="-1"></a>    <span class="at">lab            =</span> labels,</span>
-<span id="cb207-31"><a href="setup-the-environment-1.html#cb207-31" tabindex="-1"></a>    <span class="at">x              =</span> <span class="st">&quot;log2FoldChange&quot;</span>,</span>
-<span id="cb207-32"><a href="setup-the-environment-1.html#cb207-32" tabindex="-1"></a>    <span class="at">y              =</span> <span class="st">&quot;padj&quot;</span>,</span>
-<span id="cb207-33"><a href="setup-the-environment-1.html#cb207-33" tabindex="-1"></a>    <span class="at">ylab           =</span> <span class="fu">bquote</span>(<span class="sc">~-</span>Log[<span class="dv">10</span>] <span class="sc">~</span> <span class="st">&quot;adjusted&quot;</span> <span class="sc">~</span> <span class="fu">italic</span>(P)),</span>
-<span id="cb207-34"><a href="setup-the-environment-1.html#cb207-34" tabindex="-1"></a>    <span class="at">pCutoff        =</span> padj_threshold,</span>
-<span id="cb207-35"><a href="setup-the-environment-1.html#cb207-35" tabindex="-1"></a>    <span class="at">FCcutoff       =</span> lfc_threshold,</span>
-<span id="cb207-36"><a href="setup-the-environment-1.html#cb207-36" tabindex="-1"></a>    <span class="at">title          =</span> title,</span>
-<span id="cb207-37"><a href="setup-the-environment-1.html#cb207-37" tabindex="-1"></a>    <span class="at">subtitle       =</span> sub,</span>
-<span id="cb207-38"><a href="setup-the-environment-1.html#cb207-38" tabindex="-1"></a>    <span class="at">legendPosition =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb207-39"><a href="setup-the-environment-1.html#cb207-39" tabindex="-1"></a>    <span class="at">drawConnectors =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb207-40"><a href="setup-the-environment-1.html#cb207-40" tabindex="-1"></a>    <span class="at">max.overlaps   =</span> <span class="cn">Inf</span></span>
-<span id="cb207-41"><a href="setup-the-environment-1.html#cb207-41" tabindex="-1"></a>  )</span>
-<span id="cb207-42"><a href="setup-the-environment-1.html#cb207-42" tabindex="-1"></a>}</span>
-<span id="cb207-43"><a href="setup-the-environment-1.html#cb207-43" tabindex="-1"></a></span>
-<span id="cb207-44"><a href="setup-the-environment-1.html#cb207-44" tabindex="-1"></a><span class="co"># Diagnostic: are the largest fold changes coming from well-expressed genes (real)</span></span>
-<span id="cb207-45"><a href="setup-the-environment-1.html#cb207-45" tabindex="-1"></a><span class="co"># or from low-count genes (unreliable)? Prints the 10 most extreme by |log2FC|</span></span>
-<span id="cb207-46"><a href="setup-the-environment-1.html#cb207-46" tabindex="-1"></a><span class="co"># with their baseMean (mean normalised count across samples).</span></span>
-<span id="cb207-47"><a href="setup-the-environment-1.html#cb207-47" tabindex="-1"></a>check_extreme_fc <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, <span class="at">n =</span> <span class="dv">10</span>) {</span>
-<span id="cb207-48"><a href="setup-the-environment-1.html#cb207-48" tabindex="-1"></a>  res_df <span class="sc">%&gt;%</span></span>
-<span id="cb207-49"><a href="setup-the-environment-1.html#cb207-49" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(log2FoldChange))) <span class="sc">%&gt;%</span></span>
-<span id="cb207-50"><a href="setup-the-environment-1.html#cb207-50" tabindex="-1"></a>    <span class="fu">transmute</span>(gene_id,</span>
-<span id="cb207-51"><a href="setup-the-environment-1.html#cb207-51" tabindex="-1"></a>              <span class="at">baseMean       =</span> <span class="fu">round</span>(baseMean, <span class="dv">1</span>),</span>
-<span id="cb207-52"><a href="setup-the-environment-1.html#cb207-52" tabindex="-1"></a>              <span class="at">log2FoldChange =</span> <span class="fu">round</span>(log2FoldChange, <span class="dv">2</span>),</span>
-<span id="cb207-53"><a href="setup-the-environment-1.html#cb207-53" tabindex="-1"></a>              <span class="at">padj           =</span> <span class="fu">signif</span>(padj, <span class="dv">3</span>),</span>
-<span id="cb207-54"><a href="setup-the-environment-1.html#cb207-54" tabindex="-1"></a>              direction) <span class="sc">%&gt;%</span></span>
-<span id="cb207-55"><a href="setup-the-environment-1.html#cb207-55" tabindex="-1"></a>    <span class="fu">head</span>(n)</span>
-<span id="cb207-56"><a href="setup-the-environment-1.html#cb207-56" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb207-3"><a href="setup-the-environment-1.html#cb207-3" tabindex="-1"></a>  res_raw <span class="ot">&lt;-</span> <span class="fu">results</span>(dds, <span class="at">name =</span> coef_name)            <span class="co"># keeps the Wald statistic</span></span>
+<span id="cb207-4"><a href="setup-the-environment-1.html#cb207-4" tabindex="-1"></a>  res     <span class="ot">&lt;-</span> <span class="fu">lfcShrink</span>(dds, <span class="at">coef =</span> coef_name, <span class="at">type =</span> <span class="st">&quot;apeglm&quot;</span>)</span>
+<span id="cb207-5"><a href="setup-the-environment-1.html#cb207-5" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(res) <span class="sc">%&gt;%</span></span>
+<span id="cb207-6"><a href="setup-the-environment-1.html#cb207-6" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb207-7"><a href="setup-the-environment-1.html#cb207-7" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb207-8"><a href="setup-the-environment-1.html#cb207-8" tabindex="-1"></a>      <span class="co"># lfcShrink() drops `stat`, so take it from results(). Used to rank genes for GSEA.</span></span>
+<span id="cb207-9"><a href="setup-the-environment-1.html#cb207-9" tabindex="-1"></a>      <span class="at">stat =</span> res_raw[gene_id, <span class="st">&quot;stat&quot;</span>],</span>
+<span id="cb207-10"><a href="setup-the-environment-1.html#cb207-10" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">case_when</span>(</span>
+<span id="cb207-11"><a href="setup-the-environment-1.html#cb207-11" tabindex="-1"></a>        <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_threshold <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span>  lfc_threshold <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
+<span id="cb207-12"><a href="setup-the-environment-1.html#cb207-12" tabindex="-1"></a>        <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_threshold <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="sc">-</span>lfc_threshold <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
+<span id="cb207-13"><a href="setup-the-environment-1.html#cb207-13" tabindex="-1"></a>        <span class="cn">TRUE</span>                                                                    <span class="sc">~</span> <span class="st">&quot;Not significant&quot;</span></span>
+<span id="cb207-14"><a href="setup-the-environment-1.html#cb207-14" tabindex="-1"></a>      ),</span>
+<span id="cb207-15"><a href="setup-the-environment-1.html#cb207-15" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">factor</span>(direction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>, <span class="st">&quot;Not significant&quot;</span>))</span>
+<span id="cb207-16"><a href="setup-the-environment-1.html#cb207-16" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb207-17"><a href="setup-the-environment-1.html#cb207-17" tabindex="-1"></a>    <span class="fu">arrange</span>(padj)</span>
+<span id="cb207-18"><a href="setup-the-environment-1.html#cb207-18" tabindex="-1"></a>}</span>
+<span id="cb207-19"><a href="setup-the-environment-1.html#cb207-19" tabindex="-1"></a></span>
+<span id="cb207-20"><a href="setup-the-environment-1.html#cb207-20" tabindex="-1"></a><span class="co"># Compact volcano wrapper so every contrast is plotted the same way.</span></span>
+<span id="cb207-21"><a href="setup-the-environment-1.html#cb207-21" tabindex="-1"></a><span class="co"># Only the top 5 genes by adjusted p-value are labelled, to keep the plot readable.</span></span>
+<span id="cb207-22"><a href="setup-the-environment-1.html#cb207-22" tabindex="-1"></a>plot_volcano <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, title, sub, <span class="at">n_label =</span> <span class="dv">5</span>) {</span>
+<span id="cb207-23"><a href="setup-the-environment-1.html#cb207-23" tabindex="-1"></a>  top_genes <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
+<span id="cb207-24"><a href="setup-the-environment-1.html#cb207-24" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(padj)) <span class="sc">%&gt;%</span></span>
+<span id="cb207-25"><a href="setup-the-environment-1.html#cb207-25" tabindex="-1"></a>    <span class="fu">arrange</span>(padj) <span class="sc">%&gt;%</span></span>
+<span id="cb207-26"><a href="setup-the-environment-1.html#cb207-26" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n =</span> n_label) <span class="sc">%&gt;%</span></span>
+<span id="cb207-27"><a href="setup-the-environment-1.html#cb207-27" tabindex="-1"></a>    <span class="fu">pull</span>(gene_id)</span>
+<span id="cb207-28"><a href="setup-the-environment-1.html#cb207-28" tabindex="-1"></a></span>
+<span id="cb207-29"><a href="setup-the-environment-1.html#cb207-29" tabindex="-1"></a>  labels <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(res_df<span class="sc">$</span>gene_id <span class="sc">%in%</span> top_genes, res_df<span class="sc">$</span>gene_id, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb207-30"><a href="setup-the-environment-1.html#cb207-30" tabindex="-1"></a></span>
+<span id="cb207-31"><a href="setup-the-environment-1.html#cb207-31" tabindex="-1"></a>  <span class="fu">EnhancedVolcano</span>(</span>
+<span id="cb207-32"><a href="setup-the-environment-1.html#cb207-32" tabindex="-1"></a>    res_df,</span>
+<span id="cb207-33"><a href="setup-the-environment-1.html#cb207-33" tabindex="-1"></a>    <span class="at">lab            =</span> labels,</span>
+<span id="cb207-34"><a href="setup-the-environment-1.html#cb207-34" tabindex="-1"></a>    <span class="at">x              =</span> <span class="st">&quot;log2FoldChange&quot;</span>,</span>
+<span id="cb207-35"><a href="setup-the-environment-1.html#cb207-35" tabindex="-1"></a>    <span class="at">y              =</span> <span class="st">&quot;padj&quot;</span>,</span>
+<span id="cb207-36"><a href="setup-the-environment-1.html#cb207-36" tabindex="-1"></a>    <span class="at">ylab           =</span> <span class="fu">bquote</span>(<span class="sc">~-</span>Log[<span class="dv">10</span>] <span class="sc">~</span> <span class="st">&quot;adjusted&quot;</span> <span class="sc">~</span> <span class="fu">italic</span>(P)),</span>
+<span id="cb207-37"><a href="setup-the-environment-1.html#cb207-37" tabindex="-1"></a>    <span class="at">pCutoff        =</span> padj_threshold,</span>
+<span id="cb207-38"><a href="setup-the-environment-1.html#cb207-38" tabindex="-1"></a>    <span class="at">FCcutoff       =</span> lfc_threshold,</span>
+<span id="cb207-39"><a href="setup-the-environment-1.html#cb207-39" tabindex="-1"></a>    <span class="at">title          =</span> title,</span>
+<span id="cb207-40"><a href="setup-the-environment-1.html#cb207-40" tabindex="-1"></a>    <span class="at">subtitle       =</span> sub,</span>
+<span id="cb207-41"><a href="setup-the-environment-1.html#cb207-41" tabindex="-1"></a>    <span class="at">legendPosition =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb207-42"><a href="setup-the-environment-1.html#cb207-42" tabindex="-1"></a>    <span class="at">drawConnectors =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb207-43"><a href="setup-the-environment-1.html#cb207-43" tabindex="-1"></a>    <span class="at">max.overlaps   =</span> <span class="cn">Inf</span></span>
+<span id="cb207-44"><a href="setup-the-environment-1.html#cb207-44" tabindex="-1"></a>  )</span>
+<span id="cb207-45"><a href="setup-the-environment-1.html#cb207-45" tabindex="-1"></a>}</span>
+<span id="cb207-46"><a href="setup-the-environment-1.html#cb207-46" tabindex="-1"></a></span>
+<span id="cb207-47"><a href="setup-the-environment-1.html#cb207-47" tabindex="-1"></a><span class="co"># Diagnostic: are the largest fold changes coming from well-expressed genes (real)</span></span>
+<span id="cb207-48"><a href="setup-the-environment-1.html#cb207-48" tabindex="-1"></a><span class="co"># or from low-count genes (unreliable)? Prints the 10 most extreme by |log2FC|</span></span>
+<span id="cb207-49"><a href="setup-the-environment-1.html#cb207-49" tabindex="-1"></a><span class="co"># with their baseMean (mean normalised count across samples).</span></span>
+<span id="cb207-50"><a href="setup-the-environment-1.html#cb207-50" tabindex="-1"></a>check_extreme_fc <span class="ot">&lt;-</span> <span class="cf">function</span>(res_df, <span class="at">n =</span> <span class="dv">10</span>) {</span>
+<span id="cb207-51"><a href="setup-the-environment-1.html#cb207-51" tabindex="-1"></a>  res_df <span class="sc">%&gt;%</span></span>
+<span id="cb207-52"><a href="setup-the-environment-1.html#cb207-52" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(log2FoldChange))) <span class="sc">%&gt;%</span></span>
+<span id="cb207-53"><a href="setup-the-environment-1.html#cb207-53" tabindex="-1"></a>    <span class="fu">transmute</span>(gene_id,</span>
+<span id="cb207-54"><a href="setup-the-environment-1.html#cb207-54" tabindex="-1"></a>              <span class="at">baseMean       =</span> <span class="fu">round</span>(baseMean, <span class="dv">1</span>),</span>
+<span id="cb207-55"><a href="setup-the-environment-1.html#cb207-55" tabindex="-1"></a>              <span class="at">log2FoldChange =</span> <span class="fu">round</span>(log2FoldChange, <span class="dv">2</span>),</span>
+<span id="cb207-56"><a href="setup-the-environment-1.html#cb207-56" tabindex="-1"></a>              <span class="at">padj           =</span> <span class="fu">signif</span>(padj, <span class="dv">3</span>),</span>
+<span id="cb207-57"><a href="setup-the-environment-1.html#cb207-57" tabindex="-1"></a>              direction) <span class="sc">%&gt;%</span></span>
+<span id="cb207-58"><a href="setup-the-environment-1.html#cb207-58" tabindex="-1"></a>    <span class="fu">head</span>(n)</span>
+<span id="cb207-59"><a href="setup-the-environment-1.html#cb207-59" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 </div>
 </div>

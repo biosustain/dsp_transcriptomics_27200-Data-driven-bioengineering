@@ -140,10 +140,13 @@ counted as Up/Down — deliberately: a noisy low-count gene with an inflated raw
 ```{r saureus-de-helper-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 get_results <- function(dds, coef_name) {
   stopifnot(coef_name %in% resultsNames(dds))
-  res <- lfcShrink(dds, coef = coef_name, type = "apeglm")
+  res_raw <- results(dds, name = coef_name)            # keeps the Wald statistic
+  res     <- lfcShrink(dds, coef = coef_name, type = "apeglm")
   as.data.frame(res) %>%
     rownames_to_column("gene_id") %>%
     mutate(
+      # lfcShrink() drops `stat`, so take it from results(). Used to rank genes for GSEA.
+      stat = res_raw[gene_id, "stat"],
       direction = case_when(
         !is.na(padj) & padj < padj_threshold & log2FoldChange >  lfc_threshold ~ "Up",
         !is.na(padj) & padj < padj_threshold & log2FoldChange < -lfc_threshold ~ "Down",
