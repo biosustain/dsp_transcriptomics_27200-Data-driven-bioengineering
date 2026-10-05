@@ -452,7 +452,7 @@ plotCounts(dds,
 
 Clustering significant DE genes across samples provides a gene-level view of the expression differences. Genes should show clear block structure: high expression in treatment and low in control (or vice versa). With the paired design, you can also annotate donor to see whether the treatment effect is consistent across donors.
 
-```{r human-de-de-heatmap, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+```{r human-de-de-heatmap, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=12}
 vsd <- varianceStabilizingTransformation(dds, blind = FALSE)
 
 sig_genes <- res_sig %>%

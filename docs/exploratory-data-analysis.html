@@ -631,16 +631,22 @@ effect on top of donor-to-donor baseline differences.</p>
 <pre><code>## agg_png 
 ##       2</code></pre>
 <div class="note">
-<p><strong>📘 Note:</strong> Rows are already gene symbols (from the human reference), so they are ready
-to use directly in the enrichment analysis (script 03) with no ID conversion step.</p>
+<p><strong>📘 Note:</strong> Rows are gene symbols (from the human reference), so they can be used
+directly in the enrichment analysis (script 03) with no ID conversion step. A small number of
+genes have no agreed symbol yet, and GENCODE gives those its ENSEMBL identifier as the name
+instead; those rows simply will not match anything in the gene set databases.</p>
 </div>
 <div class="important">
-<strong>⭐ Two things in this plot are not biology — spot them before you interpret it.</strong>
+<strong>⭐ Three things in this plot are not biology — spot them before you interpret it.</strong>
 <ul>
 <li>
 <strong>Names ending in <code>.1</code>, <code>.2</code>, …</strong> (e.g. <code>TXLNGY.1</code>):
 a few symbols belong to more than one gene ID in the annotation, so R made the row names unique by
 appending a number.
+</li>
+<li>
+<strong>Rows named <code>ENSG…</code></strong>: these genes have no agreed symbol yet, so the
+annotation uses their ENSEMBL identifier as the name. They are real genes, just unnamed ones.
 </li>
 <li>
 <strong>Sex-linked genes</strong> (e.g. <code>RPS4Y1</code>, <code>DDX3Y</code>,
