@@ -26,12 +26,15 @@ The experiment has two experimental factors: **lifestyle** (biofilm vs planktoni
 :::
 
 <div class="important">
-<strong>⭐ Why we do not simply compare biofilm vs planktonic at a single time point.</strong> At 24 h,
+<strong>⭐ Why we do not routinely compare biofilm vs planktonic at a single time point.</strong> At 24 h,
 planktonic cells are in deep stationary phase while biofilm cells remain metabolically active. Comparing the
 two lifestyles at that single snapshot mixes together two different things: the effect of <em>lifestyle</em>
 and the effect of <em>growth phase</em>. To separate them we either compare within a lifestyle across time
 (maturation), or model lifestyle while adjusting for time. This is a core idea in experimental design:
 when two factors vary together, analyse them in a way that lets you tell their effects apart.
+<br><br>
+Part 3 makes one deliberate exception, for a question that is specifically about mature biofilm, and says
+so where it does it. Everywhere else, time is in the model.
 </div>
 
 ## Setup the Environment
@@ -668,7 +671,7 @@ about whether a single "biofilm vs planktonic" number is meaningful for this str
 between USA100 and USA500?
 </div>
 
-## Part 3 Hypothesis Test: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?
+## Part 3 A Closer Look: Does the Strongest Biofilm Producer Show the Strongest Biofilm-vs-Planktonic Difference?
 
 ::: {style="background:#eef7ee;border-left:5px solid #2e7d32;padding:0.6em 1em;margin:1em 0;border-radius:6px;"}
 <strong>❓ The question we are answering</strong>
@@ -686,6 +689,18 @@ lifestyle analysis in Part 2 adjusts for time). We compute it here <em>anyway</e
 specific hypothesis, because "biofilm biomass" is a mature-culture phenotype and the 24 h snapshot is its
 closest transcriptional match. Treat the number as "how different are mature biofilm and planktonic cells
 overall", not as a clean lifestyle-only signal.
+</div>
+
+<div class="important">
+<strong>⭐ This compares two analyses; it does not test the difference between them.</strong> The question
+"does USA500 respond more strongly?" is really a <em>strain x lifestyle interaction</em>. We cannot fit that
+model: the two strains were mapped to different references, so they have different gene identifiers and no
+shared coordinate system to put them in one design.
+<br><br>
+What we do instead is run each strain separately and compare how many genes reached significance. That is
+not the same thing. A larger count in one strain does not establish that its lifestyle effect is
+<em>significantly</em> larger - the counts also depend on library size, dispersion and how well the reads
+matched that strain's reference. Read the comparison as a description worth discussing, not as a result.
 </div>
 
 <div class="note">
