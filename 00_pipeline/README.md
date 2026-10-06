@@ -52,7 +52,7 @@ For a report worth interpreting, open the one from the full dataset:
 | Dataset | MultiQC report |
 |---|---|
 | Human ASM, 8 samples | `data/data-02-Homo_sapiens/hasapiens/multiqc/data-02-Homo_sapiens_multiqc_report.html` |
-| *S. aureus* USA-100, 32 samples | `data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureusUSA100_multiqc_report.html` |
+| *S. aureus* USA-100, 32 samples | `data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureus_USA100_multiqc_report.html` |
 | *S. aureus* USA-500, 32 samples | `data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html` |
 
 In a Codespace, right-click the file and choose **Open Preview**. On GitHub, click

@@ -138,7 +138,7 @@ cat("Results folder:", results_dir, "\n")
   <strong>📘 Before you start: look at the pipeline's own QC.</strong> Everything below starts from a
   count matrix, which hides how the reads behaved. The nf-core run wrote a MultiQC report for each
   strain, covering read quality, trimming and alignment for all 32 samples:
-  <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureusUSA100_multiqc_report.html">USA-100</a>
+  <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureus_USA100_multiqc_report.html">USA-100</a>
   and
   <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html">USA-500</a>,
   under <code>data/data-01-Staphylococcus_aureus/&lt;strain&gt;/</code>. Open the one matching the strain

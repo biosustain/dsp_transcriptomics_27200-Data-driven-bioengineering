@@ -163,7 +163,7 @@ report from a full dataset, processed before the course. Every dataset in `data/
 | Dataset | MultiQC report |
 |---|---|
 | Human ASM, 8 samples | [data-02-Homo_sapiens_multiqc_report.html](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-02-Homo_sapiens/hasapiens/multiqc/data-02-Homo_sapiens_multiqc_report.html) |
-| *S. aureus* USA-100, 32 samples | [data-01-Staphylococcus_aureusUSA100_multiqc_report.html](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureusUSA100_multiqc_report.html) |
+| *S. aureus* USA-100, 32 samples | [data-01-Staphylococcus_aureus_USA100_multiqc_report.html](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureus_USA100_multiqc_report.html) |
 | *S. aureus* USA-500, 32 samples | [data-01-Staphylococcus_aureus_USA500_multiqc_report.html](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html) |
 
 Use the human one today; the two bacterial reports belong to the advanced track. On
