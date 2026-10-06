@@ -64,7 +64,7 @@ Make sure you have run that script first - it saves two files to `results/`:
 
 :::boxy
 - `results/human/DE_treatment_vs_control_all.tsv` - all tested genes with shrunken LFC
-- `results/human/DE_treatment_vs_control_significant.tsv` - significant DE genes (padj < 0.05, |LFC| >= 1)
+- `results/human/DE_treatment_vs_control_significant.tsv` - significant DE genes (padj < 0.05, from the test against the 2-fold threshold)
 :::
 
 ```{r human-fn-load-results, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}

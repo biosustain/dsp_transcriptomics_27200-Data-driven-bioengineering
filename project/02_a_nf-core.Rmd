@@ -1,8 +1,9 @@
 # Running the nf-core/rnaseq pipeline v3.27.0
 
-**This is the first thing you do today.** Before analysing anyone else's count
-matrix, you produce one yourself, so that the table the notebooks start from is not
-a black box.
+**This is the first thing you do today** - start it during the welcome, before the
+lectures, and it will be finished by the time the exercises begin. Before analysing
+anyone else's count matrix, you produce one yourself, so that the table the notebooks
+start from is not a black box.
 
 Processing a whole dataset needs more compute than we have in a classroom, so you run
 two human airway smooth muscle samples from the dexamethasone experiment, one treated

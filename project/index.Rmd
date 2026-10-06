@@ -70,7 +70,7 @@ You can also explore the [27200 Data Driven Bioengineering - Transcriptomics rep
 
 | Time | Session |
 |---|---|
-| ☕ **8:00–8:15** | Welcome and setup |
+| ☕ **8:00–8:15** | Welcome and setup. **Start the pipeline run now** - it takes about 25 minutes and finishes while we talk |
 | 🔬 **8:15–9:00** | Theory: Illumina sequencing, RNA-seq workflow & the nf-core/rnaseq pipeline |
 | 📊 **9:00–9:45** | Theory: count matrices, normalization, PCA & differential expression (+ quizzes) |
 | ⏸️ **9:45–10:00** | Break |
