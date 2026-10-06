@@ -36,3 +36,6 @@ results/cross_strain/*
 
 # Rscript writes this when a script plots with no device open
 Rplots.pdf
+
+# bookdown writes the merged book here mid-render; it is not source
+project/27200*Transcriptomics.Rmd
