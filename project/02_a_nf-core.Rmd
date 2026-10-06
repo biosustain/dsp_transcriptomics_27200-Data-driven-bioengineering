@@ -157,12 +157,18 @@ can compare all samples side by side instead of opening reports one at a time.
   only means something once you know what was mapped against what.
 </div>
 
-A two-sample run is still too small to judge an experiment by, so we will also look at
-the report from the full human dataset,
-processed before the course:
-[MultiQC report, human ASM](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-02-Homo_sapiens/hasapiens/multiqc/data-02-Homo_sapiens_multiqc_report.html).
-On GitHub, click **Download raw file** and open it in your browser. In a
-Codespace, right-click the file and choose **Open Preview**.
+A two-sample run is still too small to judge an experiment by, so we will also look at a
+report from a full dataset, processed before the course. Every dataset in `data/` has one:
+
+| Dataset | MultiQC report |
+|---|---|
+| Human ASM, 8 samples | [data-02-Homo_sapiens_multiqc_report.html](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-02-Homo_sapiens/hasapiens/multiqc/data-02-Homo_sapiens_multiqc_report.html) |
+| *S. aureus* USA-100, 32 samples | [data-01-Staphylococcus_aureusUSA100_multiqc_report.html](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureusUSA100_multiqc_report.html) |
+| *S. aureus* USA-500, 32 samples | [data-01-Staphylococcus_aureus_USA500_multiqc_report.html](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html) |
+
+Use the human one today; the two bacterial reports belong to the advanced track. On
+GitHub, click **Download raw file** and open it in your browser. In a Codespace,
+right-click the file and choose **Open Preview**.
 
 Things worth looking at:
 

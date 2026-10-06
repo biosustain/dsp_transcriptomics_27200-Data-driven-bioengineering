@@ -134,6 +134,19 @@ cat("Data folder   :", data_dir, "\n")
 cat("Results folder:", results_dir, "\n")
 ```
 
+<div class="note">
+  <strong>📘 Before you start: look at the pipeline's own QC.</strong> Everything below starts from a
+  count matrix, which hides how the reads behaved. The nf-core run wrote a MultiQC report for each
+  strain, covering read quality, trimming and alignment for all 32 samples:
+  <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureusUSA100_multiqc_report.html">USA-100</a>
+  and
+  <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html">USA-500</a>,
+  under <code>data/data-01-Staphylococcus_aureus/&lt;strain&gt;/</code>. Open the one matching the strain
+  you set above. In a Codespace, right-click it and choose <strong>Open Preview</strong>. For USA-500 the
+  alignment rates are worth a second look, because its reads were mapped to the USA300 reference rather
+  than its own.
+</div>
+
 ### Loading Count Data
 
 The nf-core/rnaseq pipeline (prokaryotic profile: `Bowtie2` + `Salmon`) produces a `SummarizedExperiment` object. We load it, extract the raw count matrix, and use the locus tags as row names.
