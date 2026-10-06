@@ -396,7 +396,9 @@ profile and Bowtie2 instead.)</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb7-1" tabindex="-1"></a><span class="fu">bash</span> 00_pipeline/00_nfcore_rnaseq_processing_human.sh</span></code></pre></div>
 </details>
-<p>That script runs:</p>
+<p>That script runs the command below. Paths are shortened here for readability; in the
+script they are written out in full from <code>/workspaces/</code>, which is where the repository
+sits inside a Codespace.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-1" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="st">&#39;https://github.com/nf-core/rnaseq&#39;</span> <span class="dt">\</span></span>
 <span id="cb8-2"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-2" tabindex="-1"></a>    <span class="at">-r</span> 3.27.0 <span class="dt">\</span></span>

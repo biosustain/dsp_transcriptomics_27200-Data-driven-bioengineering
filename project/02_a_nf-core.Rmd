@@ -32,7 +32,9 @@ profile and Bowtie2 instead.)
 bash 00_pipeline/00_nfcore_rnaseq_processing_human.sh
 ```
 
-That script runs:
+That script runs the command below. Paths are shortened here for readability; in the
+script they are written out in full from `/workspaces/`, which is where the repository
+sits inside a Codespace.
 
 ```bash
 nextflow run 'https://github.com/nf-core/rnaseq' \
