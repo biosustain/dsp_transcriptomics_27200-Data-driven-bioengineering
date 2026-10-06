@@ -31,15 +31,7 @@
       "settings": {
         // The R extension lints notebook cells like script files and floods the
         // Problems panel with style warnings students cannot act on.
-        "r.lsp.diagnostics": false,
-        // Open START_HERE.md rendered rather than as raw markdown. It is set
-        // here as well as in .vscode/settings.json because openFiles above runs
-        // as the Codespace starts, which can be before workspace settings are
-        // applied. Both globs, since the file sits at the workspace root.
-        "workbench.editorAssociations": {
-          "START_HERE.md": "vscode.markdown.preview.editor",
-          "**/START_HERE.md": "vscode.markdown.preview.editor"
-        }
+        "r.lsp.diagnostics": false
       }
     }
   }
