@@ -71,11 +71,8 @@ You can also explore the [27200 Data Driven Bioengineering - Transcriptomics rep
 | Time | Session |
 |---|---|
 | ☕ **8:00–8:15** | Welcome and setup. **Start the pipeline run now** - it takes about 25 minutes and finishes while we talk |
-| 🔬 **8:15–9:00** | Theory: Illumina sequencing, RNA-seq workflow & the nf-core/rnaseq pipeline |
-| 📊 **9:00–9:45** | Theory: count matrices, normalization, PCA & differential expression (+ quizzes) |
-| ⏸️ **9:45–10:00** | Break |
-| 💻 **10:00–10:55** | Exercises: *Quality Control & Exploratory Data Analysis* |
-| 🧬 **10:55–11:50** | Exercises: *Differential Expression & Functional Enrichment (GSEA)* |
+| 🔬 **8:15–10:00** | Lectures: sequencing and the RNA-seq workflow; count matrices, normalization, PCA and differential expression (with a short break) |
+| 💻 **10:00–11:50** | Exercises: quality control, then differential expression and functional enrichment |
 | 🏁 **11:50–12:00** | Wrap-up: key insight + muddy point |
 
 
