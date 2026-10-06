@@ -372,14 +372,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Reading the MultiQC report<a href="reading-the-multiqc-report.html#reading-the-multiqc-report" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>MultiQC collects the quality metrics from every step into a single page, so you
 can compare all samples side by side instead of opening reports one at a time.</p>
-<div class="warning">
-<p><strong>⚠️ Your own mapping rate will look terrible, and that is correct.</strong>
-Around 1 to 2 per cent of reads map uniquely, and most are reported as “unmapped: too
-short”. The reads come from the whole transcriptome, but the reference is 5 Mb of one
-chromosome, so almost nothing has anywhere to map. A QC number means nothing until you
-know what was mapped against what.</p>
+<div class="note">
+<p><strong>📘 About half your reads map, not the 80 to 90 per cent a full run gives.</strong>
+The reference is 5 Mb of one chromosome, and the reads were chosen from that region so
+that the demo produces a usable count matrix. Mates whose partner falls outside the
+window, and reads crossing the window’s edges, still have nowhere to go. A mapping rate
+only means something once you know what was mapped against what.</p>
 </div>
-<p>Because of that, we will look at the report from the full human dataset,
+<p>A two-sample run is still too small to judge an experiment by, so we will also look at
+the report from the full human dataset,
 processed before the course:
 <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-02-Homo_sapiens/hasapiens/multiqc/data-02-Homo_sapiens_multiqc_report.html">MultiQC report, human ASM</a>.
 On GitHub, click <strong>Download raw file</strong> and open it in your browser. In a
