@@ -418,11 +418,15 @@ unless it also clears padj, and the vertical line is a reference, no longer part
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="visualisation.html#cb86-1" tabindex="-1"></a>res_ma       <span class="ot">&lt;-</span> res_shrunk</span>
 <span id="cb86-2"><a href="visualisation.html#cb86-2" tabindex="-1"></a>res_ma<span class="sc">$</span>padj  <span class="ot">&lt;-</span> res_thr[<span class="fu">rownames</span>(res_ma), <span class="st">&quot;padj&quot;</span>]   <span class="co"># colour by the thresholded test</span></span>
 <span id="cb86-3"><a href="visualisation.html#cb86-3" tabindex="-1"></a></span>
-<span id="cb86-4"><a href="visualisation.html#cb86-4" tabindex="-1"></a><span class="fu">plotMA</span>(res_ma,</span>
-<span id="cb86-5"><a href="visualisation.html#cb86-5" tabindex="-1"></a>       <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
-<span id="cb86-6"><a href="visualisation.html#cb86-6" tabindex="-1"></a>       <span class="at">main  =</span> <span class="st">&quot;MA Plot - Dexamethasone vs Untreated (shrunken LFC)&quot;</span>,</span>
-<span id="cb86-7"><a href="visualisation.html#cb86-7" tabindex="-1"></a>       <span class="at">ylab  =</span> <span class="st">&quot;log2 Fold Change&quot;</span>)</span>
-<span id="cb86-8"><a href="visualisation.html#cb86-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<span id="cb86-4"><a href="visualisation.html#cb86-4" tabindex="-1"></a><span class="co"># The default y-axis stops near +/-2.4 and draws everything beyond it as a</span></span>
+<span id="cb86-5"><a href="visualisation.html#cb86-5" tabindex="-1"></a><span class="co"># triangle on the border - 109 genes here, including the strongest hits, which</span></span>
+<span id="cb86-6"><a href="visualisation.html#cb86-6" tabindex="-1"></a><span class="co"># reach -8.9 and +10.9. +/-8 leaves only 3 genes off-scale.</span></span>
+<span id="cb86-7"><a href="visualisation.html#cb86-7" tabindex="-1"></a><span class="fu">plotMA</span>(res_ma,</span>
+<span id="cb86-8"><a href="visualisation.html#cb86-8" tabindex="-1"></a>       <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb86-9"><a href="visualisation.html#cb86-9" tabindex="-1"></a>       <span class="at">ylim  =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">8</span>),</span>
+<span id="cb86-10"><a href="visualisation.html#cb86-10" tabindex="-1"></a>       <span class="at">main  =</span> <span class="st">&quot;MA Plot - Dexamethasone vs Untreated (shrunken LFC)&quot;</span>,</span>
+<span id="cb86-11"><a href="visualisation.html#cb86-11" tabindex="-1"></a>       <span class="at">ylab  =</span> <span class="st">&quot;log2 Fold Change&quot;</span>)</span>
+<span id="cb86-12"><a href="visualisation.html#cb86-12" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-ma-plot-1.png" alt="" width="672" /></p>
 </div>
