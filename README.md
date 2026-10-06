@@ -27,7 +27,7 @@ By the end of the day you should be able to:
 - Explain why counts need normalising, and what happens if you skip it
 - Do the basic quality checks: PCA, sample correlation, spotting odd samples
 - Run a differential expression analysis in DESeq2 and read the output: the design formula, shrinkage, and why we correct p-values
-- Use enrichment analysis (ORA and GSEA) to get from a gene list to biology
+- Use enrichment analysis (GSEA, and ORA in the advanced bacterial track) to get from a gene list to biology
 - Say where transcriptomics stops being informative, and what you would measure next
 
 Quiz topics: count matrices and normalisation, reading a PCA, and the difference

@@ -11,13 +11,7 @@ Only a modest fraction is filtered because bacteria transcribe most of their gen
 
 *Principle: #5 Measurement defines reality*
 
-**Q2. The script sets planktonic as the reference, so a positive fold change means "up in biofilm". If you swapped the reference, what would change in the numbers - and what would change only in how you tell the story? For *S. aureus* living on a catheter in a patient, which lifestyle is really the "normal" one?**
-
-Swapping the reference flips every sign and nothing else - the comparison is symmetric, so no biology changes, but the narrative does: the same locus tag from your heatmap reads 'biofilm-induced' in one telling and 'planktonic-repressed' in the other, and the two sentences suggest different mechanisms to a reader. Planktonic-as-control is a laboratory convention, not a biological claim: in device-associated and chronic infection the persistent state is the biofilm, and free-swimming growth in shaken rich medium is arguably the artificial condition. The chapter fixes the reference only so fold-change directions match the paper's biofilm-vs-planktonic contrast. The take-home is that the reference level is a choice of representation that shapes how every downstream result gets phrased.
-
-*Principle: #3 Representation shapes understanding*
-
-**Q3. These 50 genes are the most *variable* - not necessarily the most *important*. Could a gene that is essential for biofilm formation be missing from this heatmap? Give one reason how. (Hint: what does a count measure - and what does it miss?)**
+**Q2. These 50 genes are the most *variable* - not necessarily the most *important*. Could a gene that is essential for biofilm formation be missing from this heatmap? Give one reason how. (Hint: what does a count measure - and what does it miss?)**
 
 Students should read the split off their own annotation bars rather than assume: the chapter flags 'samples split by time point first' as the thing to check, and where that holds, many top-variable loci track growth phase and metabolism rather than lifestyle per se - so the list is not automatically a biofilm-gene list. A central biofilm regulator can be absent because variance in transcript abundance is not activity: two-component systems and quorum-sensing components (e.g. the agr system acting through RNAIII) can be near-constitutively transcribed while their activity is switched post-transcriptionally or post-translationally. Constant transcription, or high expression with low variance, keeps a gene out of a top-variance list no matter how important it is. Transcript abundance is a dynamic but incomplete regulatory readout - the week's theme in one plot.
 
@@ -25,13 +19,19 @@ Students should read the split off their own annotation bars rather than assume:
 
 ## S. aureus - 02 Differential Expression
 
-**Q1. Pick one gene from your nine-panel profile plot. Looking at its two lines: is the interaction driven by the biofilm cells changing, the planktonic cells changing, or a real crossover? Now imagine sampling had stopped at 10 h - what would you have concluded about this gene? What decides the answer: the biology, or the time window you measured?**
+**Q1. The script sets planktonic as the reference, so a positive fold change means "up in biofilm". If you swapped the reference, what would change in the numbers - and what would change only in how you tell the story? For *S. aureus* living on a catheter in a patient, which lifestyle is really the "normal" one?**
+
+Swapping the reference flips every sign and nothing else - the comparison is symmetric, so no biology changes, but the narrative does: the same locus tag from your heatmap reads 'biofilm-induced' in one telling and 'planktonic-repressed' in the other, and the two sentences suggest different mechanisms to a reader. Planktonic-as-control is a laboratory convention, not a biological claim: in device-associated and chronic infection the persistent state is the biofilm, and free-swimming growth in shaken rich medium is arguably the artificial condition. The chapter fixes the reference only so fold-change directions match the paper's biofilm-vs-planktonic contrast. The take-home is that the reference level is a choice of representation that shapes how every downstream result gets phrased.
+
+*Principle: #3 Representation shapes understanding*
+
+**Q2. Pick one gene from your nine-panel profile plot. Looking at its two lines: is the interaction driven by the biofilm cells changing, the planktonic cells changing, or a real crossover? Now imagine sampling had stopped at 10 h - what would you have concluded about this gene? What decides the answer: the biology, or the time window you measured?**
 
 For most of the top genes the honest claim is (b): the planktonic trace moves sharply between 10 h and 24 h (entry into stationary phase) while the biofilm trace is comparatively flat, and a few genes show true crossovers. Stopping at 10 h would shrink, erase or even reverse the apparent lifestyle difference for many of these genes, so the reported 'biofilm-vs-planktonic effect' is a joint product of the biology and the chosen sampling window. This is the week's core point: transcript abundance is a dynamic readout, and when you measure determines what you see.
 
 *Principle: #5 Measurement defines reality - the sampling window, not biology alone, sets what the lifestyle effect appears to be*
 
-**Q2. The hypothesis: USA500, the strongest biofilm producer in the paper's assay, should show the biggest biofilm-vs-planktonic difference at 24 h. Compare your cross-strain table with a group that analysed the other strain. Did the hypothesis hold? Suggest two possible explanations for what you see - one biological, one technical. (Hint: which reference genome were the USA500 reads mapped to?)**
+**Q3. The hypothesis: USA500, the strongest biofilm producer in the paper's assay, should show the biggest biofilm-vs-planktonic difference at 24 h. Compare your cross-strain table with a group that analysed the other strain. Did the hypothesis hold? Suggest two possible explanations for what you see - one biological, one technical. (Hint: which reference genome were the USA500 reads mapped to?)**
 
 The intended lesson is (i): how much biofilm a strain builds is a phenotype, while a DEG count is an mRNA-abundance readout, and they need not agree - biofilm output also depends on post-transcriptional regulation, protein activity and matrix export that RNA-seq never sees. (ii) inflates both strains' 24 h counts with stationary-phase signal, though not necessarily equally, and (iii) is the chapter's explicit caveat that USA500-specific or divergent genes may map imperfectly to USA300, mixing mapping effects into any count difference - which is why the table is a discussion starter, not a quantitative comparison. Explanation (iii) is the one students can probe with existing outputs, e.g. the QC mapping rates and whether the extreme genes look reference-specific. Whichever direction their table shows, only a qualitative conclusion is defensible.
 

@@ -46,8 +46,9 @@ Each dataset has three scripts, run in order - every step saves results the next
 - Contrast: dexamethasone vs untreated, n = 4 donors per group; albuterol arms excluded.
 - Design: `~ donor + condition` (paired) is the primary model; script 02 also runs plain
   `~ condition` side by side for teaching.
-- Enrichment: g:Profiler (`gprofiler2::gost`, live API - needs internet) for ORA;
-  `fgsea` + MSigDB Hallmark (`msigdbr`) for GSEA.
+- Enrichment: GSEA only (`fgsea` + MSigDB Reactome `C2: CP:REACTOME` via `msigdbr`),
+  ranked on the Wald statistic. ORA was dropped from the human track; it remains in the
+  *S. aureus* scripts via `mulea`.
 - Gene IDs: the GENCODE v50 GTF (GRCh38) gives ENSEMBL IDs in `gene_id` and symbols in
   `gene_name`; symbols are used as row names, so no ID conversion is needed.
 - Counts: Salmon estimates are fractional; script 01 rounds to integers before DESeq2.
