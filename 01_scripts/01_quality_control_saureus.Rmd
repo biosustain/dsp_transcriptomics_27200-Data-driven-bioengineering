@@ -63,17 +63,23 @@ This document guides you through the standard QC pipeline for bulk RNA-seq data 
 
 ::: {style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;"}
 <strong>⭐ One file, two strains.</strong> Set the <code>strain</code> variable in the first code chunk to
-either <code>"USA-100"</code> or <code>"USA-500"</code> and render. Every path, label and output folder
-below is derived from that one setting, so the same script produces the QC for either strain without
-further edits.
+either <code>"USA-100"</code> or <code>"USA-500"</code>. Every path, label and output folder below is
+derived from that one setting, so the same script produces the QC for either strain without further
+edits. It runs **one strain at a time**: the two were mapped to different reference genomes, so their
+gene identifiers are not comparable. Results go to a separate folder per strain, so nothing is
+overwritten and you can compare them afterwards.
 :::
 
-These chapters are run for **USA-100**. The same analysis for **USA-500** is published alongside this
-book, so you can read the two side by side without running anything:
+These chapters are run for **USA-100**. To see the other strain, change that line to `"USA-500"` and run
+again from the top. Or read it without running anything, because the full USA-500 analysis is published
+alongside this book:
 
-- [USA-500: quality control](usa500/01_QC_usa500.html)
-- [USA-500: differential expression](usa500/02_DE_usa500.html)
-- [USA-500: functional enrichment](usa500/03_FN_usa500.html)
+- [USA-500: quality control](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/usa500/01_QC_usa500.html)
+- [USA-500: differential expression](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/usa500/02_DE_usa500.html)
+- [USA-500: functional enrichment](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/usa500/03_FN_usa500.html)
+
+To regenerate both strains as six standalone reports, run `Rscript 01_scripts/render_all_strains.R`
+from the repository root.
 
 The strains were mapped to different reference genomes, so their gene identifiers are not comparable and
 the two analyses are never merged. The one place they meet is the cross-strain table in Part 3 of the

@@ -291,11 +291,16 @@ The results table contains one row per gene with the following columns:
  well-supported fold changes (high counts, consistent signal) largely
  unchanged. Think of it as a confidence-weighted adjustment.
 <div class="important">
-  <strong>⭐ Important:</strong> shrinkage does **not** change your p-values - those come from the
- `results()` call above and are carried over unchanged. It only changes the fold-change estimates.
- Significance now comes from the test against the 2-fold threshold, so shrinkage no longer decides
- which genes qualify. It still matters for everything that reads the fold change itself: the volcano,
- the heatmap and the ranking of the strongest effects.
+  <strong>⭐ Important:</strong> shrinkage changes the fold-change estimates, nothing else. It never
+ computes a p-value of its own.
+
+ Keeping track of which number comes from where is worth a moment, because we now have three objects:
+ `res` tests against zero and supplies the Wald statistic that script 03 ranks genes by; `res_thr`
+ tests against the 2-fold threshold and supplies the p-values that decide significance; `res_shrunk`
+ supplies the fold changes. The table built below takes each from its own source.
+
+ So shrinkage no longer decides which genes qualify. It decides what the fold changes look like, which
+ is what the volcano, the MA plot and the heatmap show you.
 </div>
 
  **Why `apeglm`?** Three shrinkage methods exist in DESeq2:

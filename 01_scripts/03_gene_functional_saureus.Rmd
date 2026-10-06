@@ -55,7 +55,9 @@ a minority of *S. aureus* genes carry a curated pathway assignment.
 ### Strain parameter
 
 This report is parameterised by `strain`. The two strains use different reference genomes,
-so they load different DE tables and different cached gene sets.
+so they load different DE tables and different cached gene sets. Change the strain below and run
+again from the top to see the other one, or produce all six reports for both strains at once with
+`Rscript 01_scripts/render_all_strains.R` from the repository root.
 
 ```{r saureus-fn-params-setup, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 strain <- "usa100"          # "usa100" or "usa500" (interactive default)

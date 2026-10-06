@@ -407,7 +407,9 @@ a minority of <em>S. aureus</em> genes carry a curated pathway assignment.</p>
 <div id="strain-parameter" class="section level3 hasAnchor">
 <h3>Strain parameter<a href="gene-functional-enrichment-analysis-1.html#strain-parameter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This report is parameterised by <code>strain</code>. The two strains use different reference genomes,
-so they load different DE tables and different cached gene sets.</p>
+so they load different DE tables and different cached gene sets. Change the strain below and run
+again from the top to see the other one, or produce all six reports for both strains at once with
+<code>Rscript 01_scripts/render_all_strains.R</code> from the repository root.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="gene-functional-enrichment-analysis-1.html#cb283-1" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;usa100&quot;</span>          <span class="co"># &quot;usa100&quot; or &quot;usa500&quot; (interactive default)</span></span>
 <span id="cb283-2"><a href="gene-functional-enrichment-analysis-1.html#cb283-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;params&quot;</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">is.list</span>(params) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(params<span class="sc">$</span>strain)) strain <span class="ot">&lt;-</span> params<span class="sc">$</span>strain</span>
