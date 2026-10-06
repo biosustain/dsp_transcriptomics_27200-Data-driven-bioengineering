@@ -75,10 +75,12 @@ It takes about **20 to 25 minutes**.
 rm -rf work .nextflow*
 ```
 
-  This keeps everything in <code>results/</code> and throws away the rest. The one thing
-  you give up is <code>-resume</code>: Nextflow re-uses the <code>work</code> directory to
-  skip steps it has already done, so after deleting it a re-run starts from the beginning.
-  That is a fair trade here, because the run is short.
+  This keeps everything in <code>results/</code> and throws away the rest. The script does it
+  for you when the run succeeds, and also removes the Docker images the pipeline pulled, which
+  are nearly 22 GB of the 32 GB disk. Two things you give up: <code>-resume</code>, because
+  Nextflow re-uses <code>work</code> to skip finished steps, and the containers, so running the
+  other dataset afterwards re-downloads them. Both are fair trades here, because the run is
+  short and otherwise the disk ends the morning full.
 </div>
 
 <div class="note">

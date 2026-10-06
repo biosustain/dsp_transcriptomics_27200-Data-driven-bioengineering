@@ -434,10 +434,12 @@ files that you do not need once the run has finished. When it completes, run:</p
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb9-1" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> work .nextflow<span class="pp">*</span></span></code></pre></div>
 </details>
-<p>This keeps everything in <code>results/</code> and throws away the rest. The one thing
-you give up is <code>-resume</code>: Nextflow re-uses the <code>work</code> directory to
-skip steps it has already done, so after deleting it a re-run starts from the beginning.
-That is a fair trade here, because the run is short.</p>
+<p>This keeps everything in <code>results/</code> and throws away the rest. The script does it
+for you when the run succeeds, and also removes the Docker images the pipeline pulled, which
+are nearly 22 GB of the 32 GB disk. Two things you give up: <code>-resume</code>, because
+Nextflow re-uses <code>work</code> to skip finished steps, and the containers, so running the
+other dataset afterwards re-downloads them. Both are fair trades here, because the run is
+short and otherwise the disk ends the morning full.</p>
 </div>
 <div class="note">
 <p><strong>📘 Note:</strong> If you finish early and want to see how a bacterial dataset

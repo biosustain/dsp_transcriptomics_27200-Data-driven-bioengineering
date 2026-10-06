@@ -24,21 +24,10 @@
 # one makes the second attempt fail with "Run name ... has been already used".
 # Left out, Nextflow generates a fresh name each time and you can just re-run.
 
-# -----------------------------------------------------------------------------
-# Keep the scratch files off the small disk.
-#
-# /workspaces is 32 GB and holds the repository, the results and every Docker
-# image the pipeline pulls. /tmp is a separate 118 GB disk that nothing else
-# uses. Nextflow writes its intermediates to work/, which is by far the largest
-# thing a run produces, so it goes there instead. Override with NXF_WORK if you
-# want it somewhere else.
-# -----------------------------------------------------------------------------
-NXF_WORK="${NXF_WORK:-/tmp/nxf-work}"
 
 nextflow run 'https://github.com/nf-core/rnaseq' \
     -r 3.27.0 \
     -profile docker \
-    -work-dir "$NXF_WORK" \
     --aligner star_salmon \
     --input  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA229998_GSE52778_human/samplesheet_PRJNA229998_subsampled_2samples.csv' \
     --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/human/nfcore_rnaseq_processing_downsampled' \
@@ -60,27 +49,30 @@ nextflow run 'https://github.com/nf-core/rnaseq' \
 # -----------------------------------------------------------------------------
 # Free the disk, but only if the run actually succeeded.
 #
-# Two things to reclaim. The scratch directory, which is the bigger of the two
-# while the run is going, and the Docker images: nf-core pulls around twenty of
-# them, close to 22 GB, and they stay behind on a 32 GB disk.
+# Measured in a 4-core Codespace: the repository and the base system come to
+# about 7 GB, Nextflow's work/ directory to well under 1 GB, and the Docker
+# images nf-core pulls to nearly 22 GB. On a 32 GB disk the images are the
+# whole problem, so they are what gets reclaimed.
 #
-# Deleting the scratch costs you -resume, so a re-run starts from the beginning.
+# Deleting work/ costs you -resume, so a re-run starts from the beginning.
 # Pruning the images means the other dataset re-downloads its containers if you
-# run it next. Both are fair trades here: the run is short, and without them a
+# run it next. Both are fair trades: the run is short, and without them a
 # Codespace ends the morning at 95% full.
 #
-# If the pipeline failed, everything is kept: the logs are in the scratch
-# directory and -resume lets you carry on from where it stopped.
+# If the pipeline failed, everything is kept: work/ holds the logs you need and
+# -resume lets you carry on from where it stopped.
 # -----------------------------------------------------------------------------
 status=$?
 root=$(git rev-parse --show-toplevel 2>/dev/null) || root=""
 
 if [ "$status" -ne 0 ]; then
-    echo "Pipeline failed (exit $status). Keeping $NXF_WORK so you can debug and -resume."
+    echo "Pipeline failed (exit $status). Keeping work/ so you can debug and -resume."
+elif [ -z "$root" ]; then
+    echo "Not inside the repository, so nothing was deleted."
+    echo "To free the disk yourself: rm -rf work .nextflow* && docker image prune -af"
 else
     echo "Pipeline finished. Freeing disk space..."
-    rm -rf "$NXF_WORK"
-    [ -n "$root" ] && rm -rf "$root"/.nextflow*
-    docker image prune -af > /dev/null 2>&1 && echo "  removed the pipeline's Docker images"
-    df -h "${root:-$PWD}" | awk 'NR==1 || NR==2'
+    rm -rf "$root/work" "$root"/.nextflow*
+    docker image prune -af > /dev/null 2>&1 && echo "  removed the pipeline's Docker images (~22 GB)"
+    df -h "$root" | awk 'NR==1 || NR==2'
 fi
