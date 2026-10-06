@@ -373,41 +373,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>ORA and GSEA answer different questions and will not always agree. Sets found by both are the
 highest-confidence results.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="part-3-comparing-ora-and-gsea.html#cb358-1" tabindex="-1"></a><span class="co"># ORA hits get the same &quot;name [source]&quot; labels as the GSEA list, so identically</span></span>
-<span id="cb358-2"><a href="part-3-comparing-ora-and-gsea.html#cb358-2" tabindex="-1"></a><span class="co"># named sets from different collections are never conflated.</span></span>
-<span id="cb358-3"><a href="part-3-comparing-ora-and-gsea.html#cb358-3" tabindex="-1"></a>ora_hits <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(</span>
-<span id="cb358-4"><a href="part-3-comparing-ora-and-gsea.html#cb358-4" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(ora_up_sig)   <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">paste0</span>(ora_up_sig<span class="sc">$</span>ontology_name,   <span class="st">&quot; [&quot;</span>, ora_up_sig<span class="sc">$</span>source,   <span class="st">&quot;]&quot;</span>) <span class="cf">else</span> <span class="fu">character</span>(<span class="dv">0</span>),</span>
-<span id="cb358-5"><a href="part-3-comparing-ora-and-gsea.html#cb358-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(ora_down_sig) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">paste0</span>(ora_down_sig<span class="sc">$</span>ontology_name, <span class="st">&quot; [&quot;</span>, ora_down_sig<span class="sc">$</span>source, <span class="st">&quot;]&quot;</span>) <span class="cf">else</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb358-6"><a href="part-3-comparing-ora-and-gsea.html#cb358-6" tabindex="-1"></a>))</span>
-<span id="cb358-7"><a href="part-3-comparing-ora-and-gsea.html#cb358-7" tabindex="-1"></a>gsea_hits <span class="ot">&lt;-</span> gsea_sig<span class="sc">$</span>pathway</span>
-<span id="cb358-8"><a href="part-3-comparing-ora-and-gsea.html#cb358-8" tabindex="-1"></a></span>
-<span id="cb358-9"><a href="part-3-comparing-ora-and-gsea.html#cb358-9" tabindex="-1"></a>both      <span class="ot">&lt;-</span> <span class="fu">intersect</span>(ora_hits, gsea_hits)</span>
-<span id="cb358-10"><a href="part-3-comparing-ora-and-gsea.html#cb358-10" tabindex="-1"></a>ora_only  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(ora_hits, gsea_hits)</span>
-<span id="cb358-11"><a href="part-3-comparing-ora-and-gsea.html#cb358-11" tabindex="-1"></a>gsea_only <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(gsea_hits, ora_hits)</span>
-<span id="cb358-12"><a href="part-3-comparing-ora-and-gsea.html#cb358-12" tabindex="-1"></a></span>
-<span id="cb358-13"><a href="part-3-comparing-ora-and-gsea.html#cb358-13" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets significant in BOTH :&quot;</span>, <span class="fu">length</span>(both),      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="part-3-comparing-ora-and-gsea.html#cb357-1" tabindex="-1"></a><span class="co"># ORA hits get the same &quot;name [source]&quot; labels as the GSEA list, so identically</span></span>
+<span id="cb357-2"><a href="part-3-comparing-ora-and-gsea.html#cb357-2" tabindex="-1"></a><span class="co"># named sets from different collections are never conflated.</span></span>
+<span id="cb357-3"><a href="part-3-comparing-ora-and-gsea.html#cb357-3" tabindex="-1"></a>ora_hits <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(</span>
+<span id="cb357-4"><a href="part-3-comparing-ora-and-gsea.html#cb357-4" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(ora_up_sig)   <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">paste0</span>(ora_up_sig<span class="sc">$</span>ontology_name,   <span class="st">&quot; [&quot;</span>, ora_up_sig<span class="sc">$</span>source,   <span class="st">&quot;]&quot;</span>) <span class="cf">else</span> <span class="fu">character</span>(<span class="dv">0</span>),</span>
+<span id="cb357-5"><a href="part-3-comparing-ora-and-gsea.html#cb357-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(ora_down_sig) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">paste0</span>(ora_down_sig<span class="sc">$</span>ontology_name, <span class="st">&quot; [&quot;</span>, ora_down_sig<span class="sc">$</span>source, <span class="st">&quot;]&quot;</span>) <span class="cf">else</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb357-6"><a href="part-3-comparing-ora-and-gsea.html#cb357-6" tabindex="-1"></a>))</span>
+<span id="cb357-7"><a href="part-3-comparing-ora-and-gsea.html#cb357-7" tabindex="-1"></a>gsea_hits <span class="ot">&lt;-</span> gsea_sig<span class="sc">$</span>pathway</span>
+<span id="cb357-8"><a href="part-3-comparing-ora-and-gsea.html#cb357-8" tabindex="-1"></a></span>
+<span id="cb357-9"><a href="part-3-comparing-ora-and-gsea.html#cb357-9" tabindex="-1"></a>both      <span class="ot">&lt;-</span> <span class="fu">intersect</span>(ora_hits, gsea_hits)</span>
+<span id="cb357-10"><a href="part-3-comparing-ora-and-gsea.html#cb357-10" tabindex="-1"></a>ora_only  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(ora_hits, gsea_hits)</span>
+<span id="cb357-11"><a href="part-3-comparing-ora-and-gsea.html#cb357-11" tabindex="-1"></a>gsea_only <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(gsea_hits, ora_hits)</span>
+<span id="cb357-12"><a href="part-3-comparing-ora-and-gsea.html#cb357-12" tabindex="-1"></a></span>
+<span id="cb357-13"><a href="part-3-comparing-ora-and-gsea.html#cb357-13" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets significant in BOTH :&quot;</span>, <span class="fu">length</span>(both),      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Sets significant in BOTH : 6</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="part-3-comparing-ora-and-gsea.html#cb360-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets in ORA only         :&quot;</span>, <span class="fu">length</span>(ora_only),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="part-3-comparing-ora-and-gsea.html#cb359-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets in ORA only         :&quot;</span>, <span class="fu">length</span>(ora_only),  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Sets in ORA only         : 4</code></pre>
+<pre><code>## Sets in ORA only         : 3</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="part-3-comparing-ora-and-gsea.html#cb362-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets in GSEA only        :&quot;</span>, <span class="fu">length</span>(gsea_only), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="part-3-comparing-ora-and-gsea.html#cb361-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets in GSEA only        :&quot;</span>, <span class="fu">length</span>(gsea_only), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Sets in GSEA only        : 14</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="part-3-comparing-ora-and-gsea.html#cb364-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(both) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb364-2"><a href="part-3-comparing-ora-and-gsea.html#cb364-2" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Found by both methods:</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">&quot; -&quot;</span>, both), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb364-3"><a href="part-3-comparing-ora-and-gsea.html#cb364-3" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="part-3-comparing-ora-and-gsea.html#cb363-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(both) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb363-2"><a href="part-3-comparing-ora-and-gsea.html#cb363-2" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Found by both methods:</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">&quot; -&quot;</span>, both), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb363-3"><a href="part-3-comparing-ora-and-gsea.html#cb363-3" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 <pre><code>## 
 ## Found by both methods:
-##  - Aminoacyl-tRNA biosynthesis [KEGG]
 ##  - Ribosome [KEGG]
-##  - translation [GO:BP]
-##  - structural constituent of ribosome [GO:MF]
 ##  - Purine metabolism [KEGG]
+##  - structural constituent of ribosome [GO:MF]
+##  - Arginine biosynthesis [KEGG]
+##  - translation [GO:BP]
 ##  - Thiamine metabolism [KEGG]</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
 <strong>Interpretation guide:</strong>
@@ -429,24 +429,24 @@ genes move together without individually being significant.
 <div id="reading-the-biology" class="section level3 hasAnchor">
 <h3>Reading the biology<a href="part-3-comparing-ora-and-gsea.html#reading-the-biology" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="part-3-comparing-ora-and-gsea.html#cb366-1" tabindex="-1"></a>n_biofilm_sets    <span class="ot">&lt;-</span> <span class="fu">sum</span>(gsea_sig<span class="sc">$</span>NES <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb366-2"><a href="part-3-comparing-ora-and-gsea.html#cb366-2" tabindex="-1"></a>n_planktonic_sets <span class="ot">&lt;-</span> <span class="fu">sum</span>(gsea_sig<span class="sc">$</span>NES <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
-<span id="cb366-3"><a href="part-3-comparing-ora-and-gsea.html#cb366-3" tabindex="-1"></a></span>
-<span id="cb366-4"><a href="part-3-comparing-ora-and-gsea.html#cb366-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets higher in planktonic:&quot;</span>, n_planktonic_sets, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="part-3-comparing-ora-and-gsea.html#cb365-1" tabindex="-1"></a>n_biofilm_sets    <span class="ot">&lt;-</span> <span class="fu">sum</span>(gsea_sig<span class="sc">$</span>NES <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb365-2"><a href="part-3-comparing-ora-and-gsea.html#cb365-2" tabindex="-1"></a>n_planktonic_sets <span class="ot">&lt;-</span> <span class="fu">sum</span>(gsea_sig<span class="sc">$</span>NES <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb365-3"><a href="part-3-comparing-ora-and-gsea.html#cb365-3" tabindex="-1"></a></span>
+<span id="cb365-4"><a href="part-3-comparing-ora-and-gsea.html#cb365-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets higher in planktonic:&quot;</span>, n_planktonic_sets, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## GSEA sets higher in planktonic: 18</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="part-3-comparing-ora-and-gsea.html#cb368-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets higher in biofilm   :&quot;</span>, n_biofilm_sets, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="part-3-comparing-ora-and-gsea.html#cb367-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GSEA sets higher in biofilm   :&quot;</span>, n_biofilm_sets, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## GSEA sets higher in biofilm   : 2</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="part-3-comparing-ora-and-gsea.html#cb370-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA sets among biofilm-up genes:&quot;</span>, <span class="fu">nrow</span>(ora_up_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="part-3-comparing-ora-and-gsea.html#cb369-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA sets among biofilm-up genes:&quot;</span>, <span class="fu">nrow</span>(ora_up_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## ORA sets among biofilm-up genes: 0</code></pre>
+<pre><code>## ORA sets among biofilm-up genes: 1</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="part-3-comparing-ora-and-gsea.html#cb372-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA sets among planktonic-up genes:&quot;</span>, <span class="fu">nrow</span>(ora_down_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="part-3-comparing-ora-and-gsea.html#cb371-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;ORA sets among planktonic-up genes:&quot;</span>, <span class="fu">nrow</span>(ora_down_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## ORA sets among planktonic-up genes: 10</code></pre>
+<pre><code>## ORA sets among planktonic-up genes: 9</code></pre>
 <div class="boxy">
 <p><strong>Two things this contrast tells us.</strong></p>
 <ol style="list-style-type: decimal">

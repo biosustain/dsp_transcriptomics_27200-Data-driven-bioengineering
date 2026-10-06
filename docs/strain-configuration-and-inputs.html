@@ -439,51 +439,52 @@ contrast, which is the correct background for enrichment.</p>
 </div>
 <div id="define-significance-and-check-against-the-de-table" class="section level3 hasAnchor">
 <h3>Define significance and check against the DE table<a href="strain-configuration-and-inputs.html#define-significance-and-check-against-the-de-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We re-derive significance here (padj &lt; 0.05 and |log2FoldChange| &gt;= log2(3), i.e. a 3-fold
-change) so the threshold is visible in this script, and we check it against the <code>direction</code>
-column produced upstream. This is the same threshold used in the differential expression step
+<p>We re-derive significance here (padj &lt; 0.05 against the 3-fold threshold) so the rule is
+visible in this script, and we check it against the <code>direction</code> column produced upstream. This is the same threshold used in the differential expression step
 (chosen to match the original paper’s 3-fold criterion), so the two should agree exactly; if
 they diverge, the check will flag it.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="strain-configuration-and-inputs.html#cb297-1" tabindex="-1"></a>padj_cut <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb297-2"><a href="strain-configuration-and-inputs.html#cb297-2" tabindex="-1"></a>lfc_cut  <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">3</span>)   <span class="co"># paper&#39;s 3-fold threshold on the log2 scale (~1.585); matches script 02</span></span>
-<span id="cb297-3"><a href="strain-configuration-and-inputs.html#cb297-3" tabindex="-1"></a></span>
-<span id="cb297-4"><a href="strain-configuration-and-inputs.html#cb297-4" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
-<span id="cb297-5"><a href="strain-configuration-and-inputs.html#cb297-5" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb297-6"><a href="strain-configuration-and-inputs.html#cb297-6" tabindex="-1"></a>    <span class="at">sig_here =</span> <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_cut <span class="sc">&amp;</span> <span class="fu">abs</span>(log2FoldChange) <span class="sc">&gt;=</span> lfc_cut,</span>
-<span id="cb297-7"><a href="strain-configuration-and-inputs.html#cb297-7" tabindex="-1"></a>    <span class="at">dir_here =</span> <span class="fu">case_when</span>(</span>
-<span id="cb297-8"><a href="strain-configuration-and-inputs.html#cb297-8" tabindex="-1"></a>      sig_here <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;=</span>  lfc_cut <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
-<span id="cb297-9"><a href="strain-configuration-and-inputs.html#cb297-9" tabindex="-1"></a>      sig_here <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;=</span> <span class="sc">-</span>lfc_cut <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
-<span id="cb297-10"><a href="strain-configuration-and-inputs.html#cb297-10" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Not significant&quot;</span></span>
-<span id="cb297-11"><a href="strain-configuration-and-inputs.html#cb297-11" tabindex="-1"></a>    )</span>
-<span id="cb297-12"><a href="strain-configuration-and-inputs.html#cb297-12" tabindex="-1"></a>  )</span>
-<span id="cb297-13"><a href="strain-configuration-and-inputs.html#cb297-13" tabindex="-1"></a></span>
-<span id="cb297-14"><a href="strain-configuration-and-inputs.html#cb297-14" tabindex="-1"></a><span class="co"># Cross-check against the upstream `direction` column, if present</span></span>
-<span id="cb297-15"><a href="strain-configuration-and-inputs.html#cb297-15" tabindex="-1"></a><span class="cf">if</span> (<span class="st">&quot;direction&quot;</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(res_df)) {</span>
-<span id="cb297-16"><a href="strain-configuration-and-inputs.html#cb297-16" tabindex="-1"></a>  agree <span class="ot">&lt;-</span> <span class="fu">sum</span>(res_df<span class="sc">$</span>dir_here <span class="sc">==</span> res_df<span class="sc">$</span>direction)</span>
-<span id="cb297-17"><a href="strain-configuration-and-inputs.html#cb297-17" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Agreement with upstream &#39;direction&#39;:&quot;</span>, agree, <span class="st">&quot;/&quot;</span>, <span class="fu">nrow</span>(res_df),</span>
-<span id="cb297-18"><a href="strain-configuration-and-inputs.html#cb297-18" tabindex="-1"></a>      <span class="fu">sprintf</span>(<span class="st">&quot;(%.1f%%)</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="dv">100</span> <span class="sc">*</span> agree <span class="sc">/</span> <span class="fu">nrow</span>(res_df)))</span>
-<span id="cb297-19"><a href="strain-configuration-and-inputs.html#cb297-19" tabindex="-1"></a>  <span class="cf">if</span> (agree <span class="sc">&lt;</span> <span class="fu">nrow</span>(res_df)) {</span>
-<span id="cb297-20"><a href="strain-configuration-and-inputs.html#cb297-20" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">&quot;Re-derived significance disagrees with the upstream &#39;direction&#39; column.&quot;</span>)</span>
-<span id="cb297-21"><a href="strain-configuration-and-inputs.html#cb297-21" tabindex="-1"></a>  }</span>
-<span id="cb297-22"><a href="strain-configuration-and-inputs.html#cb297-22" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb297-23"><a href="strain-configuration-and-inputs.html#cb297-23" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No upstream &#39;direction&#39; column to check against.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb297-24"><a href="strain-configuration-and-inputs.html#cb297-24" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb297-2"><a href="strain-configuration-and-inputs.html#cb297-2" tabindex="-1"></a><span class="co"># Script 02 tested against the paper&#39;s 3-fold threshold directly</span></span>
+<span id="cb297-3"><a href="strain-configuration-and-inputs.html#cb297-3" tabindex="-1"></a><span class="co"># (lfcThreshold = log2(3), altHypothesis = &quot;greaterAbs&quot;), so padj already</span></span>
+<span id="cb297-4"><a href="strain-configuration-and-inputs.html#cb297-4" tabindex="-1"></a><span class="co"># carries that requirement. There is no separate fold-change filter here.</span></span>
+<span id="cb297-5"><a href="strain-configuration-and-inputs.html#cb297-5" tabindex="-1"></a></span>
+<span id="cb297-6"><a href="strain-configuration-and-inputs.html#cb297-6" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
+<span id="cb297-7"><a href="strain-configuration-and-inputs.html#cb297-7" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb297-8"><a href="strain-configuration-and-inputs.html#cb297-8" tabindex="-1"></a>    <span class="at">sig_here =</span> <span class="sc">!</span><span class="fu">is.na</span>(padj) <span class="sc">&amp;</span> padj <span class="sc">&lt;</span> padj_cut,</span>
+<span id="cb297-9"><a href="strain-configuration-and-inputs.html#cb297-9" tabindex="-1"></a>    <span class="at">dir_here =</span> <span class="fu">case_when</span>(</span>
+<span id="cb297-10"><a href="strain-configuration-and-inputs.html#cb297-10" tabindex="-1"></a>      sig_here <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
+<span id="cb297-11"><a href="strain-configuration-and-inputs.html#cb297-11" tabindex="-1"></a>      sig_here <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
+<span id="cb297-12"><a href="strain-configuration-and-inputs.html#cb297-12" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Not significant&quot;</span></span>
+<span id="cb297-13"><a href="strain-configuration-and-inputs.html#cb297-13" tabindex="-1"></a>    )</span>
+<span id="cb297-14"><a href="strain-configuration-and-inputs.html#cb297-14" tabindex="-1"></a>  )</span>
+<span id="cb297-15"><a href="strain-configuration-and-inputs.html#cb297-15" tabindex="-1"></a></span>
+<span id="cb297-16"><a href="strain-configuration-and-inputs.html#cb297-16" tabindex="-1"></a><span class="co"># Cross-check against the upstream `direction` column, if present</span></span>
+<span id="cb297-17"><a href="strain-configuration-and-inputs.html#cb297-17" tabindex="-1"></a><span class="cf">if</span> (<span class="st">&quot;direction&quot;</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(res_df)) {</span>
+<span id="cb297-18"><a href="strain-configuration-and-inputs.html#cb297-18" tabindex="-1"></a>  agree <span class="ot">&lt;-</span> <span class="fu">sum</span>(res_df<span class="sc">$</span>dir_here <span class="sc">==</span> res_df<span class="sc">$</span>direction)</span>
+<span id="cb297-19"><a href="strain-configuration-and-inputs.html#cb297-19" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Agreement with upstream &#39;direction&#39;:&quot;</span>, agree, <span class="st">&quot;/&quot;</span>, <span class="fu">nrow</span>(res_df),</span>
+<span id="cb297-20"><a href="strain-configuration-and-inputs.html#cb297-20" tabindex="-1"></a>      <span class="fu">sprintf</span>(<span class="st">&quot;(%.1f%%)</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="dv">100</span> <span class="sc">*</span> agree <span class="sc">/</span> <span class="fu">nrow</span>(res_df)))</span>
+<span id="cb297-21"><a href="strain-configuration-and-inputs.html#cb297-21" tabindex="-1"></a>  <span class="cf">if</span> (agree <span class="sc">&lt;</span> <span class="fu">nrow</span>(res_df)) {</span>
+<span id="cb297-22"><a href="strain-configuration-and-inputs.html#cb297-22" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">&quot;Re-derived significance disagrees with the upstream &#39;direction&#39; column.&quot;</span>)</span>
+<span id="cb297-23"><a href="strain-configuration-and-inputs.html#cb297-23" tabindex="-1"></a>  }</span>
+<span id="cb297-24"><a href="strain-configuration-and-inputs.html#cb297-24" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb297-25"><a href="strain-configuration-and-inputs.html#cb297-25" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No upstream &#39;direction&#39; column to check against.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb297-26"><a href="strain-configuration-and-inputs.html#cb297-26" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 <pre><code>## Agreement with upstream &#39;direction&#39;: 2288 / 2288 (100.0%)</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="strain-configuration-and-inputs.html#cb299-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant (padj &lt;&quot;</span>, padj_cut, <span class="st">&quot;&amp; |LFC| &gt;= log2(3) ~&quot;</span>, <span class="fu">round</span>(lfc_cut, <span class="dv">3</span>), <span class="st">&quot;):&quot;</span>,</span>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="strain-configuration-and-inputs.html#cb299-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant (padj &lt;&quot;</span>, padj_cut, <span class="st">&quot;against the 3-fold threshold):&quot;</span>,</span>
 <span id="cb299-2"><a href="strain-configuration-and-inputs.html#cb299-2" tabindex="-1"></a>    <span class="fu">sum</span>(res_df<span class="sc">$</span>sig_here), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>## Significant (padj &lt; 0.05 &amp; |LFC| &gt;= log2(3) ~ 1.585 ): 282</code></pre>
+<pre><code>## Significant (padj &lt; 0.05 against the 3-fold threshold): 114</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="strain-configuration-and-inputs.html#cb301-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Up  :&quot;</span>, <span class="fu">sum</span>(res_df<span class="sc">$</span>dir_here <span class="sc">==</span> <span class="st">&quot;Up&quot;</span>),   <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>##   Up  : 156</code></pre>
+<pre><code>##   Up  : 70</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="strain-configuration-and-inputs.html#cb303-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Down:&quot;</span>, <span class="fu">sum</span>(res_df<span class="sc">$</span>dir_here <span class="sc">==</span> <span class="st">&quot;Down&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>##   Down: 126</code></pre>
+<pre><code>##   Down: 44</code></pre>
 </div>
 <div id="combine-gene-set-collections" class="section level3 hasAnchor">
 <h3>Combine gene set collections<a href="strain-configuration-and-inputs.html#combine-gene-set-collections" class="anchor-section" aria-label="Anchor link to header"></a></h3>

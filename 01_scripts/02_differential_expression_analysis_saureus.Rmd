@@ -132,25 +132,35 @@ To avoid repeating the same code for every contrast, we define one helper that t
 <div class="note">
 <strong>📘 Note:</strong> We use <code>apeglm</code> shrinkage, which requires the effect to be named via
 <code>coef</code> (a name from <code>resultsNames()</code>). Shrinkage pulls in the fold changes of noisy,
-low-count genes so that the large fold changes that remain are trustworthy. Because our helper below applies
-the fold-change threshold to the <em>shrunken</em> values, shrinkage here also affects which genes are
-counted as Up/Down - deliberately: a noisy low-count gene with an inflated raw fold change should not pass.
+low-count genes so that the large fold changes that remain are trustworthy. Significance itself comes from a
+separate test against the 3-fold threshold, so shrinkage no longer decides which genes are counted as Up or
+Down. It still shapes every plot that reads the fold change.
 </div>
 
 ```{r saureus-de-helper-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 get_results <- function(dds, coef_name) {
   stopifnot(coef_name %in% resultsNames(dds))
   res_raw <- results(dds, name = coef_name)            # keeps the Wald statistic
+  # Test against the 3-fold threshold itself, so padj controls the error rate
+  # for the claim we report. Filtering on the estimate afterwards would not.
+  res_thr <- results(dds,
+                     name          = coef_name,
+                     lfcThreshold  = lfc_threshold,
+                     altHypothesis = "greaterAbs")
   res     <- lfcShrink(dds, coef = coef_name, type = "apeglm")
   as.data.frame(res) %>%
     rownames_to_column("gene_id") %>%
     mutate(
-      # lfcShrink() drops `stat`, so take it from results(). Used to rank genes for GSEA.
-      stat = res_raw[gene_id, "stat"],
+      # lfcShrink() drops `stat`, so take it from results(). Used to rank genes for GSEA,
+      # where the ranking must stay on the test against zero.
+      stat   = res_raw[gene_id, "stat"],
+      pvalue = res_thr[gene_id, "pvalue"],
+      padj   = res_thr[gene_id, "padj"],
+      # No fold-change filter: the 3-fold requirement is inside the hypothesis.
       direction = case_when(
-        !is.na(padj) & padj < padj_threshold & log2FoldChange >  lfc_threshold ~ "Up",
-        !is.na(padj) & padj < padj_threshold & log2FoldChange < -lfc_threshold ~ "Down",
-        TRUE                                                                    ~ "Not significant"
+        !is.na(padj) & padj < padj_threshold & log2FoldChange > 0 ~ "Up",
+        !is.na(padj) & padj < padj_threshold & log2FoldChange < 0 ~ "Down",
+        TRUE                                                      ~ "Not significant"
       ),
       direction = factor(direction, levels = c("Up", "Down", "Not significant"))
     ) %>%
@@ -239,7 +249,7 @@ res_bf  <- get_results(dds_bf, coef_bf)
 
 cat("Samples (biofilm):\n"); print(table(dds_bf$timepoint))
 cat("\nCoefficient:", coef_bf, "\n")
-cat("DEG counts (padj <", padj_threshold, "& |log2FC| >", round(lfc_threshold, 3), "):\n")
+cat("DEG counts (padj <", padj_threshold, "vs the", 2^lfc_threshold, "-fold threshold):\n")
 print(table(res_bf$direction))
 
 cat("\nMost extreme fold changes (check baseMean - high = real, single digits = low-count noise):\n")
@@ -277,7 +287,7 @@ res_pk  <- get_results(dds_pk, coef_pk)
 
 cat("Samples (planktonic):\n"); print(table(dds_pk$timepoint))
 cat("\nCoefficient:", coef_pk, "\n")
-cat("DEG counts (padj <", padj_threshold, "& |log2FC| >", round(lfc_threshold, 3), "):\n")
+cat("DEG counts (padj <", padj_threshold, "vs the", 2^lfc_threshold, "-fold threshold):\n")
 print(table(res_pk$direction))
 
 cat("\nMost extreme fold changes (check baseMean - high = real, single digits = low-count noise):\n")
@@ -518,7 +528,7 @@ dds_add <- DESeq(dds_ls)
 cat("resultsNames:\n"); print(resultsNames(dds_add))
 
 res_add <- get_results(dds_add, "lifestyle_Biofilm_vs_Planktonic")
-cat("\nDEG counts (padj <", padj_threshold, "& |log2FC| >", round(lfc_threshold, 3), "):\n")
+cat("\nDEG counts (padj <", padj_threshold, "vs the", 2^lfc_threshold, "-fold threshold):\n")
 print(table(res_add$direction))
 ```
 
@@ -700,7 +710,7 @@ res_24 <- get_results(dds_24, "lifestyle_Biofilm_vs_Planktonic")
 n_deg_24 <- sum(res_24$direction != "Not significant")
 cat("Samples at 24h:\n"); print(table(dds_24$lifestyle))
 cat("\nBiofilm vs planktonic DEGs at 24h (padj <", padj_threshold,
-    "& |log2FC| >", round(lfc_threshold, 3), "):", n_deg_24, "\n")
+    "vs the", 2^lfc_threshold, "-fold threshold):", n_deg_24, "\n")
 print(table(res_24$direction))
 
 # Save this strain's result to a shared file so both strains can be compared

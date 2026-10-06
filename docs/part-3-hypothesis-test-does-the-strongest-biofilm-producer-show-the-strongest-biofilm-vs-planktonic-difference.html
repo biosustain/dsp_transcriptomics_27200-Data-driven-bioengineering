@@ -414,16 +414,16 @@ for discussion, not a clean quantitative comparison.</p>
 ##          8          8</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb272-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Biofilm vs planktonic DEGs at 24h (padj &lt;&quot;</span>, padj_threshold,</span>
-<span id="cb272-2"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb272-2" tabindex="-1"></a>    <span class="st">&quot;&amp; |log2FC| &gt;&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;):&quot;</span>, n_deg_24, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<span id="cb272-2"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb272-2" tabindex="-1"></a>    <span class="st">&quot;vs the&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold threshold):&quot;</span>, n_deg_24, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## 
-## Biofilm vs planktonic DEGs at 24h (padj &lt; 0.05 &amp; |log2FC| &gt; 1.585 ): 608</code></pre>
+## Biofilm vs planktonic DEGs at 24h (padj &lt; 0.05 vs the 3 -fold threshold): 490</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb274-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_24<span class="sc">$</span>direction))</span></code></pre></div>
 </details>
 <pre><code>## 
 ##              Up            Down Not significant 
-##             319             289            1680</code></pre>
+##             263             227            1798</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb276-1" tabindex="-1"></a><span class="co"># Save this strain&#39;s result to a shared file so both strains can be compared</span></span>
 <span id="cb276-2"><a href="part-3-hypothesis-test-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb276-2" tabindex="-1"></a><span class="co"># after each has been rendered once.</span></span>
@@ -476,13 +476,13 @@ n_down
 USA-100
 </td>
 <td style="text-align:right;">
-608
+490
 </td>
 <td style="text-align:right;">
-319
+263
 </td>
 <td style="text-align:right;">
-289
+227
 </td>
 </tr>
 <tr>
@@ -490,13 +490,13 @@ USA-100
 USA-500
 </td>
 <td style="text-align:right;">
-560
+422
 </td>
 <td style="text-align:right;">
-357
+317
 </td>
 <td style="text-align:right;">
-203
+105
 </td>
 </tr>
 </tbody>

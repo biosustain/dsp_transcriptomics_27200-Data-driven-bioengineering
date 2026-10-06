@@ -137,22 +137,23 @@ cat("Columns                  :", paste(colnames(res_df), collapse = ", "), "\n"
 
 ### Define significance and check against the DE table
 
-We re-derive significance here (padj < 0.05 and |log2FoldChange| >= log2(3), i.e. a 3-fold
-change) so the threshold is visible in this script, and we check it against the `direction`
-column produced upstream. This is the same threshold used in the differential expression step
+We re-derive significance here (padj < 0.05 against the 3-fold threshold) so the rule is
+visible in this script, and we check it against the `direction` column produced upstream. This is the same threshold used in the differential expression step
 (chosen to match the original paper's 3-fold criterion), so the two should agree exactly; if
 they diverge, the check will flag it.
 
 ```{r saureus-fn-significance, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 padj_cut <- 0.05
-lfc_cut  <- log2(3)   # paper's 3-fold threshold on the log2 scale (~1.585); matches script 02
+# Script 02 tested against the paper's 3-fold threshold directly
+# (lfcThreshold = log2(3), altHypothesis = "greaterAbs"), so padj already
+# carries that requirement. There is no separate fold-change filter here.
 
 res_df <- res_df %>%
   mutate(
-    sig_here = !is.na(padj) & padj < padj_cut & abs(log2FoldChange) >= lfc_cut,
+    sig_here = !is.na(padj) & padj < padj_cut,
     dir_here = case_when(
-      sig_here & log2FoldChange >=  lfc_cut ~ "Up",
-      sig_here & log2FoldChange <= -lfc_cut ~ "Down",
+      sig_here & log2FoldChange > 0 ~ "Up",
+      sig_here & log2FoldChange < 0 ~ "Down",
       TRUE ~ "Not significant"
     )
   )
@@ -169,7 +170,7 @@ if ("direction" %in% colnames(res_df)) {
   cat("No upstream 'direction' column to check against.\n")
 }
 
-cat("Significant (padj <", padj_cut, "& |LFC| >= log2(3) ~", round(lfc_cut, 3), "):",
+cat("Significant (padj <", padj_cut, "against the 3-fold threshold):",
     sum(res_df$sig_here), "\n")
 cat("  Up  :", sum(res_df$dir_here == "Up"),   "\n")
 cat("  Down:", sum(res_df$dir_here == "Down"), "\n")
@@ -200,7 +201,7 @@ print(all_gmt %>% dplyr::count(source, name = "sets"))
 It uses a hypergeometric test with empirical FDR (eFDR) correction via resampling, which
 accounts for interdependence between gene sets.
 
-- **Query set** - significant DE genes (padj < 0.05, |LFC| >= log2(3), a 3-fold change), split by direction
+- **Query set** - significant DE genes (padj < 0.05 against the 3-fold threshold), split by direction
 - **Background** - all genes tested by DESeq2 for this contrast
 - **Gene sets** - KEGG, GO:BP, GO:MF
 
@@ -779,7 +780,7 @@ cat("  GSEA -> ", sprintf("GSEA_lifestyle_%s.tsv", strain), "\n")
 | ID conversion | None | DE table and gene sets share the pipeline's locus tags |
 | Background | All genes tested for this contrast | Correct statistical background, not the whole genome |
 | GSEA rank metric | `stat` (Wald statistic) | Encodes direction and significance; same as the human chapter |
-| Significance | padj < 0.05 & |LFC| >= log2(3) (3-fold), checked vs upstream | Matches the paper and script 02; cross-check should reach 100% |
+| Significance | padj < 0.05, tested against the 3-fold threshold, checked vs upstream | Matches the paper and script 02; cross-check should reach 100% |
 
 Results are saved and ready for biological interpretation. Read KEGG, GO:BP and GO:MF results
 together: agreement across collections and between ORA and GSEA is the strongest evidence.
