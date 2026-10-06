@@ -422,6 +422,18 @@ either <code>“USA-100”</code> or <code>“USA-500”</code> and render. Ever
 below is derived from that one setting, so the same script produces the QC for either strain without
 further edits.</p>
 </div>
+<p>These chapters are run for <strong>USA-100</strong>. The same analysis for <strong>USA-500</strong> is published alongside this
+book, so you can read the two side by side without running anything:</p>
+<ul>
+<li><a href="usa500/01_QC_usa500.html">USA-500: quality control</a></li>
+<li><a href="usa500/02_DE_usa500.html">USA-500: differential expression</a></li>
+<li><a href="usa500/03_FN_usa500.html">USA-500: functional enrichment</a></li>
+</ul>
+<p>The strains were mapped to different reference genomes, so their gene identifiers are not comparable and
+the two analyses are never merged. The one place they meet is the cross-strain table in Part 3 of the
+differential expression chapter, which counts how many genes each strain calls significant.</p>
+<p>To regenerate both strains yourself, run <code>Rscript 01_scripts/render_all_strains.R</code> from the repository
+root.</p>
 <p><strong>Setup the Environment</strong></p>
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
 <p><strong>📌 Remember:</strong> Load all libraries at the start of every session before running any analysis.</p>

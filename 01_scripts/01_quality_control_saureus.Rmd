@@ -68,6 +68,20 @@ below is derived from that one setting, so the same script produces the QC for e
 further edits.
 :::
 
+These chapters are run for **USA-100**. The same analysis for **USA-500** is published alongside this
+book, so you can read the two side by side without running anything:
+
+- [USA-500: quality control](usa500/01_QC_usa500.html)
+- [USA-500: differential expression](usa500/02_DE_usa500.html)
+- [USA-500: functional enrichment](usa500/03_FN_usa500.html)
+
+The strains were mapped to different reference genomes, so their gene identifiers are not comparable and
+the two analyses are never merged. The one place they meet is the cross-strain table in Part 3 of the
+differential expression chapter, which counts how many genes each strain calls significant.
+
+To regenerate both strains yourself, run `Rscript 01_scripts/render_all_strains.R` from the repository
+root.
+
 **Setup the Environment**
 
 ::: {style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;"}
