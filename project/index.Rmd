@@ -94,7 +94,9 @@ the session.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
-When it has started, open `02_notebooks/` and begin with the human dataset.
+When it has started, a `START_HERE` page opens by itself. Begin as it says: start the pipeline run,
+which takes about 25 minutes and can run while the lectures do, then open `02_notebooks/` and work
+through the human dataset.
 
 ### Option 2: Docker
 
