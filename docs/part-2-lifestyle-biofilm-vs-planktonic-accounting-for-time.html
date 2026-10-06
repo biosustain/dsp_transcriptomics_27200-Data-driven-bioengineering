@@ -408,10 +408,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [3] &quot;timepoint_24h_vs_5h&quot;             &quot;lifestyle_Biofilm_vs_Planktonic&quot;</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb258-1" tabindex="-1"></a>res_add <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_add, <span class="st">&quot;lifestyle_Biofilm_vs_Planktonic&quot;</span>)</span>
-<span id="cb258-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb258-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;vs the&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<span id="cb258-2"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb258-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">DEG counts (padj &lt; %s vs the %g-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>, padj_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold))</span></code></pre></div>
 </details>
 <pre><code>## 
-## DEG counts (padj &lt; 0.05 vs the 3 -fold threshold):</code></pre>
+## DEG counts (padj &lt; 0.05 vs the 3-fold threshold):</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="part-2-lifestyle-biofilm-vs-planktonic-accounting-for-time.html#cb260-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_add<span class="sc">$</span>direction))</span></code></pre></div>
 </details>

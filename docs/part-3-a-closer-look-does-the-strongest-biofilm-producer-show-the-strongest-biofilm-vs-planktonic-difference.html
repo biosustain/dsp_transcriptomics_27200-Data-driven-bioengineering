@@ -424,11 +424,11 @@ for discussion, not a clean quantitative comparison.</p>
 ## Planktonic    Biofilm 
 ##          8          8</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="part-3-a-closer-look-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb273-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Biofilm vs planktonic DEGs at 24h (padj &lt;&quot;</span>, padj_threshold,</span>
-<span id="cb273-2"><a href="part-3-a-closer-look-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb273-2" tabindex="-1"></a>    <span class="st">&quot;vs the&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold threshold):&quot;</span>, n_deg_24, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="part-3-a-closer-look-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb273-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Biofilm vs planktonic DEGs at 24h (padj &lt; %s vs the %g-fold threshold): %d</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb273-2"><a href="part-3-a-closer-look-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb273-2" tabindex="-1"></a>            padj_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, n_deg_24))</span></code></pre></div>
 </details>
 <pre><code>## 
-## Biofilm vs planktonic DEGs at 24h (padj &lt; 0.05 vs the 3 -fold threshold): 490</code></pre>
+## Biofilm vs planktonic DEGs at 24h (padj &lt; 0.05 vs the 3-fold threshold): 490</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="part-3-a-closer-look-does-the-strongest-biofilm-producer-show-the-strongest-biofilm-vs-planktonic-difference.html#cb275-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_24<span class="sc">$</span>direction))</span></code></pre></div>
 </details>

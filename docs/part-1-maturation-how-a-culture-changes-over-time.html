@@ -415,9 +415,9 @@ builds up over time. Nothing else in the code needs to change.</p>
 <pre><code>## 
 ## Coefficient: timepoint_24h_vs_5h</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb217-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;vs the&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb217-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;DEG counts (padj &lt; %s vs the %g-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>, padj_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold))</span></code></pre></div>
 </details>
-<pre><code>## DEG counts (padj &lt; 0.05 vs the 3 -fold threshold):</code></pre>
+<pre><code>## DEG counts (padj &lt; 0.05 vs the 3-fold threshold):</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb219-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_bf<span class="sc">$</span>direction))</span></code></pre></div>
 </details>
@@ -506,9 +506,9 @@ builds up over time. Nothing else in the code needs to change.</p>
 <pre><code>## 
 ## Coefficient: timepoint_24h_vs_5h</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb231-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;vs the&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb231-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;DEG counts (padj &lt; %s vs the %g-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>, padj_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold))</span></code></pre></div>
 </details>
-<pre><code>## DEG counts (padj &lt; 0.05 vs the 3 -fold threshold):</code></pre>
+<pre><code>## DEG counts (padj &lt; 0.05 vs the 3-fold threshold):</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="part-1-maturation-how-a-culture-changes-over-time.html#cb233-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_pk<span class="sc">$</span>direction))</span></code></pre></div>
 </details>

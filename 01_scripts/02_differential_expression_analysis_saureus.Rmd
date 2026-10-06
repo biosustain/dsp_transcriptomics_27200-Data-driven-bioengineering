@@ -252,7 +252,7 @@ res_bf  <- get_results(dds_bf, coef_bf)
 
 cat("Samples (biofilm):\n"); print(table(dds_bf$timepoint))
 cat("\nCoefficient:", coef_bf, "\n")
-cat("DEG counts (padj <", padj_threshold, "vs the", 2^lfc_threshold, "-fold threshold):\n")
+cat(sprintf("DEG counts (padj < %s vs the %g-fold threshold):\n", padj_threshold, 2^lfc_threshold))
 print(table(res_bf$direction))
 
 cat("\nMost extreme fold changes (check baseMean - high = real, single digits = low-count noise):\n")
@@ -290,7 +290,7 @@ res_pk  <- get_results(dds_pk, coef_pk)
 
 cat("Samples (planktonic):\n"); print(table(dds_pk$timepoint))
 cat("\nCoefficient:", coef_pk, "\n")
-cat("DEG counts (padj <", padj_threshold, "vs the", 2^lfc_threshold, "-fold threshold):\n")
+cat(sprintf("DEG counts (padj < %s vs the %g-fold threshold):\n", padj_threshold, 2^lfc_threshold))
 print(table(res_pk$direction))
 
 cat("\nMost extreme fold changes (check baseMean - high = real, single digits = low-count noise):\n")
@@ -531,7 +531,7 @@ dds_add <- DESeq(dds_ls)
 cat("resultsNames:\n"); print(resultsNames(dds_add))
 
 res_add <- get_results(dds_add, "lifestyle_Biofilm_vs_Planktonic")
-cat("\nDEG counts (padj <", padj_threshold, "vs the", 2^lfc_threshold, "-fold threshold):\n")
+cat(sprintf("\nDEG counts (padj < %s vs the %g-fold threshold):\n", padj_threshold, 2^lfc_threshold))
 print(table(res_add$direction))
 ```
 
@@ -724,8 +724,8 @@ res_24 <- get_results(dds_24, "lifestyle_Biofilm_vs_Planktonic")
 
 n_deg_24 <- sum(res_24$direction != "Not significant")
 cat("Samples at 24h:\n"); print(table(dds_24$lifestyle))
-cat("\nBiofilm vs planktonic DEGs at 24h (padj <", padj_threshold,
-    "vs the", 2^lfc_threshold, "-fold threshold):", n_deg_24, "\n")
+cat(sprintf("\nBiofilm vs planktonic DEGs at 24h (padj < %s vs the %g-fold threshold): %d\n",
+            padj_threshold, 2^lfc_threshold, n_deg_24))
 print(table(res_24$direction))
 
 # Save this strain's result to a shared file so both strains can be compared
