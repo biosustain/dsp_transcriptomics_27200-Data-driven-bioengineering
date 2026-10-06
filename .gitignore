@@ -33,3 +33,6 @@ results/cross_strain/*
 
 # Per-strain reports from render_all_strains.R (regenerable, ~18 MB)
 01_scripts/*.html
+
+# Rscript writes this when a script plots with no device open
+Rplots.pdf
