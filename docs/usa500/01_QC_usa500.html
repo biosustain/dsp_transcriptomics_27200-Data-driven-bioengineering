@@ -4506,10 +4506,37 @@ educational and reproducible.</p>
 <div style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
 <p><strong>⭐ One file, two strains.</strong> Set the
 <code>strain</code> variable in the first code chunk to either
-<code>“USA-100”</code> or <code>“USA-500”</code> and render. Every path,
-label and output folder below is derived from that one setting, so the
-same script produces the QC for either strain without further edits.</p>
+<code>“USA-100”</code> or <code>“USA-500”</code>. Every path, label and
+output folder below is derived from that one setting, so the same script
+produces the QC for either strain without further edits. It runs
+<strong>one strain at a time</strong>: the two were mapped to different
+reference genomes, so their gene identifiers are not comparable. Results
+go to a separate folder per strain, so nothing is overwritten and you
+can compare them afterwards.</p>
 </div>
+<p>These chapters are run for <strong>USA-100</strong>. To see the other
+strain, change that line to <code>&quot;USA-500&quot;</code> and run again from
+the top. Or read it without running anything, because the full USA-500
+analysis is published alongside this book:</p>
+<ul>
+<li><a href="https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/usa500/01_QC_usa500.html">USA-500:
+quality control</a></li>
+<li><a href="https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/usa500/02_DE_usa500.html">USA-500:
+differential expression</a></li>
+<li><a href="https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/usa500/03_FN_usa500.html">USA-500:
+functional enrichment</a></li>
+</ul>
+<p>To regenerate both strains as six standalone reports, run
+<code>Rscript 01_scripts/render_all_strains.R</code> from the repository
+root.</p>
+<p>The strains were mapped to different reference genomes, so their gene
+identifiers are not comparable and the two analyses are never merged.
+The one place they meet is the cross-strain table in Part 3 of the
+differential expression chapter, which counts how many genes each strain
+calls significant.</p>
+<p>To regenerate both strains yourself, run
+<code>Rscript 01_scripts/render_all_strains.R</code> from the repository
+root.</p>
 <p><strong>Setup the Environment</strong></p>
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
 <p><strong>📌 Remember:</strong> Load all libraries at the start of
@@ -4661,8 +4688,8 @@ carry twice the replicates.</p>
 <span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>  ),</span>
 <span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="fu">paste0</span>(<span class="st">&#39;Sample metadata - &#39;</span>, strain)</span>
 <span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>)</span></code></pre></div>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-0efcf75cfc44f766f82c" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0efcf75cfc44f766f82c">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata - USA-500<\/caption>","data":[["USA500_NRS385_Biofilm_10h_1","USA500_NRS385_Biofilm_10h_2","USA500_NRS385_Biofilm_10h_3","USA500_NRS385_Biofilm_10h_4","USA500_NRS385_Biofilm_24h_1","USA500_NRS385_Biofilm_24h_2","USA500_NRS385_Biofilm_24h_3","USA500_NRS385_Biofilm_24h_4","USA500_NRS385_Biofilm_24h_5","USA500_NRS385_Biofilm_24h_6","USA500_NRS385_Biofilm_24h_7","USA500_NRS385_Biofilm_24h_8","USA500_NRS385_Biofilm_5h_1","USA500_NRS385_Biofilm_5h_2","USA500_NRS385_Biofilm_5h_3","USA500_NRS385_Biofilm_5h_4","USA500_NRS385_Planktonic_10h_1","USA500_NRS385_Planktonic_10h_2","USA500_NRS385_Planktonic_10h_3","USA500_NRS385_Planktonic_10h_4","USA500_NRS385_Planktonic_24h_1","USA500_NRS385_Planktonic_24h_2","USA500_NRS385_Planktonic_24h_3","USA500_NRS385_Planktonic_24h_4","USA500_NRS385_Planktonic_24h_5","USA500_NRS385_Planktonic_24h_6","USA500_NRS385_Planktonic_24h_7","USA500_NRS385_Planktonic_24h_8","USA500_NRS385_Planktonic_5h_1","USA500_NRS385_Planktonic_5h_2","USA500_NRS385_Planktonic_5h_3","USA500_NRS385_Planktonic_5h_4"],["USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500"],["NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385"],["Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic"],["10h","10h","10h","10h","24h","24h","24h","24h","24h","24h","24h","24h","5h","5h","5h","5h","10h","10h","10h","10h","24h","24h","24h","24h","24h","24h","24h","24h","5h","5h","5h","5h"],[1,2,3,4,1,2,3,4,5,6,7,8,1,2,3,4,1,2,3,4,1,2,3,4,5,6,7,8,1,2,3,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>strain<\/th>\n      <th>reference<\/th>\n      <th>lifestyle<\/th>\n      <th>timepoint<\/th>\n      <th>replicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":5},{"name":"sample","targets":0},{"name":"strain","targets":1},{"name":"reference","targets":2},{"name":"lifestyle","targets":3},{"name":"timepoint","targets":4},{"name":"replicate","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-83713eb926d13e6e2b4d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-83713eb926d13e6e2b4d">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata - USA-500<\/caption>","data":[["USA500_NRS385_Biofilm_10h_1","USA500_NRS385_Biofilm_10h_2","USA500_NRS385_Biofilm_10h_3","USA500_NRS385_Biofilm_10h_4","USA500_NRS385_Biofilm_24h_1","USA500_NRS385_Biofilm_24h_2","USA500_NRS385_Biofilm_24h_3","USA500_NRS385_Biofilm_24h_4","USA500_NRS385_Biofilm_24h_5","USA500_NRS385_Biofilm_24h_6","USA500_NRS385_Biofilm_24h_7","USA500_NRS385_Biofilm_24h_8","USA500_NRS385_Biofilm_5h_1","USA500_NRS385_Biofilm_5h_2","USA500_NRS385_Biofilm_5h_3","USA500_NRS385_Biofilm_5h_4","USA500_NRS385_Planktonic_10h_1","USA500_NRS385_Planktonic_10h_2","USA500_NRS385_Planktonic_10h_3","USA500_NRS385_Planktonic_10h_4","USA500_NRS385_Planktonic_24h_1","USA500_NRS385_Planktonic_24h_2","USA500_NRS385_Planktonic_24h_3","USA500_NRS385_Planktonic_24h_4","USA500_NRS385_Planktonic_24h_5","USA500_NRS385_Planktonic_24h_6","USA500_NRS385_Planktonic_24h_7","USA500_NRS385_Planktonic_24h_8","USA500_NRS385_Planktonic_5h_1","USA500_NRS385_Planktonic_5h_2","USA500_NRS385_Planktonic_5h_3","USA500_NRS385_Planktonic_5h_4"],["USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500","USA500"],["NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385","NRS385"],["Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic"],["10h","10h","10h","10h","24h","24h","24h","24h","24h","24h","24h","24h","5h","5h","5h","5h","10h","10h","10h","10h","24h","24h","24h","24h","24h","24h","24h","24h","5h","5h","5h","5h"],[1,2,3,4,1,2,3,4,5,6,7,8,1,2,3,4,1,2,3,4,1,2,3,4,5,6,7,8,1,2,3,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>strain<\/th>\n      <th>reference<\/th>\n      <th>lifestyle<\/th>\n      <th>timepoint<\/th>\n      <th>replicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":5},{"name":"sample","targets":0},{"name":"strain","targets":1},{"name":"reference","targets":2},{"name":"lifestyle","targets":3},{"name":"timepoint","targets":4},{"name":"replicate","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="preparing-the-data" class="section level2">

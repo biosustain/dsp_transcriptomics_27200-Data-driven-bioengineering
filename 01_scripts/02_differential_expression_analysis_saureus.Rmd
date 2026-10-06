@@ -88,7 +88,7 @@ padj_threshold <- 0.05     # FDR cutoff
 
 cat("Strain          :", strain, "\n")
 cat("GTF             :", gtf_path, "\n")
-cat("log2FC threshold:", round(lfc_threshold, 3), "( =", 2^lfc_threshold, "-fold )\n")
+cat(sprintf("log2FC threshold: %.3f (= %g-fold)\n", lfc_threshold, 2^lfc_threshold))
 cat("padj threshold  :", padj_threshold, "\n")
 ```
 

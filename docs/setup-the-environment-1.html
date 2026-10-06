@@ -424,9 +424,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </details>
 <pre><code>## GTF             : /Users/jasge/Documents/GitHub/dsp_27200/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.gtf.gz</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="setup-the-environment-1.html#cb199-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;log2FC threshold:&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;( =&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold )</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="setup-the-environment-1.html#cb199-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;log2FC threshold: %.3f (= %g-fold)</span><span class="sc">\n</span><span class="st">&quot;</span>, lfc_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold))</span></code></pre></div>
 </details>
-<pre><code>## log2FC threshold: 1.585 ( = 3 -fold )</code></pre>
+<pre><code>## log2FC threshold: 1.585 (= 3-fold)</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="setup-the-environment-1.html#cb201-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;padj threshold  :&quot;</span>, padj_threshold, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>

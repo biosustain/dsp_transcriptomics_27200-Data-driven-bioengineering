@@ -1985,8 +1985,8 @@ line below.</li>
 <pre><code>## Strain          : USA-500</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;GTF             :&quot;</span>, gtf_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## GTF             : /Users/jasge/Documents/GitHub/dsp_27200/data/genome_files/saureus/usa500_USA300/GCF_000013465.1_ASM1346v1_genomic.gtf.gz</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;log2FC threshold:&quot;</span>, <span class="fu">round</span>(lfc_threshold, <span class="dv">3</span>), <span class="st">&quot;( =&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold )</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## log2FC threshold: 1.585 ( = 3 -fold )</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;log2FC threshold: %.3f (= %g-fold)</span><span class="sc">\n</span><span class="st">&quot;</span>, lfc_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold))</span></code></pre></div>
+<pre><code>## log2FC threshold: 1.585 (= 3-fold)</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;padj threshold  :&quot;</span>, padj_threshold, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## padj threshold  : 0.05</code></pre>
 </div>
@@ -2171,8 +2171,8 @@ maturation programme.</li>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_bf, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Coefficient: timepoint_24h_vs_5h</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;vs the&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## DEG counts (padj &lt; 0.05 vs the 3 -fold threshold):</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;DEG counts (padj &lt; %s vs the %g-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>, padj_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold))</span></code></pre></div>
+<pre><code>## DEG counts (padj &lt; 0.05 vs the 3-fold threshold):</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_bf<span class="sc">$</span>direction))</span></code></pre></div>
 <pre><code>## 
 ##              Up            Down Not significant 
@@ -2255,8 +2255,8 @@ phase).</li>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Coefficient:&quot;</span>, coef_pk, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Coefficient: timepoint_24h_vs_5h</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;vs the&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## DEG counts (padj &lt; 0.05 vs the 3 -fold threshold):</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;DEG counts (padj &lt; %s vs the %g-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>, padj_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold))</span></code></pre></div>
+<pre><code>## DEG counts (padj &lt; 0.05 vs the 3-fold threshold):</code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_pk<span class="sc">$</span>direction))</span></code></pre></div>
 <pre><code>## 
 ##              Up            Down Not significant 
@@ -2633,9 +2633,9 @@ biofilm-vs-planktonic gene, not just a growth-phase artefact.</li>
 <pre><code>## [1] &quot;Intercept&quot;                       &quot;timepoint_10h_vs_5h&quot;            
 ## [3] &quot;timepoint_24h_vs_5h&quot;             &quot;lifestyle_Biofilm_vs_Planktonic&quot;</code></pre>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a>res_add <span class="ot">&lt;-</span> <span class="fu">get_results</span>(dds_add, <span class="st">&quot;lifestyle_Biofilm_vs_Planktonic&quot;</span>)</span>
-<span id="cb65-2"><a href="#cb65-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">DEG counts (padj &lt;&quot;</span>, padj_threshold, <span class="st">&quot;vs the&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<span id="cb65-2"><a href="#cb65-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">DEG counts (padj &lt; %s vs the %g-fold threshold):</span><span class="sc">\n</span><span class="st">&quot;</span>, padj_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold))</span></code></pre></div>
 <pre><code>## 
-## DEG counts (padj &lt; 0.05 vs the 3 -fold threshold):</code></pre>
+## DEG counts (padj &lt; 0.05 vs the 3-fold threshold):</code></pre>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_add<span class="sc">$</span>direction))</span></code></pre></div>
 <pre><code>## 
 ##              Up            Down Not significant 
@@ -2882,10 +2882,10 @@ not a clean quantitative comparison.</p>
 <pre><code>## 
 ## Planktonic    Biofilm 
 ##          8          8</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Biofilm vs planktonic DEGs at 24h (padj &lt;&quot;</span>, padj_threshold,</span>
-<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a>    <span class="st">&quot;vs the&quot;</span>, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, <span class="st">&quot;-fold threshold):&quot;</span>, n_deg_24, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Biofilm vs planktonic DEGs at 24h (padj &lt; %s vs the %g-fold threshold): %d</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a>            padj_threshold, <span class="dv">2</span><span class="sc">^</span>lfc_threshold, n_deg_24))</span></code></pre></div>
 <pre><code>## 
-## Biofilm vs planktonic DEGs at 24h (padj &lt; 0.05 vs the 3 -fold threshold): 422</code></pre>
+## Biofilm vs planktonic DEGs at 24h (padj &lt; 0.05 vs the 3-fold threshold): 422</code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(res_24<span class="sc">$</span>direction))</span></code></pre></div>
 <pre><code>## 
 ##              Up            Down Not significant 
