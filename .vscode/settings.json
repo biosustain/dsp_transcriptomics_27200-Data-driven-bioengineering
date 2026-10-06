@@ -4,8 +4,12 @@
   // customizations.codespaces.openFiles), and students should land on the
   // formatted page, not the raw text.
   //
+  // Two glob forms, because the file sits at the workspace root and the
+  // "**/" prefix alone did not take.
+  //
   // To edit it instead: right-click the file -> Open With... -> Text Editor.
   "workbench.editorAssociations": {
+    "START_HERE.md": "vscode.markdown.preview.editor",
     "**/START_HERE.md": "vscode.markdown.preview.editor"
   }
 }
