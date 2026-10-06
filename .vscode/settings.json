@@ -1,0 +1,11 @@
+{
+  // Open START_HERE.md as rendered markdown rather than source. The Codespace
+  // opens this file automatically (see .devcontainer/devcontainer.json ->
+  // customizations.codespaces.openFiles), and students should land on the
+  // formatted page, not the raw text.
+  //
+  // To edit it instead: right-click the file -> Open With... -> Text Editor.
+  "workbench.editorAssociations": {
+    "**/START_HERE.md": "vscode.markdown.preview.editor"
+  }
+}
