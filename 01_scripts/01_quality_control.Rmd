@@ -118,9 +118,10 @@ DT::datatable(
   count matrix, which hides how the reads behaved. The nf-core run that produced it wrote a MultiQC
   report covering read quality, trimming, alignment rates and duplication for all eight samples:
   <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-02-Homo_sapiens/hasapiens/multiqc/data-02-Homo_sapiens_multiqc_report.html">data-02-Homo_sapiens_multiqc_report.html</a>,
-  under <code>data/data-02-Homo_sapiens/hasapiens/multiqc/</code>. In a Codespace, right-click it and
-  choose <strong>Open Preview</strong>. If something is wrong at that level, no amount of careful
-  modelling afterwards will rescue it.
+  under <code>data/data-02-Homo_sapiens/hasapiens/multiqc/</code>. It is an HTML page, which VS Code
+  cannot display inside a Codespace: right-click the file in the explorer, choose
+  <strong>Download</strong>, and open it in your own browser. If something is wrong at that level, no
+  amount of careful modelling afterwards will rescue it.
 </div>
 
 ### Loading Count Data

@@ -166,9 +166,11 @@ report from a full dataset, processed before the course. Every dataset in `data/
 | *S. aureus* USA-100, 32 samples | [data-01-Staphylococcus_aureus_USA100_multiqc_report.html](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureus_USA100_multiqc_report.html) |
 | *S. aureus* USA-500, 32 samples | [data-01-Staphylococcus_aureus_USA500_multiqc_report.html](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html) |
 
-Use the human one today; the two bacterial reports belong to the advanced track. On
-GitHub, click **Download raw file** and open it in your browser. In a Codespace,
-right-click the file and choose **Open Preview**.
+Use the human one today; the two bacterial reports belong to the advanced track.
+
+A MultiQC report is an HTML page and VS Code cannot display one inside a Codespace. In the
+Codespace, right-click the file in the explorer and choose **Download**, then open the
+downloaded file in your browser. Straight from GitHub, click **Download raw file** instead.
 
 Things worth looking at:
 

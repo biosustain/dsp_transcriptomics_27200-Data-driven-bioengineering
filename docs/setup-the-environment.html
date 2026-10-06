@@ -416,16 +416,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-13"><a href="setup-the-environment.html#cb14-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;Sample metadata - Human ASM (dexamethasone vs untreated)&#39;</span></span>
 <span id="cb14-14"><a href="setup-the-environment.html#cb14-14" tabindex="-1"></a>)</span></code></pre></div>
 </details>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-92ef597cfbb5ba18170a" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-92ef597cfbb5ba18170a">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata - Human ASM (dexamethasone vs untreated)<\/caption>","data":[["N052611_dexamethasone","N052611_untreated","N061011_dexamethasone","N061011_untreated","N080611_dexamethasone","N080611_untreated","N61311_dexamethasone","N61311_untreated"],["N052611","N052611","N061011","N061011","N080611","N080611","N61311","N61311"],["dexamethasone","untreated","dexamethasone","untreated","dexamethasone","untreated","dexamethasone","untreated"],["treatment","control","treatment","control","treatment","control","treatment","control"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>donor<\/th>\n      <th>treatment_full<\/th>\n      <th>group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"name":"sample","targets":0},{"name":"donor","targets":1},{"name":"treatment_full","targets":2},{"name":"group","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6c9981339176fa56a466" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6c9981339176fa56a466">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata - Human ASM (dexamethasone vs untreated)<\/caption>","data":[["N052611_dexamethasone","N052611_untreated","N061011_dexamethasone","N061011_untreated","N080611_dexamethasone","N080611_untreated","N61311_dexamethasone","N61311_untreated"],["N052611","N052611","N061011","N061011","N080611","N080611","N61311","N61311"],["dexamethasone","untreated","dexamethasone","untreated","dexamethasone","untreated","dexamethasone","untreated"],["treatment","control","treatment","control","treatment","control","treatment","control"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>donor<\/th>\n      <th>treatment_full<\/th>\n      <th>group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"name":"sample","targets":0},{"name":"donor","targets":1},{"name":"treatment_full","targets":2},{"name":"group","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <div class="note">
 <p><strong>📘 Before you start: look at the pipeline’s own QC.</strong> Everything below starts from a
 count matrix, which hides how the reads behaved. The nf-core run that produced it wrote a MultiQC
 report covering read quality, trimming, alignment rates and duplication for all eight samples:
 <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-02-Homo_sapiens/hasapiens/multiqc/data-02-Homo_sapiens_multiqc_report.html">data-02-Homo_sapiens_multiqc_report.html</a>,
-under <code>data/data-02-Homo_sapiens/hasapiens/multiqc/</code>. In a Codespace, right-click it and
-choose <strong>Open Preview</strong>. If something is wrong at that level, no amount of careful
-modelling afterwards will rescue it.</p>
+under <code>data/data-02-Homo_sapiens/hasapiens/multiqc/</code>. It is an HTML page, which VS Code
+cannot display inside a Codespace: right-click the file in the explorer, choose
+<strong>Download</strong>, and open it in your own browser. If something is wrong at that level, no
+amount of careful modelling afterwards will rescue it.</p>
 </div>
 </div>
 <div id="loading-count-data" class="section level3 hasAnchor">

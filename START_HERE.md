@@ -50,8 +50,11 @@ Open it in the file tree on the left and have a look around. Worth finding:
 - **`pipeline_info/`** - what ran, for how long, with which software versions.
 
 **Then open the real quality report.** Yours covers two samples; these cover the full
-datasets we processed before the course, and they are the ones worth interpreting. In the
-file tree, right-click the file and choose **Open Preview**:
+datasets we processed before the course, and they are the ones worth interpreting.
+
+A MultiQC report is an HTML page, and VS Code cannot display one inside a Codespace. In
+the file tree on the left, **right-click the file and choose Download**, then open the
+downloaded file in your own browser:
 
 | Dataset | File |
 |---|---|

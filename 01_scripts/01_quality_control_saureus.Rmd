@@ -142,7 +142,8 @@ cat("Results folder:", results_dir, "\n")
   and
   <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html">USA-500</a>,
   under <code>data/data-01-Staphylococcus_aureus/&lt;strain&gt;/</code>. Open the one matching the strain
-  you set above. In a Codespace, right-click it and choose <strong>Open Preview</strong>. For USA-500 the
+  you set above. These are HTML pages, which VS Code cannot display inside a Codespace:
+  right-click the file, choose <strong>Download</strong>, and open it in your own browser. For USA-500 the
   alignment rates are worth a second look, because its reads were mapped to the USA300 reference rather
   than its own.
 </div>

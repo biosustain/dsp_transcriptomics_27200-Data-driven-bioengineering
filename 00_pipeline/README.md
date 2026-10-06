@@ -55,8 +55,9 @@ For a report worth interpreting, open the one from the full dataset:
 | *S. aureus* USA-100, 32 samples | `data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureus_USA100_multiqc_report.html` |
 | *S. aureus* USA-500, 32 samples | `data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html` |
 
-In a Codespace, right-click the file and choose **Open Preview**. On GitHub, click
-**Download raw file** and open it in a browser.
+These are HTML pages, and VS Code cannot display one inside a Codespace. Right-click the
+file in the explorer and choose **Download**, then open it in your own browser. Straight
+from GitHub, click **Download raw file** instead.
 
 The walkthrough, with every argument explained, is the *Running the nf-core/rnaseq
 pipeline* chapter of the course book.
