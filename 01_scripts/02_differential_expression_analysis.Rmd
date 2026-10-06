@@ -468,8 +468,13 @@ volcano
 
 An MA plot shows log2 fold change (y-axis) against mean expression (x-axis). It helps assess whether the fold change estimates are stable across the expression range. After shrinkage, estimates for lowly expressed genes (left side) should be pulled toward zero.
 
+The coloured points are the significant genes. `lfcShrink()` copies the p-values across untouched, so the shrunken object still carries the ones from the test against zero. We swap in the p-values from the test against the 2-fold threshold, so the plot marks the same genes the rest of the chapter calls significant rather than several thousand more.
+
 ```{r human-de-ma-plot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-plotMA(res_shrunk,
+res_ma       <- res_shrunk
+res_ma$padj  <- res_thr[rownames(res_ma), "padj"]   # colour by the thresholded test
+
+plotMA(res_ma,
        alpha = 0.05,
        main  = "MA Plot - Dexamethasone vs Untreated (shrunken LFC)",
        ylab  = "log2 Fold Change")

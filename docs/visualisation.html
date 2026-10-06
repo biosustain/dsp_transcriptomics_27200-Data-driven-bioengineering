@@ -413,12 +413,16 @@ unless it also clears padj, and the vertical line is a reference, no longer part
 <div id="ma-plot" class="section level3 hasAnchor">
 <h3>MA Plot<a href="visualisation.html#ma-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>An MA plot shows log2 fold change (y-axis) against mean expression (x-axis). It helps assess whether the fold change estimates are stable across the expression range. After shrinkage, estimates for lowly expressed genes (left side) should be pulled toward zero.</p>
+<p>The coloured points are the significant genes. <code>lfcShrink()</code> copies the p-values across untouched, so the shrunken object still carries the ones from the test against zero. We swap in the p-values from the test against the 2-fold threshold, so the plot marks the same genes the rest of the chapter calls significant rather than several thousand more.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="visualisation.html#cb86-1" tabindex="-1"></a><span class="fu">plotMA</span>(res_shrunk,</span>
-<span id="cb86-2"><a href="visualisation.html#cb86-2" tabindex="-1"></a>       <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
-<span id="cb86-3"><a href="visualisation.html#cb86-3" tabindex="-1"></a>       <span class="at">main  =</span> <span class="st">&quot;MA Plot - Dexamethasone vs Untreated (shrunken LFC)&quot;</span>,</span>
-<span id="cb86-4"><a href="visualisation.html#cb86-4" tabindex="-1"></a>       <span class="at">ylab  =</span> <span class="st">&quot;log2 Fold Change&quot;</span>)</span>
-<span id="cb86-5"><a href="visualisation.html#cb86-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="visualisation.html#cb86-1" tabindex="-1"></a>res_ma       <span class="ot">&lt;-</span> res_shrunk</span>
+<span id="cb86-2"><a href="visualisation.html#cb86-2" tabindex="-1"></a>res_ma<span class="sc">$</span>padj  <span class="ot">&lt;-</span> res_thr[<span class="fu">rownames</span>(res_ma), <span class="st">&quot;padj&quot;</span>]   <span class="co"># colour by the thresholded test</span></span>
+<span id="cb86-3"><a href="visualisation.html#cb86-3" tabindex="-1"></a></span>
+<span id="cb86-4"><a href="visualisation.html#cb86-4" tabindex="-1"></a><span class="fu">plotMA</span>(res_ma,</span>
+<span id="cb86-5"><a href="visualisation.html#cb86-5" tabindex="-1"></a>       <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb86-6"><a href="visualisation.html#cb86-6" tabindex="-1"></a>       <span class="at">main  =</span> <span class="st">&quot;MA Plot - Dexamethasone vs Untreated (shrunken LFC)&quot;</span>,</span>
+<span id="cb86-7"><a href="visualisation.html#cb86-7" tabindex="-1"></a>       <span class="at">ylab  =</span> <span class="st">&quot;log2 Fold Change&quot;</span>)</span>
+<span id="cb86-8"><a href="visualisation.html#cb86-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-ma-plot-1.png" alt="" width="672" /></p>
 </div>

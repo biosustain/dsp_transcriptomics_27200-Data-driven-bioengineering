@@ -375,12 +375,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb138-2"><a href="saving-results-1.html#cb138-2" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb138-3"><a href="saving-results-1.html#cb138-3" tabindex="-1"></a></span>
 <span id="cb138-4"><a href="saving-results-1.html#cb138-4" tabindex="-1"></a><span class="fu">write.table</span>(</span>
-<span id="cb138-5"><a href="saving-results-1.html#cb138-5" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(gsea_results) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>leadingEdge),</span>
-<span id="cb138-6"><a href="saving-results-1.html#cb138-6" tabindex="-1"></a>  <span class="at">file      =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;GSEA_Reactome_treatment_vs_control.tsv&quot;</span>),</span>
-<span id="cb138-7"><a href="saving-results-1.html#cb138-7" tabindex="-1"></a>  <span class="at">sep       =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb138-8"><a href="saving-results-1.html#cb138-8" tabindex="-1"></a>)</span>
-<span id="cb138-9"><a href="saving-results-1.html#cb138-9" tabindex="-1"></a></span>
-<span id="cb138-10"><a href="saving-results-1.html#cb138-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Results saved to:&quot;</span>, results_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<span id="cb138-5"><a href="saving-results-1.html#cb138-5" tabindex="-1"></a>  <span class="co"># leadingEdge is a list column; flatten it rather than drop it, so the genes</span></span>
+<span id="cb138-6"><a href="saving-results-1.html#cb138-6" tabindex="-1"></a>  <span class="co"># driving each set are still there when the file is opened outside R.</span></span>
+<span id="cb138-7"><a href="saving-results-1.html#cb138-7" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(gsea_results) <span class="sc">%&gt;%</span></span>
+<span id="cb138-8"><a href="saving-results-1.html#cb138-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">leadingEdge =</span> <span class="fu">vapply</span>(leadingEdge, paste, <span class="fu">character</span>(<span class="dv">1</span>), <span class="at">collapse =</span> <span class="st">&quot;;&quot;</span>)),</span>
+<span id="cb138-9"><a href="saving-results-1.html#cb138-9" tabindex="-1"></a>  <span class="at">file      =</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;GSEA_Reactome_treatment_vs_control.tsv&quot;</span>),</span>
+<span id="cb138-10"><a href="saving-results-1.html#cb138-10" tabindex="-1"></a>  <span class="at">sep       =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb138-11"><a href="saving-results-1.html#cb138-11" tabindex="-1"></a>)</span>
+<span id="cb138-12"><a href="saving-results-1.html#cb138-12" tabindex="-1"></a></span>
+<span id="cb138-13"><a href="saving-results-1.html#cb138-13" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Results saved to:&quot;</span>, results_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Results saved to: /Users/jasge/Documents/GitHub/dsp_27200/results/human</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>

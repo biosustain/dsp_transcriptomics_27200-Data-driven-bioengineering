@@ -380,7 +380,10 @@ results_dir <- file.path(git_root, "results", "human")
 dir.create(results_dir, showWarnings = FALSE)
 
 write.table(
-  as.data.frame(gsea_results) %>% select(-leadingEdge),
+  # leadingEdge is a list column; flatten it rather than drop it, so the genes
+  # driving each set are still there when the file is opened outside R.
+  as.data.frame(gsea_results) %>%
+    mutate(leadingEdge = vapply(leadingEdge, paste, character(1), collapse = ";")),
   file      = file.path(results_dir, "GSEA_Reactome_treatment_vs_control.tsv"),
   sep       = "\t", quote = FALSE, row.names = FALSE
 )
