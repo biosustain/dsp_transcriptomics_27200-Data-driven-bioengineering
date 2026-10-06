@@ -225,8 +225,9 @@ The `DESeqDataSet` (DDS) holds the raw count matrix, sample metadata, and the de
 ::: note
 <strong>📘 Note:</strong> **Design choice.** Because each donor provides both a treated and an untreated
 sample, donor is a paired/blocking factor. The recommended design is `~ donor + condition`, which
-removes between-donor baseline differences before testing the treatment effect. We build the DDS with
-this design, and also keep a simple `~ condition` version so the two can be compared for teaching (script 02).
+removes between-donor baseline differences before testing the treatment effect. The object saved here
+carries that design; script 02 derives a simple `~ condition` version from it so the two can be compared
+for teaching.
 :::
 
 ```{r human-qc-make-dds-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
@@ -398,7 +399,7 @@ already accounts for the design.
 
 PCA reduces the high-dimensional expression space (one dimension per gene) to a small number of principal components that capture the largest sources of variance in the data. Inspect whether the treatment separates samples, and whether donor identity contributes to the remaining structure.
 
-If a technical variable (batch, sequencing run, RNA quality) - or, here, donor - dominates PC1, that variance should be accounted for in the design before differential expression analysis ([Leek *et al.*, 2010](https://doi.org/10.1038/nrg2825)).
+If a nuisance variable (batch, sequencing run, RNA quality, or here the donor) carries a large share of the variance, it should be accounted for in the design before differential expression analysis ([Leek *et al.*, 2010](https://doi.org/10.1038/nrg2825)). Look at where it lands rather than assuming: a nuisance variable on PC1 is a warning, on a later component it is simply something the model should absorb.
 
 ```{r human-qc-pca-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 pca_data <- plotPCA(vsd,

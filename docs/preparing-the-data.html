@@ -413,8 +413,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="note">
 <p><strong>📘 Note:</strong> <strong>Design choice.</strong> Because each donor provides both a treated and an untreated
 sample, donor is a paired/blocking factor. The recommended design is <code>~ donor + condition</code>, which
-removes between-donor baseline differences before testing the treatment effect. We build the DDS with
-this design, and also keep a simple <code>~ condition</code> version so the two can be compared for teaching (script 02).</p>
+removes between-donor baseline differences before testing the treatment effect. The object saved here
+carries that design; script 02 derives a simple <code>~ condition</code> version from it so the two can be compared
+for teaching.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="preparing-the-data.html#cb30-1" tabindex="-1"></a>samples_info<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">factor</span>(samples_info<span class="sc">$</span>group,</span>
