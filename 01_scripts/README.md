@@ -17,9 +17,9 @@ run unchanged on a local machine or in a Codespace.
 
 Each dataset has three scripts, run in order - every step saves results the next one loads:
 
-1. `01_quality_control[_saureus].Rmd` - QC and exploratory analysis (PCA, correlation, outliers)
+1. `01_quality_control[_saureus].Rmd` - QC and exploratory analysis (library sizes, normalisation, PCA, top-variable genes)
 2. `02_differential_expression_analysis[_saureus].Rmd` - DESeq2
-3. `03_gene_functional[_saureus].Rmd` - functional enrichment (ORA & GSEA)
+3. `03_gene_functional[_saureus].Rmd` - functional enrichment (GSEA for human; ORA and GSEA for *S. aureus*)
 
 ## Helper and provenance files
 
@@ -36,8 +36,9 @@ Each dataset has three scripts, run in order - every step saves results the next
 
 - Strain-specific reference genomes: **USA-100** → N315 (`GCF_000009645.1`); **USA-500** →
   USA300_FPR3757 (`GCF_000013465.1`), its closest finished relative, as in the paper.
-- Scripts 02/03 are parameterized by strain (`params$strain`) with USA-100 as the
-  interactive/book default; use `render_all_strains.R` for both strains.
+- All three scripts are parameterized by strain (`params$strain`) with USA-100 as the
+  interactive/book default; use `render_all_strains.R` for both strains. Note 01 and 02
+  take `"USA-100"`, while 03 takes `"usa100"`.
 - Enrichment via KEGGREST/mulea with locus-tag → symbol maps cached in `data/databases/`.
 
 **Human**

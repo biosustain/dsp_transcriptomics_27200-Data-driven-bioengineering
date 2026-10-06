@@ -1,7 +1,7 @@
 # Instructions
 
 :::boxy
-[nf-core rnaseq pipeline](https://nf-co.re/rnaseq/3.23.0/docs/usage/)
+[nf-core rnaseq pipeline](https://nf-co.re/rnaseq/3.27.0/docs/usage/)
 :::
 
 **Topics covered**
@@ -10,7 +10,7 @@
 -   Mapping of short reads (Bowtie2 for bacteria, STAR for human) and quantification with Salmon
 -   Quality control and exploratory data analysis
 -   Differential expression analysis (DESeq2)
--   Functional enrichment analysis (ORA & GSEA)
+-   Functional enrichment analysis (GSEA for human; ORA as well in the advanced bacterial track)
 
 **Data**
 
