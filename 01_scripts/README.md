@@ -26,7 +26,7 @@ Each dataset has three scripts, run in order - every step saves results the next
 | File | Purpose |
 |---|---|
 | `02b_prepare_genesets_saureus.Rmd` | Builds the KEGG/GO gene-set `.rds` caches in `data/databases/` used by the S. aureus functional script (cached outputs committed) |
-| `render_all_strains.R` | Renders the parameterized S. aureus scripts for **both** strains (USA-100 and USA-500); HTML lands next to the scripts |
+| `render_all_strains.R` | Runs QC, differential expression and enrichment for **both** strains (USA-100 and USA-500); six HTML reports land next to the scripts and are gitignored |
 | `params_degs.json` | Parameters for the optional nf-core/differentialabundance run (human dataset) |
 | `run_differentialabundance.sh` | Optional comparison track: nf-core/differentialabundance with the simple `~ condition` model (the paired `~ donor + condition` DESeq2 analysis in script 02 is the primary analysis) |
 

@@ -30,3 +30,6 @@ results/*
 !results/cross_strain/
 results/cross_strain/*
 !results/cross_strain/biofilm_vs_planktonic_24h.tsv
+
+# Per-strain reports from render_all_strains.R (regenerable, ~18 MB)
+01_scripts/*.html

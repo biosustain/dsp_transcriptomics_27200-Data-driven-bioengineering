@@ -1,4 +1,6 @@
 ---
+params:
+  strain: "USA-100"
 output:
   html_document:
     toc: true
@@ -92,6 +94,11 @@ Everything downstream keys off this single setting. Change it to `"USA-500"` to 
 # --- The only line you need to change to switch strains ---
 strain <- "USA-100"          # "USA-100" or "USA-500"
 # ----------------------------------------------------------
+
+# When the file is rendered with params (render_all_strains.R does this),
+# that value wins over the line above. In the notebook there are no params,
+# so the line above is what counts.
+if (exists("params", inherits = FALSE) && is.list(params) && !is.null(params$strain)) strain <- params$strain
 
 stopifnot(strain %in% c("USA-100", "USA-500"))
 
@@ -549,6 +556,10 @@ sessionInfo()
 ```
 
 ```{r saureus-qc-render-0, eval=FALSE, echo=FALSE}
-rmarkdown::render("01_scripts/01_quality_control.Rmd")
+# Both strains in one go, from the repository root:
+#     Rscript 01_scripts/render_all_strains.R
+# A single strain:
+rmarkdown::render("01_scripts/01_quality_control_saureus.Rmd",
+                  params = list(strain = "USA-500"))
 ```
 
