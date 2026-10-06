@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Summary | 27200 Data Driven Bioengineering - Transcriptomics</title>
-  <meta name="description" content="Summary | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <title>Running the nf-core/rnaseq pipeline v3.27.0 | 27200 Data Driven Bioengineering - Transcriptomics</title>
+  <meta name="description" content="Running the nf-core/rnaseq pipeline v3.27.0 | 27200 Data Driven Bioengineering - Transcriptomics" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Summary | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <meta property="og:title" content="Running the nf-core/rnaseq pipeline v3.27.0 | 27200 Data Driven Bioengineering - Transcriptomics" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Summary | 27200 Data Driven Bioengineering - Transcriptomics" />
+  <meta name="twitter:title" content="Running the nf-core/rnaseq pipeline v3.27.0 | 27200 Data Driven Bioengineering - Transcriptomics" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="exploratory-data-analysis.html"/>
-<link rel="next" href="interpretation-questions.html"/>
+<link rel="prev" href="data-processing-using-the-nf-corernaseq-pipeline.html"/>
+<link rel="next" href="structure-of-the-output-directory.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -368,76 +368,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="summary" class="section level2 hasAnchor">
-<h2>Summary<a href="summary.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Before proceeding to differential expression analysis, confirm the QC checks and note the design implication:</p>
-<div class="boxy">
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Check</th>
-<th>What to confirm</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Size factors ≈ 1.0 across samples</td>
-<td>Library sizes are balanced</td>
-</tr>
-<tr class="even">
-<td>Boxplots of normalised counts overlap</td>
-<td>No extreme outlier samples</td>
-</tr>
-<tr class="odd">
-<td>Correlation heatmap</td>
-<td>Note whether structure is by treatment, by donor, or both</td>
-</tr>
-<tr class="even">
-<td>PCA</td>
-<td>Note whether treatment or donor drives the main axes</td>
-</tr>
-<tr class="odd">
-<td>No isolated samples</td>
-<td>No technical outliers</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div style="font-size: 0.9em; color: grey;">
-<p><em>Because the four donors each contribute a treated and an untreated sample, donor is a paired factor.
-The recommended design <code>~ donor + condition</code> removes donor baseline differences before testing the
-treatment effect. Script 02 runs this model and, for teaching, compares it against the simpler
-<code>~ condition</code> model.</em></p>
-</div>
+<div id="running-the-nf-corernaseq-pipeline-v3.27.0" class="section level1 hasAnchor">
+<h1>Running the nf-core/rnaseq pipeline v3.27.0<a href="running-the-nf-corernaseq-pipeline-v3.27.html#running-the-nf-corernaseq-pipeline-v3.27.0" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>This is the first thing you do today.</strong> Before analysing anyone else’s count
+matrix, you produce one yourself, so that the table the notebooks start from is not
+a black box.</p>
+<p>Processing a whole dataset needs more compute than we have in a classroom, so you run
+two human airway smooth muscle samples from the dexamethasone experiment, one treated
+and one untreated, sub-sampled to 50,000 reads each. The reference is a 5 Mb slice of
+chromosome 19 rather than the whole genome, for the same reason.</p>
 <div class="important">
-<p><strong>⭐ Important:</strong> If any check fails, investigate the cause before running DESeq2. Proceeding with outlier samples or a mis-specified design will compromise all downstream results.</p>
+<p><strong>⭐ What this run is, and what it is not.</strong> Two files of 50,000 reads
+against 5 Mb of one chromosome are enough to watch the pipeline work and to read its
+quality report. They are far too few to draw biology from, so <strong>you will not
+analyse your own output</strong>. Once you have seen how reads become counts, the
+notebooks pick up from the full count matrices, made with this same pipeline, which are
+already in <code>data/</code>. If you go looking for your pipeline output in notebook
+01, you will not find it - that is expected.</p>
 </div>
+<p>We use pipeline release <a href="https://nf-co.re/rnaseq/3.27.0">v3.27.0</a> with the
+<code>star_salmon</code> aligner: STAR for alignment and Salmon for quantification. Human
+genes have introns, so the aligner has to be splice-aware. (For bacteria this is
+unnecessary, which is why the advanced <em>S. aureus</em> track uses the <code>prokaryotic</code>
+profile and Bowtie2 instead.)</p>
+<p><strong>To process the data, run the following command:</strong></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="summary.html#cb51-1" tabindex="-1"></a><span class="co"># ── Export DDS for downstream analysis ────────────────────────────────────────</span></span>
-<span id="cb51-2"><a href="summary.html#cb51-2" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;rds&quot;</span>)</span>
-<span id="cb51-3"><a href="summary.html#cb51-3" tabindex="-1"></a><span class="fu">dir.create</span>(results_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb51-4"><a href="summary.html#cb51-4" tabindex="-1"></a></span>
-<span id="cb51-5"><a href="summary.html#cb51-5" tabindex="-1"></a>dds_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;dds_human_asm.rds&quot;</span>)</span>
-<span id="cb51-6"><a href="summary.html#cb51-6" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> dds_path)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb7-1" tabindex="-1"></a><span class="fu">bash</span> 00_pipeline/00_nfcore_rnaseq_processing_human.sh</span></code></pre></div>
 </details>
+<p>That script runs:</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="summary.html#cb52-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ DDS saved to:&quot;</span>, dds_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb52-2"><a href="summary.html#cb52-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb52-3"><a href="summary.html#cb52-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Design      : ~ donor + condition</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb52-4"><a href="summary.html#cb52-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Conditions  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">levels</span>(dds<span class="sc">$</span>condition), <span class="at">collapse =</span> <span class="st">&quot; vs &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-1" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="st">&#39;https://github.com/nf-core/rnaseq&#39;</span> <span class="dt">\</span></span>
+<span id="cb8-2"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-2" tabindex="-1"></a>    <span class="at">-r</span> 3.27.0 <span class="dt">\</span></span>
+<span id="cb8-3"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-3" tabindex="-1"></a>    <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb8-4"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-4" tabindex="-1"></a>    <span class="at">--aligner</span> star_salmon <span class="dt">\</span></span>
+<span id="cb8-5"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-5" tabindex="-1"></a>    <span class="at">--input</span>  <span class="st">&#39;data/seq_files_subsampled/PRJNA229998_GSE52778_human/samplesheet_PRJNA229998_subsampled_2samples.csv&#39;</span> <span class="dt">\</span></span>
+<span id="cb8-6"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-6" tabindex="-1"></a>    <span class="at">--outdir</span> <span class="st">&#39;results/human/nfcore_rnaseq_processing_downsampled&#39;</span> <span class="dt">\</span></span>
+<span id="cb8-7"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-7" tabindex="-1"></a>    <span class="at">--fasta</span>  <span class="st">&#39;data/genome_files/human/chr19_GRCh38_48115444-53115443.fna.gz&#39;</span> <span class="dt">\</span></span>
+<span id="cb8-8"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-8" tabindex="-1"></a>    <span class="at">--gtf</span>    <span class="st">&#39;data/genome_files/human/chr19_GRCh38_48115444-53115443.gtf.gz&#39;</span> <span class="dt">\</span></span>
+<span id="cb8-9"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-9" tabindex="-1"></a>    <span class="at">--gtf_group_features</span> <span class="st">&#39;gene_id&#39;</span> <span class="dt">\</span></span>
+<span id="cb8-10"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-10" tabindex="-1"></a>    <span class="at">--featurecounts_feature_type</span> <span class="st">&#39;exon&#39;</span> <span class="dt">\</span></span>
+<span id="cb8-11"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-11" tabindex="-1"></a>    <span class="at">-c</span> 00_pipeline/custom.config <span class="dt">\</span></span>
+<span id="cb8-12"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb8-12" tabindex="-1"></a>    <span class="at">-c</span> 00_pipeline/human_demo.config</span></code></pre></div>
 </details>
+<p><strong>What the arguments mean:</strong></p>
+<ul>
+<li><code>-r</code>: which release of the pipeline to use</li>
+<li><code>-profile</code>: run the tools in <code>docker</code> containers</li>
+<li><code>--aligner</code>: <code>star_salmon</code>, i.e. STAR for alignment and Salmon for quantification</li>
+<li><code>--input</code>: the sample sheet, listing each sample and its two fastq files</li>
+<li><code>--outdir</code>: where results go (the folder is created for you)</li>
+<li><code>--fasta</code>: the genome sequence, here the chromosome 19 slice</li>
+<li><code>--gtf</code>: the matching annotation</li>
+<li><code>-c</code>: two small config files. One caps CPUs and memory so the run fits in a
+Codespace; the other sets a handful of switches that cannot be passed on the
+command line.</li>
+</ul>
+<p>It takes about <strong>20 to 25 minutes</strong>.</p>
+<div class="warning">
+<p><strong>⚠️ Free the disk space afterwards.</strong> A Codespace does not have room for
+two pipeline runs. This one fills roughly half the disk, almost all of it intermediate
+files that you do not need once the run has finished. When it completes, run:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="running-the-nf-corernaseq-pipeline-v3.27.html#cb9-1" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> work .nextflow<span class="pp">*</span></span></code></pre></div>
+</details>
+<p>This keeps everything in <code>results/</code> and throws away the rest. The one thing
+you give up is <code>-resume</code>: Nextflow re-uses the <code>work</code> directory to
+skip steps it has already done, so after deleting it a re-run starts from the beginning.
+That is a fair trade here, because the run is short.</p>
+</div>
+<div class="note">
+<p><strong>📘 Note:</strong> If you finish early and want to see how a bacterial dataset
+differs, run the cleanup above first, then
+<code>bash 00_pipeline/00_nfcore_rnaseq_processing_saureus.sh</code>. It uses two
+<em>S. aureus</em> USA-100 samples and the <code>prokaryotic</code> profile, and takes
+about 10 minutes. Without the cleanup it will run out of disk part-way through.</p>
+</div>
+<div class="remember">
+<p><strong>📌 Remember:</strong> You can also set parameters through the nf-core website instead of typing them.
+Go to the <a href="https://nf-co.re/rnaseq/3.27.0">pipeline page</a>, press <strong>Launch version 3.27.0</strong>, fill in the form,
+and it generates a config file you can pass to Nextflow.</p>
+</div>
+<div class="note">
+<p><strong>📘 Note:</strong> The counts the notebooks use were made with this same pipeline on the full
+datasets: the human samples against the whole GRCh38 genome, and all three time points for both
+<em>S. aureus</em> strains with Bowtie2. The scripts for those runs are in
+<code>00_pipeline/</code> if you want to see the exact commands.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="exploratory-data-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="interpretation-questions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-processing-using-the-nf-corernaseq-pipeline.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="structure-of-the-output-directory.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -10,12 +10,17 @@ chapter in the [course book](https://biosustain.github.io/dsp_transcriptomics_27
 or run it directly:
 
 ```bash
-bash 00_pipeline/00_nfcore_rnaseq_processing_saureus.sh
+bash 00_pipeline/00_nfcore_rnaseq_processing_human.sh
 ```
 
-It takes about 10 minutes on six small files. That run is a demonstration: it is far too
-small to analyse, so you will **not** use its output afterwards. The point is to see how
-reads become a table of counts, and to read the quality report it produces.
+It takes about 20 to 25 minutes on two small files, and frees its own disk space when it
+finishes. That run is a demonstration: it is far too small to analyse, so you will
+**not** use its output afterwards. The point is to see how reads become a table of
+counts, and to read the quality report it produces.
+
+A Codespace only has room for one pipeline run at a time, which is why the script clears
+up after itself. If you finish early and want to see a bacterial dataset too, run
+`bash 00_pipeline/00_nfcore_rnaseq_processing_saureus.sh` afterwards.
 
 **Then analyse real counts.** The notebooks start from full count matrices, made with the
 same pipeline, already in `data/`.

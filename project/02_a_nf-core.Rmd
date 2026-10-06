@@ -1,110 +1,139 @@
-# Running the nf-core/rnaseq pipeline v3.23.0
+# Running the nf-core/rnaseq pipeline v3.27.0
 
 **This is the first thing you do today.** Before analysing anyone else's count
 matrix, you produce one yourself, so that the table the notebooks start from is not
 a black box.
 
 Processing a whole dataset needs more compute than we have in a classroom, so you run
-six *Staphylococcus aureus* USA-100 samples, sub-sampled to 50,000 reads each: three
-biofilm and three planktonic, all at the 24 hour time point. The sub-sampling script is
-`util/subsample_50k_PRJNA685119_GSE163153_Sareus.sh`.
+two human airway smooth muscle samples from the dexamethasone experiment, one treated
+and one untreated, sub-sampled to 50,000 reads each. The reference is a 5 Mb slice of
+chromosome 19 rather than the whole genome, for the same reason.
 
 <div class="important">
-  <strong>⭐ What this run is, and what it is not.</strong> Six files of 50,000 reads are
-  enough to watch the pipeline work and to read its quality report. They are far too few
-  to draw biology from, so <strong>you will not analyse your own output</strong>. Once you
-  have seen how reads become counts, the notebooks pick up from the full count matrices,
-  made with this same pipeline, which are already in <code>data/</code>. If you go looking
-  for your pipeline output in notebook 01, you will not find it - that is expected.
+  <strong>⭐ What this run is, and what it is not.</strong> Two files of 50,000 reads
+  against 5 Mb of one chromosome are enough to watch the pipeline work and to read its
+  quality report. They are far too few to draw biology from, so <strong>you will not
+  analyse your own output</strong>. Once you have seen how reads become counts, the
+  notebooks pick up from the full count matrices, made with this same pipeline, which are
+  already in <code>data/</code>. If you go looking for your pipeline output in notebook
+  01, you will not find it - that is expected.
 </div>
 
-We use pipeline release [v3.23.0](https://nf-co.re/rnaseq/3.23.0). From this
-release you can align with Bowtie2, which suits bacterial RNA-seq because
-bacteria have no introns and a splice-aware aligner is unnecessary. The
-`prokaryotic` profile selects Bowtie2 for alignment and Salmon for
-quantification, so we do not have to set those separately.
+We use pipeline release [v3.27.0](https://nf-co.re/rnaseq/3.27.0) with the
+`star_salmon` aligner: STAR for alignment and Salmon for quantification. Human
+genes have introns, so the aligner has to be splice-aware. (For bacteria this is
+unnecessary, which is why the advanced *S. aureus* track uses the `prokaryotic`
+profile and Bowtie2 instead.)
 
 **To process the data, run the following command:**
 
 ```bash
+bash 00_pipeline/00_nfcore_rnaseq_processing_human.sh
+```
+
+That script runs:
+
+```bash
 nextflow run 'https://github.com/nf-core/rnaseq' \
-    -name 'saureus_usa100_PRJNA685119_GSE163153' \
-    -r 3.23.0 \
-    -profile prokaryotic,docker \
-    --input  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA685119_GSE163153_saureus/usa100/samplesheet_PRJNA685119_usa100_subset_24h.csv' \
-    --outdir '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/results/saureus_usa100_nfcore_processing_downsampled' \
-    --fasta  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.fna.gz' \
-    --gtf    '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/genome_files/saureus/usa100_NC_002745/GCF_000009645.1_ASM964v1_genomic.gtf.gz' \
-    -c /workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/00_pipeline/custom.config
+    -r 3.27.0 \
+    -profile docker \
+    --aligner star_salmon \
+    --input  'data/seq_files_subsampled/PRJNA229998_GSE52778_human/samplesheet_PRJNA229998_subsampled_2samples.csv' \
+    --outdir 'results/human/nfcore_rnaseq_processing_downsampled' \
+    --fasta  'data/genome_files/human/chr19_GRCh38_48115444-53115443.fna.gz' \
+    --gtf    'data/genome_files/human/chr19_GRCh38_48115444-53115443.gtf.gz' \
+    --gtf_group_features 'gene_id' \
+    --featurecounts_feature_type 'exon' \
+    -c 00_pipeline/custom.config \
+    -c 00_pipeline/human_demo.config
 ```
 
 **What the arguments mean:**
 
--   `-name`: a name for this run
 -   `-r`: which release of the pipeline to use
--   `-profile`: `prokaryotic` (Bowtie2 + Salmon) running in `docker`
+-   `-profile`: run the tools in `docker` containers
+-   `--aligner`: `star_salmon`, i.e. STAR for alignment and Salmon for quantification
 -   `--input`: the sample sheet, listing each sample and its two fastq files
 -   `--outdir`: where results go (the folder is created for you)
--   `--fasta`: the genome sequence
--   `--gtf`: the genome annotation
--   `-c`: a small config file that caps CPUs and memory so the run fits in a Codespace
+-   `--fasta`: the genome sequence, here the chromosome 19 slice
+-   `--gtf`: the matching annotation
+-   `-c`: two small config files. One caps CPUs and memory so the run fits in a
+    Codespace; the other sets a handful of switches that cannot be passed on the
+    command line.
 
-The same command is saved as a script, if you prefer to run it that way:
+It takes about **20 to 25 minutes**.
+
+<div class="warning">
+  <strong>⚠️ Free the disk space afterwards.</strong> A Codespace does not have room for
+  two pipeline runs. This one fills roughly half the disk, almost all of it intermediate
+  files that you do not need once the run has finished. When it completes, run:
 
 ```bash
-bash 00_pipeline/00_nfcore_rnaseq_processing_saureus.sh
+rm -rf work .nextflow*
 ```
 
-It takes about 10 minutes.
+  This keeps everything in <code>results/</code> and throws away the rest. The one thing
+  you give up is <code>-resume</code>: Nextflow re-uses the <code>work</code> directory to
+  skip steps it has already done, so after deleting it a re-run starts from the beginning.
+  That is a fair trade here, because the run is short.
+</div>
+
+<div class="note">
+  <strong>📘 Note:</strong> If you finish early and want to see how a bacterial dataset
+  differs, run the cleanup above first, then
+  <code>bash 00_pipeline/00_nfcore_rnaseq_processing_saureus.sh</code>. It uses two
+  <em>S. aureus</em> USA-100 samples and the <code>prokaryotic</code> profile, and takes
+  about 10 minutes. Without the cleanup it will run out of disk part-way through.
+</div>
 
 <div class="remember">
   <strong>📌 Remember:</strong> You can also set parameters through the nf-core website instead of typing them.
-  Go to the [pipeline page](https://nf-co.re/rnaseq/3.23.0), press **Launch version 3.23.0**, fill in the form,
+  Go to the [pipeline page](https://nf-co.re/rnaseq/3.27.0), press **Launch version 3.27.0**, fill in the form,
   and it generates a config file you can pass to Nextflow.
 </div>
 
 <div class="note">
   <strong>📘 Note:</strong> The counts the notebooks use were made with this same pipeline on the full
-  datasets: all three time points for both <em>S. aureus</em> strains, and the human samples with STAR
-  rather than Bowtie2, because human genes do have introns. The scripts for those runs are in
+  datasets: the human samples against the whole GRCh38 genome, and all three time points for both
+  <em>S. aureus</em> strains with Bowtie2. The scripts for those runs are in
   <code>00_pipeline/</code> if you want to see the exact commands.
 </div>
 
 ## Structure of the output directory
 
-Results are written to `results/saureus_usa100_nfcore_processing_downsampled`.
+Results are written to `results/human/nfcore_rnaseq_processing_downsampled`.
 The top level looks like this:
 
 ```
 .
-├── bowtie2_salmon
 ├── fastqc
 ├── fq_lint
 ├── multiqc
 ├── pipeline_info
+├── star_salmon
 └── trimgalore
 ```
 
 What each folder holds:
 
--   **`bowtie2_salmon`** - the important one. Alignments (`.bam`), per-sample Salmon quantification, and the merged count matrices for the whole run. `salmon.merged.gene_counts.tsv` and `salmon.merged.gene.SummarizedExperiment.rds` are what an analysis like the next chapter starts from.
+-   **`star_salmon`** - the important one. Alignments (`.bam`), per-sample Salmon quantification, and the merged count matrices for the whole run. `salmon.merged.gene_counts.tsv` and `salmon.merged.gene.SummarizedExperiment.rds` are what an analysis like the next chapter starts from.
 -   **`fastqc`** - read quality reports, before (`raw`) and after (`trim`) trimming.
 -   **`fq_lint`** - format checks on the fastq files.
 -   **`multiqc`** - everything above gathered into one report. Start here.
 -   **`pipeline_info`** - what ran, for how long, with which software versions. This is your reproducibility record.
 -   **`trimgalore`** - adapter and quality trimming reports.
 
-A closer look inside `bowtie2_salmon`, for one sample:
+A closer look inside `star_salmon`, for one sample:
 
 ```
-bowtie2_salmon
-├── USA100_N315_Biofilm_24h_1/          # per-sample Salmon output
+star_salmon
+├── N052611_dexamethasone/              # per-sample Salmon output
 │   ├── quant.sf                        #   transcript-level estimates
 │   └── quant.genes.sf                  #   gene-level estimates
-├── USA100_N315_Biofilm_24h_1.markdup.sorted.bam
-├── log/                                # Bowtie2 alignment logs
+├── N052611_dexamethasone.sorted.bam
+├── N052611_dexamethasone.sorted.bam.bai
+├── log/                                # STAR alignment logs
 ├── samtools_stats/                     # alignment summaries per sample
-├── picard_metrics/                     # duplication metrics
 ├── deseq2_qc/                          # a quick PCA and sample distances
 ├── salmon.merged.gene_counts.tsv       # merged counts, genes x samples
 ├── salmon.merged.gene_tpm.tsv          # merged TPM
@@ -117,10 +146,17 @@ bowtie2_salmon
 MultiQC collects the quality metrics from every step into a single page, so you
 can compare all samples side by side instead of opening reports one at a time.
 
-Your own run only has six sub-sampled files, which is too little to judge an
-experiment by. So we will look at the report from the full USA-100 dataset,
+<div class="warning">
+  <strong>⚠️ Your own mapping rate will look terrible, and that is correct.</strong>
+  Around 1 to 2 per cent of reads map uniquely, and most are reported as "unmapped: too
+  short". The reads come from the whole transcriptome, but the reference is 5 Mb of one
+  chromosome, so almost nothing has anywhere to map. A QC number means nothing until you
+  know what was mapped against what.
+</div>
+
+Because of that, we will look at the report from the full human dataset,
 processed before the course:
-[MultiQC report, USA-100](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureusUSA100_multiqc_report.html).
+[MultiQC report, human ASM](https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-02-Homo_sapiens/hasapiens/multiqc/data-02-Homo_sapiens_multiqc_report.html).
 On GitHub, click **Download raw file** and open it in your browser. In a
 Codespace, right-click the file and choose **Open Preview**.
 
@@ -136,6 +172,7 @@ Spend a few minutes going through it. Use the menu on the left to move around.
 We will talk about what you found afterwards.
 
 :::boxy
-Sample names tell you the strain, the lifestyle and the time point, for example
-`USA100_N315_Biofilm_24h_1` is the first biofilm replicate at 24 hours.
+Sample names tell you the donor and the treatment, for example
+`N052611_dexamethasone` is donor N052611 treated with dexamethasone, and
+`N052611_untreated` is the matching untreated sample from the same donor.
 :::

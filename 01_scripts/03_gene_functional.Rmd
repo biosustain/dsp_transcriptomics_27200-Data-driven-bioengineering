@@ -204,7 +204,7 @@ In the table and plots below, check the `padj` column before you read a set as a
 
 ```{r human-fn-gsea-table, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 # Sets passing multiple-testing correction
-gsea_padj_sig <- gsea_results %>% as.data.frame() %>% filter(padj < 0.05)
+gsea_padj_sig <- gsea_results %>% as.data.frame() %>% filter(padj < 0.05) %>% arrange(pval)
 
 # Sets passing the nominal (uncorrected) threshold - for inspecting the biology
 gsea_nom <- gsea_results %>%
@@ -216,7 +216,7 @@ cat("Sets significant after correction (padj < 0.05):", nrow(gsea_padj_sig), "\n
 cat("Sets at nominal pval < 0.05                    :", nrow(gsea_nom), "\n")
 
 DT::datatable(
-  gsea_nom %>%
+  gsea_padj_sig %>%
     select(pathway, NES, pval, padj, size) %>%
     mutate(
       direction = ifelse(NES > 0, "Activated", "Suppressed"),
@@ -251,7 +251,7 @@ tidy_set_name <- function(x) {
 }
 
 # NB: fgsea loads IRanges, whose slice() masks dplyr's - hence dplyr::slice here.
-top_sets <- gsea_nom %>%
+top_sets <- gsea_padj_sig %>%
   arrange(desc(NES)) %>%
   dplyr::slice(c(1:5, (dplyr::n() - 4):dplyr::n())) %>%   # five most positive, five most negative
   dplyr::pull(pathway)
@@ -278,7 +278,7 @@ one end is a coordinated shift; compare the small sets with the very large ones.
 We plot the top sets by **nominal** p-value. In this dataset all of the top 20 also pass padj < 0.05.
 
 ```{r human-fn-gsea-nes-barplot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=7}
-gsea_bar <- gsea_nom %>%
+gsea_bar <- gsea_padj_sig %>%
   slice_min(pval, n = 20) %>%
   mutate(
     direction = ifelse(NES > 0, "Activated", "Suppressed"),
@@ -313,8 +313,8 @@ The enrichment plot shows the running sum of the enrichment score for a single g
 **How to read it:** the x-axis is every tested gene, ordered from most up-regulated (left) to most down-regulated (right). Each tick in the rug is one gene of the set. Ticks bunched at one end drive the curve to a high peak - coordinated enrichment. Ticks spread evenly across the axis give a flat, wandering curve and no enrichment.
 
 ```{r human-fn-gsea-enrichment-plots, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-top_up <- gsea_nom %>% filter(NES > 0) %>% slice_min(pval, n = 1) %>% pull(pathway)
-top_down <- gsea_nom %>% filter(NES < 0) %>% slice_min(pval, n = 1) %>% pull(pathway)
+top_up <- gsea_padj_sig %>% filter(NES > 0) %>% slice_min(pval, n = 1) %>% pull(pathway)
+top_down <- gsea_padj_sig %>% filter(NES < 0) %>% slice_min(pval, n = 1) %>% pull(pathway)
 
 if (length(top_up) > 0) {
   print(

@@ -28,7 +28,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="running-the-nf-corernaseq-pipeline-v3.23.html"/>
+<link rel="prev" href="running-the-nf-corernaseq-pipeline-v3.27.html"/>
 <link rel="next" href="reading-the-multiqc-report.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ai-assistants-in-your-codespace.html"><a href="ai-assistants-in-your-codespace.html"><i class="fa fa-check"></i>AI assistants in your Codespace</a></li>
 <li class="chapter" data-level="" data-path="data-processing-using-the-nf-corernaseq-pipeline.html"><a href="data-processing-using-the-nf-corernaseq-pipeline.html"><i class="fa fa-check"></i>Data processing using the nf-core/rnaseq pipeline</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="running-the-nf-corernaseq-pipeline-v3.23.html"><a href="running-the-nf-corernaseq-pipeline-v3.23.html"><i class="fa fa-check"></i>Running the nf-core/rnaseq pipeline v3.23.0</a>
+<li class="chapter" data-level="" data-path="running-the-nf-corernaseq-pipeline-v3.27.html"><a href="running-the-nf-corernaseq-pipeline-v3.27.html"><i class="fa fa-check"></i>Running the nf-core/rnaseq pipeline v3.27.0</a>
 <ul>
 <li class="chapter" data-level="" data-path="structure-of-the-output-directory.html"><a href="structure-of-the-output-directory.html"><i class="fa fa-check"></i>Structure of the output directory</a></li>
 <li class="chapter" data-level="" data-path="reading-the-multiqc-report.html"><a href="reading-the-multiqc-report.html"><i class="fa fa-check"></i>Reading the MultiQC report</a></li>
@@ -370,33 +370,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="structure-of-the-output-directory" class="section level2 hasAnchor">
 <h2>Structure of the output directory<a href="structure-of-the-output-directory.html#structure-of-the-output-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Results are written to <code>results/saureus_usa100_nfcore_processing_downsampled</code>.
+<p>Results are written to <code>results/human/nfcore_rnaseq_processing_downsampled</code>.
 The top level looks like this:</p>
 <pre><code>.
-├── bowtie2_salmon
 ├── fastqc
 ├── fq_lint
 ├── multiqc
 ├── pipeline_info
+├── star_salmon
 └── trimgalore</code></pre>
 <p>What each folder holds:</p>
 <ul>
-<li><strong><code>bowtie2_salmon</code></strong> - the important one. Alignments (<code>.bam</code>), per-sample Salmon quantification, and the merged count matrices for the whole run. <code>salmon.merged.gene_counts.tsv</code> and <code>salmon.merged.gene.SummarizedExperiment.rds</code> are what an analysis like the next chapter starts from.</li>
+<li><strong><code>star_salmon</code></strong> - the important one. Alignments (<code>.bam</code>), per-sample Salmon quantification, and the merged count matrices for the whole run. <code>salmon.merged.gene_counts.tsv</code> and <code>salmon.merged.gene.SummarizedExperiment.rds</code> are what an analysis like the next chapter starts from.</li>
 <li><strong><code>fastqc</code></strong> - read quality reports, before (<code>raw</code>) and after (<code>trim</code>) trimming.</li>
 <li><strong><code>fq_lint</code></strong> - format checks on the fastq files.</li>
 <li><strong><code>multiqc</code></strong> - everything above gathered into one report. Start here.</li>
 <li><strong><code>pipeline_info</code></strong> - what ran, for how long, with which software versions. This is your reproducibility record.</li>
 <li><strong><code>trimgalore</code></strong> - adapter and quality trimming reports.</li>
 </ul>
-<p>A closer look inside <code>bowtie2_salmon</code>, for one sample:</p>
-<pre><code>bowtie2_salmon
-├── USA100_N315_Biofilm_24h_1/          # per-sample Salmon output
+<p>A closer look inside <code>star_salmon</code>, for one sample:</p>
+<pre><code>star_salmon
+├── N052611_dexamethasone/              # per-sample Salmon output
 │   ├── quant.sf                        #   transcript-level estimates
 │   └── quant.genes.sf                  #   gene-level estimates
-├── USA100_N315_Biofilm_24h_1.markdup.sorted.bam
-├── log/                                # Bowtie2 alignment logs
+├── N052611_dexamethasone.sorted.bam
+├── N052611_dexamethasone.sorted.bam.bai
+├── log/                                # STAR alignment logs
 ├── samtools_stats/                     # alignment summaries per sample
-├── picard_metrics/                     # duplication metrics
 ├── deseq2_qc/                          # a quick PCA and sample distances
 ├── salmon.merged.gene_counts.tsv       # merged counts, genes x samples
 ├── salmon.merged.gene_tpm.tsv          # merged TPM
@@ -408,7 +408,7 @@ The top level looks like this:</p>
           </div>
         </div>
       </div>
-<a href="running-the-nf-corernaseq-pipeline-v3.23.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="running-the-nf-corernaseq-pipeline-v3.27.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="reading-the-multiqc-report.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

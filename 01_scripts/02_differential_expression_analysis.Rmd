@@ -401,7 +401,9 @@ result and confirms the pipeline is working correctly.
 
 ```{r human-de-results-table, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 DT::datatable(
-  res_sig %>% mutate(across(where(is.numeric), \(x) round(x, 4))),
+  # signif(), not round(): round(padj, 4) prints every p-value below 0.00005
+  # as a flat 0, which looks like the test returned zero. It never does.
+  res_sig %>% mutate(across(where(is.numeric), \(x) signif(x, 3))),
   rownames   = FALSE,
   extensions = c('Buttons', 'Scroller'),
   options    = list(
