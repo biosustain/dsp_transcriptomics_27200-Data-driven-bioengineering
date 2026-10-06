@@ -34,6 +34,36 @@ That run is a **demonstration**: two samples of 50,000 reads are far too few to 
 biology from, so you will **not** analyse its output. The point is to watch reads turn
 into a table of numbers, and to read the quality report it produces.
 
+### While you wait: read the command you just ran
+
+It takes twenty minutes, so use them. Open the script you ran:
+
+- `00_pipeline/00_nfcore_rnaseq_processing_human.sh`
+- `00_pipeline/00_nfcore_rnaseq_processing_saureus.sh`
+
+and the two config files next to it, `custom.config` and `human_demo.config`. Everything
+the pipeline does is in those few lines.
+
+Then open **Copilot Chat** (the chat icon in the sidebar) and interrogate them. Things
+worth asking:
+
+- *Explain each parameter of this nextflow run command.*
+- *The bacterial run uses `-profile prokaryotic`. What does that profile actually set?
+  Which aligner does it choose, and which steps does it skip?*
+- *Why does the human run use `--aligner star_salmon` instead? What is different about the
+  two genomes?*
+- *Why are `gencode` and the `skip_*` switches in a config file instead of on the command
+  line?*
+- *What does `-profile docker` change about how the pipeline runs?*
+
+A profile is a named bundle of settings that lives inside the pipeline itself, not in our
+files, so the second question is really asking Copilot to read nf-core's own
+configuration. That is a fair use of it: faster than digging through the repository.
+
+**Check every answer against the script, the config files and the course book.** An AI
+assistant answers with the same confidence whether it knows or is guessing, and you are
+the one who has to tell the difference.
+
 Your results land in:
 
 | Run | Folder |
