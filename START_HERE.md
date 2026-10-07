@@ -43,6 +43,10 @@ This run is a **demonstration**: two samples of 50,000 reads are far too few to 
 biology from, so you will **not** analyse its output. The point is to watch reads turn into
 a table of numbers.
 
+Which one you pick here does not decide what you analyse later. **Everyone works through the
+human dataset in step 3**, whichever pipeline they ran, because step 3 starts from the full
+count matrices in `data/` rather than from your run.
+
 ---
 
 ## Step 2: While it runs
@@ -100,8 +104,11 @@ matrix itself. Open that file: that table is what the whole rest of the day is b
 
 ## Step 3: Analyse real counts
 
-The notebooks start from full count matrices, made with the
-same pipeline, already in `data/`.
+**Everyone does the human dataset**, whichever pipeline they ran in step 1. The *S. aureus*
+notebooks are the advanced track: start them afterwards if you have time.
+
+The notebooks start from full count matrices, made with the same pipeline, already in
+`data/` - not from your own run.
 
 1. Open **`02_notebooks/homo_sapiens/01_quality_control.ipynb`** in the file tree on the left.
 2. When VS Code asks you to *Select Kernel*, choose **Jupyter Kernel... → R**. The notebooks are R, not Python.
