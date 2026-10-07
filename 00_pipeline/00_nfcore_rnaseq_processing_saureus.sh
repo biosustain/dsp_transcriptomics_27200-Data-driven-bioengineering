@@ -8,12 +8,13 @@
 # and put these to it, with this file open so it can see the command:
 #
 #   - Explain each parameter of this nextflow run command.
-#   - The bacterial run uses -profile prokaryotic. What does that profile
-#     actually set? Which aligner does it choose, and which steps does it skip?
-#   - Why does the human run use --aligner star_salmon instead? What is
-#     different about the two genomes?
-#   - Why are gencode and the skip_* switches in a config file (human_demo.config)
-#     instead of on the command line?
+#   - This run uses -profile prokaryotic. What does that profile actually set?
+#     Which aligner does it choose, and which steps does it skip?
+#   - Nothing in this command names an aligner. So where does the choice of
+#     aligner come from?
+#   - Bacterial genes are not spliced, and neighbouring genes are often
+#     transcribed together as one operon. What does that mean for how reads
+#     should be counted?
 #   - What does -profile docker change about how the pipeline runs?
 #
 # A profile is a named bundle of settings that lives inside the pipeline itself,

@@ -32,16 +32,16 @@
 # and put these to it, with this file open so it can see the command:
 #
 #   - Explain each parameter of this nextflow run command.
-#   - The bacterial run uses -profile prokaryotic. What does that profile
-#     actually set? Which aligner does it choose, and which steps does it skip?
-#   - Why does the human run use --aligner star_salmon instead? What is
-#     different about the two genomes?
-#   - Why are gencode and the skip_* switches in a config file (human_demo.config)
-#     instead of on the command line?
+#   - This run uses --aligner star_salmon. What do STAR and Salmon each do?
+#     Why two tools rather than one?
+#   - Human genes are spliced. Where in this command is that fact accounted for?
+#   - --fasta and --gtf point to a 5 Mb slice of chromosome 19, not the whole
+#     genome. What does that do to the share of reads that map, and why is it
+#     acceptable for a demonstration?
 #   - What does -profile docker change about how the pipeline runs?
 #
 # A profile is a named bundle of settings that lives inside the pipeline itself,
-# not in our files, so the second question is really asking Copilot to read
+# not in our files, so the last question is really asking Copilot to read
 # nf-core's own configuration.
 #
 # Check every answer against this script, the config files beside it, and the
