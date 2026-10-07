@@ -422,11 +422,6 @@ data.frame(
 
 Do not answer yet. Decide first **what you would have to see** in the boxplots below to be worried,
 then look at them.
-
-One more, while the table is in front of you. It is sorted by depth, shallowest at the top, so the
-size factor should climb steadily as you read down. It does, **except in one place**, where a sample
-with more reads has the smaller factor. Find that step. What does it tell you a size factor is
-actually measuring?
 :::
 
 ### Distribution of Normalised Counts
@@ -484,17 +479,10 @@ land on top of each other. What should worry you
 is a sample still sitting apart *after* this step, or a factor so extreme that scaling it up
 amplifies noise instead of signal. Neither is the case here, so you move on.
 
-**And the pair.** `N61311_untreated` has fewer reads than `N061011_dexamethasone`, yet the larger
-size factor (1.026 against 0.944). Count the genes one at a time and the reason appears: of the
-15,842 genes measured in both, **9,558 are higher in `N61311_untreated`**. Six genes in ten are
-higher in the sample with fewer total reads, because the other sample's extra reads sit in a
-minority of genes.
-
-A total is one number, and a minority of genes can push it around. The size factor asks a different
-question: compared with a reference sample, how does this one look for a *typical* gene? It takes
-every gene's ratio to that reference and keeps the middle one. The middle follows the 60%, the total
-follows the minority. That is why DESeq2 normalises on a median of ratios rather than dividing by
-total counts.
+One thing the table is worth noticing for. A size factor is not simply the read count rescaled: it is
+computed gene by gene, as the median of that sample's ratios to a reference. That distinction matters
+when a library is dominated by a handful of genes, because a median ignores them while a total does
+not. Here the two agree closely, which is what a healthy set of libraries looks like.
 :::
 
 ### Variance-Stabilising Transformation
