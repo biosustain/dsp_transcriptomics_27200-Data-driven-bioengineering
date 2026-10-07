@@ -283,13 +283,20 @@ Before anything else, check how many reads ended up in each sample. DESeq2 needs
 ```{r human-qc-check-raw-0, echo=TRUE, eval=TRUE, include=TRUE, warning=FALSE, message=FALSE}
 options(scipen = 999)
 
-barplot(colSums(count_genes),
-        main   = "Library sizes (total counts per sample)",
-        ylab   = "Total raw counts",
-        xlab   = NULL,
-        col    = "steelblue",
-        las    = 2,
-        names.arg = colnames(count_genes))
+# Sample names are long, so draw the bars horizontally and widen the left
+# margin, otherwise the labels are clipped and you cannot tell the samples apart.
+op <- par(mar = c(5, 12, 4, 2) + 0.1)
+
+barplot(rev(colSums(count_genes)),
+        main      = "Library sizes (total counts per sample)",
+        xlab      = "Total raw counts",
+        col       = "steelblue",
+        horiz     = TRUE,
+        las       = 1,
+        cex.names = 0.8,
+        names.arg = rev(colnames(count_genes)))
+
+par(op)
 ```
 
 :::boxy
@@ -395,9 +402,15 @@ Library sizes (total mapped reads) differ between samples due to technical varia
 
 dds <- estimateSizeFactors(dds)
 
-sizeFactors(dds) %>%
-  enframe(name = "sample", value = "size_factor") %>%
-  kable(digits = 3, caption = "DESeq2 size factors per sample") %>%
+# Show the read count beside the size factor. Reading one against the other is
+# the point: they are related but they are not the same thing.
+data.frame(
+  sample          = colnames(dds),
+  million_reads   = round(colSums(counts(dds)) / 1e6, 2),
+  size_factor     = round(sizeFactors(dds), 3),
+  row.names       = NULL
+) %>%
+  kable(caption = "Library size and DESeq2 size factor per sample") %>%
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 ```
 
@@ -409,9 +422,9 @@ sizeFactors(dds) %>%
 Do not answer yet. Decide first **what you would have to see** in the boxplots below to be worried,
 then look at them.
 
-One more, while the table is in front of you: find the pair of samples where the one with *fewer*
-reads has the *larger* size factor. It is there. What does that tell you a size factor is actually
-measuring?
+One more, while the table is in front of you. It has two columns: reads, and size factor. Find the
+pair of samples where the one with *fewer* reads has the *larger* size factor. It is there. What does
+that tell you a size factor is actually measuring?
 :::
 
 ### Distribution of Normalised Counts
