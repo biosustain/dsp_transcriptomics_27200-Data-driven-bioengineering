@@ -1,5 +1,9 @@
 # Script to process RNA sequencing files - Staphylococcus aureus USA100
 
+# No -name is set on purpose. Nextflow refuses to reuse a run name, so a fixed
+# one makes the second attempt fail with "Run name ... has been already used".
+# Left out, Nextflow generates a fresh name each time and you can just re-run.
+
 
 # =============================================================================
 # WHILE THIS RUNS: ask Copilot about the command below
@@ -27,7 +31,6 @@
 # =============================================================================
 
 nextflow run 'https://github.com/nf-core/rnaseq' \
-    -name 'saureus_usa100_PRJNA685119_GSE163153' \
     -r 3.23.0 \
     -profile prokaryotic,docker \
     --input  '/workspaces/dsp_transcriptomics_27200-Data-driven-bioengineering/data/seq_files_subsampled/PRJNA685119_GSE163153_saureus/usa100/samplesheet_PRJNA685119_usa100_subset_24h_2samples.csv' \
