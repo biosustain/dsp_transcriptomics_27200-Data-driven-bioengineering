@@ -12,8 +12,8 @@ The R code is copied into the cells verbatim. What the script translates is the
 R Markdown scaffolding that Jupyter cannot render or run:
 
   * YAML front matter is dropped (the first heading is the title).
-  * `eval=FALSE` chunks become display-only code blocks (or are dropped when the
-    Rmd also hides them with `echo=FALSE`), so "Run All" never executes a chunk
+  * `eval=FALSE` chunks become ordinary code cells, so a student can run them;
+    they are dropped only when the Rmd also hides them with `echo=FALSE`
     the report itself does not run.
   * `fig.width`/`fig.height` become `options(repr.plot.*)` so figures keep the
     size the author chose.
@@ -210,8 +210,11 @@ def convert_code(label, opts, body, stats):
         if is_false(opts.get("echo")):
             stats["dropped"] += 1
             return None
-        stats["display_only"] += 1
-        return ("md", f"```r\n{src}\n```")
+        # eval=FALSE keeps the output out of the rendered book. A notebook is for
+        # running code, so emitting these as fenced markdown left dead text a
+        # student could not execute - sessionInfo(), the "DDS saved" confirmation.
+        # They become ordinary code cells instead.
+        stats["eval_false"] += 1
 
     w, h = opts.get("fig.width"), opts.get("fig.height")
     if w or h:
@@ -262,38 +265,19 @@ def preamble(src_rel):
         "- ▶️ **Running cells:** use **Shift+Enter** or the ▶ button next to the cell, **not Ctrl+Enter**, which the R extension intercepts. The first cell can take a moment while the R kernel starts."
     )
     code = (
-        "# Match the report's defaults: warnings hidden (warning=FALSE in the Rmd)\n"
-        "# and 7 x 5 inch figures. Remove the warn option to see warnings.\n"
-        "options(warn = -1, repr.plot.width = 7, repr.plot.height = 5)\n"
-        "\n"
-        "# Make tables display in Jupyter the way they do in the rendered report.\n"
-        "# kable()/kableExtra return HTML that the R kernel would otherwise show as\n"
-        "# raw text; DT::datatable() is an interactive widget whose JavaScript does\n"
-        "# not run in the VS Code output pane, so it is shown as a static table.\n"
-        "options(knitr.table.format = \"html\")\n"
-        "local({\n"
-        "  css <- paste0(\"<style>table.table,table.dataframe{border-collapse:collapse;font-size:0.9em}\",\n"
-        "                \".table th,.table td{padding:3px 10px;border-bottom:1px solid #ddd}\",\n"
-        "                \".table-striped tbody tr:nth-child(odd){background:#f5f7fa}</style>\")\n"
-        "  registerS3method(\"repr_html\", \"knitr_kable\", function(obj, ...) {\n"
-        "    paste0(css, paste(obj, collapse = \"\\n\"))\n"
-        "  }, envir = asNamespace(\"repr\"))\n"
-        "  registerS3method(\"repr_html\", \"datatables\", function(obj, ...) {\n"
-        "    d <- as.data.frame(obj$x$data, stringsAsFactors = FALSE, check.names = FALSE)\n"
-        "    note <- if (nrow(d) > 100) sprintf(\n"
-        "      \"<p style='font-size:0.85em;color:#666'><em>Static preview: first 100 of %d rows.</em></p>\", nrow(d)) else \"\"\n"
-        "    tbl <- knitr::kable(head(d, 100), format = \"html\", row.names = FALSE,\n"
-        "                        table.attr = \"class='table table-striped'\")\n"
-        "    paste0(css, note, paste(tbl, collapse = \"\\n\"))\n"
-        "  }, envir = asNamespace(\"repr\"))\n"
-        "})"
+        "# Display settings, so figures and tables look the way they do in the course\n"
+        "# book: 7 x 5 inch default figures, warnings hidden, and HTML tables rendered\n"
+        "# as tables. Open util/notebook_setup.R to see or change what it sets.\n"
+        "# Nothing there affects the analysis, only how results are displayed.\n"
+        "source(file.path(system(\"git rev-parse --show-toplevel\", intern = TRUE),\n"
+        "                 \"util\", \"notebook_setup.R\"))"
     )
     return md, code
 
 
 def convert(src: Path, dst: Path):
     src_rel = src.resolve().relative_to(REPO).as_posix()
-    stats = {k: 0 for k in ("callouts", "dropped", "display_only", "fig_sized", "inline_r_unfolded")}
+    stats = {k: 0 for k in ("callouts", "dropped", "eval_false", "fig_sized", "inline_r_unfolded")}
     cells = []
 
     def add(kind, source, name=None):
@@ -329,7 +313,7 @@ def convert(src: Path, dst: Path):
     n_code = sum(c["cell_type"] == "code" for c in cells)
     print(f"{dst.relative_to(REPO)}: {len(cells)} cells ({n_code} code) | "
           f"callouts {stats['callouts']}, fig-sized {stats['fig_sized']}, "
-          f"display-only {stats['display_only']}, dropped {stats['dropped']}"
+          f"eval=FALSE as code {stats['eval_false']}, dropped {stats['dropped']}"
           + (f", UNFOLDED inline R {stats['inline_r_unfolded']}" if stats["inline_r_unfolded"] else ""))
 
 
