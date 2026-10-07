@@ -373,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="question">
 <ol style="list-style-type: decimal">
 <li>Find each donor’s treated and untreated points in your PCA. Which is bigger: the difference between donors, or the shift caused by treatment? Based on that, predict which model will find more differentially expressed genes in the next notebook - <code>~ condition</code> or <code>~ donor + condition</code> - and why. Write the prediction down: you will check it.</li>
-<li>Pick the gene with the cleanest treated/untreated split in your heatmap. Which of these can you claim from it: more transcript? more protein? more activity? Then look for <em>NR3C1</em> - the receptor dexamethasone binds to. It is a pre-existing protein: did its transcript need to change for the response you see? What does that say about what RNA-seq can and cannot show?</li>
+<li>Pick the gene with the cleanest treated/untreated split in your heatmap. Which of these can you claim from it: more transcript? more protein? more activity? Then look for <em>NR3C1</em> - the receptor dexamethasone binds to. It is a pre-existing protein: did its transcript need to change for the response you see? What does that say about what RNA-seq can and cannot show? <strong>Careful: <em>NR3C1</em> is not in this heatmap, and absent here does not mean unchanged. This plot shows the 50 most <em>variable</em> genes, which is a different question. Find it in <code>res_df</code> in the next notebook before you decide what it did.</strong></li>
 </ol>
 </div>
 <!-- --------------------- Do not edit this and below ---------------------- -->
