@@ -416,7 +416,7 @@ ggsave(
 )
 ```
 
-::: {style="background:#f0f4f8;border:1px solid #c9d6e3;border-radius:4px;padding:10px 20px;margin:10px 0;"}
+:::boxy
 **Now the answer.** The boxes line up. That is the point: a size factor is not a fault to
 investigate, it *is* the correction. A factor of 0.670 says that library was
 roughly a third shallower than a typical one, so DESeq2 scales its counts up and the distributions
@@ -515,6 +515,12 @@ Clustering the 50 most variable genes across samples provides a gene-level view 
 
 Row-scaling (z-score per gene) is applied so that highly expressed genes do not visually dominate over lowly expressed ones.
 
+::: question
+<strong>🤔 Predict before you run it.</strong> Of the 50 most variable genes in this experiment, how
+many do you expect to be dexamethasone-response genes? Most of them? About half? Commit to a number
+out loud in your group, then run the cell and count.
+:::
+
 ```{r human-qc-topvar-heatmap-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=12}
 
 topVarGenes <- head(order(rowVars(assay(vsd)), decreasing = TRUE), 50)
@@ -553,6 +559,18 @@ png(
 heat_plot
 dev.off()
 ```
+
+:::boxy
+**Now the answer.** Most groups say "most of them". Count the rows: you will find a block of real
+drug responses - *FKBP5*, *TSC22D3*, *KLF15*, *ZBTB16*, *DUSP1*, *GPX3* - sitting next to seven
+sex-linked genes and a set of rows that separate donors and nothing else. Even the canonical targets
+*PER1* and *CRISPLD2*, which respond strongly to dexamethasone, are **not** in this list at all.
+
+The reason is that "most variable" is an unsupervised question. It asks which genes differ most
+across all eight samples, and it does not know, or care, that four of them were treated. Donor
+identity answers that question just as well as the drug does. This is why the next notebook stops
+ranking by variance and tests a defined contrast instead: most variable is not most relevant.
+:::
 
 <div class="note">
   <strong>📘 Note:</strong> Rows are gene symbols (from the human reference), so they can be used
