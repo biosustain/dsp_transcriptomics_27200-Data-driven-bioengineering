@@ -544,7 +544,7 @@ Before proceeding to differential expression, confirm the QC checks and record w
 |---|---|
 | Size factors are all of a similar order (here roughly 0.7–2) | No sample needs an extreme rescaling; a far-out value is worth checking against its library size |
 | Boxplots of normalised counts overlap | No extreme outlier samples |
-| Correlation heatmap | Note whether structure is by lifestyle, by time point, or both |
+| Top variable genes heatmap | Note whether the clearest blocks follow lifestyle, time point, or both |
 | PCA | Note which axis is lifestyle and which is time point |
 | No isolated samples | No technical outliers |
 | **Time structure** | **Record how strongly time separates your samples - script 02's models are built around it** |

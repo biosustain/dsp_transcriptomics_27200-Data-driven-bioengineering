@@ -554,7 +554,7 @@ Before proceeding to differential expression analysis, confirm the QC checks and
 |---|---|
 | Size factors ≈ 1.0 across samples | Library sizes are balanced |
 | Boxplots of normalised counts overlap | No extreme outlier samples |
-| Correlation heatmap | Note whether structure is by treatment, by donor, or both |
+| Top variable genes heatmap | Note whether the clearest blocks follow treatment, donor, or both |
 | PCA | Note whether treatment or donor drives the main axes |
 | No isolated samples | No technical outliers |
 :::
