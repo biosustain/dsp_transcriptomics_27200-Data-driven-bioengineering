@@ -113,9 +113,11 @@ The notebooks start from full count matrices, made with the same pipeline, alrea
 1. Open [`02_notebooks/homo_sapiens/01_quality_control.ipynb`](02_notebooks/homo_sapiens/01_quality_control.ipynb), or find it in the file tree on the left.
 2. When VS Code asks you to *Select Kernel*, choose **Jupyter Kernel... → R**. The notebooks are R, not Python.
 3. Run cells with **Shift+Enter**, or the play button next to each cell.
-4. Work through the three notebooks **in order**: `01` quality control, then `02` differential
-   expression, then `03` functional enrichment. Each one saves results the next one reads, so
-   the order matters.
+4. Work through the three notebooks **in order**:
+   [`01`](02_notebooks/homo_sapiens/01_quality_control.ipynb) quality control, then
+   [`02`](02_notebooks/homo_sapiens/02_differential_expression_analysis.ipynb) differential
+   expression, then [`03`](02_notebooks/homo_sapiens/03_gene_functional.ipynb) functional
+   enrichment. Each one saves results the next one reads, so the order matters.
 
 Work in your group, and stop at the **Interpretation questions** at the end of each
 notebook. Those are the point of the session. Nobody expects a complete answer, and
