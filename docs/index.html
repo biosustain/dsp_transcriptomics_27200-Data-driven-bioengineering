@@ -459,15 +459,16 @@ through the human dataset.</p>
 <div id="option-2-docker" class="section level3 hasAnchor">
 <h3>Option 2: Docker<a href="index.html#option-2-docker" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The Codespace runs from an image you can also start yourself. It already contains R, all
-the packages, Jupyter with the R kernel, and Nextflow. From the folder where you cloned
-the repository:</p>
+the packages, Jupyter with the R kernel, and Nextflow. Run this from <strong>inside</strong> the
+repository you cloned, not from the folder above it:</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-it</span> <span class="at">-p</span> 8888:8888 <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$PWD</span><span class="st">&quot;</span>:/work <span class="at">-w</span> /work <span class="dt">\</span></span>
 <span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a>  ghcr.io/biosustain/dsp_transcriptomics_27200-data-driven-bioengineering:1.1.0 <span class="dt">\</span></span>
 <span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a>  jupyter lab <span class="at">--ip</span><span class="op">=</span>0.0.0.0 <span class="at">--port</span><span class="op">=</span>8888 <span class="at">--no-browser</span> <span class="at">--allow-root</span></span></code></pre></div>
 </details>
 <p>Open the <code>http://127.0.0.1:8888/lab?token=...</code> link it prints, then go to <code>02_notebooks/</code>.
-On an Apple Silicon Mac add <code>--platform linux/amd64</code>.</p>
+On an Apple Silicon Mac add <code>--platform linux/amd64</code> directly after <code>docker run</code>, before the
+image name.</p>
 </div>
 <div id="option-3-your-own-r-installation" class="section level3 hasAnchor">
 <h3>Option 3: your own R installation<a href="index.html#option-3-your-own-r-installation" class="anchor-section" aria-label="Anchor link to header"></a></h3>

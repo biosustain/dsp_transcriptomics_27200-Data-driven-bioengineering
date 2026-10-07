@@ -384,28 +384,28 @@ would land at an extreme, despite telling us nothing.</p>
 <div id="prepare-the-ranked-gene-list" class="section level3 hasAnchor">
 <h3>Prepare the Ranked Gene List<a href="running-gsea.html#prepare-the-ranked-gene-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="running-gsea.html#cb114-1" tabindex="-1"></a>ranked_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
-<span id="cb114-2"><a href="running-gsea.html#cb114-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(stat)) <span class="sc">%&gt;%</span></span>
-<span id="cb114-3"><a href="running-gsea.html#cb114-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank_metric =</span> stat) <span class="sc">%&gt;%</span></span>
-<span id="cb114-4"><a href="running-gsea.html#cb114-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(rank_metric)) <span class="sc">%&gt;%</span></span>
-<span id="cb114-5"><a href="running-gsea.html#cb114-5" tabindex="-1"></a>  <span class="fu">distinct</span>(gene, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb114-6"><a href="running-gsea.html#cb114-6" tabindex="-1"></a></span>
-<span id="cb114-7"><a href="running-gsea.html#cb114-7" tabindex="-1"></a>rank_vector        <span class="ot">&lt;-</span> ranked_df<span class="sc">$</span>rank_metric</span>
-<span id="cb114-8"><a href="running-gsea.html#cb114-8" tabindex="-1"></a><span class="fu">names</span>(rank_vector) <span class="ot">&lt;-</span> ranked_df<span class="sc">$</span>gene</span>
-<span id="cb114-9"><a href="running-gsea.html#cb114-9" tabindex="-1"></a></span>
-<span id="cb114-10"><a href="running-gsea.html#cb114-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes in ranked list :&quot;</span>, <span class="fu">length</span>(rank_vector), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="running-gsea.html#cb115-1" tabindex="-1"></a>ranked_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
+<span id="cb115-2"><a href="running-gsea.html#cb115-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(stat)) <span class="sc">%&gt;%</span></span>
+<span id="cb115-3"><a href="running-gsea.html#cb115-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank_metric =</span> stat) <span class="sc">%&gt;%</span></span>
+<span id="cb115-4"><a href="running-gsea.html#cb115-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(rank_metric)) <span class="sc">%&gt;%</span></span>
+<span id="cb115-5"><a href="running-gsea.html#cb115-5" tabindex="-1"></a>  <span class="fu">distinct</span>(gene, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb115-6"><a href="running-gsea.html#cb115-6" tabindex="-1"></a></span>
+<span id="cb115-7"><a href="running-gsea.html#cb115-7" tabindex="-1"></a>rank_vector        <span class="ot">&lt;-</span> ranked_df<span class="sc">$</span>rank_metric</span>
+<span id="cb115-8"><a href="running-gsea.html#cb115-8" tabindex="-1"></a><span class="fu">names</span>(rank_vector) <span class="ot">&lt;-</span> ranked_df<span class="sc">$</span>gene</span>
+<span id="cb115-9"><a href="running-gsea.html#cb115-9" tabindex="-1"></a></span>
+<span id="cb115-10"><a href="running-gsea.html#cb115-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes in ranked list :&quot;</span>, <span class="fu">length</span>(rank_vector), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes in ranked list : 16238</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="running-gsea.html#cb116-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Infinite values      :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.finite</span>(rank_vector)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="running-gsea.html#cb117-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Infinite values      :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.finite</span>(rank_vector)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Infinite values      : 0</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="running-gsea.html#cb118-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Top 5 (upregulated)  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">head</span>(<span class="fu">names</span>(rank_vector), <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="running-gsea.html#cb119-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Top 5 (upregulated)  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">head</span>(<span class="fu">names</span>(rank_vector), <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Top 5 (upregulated)  : CACNB2, DUSP1, SPARCL1, STEAP2, NEXN</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="running-gsea.html#cb120-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Bottom 5 (downreg.)  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">tail</span>(<span class="fu">names</span>(rank_vector), <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="running-gsea.html#cb121-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Bottom 5 (downreg.)  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">tail</span>(<span class="fu">names</span>(rank_vector), <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Bottom 5 (downreg.)  : DNM1, PRSS35, VCAM1, KCTD12, ADAM12</code></pre>
 </div>
@@ -421,30 +421,30 @@ and argument names for <code>msigdbr()</code> changed between versions, so the c
 right names automatically.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="running-gsea.html#cb122-1" tabindex="-1"></a><span class="co"># msigdbr argument names differ by version (collection/subcollection vs category/subcategory),</span></span>
-<span id="cb122-2"><a href="running-gsea.html#cb122-2" tabindex="-1"></a><span class="co"># and the KEGG subcollection was renamed, so we detect the available names first.</span></span>
-<span id="cb122-3"><a href="running-gsea.html#cb122-3" tabindex="-1"></a>get_sets <span class="ot">&lt;-</span> <span class="cf">function</span>(collection, <span class="at">subcollection =</span> <span class="cn">NULL</span>) {</span>
-<span id="cb122-4"><a href="running-gsea.html#cb122-4" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(</span>
-<span id="cb122-5"><a href="running-gsea.html#cb122-5" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(subcollection)) <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">collection =</span> collection)</span>
-<span id="cb122-6"><a href="running-gsea.html#cb122-6" tabindex="-1"></a>    <span class="cf">else</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">collection =</span> collection, <span class="at">subcollection =</span> subcollection),</span>
-<span id="cb122-7"><a href="running-gsea.html#cb122-7" tabindex="-1"></a>    <span class="at">error =</span> <span class="cf">function</span>(e)</span>
-<span id="cb122-8"><a href="running-gsea.html#cb122-8" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">is.null</span>(subcollection)) <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">category =</span> collection)</span>
-<span id="cb122-9"><a href="running-gsea.html#cb122-9" tabindex="-1"></a>      <span class="cf">else</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">category =</span> collection, <span class="at">subcategory =</span> subcollection)</span>
-<span id="cb122-10"><a href="running-gsea.html#cb122-10" tabindex="-1"></a>  )</span>
-<span id="cb122-11"><a href="running-gsea.html#cb122-11" tabindex="-1"></a>  <span class="fu">split</span>(<span class="at">x =</span> df<span class="sc">$</span>gene_symbol, <span class="at">f =</span> df<span class="sc">$</span>gs_name)</span>
-<span id="cb122-12"><a href="running-gsea.html#cb122-12" tabindex="-1"></a>}</span>
-<span id="cb122-13"><a href="running-gsea.html#cb122-13" tabindex="-1"></a></span>
-<span id="cb122-14"><a href="running-gsea.html#cb122-14" tabindex="-1"></a>pathways_list <span class="ot">&lt;-</span> <span class="fu">get_sets</span>(<span class="st">&quot;C2&quot;</span>, <span class="st">&quot;CP:REACTOME&quot;</span>)</span>
-<span id="cb122-15"><a href="running-gsea.html#cb122-15" tabindex="-1"></a></span>
-<span id="cb122-16"><a href="running-gsea.html#cb122-16" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Gene sets retrieved:&quot;</span>, <span class="fu">length</span>(pathways_list), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="running-gsea.html#cb123-1" tabindex="-1"></a><span class="co"># msigdbr argument names differ by version (collection/subcollection vs category/subcategory),</span></span>
+<span id="cb123-2"><a href="running-gsea.html#cb123-2" tabindex="-1"></a><span class="co"># and the KEGG subcollection was renamed, so we detect the available names first.</span></span>
+<span id="cb123-3"><a href="running-gsea.html#cb123-3" tabindex="-1"></a>get_sets <span class="ot">&lt;-</span> <span class="cf">function</span>(collection, <span class="at">subcollection =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb123-4"><a href="running-gsea.html#cb123-4" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(</span>
+<span id="cb123-5"><a href="running-gsea.html#cb123-5" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(subcollection)) <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">collection =</span> collection)</span>
+<span id="cb123-6"><a href="running-gsea.html#cb123-6" tabindex="-1"></a>    <span class="cf">else</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">collection =</span> collection, <span class="at">subcollection =</span> subcollection),</span>
+<span id="cb123-7"><a href="running-gsea.html#cb123-7" tabindex="-1"></a>    <span class="at">error =</span> <span class="cf">function</span>(e)</span>
+<span id="cb123-8"><a href="running-gsea.html#cb123-8" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">is.null</span>(subcollection)) <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">category =</span> collection)</span>
+<span id="cb123-9"><a href="running-gsea.html#cb123-9" tabindex="-1"></a>      <span class="cf">else</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Homo sapiens&quot;</span>, <span class="at">category =</span> collection, <span class="at">subcategory =</span> subcollection)</span>
+<span id="cb123-10"><a href="running-gsea.html#cb123-10" tabindex="-1"></a>  )</span>
+<span id="cb123-11"><a href="running-gsea.html#cb123-11" tabindex="-1"></a>  <span class="fu">split</span>(<span class="at">x =</span> df<span class="sc">$</span>gene_symbol, <span class="at">f =</span> df<span class="sc">$</span>gs_name)</span>
+<span id="cb123-12"><a href="running-gsea.html#cb123-12" tabindex="-1"></a>}</span>
+<span id="cb123-13"><a href="running-gsea.html#cb123-13" tabindex="-1"></a></span>
+<span id="cb123-14"><a href="running-gsea.html#cb123-14" tabindex="-1"></a>pathways_list <span class="ot">&lt;-</span> <span class="fu">get_sets</span>(<span class="st">&quot;C2&quot;</span>, <span class="st">&quot;CP:REACTOME&quot;</span>)</span>
+<span id="cb123-15"><a href="running-gsea.html#cb123-15" tabindex="-1"></a></span>
+<span id="cb123-16"><a href="running-gsea.html#cb123-16" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Gene sets retrieved:&quot;</span>, <span class="fu">length</span>(pathways_list), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Gene sets retrieved: 1839</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="running-gsea.html#cb124-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Example set        :&quot;</span>, <span class="fu">names</span>(pathways_list)[<span class="dv">1</span>], <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="running-gsea.html#cb125-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Example set        :&quot;</span>, <span class="fu">names</span>(pathways_list)[<span class="dv">1</span>], <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Example set        : REACTOME_2_LTR_CIRCLE_FORMATION</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="running-gsea.html#cb126-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;First 5 genes      :&quot;</span>, <span class="fu">paste</span>(<span class="fu">head</span>(pathways_list[[<span class="dv">1</span>]], <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="running-gsea.html#cb127-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;First 5 genes      :&quot;</span>, <span class="fu">paste</span>(<span class="fu">head</span>(pathways_list[[<span class="dv">1</span>]], <span class="dv">5</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## First 5 genes      : BANF1, HMGA1, LIG4, PSIP1, XRCC4</code></pre>
 </div>
@@ -454,24 +454,24 @@ right names automatically.</p>
 <code>fgsea()</code>, with <code>minSize = 15</code> and <code>maxSize = 1000</code> to skip tiny unstable sets and enormous, uninformative
 ones.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="running-gsea.html#cb128-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb128-2"><a href="running-gsea.html#cb128-2" tabindex="-1"></a></span>
-<span id="cb128-3"><a href="running-gsea.html#cb128-3" tabindex="-1"></a>gsea_results <span class="ot">&lt;-</span> <span class="fu">fgseaMultilevel</span>(</span>
-<span id="cb128-4"><a href="running-gsea.html#cb128-4" tabindex="-1"></a>  <span class="at">pathways =</span> pathways_list,</span>
-<span id="cb128-5"><a href="running-gsea.html#cb128-5" tabindex="-1"></a>  <span class="at">stats    =</span> rank_vector,</span>
-<span id="cb128-6"><a href="running-gsea.html#cb128-6" tabindex="-1"></a>  <span class="at">minSize  =</span> <span class="dv">15</span>,</span>
-<span id="cb128-7"><a href="running-gsea.html#cb128-7" tabindex="-1"></a>  <span class="at">maxSize  =</span> <span class="dv">1000</span></span>
-<span id="cb128-8"><a href="running-gsea.html#cb128-8" tabindex="-1"></a>)</span>
-<span id="cb128-9"><a href="running-gsea.html#cb128-9" tabindex="-1"></a></span>
-<span id="cb128-10"><a href="running-gsea.html#cb128-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Gene sets tested         :&quot;</span>, <span class="fu">nrow</span>(gsea_results), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="running-gsea.html#cb129-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb129-2"><a href="running-gsea.html#cb129-2" tabindex="-1"></a></span>
+<span id="cb129-3"><a href="running-gsea.html#cb129-3" tabindex="-1"></a>gsea_results <span class="ot">&lt;-</span> <span class="fu">fgseaMultilevel</span>(</span>
+<span id="cb129-4"><a href="running-gsea.html#cb129-4" tabindex="-1"></a>  <span class="at">pathways =</span> pathways_list,</span>
+<span id="cb129-5"><a href="running-gsea.html#cb129-5" tabindex="-1"></a>  <span class="at">stats    =</span> rank_vector,</span>
+<span id="cb129-6"><a href="running-gsea.html#cb129-6" tabindex="-1"></a>  <span class="at">minSize  =</span> <span class="dv">15</span>,</span>
+<span id="cb129-7"><a href="running-gsea.html#cb129-7" tabindex="-1"></a>  <span class="at">maxSize  =</span> <span class="dv">1000</span></span>
+<span id="cb129-8"><a href="running-gsea.html#cb129-8" tabindex="-1"></a>)</span>
+<span id="cb129-9"><a href="running-gsea.html#cb129-9" tabindex="-1"></a></span>
+<span id="cb129-10"><a href="running-gsea.html#cb129-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Gene sets tested         :&quot;</span>, <span class="fu">nrow</span>(gsea_results), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Gene sets tested         : 1043</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="running-gsea.html#cb130-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant (padj &lt; 0.05):&quot;</span>, <span class="fu">sum</span>(gsea_results<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="running-gsea.html#cb131-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Significant (padj &lt; 0.05):&quot;</span>, <span class="fu">sum</span>(gsea_results<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Significant (padj &lt; 0.05): 26</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="running-gsea.html#cb132-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Nominal (pval &lt; 0.05)    :&quot;</span>, <span class="fu">sum</span>(gsea_results<span class="sc">$</span>pval <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="running-gsea.html#cb133-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Nominal (pval &lt; 0.05)    :&quot;</span>, <span class="fu">sum</span>(gsea_results<span class="sc">$</span>pval <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Nominal (pval &lt; 0.05)    : 178</code></pre>
 <div style="background:#eaf4fd;border-left:5px solid #3498db;padding:0.5em 1em;margin:1em 0;border-radius:6px;">
@@ -491,40 +491,40 @@ results to publish.</li>
 <div id="inspect-gene-sets" class="section level3 hasAnchor">
 <h3>Inspect Gene Sets<a href="running-gsea.html#inspect-gene-sets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="running-gsea.html#cb134-1" tabindex="-1"></a><span class="co"># Sets passing multiple-testing correction</span></span>
-<span id="cb134-2"><a href="running-gsea.html#cb134-2" tabindex="-1"></a>gsea_padj_sig <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(pval)</span>
-<span id="cb134-3"><a href="running-gsea.html#cb134-3" tabindex="-1"></a></span>
-<span id="cb134-4"><a href="running-gsea.html#cb134-4" tabindex="-1"></a><span class="co"># Sets passing the nominal (uncorrected) threshold - for inspecting the biology</span></span>
-<span id="cb134-5"><a href="running-gsea.html#cb134-5" tabindex="-1"></a>gsea_nom <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span></span>
-<span id="cb134-6"><a href="running-gsea.html#cb134-6" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb134-7"><a href="running-gsea.html#cb134-7" tabindex="-1"></a>  <span class="fu">filter</span>(pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb134-8"><a href="running-gsea.html#cb134-8" tabindex="-1"></a>  <span class="fu">arrange</span>(pval)</span>
-<span id="cb134-9"><a href="running-gsea.html#cb134-9" tabindex="-1"></a></span>
-<span id="cb134-10"><a href="running-gsea.html#cb134-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets significant after correction (padj &lt; 0.05):&quot;</span>, <span class="fu">nrow</span>(gsea_padj_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="running-gsea.html#cb135-1" tabindex="-1"></a><span class="co"># Sets passing multiple-testing correction</span></span>
+<span id="cb135-2"><a href="running-gsea.html#cb135-2" tabindex="-1"></a>gsea_padj_sig <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(pval)</span>
+<span id="cb135-3"><a href="running-gsea.html#cb135-3" tabindex="-1"></a></span>
+<span id="cb135-4"><a href="running-gsea.html#cb135-4" tabindex="-1"></a><span class="co"># Sets passing the nominal (uncorrected) threshold - for inspecting the biology</span></span>
+<span id="cb135-5"><a href="running-gsea.html#cb135-5" tabindex="-1"></a>gsea_nom <span class="ot">&lt;-</span> gsea_results <span class="sc">%&gt;%</span></span>
+<span id="cb135-6"><a href="running-gsea.html#cb135-6" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb135-7"><a href="running-gsea.html#cb135-7" tabindex="-1"></a>  <span class="fu">filter</span>(pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb135-8"><a href="running-gsea.html#cb135-8" tabindex="-1"></a>  <span class="fu">arrange</span>(pval)</span>
+<span id="cb135-9"><a href="running-gsea.html#cb135-9" tabindex="-1"></a></span>
+<span id="cb135-10"><a href="running-gsea.html#cb135-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets significant after correction (padj &lt; 0.05):&quot;</span>, <span class="fu">nrow</span>(gsea_padj_sig), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Sets significant after correction (padj &lt; 0.05): 26</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="running-gsea.html#cb136-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets at nominal pval &lt; 0.05                    :&quot;</span>, <span class="fu">nrow</span>(gsea_nom), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="running-gsea.html#cb137-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sets at nominal pval &lt; 0.05                    :&quot;</span>, <span class="fu">nrow</span>(gsea_nom), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Sets at nominal pval &lt; 0.05                    : 178</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="running-gsea.html#cb138-1" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
-<span id="cb138-2"><a href="running-gsea.html#cb138-2" tabindex="-1"></a>  gsea_padj_sig <span class="sc">%&gt;%</span></span>
-<span id="cb138-3"><a href="running-gsea.html#cb138-3" tabindex="-1"></a>    <span class="fu">select</span>(pathway, NES, pval, padj, size) <span class="sc">%&gt;%</span></span>
-<span id="cb138-4"><a href="running-gsea.html#cb138-4" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb138-5"><a href="running-gsea.html#cb138-5" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">ifelse</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Activated&quot;</span>, <span class="st">&quot;Suppressed&quot;</span>),</span>
-<span id="cb138-6"><a href="running-gsea.html#cb138-6" tabindex="-1"></a>      <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">signif</span>(x, <span class="dv">3</span>))</span>
-<span id="cb138-7"><a href="running-gsea.html#cb138-7" tabindex="-1"></a>    ),</span>
-<span id="cb138-8"><a href="running-gsea.html#cb138-8" tabindex="-1"></a>  <span class="at">rownames   =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb138-9"><a href="running-gsea.html#cb138-9" tabindex="-1"></a>  <span class="at">colnames   =</span> <span class="fu">c</span>(<span class="st">&quot;Gene set&quot;</span>, <span class="st">&quot;NES&quot;</span>, <span class="st">&quot;p-value&quot;</span>, <span class="st">&quot;padj&quot;</span>, <span class="st">&quot;Size&quot;</span>, <span class="st">&quot;Direction&quot;</span>),</span>
-<span id="cb138-10"><a href="running-gsea.html#cb138-10" tabindex="-1"></a>  <span class="at">extensions =</span> <span class="fu">c</span>(<span class="st">&quot;Buttons&quot;</span>, <span class="st">&quot;Scroller&quot;</span>),</span>
-<span id="cb138-11"><a href="running-gsea.html#cb138-11" tabindex="-1"></a>  <span class="at">options    =</span> <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">&quot;Bfrtip&quot;</span>, <span class="at">buttons =</span> <span class="fu">c</span>(<span class="st">&quot;copy&quot;</span>, <span class="st">&quot;csv&quot;</span>),</span>
-<span id="cb138-12"><a href="running-gsea.html#cb138-12" tabindex="-1"></a>                    <span class="at">scrollX =</span> <span class="cn">TRUE</span>, <span class="at">scrollY =</span> <span class="dv">300</span>, <span class="at">scroller =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb138-13"><a href="running-gsea.html#cb138-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;GSEA gene sets significant after multiple-testing correction (padj &lt; 0.05)&quot;</span></span>
-<span id="cb138-14"><a href="running-gsea.html#cb138-14" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="running-gsea.html#cb139-1" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb139-2"><a href="running-gsea.html#cb139-2" tabindex="-1"></a>  gsea_padj_sig <span class="sc">%&gt;%</span></span>
+<span id="cb139-3"><a href="running-gsea.html#cb139-3" tabindex="-1"></a>    <span class="fu">select</span>(pathway, NES, pval, padj, size) <span class="sc">%&gt;%</span></span>
+<span id="cb139-4"><a href="running-gsea.html#cb139-4" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb139-5"><a href="running-gsea.html#cb139-5" tabindex="-1"></a>      <span class="at">direction =</span> <span class="fu">ifelse</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Activated&quot;</span>, <span class="st">&quot;Suppressed&quot;</span>),</span>
+<span id="cb139-6"><a href="running-gsea.html#cb139-6" tabindex="-1"></a>      <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">signif</span>(x, <span class="dv">3</span>))</span>
+<span id="cb139-7"><a href="running-gsea.html#cb139-7" tabindex="-1"></a>    ),</span>
+<span id="cb139-8"><a href="running-gsea.html#cb139-8" tabindex="-1"></a>  <span class="at">rownames   =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb139-9"><a href="running-gsea.html#cb139-9" tabindex="-1"></a>  <span class="at">colnames   =</span> <span class="fu">c</span>(<span class="st">&quot;Gene set&quot;</span>, <span class="st">&quot;NES&quot;</span>, <span class="st">&quot;p-value&quot;</span>, <span class="st">&quot;padj&quot;</span>, <span class="st">&quot;Size&quot;</span>, <span class="st">&quot;Direction&quot;</span>),</span>
+<span id="cb139-10"><a href="running-gsea.html#cb139-10" tabindex="-1"></a>  <span class="at">extensions =</span> <span class="fu">c</span>(<span class="st">&quot;Buttons&quot;</span>, <span class="st">&quot;Scroller&quot;</span>),</span>
+<span id="cb139-11"><a href="running-gsea.html#cb139-11" tabindex="-1"></a>  <span class="at">options    =</span> <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">&quot;Bfrtip&quot;</span>, <span class="at">buttons =</span> <span class="fu">c</span>(<span class="st">&quot;copy&quot;</span>, <span class="st">&quot;csv&quot;</span>),</span>
+<span id="cb139-12"><a href="running-gsea.html#cb139-12" tabindex="-1"></a>                    <span class="at">scrollX =</span> <span class="cn">TRUE</span>, <span class="at">scrollY =</span> <span class="dv">300</span>, <span class="at">scroller =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb139-13"><a href="running-gsea.html#cb139-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;GSEA gene sets significant after multiple-testing correction (padj &lt; 0.05)&quot;</span></span>
+<span id="cb139-14"><a href="running-gsea.html#cb139-14" tabindex="-1"></a>)</span></code></pre></div>
 </details>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-f8b0a1c27eb7dbfd4332" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f8b0a1c27eb7dbfd4332">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>GSEA gene sets significant after multiple-testing correction (padj &lt; 0.05)<\/caption>","data":[["REACTOME_INNATE_IMMUNE_SYSTEM","REACTOME_NEUTROPHIL_DEGRANULATION","REACTOME_MUSCLE_CONTRACTION","REACTOME_METABOLISM_OF_LIPIDS","REACTOME_PHOSPHOLIPID_METABOLISM","REACTOME_SMOOTH_MUSCLE_CONTRACTION","REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION","REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE","REACTOME_RHO_GTPASES_ACTIVATE_ROCKS","REACTOME_SIGNALING_BY_ERYTHROPOIETIN","REACTOME_SIGNALING_BY_RHO_GTPASES_MIRO_GTPASES_AND_RHOBTB3","REACTOME_SEMA4D_IN_SEMAPHORIN_SIGNALING","REACTOME_GLYCEROPHOSPHOLIPID_BIOSYNTHESIS","REACTOME_MEMBRANE_TRAFFICKING","REACTOME_TRNA_AMINOACYLATION","REACTOME_LAMININ_INTERACTIONS","REACTOME_MAPK_FAMILY_SIGNALING_CASCADES","REACTOME_DOWNSTREAM_SIGNAL_TRANSDUCTION","REACTOME_RECRUITMENT_OF_NUMA_TO_MITOTIC_CENTROSOMES","REACTOME_DISEASES_OF_SIGNAL_TRANSDUCTION_BY_GROWTH_FACTOR_RECEPTORS_AND_SECOND_MESSENGERS","REACTOME_SIGNALING_BY_RECEPTOR_TYROSINE_KINASES","REACTOME_REGULATION_OF_INSULIN_LIKE_GROWTH_FACTOR_IGF_TRANSPORT_AND_UPTAKE_BY_INSULIN_LIKE_GROWTH_FACTOR_BINDING_PROTEINS_IGFBPS","REACTOME_SEMA4D_INDUCED_CELL_MIGRATION_AND_GROWTH_CONE_COLLAPSE","REACTOME_PLATELET_ACTIVATION_SIGNALING_AND_AGGREGATION","REACTOME_SIGNALING_BY_MODERATE_KINASE_ACTIVITY_BRAF_MUTANTS","REACTOME_RHO_GTPASES_ACTIVATE_PAKS"],[1.6,1.67,1.84,1.51,1.71,2.02,-2.13,-1.8,1.96,1.92,1.46,1.95,1.76,1.43,-1.91,1.89,1.59,1.88,-1.71,1.49,1.46,1.72,1.86,1.56,1.78,1.82],[8.51e-08,5.04e-06,1.29e-05,3.1e-05,5.22e-05,5.64e-05,5.73e-05,9.86e-05,0.000166,0.00017,0.00017,0.000195,0.000258,0.000267,0.000344,0.000365,0.000366,0.000389,0.000389,0.000489,0.000621,0.000645,0.000893,0.000962,0.0012,0.00121],[8.88e-05,0.00263,0.00447,0.00809,0.008529999999999999,0.008529999999999999,0.008529999999999999,0.0129,0.0161,0.0161,0.0161,0.017,0.0199,0.0199,0.0214,0.0214,0.0214,0.0214,0.0214,0.0255,0.0306,0.0306,0.0405,0.0418,0.0485,0.0485],[728,354,123,597,174,36,24,95,18,21,602,22,102,550,42,29,241,27,84,381,426,79,18,191,37,20],["Activated","Activated","Activated","Activated","Activated","Activated","Suppressed","Suppressed","Activated","Activated","Activated","Activated","Activated","Activated","Suppressed","Activated","Activated","Activated","Suppressed","Activated","Activated","Activated","Activated","Activated","Activated","Activated"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Gene set<\/th>\n      <th>NES<\/th>\n      <th>p-value<\/th>\n      <th>padj<\/th>\n      <th>Size<\/th>\n      <th>Direction<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"scrollX":true,"scrollY":300,"scroller":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"name":"pathway","targets":0},{"name":"NES","targets":1},{"name":"pval","targets":2},{"name":"padj","targets":3},{"name":"size","targets":4},{"name":"direction","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-05b43442d42dc9ee636c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-05b43442d42dc9ee636c">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>GSEA gene sets significant after multiple-testing correction (padj &lt; 0.05)<\/caption>","data":[["REACTOME_INNATE_IMMUNE_SYSTEM","REACTOME_NEUTROPHIL_DEGRANULATION","REACTOME_MUSCLE_CONTRACTION","REACTOME_METABOLISM_OF_LIPIDS","REACTOME_PHOSPHOLIPID_METABOLISM","REACTOME_SMOOTH_MUSCLE_CONTRACTION","REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION","REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE","REACTOME_RHO_GTPASES_ACTIVATE_ROCKS","REACTOME_SIGNALING_BY_ERYTHROPOIETIN","REACTOME_SIGNALING_BY_RHO_GTPASES_MIRO_GTPASES_AND_RHOBTB3","REACTOME_SEMA4D_IN_SEMAPHORIN_SIGNALING","REACTOME_GLYCEROPHOSPHOLIPID_BIOSYNTHESIS","REACTOME_MEMBRANE_TRAFFICKING","REACTOME_TRNA_AMINOACYLATION","REACTOME_LAMININ_INTERACTIONS","REACTOME_MAPK_FAMILY_SIGNALING_CASCADES","REACTOME_DOWNSTREAM_SIGNAL_TRANSDUCTION","REACTOME_RECRUITMENT_OF_NUMA_TO_MITOTIC_CENTROSOMES","REACTOME_DISEASES_OF_SIGNAL_TRANSDUCTION_BY_GROWTH_FACTOR_RECEPTORS_AND_SECOND_MESSENGERS","REACTOME_SIGNALING_BY_RECEPTOR_TYROSINE_KINASES","REACTOME_REGULATION_OF_INSULIN_LIKE_GROWTH_FACTOR_IGF_TRANSPORT_AND_UPTAKE_BY_INSULIN_LIKE_GROWTH_FACTOR_BINDING_PROTEINS_IGFBPS","REACTOME_SEMA4D_INDUCED_CELL_MIGRATION_AND_GROWTH_CONE_COLLAPSE","REACTOME_PLATELET_ACTIVATION_SIGNALING_AND_AGGREGATION","REACTOME_SIGNALING_BY_MODERATE_KINASE_ACTIVITY_BRAF_MUTANTS","REACTOME_RHO_GTPASES_ACTIVATE_PAKS"],[1.6,1.67,1.84,1.51,1.71,2.02,-2.13,-1.8,1.96,1.92,1.46,1.95,1.76,1.43,-1.91,1.89,1.59,1.88,-1.71,1.49,1.46,1.72,1.86,1.56,1.78,1.82],[8.51e-08,5.04e-06,1.29e-05,3.1e-05,5.22e-05,5.64e-05,5.73e-05,9.86e-05,0.000166,0.00017,0.00017,0.000195,0.000258,0.000267,0.000344,0.000365,0.000366,0.000389,0.000389,0.000489,0.000621,0.000645,0.000893,0.000962,0.0012,0.00121],[8.88e-05,0.00263,0.00447,0.00809,0.008529999999999999,0.008529999999999999,0.008529999999999999,0.0129,0.0161,0.0161,0.0161,0.017,0.0199,0.0199,0.0214,0.0214,0.0214,0.0214,0.0214,0.0255,0.0306,0.0306,0.0405,0.0418,0.0485,0.0485],[728,354,123,597,174,36,24,95,18,21,602,22,102,550,42,29,241,27,84,381,426,79,18,191,37,20],["Activated","Activated","Activated","Activated","Activated","Activated","Suppressed","Suppressed","Activated","Activated","Activated","Activated","Activated","Activated","Suppressed","Activated","Activated","Activated","Suppressed","Activated","Activated","Activated","Activated","Activated","Activated","Activated"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Gene set<\/th>\n      <th>NES<\/th>\n      <th>p-value<\/th>\n      <th>padj<\/th>\n      <th>Size<\/th>\n      <th>Direction<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"scrollX":true,"scrollY":300,"scroller":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"name":"pathway","targets":0},{"name":"NES","targets":1},{"name":"pval","targets":2},{"name":"padj","targets":3},{"name":"size","targets":4},{"name":"direction","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="summary-table-of-the-top-sets" class="section level3 hasAnchor">
 <h3>Summary Table of the Top Sets<a href="running-gsea.html#summary-table-of-the-top-sets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -533,33 +533,33 @@ enrichment score. It is the fastest way to see whether a result is solid or thin
 enrichment shows a curve with a clear peak and gene ticks bunched at one end, while a weak one
 shows a shallow, wandering curve and ticks scattered along the whole width.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="running-gsea.html#cb139-1" tabindex="-1"></a><span class="co"># Reactome set names are very long (&quot;REACTOME_REGULATION_OF_INSULIN_LIKE_GROWTH_</span></span>
-<span id="cb139-2"><a href="running-gsea.html#cb139-2" tabindex="-1"></a><span class="co"># FACTOR_IGF_TRANSPORT_AND_UPTAKE_BY...&quot;). Left as they are, the labels take the</span></span>
-<span id="cb139-3"><a href="running-gsea.html#cb139-3" tabindex="-1"></a><span class="co"># whole plot and squeeze the bars off the edge, so we tidy them for display.</span></span>
-<span id="cb139-4"><a href="running-gsea.html#cb139-4" tabindex="-1"></a>tidy_set_name <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb139-5"><a href="running-gsea.html#cb139-5" tabindex="-1"></a>  x <span class="sc">%&gt;%</span></span>
-<span id="cb139-6"><a href="running-gsea.html#cb139-6" tabindex="-1"></a>    <span class="fu">str_remove</span>(<span class="st">&quot;^REACTOME_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb139-7"><a href="running-gsea.html#cb139-7" tabindex="-1"></a>    <span class="fu">str_replace_all</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb139-8"><a href="running-gsea.html#cb139-8" tabindex="-1"></a>    <span class="fu">str_to_sentence</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb139-9"><a href="running-gsea.html#cb139-9" tabindex="-1"></a>    <span class="fu">str_trunc</span>(<span class="dv">55</span>)</span>
-<span id="cb139-10"><a href="running-gsea.html#cb139-10" tabindex="-1"></a>}</span>
-<span id="cb139-11"><a href="running-gsea.html#cb139-11" tabindex="-1"></a></span>
-<span id="cb139-12"><a href="running-gsea.html#cb139-12" tabindex="-1"></a><span class="co"># NB: fgsea loads IRanges, whose slice() masks dplyr&#39;s - hence dplyr::slice here.</span></span>
-<span id="cb139-13"><a href="running-gsea.html#cb139-13" tabindex="-1"></a>top_sets <span class="ot">&lt;-</span> gsea_padj_sig <span class="sc">%&gt;%</span></span>
-<span id="cb139-14"><a href="running-gsea.html#cb139-14" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(NES)) <span class="sc">%&gt;%</span></span>
-<span id="cb139-15"><a href="running-gsea.html#cb139-15" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, (dplyr<span class="sc">::</span><span class="fu">n</span>() <span class="sc">-</span> <span class="dv">4</span>)<span class="sc">:</span>dplyr<span class="sc">::</span><span class="fu">n</span>())) <span class="sc">%&gt;%</span>   <span class="co"># five most positive, five most negative</span></span>
-<span id="cb139-16"><a href="running-gsea.html#cb139-16" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(pathway)</span>
-<span id="cb139-17"><a href="running-gsea.html#cb139-17" tabindex="-1"></a></span>
-<span id="cb139-18"><a href="running-gsea.html#cb139-18" tabindex="-1"></a><span class="co"># shorten the set names for display, as in the bar plot</span></span>
-<span id="cb139-19"><a href="running-gsea.html#cb139-19" tabindex="-1"></a>top_pathways <span class="ot">&lt;-</span> pathways_list[top_sets]</span>
-<span id="cb139-20"><a href="running-gsea.html#cb139-20" tabindex="-1"></a><span class="fu">names</span>(top_pathways) <span class="ot">&lt;-</span> <span class="fu">tidy_set_name</span>(<span class="fu">names</span>(top_pathways))</span>
-<span id="cb139-21"><a href="running-gsea.html#cb139-21" tabindex="-1"></a></span>
-<span id="cb139-22"><a href="running-gsea.html#cb139-22" tabindex="-1"></a><span class="fu">plotGseaTable</span>(</span>
-<span id="cb139-23"><a href="running-gsea.html#cb139-23" tabindex="-1"></a>  <span class="at">pathways  =</span> top_pathways,</span>
-<span id="cb139-24"><a href="running-gsea.html#cb139-24" tabindex="-1"></a>  <span class="at">stats     =</span> rank_vector,</span>
-<span id="cb139-25"><a href="running-gsea.html#cb139-25" tabindex="-1"></a>  <span class="at">fgseaRes  =</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pathway =</span> <span class="fu">tidy_set_name</span>(pathway)),</span>
-<span id="cb139-26"><a href="running-gsea.html#cb139-26" tabindex="-1"></a>  <span class="at">gseaParam =</span> <span class="fl">0.5</span></span>
-<span id="cb139-27"><a href="running-gsea.html#cb139-27" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="running-gsea.html#cb140-1" tabindex="-1"></a><span class="co"># Reactome set names are very long (&quot;REACTOME_REGULATION_OF_INSULIN_LIKE_GROWTH_</span></span>
+<span id="cb140-2"><a href="running-gsea.html#cb140-2" tabindex="-1"></a><span class="co"># FACTOR_IGF_TRANSPORT_AND_UPTAKE_BY...&quot;). Left as they are, the labels take the</span></span>
+<span id="cb140-3"><a href="running-gsea.html#cb140-3" tabindex="-1"></a><span class="co"># whole plot and squeeze the bars off the edge, so we tidy them for display.</span></span>
+<span id="cb140-4"><a href="running-gsea.html#cb140-4" tabindex="-1"></a>tidy_set_name <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb140-5"><a href="running-gsea.html#cb140-5" tabindex="-1"></a>  x <span class="sc">%&gt;%</span></span>
+<span id="cb140-6"><a href="running-gsea.html#cb140-6" tabindex="-1"></a>    <span class="fu">str_remove</span>(<span class="st">&quot;^REACTOME_&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb140-7"><a href="running-gsea.html#cb140-7" tabindex="-1"></a>    <span class="fu">str_replace_all</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb140-8"><a href="running-gsea.html#cb140-8" tabindex="-1"></a>    <span class="fu">str_to_sentence</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb140-9"><a href="running-gsea.html#cb140-9" tabindex="-1"></a>    <span class="fu">str_trunc</span>(<span class="dv">55</span>)</span>
+<span id="cb140-10"><a href="running-gsea.html#cb140-10" tabindex="-1"></a>}</span>
+<span id="cb140-11"><a href="running-gsea.html#cb140-11" tabindex="-1"></a></span>
+<span id="cb140-12"><a href="running-gsea.html#cb140-12" tabindex="-1"></a><span class="co"># NB: fgsea loads IRanges, whose slice() masks dplyr&#39;s - hence dplyr::slice here.</span></span>
+<span id="cb140-13"><a href="running-gsea.html#cb140-13" tabindex="-1"></a>top_sets <span class="ot">&lt;-</span> gsea_padj_sig <span class="sc">%&gt;%</span></span>
+<span id="cb140-14"><a href="running-gsea.html#cb140-14" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(NES)) <span class="sc">%&gt;%</span></span>
+<span id="cb140-15"><a href="running-gsea.html#cb140-15" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, (dplyr<span class="sc">::</span><span class="fu">n</span>() <span class="sc">-</span> <span class="dv">4</span>)<span class="sc">:</span>dplyr<span class="sc">::</span><span class="fu">n</span>())) <span class="sc">%&gt;%</span>   <span class="co"># five most positive, five most negative</span></span>
+<span id="cb140-16"><a href="running-gsea.html#cb140-16" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(pathway)</span>
+<span id="cb140-17"><a href="running-gsea.html#cb140-17" tabindex="-1"></a></span>
+<span id="cb140-18"><a href="running-gsea.html#cb140-18" tabindex="-1"></a><span class="co"># shorten the set names for display, as in the bar plot</span></span>
+<span id="cb140-19"><a href="running-gsea.html#cb140-19" tabindex="-1"></a>top_pathways <span class="ot">&lt;-</span> pathways_list[top_sets]</span>
+<span id="cb140-20"><a href="running-gsea.html#cb140-20" tabindex="-1"></a><span class="fu">names</span>(top_pathways) <span class="ot">&lt;-</span> <span class="fu">tidy_set_name</span>(<span class="fu">names</span>(top_pathways))</span>
+<span id="cb140-21"><a href="running-gsea.html#cb140-21" tabindex="-1"></a></span>
+<span id="cb140-22"><a href="running-gsea.html#cb140-22" tabindex="-1"></a><span class="fu">plotGseaTable</span>(</span>
+<span id="cb140-23"><a href="running-gsea.html#cb140-23" tabindex="-1"></a>  <span class="at">pathways  =</span> top_pathways,</span>
+<span id="cb140-24"><a href="running-gsea.html#cb140-24" tabindex="-1"></a>  <span class="at">stats     =</span> rank_vector,</span>
+<span id="cb140-25"><a href="running-gsea.html#cb140-25" tabindex="-1"></a>  <span class="at">fgseaRes  =</span> gsea_results <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pathway =</span> <span class="fu">tidy_set_name</span>(pathway)),</span>
+<span id="cb140-26"><a href="running-gsea.html#cb140-26" tabindex="-1"></a>  <span class="at">gseaParam =</span> <span class="fl">0.5</span></span>
+<span id="cb140-27"><a href="running-gsea.html#cb140-27" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-fn-gsea-table-plot-1.png" alt="" width="1344" /></p>
 <div class="boxy">
@@ -572,32 +572,32 @@ one end is a coordinated shift; compare the small sets with the very large ones.
 <p>We plot up to twenty of the sets that survive correction, ordered by p-value, so everything shown
 here is a result rather than a lead.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="running-gsea.html#cb140-1" tabindex="-1"></a>gsea_bar <span class="ot">&lt;-</span> gsea_padj_sig <span class="sc">%&gt;%</span></span>
-<span id="cb140-2"><a href="running-gsea.html#cb140-2" tabindex="-1"></a>  <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb140-3"><a href="running-gsea.html#cb140-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb140-4"><a href="running-gsea.html#cb140-4" tabindex="-1"></a>    <span class="at">direction =</span> <span class="fu">ifelse</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Activated&quot;</span>, <span class="st">&quot;Suppressed&quot;</span>),</span>
-<span id="cb140-5"><a href="running-gsea.html#cb140-5" tabindex="-1"></a>    <span class="at">pathway   =</span> <span class="fu">fct_reorder</span>(<span class="fu">tidy_set_name</span>(pathway), NES)</span>
-<span id="cb140-6"><a href="running-gsea.html#cb140-6" tabindex="-1"></a>  )</span>
-<span id="cb140-7"><a href="running-gsea.html#cb140-7" tabindex="-1"></a></span>
-<span id="cb140-8"><a href="running-gsea.html#cb140-8" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(gsea_bar) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb140-9"><a href="running-gsea.html#cb140-9" tabindex="-1"></a>  gsea_nesplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(gsea_bar,</span>
-<span id="cb140-10"><a href="running-gsea.html#cb140-10" tabindex="-1"></a>                         <span class="fu">aes</span>(<span class="at">x =</span> NES, <span class="at">y =</span> pathway, <span class="at">fill =</span> direction)) <span class="sc">+</span></span>
-<span id="cb140-11"><a href="running-gsea.html#cb140-11" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb140-12"><a href="running-gsea.html#cb140-12" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb140-13"><a href="running-gsea.html#cb140-13" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb140-14"><a href="running-gsea.html#cb140-14" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb140-15"><a href="running-gsea.html#cb140-15" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb140-16"><a href="running-gsea.html#cb140-16" tabindex="-1"></a>      <span class="at">title    =</span> <span class="st">&quot;GSEA - strongest sets after correction&quot;</span>,</span>
-<span id="cb140-17"><a href="running-gsea.html#cb140-17" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">&quot;Dexamethasone vs Untreated | Human ASM (Reactome)&quot;</span>,</span>
-<span id="cb140-18"><a href="running-gsea.html#cb140-18" tabindex="-1"></a>      <span class="at">x        =</span> <span class="st">&quot;Normalised Enrichment Score (NES)&quot;</span>,</span>
-<span id="cb140-19"><a href="running-gsea.html#cb140-19" tabindex="-1"></a>      <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
-<span id="cb140-20"><a href="running-gsea.html#cb140-20" tabindex="-1"></a>      <span class="at">fill     =</span> <span class="cn">NULL</span></span>
-<span id="cb140-21"><a href="running-gsea.html#cb140-21" tabindex="-1"></a>    )</span>
-<span id="cb140-22"><a href="running-gsea.html#cb140-22" tabindex="-1"></a></span>
-<span id="cb140-23"><a href="running-gsea.html#cb140-23" tabindex="-1"></a>  gsea_nesplot</span>
-<span id="cb140-24"><a href="running-gsea.html#cb140-24" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb140-25"><a href="running-gsea.html#cb140-25" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No gene sets survived multiple-testing correction, so there is nothing to plot.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb140-26"><a href="running-gsea.html#cb140-26" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="running-gsea.html#cb141-1" tabindex="-1"></a>gsea_bar <span class="ot">&lt;-</span> gsea_padj_sig <span class="sc">%&gt;%</span></span>
+<span id="cb141-2"><a href="running-gsea.html#cb141-2" tabindex="-1"></a>  <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb141-3"><a href="running-gsea.html#cb141-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb141-4"><a href="running-gsea.html#cb141-4" tabindex="-1"></a>    <span class="at">direction =</span> <span class="fu">ifelse</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Activated&quot;</span>, <span class="st">&quot;Suppressed&quot;</span>),</span>
+<span id="cb141-5"><a href="running-gsea.html#cb141-5" tabindex="-1"></a>    <span class="at">pathway   =</span> <span class="fu">fct_reorder</span>(<span class="fu">tidy_set_name</span>(pathway), NES)</span>
+<span id="cb141-6"><a href="running-gsea.html#cb141-6" tabindex="-1"></a>  )</span>
+<span id="cb141-7"><a href="running-gsea.html#cb141-7" tabindex="-1"></a></span>
+<span id="cb141-8"><a href="running-gsea.html#cb141-8" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(gsea_bar) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb141-9"><a href="running-gsea.html#cb141-9" tabindex="-1"></a>  gsea_nesplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(gsea_bar,</span>
+<span id="cb141-10"><a href="running-gsea.html#cb141-10" tabindex="-1"></a>                         <span class="fu">aes</span>(<span class="at">x =</span> NES, <span class="at">y =</span> pathway, <span class="at">fill =</span> direction)) <span class="sc">+</span></span>
+<span id="cb141-11"><a href="running-gsea.html#cb141-11" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb141-12"><a href="running-gsea.html#cb141-12" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb141-13"><a href="running-gsea.html#cb141-13" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb141-14"><a href="running-gsea.html#cb141-14" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb141-15"><a href="running-gsea.html#cb141-15" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb141-16"><a href="running-gsea.html#cb141-16" tabindex="-1"></a>      <span class="at">title    =</span> <span class="st">&quot;GSEA - strongest sets after correction&quot;</span>,</span>
+<span id="cb141-17"><a href="running-gsea.html#cb141-17" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">&quot;Dexamethasone vs Untreated | Human ASM (Reactome)&quot;</span>,</span>
+<span id="cb141-18"><a href="running-gsea.html#cb141-18" tabindex="-1"></a>      <span class="at">x        =</span> <span class="st">&quot;Normalised Enrichment Score (NES)&quot;</span>,</span>
+<span id="cb141-19"><a href="running-gsea.html#cb141-19" tabindex="-1"></a>      <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
+<span id="cb141-20"><a href="running-gsea.html#cb141-20" tabindex="-1"></a>      <span class="at">fill     =</span> <span class="cn">NULL</span></span>
+<span id="cb141-21"><a href="running-gsea.html#cb141-21" tabindex="-1"></a>    )</span>
+<span id="cb141-22"><a href="running-gsea.html#cb141-22" tabindex="-1"></a></span>
+<span id="cb141-23"><a href="running-gsea.html#cb141-23" tabindex="-1"></a>  gsea_nesplot</span>
+<span id="cb141-24"><a href="running-gsea.html#cb141-24" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb141-25"><a href="running-gsea.html#cb141-25" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;No gene sets survived multiple-testing correction, so there is nothing to plot.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb141-26"><a href="running-gsea.html#cb141-26" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-fn-gsea-nes-barplot-1.png" alt="" width="960" /></p>
 </div>
@@ -606,24 +606,24 @@ here is a result rather than a lead.</p>
 <p>The enrichment plot shows the running sum of the enrichment score for a single gene set across the ranked gene list. The peak of the curve is the enrichment score; genes from the set are shown as vertical bars (the “rug”) at the bottom.</p>
 <p><strong>How to read it:</strong> the x-axis is every tested gene, ordered from most up-regulated (left) to most down-regulated (right). Each tick in the rug is one gene of the set. Ticks bunched at one end drive the curve to a high peak - coordinated enrichment. Ticks spread evenly across the axis give a flat, wandering curve and no enrichment.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="running-gsea.html#cb141-1" tabindex="-1"></a>top_up <span class="ot">&lt;-</span> gsea_padj_sig <span class="sc">%&gt;%</span> <span class="fu">filter</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
-<span id="cb141-2"><a href="running-gsea.html#cb141-2" tabindex="-1"></a>top_down <span class="ot">&lt;-</span> gsea_padj_sig <span class="sc">%&gt;%</span> <span class="fu">filter</span>(NES <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
-<span id="cb141-3"><a href="running-gsea.html#cb141-3" tabindex="-1"></a></span>
-<span id="cb141-4"><a href="running-gsea.html#cb141-4" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(top_up) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb141-5"><a href="running-gsea.html#cb141-5" tabindex="-1"></a>  <span class="fu">print</span>(</span>
-<span id="cb141-6"><a href="running-gsea.html#cb141-6" tabindex="-1"></a>    <span class="fu">plotEnrichment</span>(pathways_list[[top_up]], rank_vector) <span class="sc">+</span></span>
-<span id="cb141-7"><a href="running-gsea.html#cb141-7" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Top activated:&quot;</span>, <span class="fu">tidy_set_name</span>(top_up)))</span>
-<span id="cb141-8"><a href="running-gsea.html#cb141-8" tabindex="-1"></a>  )</span>
-<span id="cb141-9"><a href="running-gsea.html#cb141-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="running-gsea.html#cb142-1" tabindex="-1"></a>top_up <span class="ot">&lt;-</span> gsea_padj_sig <span class="sc">%&gt;%</span> <span class="fu">filter</span>(NES <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
+<span id="cb142-2"><a href="running-gsea.html#cb142-2" tabindex="-1"></a>top_down <span class="ot">&lt;-</span> gsea_padj_sig <span class="sc">%&gt;%</span> <span class="fu">filter</span>(NES <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">slice_min</span>(pval, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(pathway)</span>
+<span id="cb142-3"><a href="running-gsea.html#cb142-3" tabindex="-1"></a></span>
+<span id="cb142-4"><a href="running-gsea.html#cb142-4" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(top_up) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb142-5"><a href="running-gsea.html#cb142-5" tabindex="-1"></a>  <span class="fu">print</span>(</span>
+<span id="cb142-6"><a href="running-gsea.html#cb142-6" tabindex="-1"></a>    <span class="fu">plotEnrichment</span>(pathways_list[[top_up]], rank_vector) <span class="sc">+</span></span>
+<span id="cb142-7"><a href="running-gsea.html#cb142-7" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Top activated:&quot;</span>, <span class="fu">tidy_set_name</span>(top_up)))</span>
+<span id="cb142-8"><a href="running-gsea.html#cb142-8" tabindex="-1"></a>  )</span>
+<span id="cb142-9"><a href="running-gsea.html#cb142-9" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-fn-gsea-enrichment-plots-1.png" alt="" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="running-gsea.html#cb142-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(top_down) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb142-2"><a href="running-gsea.html#cb142-2" tabindex="-1"></a>  <span class="fu">print</span>(</span>
-<span id="cb142-3"><a href="running-gsea.html#cb142-3" tabindex="-1"></a>    <span class="fu">plotEnrichment</span>(pathways_list[[top_down]], rank_vector) <span class="sc">+</span></span>
-<span id="cb142-4"><a href="running-gsea.html#cb142-4" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Top suppressed:&quot;</span>, <span class="fu">tidy_set_name</span>(top_down)))</span>
-<span id="cb142-5"><a href="running-gsea.html#cb142-5" tabindex="-1"></a>  )</span>
-<span id="cb142-6"><a href="running-gsea.html#cb142-6" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="running-gsea.html#cb143-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(top_down) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb143-2"><a href="running-gsea.html#cb143-2" tabindex="-1"></a>  <span class="fu">print</span>(</span>
+<span id="cb143-3"><a href="running-gsea.html#cb143-3" tabindex="-1"></a>    <span class="fu">plotEnrichment</span>(pathways_list[[top_down]], rank_vector) <span class="sc">+</span></span>
+<span id="cb143-4"><a href="running-gsea.html#cb143-4" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Top suppressed:&quot;</span>, <span class="fu">tidy_set_name</span>(top_down)))</span>
+<span id="cb143-5"><a href="running-gsea.html#cb143-5" tabindex="-1"></a>  )</span>
+<span id="cb143-6"><a href="running-gsea.html#cb143-6" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-fn-gsea-enrichment-plots-2.png" alt="" width="672" /></p>
 </div>

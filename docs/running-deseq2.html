@@ -411,23 +411,23 @@ will list <code>condition_treatment_vs_control</code> - the fold change is calcu
 inverted and your biological interpretation would be backwards.</p>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="running-deseq2.html#cb67-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb67-2"><a href="running-deseq2.html#cb67-2" tabindex="-1"></a></span>
-<span id="cb67-3"><a href="running-deseq2.html#cb67-3" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;rds&quot;</span>, <span class="st">&quot;dds_human_asm.rds&quot;</span>))</span>
-<span id="cb67-4"><a href="running-deseq2.html#cb67-4" tabindex="-1"></a></span>
-<span id="cb67-5"><a href="running-deseq2.html#cb67-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ DDS loaded</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="running-deseq2.html#cb68-1" tabindex="-1"></a>git_root <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb68-2"><a href="running-deseq2.html#cb68-2" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="running-deseq2.html#cb68-3" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;rds&quot;</span>, <span class="st">&quot;dds_human_asm.rds&quot;</span>))</span>
+<span id="cb68-4"><a href="running-deseq2.html#cb68-4" tabindex="-1"></a></span>
+<span id="cb68-5"><a href="running-deseq2.html#cb68-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ DDS loaded</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## ✅ DDS loaded</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="running-deseq2.html#cb69-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="running-deseq2.html#cb70-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions  :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##    Dimensions  : 16238 genes × 8 samples</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="running-deseq2.html#cb71-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Design      :&quot;</span>, <span class="fu">paste</span>(<span class="fu">deparse</span>(<span class="fu">design</span>(dds)), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="running-deseq2.html#cb72-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Design      :&quot;</span>, <span class="fu">paste</span>(<span class="fu">deparse</span>(<span class="fu">design</span>(dds)), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##    Design      : ~donor + condition</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="running-deseq2.html#cb73-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Conditions  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">levels</span>(dds<span class="sc">$</span>condition), <span class="at">collapse =</span> <span class="st">&quot; vs &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="running-deseq2.html#cb74-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Conditions  :&quot;</span>, <span class="fu">paste</span>(<span class="fu">levels</span>(dds<span class="sc">$</span>condition), <span class="at">collapse =</span> <span class="st">&quot; vs &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##    Conditions  : control vs treatment</code></pre>
 <div style="background:#d1ecf1;border-left:4px solid #0c5460;padding:10px;margin:10px 0;">
@@ -438,9 +438,9 @@ inverted and your biological interpretation would be backwards.</p>
 <p>Before fitting, make sure the comparison points the way you think it does.
 The first factor level is always the reference (denominator) in <code>DESeq2</code> comparisons. Setting it explicitly ensures fold changes are computed in the intended direction: <strong>treatment (dexamethasone) vs control (untreated)</strong>, not the reverse.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="running-deseq2.html#cb75-1" tabindex="-1"></a>dds<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">relevel</span>(dds<span class="sc">$</span>condition, <span class="at">ref =</span> <span class="st">&quot;control&quot;</span>)</span>
-<span id="cb75-2"><a href="running-deseq2.html#cb75-2" tabindex="-1"></a></span>
-<span id="cb75-3"><a href="running-deseq2.html#cb75-3" tabindex="-1"></a><span class="fu">levels</span>(dds<span class="sc">$</span>condition)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="running-deseq2.html#cb76-1" tabindex="-1"></a>dds<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">relevel</span>(dds<span class="sc">$</span>condition, <span class="at">ref =</span> <span class="st">&quot;control&quot;</span>)</span>
+<span id="cb76-2"><a href="running-deseq2.html#cb76-2" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="running-deseq2.html#cb76-3" tabindex="-1"></a><span class="fu">levels</span>(dds<span class="sc">$</span>condition)</span></code></pre></div>
 </details>
 <pre><code>## [1] &quot;control&quot;   &quot;treatment&quot;</code></pre>
 <div style="background:#d4edda;border-left:4px solid #28a745;padding:10px;margin:10px 0;">
@@ -448,8 +448,8 @@ The first factor level is always the reference (denominator) in <code>DESeq2</co
 </div>
 <p><strong>Run DESeq2 (paired design)</strong></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="running-deseq2.html#cb77-1" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds)</span>
-<span id="cb77-2"><a href="running-deseq2.html#cb77-2" tabindex="-1"></a><span class="fu">resultsNames</span>(dds)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="running-deseq2.html#cb78-1" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds)</span>
+<span id="cb78-2"><a href="running-deseq2.html#cb78-2" tabindex="-1"></a><span class="fu">resultsNames</span>(dds)</span></code></pre></div>
 </details>
 <pre><code>## [1] &quot;Intercept&quot;                      &quot;donor_N061011_vs_N052611&quot;      
 ## [3] &quot;donor_N080611_vs_N052611&quot;       &quot;donor_N61311_vs_N052611&quot;       
@@ -459,7 +459,7 @@ The first factor level is always the reference (denominator) in <code>DESeq2</co
 pulls the noisy per-gene estimates towards the overall trend. This plot is where you check
 that it worked.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="running-deseq2.html#cb79-1" tabindex="-1"></a><span class="fu">plotDispEsts</span>(dds, <span class="at">main =</span> <span class="st">&quot;Dispersion estimates&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="running-deseq2.html#cb80-1" tabindex="-1"></a><span class="fu">plotDispEsts</span>(dds, <span class="at">main =</span> <span class="st">&quot;Dispersion estimates&quot;</span>)</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-disp-plot-1.png" alt="" width="672" /></p>
 <div class="boxy">

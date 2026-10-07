@@ -421,22 +421,22 @@ genomes and their locus tags are not comparable.</em></p>
 <p><strong>⭐ Important:</strong> If any check fails, investigate the cause before running DESeq2. Proceeding with outlier samples or a mis-specified design will compromise all downstream results.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="summary-3.html#cb199-1" tabindex="-1"></a><span class="co"># ── Export the full (all-timepoints) DDS for reference ────────────────────────</span></span>
-<span id="cb199-2"><a href="summary-3.html#cb199-2" tabindex="-1"></a>rds_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;rds&quot;</span>)</span>
-<span id="cb199-3"><a href="summary-3.html#cb199-3" tabindex="-1"></a><span class="fu">dir.create</span>(rds_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb199-4"><a href="summary-3.html#cb199-4" tabindex="-1"></a></span>
-<span id="cb199-5"><a href="summary-3.html#cb199-5" tabindex="-1"></a>dds_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(rds_dir, <span class="fu">paste0</span>(<span class="st">&quot;dds_&quot;</span>, strain_tag, <span class="st">&quot;_all_timepoints.rds&quot;</span>))</span>
-<span id="cb199-6"><a href="summary-3.html#cb199-6" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> dds_path)</span>
-<span id="cb199-7"><a href="summary-3.html#cb199-7" tabindex="-1"></a></span>
-<span id="cb199-8"><a href="summary-3.html#cb199-8" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ Full DDS saved to:&quot;</span>, dds_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="summary-3.html#cb200-1" tabindex="-1"></a><span class="co"># ── Export the full (all-timepoints) DDS for reference ────────────────────────</span></span>
+<span id="cb200-2"><a href="summary-3.html#cb200-2" tabindex="-1"></a>rds_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(results_dir, <span class="st">&quot;rds&quot;</span>)</span>
+<span id="cb200-3"><a href="summary-3.html#cb200-3" tabindex="-1"></a><span class="fu">dir.create</span>(rds_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb200-4"><a href="summary-3.html#cb200-4" tabindex="-1"></a></span>
+<span id="cb200-5"><a href="summary-3.html#cb200-5" tabindex="-1"></a>dds_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(rds_dir, <span class="fu">paste0</span>(<span class="st">&quot;dds_&quot;</span>, strain_tag, <span class="st">&quot;_all_timepoints.rds&quot;</span>))</span>
+<span id="cb200-6"><a href="summary-3.html#cb200-6" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> dds_path)</span>
+<span id="cb200-7"><a href="summary-3.html#cb200-7" tabindex="-1"></a></span>
+<span id="cb200-8"><a href="summary-3.html#cb200-8" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;✅ Full DDS saved to:&quot;</span>, dds_path, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## ✅ Full DDS saved to: /Users/jasge/Documents/GitHub/dsp_27200/results/usa100/rds/dds_usa100_all_timepoints.rds</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="summary-3.html#cb201-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions       :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="summary-3.html#cb202-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Dimensions       :&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;genes ×&quot;</span>, <span class="fu">ncol</span>(dds), <span class="st">&quot;samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##    Dimensions       : 2288 genes × 32 samples</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="summary-3.html#cb203-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Note             : this holds ALL time points. Script 02 subsets to the chosen one.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="summary-3.html#cb204-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;   Note             : this holds ALL time points. Script 02 subsets to the chosen one.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##    Note             : this holds ALL time points. Script 02 subsets to the chosen one.</code></pre>
 </div>

@@ -379,15 +379,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="sanity-checks.html#cb31-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
 <span id="cb31-2"><a href="sanity-checks.html#cb31-2" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="sanity-checks.html#cb31-3" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">colSums</span>(count_genes),</span>
-<span id="cb31-4"><a href="sanity-checks.html#cb31-4" tabindex="-1"></a>        <span class="at">main   =</span> <span class="st">&quot;Library sizes (total counts per sample)&quot;</span>,</span>
-<span id="cb31-5"><a href="sanity-checks.html#cb31-5" tabindex="-1"></a>        <span class="at">ylab   =</span> <span class="st">&quot;Total raw counts&quot;</span>,</span>
-<span id="cb31-6"><a href="sanity-checks.html#cb31-6" tabindex="-1"></a>        <span class="at">xlab   =</span> <span class="cn">NULL</span>,</span>
-<span id="cb31-7"><a href="sanity-checks.html#cb31-7" tabindex="-1"></a>        <span class="at">col    =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
-<span id="cb31-8"><a href="sanity-checks.html#cb31-8" tabindex="-1"></a>        <span class="at">las    =</span> <span class="dv">2</span>,</span>
-<span id="cb31-9"><a href="sanity-checks.html#cb31-9" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">colnames</span>(count_genes))</span></code></pre></div>
+<span id="cb31-3"><a href="sanity-checks.html#cb31-3" tabindex="-1"></a><span class="co"># Sample names are long, so draw the bars horizontally and widen the left</span></span>
+<span id="cb31-4"><a href="sanity-checks.html#cb31-4" tabindex="-1"></a><span class="co"># margin, otherwise the labels are clipped and you cannot tell the samples apart.</span></span>
+<span id="cb31-5"><a href="sanity-checks.html#cb31-5" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">4</span>, <span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
+<span id="cb31-6"><a href="sanity-checks.html#cb31-6" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="sanity-checks.html#cb31-7" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">rev</span>(<span class="fu">colSums</span>(count_genes)),</span>
+<span id="cb31-8"><a href="sanity-checks.html#cb31-8" tabindex="-1"></a>        <span class="at">main      =</span> <span class="st">&quot;Library sizes (total counts per sample)&quot;</span>,</span>
+<span id="cb31-9"><a href="sanity-checks.html#cb31-9" tabindex="-1"></a>        <span class="at">xlab      =</span> <span class="st">&quot;Total raw counts&quot;</span>,</span>
+<span id="cb31-10"><a href="sanity-checks.html#cb31-10" tabindex="-1"></a>        <span class="at">col       =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb31-11"><a href="sanity-checks.html#cb31-11" tabindex="-1"></a>        <span class="at">horiz     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb31-12"><a href="sanity-checks.html#cb31-12" tabindex="-1"></a>        <span class="at">las       =</span> <span class="dv">1</span>,</span>
+<span id="cb31-13"><a href="sanity-checks.html#cb31-13" tabindex="-1"></a>        <span class="at">cex.names =</span> <span class="fl">0.8</span>,</span>
+<span id="cb31-14"><a href="sanity-checks.html#cb31-14" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">rev</span>(<span class="fu">colnames</span>(count_genes)))</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-check-raw-0-1.png" alt="" width="672" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sanity-checks.html#cb32-1" tabindex="-1"></a><span class="fu">par</span>(op)</span></code></pre></div>
+</details>
 <div class="boxy">
 <p>Samples differ in depth, which is exactly what the size factors further down correct for.
 What would worry you is one sample far below the rest: too few reads means too little
@@ -403,39 +411,42 @@ The <a href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/
 is explicit that pre-filtering is <strong>not necessary</strong> before running DESeq2. It is useful for three
 practical reasons: it shrinks the <code>dds</code> object, it speeds up model fitting, and it makes dispersion
 and MA plots easier to read, because genes with no information are not plotted.</p>
-<p>What it does <strong>not</strong> do is take care of multiple testing. <code>results()</code> applies <strong>independent
-filtering</strong> of its own, through IHW or genefilter, which removes low-count genes from the adjusted
-p-value calculation whether or not you filtered here. You could skip this step entirely and rely on
-that instead.</p>
+<p>What it does <strong>not</strong> do is take care of multiple testing. <code>results()</code> already applies
+<strong>independent filtering</strong> of its own: it searches for the mean-count threshold that yields the most
+significant genes at your chosen alpha, then sets <code>padj</code> to <code>NA</code> below it, so those genes leave the
+correction altogether. That happens whether or not you filtered here, which is why you could skip
+this step and rely on it instead. (A more refined option exists, IHW or Independent Hypothesis
+Weighting, which weights each gene by its mean count rather than discarding it, but you have to ask
+for it with <code>filterFun = ihw</code>.)</p>
 <p>Why these two numbers? A count of 10 is a reasonable choice for bulk RNA-seq, and the recommended
 number of samples is the size of the smallest group, so that a gene expressed in only one
 experimental group still survives the filter. If your design has no discrete groups, use the
 smallest number of samples in which a non-zero count would be interesting to you.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sanity-checks.html#cb32-1" tabindex="-1"></a>smallestGroupSize <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>condition))</span>
-<span id="cb32-2"><a href="sanity-checks.html#cb32-2" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="sanity-checks.html#cb32-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Smallest group size   :&quot;</span>, smallestGroupSize, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sanity-checks.html#cb33-1" tabindex="-1"></a>smallestGroupSize <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>condition))</span>
+<span id="cb33-2"><a href="sanity-checks.html#cb33-2" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="sanity-checks.html#cb33-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Smallest group size   :&quot;</span>, smallestGroupSize, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Smallest group size   : 4</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sanity-checks.html#cb34-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Filtering threshold   : at least 10 counts in&quot;</span>, smallestGroupSize, <span class="st">&quot;or more samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sanity-checks.html#cb35-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Filtering threshold   : at least 10 counts in&quot;</span>, smallestGroupSize, <span class="st">&quot;or more samples</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Filtering threshold   : at least 10 counts in 4 or more samples</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sanity-checks.html#cb36-1" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">counts</span>(dds) <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">&gt;=</span> smallestGroupSize</span>
-<span id="cb36-2"><a href="sanity-checks.html#cb36-2" tabindex="-1"></a>n_before <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dds)</span>
-<span id="cb36-3"><a href="sanity-checks.html#cb36-3" tabindex="-1"></a>dds  <span class="ot">&lt;-</span> dds[keep, ]</span>
-<span id="cb36-4"><a href="sanity-checks.html#cb36-4" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="sanity-checks.html#cb36-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes before filtering:&quot;</span>, n_before, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sanity-checks.html#cb37-1" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">counts</span>(dds) <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">&gt;=</span> smallestGroupSize</span>
+<span id="cb37-2"><a href="sanity-checks.html#cb37-2" tabindex="-1"></a>n_before <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dds)</span>
+<span id="cb37-3"><a href="sanity-checks.html#cb37-3" tabindex="-1"></a>dds  <span class="ot">&lt;-</span> dds[keep, ]</span>
+<span id="cb37-4"><a href="sanity-checks.html#cb37-4" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="sanity-checks.html#cb37-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes before filtering:&quot;</span>, n_before, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes before filtering: 78941</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sanity-checks.html#cb38-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes after  filtering:&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="sanity-checks.html#cb39-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes after  filtering:&quot;</span>, <span class="fu">nrow</span>(dds), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes after  filtering: 16238</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="sanity-checks.html#cb40-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes removed         :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sanity-checks.html#cb41-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes removed         :&quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Genes removed         : 62703</code></pre>
 <div class="question">
@@ -447,28 +458,28 @@ so <code>count_genes[!keep, ]</code> gives you the discarded rows and <code>rowS
 you run the next cell.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sanity-checks.html#cb42-1" tabindex="-1"></a>removed <span class="ot">&lt;-</span> count_genes[<span class="sc">!</span>keep, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb42-2"><a href="sanity-checks.html#cb42-2" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="sanity-checks.html#cb42-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Removed genes with zero counts in every sample :&quot;</span>, <span class="fu">sum</span>(<span class="fu">rowSums</span>(removed) <span class="sc">==</span> <span class="dv">0</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sanity-checks.html#cb43-1" tabindex="-1"></a>removed <span class="ot">&lt;-</span> count_genes[<span class="sc">!</span>keep, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb43-2"><a href="sanity-checks.html#cb43-2" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="sanity-checks.html#cb43-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Removed genes with zero counts in every sample :&quot;</span>, <span class="fu">sum</span>(<span class="fu">rowSums</span>(removed) <span class="sc">==</span> <span class="dv">0</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Removed genes with zero counts in every sample : 41325</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sanity-checks.html#cb44-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Removed genes with under 10 counts in total    :&quot;</span>, <span class="fu">sum</span>(<span class="fu">rowSums</span>(removed) <span class="sc">&lt;</span> <span class="dv">10</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="sanity-checks.html#cb45-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Removed genes with under 10 counts in total    :&quot;</span>, <span class="fu">sum</span>(<span class="fu">rowSums</span>(removed) <span class="sc">&lt;</span> <span class="dv">10</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Removed genes with under 10 counts in total    : 55650</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="sanity-checks.html#cb46-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Removed genes in total                         :&quot;</span>, <span class="fu">nrow</span>(removed), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="sanity-checks.html#cb47-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Removed genes in total                         :&quot;</span>, <span class="fu">nrow</span>(removed), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Removed genes in total                         : 62703</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="sanity-checks.html#cb48-1" tabindex="-1"></a><span class="co"># The loudest gene the filter still threw out</span></span>
-<span id="cb48-2"><a href="sanity-checks.html#cb48-2" tabindex="-1"></a>loudest <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">apply</span>(removed, <span class="dv">1</span>, max)))</span>
-<span id="cb48-3"><a href="sanity-checks.html#cb48-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Loudest removed gene:&quot;</span>, loudest, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sanity-checks.html#cb49-1" tabindex="-1"></a><span class="co"># The loudest gene the filter still threw out</span></span>
+<span id="cb49-2"><a href="sanity-checks.html#cb49-2" tabindex="-1"></a>loudest <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">apply</span>(removed, <span class="dv">1</span>, max)))</span>
+<span id="cb49-3"><a href="sanity-checks.html#cb49-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Loudest removed gene:&quot;</span>, loudest, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## 
 ## Loudest removed gene: XIST</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sanity-checks.html#cb50-1" tabindex="-1"></a><span class="fu">print</span>(removed[loudest, ])</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sanity-checks.html#cb51-1" tabindex="-1"></a><span class="fu">print</span>(removed[loudest, ])</span></code></pre></div>
 </details>
 <pre><code>## N052611_dexamethasone     N052611_untreated N061011_dexamethasone 
 ##                     2                     3                  6491 
@@ -477,7 +488,7 @@ you run the next cell.</p>
 ##  N61311_dexamethasone      N61311_untreated 
 ##                     2                     0</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="sanity-checks.html#cb52-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;samples reaching 10 reads:&quot;</span>, <span class="fu">sum</span>(removed[loudest, ] <span class="sc">&gt;=</span> <span class="dv">10</span>), <span class="st">&quot;of&quot;</span>, <span class="fu">ncol</span>(removed), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="sanity-checks.html#cb53-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;samples reaching 10 reads:&quot;</span>, <span class="fu">sum</span>(removed[loudest, ] <span class="sc">&gt;=</span> <span class="dv">10</span>), <span class="st">&quot;of&quot;</span>, <span class="fu">ncol</span>(removed), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## samples reaching 10 reads: 2 of 8</code></pre>
 <div class="boxy">
