@@ -1,13 +1,16 @@
 {
-  // Open START_HERE.md as rendered markdown rather than source. The Codespace
-  // opens this file automatically (see .devcontainer/devcontainer.json ->
-  // customizations.codespaces.openFiles), and students should land on the
-  // formatted page, not the raw text.
+  // Intended to open START_HERE.md as rendered markdown rather than source.
   //
-  // Two glob forms, because the file sits at the workspace root and the
-  // "**/" prefix alone did not take.
+  // In practice this does not take in a Codespace: customizations.codespaces
+  // .openFiles in devcontainer.json opens the file as the Codespace starts,
+  // which is before workspace settings are applied. Setting it in
+  // devcontainer.json instead does work, but any edit to that file makes
+  // Codespaces prompt every student to rebuild the container, which is worse
+  // than the problem. START_HERE.md therefore tells readers to right-click and
+  // choose Open Preview.
   //
-  // To edit it instead: right-click the file -> Open With... -> Text Editor.
+  // Left here because it costs nothing and does apply to the file once the
+  // workspace has finished loading.
   "workbench.editorAssociations": {
     "START_HERE.md": "vscode.markdown.preview.editor",
     "**/START_HERE.md": "vscode.markdown.preview.editor"

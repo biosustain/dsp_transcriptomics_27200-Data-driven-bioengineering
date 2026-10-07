@@ -1,5 +1,8 @@
 # Start here
 
+> **Reading this as plain text?** Right-click `START_HERE.md` in the file tree on the left
+> and choose **Open Preview** for the formatted version. Easier to follow.
+
 Welcome to the transcriptomics session. Everything you need is already installed
 in this Codespace: R, all the packages, Nextflow and Docker. Nothing to set up.
 
