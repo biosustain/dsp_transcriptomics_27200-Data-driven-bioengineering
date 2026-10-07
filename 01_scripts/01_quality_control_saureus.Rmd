@@ -315,9 +315,26 @@ information about that sample, whatever you do afterwards.
 
 ### Pre-filtering Low-count Genes
 
-Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples - here the size of the smallest **lifestyle** group (16). Note this is stricter than DESeq2's usual convention of the smallest design cell (4 samples in a lifestyle × time group): a gene expressed only in one lifestyle at one time point could be lost. With this dataset that cost is small, and the stricter filter keeps the later models stable.
+Genes with very few reads across all samples carry almost no information about differential expression. We remove genes that do not have at least 10 counts in a minimum number of samples - here the size of the smallest **lifestyle** group (16). Note this is stricter than DESeq2's usual convention of the smallest design cell (4 samples in a lifestyle × time group): a gene expressed only in one lifestyle at one time point could be lost. With this dataset that cost is small, and the stricter filter keeps the later models stable.
 
 Unlike the human genome, most bacterial genes are expressed under standard growth, so expect only a modest fraction to be filtered out.
+
+::: note
+<strong>📘 Note: this step is optional, and it is not what controls your false positives.</strong>
+The [DESeq2 vignette](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+is explicit that pre-filtering is **not necessary** before running DESeq2. It is useful for three
+practical reasons: it shrinks the `dds` object, it speeds up model fitting, and it makes dispersion
+and MA plots easier to read, because genes with no information are not plotted.
+
+What it does **not** do is take care of multiple testing. `results()` applies **independent
+filtering** of its own, through IHW or genefilter, which removes low-count genes from the adjusted
+p-value calculation whether or not you filtered here. You could skip this step entirely and rely on
+that instead.
+
+The count of 10 is the vignette's suggestion for bulk RNA-seq, and its recommended number of samples
+is the size of the smallest group, so that a gene expressed in only one experimental group still
+survives. That is the convention the paragraph above departs from, deliberately.
+:::
 
 ```{r saureus-qc-prefilter-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 smallestGroupSize <- min(table(samples_info$lifestyle))
