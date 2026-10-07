@@ -24,7 +24,7 @@ We use **GSEA** (Gene Set Enrichment Analysis) with
 
 :::boxy
 The differential expression chapter gave you a list of genes. On its own a gene list is hard to
-interpret: nobody reads 700 gene names and sees biology.
+interpret: a couple of hundred gene names is not a result anyone can read.
 
 GSEA takes a different angle. Instead of asking "which genes passed a cutoff?", it ranks **every**
 gene you tested, from most up-regulated to most down-regulated, and then asks, for each known set of
@@ -227,7 +227,7 @@ DT::datatable(
   extensions = c("Buttons", "Scroller"),
   options    = list(dom = "Bfrtip", buttons = c("copy", "csv"),
                     scrollX = TRUE, scrollY = 300, scroller = TRUE),
-  caption = "GSEA gene sets at nominal p < 0.05 (check padj for those that survive correction)"
+  caption = "GSEA gene sets significant after multiple-testing correction (padj < 0.05)"
 )
 ```
 
@@ -273,9 +273,10 @@ plotGseaTable(
 one end is a coordinated shift; compare the small sets with the very large ones.
 :::
 
-### NES Bar Plot: Top Sets by Nominal p-value
+### NES Bar Plot: Strongest Corrected Sets
 
-We plot the top sets by **nominal** p-value. In this dataset all of the top 20 also pass padj < 0.05.
+We plot up to twenty of the sets that survive correction, ordered by p-value, so everything shown
+here is a result rather than a lead.
 
 ```{r human-fn-gsea-nes-barplot, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=7}
 gsea_bar <- gsea_padj_sig %>%
@@ -293,7 +294,7 @@ if (nrow(gsea_bar) > 0) {
     theme_bw() +
     theme(legend.position = "bottom") +
     labs(
-      title    = "GSEA - top sets by nominal p-value",
+      title    = "GSEA - strongest sets after correction",
       subtitle = "Dexamethasone vs Untreated | Human ASM (Reactome)",
       x        = "Normalised Enrichment Score (NES)",
       y        = NULL,
@@ -302,7 +303,7 @@ if (nrow(gsea_bar) > 0) {
 
   gsea_nesplot
 } else {
-  cat("No gene sets with nominal pval < 0.05 to plot.\n")
+  cat("No gene sets survived multiple-testing correction, so there is nothing to plot.\n")
 }
 ```
 
@@ -319,14 +320,14 @@ top_down <- gsea_padj_sig %>% filter(NES < 0) %>% slice_min(pval, n = 1) %>% pul
 if (length(top_up) > 0) {
   print(
     plotEnrichment(pathways_list[[top_up]], rank_vector) +
-      labs(title = paste("Top activated (nominal):", tidy_set_name(top_up)))
+      labs(title = paste("Top activated:", tidy_set_name(top_up)))
   )
 }
 
 if (length(top_down) > 0) {
   print(
     plotEnrichment(pathways_list[[top_down]], rank_vector) +
-      labs(title = paste("Top suppressed (nominal):", tidy_set_name(top_down)))
+      labs(title = paste("Top suppressed:", tidy_set_name(top_down)))
   )
 }
 ```
