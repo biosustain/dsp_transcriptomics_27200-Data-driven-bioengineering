@@ -658,21 +658,27 @@ out loud in your group, then run the cell and count.</p>
 <span id="cb61-8"><a href="exploratory-data-analysis.html#cb61-8" tabindex="-1"></a>y_expr  <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(<span class="fu">assay</span>(vsd)[y_genes, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
 <span id="cb61-9"><a href="exploratory-data-analysis.html#cb61-9" tabindex="-1"></a>df_anno<span class="sc">$</span>sex_inferred <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y_expr <span class="sc">&gt;</span> <span class="fu">mean</span>(<span class="fu">range</span>(y_expr)), <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>)</span>
 <span id="cb61-10"><a href="exploratory-data-analysis.html#cb61-10" tabindex="-1"></a></span>
-<span id="cb61-11"><a href="exploratory-data-analysis.html#cb61-11" tabindex="-1"></a>heat_plot <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
-<span id="cb61-12"><a href="exploratory-data-analysis.html#cb61-12" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[topVarGenes, ],</span>
-<span id="cb61-13"><a href="exploratory-data-analysis.html#cb61-13" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb61-14"><a href="exploratory-data-analysis.html#cb61-14" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb61-15"><a href="exploratory-data-analysis.html#cb61-15" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
-<span id="cb61-16"><a href="exploratory-data-analysis.html#cb61-16" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb61-17"><a href="exploratory-data-analysis.html#cb61-17" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb61-18"><a href="exploratory-data-analysis.html#cb61-18" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
-<span id="cb61-19"><a href="exploratory-data-analysis.html#cb61-19" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb61-20"><a href="exploratory-data-analysis.html#cb61-20" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb61-21"><a href="exploratory-data-analysis.html#cb61-21" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
-<span id="cb61-22"><a href="exploratory-data-analysis.html#cb61-22" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top 50 variable genes - Human ASM (VST, row-scaled)&quot;</span></span>
-<span id="cb61-23"><a href="exploratory-data-analysis.html#cb61-23" tabindex="-1"></a>)</span>
-<span id="cb61-24"><a href="exploratory-data-analysis.html#cb61-24" tabindex="-1"></a></span>
-<span id="cb61-25"><a href="exploratory-data-analysis.html#cb61-25" tabindex="-1"></a>heat_plot</span></code></pre></div>
+<span id="cb61-11"><a href="exploratory-data-analysis.html#cb61-11" tabindex="-1"></a><span class="co"># Columns in a fixed order, untreated first then treated, instead of clustered.</span></span>
+<span id="cb61-12"><a href="exploratory-data-analysis.html#cb61-12" tabindex="-1"></a><span class="co"># A gene that responds to the drug is then one colour on the left half and the</span></span>
+<span id="cb61-13"><a href="exploratory-data-analysis.html#cb61-13" tabindex="-1"></a><span class="co"># other on the right, which you can count. Clustered columns interleave the two</span></span>
+<span id="cb61-14"><a href="exploratory-data-analysis.html#cb61-14" tabindex="-1"></a><span class="co"># groups and make that impossible to see.</span></span>
+<span id="cb61-15"><a href="exploratory-data-analysis.html#cb61-15" tabindex="-1"></a>col_order <span class="ot">&lt;-</span> <span class="fu">order</span>(<span class="fu">colData</span>(vsd)<span class="sc">$</span>condition, <span class="fu">colData</span>(vsd)<span class="sc">$</span>donor)</span>
+<span id="cb61-16"><a href="exploratory-data-analysis.html#cb61-16" tabindex="-1"></a></span>
+<span id="cb61-17"><a href="exploratory-data-analysis.html#cb61-17" tabindex="-1"></a>heat_plot <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
+<span id="cb61-18"><a href="exploratory-data-analysis.html#cb61-18" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[topVarGenes, col_order],</span>
+<span id="cb61-19"><a href="exploratory-data-analysis.html#cb61-19" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb61-20"><a href="exploratory-data-analysis.html#cb61-20" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb61-21"><a href="exploratory-data-analysis.html#cb61-21" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
+<span id="cb61-22"><a href="exploratory-data-analysis.html#cb61-22" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb61-23"><a href="exploratory-data-analysis.html#cb61-23" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
+<span id="cb61-24"><a href="exploratory-data-analysis.html#cb61-24" tabindex="-1"></a>  <span class="at">gaps_col                 =</span> <span class="fu">sum</span>(<span class="fu">colData</span>(vsd)<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;control&quot;</span>),</span>
+<span id="cb61-25"><a href="exploratory-data-analysis.html#cb61-25" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb61-26"><a href="exploratory-data-analysis.html#cb61-26" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb61-27"><a href="exploratory-data-analysis.html#cb61-27" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
+<span id="cb61-28"><a href="exploratory-data-analysis.html#cb61-28" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top 50 variable genes - Human ASM (VST, row-scaled)</span><span class="sc">\n</span><span class="st">untreated | dexamethasone&quot;</span></span>
+<span id="cb61-29"><a href="exploratory-data-analysis.html#cb61-29" tabindex="-1"></a>)</span>
+<span id="cb61-30"><a href="exploratory-data-analysis.html#cb61-30" tabindex="-1"></a></span>
+<span id="cb61-31"><a href="exploratory-data-analysis.html#cb61-31" tabindex="-1"></a>heat_plot</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-qc-topvar-heatmap-0-1.png" alt="" width="768" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -689,10 +695,18 @@ out loud in your group, then run the cell and count.</p>
 <pre><code>## agg_png 
 ##       2</code></pre>
 <div class="boxy">
-<p><strong>Now the answer.</strong> Most groups say “most of them”. Count the rows: you will find a block of real
-drug responses - <em>FKBP5</em>, <em>TSC22D3</em>, <em>KLF15</em>, <em>ZBTB16</em>, <em>DUSP1</em>, <em>GPX3</em> - sitting next to seven
-sex-linked genes and a set of rows that separate donors and nothing else. Even the canonical targets
-<em>PER1</em> and <em>CRISPLD2</em>, which respond strongly to dexamethasone, are <strong>not</strong> in this list at all.</p>
+<p><strong>Now the answer: about 16 of the 50, so roughly a third.</strong> Most groups say “most of them”. The
+columns are fixed, the four untreated samples left of the gap and the four treated right of it, so a
+drug response is a row that changes colour across the gap. The block at the top is them: <em>PDK4</em>,
+<em>SERPINA3</em>, <em>FKBP5</em>, <em>MAOA</em>, <em>STEAP4</em>, <em>TSC22D3</em>, <em>KLF15</em>, <em>GLUL</em>, <em>GPX3</em>, <em>ZBTB16</em>, <em>DUSP1</em> and a
+few more. A couple of rows below it are borderline, so if you counted 17 or 18 you were not wrong,
+and that is worth noticing in itself: the eye is not a test. Notebook 02 is where a number replaces
+the judgement call.</p>
+<p>The other two thirds follow donors, not the drug. The tight block of seven, <em>RPS4Y1</em>, <em>DDX3Y</em>,
+<em>KDM5D</em>, <em>USP9Y</em>, <em>ZFY</em>, <em>NLGN4Y</em>, <em>TXLNGY.1</em>, drops out in exactly the two <code>N061011</code> columns, one on
+each side of the gap. That is the female donor, and the same fact XIST was pointing at when the
+filter removed it earlier. Even the canonical targets <em>PER1</em> and <em>CRISPLD2</em>, which respond strongly
+to dexamethasone, are <strong>not</strong> in this list at all.</p>
 <p>The reason is that “most variable” is an unsupervised question. It asks which genes differ most
 across all eight samples, and it does not know, or care, that four of them were treated. Donor
 identity answers that question just as well as the drug does. This is why the next notebook stops
@@ -731,12 +745,14 @@ specific contrast instead of trusting variance.</p>
 <ul>
 <li>Each <strong>row</strong> is a gene, each <strong>column</strong> is a sample</li>
 <li>Colours show the <strong>z-score</strong> (row-scaled expression) - red = higher than average for that gene, blue = lower</li>
-<li>The <strong>dendrograms</strong> show hierarchical clustering - samples/genes that behave similarly are grouped together</li>
+<li>The <strong>row dendrogram</strong> groups genes that behave similarly. Columns are <em>not</em> clustered: they are
+fixed in condition order, untreated then treated, split by the gap</li>
 </ul>
 <p><strong>What to look for:</strong></p>
 <ul>
 <li>Clear colour blocks by condition → the treatment has a strong, consistent transcriptional effect</li>
-<li>Whether samples cluster by donor instead of (or in addition to) treatment - a visual argument for the paired design</li>
+<li>Rows that change colour across the gap: those are the drug responses</li>
+<li>Rows that instead single out one or two columns: those follow a donor, not the treatment</li>
 </ul>
 </div>
 </div>
