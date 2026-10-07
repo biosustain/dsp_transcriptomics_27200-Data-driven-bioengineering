@@ -39,3 +39,6 @@ Rplots.pdf
 
 # bookdown writes the merged book here mid-render; it is not source
 project/27200*Transcriptomics.Rmd
+
+# Private teaching material: notes and answer-reveal images, never committed
+TEACHING_*
