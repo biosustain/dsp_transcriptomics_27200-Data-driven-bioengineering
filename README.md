@@ -127,8 +127,8 @@ A few things that surprise people the first time:
 ### Option 2: Docker
 
 The Codespace is built from an image you can also run yourself. Everything is already
-inside it: R, all the packages, Jupyter with the R kernel, and Nextflow. From the
-folder where you cloned this repository:
+inside it: R, all the packages, Jupyter with the R kernel, and Nextflow. Run this from
+**inside** the repository you cloned, not from the folder above it:
 
 ```bash
 docker run --rm -it -p 8888:8888 -v "$PWD":/work -w /work \
@@ -137,8 +137,8 @@ docker run --rm -it -p 8888:8888 -v "$PWD":/work -w /work \
 ```
 
 Then open the link it prints (the one starting `http://127.0.0.1:8888/lab?token=...`)
-and go to `02_notebooks/`. On an Apple Silicon Mac add `--platform linux/amd64`, since
-the image is built for amd64.
+and go to `02_notebooks/`. On an Apple Silicon Mac add `--platform linux/amd64` directly
+after `docker run`, before the image name, since the image is built for amd64.
 
 ### Option 3: your own R installation
 
