@@ -376,38 +376,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 because the 2-fold requirement is inside the test: a gene to the right of the line is not significant
 unless it also clears padj, and the vertical line is a reference, no longer part of the rule.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="visualisation.html#cb85-1" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
-<span id="cb85-2"><a href="visualisation.html#cb85-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb85-3"><a href="visualisation.html#cb85-3" tabindex="-1"></a>    <span class="at">significance =</span> <span class="fu">case_when</span>(</span>
-<span id="cb85-4"><a href="visualisation.html#cb85-4" tabindex="-1"></a>      padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
-<span id="cb85-5"><a href="visualisation.html#cb85-5" tabindex="-1"></a>      padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
-<span id="cb85-6"><a href="visualisation.html#cb85-6" tabindex="-1"></a>      <span class="cn">TRUE</span>                             <span class="sc">~</span> <span class="st">&quot;NS&quot;</span></span>
-<span id="cb85-7"><a href="visualisation.html#cb85-7" tabindex="-1"></a>    )</span>
-<span id="cb85-8"><a href="visualisation.html#cb85-8" tabindex="-1"></a>  )</span>
-<span id="cb85-9"><a href="visualisation.html#cb85-9" tabindex="-1"></a></span>
-<span id="cb85-10"><a href="visualisation.html#cb85-10" tabindex="-1"></a>top_labels <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
-<span id="cb85-11"><a href="visualisation.html#cb85-11" tabindex="-1"></a>  <span class="fu">filter</span>(significance <span class="sc">!=</span> <span class="st">&quot;NS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb85-12"><a href="visualisation.html#cb85-12" tabindex="-1"></a>  <span class="fu">slice_min</span>(padj, <span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb85-13"><a href="visualisation.html#cb85-13" tabindex="-1"></a></span>
-<span id="cb85-14"><a href="visualisation.html#cb85-14" tabindex="-1"></a>volcano <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange,</span>
-<span id="cb85-15"><a href="visualisation.html#cb85-15" tabindex="-1"></a>                              <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(padj),</span>
-<span id="cb85-16"><a href="visualisation.html#cb85-16" tabindex="-1"></a>                              <span class="at">color =</span> significance)) <span class="sc">+</span></span>
-<span id="cb85-17"><a href="visualisation.html#cb85-17" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
-<span id="cb85-18"><a href="visualisation.html#cb85-18" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),  <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb85-19"><a href="visualisation.html#cb85-19" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb85-20"><a href="visualisation.html#cb85-20" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> top_labels,</span>
-<span id="cb85-21"><a href="visualisation.html#cb85-21" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> gene),</span>
-<span id="cb85-22"><a href="visualisation.html#cb85-22" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.6</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb85-23"><a href="visualisation.html#cb85-23" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Up&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>, <span class="st">&quot;Down&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;NS&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey70&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb85-24"><a href="visualisation.html#cb85-24" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb85-25"><a href="visualisation.html#cb85-25" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb85-26"><a href="visualisation.html#cb85-26" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Volcano Plot - Dexamethasone vs Untreated&quot;</span>,</span>
-<span id="cb85-27"><a href="visualisation.html#cb85-27" tabindex="-1"></a>    <span class="at">x     =</span> <span class="st">&quot;log2(Fold Change)&quot;</span>,</span>
-<span id="cb85-28"><a href="visualisation.html#cb85-28" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">&quot;-log10(adjusted p-value)&quot;</span>,</span>
-<span id="cb85-29"><a href="visualisation.html#cb85-29" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
-<span id="cb85-30"><a href="visualisation.html#cb85-30" tabindex="-1"></a>  )</span>
-<span id="cb85-31"><a href="visualisation.html#cb85-31" tabindex="-1"></a></span>
-<span id="cb85-32"><a href="visualisation.html#cb85-32" tabindex="-1"></a>volcano</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="visualisation.html#cb97-1" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
+<span id="cb97-2"><a href="visualisation.html#cb97-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb97-3"><a href="visualisation.html#cb97-3" tabindex="-1"></a>    <span class="at">significance =</span> <span class="fu">case_when</span>(</span>
+<span id="cb97-4"><a href="visualisation.html#cb97-4" tabindex="-1"></a>      padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
+<span id="cb97-5"><a href="visualisation.html#cb97-5" tabindex="-1"></a>      padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
+<span id="cb97-6"><a href="visualisation.html#cb97-6" tabindex="-1"></a>      <span class="cn">TRUE</span>                             <span class="sc">~</span> <span class="st">&quot;NS&quot;</span></span>
+<span id="cb97-7"><a href="visualisation.html#cb97-7" tabindex="-1"></a>    )</span>
+<span id="cb97-8"><a href="visualisation.html#cb97-8" tabindex="-1"></a>  )</span>
+<span id="cb97-9"><a href="visualisation.html#cb97-9" tabindex="-1"></a></span>
+<span id="cb97-10"><a href="visualisation.html#cb97-10" tabindex="-1"></a>top_labels <span class="ot">&lt;-</span> res_df <span class="sc">%&gt;%</span></span>
+<span id="cb97-11"><a href="visualisation.html#cb97-11" tabindex="-1"></a>  <span class="fu">filter</span>(significance <span class="sc">!=</span> <span class="st">&quot;NS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb97-12"><a href="visualisation.html#cb97-12" tabindex="-1"></a>  <span class="fu">slice_min</span>(padj, <span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb97-13"><a href="visualisation.html#cb97-13" tabindex="-1"></a></span>
+<span id="cb97-14"><a href="visualisation.html#cb97-14" tabindex="-1"></a>volcano <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange,</span>
+<span id="cb97-15"><a href="visualisation.html#cb97-15" tabindex="-1"></a>                              <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(padj),</span>
+<span id="cb97-16"><a href="visualisation.html#cb97-16" tabindex="-1"></a>                              <span class="at">color =</span> significance)) <span class="sc">+</span></span>
+<span id="cb97-17"><a href="visualisation.html#cb97-17" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
+<span id="cb97-18"><a href="visualisation.html#cb97-18" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),  <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb97-19"><a href="visualisation.html#cb97-19" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb97-20"><a href="visualisation.html#cb97-20" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> top_labels,</span>
+<span id="cb97-21"><a href="visualisation.html#cb97-21" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> gene),</span>
+<span id="cb97-22"><a href="visualisation.html#cb97-22" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.6</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb97-23"><a href="visualisation.html#cb97-23" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Up&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>, <span class="st">&quot;Down&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;NS&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey70&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb97-24"><a href="visualisation.html#cb97-24" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">border =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb97-25"><a href="visualisation.html#cb97-25" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb97-26"><a href="visualisation.html#cb97-26" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Volcano Plot - Dexamethasone vs Untreated&quot;</span>,</span>
+<span id="cb97-27"><a href="visualisation.html#cb97-27" tabindex="-1"></a>    <span class="at">x     =</span> <span class="st">&quot;log2(Fold Change)&quot;</span>,</span>
+<span id="cb97-28"><a href="visualisation.html#cb97-28" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">&quot;-log10(adjusted p-value)&quot;</span>,</span>
+<span id="cb97-29"><a href="visualisation.html#cb97-29" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
+<span id="cb97-30"><a href="visualisation.html#cb97-30" tabindex="-1"></a>  )</span>
+<span id="cb97-31"><a href="visualisation.html#cb97-31" tabindex="-1"></a></span>
+<span id="cb97-32"><a href="visualisation.html#cb97-32" tabindex="-1"></a>volcano</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-volcano-1.png" alt="" width="672" /></p>
 <div id="ma-plot" class="section level3 hasAnchor">
@@ -415,18 +415,18 @@ unless it also clears padj, and the vertical line is a reference, no longer part
 <p>An MA plot shows log2 fold change (y-axis) against mean expression (x-axis). It helps assess whether the fold change estimates are stable across the expression range. After shrinkage, estimates for lowly expressed genes (left side) should be pulled toward zero.</p>
 <p>The coloured points are the significant genes. <code>lfcShrink()</code> copies the p-values across untouched, so the shrunken object still carries the ones from the test against zero. We swap in the p-values from the test against the 2-fold threshold, so the plot marks the same genes the rest of the chapter calls significant rather than several thousand more.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="visualisation.html#cb86-1" tabindex="-1"></a>res_ma       <span class="ot">&lt;-</span> res_shrunk</span>
-<span id="cb86-2"><a href="visualisation.html#cb86-2" tabindex="-1"></a>res_ma<span class="sc">$</span>padj  <span class="ot">&lt;-</span> res_thr[<span class="fu">rownames</span>(res_ma), <span class="st">&quot;padj&quot;</span>]   <span class="co"># colour by the thresholded test</span></span>
-<span id="cb86-3"><a href="visualisation.html#cb86-3" tabindex="-1"></a></span>
-<span id="cb86-4"><a href="visualisation.html#cb86-4" tabindex="-1"></a><span class="co"># The default y-axis stops near +/-2.4 and draws everything beyond it as a</span></span>
-<span id="cb86-5"><a href="visualisation.html#cb86-5" tabindex="-1"></a><span class="co"># triangle on the border - 109 genes here, including the strongest hits, which</span></span>
-<span id="cb86-6"><a href="visualisation.html#cb86-6" tabindex="-1"></a><span class="co"># reach -8.9 and +10.9. +/-8 leaves only 3 genes off-scale.</span></span>
-<span id="cb86-7"><a href="visualisation.html#cb86-7" tabindex="-1"></a><span class="fu">plotMA</span>(res_ma,</span>
-<span id="cb86-8"><a href="visualisation.html#cb86-8" tabindex="-1"></a>       <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
-<span id="cb86-9"><a href="visualisation.html#cb86-9" tabindex="-1"></a>       <span class="at">ylim  =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">8</span>),</span>
-<span id="cb86-10"><a href="visualisation.html#cb86-10" tabindex="-1"></a>       <span class="at">main  =</span> <span class="st">&quot;MA Plot - Dexamethasone vs Untreated (shrunken LFC)&quot;</span>,</span>
-<span id="cb86-11"><a href="visualisation.html#cb86-11" tabindex="-1"></a>       <span class="at">ylab  =</span> <span class="st">&quot;log2 Fold Change&quot;</span>)</span>
-<span id="cb86-12"><a href="visualisation.html#cb86-12" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="visualisation.html#cb98-1" tabindex="-1"></a>res_ma       <span class="ot">&lt;-</span> res_shrunk</span>
+<span id="cb98-2"><a href="visualisation.html#cb98-2" tabindex="-1"></a>res_ma<span class="sc">$</span>padj  <span class="ot">&lt;-</span> res_thr[<span class="fu">rownames</span>(res_ma), <span class="st">&quot;padj&quot;</span>]   <span class="co"># colour by the thresholded test</span></span>
+<span id="cb98-3"><a href="visualisation.html#cb98-3" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="visualisation.html#cb98-4" tabindex="-1"></a><span class="co"># The default y-axis stops near +/-2.4 and draws everything beyond it as a</span></span>
+<span id="cb98-5"><a href="visualisation.html#cb98-5" tabindex="-1"></a><span class="co"># triangle on the border - 109 genes here, including the strongest hits, which</span></span>
+<span id="cb98-6"><a href="visualisation.html#cb98-6" tabindex="-1"></a><span class="co"># reach -8.9 and +10.9. +/-8 leaves only 3 genes off-scale.</span></span>
+<span id="cb98-7"><a href="visualisation.html#cb98-7" tabindex="-1"></a><span class="fu">plotMA</span>(res_ma,</span>
+<span id="cb98-8"><a href="visualisation.html#cb98-8" tabindex="-1"></a>       <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb98-9"><a href="visualisation.html#cb98-9" tabindex="-1"></a>       <span class="at">ylim  =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">8</span>),</span>
+<span id="cb98-10"><a href="visualisation.html#cb98-10" tabindex="-1"></a>       <span class="at">main  =</span> <span class="st">&quot;MA Plot - Dexamethasone vs Untreated (shrunken LFC)&quot;</span>,</span>
+<span id="cb98-11"><a href="visualisation.html#cb98-11" tabindex="-1"></a>       <span class="at">ylab  =</span> <span class="st">&quot;log2 Fold Change&quot;</span>)</span>
+<span id="cb98-12"><a href="visualisation.html#cb98-12" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-ma-plot-1.png" alt="" width="672" /></p>
 </div>
@@ -434,12 +434,12 @@ unless it also clears padj, and the vertical line is a reference, no longer part
 <h3>Top Gene Count Plot<a href="visualisation.html#top-gene-count-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Plotting raw normalised counts for the most significant gene provides a sanity check: the direction and magnitude of the fold change should be visually obvious. If it isn’t, investigate further.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="visualisation.html#cb87-1" tabindex="-1"></a>top_gene <span class="ot">&lt;-</span> res_sig<span class="sc">$</span>gene[<span class="dv">1</span>]</span>
-<span id="cb87-2"><a href="visualisation.html#cb87-2" tabindex="-1"></a></span>
-<span id="cb87-3"><a href="visualisation.html#cb87-3" tabindex="-1"></a><span class="fu">plotCounts</span>(dds,</span>
-<span id="cb87-4"><a href="visualisation.html#cb87-4" tabindex="-1"></a>           <span class="at">gene     =</span> top_gene,</span>
-<span id="cb87-5"><a href="visualisation.html#cb87-5" tabindex="-1"></a>           <span class="at">intgroup =</span> <span class="st">&quot;condition&quot;</span>,</span>
-<span id="cb87-6"><a href="visualisation.html#cb87-6" tabindex="-1"></a>           <span class="at">main     =</span> <span class="fu">paste</span>(<span class="st">&quot;Normalised counts -&quot;</span>, top_gene))</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="visualisation.html#cb99-1" tabindex="-1"></a>top_gene <span class="ot">&lt;-</span> res_sig<span class="sc">$</span>gene[<span class="dv">1</span>]</span>
+<span id="cb99-2"><a href="visualisation.html#cb99-2" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="visualisation.html#cb99-3" tabindex="-1"></a><span class="fu">plotCounts</span>(dds,</span>
+<span id="cb99-4"><a href="visualisation.html#cb99-4" tabindex="-1"></a>           <span class="at">gene     =</span> top_gene,</span>
+<span id="cb99-5"><a href="visualisation.html#cb99-5" tabindex="-1"></a>           <span class="at">intgroup =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb99-6"><a href="visualisation.html#cb99-6" tabindex="-1"></a>           <span class="at">main     =</span> <span class="fu">paste</span>(<span class="st">&quot;Normalised counts -&quot;</span>, top_gene))</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-top-gene-1.png" alt="" width="672" /></p>
 </div>
@@ -447,27 +447,27 @@ unless it also clears padj, and the vertical line is a reference, no longer part
 <h3>Heatmap of Significant Genes<a href="visualisation.html#heatmap-of-significant-genes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Clustering significant DE genes across samples provides a gene-level view of the expression differences. Genes should show clear block structure: high expression in treatment and low in control (or vice versa). With the paired design, you can also annotate donor to see whether the treatment effect is consistent across donors.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="visualisation.html#cb88-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb88-2"><a href="visualisation.html#cb88-2" tabindex="-1"></a></span>
-<span id="cb88-3"><a href="visualisation.html#cb88-3" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> res_sig <span class="sc">%&gt;%</span></span>
-<span id="cb88-4"><a href="visualisation.html#cb88-4" tabindex="-1"></a>  <span class="fu">slice_min</span>(padj, <span class="at">n =</span> <span class="fu">min</span>(<span class="dv">50</span>, <span class="fu">nrow</span>(res_sig))) <span class="sc">%&gt;%</span></span>
-<span id="cb88-5"><a href="visualisation.html#cb88-5" tabindex="-1"></a>  <span class="fu">pull</span>(gene)</span>
-<span id="cb88-6"><a href="visualisation.html#cb88-6" tabindex="-1"></a></span>
-<span id="cb88-7"><a href="visualisation.html#cb88-7" tabindex="-1"></a>df_anno    <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;donor&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb88-8"><a href="visualisation.html#cb88-8" tabindex="-1"></a></span>
-<span id="cb88-9"><a href="visualisation.html#cb88-9" tabindex="-1"></a><span class="fu">pheatmap</span>(</span>
-<span id="cb88-10"><a href="visualisation.html#cb88-10" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[sig_genes, ],</span>
-<span id="cb88-11"><a href="visualisation.html#cb88-11" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb88-12"><a href="visualisation.html#cb88-12" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb88-13"><a href="visualisation.html#cb88-13" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
-<span id="cb88-14"><a href="visualisation.html#cb88-14" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb88-15"><a href="visualisation.html#cb88-15" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb88-16"><a href="visualisation.html#cb88-16" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
-<span id="cb88-17"><a href="visualisation.html#cb88-17" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb88-18"><a href="visualisation.html#cb88-18" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb88-19"><a href="visualisation.html#cb88-19" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
-<span id="cb88-20"><a href="visualisation.html#cb88-20" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top DE genes - Dexamethasone vs Untreated (VST, row-scaled)&quot;</span></span>
-<span id="cb88-21"><a href="visualisation.html#cb88-21" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="visualisation.html#cb100-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb100-2"><a href="visualisation.html#cb100-2" tabindex="-1"></a></span>
+<span id="cb100-3"><a href="visualisation.html#cb100-3" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> res_sig <span class="sc">%&gt;%</span></span>
+<span id="cb100-4"><a href="visualisation.html#cb100-4" tabindex="-1"></a>  <span class="fu">slice_min</span>(padj, <span class="at">n =</span> <span class="fu">min</span>(<span class="dv">50</span>, <span class="fu">nrow</span>(res_sig))) <span class="sc">%&gt;%</span></span>
+<span id="cb100-5"><a href="visualisation.html#cb100-5" tabindex="-1"></a>  <span class="fu">pull</span>(gene)</span>
+<span id="cb100-6"><a href="visualisation.html#cb100-6" tabindex="-1"></a></span>
+<span id="cb100-7"><a href="visualisation.html#cb100-7" tabindex="-1"></a>df_anno    <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;donor&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb100-8"><a href="visualisation.html#cb100-8" tabindex="-1"></a></span>
+<span id="cb100-9"><a href="visualisation.html#cb100-9" tabindex="-1"></a><span class="fu">pheatmap</span>(</span>
+<span id="cb100-10"><a href="visualisation.html#cb100-10" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[sig_genes, ],</span>
+<span id="cb100-11"><a href="visualisation.html#cb100-11" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb100-12"><a href="visualisation.html#cb100-12" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb100-13"><a href="visualisation.html#cb100-13" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
+<span id="cb100-14"><a href="visualisation.html#cb100-14" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb100-15"><a href="visualisation.html#cb100-15" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb100-16"><a href="visualisation.html#cb100-16" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
+<span id="cb100-17"><a href="visualisation.html#cb100-17" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb100-18"><a href="visualisation.html#cb100-18" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb100-19"><a href="visualisation.html#cb100-19" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
+<span id="cb100-20"><a href="visualisation.html#cb100-20" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top DE genes - Dexamethasone vs Untreated (VST, row-scaled)&quot;</span></span>
+<span id="cb100-21"><a href="visualisation.html#cb100-21" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-de-heatmap-1.png" alt="" width="768" /></p>
 </div>

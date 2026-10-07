@@ -371,39 +371,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="saving-results-2" class="section level2 hasAnchor">
 <h2>Saving Results<a href="saving-results-2.html#saving-results-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="saving-results-2.html#cb374-1" tabindex="-1"></a>tables_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>)</span>
-<span id="cb374-2"><a href="saving-results-2.html#cb374-2" tabindex="-1"></a><span class="fu">dir.create</span>(tables_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb374-3"><a href="saving-results-2.html#cb374-3" tabindex="-1"></a></span>
-<span id="cb374-4"><a href="saving-results-2.html#cb374-4" tabindex="-1"></a>ora_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb374-5"><a href="saving-results-2.html#cb374-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up)   <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_up)   <span class="sc">&gt;</span> <span class="dv">0</span>) ora_up   <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Up-biofilm&quot;</span>),</span>
-<span id="cb374-6"><a href="saving-results-2.html#cb374-6" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_down) <span class="sc">&gt;</span> <span class="dv">0</span>) ora_down <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Down-planktonic&quot;</span>)</span>
-<span id="cb374-7"><a href="saving-results-2.html#cb374-7" tabindex="-1"></a>)</span>
-<span id="cb374-8"><a href="saving-results-2.html#cb374-8" tabindex="-1"></a></span>
-<span id="cb374-9"><a href="saving-results-2.html#cb374-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_all) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_all) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb374-10"><a href="saving-results-2.html#cb374-10" tabindex="-1"></a>  <span class="fu">write.table</span>(</span>
-<span id="cb374-11"><a href="saving-results-2.html#cb374-11" tabindex="-1"></a>    ora_all <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">is.list</span>(.))),</span>
-<span id="cb374-12"><a href="saving-results-2.html#cb374-12" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">file.path</span>(tables_dir,</span>
-<span id="cb374-13"><a href="saving-results-2.html#cb374-13" tabindex="-1"></a>                     <span class="fu">sprintf</span>(<span class="st">&quot;ORA_lifestyle_%s.tsv&quot;</span>, strain)),</span>
-<span id="cb374-14"><a href="saving-results-2.html#cb374-14" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb374-15"><a href="saving-results-2.html#cb374-15" tabindex="-1"></a>  )</span>
-<span id="cb374-16"><a href="saving-results-2.html#cb374-16" tabindex="-1"></a>}</span>
-<span id="cb374-17"><a href="saving-results-2.html#cb374-17" tabindex="-1"></a></span>
-<span id="cb374-18"><a href="saving-results-2.html#cb374-18" tabindex="-1"></a><span class="fu">write.table</span>(</span>
-<span id="cb374-19"><a href="saving-results-2.html#cb374-19" tabindex="-1"></a>  gsea_results <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>leadingEdge),</span>
-<span id="cb374-20"><a href="saving-results-2.html#cb374-20" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">file.path</span>(tables_dir,</span>
-<span id="cb374-21"><a href="saving-results-2.html#cb374-21" tabindex="-1"></a>                   <span class="fu">sprintf</span>(<span class="st">&quot;GSEA_lifestyle_%s.tsv&quot;</span>, strain)),</span>
-<span id="cb374-22"><a href="saving-results-2.html#cb374-22" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb374-23"><a href="saving-results-2.html#cb374-23" tabindex="-1"></a>)</span>
-<span id="cb374-24"><a href="saving-results-2.html#cb374-24" tabindex="-1"></a></span>
-<span id="cb374-25"><a href="saving-results-2.html#cb374-25" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Saved to:&quot;</span>, <span class="fu">file.path</span>(cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="saving-results-2.html#cb386-1" tabindex="-1"></a>tables_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>)</span>
+<span id="cb386-2"><a href="saving-results-2.html#cb386-2" tabindex="-1"></a><span class="fu">dir.create</span>(tables_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb386-3"><a href="saving-results-2.html#cb386-3" tabindex="-1"></a></span>
+<span id="cb386-4"><a href="saving-results-2.html#cb386-4" tabindex="-1"></a>ora_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb386-5"><a href="saving-results-2.html#cb386-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_up)   <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_up)   <span class="sc">&gt;</span> <span class="dv">0</span>) ora_up   <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Up-biofilm&quot;</span>),</span>
+<span id="cb386-6"><a href="saving-results-2.html#cb386-6" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_down) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_down) <span class="sc">&gt;</span> <span class="dv">0</span>) ora_down <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="st">&quot;Down-planktonic&quot;</span>)</span>
+<span id="cb386-7"><a href="saving-results-2.html#cb386-7" tabindex="-1"></a>)</span>
+<span id="cb386-8"><a href="saving-results-2.html#cb386-8" tabindex="-1"></a></span>
+<span id="cb386-9"><a href="saving-results-2.html#cb386-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(ora_all) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(ora_all) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb386-10"><a href="saving-results-2.html#cb386-10" tabindex="-1"></a>  <span class="fu">write.table</span>(</span>
+<span id="cb386-11"><a href="saving-results-2.html#cb386-11" tabindex="-1"></a>    ora_all <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">is.list</span>(.))),</span>
+<span id="cb386-12"><a href="saving-results-2.html#cb386-12" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">file.path</span>(tables_dir,</span>
+<span id="cb386-13"><a href="saving-results-2.html#cb386-13" tabindex="-1"></a>                     <span class="fu">sprintf</span>(<span class="st">&quot;ORA_lifestyle_%s.tsv&quot;</span>, strain)),</span>
+<span id="cb386-14"><a href="saving-results-2.html#cb386-14" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb386-15"><a href="saving-results-2.html#cb386-15" tabindex="-1"></a>  )</span>
+<span id="cb386-16"><a href="saving-results-2.html#cb386-16" tabindex="-1"></a>}</span>
+<span id="cb386-17"><a href="saving-results-2.html#cb386-17" tabindex="-1"></a></span>
+<span id="cb386-18"><a href="saving-results-2.html#cb386-18" tabindex="-1"></a><span class="fu">write.table</span>(</span>
+<span id="cb386-19"><a href="saving-results-2.html#cb386-19" tabindex="-1"></a>  gsea_results <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>leadingEdge),</span>
+<span id="cb386-20"><a href="saving-results-2.html#cb386-20" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">file.path</span>(tables_dir,</span>
+<span id="cb386-21"><a href="saving-results-2.html#cb386-21" tabindex="-1"></a>                   <span class="fu">sprintf</span>(<span class="st">&quot;GSEA_lifestyle_%s.tsv&quot;</span>, strain)),</span>
+<span id="cb386-22"><a href="saving-results-2.html#cb386-22" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb386-23"><a href="saving-results-2.html#cb386-23" tabindex="-1"></a>)</span>
+<span id="cb386-24"><a href="saving-results-2.html#cb386-24" tabindex="-1"></a></span>
+<span id="cb386-25"><a href="saving-results-2.html#cb386-25" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Saved to:&quot;</span>, <span class="fu">file.path</span>(cfg<span class="sc">$</span>out, <span class="st">&quot;tables&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Saved to: results/usa100/tables</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="saving-results-2.html#cb376-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  ORA  -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;ORA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="saving-results-2.html#cb388-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  ORA  -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;ORA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##   ORA  -&gt;  ORA_lifestyle_usa100.tsv</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="saving-results-2.html#cb378-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;GSEA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="saving-results-2.html#cb390-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  GSEA -&gt; &quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;GSEA_lifestyle_%s.tsv&quot;</span>, strain), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>##   GSEA -&gt;  GSEA_lifestyle_usa100.tsv</code></pre>
 </div>

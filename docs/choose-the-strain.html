@@ -372,33 +372,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Choose the Strain<a href="choose-the-strain.html#choose-the-strain" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Everything downstream keys off this single setting. Change it to <code>"USA-500"</code> to run the other strain.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="choose-the-strain.html#cb145-1" tabindex="-1"></a><span class="co"># --- The only line you need to change to switch strains ---</span></span>
-<span id="cb145-2"><a href="choose-the-strain.html#cb145-2" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;USA-100&quot;</span>          <span class="co"># &quot;USA-100&quot; or &quot;USA-500&quot;</span></span>
-<span id="cb145-3"><a href="choose-the-strain.html#cb145-3" tabindex="-1"></a><span class="co"># ----------------------------------------------------------</span></span>
-<span id="cb145-4"><a href="choose-the-strain.html#cb145-4" tabindex="-1"></a></span>
-<span id="cb145-5"><a href="choose-the-strain.html#cb145-5" tabindex="-1"></a><span class="co"># When the file is rendered with params (render_all_strains.R does this),</span></span>
-<span id="cb145-6"><a href="choose-the-strain.html#cb145-6" tabindex="-1"></a><span class="co"># that value wins over the line above. In the notebook there are no params,</span></span>
-<span id="cb145-7"><a href="choose-the-strain.html#cb145-7" tabindex="-1"></a><span class="co"># so the line above is what counts.</span></span>
-<span id="cb145-8"><a href="choose-the-strain.html#cb145-8" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;params&quot;</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">is.list</span>(params) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(params<span class="sc">$</span>strain)) strain <span class="ot">&lt;-</span> params<span class="sc">$</span>strain</span>
-<span id="cb145-9"><a href="choose-the-strain.html#cb145-9" tabindex="-1"></a></span>
-<span id="cb145-10"><a href="choose-the-strain.html#cb145-10" tabindex="-1"></a><span class="fu">stopifnot</span>(strain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;USA-100&quot;</span>, <span class="st">&quot;USA-500&quot;</span>))</span>
-<span id="cb145-11"><a href="choose-the-strain.html#cb145-11" tabindex="-1"></a></span>
-<span id="cb145-12"><a href="choose-the-strain.html#cb145-12" tabindex="-1"></a><span class="co"># A filesystem-safe tag used for the results sub-folder (e.g. &quot;usa100&quot;)</span></span>
-<span id="cb145-13"><a href="choose-the-strain.html#cb145-13" tabindex="-1"></a>strain_tag <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">gsub</span>(<span class="st">&quot;-&quot;</span>, <span class="st">&quot;&quot;</span>, strain))</span>
-<span id="cb145-14"><a href="choose-the-strain.html#cb145-14" tabindex="-1"></a></span>
-<span id="cb145-15"><a href="choose-the-strain.html#cb145-15" tabindex="-1"></a>git_root    <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb145-16"><a href="choose-the-strain.html#cb145-16" tabindex="-1"></a>data_dir    <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;data-01-Staphylococcus_aureus&quot;</span>, strain)</span>
-<span id="cb145-17"><a href="choose-the-strain.html#cb145-17" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, strain_tag)</span>
-<span id="cb145-18"><a href="choose-the-strain.html#cb145-18" tabindex="-1"></a></span>
-<span id="cb145-19"><a href="choose-the-strain.html#cb145-19" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain        :&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="choose-the-strain.html#cb157-1" tabindex="-1"></a><span class="co"># --- The only line you need to change to switch strains ---</span></span>
+<span id="cb157-2"><a href="choose-the-strain.html#cb157-2" tabindex="-1"></a>strain <span class="ot">&lt;-</span> <span class="st">&quot;USA-100&quot;</span>          <span class="co"># &quot;USA-100&quot; or &quot;USA-500&quot;</span></span>
+<span id="cb157-3"><a href="choose-the-strain.html#cb157-3" tabindex="-1"></a><span class="co"># ----------------------------------------------------------</span></span>
+<span id="cb157-4"><a href="choose-the-strain.html#cb157-4" tabindex="-1"></a></span>
+<span id="cb157-5"><a href="choose-the-strain.html#cb157-5" tabindex="-1"></a><span class="co"># When the file is rendered with params (render_all_strains.R does this),</span></span>
+<span id="cb157-6"><a href="choose-the-strain.html#cb157-6" tabindex="-1"></a><span class="co"># that value wins over the line above. In the notebook there are no params,</span></span>
+<span id="cb157-7"><a href="choose-the-strain.html#cb157-7" tabindex="-1"></a><span class="co"># so the line above is what counts.</span></span>
+<span id="cb157-8"><a href="choose-the-strain.html#cb157-8" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;params&quot;</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">is.list</span>(params) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(params<span class="sc">$</span>strain)) strain <span class="ot">&lt;-</span> params<span class="sc">$</span>strain</span>
+<span id="cb157-9"><a href="choose-the-strain.html#cb157-9" tabindex="-1"></a></span>
+<span id="cb157-10"><a href="choose-the-strain.html#cb157-10" tabindex="-1"></a><span class="fu">stopifnot</span>(strain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;USA-100&quot;</span>, <span class="st">&quot;USA-500&quot;</span>))</span>
+<span id="cb157-11"><a href="choose-the-strain.html#cb157-11" tabindex="-1"></a></span>
+<span id="cb157-12"><a href="choose-the-strain.html#cb157-12" tabindex="-1"></a><span class="co"># A filesystem-safe tag used for the results sub-folder (e.g. &quot;usa100&quot;)</span></span>
+<span id="cb157-13"><a href="choose-the-strain.html#cb157-13" tabindex="-1"></a>strain_tag <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">gsub</span>(<span class="st">&quot;-&quot;</span>, <span class="st">&quot;&quot;</span>, strain))</span>
+<span id="cb157-14"><a href="choose-the-strain.html#cb157-14" tabindex="-1"></a></span>
+<span id="cb157-15"><a href="choose-the-strain.html#cb157-15" tabindex="-1"></a>git_root    <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">&quot;git rev-parse --show-toplevel&quot;</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb157-16"><a href="choose-the-strain.html#cb157-16" tabindex="-1"></a>data_dir    <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;data-01-Staphylococcus_aureus&quot;</span>, strain)</span>
+<span id="cb157-17"><a href="choose-the-strain.html#cb157-17" tabindex="-1"></a>results_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(git_root, <span class="st">&quot;results&quot;</span>, strain_tag)</span>
+<span id="cb157-18"><a href="choose-the-strain.html#cb157-18" tabindex="-1"></a></span>
+<span id="cb157-19"><a href="choose-the-strain.html#cb157-19" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Strain        :&quot;</span>, strain, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Strain        : USA-100</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="choose-the-strain.html#cb147-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Data folder   :&quot;</span>, data_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="choose-the-strain.html#cb159-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Data folder   :&quot;</span>, data_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Data folder   : /Users/jasge/Documents/GitHub/dsp_27200/data/data-01-Staphylococcus_aureus/USA-100</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="choose-the-strain.html#cb149-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Results folder:&quot;</span>, results_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="choose-the-strain.html#cb161-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Results folder:&quot;</span>, results_dir, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Results folder: /Users/jasge/Documents/GitHub/dsp_27200/results/usa100</code></pre>
 <div class="note">
@@ -422,34 +422,34 @@ than its own.</p>
 <p><strong>💡 Tip:</strong> If you are unsure which assay name or rowData columns are available in your RDS, inspect them first with <code>assayNames(count_x)</code> and <code>names(rowData(count_x))</code>.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="choose-the-strain.html#cb151-1" tabindex="-1"></a>count_x <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
-<span id="cb151-2"><a href="choose-the-strain.html#cb151-2" tabindex="-1"></a>  <span class="fu">file.path</span>(data_dir, <span class="st">&quot;salmon.merged.gene.SummarizedExperiment.rds&quot;</span>)</span>
-<span id="cb151-3"><a href="choose-the-strain.html#cb151-3" tabindex="-1"></a>)</span>
-<span id="cb151-4"><a href="choose-the-strain.html#cb151-4" tabindex="-1"></a></span>
-<span id="cb151-5"><a href="choose-the-strain.html#cb151-5" tabindex="-1"></a><span class="co"># Inspect what is available (uncomment to explore):</span></span>
-<span id="cb151-6"><a href="choose-the-strain.html#cb151-6" tabindex="-1"></a><span class="co"># assayNames(count_x); names(rowData(count_x))</span></span>
-<span id="cb151-7"><a href="choose-the-strain.html#cb151-7" tabindex="-1"></a></span>
-<span id="cb151-8"><a href="choose-the-strain.html#cb151-8" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> <span class="fu">assay</span>(count_x, <span class="fu">assayNames</span>(count_x)[<span class="dv">1</span>])</span>
-<span id="cb151-9"><a href="choose-the-strain.html#cb151-9" tabindex="-1"></a></span>
-<span id="cb151-10"><a href="choose-the-strain.html#cb151-10" tabindex="-1"></a>gene_ids   <span class="ot">&lt;-</span> <span class="fu">rowData</span>(count_x)<span class="sc">$</span>gene_id</span>
-<span id="cb151-11"><a href="choose-the-strain.html#cb151-11" tabindex="-1"></a>gene_names <span class="ot">&lt;-</span> <span class="fu">rowData</span>(count_x)<span class="sc">$</span>gene_name</span>
-<span id="cb151-12"><a href="choose-the-strain.html#cb151-12" tabindex="-1"></a></span>
-<span id="cb151-13"><a href="choose-the-strain.html#cb151-13" tabindex="-1"></a><span class="co"># Salmon estimates are fractional -&gt; round to nearest integer for DESeq2.</span></span>
-<span id="cb151-14"><a href="choose-the-strain.html#cb151-14" tabindex="-1"></a><span class="co"># assay() can return a data.frame, which breaks storage.mode&lt;- ; force a numeric matrix first.</span></span>
-<span id="cb151-15"><a href="choose-the-strain.html#cb151-15" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(count_genes)</span>
-<span id="cb151-16"><a href="choose-the-strain.html#cb151-16" tabindex="-1"></a><span class="fu">mode</span>(count_genes) <span class="ot">&lt;-</span> <span class="st">&quot;numeric&quot;</span></span>
-<span id="cb151-17"><a href="choose-the-strain.html#cb151-17" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> <span class="fu">round</span>(count_genes)</span>
-<span id="cb151-18"><a href="choose-the-strain.html#cb151-18" tabindex="-1"></a><span class="fu">storage.mode</span>(count_genes) <span class="ot">&lt;-</span> <span class="st">&quot;integer&quot;</span></span>
-<span id="cb151-19"><a href="choose-the-strain.html#cb151-19" tabindex="-1"></a></span>
-<span id="cb151-20"><a href="choose-the-strain.html#cb151-20" tabindex="-1"></a><span class="co"># Row names are the locus tags (gene_id). In this prokaryotic GTF gene_name == gene_id,</span></span>
-<span id="cb151-21"><a href="choose-the-strain.html#cb151-21" tabindex="-1"></a><span class="co"># so there is nothing to swap to; make.unique() guards against any accidental duplicates.</span></span>
-<span id="cb151-22"><a href="choose-the-strain.html#cb151-22" tabindex="-1"></a><span class="fu">rownames</span>(count_genes) <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(<span class="fu">as.character</span>(gene_ids))</span>
-<span id="cb151-23"><a href="choose-the-strain.html#cb151-23" tabindex="-1"></a></span>
-<span id="cb151-24"><a href="choose-the-strain.html#cb151-24" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions (genes × samples):&quot;</span>, <span class="fu">dim</span>(count_genes), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="choose-the-strain.html#cb163-1" tabindex="-1"></a>count_x <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb163-2"><a href="choose-the-strain.html#cb163-2" tabindex="-1"></a>  <span class="fu">file.path</span>(data_dir, <span class="st">&quot;salmon.merged.gene.SummarizedExperiment.rds&quot;</span>)</span>
+<span id="cb163-3"><a href="choose-the-strain.html#cb163-3" tabindex="-1"></a>)</span>
+<span id="cb163-4"><a href="choose-the-strain.html#cb163-4" tabindex="-1"></a></span>
+<span id="cb163-5"><a href="choose-the-strain.html#cb163-5" tabindex="-1"></a><span class="co"># Inspect what is available (uncomment to explore):</span></span>
+<span id="cb163-6"><a href="choose-the-strain.html#cb163-6" tabindex="-1"></a><span class="co"># assayNames(count_x); names(rowData(count_x))</span></span>
+<span id="cb163-7"><a href="choose-the-strain.html#cb163-7" tabindex="-1"></a></span>
+<span id="cb163-8"><a href="choose-the-strain.html#cb163-8" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> <span class="fu">assay</span>(count_x, <span class="fu">assayNames</span>(count_x)[<span class="dv">1</span>])</span>
+<span id="cb163-9"><a href="choose-the-strain.html#cb163-9" tabindex="-1"></a></span>
+<span id="cb163-10"><a href="choose-the-strain.html#cb163-10" tabindex="-1"></a>gene_ids   <span class="ot">&lt;-</span> <span class="fu">rowData</span>(count_x)<span class="sc">$</span>gene_id</span>
+<span id="cb163-11"><a href="choose-the-strain.html#cb163-11" tabindex="-1"></a>gene_names <span class="ot">&lt;-</span> <span class="fu">rowData</span>(count_x)<span class="sc">$</span>gene_name</span>
+<span id="cb163-12"><a href="choose-the-strain.html#cb163-12" tabindex="-1"></a></span>
+<span id="cb163-13"><a href="choose-the-strain.html#cb163-13" tabindex="-1"></a><span class="co"># Salmon estimates are fractional -&gt; round to nearest integer for DESeq2.</span></span>
+<span id="cb163-14"><a href="choose-the-strain.html#cb163-14" tabindex="-1"></a><span class="co"># assay() can return a data.frame, which breaks storage.mode&lt;- ; force a numeric matrix first.</span></span>
+<span id="cb163-15"><a href="choose-the-strain.html#cb163-15" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(count_genes)</span>
+<span id="cb163-16"><a href="choose-the-strain.html#cb163-16" tabindex="-1"></a><span class="fu">mode</span>(count_genes) <span class="ot">&lt;-</span> <span class="st">&quot;numeric&quot;</span></span>
+<span id="cb163-17"><a href="choose-the-strain.html#cb163-17" tabindex="-1"></a>count_genes <span class="ot">&lt;-</span> <span class="fu">round</span>(count_genes)</span>
+<span id="cb163-18"><a href="choose-the-strain.html#cb163-18" tabindex="-1"></a><span class="fu">storage.mode</span>(count_genes) <span class="ot">&lt;-</span> <span class="st">&quot;integer&quot;</span></span>
+<span id="cb163-19"><a href="choose-the-strain.html#cb163-19" tabindex="-1"></a></span>
+<span id="cb163-20"><a href="choose-the-strain.html#cb163-20" tabindex="-1"></a><span class="co"># Row names are the locus tags (gene_id). In this prokaryotic GTF gene_name == gene_id,</span></span>
+<span id="cb163-21"><a href="choose-the-strain.html#cb163-21" tabindex="-1"></a><span class="co"># so there is nothing to swap to; make.unique() guards against any accidental duplicates.</span></span>
+<span id="cb163-22"><a href="choose-the-strain.html#cb163-22" tabindex="-1"></a><span class="fu">rownames</span>(count_genes) <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(<span class="fu">as.character</span>(gene_ids))</span>
+<span id="cb163-23"><a href="choose-the-strain.html#cb163-23" tabindex="-1"></a></span>
+<span id="cb163-24"><a href="choose-the-strain.html#cb163-24" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions (genes × samples):&quot;</span>, <span class="fu">dim</span>(count_genes), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Dimensions (genes × samples): 2816 32</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="choose-the-strain.html#cb153-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(<span class="fu">rownames</span>(count_genes)))</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="choose-the-strain.html#cb165-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(<span class="fu">rownames</span>(count_genes)))</span></code></pre></div>
 </details>
 <pre><code>## [1] &quot;SA_RS00005&quot; &quot;SA_RS00010&quot; &quot;SA_RS00015&quot; &quot;SA_RS00020&quot; &quot;SA_RS00025&quot;
 ## [6] &quot;SA_RS00030&quot;</code></pre>
@@ -460,15 +460,15 @@ they are the stable identifiers used by KEGG for enrichment later. (The GTF itse
 about a third of genes; script 02 extracts them purely for readability.)</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="choose-the-strain.html#cb155-1" tabindex="-1"></a><span class="co"># Confirm the two ID columns are identical (they are, for this GTF), and that</span></span>
-<span id="cb155-2"><a href="choose-the-strain.html#cb155-2" tabindex="-1"></a><span class="co"># the IDs look like S. aureus locus tags rather than symbols.</span></span>
-<span id="cb155-3"><a href="choose-the-strain.html#cb155-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;gene_id == gene_name for all rows? :&quot;</span>,</span>
-<span id="cb155-4"><a href="choose-the-strain.html#cb155-4" tabindex="-1"></a>    <span class="fu">identical</span>(<span class="fu">as.character</span>(gene_ids), <span class="fu">as.character</span>(gene_names)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="choose-the-strain.html#cb167-1" tabindex="-1"></a><span class="co"># Confirm the two ID columns are identical (they are, for this GTF), and that</span></span>
+<span id="cb167-2"><a href="choose-the-strain.html#cb167-2" tabindex="-1"></a><span class="co"># the IDs look like S. aureus locus tags rather than symbols.</span></span>
+<span id="cb167-3"><a href="choose-the-strain.html#cb167-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;gene_id == gene_name for all rows? :&quot;</span>,</span>
+<span id="cb167-4"><a href="choose-the-strain.html#cb167-4" tabindex="-1"></a>    <span class="fu">identical</span>(<span class="fu">as.character</span>(gene_ids), <span class="fu">as.character</span>(gene_names)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## gene_id == gene_name for all rows? : TRUE</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="choose-the-strain.html#cb157-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Example locus tags                 :&quot;</span>,</span>
-<span id="cb157-2"><a href="choose-the-strain.html#cb157-2" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="fu">head</span>(gene_ids, <span class="dv">3</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="choose-the-strain.html#cb169-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Example locus tags                 :&quot;</span>,</span>
+<span id="cb169-2"><a href="choose-the-strain.html#cb169-2" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="fu">head</span>(gene_ids, <span class="dv">3</span>), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Example locus tags                 : SA_RS00005, SA_RS00010, SA_RS00015</code></pre>
 </div>
@@ -477,24 +477,24 @@ about a third of genes; script 02 extracts them purely for readability.)</p>
 <p>The metadata file says what each sample is: which lifestyle, which time point,
 which replicate. It sits next to the counts, in the folder for your strain.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="choose-the-strain.html#cb159-1" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
-<span id="cb159-2"><a href="choose-the-strain.html#cb159-2" tabindex="-1"></a>  <span class="fu">file.path</span>(data_dir, <span class="st">&quot;metadata.tsv&quot;</span>),</span>
-<span id="cb159-3"><a href="choose-the-strain.html#cb159-3" tabindex="-1"></a>  <span class="at">header      =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb159-4"><a href="choose-the-strain.html#cb159-4" tabindex="-1"></a>  <span class="at">sep         =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb159-5"><a href="choose-the-strain.html#cb159-5" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">TRUE</span></span>
-<span id="cb159-6"><a href="choose-the-strain.html#cb159-6" tabindex="-1"></a>)</span>
-<span id="cb159-7"><a href="choose-the-strain.html#cb159-7" tabindex="-1"></a></span>
-<span id="cb159-8"><a href="choose-the-strain.html#cb159-8" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> samples_info <span class="sc">%&gt;%</span></span>
-<span id="cb159-9"><a href="choose-the-strain.html#cb159-9" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb159-10"><a href="choose-the-strain.html#cb159-10" tabindex="-1"></a>    <span class="at">lifestyle =</span> <span class="fu">factor</span>(lifestyle, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Planktonic&quot;</span>, <span class="st">&quot;Biofilm&quot;</span>)),  <span class="co"># Planktonic = reference</span></span>
-<span id="cb159-11"><a href="choose-the-strain.html#cb159-11" tabindex="-1"></a>    <span class="at">timepoint =</span> <span class="fu">factor</span>(timepoint, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;5h&quot;</span>, <span class="st">&quot;10h&quot;</span>, <span class="st">&quot;24h&quot;</span>))</span>
-<span id="cb159-12"><a href="choose-the-strain.html#cb159-12" tabindex="-1"></a>  )</span>
-<span id="cb159-13"><a href="choose-the-strain.html#cb159-13" tabindex="-1"></a></span>
-<span id="cb159-14"><a href="choose-the-strain.html#cb159-14" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples:&quot;</span>, <span class="fu">nrow</span>(samples_info), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="choose-the-strain.html#cb171-1" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb171-2"><a href="choose-the-strain.html#cb171-2" tabindex="-1"></a>  <span class="fu">file.path</span>(data_dir, <span class="st">&quot;metadata.tsv&quot;</span>),</span>
+<span id="cb171-3"><a href="choose-the-strain.html#cb171-3" tabindex="-1"></a>  <span class="at">header      =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb171-4"><a href="choose-the-strain.html#cb171-4" tabindex="-1"></a>  <span class="at">sep         =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb171-5"><a href="choose-the-strain.html#cb171-5" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">TRUE</span></span>
+<span id="cb171-6"><a href="choose-the-strain.html#cb171-6" tabindex="-1"></a>)</span>
+<span id="cb171-7"><a href="choose-the-strain.html#cb171-7" tabindex="-1"></a></span>
+<span id="cb171-8"><a href="choose-the-strain.html#cb171-8" tabindex="-1"></a>samples_info <span class="ot">&lt;-</span> samples_info <span class="sc">%&gt;%</span></span>
+<span id="cb171-9"><a href="choose-the-strain.html#cb171-9" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb171-10"><a href="choose-the-strain.html#cb171-10" tabindex="-1"></a>    <span class="at">lifestyle =</span> <span class="fu">factor</span>(lifestyle, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Planktonic&quot;</span>, <span class="st">&quot;Biofilm&quot;</span>)),  <span class="co"># Planktonic = reference</span></span>
+<span id="cb171-11"><a href="choose-the-strain.html#cb171-11" tabindex="-1"></a>    <span class="at">timepoint =</span> <span class="fu">factor</span>(timepoint, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;5h&quot;</span>, <span class="st">&quot;10h&quot;</span>, <span class="st">&quot;24h&quot;</span>))</span>
+<span id="cb171-12"><a href="choose-the-strain.html#cb171-12" tabindex="-1"></a>  )</span>
+<span id="cb171-13"><a href="choose-the-strain.html#cb171-13" tabindex="-1"></a></span>
+<span id="cb171-14"><a href="choose-the-strain.html#cb171-14" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Samples:&quot;</span>, <span class="fu">nrow</span>(samples_info), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 </details>
 <pre><code>## Samples: 32</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="choose-the-strain.html#cb161-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>lifestyle, samples_info<span class="sc">$</span>timepoint))</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="choose-the-strain.html#cb173-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>lifestyle, samples_info<span class="sc">$</span>timepoint))</span></code></pre></div>
 </details>
 <pre><code>##             
 ##              5h 10h 24h
@@ -506,23 +506,23 @@ time</strong>: 5 h and 10 h have 4 replicates per lifestyle, while 24 h has 8. T
 keep it in mind when reading the models in script 02 - the 24 h groups carry twice the replicates.</p>
 </div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="choose-the-strain.html#cb163-1" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
-<span id="cb163-2"><a href="choose-the-strain.html#cb163-2" tabindex="-1"></a>  <span class="at">data       =</span> samples_info,</span>
-<span id="cb163-3"><a href="choose-the-strain.html#cb163-3" tabindex="-1"></a>  <span class="at">rownames   =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb163-4"><a href="choose-the-strain.html#cb163-4" tabindex="-1"></a>  <span class="at">extensions =</span> <span class="fu">c</span>(<span class="st">&#39;Buttons&#39;</span>, <span class="st">&#39;Scroller&#39;</span>),</span>
-<span id="cb163-5"><a href="choose-the-strain.html#cb163-5" tabindex="-1"></a>  <span class="at">options    =</span> <span class="fu">list</span>(</span>
-<span id="cb163-6"><a href="choose-the-strain.html#cb163-6" tabindex="-1"></a>    <span class="at">dom         =</span> <span class="st">&#39;Bfrtip&#39;</span>,</span>
-<span id="cb163-7"><a href="choose-the-strain.html#cb163-7" tabindex="-1"></a>    <span class="at">buttons     =</span> <span class="fu">c</span>(<span class="st">&#39;copy&#39;</span>, <span class="st">&#39;csv&#39;</span>),</span>
-<span id="cb163-8"><a href="choose-the-strain.html#cb163-8" tabindex="-1"></a>    <span class="at">deferRender =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb163-9"><a href="choose-the-strain.html#cb163-9" tabindex="-1"></a>    <span class="at">scrollX     =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb163-10"><a href="choose-the-strain.html#cb163-10" tabindex="-1"></a>    <span class="at">scrollY     =</span> <span class="dv">200</span>,</span>
-<span id="cb163-11"><a href="choose-the-strain.html#cb163-11" tabindex="-1"></a>    <span class="at">scroller    =</span> <span class="cn">TRUE</span></span>
-<span id="cb163-12"><a href="choose-the-strain.html#cb163-12" tabindex="-1"></a>  ),</span>
-<span id="cb163-13"><a href="choose-the-strain.html#cb163-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="fu">paste0</span>(<span class="st">&#39;Sample metadata - &#39;</span>, strain)</span>
-<span id="cb163-14"><a href="choose-the-strain.html#cb163-14" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="choose-the-strain.html#cb175-1" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb175-2"><a href="choose-the-strain.html#cb175-2" tabindex="-1"></a>  <span class="at">data       =</span> samples_info,</span>
+<span id="cb175-3"><a href="choose-the-strain.html#cb175-3" tabindex="-1"></a>  <span class="at">rownames   =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb175-4"><a href="choose-the-strain.html#cb175-4" tabindex="-1"></a>  <span class="at">extensions =</span> <span class="fu">c</span>(<span class="st">&#39;Buttons&#39;</span>, <span class="st">&#39;Scroller&#39;</span>),</span>
+<span id="cb175-5"><a href="choose-the-strain.html#cb175-5" tabindex="-1"></a>  <span class="at">options    =</span> <span class="fu">list</span>(</span>
+<span id="cb175-6"><a href="choose-the-strain.html#cb175-6" tabindex="-1"></a>    <span class="at">dom         =</span> <span class="st">&#39;Bfrtip&#39;</span>,</span>
+<span id="cb175-7"><a href="choose-the-strain.html#cb175-7" tabindex="-1"></a>    <span class="at">buttons     =</span> <span class="fu">c</span>(<span class="st">&#39;copy&#39;</span>, <span class="st">&#39;csv&#39;</span>),</span>
+<span id="cb175-8"><a href="choose-the-strain.html#cb175-8" tabindex="-1"></a>    <span class="at">deferRender =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb175-9"><a href="choose-the-strain.html#cb175-9" tabindex="-1"></a>    <span class="at">scrollX     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb175-10"><a href="choose-the-strain.html#cb175-10" tabindex="-1"></a>    <span class="at">scrollY     =</span> <span class="dv">200</span>,</span>
+<span id="cb175-11"><a href="choose-the-strain.html#cb175-11" tabindex="-1"></a>    <span class="at">scroller    =</span> <span class="cn">TRUE</span></span>
+<span id="cb175-12"><a href="choose-the-strain.html#cb175-12" tabindex="-1"></a>  ),</span>
+<span id="cb175-13"><a href="choose-the-strain.html#cb175-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="fu">paste0</span>(<span class="st">&#39;Sample metadata - &#39;</span>, strain)</span>
+<span id="cb175-14"><a href="choose-the-strain.html#cb175-14" tabindex="-1"></a>)</span></code></pre></div>
 </details>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-68cbc1690b56e073c215" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-68cbc1690b56e073c215">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata - USA-100<\/caption>","data":[["USA100_N315_Biofilm_10h_1","USA100_N315_Biofilm_10h_2","USA100_N315_Biofilm_10h_3","USA100_N315_Biofilm_10h_4","USA100_N315_Biofilm_24h_1","USA100_N315_Biofilm_24h_2","USA100_N315_Biofilm_24h_3","USA100_N315_Biofilm_24h_4","USA100_N315_Biofilm_24h_5","USA100_N315_Biofilm_24h_6","USA100_N315_Biofilm_24h_7","USA100_N315_Biofilm_24h_8","USA100_N315_Biofilm_5h_1","USA100_N315_Biofilm_5h_2","USA100_N315_Biofilm_5h_3","USA100_N315_Biofilm_5h_4","USA100_N315_Planktonic_10h_1","USA100_N315_Planktonic_10h_2","USA100_N315_Planktonic_10h_3","USA100_N315_Planktonic_10h_4","USA100_N315_Planktonic_24h_1","USA100_N315_Planktonic_24h_2","USA100_N315_Planktonic_24h_3","USA100_N315_Planktonic_24h_4","USA100_N315_Planktonic_24h_5","USA100_N315_Planktonic_24h_6","USA100_N315_Planktonic_24h_7","USA100_N315_Planktonic_24h_8","USA100_N315_Planktonic_5h_1","USA100_N315_Planktonic_5h_2","USA100_N315_Planktonic_5h_3","USA100_N315_Planktonic_5h_4"],["USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100"],["N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315"],["Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic"],["10h","10h","10h","10h","24h","24h","24h","24h","24h","24h","24h","24h","5h","5h","5h","5h","10h","10h","10h","10h","24h","24h","24h","24h","24h","24h","24h","24h","5h","5h","5h","5h"],[1,2,3,4,1,2,3,4,5,6,7,8,1,2,3,4,1,2,3,4,1,2,3,4,5,6,7,8,1,2,3,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>strain<\/th>\n      <th>reference<\/th>\n      <th>lifestyle<\/th>\n      <th>timepoint<\/th>\n      <th>replicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":5},{"name":"sample","targets":0},{"name":"strain","targets":1},{"name":"reference","targets":2},{"name":"lifestyle","targets":3},{"name":"timepoint","targets":4},{"name":"replicate","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a8cacede725a80df9464" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a8cacede725a80df9464">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Scroller"],"caption":"<caption>Sample metadata - USA-100<\/caption>","data":[["USA100_N315_Biofilm_10h_1","USA100_N315_Biofilm_10h_2","USA100_N315_Biofilm_10h_3","USA100_N315_Biofilm_10h_4","USA100_N315_Biofilm_24h_1","USA100_N315_Biofilm_24h_2","USA100_N315_Biofilm_24h_3","USA100_N315_Biofilm_24h_4","USA100_N315_Biofilm_24h_5","USA100_N315_Biofilm_24h_6","USA100_N315_Biofilm_24h_7","USA100_N315_Biofilm_24h_8","USA100_N315_Biofilm_5h_1","USA100_N315_Biofilm_5h_2","USA100_N315_Biofilm_5h_3","USA100_N315_Biofilm_5h_4","USA100_N315_Planktonic_10h_1","USA100_N315_Planktonic_10h_2","USA100_N315_Planktonic_10h_3","USA100_N315_Planktonic_10h_4","USA100_N315_Planktonic_24h_1","USA100_N315_Planktonic_24h_2","USA100_N315_Planktonic_24h_3","USA100_N315_Planktonic_24h_4","USA100_N315_Planktonic_24h_5","USA100_N315_Planktonic_24h_6","USA100_N315_Planktonic_24h_7","USA100_N315_Planktonic_24h_8","USA100_N315_Planktonic_5h_1","USA100_N315_Planktonic_5h_2","USA100_N315_Planktonic_5h_3","USA100_N315_Planktonic_5h_4"],["USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100","USA100"],["N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315","N315"],["Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Biofilm","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic","Planktonic"],["10h","10h","10h","10h","24h","24h","24h","24h","24h","24h","24h","24h","5h","5h","5h","5h","10h","10h","10h","10h","24h","24h","24h","24h","24h","24h","24h","24h","5h","5h","5h","5h"],[1,2,3,4,1,2,3,4,5,6,7,8,1,2,3,4,1,2,3,4,1,2,3,4,5,6,7,8,1,2,3,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>strain<\/th>\n      <th>reference<\/th>\n      <th>lifestyle<\/th>\n      <th>timepoint<\/th>\n      <th>replicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv"],"deferRender":true,"scrollX":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":5},{"name":"sample","targets":0},{"name":"strain","targets":1},{"name":"reference","targets":2},{"name":"lifestyle","targets":3},{"name":"timepoint","targets":4},{"name":"replicate","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
             </section>
