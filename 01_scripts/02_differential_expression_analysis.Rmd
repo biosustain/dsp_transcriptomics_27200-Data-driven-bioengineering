@@ -379,8 +379,11 @@ known_genes <- c("DUSP1", "KLF15", "PER1", "TSC22D3", "CRISPLD2", "FKBP5", "ZBTB
 res_df %>%
   filter(gene %in% known_genes) %>%
   select(gene, log2FoldChange, padj) %>%
-  mutate(across(where(is.numeric), \(x) signif(x, 3))) %>%
   arrange(padj) %>%
+  # padj becomes text before kable sees it. kable rounds numeric columns, so a
+  # padj of 1e-55 would print as a flat 0 and look like the test returned zero.
+  mutate(log2FoldChange = signif(log2FoldChange, 3),
+         padj           = format(padj, scientific = TRUE, digits = 3)) %>%
   kable(caption = "Known glucocorticoid-responsive genes in our results") %>%
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 ```

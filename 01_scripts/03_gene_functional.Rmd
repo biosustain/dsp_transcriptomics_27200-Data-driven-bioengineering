@@ -345,8 +345,11 @@ res_df %>%
   filter(gene %in% known_genes) %>%
   select(gene, log2FoldChange, padj) %>%
   arrange(padj) %>%
-  kable(caption = "Known dexamethasone-responsive genes, tested one at a time",
-        digits = c(0, 2, 30)) %>%
+  # padj becomes text before kable sees it: kable rounds numeric columns, and
+  # digits = 30 still flattens anything smaller than about 1e-30 to zero.
+  mutate(log2FoldChange = signif(log2FoldChange, 3),
+         padj           = format(padj, scientific = TRUE, digits = 3)) %>%
+  kable(caption = "Known dexamethasone-responsive genes, tested one at a time") %>%
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 
 cat("\nGenes significant on their own (padj < 0.05):",
