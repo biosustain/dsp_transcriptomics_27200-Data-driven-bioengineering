@@ -75,7 +75,7 @@ Adding donor moves between-donor baseline variation out of the residual: the sim
 
 *Principle: #4 Models are controlled simplifications*
 
-**Q2. Dexamethasone works by binding the glucocorticoid receptor, made by the gene *NR3C1*. Before looking: predict where *NR3C1* sits in your results - top hit, modest, or absent? Now find it in `res_df` (not the interactive table - that only holds genes passing *both* cutoffs). Two surprises are waiting: which **direction** did it move, and does it appear in your significant table at all? The drug did not switch this gene on - it bound the protein that was already there. So what did your RNA-seq actually measure about the receptor, and what did it miss?**
+**Q2. Dexamethasone works by binding the glucocorticoid receptor, made by the gene *NR3C1*. Before looking: predict where *NR3C1* sits in your results - top hit, modest, or absent? Now find it in `res_df` (not the interactive table - that only holds the genes that passed the test). Two surprises are waiting: which **direction** did it move, and does it appear in your significant table at all? The drug did not switch this gene on - it bound the protein that was already there. So what did your RNA-seq actually measure about the receptor, and what did it miss?**
 
 **The actual numbers (worth knowing before the discussion):** in `res_df`, NR3C1 has **log2FC = −0.97**, **padj = 6.6e-23**, and ranks **191st of 16,238** tested genes. So both naive predictions are wrong: it is not absent, and it is not a weak signal - it is in the top ~1% and strongly significant. Two surprises for the students:
 
