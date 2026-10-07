@@ -61,7 +61,7 @@ course and two strains.
 | *Homo sapiens*, airway smooth muscle with and without dexamethasone | |
 | [`01_quality_control`](02_notebooks/homo_sapiens/01_quality_control.ipynb) | Quality checks, taking the donors into account |
 | [`02_differential_expression_analysis`](02_notebooks/homo_sapiens/02_differential_expression_analysis.ipynb) | DESeq2 with a paired design (`~ donor + condition`) |
-| [`03_gene_functional`](02_notebooks/homo_sapiens/03_gene_functional.ipynb) | Enrichment with g:Profiler and MSigDB |
+| [`03_gene_functional`](02_notebooks/homo_sapiens/03_gene_functional.ipynb) | GSEA with `fgsea` on the MSigDB Reactome sets |
 | **Advanced** - *Staphylococcus aureus*, biofilm vs planktonic | |
 | [`01_quality_control`](02_notebooks/staphylococcus_aureus/01_quality_control.ipynb) | Quality checks and first look at the data, one strain at a time |
 | [`02_differential_expression_analysis`](02_notebooks/staphylococcus_aureus/02_differential_expression_analysis.ipynb) | DESeq2: how cultures change over time, and biofilm vs planktonic |

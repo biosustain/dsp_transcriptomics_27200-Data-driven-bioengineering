@@ -78,15 +78,9 @@ alongside this book:
 - [USA-500: differential expression](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/usa500/02_DE_usa500.html)
 - [USA-500: functional enrichment](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/usa500/03_FN_usa500.html)
 
-To regenerate both strains as six standalone reports, run `Rscript 01_scripts/render_all_strains.R`
-from the repository root.
-
-The strains were mapped to different reference genomes, so their gene identifiers are not comparable and
-the two analyses are never merged. The one place they meet is the cross-strain table in Part 3 of the
-differential expression chapter, which counts how many genes each strain calls significant.
-
-To regenerate both strains yourself, run `Rscript 01_scripts/render_all_strains.R` from the repository
-root.
+The one place the two strains meet is the cross-strain table in Part 3 of the differential expression
+chapter, which counts how many genes each calls significant. To regenerate both as six standalone
+reports, run `Rscript 01_scripts/render_all_strains.R` from the repository root.
 
 **Setup the Environment**
 
