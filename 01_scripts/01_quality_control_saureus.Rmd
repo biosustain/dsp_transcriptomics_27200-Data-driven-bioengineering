@@ -132,12 +132,10 @@ cat("Results folder:", results_dir, "\n")
   <strong>📘 Before you start: look at the pipeline's own QC.</strong> Everything below starts from a
   count matrix, which hides how the reads behaved. The nf-core run wrote a MultiQC report for each
   strain, covering read quality, trimming and alignment for all 32 samples:
-  <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureus_USA100_multiqc_report.html">USA-100</a>
+  <a href="https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/multiqc/usa100_multiqc_report.html">USA-100</a>
   and
-  <a href="https://github.com/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering/blob/main/data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html">USA-500</a>,
-  under <code>data/data-01-Staphylococcus_aureus/&lt;strain&gt;/</code>. Open the one matching the strain
-  you set above. These are HTML pages, which VS Code cannot display inside a Codespace:
-  right-click the file, choose <strong>Download</strong>, and open it in your own browser. For USA-500 the
+  <a href="https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/multiqc/usa500_multiqc_report.html">USA-500</a>. Open the one matching the strain you set
+  above; they open straight in your browser. For USA-500 the
   alignment rates are worth a second look, because its reads were mapped to the USA300 reference rather
   than its own.
 </div>

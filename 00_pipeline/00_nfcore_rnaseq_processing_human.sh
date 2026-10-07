@@ -25,6 +25,30 @@
 # Left out, Nextflow generates a fresh name each time and you can just re-run.
 
 
+# =============================================================================
+# WHILE THIS RUNS: ask Copilot about the command below
+#
+# The run takes about 20 to 25 minutes. Open Copilot Chat (the chat icon in the sidebar)
+# and put these to it, with this file open so it can see the command:
+#
+#   - Explain each parameter of this nextflow run command.
+#   - The bacterial run uses -profile prokaryotic. What does that profile
+#     actually set? Which aligner does it choose, and which steps does it skip?
+#   - Why does the human run use --aligner star_salmon instead? What is
+#     different about the two genomes?
+#   - Why are gencode and the skip_* switches in a config file (human_demo.config)
+#     instead of on the command line?
+#   - What does -profile docker change about how the pipeline runs?
+#
+# A profile is a named bundle of settings that lives inside the pipeline itself,
+# not in our files, so the second question is really asking Copilot to read
+# nf-core's own configuration.
+#
+# Check every answer against this script, the config files beside it, and the
+# course book. An AI assistant answers with the same confidence whether it knows
+# or is guessing, and you are the one who has to tell the difference.
+# =============================================================================
+
 nextflow run 'https://github.com/nf-core/rnaseq' \
     -r 3.27.0 \
     -profile docker \

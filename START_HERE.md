@@ -6,15 +6,23 @@
 Welcome to the transcriptomics session. Everything you need is already installed
 in this Codespace: R, all the packages, Nextflow and Docker. Nothing to set up.
 
-## What to do
+## The day in three steps
 
-**First, make a count matrix yourself.** Start this now, during the welcome: it runs on its
-own while the lectures go on.
+| | What | How long |
+|---|---|---|
+| **1** | **Run the pipeline** to make a count matrix yourself | ~25 min, runs on its own |
+| **2** | **While it runs**, read the command, and explore a real quality report | the same ~25 min |
+| **3** | **Analyse real counts** in the notebooks | the rest of the session |
 
-### Pick ONE dataset and run it
+Start step 1 now, during the welcome. It runs by itself while the lectures go on, and you
+do steps 2 and 3 without waiting for it.
 
-A Codespace has room for **one** pipeline run at a time. Choose one, paste it into the
-terminal, and leave it running.
+---
+
+## Step 1: Run the pipeline
+
+Pick **ONE** dataset. A Codespace has room for one run at a time. Paste it into the
+terminal and leave it running.
 
 **Human** - the dataset the rest of the day uses. About **20 to 25 minutes**.
 
@@ -28,74 +36,71 @@ bash 00_pipeline/00_nfcore_rnaseq_processing_human.sh
 bash 00_pipeline/00_nfcore_rnaseq_processing_saureus.sh
 ```
 
-Each script deletes its own working files at the end, so if you want to try the other one
-afterwards there is room for it. Run them one at a time, never both at once.
+Each script clears up after itself when it finishes, so you can try the other one
+afterwards if you want. Run them one at a time, never both at once.
 
-### While it runs, and when it finishes
+This run is a **demonstration**: two samples of 50,000 reads are far too few to draw
+biology from, so you will **not** analyse its output. The point is to watch reads turn into
+a table of numbers.
 
-That run is a **demonstration**: two samples of 50,000 reads are far too few to draw
-biology from, so you will **not** analyse its output. The point is to watch reads turn
-into a table of numbers, and to read the quality report it produces.
+---
 
-### While you wait: read the command you just ran
+## Step 2: While it runs
 
-It takes twenty minutes, so use them. Open the script you ran:
+Do not sit and watch the terminal. There are two things to do, both of which take about as
+long as the run.
+
+### 2a. Read the command you just ran
+
+Open the script you started - the questions to ask are written inside it, as comments just
+above the command:
 
 - `00_pipeline/00_nfcore_rnaseq_processing_human.sh`
 - `00_pipeline/00_nfcore_rnaseq_processing_saureus.sh`
 
-and the two config files next to it, `custom.config` and `human_demo.config`. Everything
-the pipeline does is in those few lines.
+Open **Copilot Chat** (the chat icon in the sidebar) with that file open, and work through
+them. Check every answer against the script and the course book: an AI assistant answers
+with the same confidence whether it knows or is guessing.
 
-Then open **Copilot Chat** (the chat icon in the sidebar) and interrogate them. Things
-worth asking:
+### 2b. Explore a real quality report
 
-- *Explain each parameter of this nextflow run command.*
-- *The bacterial run uses `-profile prokaryotic`. What does that profile actually set?
-  Which aligner does it choose, and which steps does it skip?*
-- *Why does the human run use `--aligner star_salmon` instead? What is different about the
-  two genomes?*
-- *Why are `gencode` and the `skip_*` switches in a config file instead of on the command
-  line?*
-- *What does `-profile docker` change about how the pipeline runs?*
+Your own run covers two samples. These cover the **full** datasets, processed before the
+course, and they are the ones worth interpreting. They open straight in your browser, no
+download needed:
 
-A profile is a named bundle of settings that lives inside the pipeline itself, not in our
-files, so the second question is really asking Copilot to read nf-core's own
-configuration. That is a fair use of it: faster than digging through the repository.
+| Dataset | MultiQC report |
+|---|---|
+| Human ASM, 8 samples | [open](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/multiqc/human_multiqc_report.html) |
+| *S. aureus* USA-100, 32 samples | [open](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/multiqc/usa100_multiqc_report.html) |
+| *S. aureus* USA-500, 32 samples | [open](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/multiqc/usa500_multiqc_report.html) |
 
-**Check every answer against the script, the config files and the course book.** An AI
-assistant answers with the same confidence whether it knows or is guessing, and you are
-the one who has to tell the difference.
+Spend ten minutes in the one matching your dataset. Worth finding:
 
-Your results land in:
+- The **general statistics** table at the top, one row per sample
+- **FastQC**: read quality, GC content, adapter content, duplication, before and after trimming
+- **How many reads aligned**, per sample
+- The **PCA and sample-distance heatmap** from DESeq2
+- **Software versions**, at the very end
+
+### When your run finishes
+
+Your output lands in:
 
 | Run | Folder |
 |---|---|
 | Human | `results/human/nfcore_rnaseq_processing_downsampled/` |
 | *S. aureus* | `results/saureus_usa100_nfcore_processing_downsampled/` |
 
-Open it in the file tree on the left and have a look around. Worth finding:
+Open it in the file tree and look around. `multiqc/` is your own report; `star_salmon/`
+(human) or `bowtie2_salmon/` (*S. aureus*) holds `salmon.merged.gene_counts.tsv`, the count
+matrix itself. Open that file: that table is what the whole rest of the day is built on.
+`pipeline_info/` records what ran, for how long, with which software versions.
 
-- **`multiqc/`** - every quality metric from every step, gathered into one page. Start here.
-- **`star_salmon/`** (human) or **`bowtie2_salmon/`** (*S. aureus*) - the alignments, and
-  `salmon.merged.gene_counts.tsv`, which is the count matrix itself. Open it: that table is
-  what the whole rest of the day is built on.
-- **`pipeline_info/`** - what ran, for how long, with which software versions.
+---
 
-**Then open the real quality report.** Yours covers two samples; these cover the full
-datasets we processed before the course, and they are the ones worth interpreting.
+## Step 3: Analyse real counts
 
-A MultiQC report is an HTML page, and VS Code cannot display one inside a Codespace. In
-the file tree on the left, **right-click the file and choose Download**, then open the
-downloaded file in your own browser:
-
-| Dataset | File |
-|---|---|
-| Human ASM, 8 samples | `data/data-02-Homo_sapiens/hasapiens/multiqc/data-02-Homo_sapiens_multiqc_report.html` |
-| *S. aureus* USA-100, 32 samples | `data/data-01-Staphylococcus_aureus/USA-100/data-01-Staphylococcus_aureus_USA100_multiqc_report.html` |
-| *S. aureus* USA-500, 32 samples | `data/data-01-Staphylococcus_aureus/USA-500/data-01-Staphylococcus_aureus_USA500_multiqc_report.html` |
-
-**Then analyse real counts.** The notebooks start from full count matrices, made with the
+The notebooks start from full count matrices, made with the
 same pipeline, already in `data/`.
 
 1. Open **`02_notebooks/homo_sapiens/01_quality_control.ipynb`** in the file tree on the left.
