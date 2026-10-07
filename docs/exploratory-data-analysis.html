@@ -385,12 +385,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb55-8"><a href="exploratory-data-analysis.html#cb55-8" tabindex="-1"></a>  <span class="at">size_factor     =</span> <span class="fu">round</span>(<span class="fu">sizeFactors</span>(dds), <span class="dv">3</span>),</span>
 <span id="cb55-9"><a href="exploratory-data-analysis.html#cb55-9" tabindex="-1"></a>  <span class="at">row.names       =</span> <span class="cn">NULL</span></span>
 <span id="cb55-10"><a href="exploratory-data-analysis.html#cb55-10" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb55-11"><a href="exploratory-data-analysis.html#cb55-11" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Library size and DESeq2 size factor per sample&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb55-12"><a href="exploratory-data-analysis.html#cb55-12" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb55-11"><a href="exploratory-data-analysis.html#cb55-11" tabindex="-1"></a>  <span class="fu">arrange</span>(million_reads) <span class="sc">%&gt;%</span>     <span class="co"># sorted by depth, so the two columns can be read against each other</span></span>
+<span id="cb55-12"><a href="exploratory-data-analysis.html#cb55-12" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Library size and DESeq2 size factor per sample, shallowest first&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-13"><a href="exploratory-data-analysis.html#cb55-13" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>), <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </details>
 <table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:human-qc-size-factors-0">Table 1: </span><span id="tab:human-qc-size-factors-0">Table 2: </span>Library size and DESeq2 size factor per sample
+<span id="tab:human-qc-size-factors-0">Table 1: </span><span id="tab:human-qc-size-factors-0">Table 2: </span>Library size and DESeq2 size factor per sample, shallowest first
 </caption>
 <thead>
 <tr>
@@ -419,24 +420,13 @@ N052611_dexamethasone
 </tr>
 <tr>
 <td style="text-align:left;">
-N052611_untreated
+N61311_dexamethasone
 </td>
 <td style="text-align:right;">
-25.72
+19.06
 </td>
 <td style="text-align:right;">
-1.177
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N061011_dexamethasone
-</td>
-<td style="text-align:right;">
-21.41
-</td>
-<td style="text-align:right;">
-0.944
+0.896
 </td>
 </tr>
 <tr>
@@ -452,13 +442,24 @@ N061011_untreated
 </tr>
 <tr>
 <td style="text-align:left;">
-N080611_dexamethasone
+N61311_untreated
 </td>
 <td style="text-align:right;">
-31.24
+20.90
 </td>
 <td style="text-align:right;">
-1.395
+1.026
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N061011_dexamethasone
+</td>
+<td style="text-align:right;">
+21.41
+</td>
+<td style="text-align:right;">
+0.944
 </td>
 </tr>
 <tr>
@@ -474,24 +475,24 @@ N080611_untreated
 </tr>
 <tr>
 <td style="text-align:left;">
-N61311_dexamethasone
+N052611_untreated
 </td>
 <td style="text-align:right;">
-19.06
+25.72
 </td>
 <td style="text-align:right;">
-0.896
+1.177
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-N61311_untreated
+N080611_dexamethasone
 </td>
 <td style="text-align:right;">
-20.90
+31.24
 </td>
 <td style="text-align:right;">
-1.026
+1.395
 </td>
 </tr>
 </tbody>
@@ -502,9 +503,6 @@ N61311_untreated
 2-fold. Is that a problem?</p>
 <p>Do not answer yet. Decide first <strong>what you would have to see</strong> in the boxplots below to be worried,
 then look at them.</p>
-<p>One more, while the table is in front of you. It has two columns: reads, and size factor. Find the
-pair of samples where the one with <em>fewer</em> reads has the <em>larger</em> size factor. It is there. What does
-that tell you a size factor is actually measuring?</p>
 </div>
 </div>
 <div id="distribution-of-normalised-counts" class="section level3 hasAnchor">
@@ -560,12 +558,10 @@ roughly a third shallower than a typical one, so DESeq2 scales its counts up and
 land on top of each other. What should worry you
 is a sample still sitting apart <em>after</em> this step, or a factor so extreme that scaling it up
 amplifies noise instead of signal. Neither is the case here, so you move on.</p>
-<p><strong>And the pair.</strong> <code>N61311_untreated</code> has fewer reads than <code>N061011_dexamethasone</code>, yet the larger
-size factor (1.026 against 0.944). So the size factor is not sequencing
-depth. It is the median of that sample’s ratios to a reference, gene by gene. A handful of very
-highly expressed genes can swallow a large share of one library’s reads without dragging its
-normalisation with them, because the median ignores them. That robustness is the whole reason
-DESeq2 uses median-of-ratios rather than simply dividing by total counts.</p>
+<p>One thing the table is worth noticing for. A size factor is not simply the read count rescaled: it is
+computed gene by gene, as the median of that sample’s ratios to a reference. That distinction matters
+when a library is dominated by a handful of genes, because a median ignores them while a total does
+not. Here the two agree closely, which is what a healthy set of libraries looks like.</p>
 </div>
 </div>
 <div id="variance-stabilising-transformation" class="section level3 hasAnchor">
