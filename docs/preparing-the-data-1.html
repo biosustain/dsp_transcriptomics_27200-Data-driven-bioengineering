@@ -467,8 +467,22 @@ information about that sample, whatever you do afterwards.</p>
 </div>
 <div id="pre-filtering-low-count-genes-1" class="section level3 hasAnchor">
 <h3>Pre-filtering Low-count Genes<a href="preparing-the-data-1.html#pre-filtering-low-count-genes-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Genes with very few counts across all samples carry no statistical power and inflate the multiple testing burden. We remove genes that do not have at least 10 counts in a minimum number of samples - here the size of the smallest <strong>lifestyle</strong> group (16). Note this is stricter than DESeq2’s usual convention of the smallest design cell (4 samples in a lifestyle × time group): a gene expressed only in one lifestyle at one time point could be lost. With this dataset that cost is small, and the stricter filter keeps the later models stable.</p>
+<p>Genes with very few reads across all samples carry almost no information about differential expression. We remove genes that do not have at least 10 counts in a minimum number of samples - here the size of the smallest <strong>lifestyle</strong> group (16). Note this is stricter than DESeq2’s usual convention of the smallest design cell (4 samples in a lifestyle × time group): a gene expressed only in one lifestyle at one time point could be lost. With this dataset that cost is small, and the stricter filter keeps the later models stable.</p>
 <p>Unlike the human genome, most bacterial genes are expressed under standard growth, so expect only a modest fraction to be filtered out.</p>
+<div class="note">
+<p><strong>📘 Note: this step is optional, and it is not what controls your false positives.</strong>
+The <a href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">DESeq2 vignette</a>
+is explicit that pre-filtering is <strong>not necessary</strong> before running DESeq2. It is useful for three
+practical reasons: it shrinks the <code>dds</code> object, it speeds up model fitting, and it makes dispersion
+and MA plots easier to read, because genes with no information are not plotted.</p>
+<p>What it does <strong>not</strong> do is take care of multiple testing. <code>results()</code> applies <strong>independent
+filtering</strong> of its own, through IHW or genefilter, which removes low-count genes from the adjusted
+p-value calculation whether or not you filtered here. You could skip this step entirely and rely on
+that instead.</p>
+<p>The count of 10 is the vignette’s suggestion for bulk RNA-seq, and its recommended number of samples
+is the size of the smallest group, so that a gene expressed in only one experimental group still
+survives. That is the convention the paragraph above departs from, deliberately.</p>
+</div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="preparing-the-data-1.html#cb168-1" tabindex="-1"></a>smallestGroupSize <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">table</span>(samples_info<span class="sc">$</span>lifestyle))</span>
 <span id="cb168-2"><a href="preparing-the-data-1.html#cb168-2" tabindex="-1"></a></span>
