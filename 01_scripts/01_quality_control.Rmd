@@ -586,18 +586,24 @@ y_genes <- intersect(c("RPS4Y1", "DDX3Y", "KDM5D", "USP9Y"), rownames(vsd))
 y_expr  <- colMeans(assay(vsd)[y_genes, , drop = FALSE])
 df_anno$sex_inferred <- ifelse(y_expr > mean(range(y_expr)), "male", "female")
 
+# Columns in a fixed order, untreated first then treated, instead of clustered.
+# A gene that responds to the drug is then one colour on the left half and the
+# other on the right, which you can count. Clustered columns interleave the two
+# groups and make that impossible to see.
+col_order <- order(colData(vsd)$condition, colData(vsd)$donor)
+
 heat_plot <- pheatmap(
-  assay(vsd)[topVarGenes, ],
-  cluster_cols             = TRUE,
+  assay(vsd)[topVarGenes, col_order],
+  cluster_cols             = FALSE,
   cluster_rows             = TRUE,
   scale                    = "row",
   clustering_distance_rows = "euclidean",
-  clustering_distance_cols = "euclidean",
   annotation_col           = df_anno,
+  gaps_col                 = sum(colData(vsd)$condition == "control"),
   show_colnames            = TRUE,
   show_rownames            = TRUE,
   fontsize_row             = 7,
-  main                     = "Top 50 variable genes - Human ASM (VST, row-scaled)"
+  main                     = "Top 50 variable genes - Human ASM (VST, row-scaled)\nuntreated | dexamethasone"
 )
 
 heat_plot
@@ -614,10 +620,19 @@ dev.off()
 ```
 
 :::boxy
-**Now the answer.** Most groups say "most of them". Count the rows: you will find a block of real
-drug responses - *FKBP5*, *TSC22D3*, *KLF15*, *ZBTB16*, *DUSP1*, *GPX3* - sitting next to seven
-sex-linked genes and a set of rows that separate donors and nothing else. Even the canonical targets
-*PER1* and *CRISPLD2*, which respond strongly to dexamethasone, are **not** in this list at all.
+**Now the answer: about 16 of the 50, so roughly a third.** Most groups say "most of them". The
+columns are fixed, the four untreated samples left of the gap and the four treated right of it, so a
+drug response is a row that changes colour across the gap. The block at the top is them: *PDK4*,
+*SERPINA3*, *FKBP5*, *MAOA*, *STEAP4*, *TSC22D3*, *KLF15*, *GLUL*, *GPX3*, *ZBTB16*, *DUSP1* and a
+few more. A couple of rows below it are borderline, so if you counted 17 or 18 you were not wrong,
+and that is worth noticing in itself: the eye is not a test. Notebook 02 is where a number replaces
+the judgement call.
+
+The other two thirds follow donors, not the drug. The tight block of seven, *RPS4Y1*, *DDX3Y*,
+*KDM5D*, *USP9Y*, *ZFY*, *NLGN4Y*, *TXLNGY.1*, drops out in exactly the two `N061011` columns, one on
+each side of the gap. That is the female donor, and the same fact XIST was pointing at when the
+filter removed it earlier. Even the canonical targets *PER1* and *CRISPLD2*, which respond strongly
+to dexamethasone, are **not** in this list at all.
 
 The reason is that "most variable" is an unsupervised question. It asks which genes differ most
 across all eight samples, and it does not know, or care, that four of them were treated. Donor
@@ -654,12 +669,14 @@ ranking by variance and tests a defined contrast instead: most variable is not m
 
 - Each **row** is a gene, each **column** is a sample
 - Colours show the **z-score** (row-scaled expression) - red = higher than average for that gene, blue = lower
-- The **dendrograms** show hierarchical clustering - samples/genes that behave similarly are grouped together
+- The **row dendrogram** groups genes that behave similarly. Columns are *not* clustered: they are
+  fixed in condition order, untreated then treated, split by the gap
 
 **What to look for:**
 
 - Clear colour blocks by condition → the treatment has a strong, consistent transcriptional effect
-- Whether samples cluster by donor instead of (or in addition to) treatment - a visual argument for the paired design
+- Rows that change colour across the gap: those are the drug responses
+- Rows that instead single out one or two columns: those follow a donor, not the treatment
 :::
 
 ## Summary
