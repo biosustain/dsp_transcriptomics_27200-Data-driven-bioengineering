@@ -311,10 +311,13 @@ is explicit that pre-filtering is **not necessary** before running DESeq2. It is
 practical reasons: it shrinks the `dds` object, it speeds up model fitting, and it makes dispersion
 and MA plots easier to read, because genes with no information are not plotted.
 
-What it does **not** do is take care of multiple testing. `results()` applies **independent
-filtering** of its own, through IHW or genefilter, which removes low-count genes from the adjusted
-p-value calculation whether or not you filtered here. You could skip this step entirely and rely on
-that instead.
+What it does **not** do is take care of multiple testing. `results()` already applies
+**independent filtering** of its own: it searches for the mean-count threshold that yields the most
+significant genes at your chosen alpha, then sets `padj` to `NA` below it, so those genes leave the
+correction altogether. That happens whether or not you filtered here, which is why you could skip
+this step and rely on it instead. (A more refined option exists, IHW or Independent Hypothesis
+Weighting, which weights each gene by its mean count rather than discarding it, but you have to ask
+for it with `filterFun = ihw`.)
 
 Why these two numbers? A count of 10 is a reasonable choice for bulk RNA-seq, and the recommended
 number of samples is the size of the smallest group, so that a gene expressed in only one
