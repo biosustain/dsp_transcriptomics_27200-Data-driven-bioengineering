@@ -338,6 +338,48 @@ cat("Genes after  filtering:", nrow(dds), "\n")
 cat("Genes removed         :", sum(!keep), "\n")
 ```
 
+::: question
+<strong>🤔 That number deserves a reaction.</strong> You have just removed the large majority of the
+annotation, before testing anything at all.
+
+Do not take anyone's word for whether that was safe. Check it yourself: of the genes you removed, how
+many were ever detected? The full matrix is still in `count_genes` and the filter is still in `keep`,
+so `count_genes[!keep, ]` gives you the discarded rows and `rowSums()` does the rest. Try it before
+you run the next cell.
+:::
+
+```{r human-qc-prefilter-check-0, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+removed <- count_genes[!keep, , drop = FALSE]
+
+cat("Removed genes with zero counts in every sample :", sum(rowSums(removed) == 0), "\n")
+cat("Removed genes with under 10 counts in total    :", sum(rowSums(removed) < 10), "\n")
+cat("Removed genes in total                         :", nrow(removed), "\n")
+
+# The loudest gene the filter still threw out
+loudest <- names(which.max(apply(removed, 1, max)))
+cat("\nLoudest removed gene:", loudest, "\n")
+print(removed[loudest, ])
+cat("samples reaching 10 reads:", sum(removed[loudest, ] >= 10), "of", ncol(removed), "\n")
+```
+
+:::boxy
+**Now the answer.** Two thirds of the removed genes have zero counts in all eight samples, and nearly
+nine in ten have under ten reads in the whole experiment combined. You did not discard information,
+because there was none to discard.
+
+The share removed is a fact about the annotation, not about the filter. GENCODE lists every biotype,
+lncRNAs and pseudogenes and small RNAs included, which is why the starting number is around 79,000
+rather than the roughly 20,000 protein-coding genes. Most of those are not transcribed in airway
+smooth muscle. Begin from a protein-coding annotation and the same filter removes a far smaller
+share, while keeping the same genes.
+
+**One oddity worth keeping.** Look at the loudest gene that was removed anyway, with thousands of
+reads in a single sample. It went because it reached ten reads in only 2 of the 8 samples: this
+filter counts *samples*, not reads, which is what stops one unusual library from inventing a gene.
+Hold on to the question of why a gene would be loud in exactly two samples and silent in the other
+six. You will meet those two samples again in the heatmap further down.
+:::
+
 ## Exploratory Data Analysis
 
 In this section we do **not** perform statistical tests. The goal is **quality control:** check count distributions, detect technical outliers, and confirm that samples cluster as expected before committing to differential expression analysis.
