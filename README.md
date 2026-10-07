@@ -103,7 +103,19 @@ Nothing to install.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_transcriptomics_27200-Data-driven-bioengineering)
 
-Once it has started, open `02_notebooks/` and pick a dataset to begin with.
+Once it has started, a `START_HERE` page opens by itself and walks you through the day in
+three steps:
+
+1. **Run the pipeline** to make a count matrix yourself - about 25 minutes, and it runs on
+   its own. Start it first, so it is working while you do step 2.
+   ```bash
+   bash 00_pipeline/00_nfcore_rnaseq_processing_human.sh
+   ```
+2. **While it runs**, read the command you just started - the questions to put to Copilot are
+   written in the script itself - and open a full-dataset
+   [MultiQC report](https://biosustain.github.io/dsp_transcriptomics_27200-Data-driven-bioengineering/multiqc/human_multiqc_report.html).
+3. **Analyse real counts** in `02_notebooks/`, working through the human dataset in order:
+   `01` quality control, `02` differential expression, `03` functional enrichment.
 
 A few things that surprise people the first time:
 
