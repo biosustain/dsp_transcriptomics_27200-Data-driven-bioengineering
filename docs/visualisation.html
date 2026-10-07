@@ -436,38 +436,47 @@ unless it also clears padj, and the vertical line is a reference, no longer part
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="visualisation.html#cb100-1" tabindex="-1"></a>top_gene <span class="ot">&lt;-</span> res_sig<span class="sc">$</span>gene[<span class="dv">1</span>]</span>
 <span id="cb100-2"><a href="visualisation.html#cb100-2" tabindex="-1"></a></span>
-<span id="cb100-3"><a href="visualisation.html#cb100-3" tabindex="-1"></a><span class="fu">plotCounts</span>(dds,</span>
-<span id="cb100-4"><a href="visualisation.html#cb100-4" tabindex="-1"></a>           <span class="at">gene     =</span> top_gene,</span>
-<span id="cb100-5"><a href="visualisation.html#cb100-5" tabindex="-1"></a>           <span class="at">intgroup =</span> <span class="st">&quot;condition&quot;</span>,</span>
-<span id="cb100-6"><a href="visualisation.html#cb100-6" tabindex="-1"></a>           <span class="at">main     =</span> <span class="fu">paste</span>(<span class="st">&quot;Normalised counts -&quot;</span>, top_gene))</span></code></pre></div>
+<span id="cb100-3"><a href="visualisation.html#cb100-3" tabindex="-1"></a><span class="co"># plotCounts() jitters the points with runif(), so the figure came out slightly</span></span>
+<span id="cb100-4"><a href="visualisation.html#cb100-4" tabindex="-1"></a><span class="co"># different on every render. Fix the seed for the plot, then put the random</span></span>
+<span id="cb100-5"><a href="visualisation.html#cb100-5" tabindex="-1"></a><span class="co"># stream back exactly as it was, so nothing later in the book is affected.</span></span>
+<span id="cb100-6"><a href="visualisation.html#cb100-6" tabindex="-1"></a>.seed_before <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;.Random.seed&quot;</span>, .GlobalEnv)) <span class="fu">get</span>(<span class="st">&quot;.Random.seed&quot;</span>, .GlobalEnv) <span class="cf">else</span> <span class="cn">NULL</span></span>
+<span id="cb100-7"><a href="visualisation.html#cb100-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">27200</span>)</span>
+<span id="cb100-8"><a href="visualisation.html#cb100-8" tabindex="-1"></a></span>
+<span id="cb100-9"><a href="visualisation.html#cb100-9" tabindex="-1"></a><span class="fu">plotCounts</span>(dds,</span>
+<span id="cb100-10"><a href="visualisation.html#cb100-10" tabindex="-1"></a>           <span class="at">gene     =</span> top_gene,</span>
+<span id="cb100-11"><a href="visualisation.html#cb100-11" tabindex="-1"></a>           <span class="at">intgroup =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb100-12"><a href="visualisation.html#cb100-12" tabindex="-1"></a>           <span class="at">main     =</span> <span class="fu">paste</span>(<span class="st">&quot;Normalised counts -&quot;</span>, top_gene))</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-top-gene-1.png" alt="" width="672" /></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="visualisation.html#cb101-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(.seed_before)) <span class="fu">assign</span>(<span class="st">&quot;.Random.seed&quot;</span>, .seed_before, .GlobalEnv)</span></code></pre></div>
+</details>
 </div>
 <div id="heatmap-of-significant-genes" class="section level3 hasAnchor">
 <h3>Heatmap of Significant Genes<a href="visualisation.html#heatmap-of-significant-genes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Clustering significant DE genes across samples provides a gene-level view of the expression differences. Genes should show clear block structure: high expression in treatment and low in control (or vice versa). With the paired design, you can also annotate donor to see whether the treatment effect is consistent across donors.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="visualisation.html#cb101-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb101-2"><a href="visualisation.html#cb101-2" tabindex="-1"></a></span>
-<span id="cb101-3"><a href="visualisation.html#cb101-3" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> res_sig <span class="sc">%&gt;%</span></span>
-<span id="cb101-4"><a href="visualisation.html#cb101-4" tabindex="-1"></a>  <span class="fu">slice_min</span>(padj, <span class="at">n =</span> <span class="fu">min</span>(<span class="dv">50</span>, <span class="fu">nrow</span>(res_sig))) <span class="sc">%&gt;%</span></span>
-<span id="cb101-5"><a href="visualisation.html#cb101-5" tabindex="-1"></a>  <span class="fu">pull</span>(gene)</span>
-<span id="cb101-6"><a href="visualisation.html#cb101-6" tabindex="-1"></a></span>
-<span id="cb101-7"><a href="visualisation.html#cb101-7" tabindex="-1"></a>df_anno    <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;donor&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb101-8"><a href="visualisation.html#cb101-8" tabindex="-1"></a></span>
-<span id="cb101-9"><a href="visualisation.html#cb101-9" tabindex="-1"></a><span class="fu">pheatmap</span>(</span>
-<span id="cb101-10"><a href="visualisation.html#cb101-10" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[sig_genes, ],</span>
-<span id="cb101-11"><a href="visualisation.html#cb101-11" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb101-12"><a href="visualisation.html#cb101-12" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb101-13"><a href="visualisation.html#cb101-13" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
-<span id="cb101-14"><a href="visualisation.html#cb101-14" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb101-15"><a href="visualisation.html#cb101-15" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
-<span id="cb101-16"><a href="visualisation.html#cb101-16" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
-<span id="cb101-17"><a href="visualisation.html#cb101-17" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb101-18"><a href="visualisation.html#cb101-18" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb101-19"><a href="visualisation.html#cb101-19" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
-<span id="cb101-20"><a href="visualisation.html#cb101-20" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top DE genes - Dexamethasone vs Untreated (VST, row-scaled)&quot;</span></span>
-<span id="cb101-21"><a href="visualisation.html#cb101-21" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="visualisation.html#cb102-1" tabindex="-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">varianceStabilizingTransformation</span>(dds, <span class="at">blind =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb102-2"><a href="visualisation.html#cb102-2" tabindex="-1"></a></span>
+<span id="cb102-3"><a href="visualisation.html#cb102-3" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> res_sig <span class="sc">%&gt;%</span></span>
+<span id="cb102-4"><a href="visualisation.html#cb102-4" tabindex="-1"></a>  <span class="fu">slice_min</span>(padj, <span class="at">n =</span> <span class="fu">min</span>(<span class="dv">50</span>, <span class="fu">nrow</span>(res_sig))) <span class="sc">%&gt;%</span></span>
+<span id="cb102-5"><a href="visualisation.html#cb102-5" tabindex="-1"></a>  <span class="fu">pull</span>(gene)</span>
+<span id="cb102-6"><a href="visualisation.html#cb102-6" tabindex="-1"></a></span>
+<span id="cb102-7"><a href="visualisation.html#cb102-7" tabindex="-1"></a>df_anno    <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(vsd)[, <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;donor&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb102-8"><a href="visualisation.html#cb102-8" tabindex="-1"></a></span>
+<span id="cb102-9"><a href="visualisation.html#cb102-9" tabindex="-1"></a><span class="fu">pheatmap</span>(</span>
+<span id="cb102-10"><a href="visualisation.html#cb102-10" tabindex="-1"></a>  <span class="fu">assay</span>(vsd)[sig_genes, ],</span>
+<span id="cb102-11"><a href="visualisation.html#cb102-11" tabindex="-1"></a>  <span class="at">cluster_cols             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb102-12"><a href="visualisation.html#cb102-12" tabindex="-1"></a>  <span class="at">cluster_rows             =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb102-13"><a href="visualisation.html#cb102-13" tabindex="-1"></a>  <span class="at">scale                    =</span> <span class="st">&quot;row&quot;</span>,</span>
+<span id="cb102-14"><a href="visualisation.html#cb102-14" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb102-15"><a href="visualisation.html#cb102-15" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">&quot;euclidean&quot;</span>,</span>
+<span id="cb102-16"><a href="visualisation.html#cb102-16" tabindex="-1"></a>  <span class="at">annotation_col           =</span> df_anno,</span>
+<span id="cb102-17"><a href="visualisation.html#cb102-17" tabindex="-1"></a>  <span class="at">show_colnames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb102-18"><a href="visualisation.html#cb102-18" tabindex="-1"></a>  <span class="at">show_rownames            =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb102-19"><a href="visualisation.html#cb102-19" tabindex="-1"></a>  <span class="at">fontsize_row             =</span> <span class="dv">7</span>,</span>
+<span id="cb102-20"><a href="visualisation.html#cb102-20" tabindex="-1"></a>  <span class="at">main                     =</span> <span class="st">&quot;Top DE genes - Dexamethasone vs Untreated (VST, row-scaled)&quot;</span></span>
+<span id="cb102-21"><a href="visualisation.html#cb102-21" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 <p><img src="27200-Data-Driven-Bioengineering---Transcriptomics_files/figure-html/human-de-de-heatmap-1.png" alt="" width="768" /></p>
 </div>
