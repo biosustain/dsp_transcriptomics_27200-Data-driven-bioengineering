@@ -256,6 +256,23 @@ if (length(nok) > 0) {
 cat("=========================================\n")
 ```
 
+## Maintaining this repository
+
+The notebooks under `02_notebooks/` are **generated**. The source of truth is the
+Rmd files in `01_scripts/`, which are at the same time the chapters of the course
+book. Each notebook carries a comment at the top naming the Rmd it came from.
+
+To change the teaching material, edit the Rmd and regenerate:
+
+```bash
+python3 util/rmd_to_ipynb.py                      # all six notebooks
+python3 util/rmd_to_ipynb.py 01_scripts/x.Rmd --out 02_notebooks/y.ipynb   # just one
+```
+
+A fix made directly in a notebook is lost the next time anyone regenerates, and it
+never reaches the book. Students are welcome to edit their own copies; this rule is
+for whoever maintains the material.
+
 ## See you there
 
 If anything is unclear before the class, just ask.

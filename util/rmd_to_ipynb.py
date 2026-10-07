@@ -240,9 +240,13 @@ def cell(kind, source, cell_id, name=None):
 
 def preamble(src_rel):
     md = (
-        "> **Generated notebook — do not edit here.**  \n"
-        f"> Source: `{src_rel}`, which is also a chapter of the course book.  \n"
-        "> To change anything, edit the Rmd and run `python3 util/rmd_to_ipynb.py`.\n"
+        # Provenance for whoever maintains this, in an HTML comment so it does not
+        # render. Students should feel free to edit; see the README for the workflow.
+        f"<!-- Generated from {src_rel} by util/rmd_to_ipynb.py. Edit the Rmd, not this file. -->\n"
+        "\n"
+        "> **This notebook is yours.** Edit it, break it, re-run it: changing a cell and\n"
+        "> seeing what happens is the point. If you want to keep your version, save a copy\n"
+        "> under a new name, because `git pull` can overwrite this one.\n"
         ">\n"
         "> Run the notebooks in order — **01 → 02 → 03** — with the **R** kernel; "
         "each step saves results that the next one loads.\n"
