@@ -59,8 +59,8 @@ long as the run.
 Open the script you started - the questions to ask are written inside it, as comments just
 above the command:
 
-- `00_pipeline/00_nfcore_rnaseq_processing_human.sh`
-- `00_pipeline/00_nfcore_rnaseq_processing_saureus.sh`
+- [`00_pipeline/00_nfcore_rnaseq_processing_human.sh`](00_pipeline/00_nfcore_rnaseq_processing_human.sh)
+- [`00_pipeline/00_nfcore_rnaseq_processing_saureus.sh`](00_pipeline/00_nfcore_rnaseq_processing_saureus.sh)
 
 Open **Copilot Chat** (the chat icon in the sidebar) with that file open, and work through
 them. Check every answer against the script and the course book: an AI assistant answers
@@ -110,7 +110,7 @@ notebooks are the advanced track: start them afterwards if you have time.
 The notebooks start from full count matrices, made with the same pipeline, already in
 `data/` - not from your own run.
 
-1. Open **`02_notebooks/homo_sapiens/01_quality_control.ipynb`** in the file tree on the left.
+1. Open [`02_notebooks/homo_sapiens/01_quality_control.ipynb`](02_notebooks/homo_sapiens/01_quality_control.ipynb), or find it in the file tree on the left.
 2. When VS Code asks you to *Select Kernel*, choose **Jupyter Kernel... → R**. The notebooks are R, not Python.
 3. Run cells with **Shift+Enter**, or the play button next to each cell.
 4. Work through the three notebooks **in order**: `01` quality control, then `02` differential
